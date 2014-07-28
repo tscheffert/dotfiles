@@ -1,0 +1,21 @@
+# Overall
+# Initial source
+# https://github.com/mathiasbynens/dotfiles
+# https://gist.github.com/janmoesen/1156154
+# https://github.com/janmoesen/tilde
+# http://dotfiles.github.io/
+
+# Function sources:
+# Good handwritten, well documented
+# https://github.com/mathiasbynens/dotfiles/blob/master/.functions
+
+
+# Bootstrapper sources
+# https://github.com/cowboy/dotfiles
+# https://github.com/cowboy/dotfiles/blob/master/bin/dotfiles
+# https://raw.githubusercontent.com/cowboy/dotfiles/master/source/50_prompt.sh
+# https://github.com/gf3/dotfiles/blob/master/bootstrap.sh
+# https://github.com/mathiasbynens/dotfiles/blob/master/bootstrap.sh
+# http://www.neuhalfen.name/2013/08/31/keeping-dotfiles-organised-over-multiple-machines/
+# https://github.com/kevinSuttle/dotfiles/blob/master/install.zsh
+

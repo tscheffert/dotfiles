@@ -1,0 +1,74 @@
+" This shows what you are typing as a command.  I love this!
+set showcmd
+
+" Folding Stuffs
+set foldmethod=marker
+
+" Needed for Syntax Highlighting and stuff
+set grepprg=grep\ -nH\ $*
+
+" Cool tab completion stuff
+set wildmenu
+set wildmode=list:longest,full
+
+
+" Allow the cursor to go in to "invalid" places
+set virtualedit=all
+
+" For how *I* code these are the best types of settings for
+" completion but I get rid of some neat things that you might
+" like
+set complete=.,w,b,t
+" The GUI (i.e. the 'g' in 'gvim') is fantastic, but let's not be
+" silly about it :)  The GUI is fantastic, but it's fantastic for
+" its fonts and its colours, not for its toolbar and its menus -
+" those just steal screen real estate
+set guioptions=ac
+
+" Set the status line the way I like it
+set stl=%f\ %m\ %r\ Line:\ %l/%L[%p%%]\ Col:\ %c\ Buf:\ #%n\ [%b][0x%B]
+
+
+" Ignoring case is a fun trick
+set ignorecase
+
+" And so is Artificial Intellegence!
+set smartcase
+
+
+
+
+"{{{Look and Feel
+
+" Favorite Color Scheme
+if has("gui_running")
+   colorscheme inkpot
+   " Remove Toolbar
+   set guioptions-=T
+   "Terminus is AWESOME
+   set guifont=Terminus\ 9
+else
+   colorscheme metacosm
+endif
+
+"Status line gnarliness
+set laststatus=2
+set statusline=%F%m%r%h%w\ (%{&ff}){%Y}\ [%l,%v][%p%%]
+
+" }}}
+
+
+
+function! <SID>StripTrailingWhitespaces()
+    " Preparation: save last search, and cursor position.
+    let _s=@/
+    let l = line(".")
+    let c = col(".")
+    " Do the business:
+    %s/\s\+$//e
+    " Clean up: restore previous search history, and cursor position
+    let @/=_s
+    call cursor(l, c)
+endfunction
+
+autocmd BufWritePre *.js :call <SID>StripTrailingWhiteSpaces()

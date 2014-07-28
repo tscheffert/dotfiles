@@ -1,0 +1,17 @@
+start cmd /k "mklink /j C:\Users\tscheffert\bin C:\Users\tscheffert\.dotfiles\bin"
+start cmd /k "mklink /j C:\Users\tscheffert\init C:\Users\tscheffert\.dotfiles\init"
+start cmd /k "mklink /j C:\Users\tscheffert\source C:\Users\tscheffert\.dotfiles\source"
+start cmd /k "mklink /j C:\Users\tscheffert\vimfiles C:\Users\tscheffert\.dotfiles\vimfiles"
+start cmd /k "mklink /h C:\Users\tscheffert\.bash_profile C:\Users\tscheffert\.dotfiles\.bash_profile"
+start cmd /k "mklink /h C:\Users\tscheffert\.bash_prompt C:\Users\tscheffert\.dotfiles\.bash_prompt"
+start cmd /k "mklink /h C:\Users\tscheffert\.bashrc C:\Users\tscheffert\.dotfiles\.bashrc"
+start cmd /k "mklink /h C:\Users\tscheffert\.curlrc C:\Users\tscheffert\.dotfiles\.curlrc"
+start cmd /k "mklink /h C:\Users\tscheffert\.editorconfig C:\Users\tscheffert\.dotfiles\.editorconfig"
+start cmd /k "mklink /h C:\Users\tscheffert\.gitconfig C:\Users\tscheffert\.dotfiles\.gitconfig"
+start cmd /k "mklink /h C:\Users\tscheffert\.gitignore C:\Users\tscheffert\.dotfiles\.gitignore"
+start cmd /k "mklink /h C:\Users\tscheffert\.jscs.json C:\Users\tscheffert\.dotfiles\.jscs.json"
+start cmd /k "mklink /h C:\Users\tscheffert\.osx C:\Users\tscheffert\.dotfiles\.osx"
+start cmd /k "mklink /h C:\Users\tscheffert\.vimrc C:\Users\tscheffert\.dotfiles\.vimrc"
+start cmd /k "mklink /h C:\Users\tscheffert\coffeelint.json C:\Users\tscheffert\.dotfiles\coffeelint.json"
+
+pause

@@ -12,6 +12,9 @@ export PATH=$PATH:'C:\Program Files (x86)\IIS Express\'
 # Add `~/bin` to the `$PATH`
 export PATH="$HOME/bin:$PATH";
 
+# Ack for better grepping
+export PATH=$PATH:'C:\strawberryPerl\perl\bin'
+
 
 
 # Load the shell dotfiles, and then some:

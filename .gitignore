@@ -1,7 +1,8 @@
 # ----- Custom -----
 # AWS ElasticBeanstalk generated files
 .elasticbeanstalk/
-
+# SQLite Databse
+*.sqlite
 
 
 # ----- Default...? -----

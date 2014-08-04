@@ -24,16 +24,24 @@ filetype plugin indent on
 syntax on
 
 " Restore cursor position from last time you editted the file
-function! ResCur()
-    if line("'\"") <= line("$")
-        normal! g`"
-        return 1
-    endif
-endfunction
-augroup resCur
+augroup line_return
     autocmd!
-    autocmd BufWinEnter * call ResCur()
+    autocmd BufReadPost *
+        \ if line("'\"") > 0 && line("'\"") <= line("$") |
+        \       execute 'normal! g`"zvzz' |
+        \ endif
 augroup END
+
+" function! ResCur()
+"     if line("'\"") <= line("$")
+"         normal! g`"
+"         return 1
+"     endif
+" endfunction
+" augroup resCur
+"     autocmd!
+"     autocmd BufWinEnter * call ResCur()
+" augroup END
 
 
 " -----
@@ -62,7 +70,23 @@ set undoreload=10000
 " Save undo's after file closes
 "set undofile
 " Set where to save undo histories
-"set undodir=~/.vim/undo
+set undodir=~/vimfiles/tmp/undo//     " Fancy undo file location. The trailing '//' makes the files saved be path unique
+set backupdir=~/vimfiles/tmp/backup// " Backups
+set directory=~/vimfiles/tmp/swap//   " Swap Files
+set backup                        " Enable backups
+set noswapfile                    " No More Collisions!
+
+" Make those folders automatically if they don't already exist.
+if !isdirectory(expand(&undodir))
+    call mkdir(expand(&undodir), "p")
+endif
+if !isdirectory(expand(&backupdir))
+    call mkdir(expand(&backupdir), "p")
+endif
+if !isdirectory(expand(&directory))
+    call mkdir(expand(&directory), "p")
+endif
+
 
 " Don't stop and say 'more' for long files
 "set nomore
@@ -84,6 +108,10 @@ augroup myvimrc
     au!
     au BufWritePost .vimrc,_vimrc,vimrc,.gvimrc,_gvimrc,gvimrc so $MYVIMRC " | if has('gui_running') | so $MYGVIMRC | endif
 augroup END
+
+" Source
+vnoremap <leader>S y:execute @@<cr>:echo 'Sourced selection.'<cr>
+nnoremap <leader>S ^vg_y:execute @@<cr>:echo 'Sourced line.'<cr>
 
 " Only care about base 10 digits, not octal or hex
 set nrformats=
@@ -149,6 +177,12 @@ set nojoinspaces
 " Remove any trailing whitespace that is in the file
 autocmd BufRead,BufWrite * if ! &bin | silent! %s/\s\+$//ge | endif
 
+" Save when losing focus
+autocmd FocusLost * :wa
+
+" Resize splits when the window is resized
+autocmd VimResized * exe "normal! \<c-w>="
+
 
 " -----
 " File Specific Display stuff like tabs
@@ -177,7 +211,19 @@ endif
 set wildmode=list:longest,full
 
 " File types to ignore for wildmode
-set wildignore=*.swp,*.pyc,*.class,*.gitignore,*.sln
+" Note #0: These are from :help ctrlp
+" Note #1: the `*/` in front of each directory glob is required.
+
+" Note #2: |wildignore| influences the result of |expand()|, |globpath()| and
+" |glob()| which many plugins use to find stuff on the system (e.g. VCS related
+" plugins look for .git/, .hg/,... some other plugins look for external *.exe
+" tools on Windows). So be a little mindful of what you put in your |wildignore|.
+set wildignore+=*.sw?                           " Vim swap files
+set wildignore+=*.gitignore,*.sln,.hg,.git      " Version Control
+set wildignore+=*.pyc                           " Python byte code
+set wildignore+=*.o,*.obj,*.exe,*.dll,*.manifest " Compiled objects
+set wildignore+=*.DS_Store                      " OSX Sucks
+set wildignore+=*.jpg,*.jpeg,*.bmp,*.gif,*.png  " Binary images
 
 " Set the forward slash to be the slash of note.  Backslashes suck
 " Matters only on Windows
@@ -251,12 +297,24 @@ set magic
 " ignore all whitespace and sync when searching
 "set diffopt=filler,iwhite
 
+" Visual Mode */# from Scrooloose
+function! s:VSetSearch()
+  let temp = @@
+  norm! gvy
+  let @/ = '\V' . substitute(escape(@@, '\'), '\n', '\\n', 'g')
+  let @@ = temp
+endfunction
+
+vnoremap * :<C-u>call <SID>VSetSearch()<CR>//<CR><c-o>
+vnoremap # :<C-u>call <SID>VSetSearch()<CR>??<CR><c-o>
+
+
 
 " -----
 " GUI Settings
 " -----
 
-" Make command line two lines high
+" Make command line one lines high
 set cmdheight=1
 
 " Don't update the display while executing macros
@@ -275,13 +333,12 @@ set number
 set noerrorbells
 set visualbell
 
-" set visual bell OFF -- I hate that damned beeping
+" set visual bell OFF
 set t_vb=
 au GUIEnter * set visualbell t_vb=
 
 " Sets the default size of gvim on open
 set lines=50 columns=90
-"set winheight=999
 
 " Colors!
 if has('gui_running')
@@ -289,7 +346,26 @@ if has('gui_running')
     set guifont=Consolas:h11:cANSI
     set background=dark
     colorscheme molokai
-let g:airline_theme='molokai'
+    let g:airline_theme='molokai'
+
+    " Set vim to be maximized on opening
+    au GUIEnter * simalt ~x
+
+    " Remove the gui from GVim
+    :set guioptions-=m " Remove menu bar
+    :set guioptions-=T " Remove the toolbar
+    :set guioptions-=r " Remove the right-hand scroll bar
+    :set guioptions-=L " Remove the left-hand scroll bar...bar[]
+" ConEmu specific
+elseif has('win32') && !has('gui_running') && !empty($CONEMUBUILD)
+    set term=xterm
+    set t_Co=256
+    let &t_AB="\e[48;5;%dm"
+    let &t_AF="\e[38;5;%dm"
+    set background=dark
+    colorscheme jellybeans
+    let g:airline_theme='jellybeans'
+" Everything else
 else
     set term=xterm
     set t_Co=256
@@ -297,30 +373,11 @@ else
     let &t_AF="\e[38;5;%dm"
     set background=dark
     colorscheme jellybeans
-let g:airline_theme='jellybeans'
-endif
-" ConEmu specific
-if has('win32') && !has('gui_running') && !empty($CONEMUBUILD)
-    set term=xterm
-    set t_Co=256
-    let &t_AB="\e[48;5;%dm"
-    let &t_AF="\e[38;5;%dm"
-    set background=dark
-    colorscheme jellybeans
-let g:airline_theme='jellybeans'
+    let g:airline_theme='jellybeans'
 endif
 
 " Long lines make syntax highlighting slow
 set synmaxcol=2048
-
-" Set vim to be maximized on opening
-au GUIEnter * simalt ~x
-
-" Remove the gui from GVim
-:set guioptions-=m " Remove menu bar
-:set guioptions-=T " Remove the toolbar
-:set guioptions-=r " Remove the right-hand scroll bar
-:set guioptions-=L " Remove the left-hand scroll bar...bar
 
 " When the page starts to scroll, keep the cursor 8 lines from
 " the top and 8 lines from the bottom
@@ -337,6 +394,10 @@ set report=0
 " Shorten messages and don't show intro
 set shortmess=atI
 
+" Open new split panes to the right and bottom, feels a lot more natural
+set splitbelow
+set splitright
+
 
 " -----
 " Visual Mode Better
@@ -348,24 +409,9 @@ nnoremap <c-v> v
 vnoremap v <c-v>
 vnoremap <c-v> v
 
-" NOTE: This doesn't work as expected
-" When shifting, retain selection over multiple shifts...
-" vmap <expr> > KeepVisualSelection(">")
-" vmap <expr> < KeepVisualSelection("<")
-
-" function! KeepVisualSelection(cmd)
-"     set nosmartindent
-"     if mode() ==# "V"
-"         return a:cmd . ":set smartindent\<CR>gv"
-"     else
-"         return a:cmd . ":set smartindent\<CR>"
-"     endif
-" endfunction
-
-" NOTE: Figure out if the above works and then try the following if not
 "Reselect after indent so it can easily be repeated
-"vnoremap < <gv
-"vnoremap > >gv
+vnoremap < <gv
+vnoremap > >gv
 
 " Make BS/DEL work as expected in vusal modes (i.e. delete the selected text)
 vmap <BS> x
@@ -375,23 +421,6 @@ vmap aa VGo1G
 
 " Visual block beyond the characters in the line, ie virtually
 set virtualedit=block
-
-
-" -----
-" Interesting Functions
-" -----
-" This will escape HTML chars from the last pasted block
-"nnoremap <Leader>h :'[,']call HtmlEscape()<CR>
-" This will do it for the visually selected block
-"vnoremap <Leader>h :call HtmlEscape()<CR>
-
-" Insert more chars to replace here
-"function HtmlEscape()
-    "silent s/&/\&amp;/eg  " Amp has to be first
-    "silent s/</\&lt;/eg   " Less than
-    "silent s/>/\&gt;/eg   " Greater than
-    "silent s/\ /\%20;/eg  " Space
-"endfunction
 
 
 " -----
@@ -427,17 +456,24 @@ let g:airline#extensions#default#layout = [
             \ [ 'x', 'y', 'z', 'warning' ]
             \ ]
 
+
 " -----
 " Plugin: Ctrl-p
 " -----
-
-" Start in regexp mode
-"let g:ctrlp_regexp = 1
 
 " Ignore stuff
 let g:ctrlp_custom_ignore = {
     \ 'dir': '\v[\/](\.git|\.hg|\.svn|_site)$',
     \ }
+
+" Don't ignore hidden files
+let g:ctrlp_show_hidden = 1
+
+" Don't ignore symlinks
+let g:ctrlp_follow_symlinks = 0
+
+" Where to do ctrlp caching
+let g:ctrlp_cache_dir = $HOME.'/vimfiles/tmp/ctrlp/cache'
 
 
 " ---
@@ -466,6 +502,7 @@ let g:gundo_close_on_revert=1
 " Move the layout to the right
 let g:gundo_right=1
 
+
 " -----
 " JsBeautify Key Binds
 " -----
@@ -487,6 +524,7 @@ autocmd FileType javascript vnoremap <buffer> <c-e><c-f> :call RangeJsBeautify()
 autocmd FileType html vnoremap <buffer> <c-e><c-f> :call RangeHtmlBeautify()<cr>
 autocmd FileType css vnoremap <buffer> <c-e><c-f> :call RangeCSSBeautify()<cr>
 
+
 " -----
 " UltiSnips Key Binds
 " -----
@@ -498,6 +536,7 @@ let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"
+
 
 " -----
 " General Key Binds
@@ -516,8 +555,8 @@ noremap / :set hlsearch<CR>/
 au InsertEnter * :set nohlsearch
 
 " n and N turn on hlsearch too
-noremap n :set hlsearch<CR>n
-noremap N :set hlsearch<CR>N
+noremap n :set hlsearch<CR>nzzzv
+noremap N :set hlsearch<CR>Nzzzv
 
 " Quickly open a scratch buffer
 map <leader>qs :e ~/buffer<cr>
@@ -569,6 +608,7 @@ noremap S i<Space><Esc>r
 map <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
         \ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
         \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
+
 
 " -----
 " Insert Mode Keybinds

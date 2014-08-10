@@ -12,8 +12,11 @@ export PATH=$PATH:'C:\Program Files (x86)\IIS Express\'
 # Add `~/bin` to the `$PATH`
 export PATH="$HOME/bin:$PATH";
 
-# Ack for better grepping
-export PATH=$PATH:'C:\strawberryPerl\perl\bin'
+# Adb for android debugging
+export PATH=$PATH:'C:\Users\tscheffert\AppData\Local\Android\android-sdk\platform-tools'
+
+# Clearly we want vim...
+export PATH='C:\Program Files\Vim\vim74':$PATH
 
 
 

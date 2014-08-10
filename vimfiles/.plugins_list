@@ -1,30 +1,29 @@
-ack.vim
-BufOnly.vim
-ColorSamplerPack
-ctrlp.vimm
-delimitMate
-gundo.vim
-ir_black.vim
-jshint.vim
-moria.vim
-mustache.vim
-myhere-vim-nodejs-complete-1e2f98f
-nerdtree
-ScrollColors
-Terminal_16_Colors
-ultisnips
-vim-abolish
-vim-airline
-vim-coffee-script
-vim-colors-solarized
-vim-commentary
-vim-easymotion
-vim-jade
-vim-javascript-syntax
-vim-jsbeautify
-vim-json
-vim-less
-vim-nerdtree-tabs
-vim-snippets
-vim-stylus
-vim-surround
+ack.vim - https://github.com/mileszs/ack.vim.git
+BufOnly.vim - https://github.com/vim-scripts/BufOnly.vim.git
+ColorSamplerPack - https://github.com/vim-scripts/Color-Sampler-Pack.git
+ctrlp.vim - https://github.com/kien/ctrlp.vim.git
+delimitMate - https://github.com/Raimondi/delimitMate.git
+gundo.vim - https://github.com/sjl/gundo.vim.git
+ir_black.vim - https://github.com/twerth/ir_black.git
+jshint.vim - https://github.com/wookiehangover/jshint.vim
+moria.vim - https://github.com/vim-scripts/moria.git
+nerdtree - https://github.com/scrooloose/nerdtree.git
+ScrollColors - https://github.com/vim-scripts/ScrollColors.git
+ultisnips - https://github.com/SirVer/ultisnips.git
+vim-abolish - https://github.com/tpope/vim-abolish.git
+vim-airline - https://github.com/bling/vim-airline.git
+vim-coffee-script - https://github.com/kchmck/vim-coffee-script.git
+vim-colors-solarized - https://github.com/altercation/vim-colors-solarized.git
+vim-commentary - https://github.com/tpope/vim-commentary.git
+vim-easymotion - https://github.com/Lokaltog/vim-easymotion.git
+vim-jade - https://github.com/digitaltoad/vim-jade.git
+vim-javascript-syntax - https://github.com/jelera/vim-javascript-syntax.git
+vim-jsbeautify - https://github.com/maksimr/vim-jsbeautify.git
+vim-json - https://github.com/elzr/vim-json.git
+vim-less - https://github.com/groenewege/vim-less.git
+vim-nerdtree-tabs - https://github.com/jistr/vim-nerdtree-tabs.git
+vim-pathogen - https://github.com/tpope/vim-pathogen.git
+vim-snippets - https://github.com/honza/vim-snippets.git
+vim-stylus - https://github.com/wavded/vim-stylus.git
+vim-surround - https://github.com/tpope/vim-surround.git
+vim-molokai - https://github.com/tomasr/molokai.git

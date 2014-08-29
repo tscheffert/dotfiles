@@ -1,6 +1,11 @@
 # ----- Custom -----
 # AWS ElasticBeanstalk generated files
 .elasticbeanstalk/
+
+# Vim Stuff in DotFiles
+vimfiles/bundle/
+vimfiles/tmp/
+
 # SQLite Databse
 *.sqlite
 

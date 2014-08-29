@@ -10,6 +10,7 @@ mklink /h C:\Users\tscheffert\.editorconfig C:\Users\tscheffert\.dotfiles\.edito
 mklink /h C:\Users\tscheffert\.gitconfig C:\Users\tscheffert\.dotfiles\.gitconfig
 mklink /h C:\Users\tscheffert\.gitignore C:\Users\tscheffert\.dotfiles\.gitignore
 mklink /h C:\Users\tscheffert\.jscs.json C:\Users\tscheffert\.dotfiles\.jscs.json
+mklink /h C:\Users\tscheffert\.jshintrc C:\Users\tscheffert\.dotfiles\.jshintrc
 mklink /h C:\Users\tscheffert\.osx C:\Users\tscheffert\.dotfiles\.osx
 mklink /h C:\Users\tscheffert\.vimrc C:\Users\tscheffert\.dotfiles\.vimrc
 mklink /h C:\Users\tscheffert\coffeelint.json C:\Users\tscheffert\.dotfiles\coffeelint.json

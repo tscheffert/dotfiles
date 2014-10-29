@@ -3,7 +3,8 @@
 .elasticbeanstalk/
 
 # Vim Stuff in DotFiles
-vimfiles/bundle/
+# We're not actually going to ignore bundle because we're gonna use submodules!
+# vimfiles/bundle/
 vimfiles/tmp/
 
 # SQLite Databse

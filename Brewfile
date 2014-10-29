@@ -8,7 +8,8 @@ update
 upgrade
 
 # Install GNU core utilities (those that come with OS X are outdated)
-# Don’t forget to add `$(brew --prefix coreutils)/libexec/gnubin` to `$PATH`.
+# Don’t forget to add to path:
+# $PATH=$(brew --prefix coreutils)/libexec/gnubin:$PATH
 install coreutils
 # Install some other useful utilities like `sponge`
 install moreutils
@@ -49,6 +50,8 @@ install webkit2png # Website Screenshotter - Homepage: http://www.paulhammond.or
 install xpdf # PDF Utilities - Homepage: http://www.foolabs.com/xpdf/
 install zopfli # Improved (slow-ass) Compression - Homepage: https://code.google.com/p/zopfli/
 
+# Programming utilities
+install python
 install homebrew/versions/lua52
 
 # Remove outdated versions from the cellar

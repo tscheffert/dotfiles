@@ -8,22 +8,52 @@
 #fi
 
 # --- Path ---
-export PATH=$PATH:'C:\Program Files (x86)\IIS Express\'
 
-# Add `~/bin` to the `$PATH`
-export PATH="$HOME/bin:$PATH";
+# Function to safely, idempotently, append to path
+prepend_to_PATH () {
+    for d; do
+        d=$(cd -- "$d" && { pwd -P || pwd; }) 2>/dev/null # canonicalize symbolic links (? what?)
+        if [ -z "$d" ]; then continue; fi # skip nonexistent directory
+        case ":$PATH:" in
+            *":$d:"*) :;;
+            *) PATH=$d:$PATH;;
+        esac
+    done
+}
 
-# Adb for android debugging
-export PATH=$PATH:'C:\Users\tscheffert\AppData\Local\Android\android-sdk\platform-tools'
+# -- Prepend --
 
 # Clearly we want vim...
-export PATH='C:\Program Files\Vim\vim74':$PATH
+prepend_to_PATH 'C:\Program Files\Vim\vim74'
+
+# Add `~/bin` to the `$PATH`
+prepend_to_PATH "$HOME/bin"
+
+# -- Append --
+
+# Function to safely, idempotently, append to path
+append_to_PATH () {
+    for d; do
+        d=$(cd -- "$d" && { pwd -P || pwd; }) 2>/dev/null # canonicalize symbolic links (? what?)
+        if [ -z "$d" ]; then continue; fi # skip nonexistent directory
+        case ":$PATH:" in
+            *":$d:"*) :;;
+            *) PATH=$PATH:$d;;
+        esac
+    done
+}
+
+# We want IIS Express!
+append_to_PATH 'C:\Program Files (x86)\IIS Express\'
+
+# Adb for android debugging
+append_to_PATH 'C:\Users\tscheffert\AppData\Local\Android\android-sdk\platform-tools'
 
 # GnuWin Make
-export PATH=$PATH:'C:\Program Files (x86)\GnuWin32\bin'
+append_to_PATH 'C:\Program Files (x86)\GnuWin32\bin'
 
 # Python Scripts including pip
-export PATH=$PATH:'C:\tools\python\Scripts'
+append_to_PATH 'C:\tools\python\Scripts'
 
 
 # Load the shell dotfiles, and then some:
@@ -104,6 +134,7 @@ alias ip1="ifconfig -a | perl -nle'/(\d+\.\d+\.\d+\.\d+)/ && print $1'"
 alias ip2="curl -s http://www.showmyip.com/simple/ | awk '{print $1}'"
 
 # grep with color
+# for whatever reason this doesn't work with my grep on windows
 #alias grep='grep --color=auto'
 
 # refresh shell

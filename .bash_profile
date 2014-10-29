@@ -1,5 +1,6 @@
 #!/bin/bash
 # TODO: See if I can platform agnosticize this
+# TODO: This runs twice unfortunately
 
 #if [ -f ~/.bashrc ]; then
 
@@ -18,6 +19,11 @@ export PATH=$PATH:'C:\Users\tscheffert\AppData\Local\Android\android-sdk\platfor
 # Clearly we want vim...
 export PATH='C:\Program Files\Vim\vim74':$PATH
 
+# GnuWin Make
+export PATH=$PATH:'C:\Program Files (x86)\GnuWin32\bin'
+
+# Python Scripts including pip
+export PATH=$PATH:'C:\tools\python\Scripts'
 
 
 # Load the shell dotfiles, and then some:

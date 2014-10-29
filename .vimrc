@@ -174,14 +174,22 @@ set shiftround
 " Only one space when using "join" commands
 set nojoinspaces
 
-" Remove any trailing whitespace that is in the file
-autocmd BufRead,BufWrite * if ! &bin | silent! %s/\s\+$//ge | endif
 
-" Save when losing focus
-autocmd FocusLost * :wa
+augroup VisualEffects
+    au!
+    " Remove any trailing whitespace that is in the file
+    autocmd BufRead,BufWrite * if ! &bin | silent! %s/\s\+$//ge | endif
 
-" Resize splits when the window is resized
-autocmd VimResized * exe "normal! \<c-w>="
+    " Save when losing focus
+    " NOTE: This doesn't work as well as it should. It's a cool idea though.
+    "autocmd FocusLost * :wa
+
+    " Resize splits when the window is resized
+    autocmd VimResized * exe "normal! \<c-w>="
+augroup END
+
+" Fix indents when linewrap is on
+set breakindent
 
 
 " -----
@@ -576,6 +584,8 @@ nnoremap <Leader>cc :CoffeeCompile<cr>
 noremap ; :
 noremap : ;
 nnoremap q; q:
+
+nnoremap <Leader>a :%y+<CR>
 
 "TAB navigation like firefox
 "nnoremap <C-S-tab> :tabprevious<cr>

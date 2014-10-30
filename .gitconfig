@@ -1,8 +1,9 @@
 [gui]
 [core]
+  # TODO: Not cross platform!
   excludesfile = /Users/tscheffert/.gitignore
-	autocrlf = input
-  editor ='C:/Program Files (x86)/Vim/vim74/gvim.exe' 
+  autocrlf = input
+  editor ='C:/Program Files (x86)/Vim/vim74/gvim.exe'
 
 [alias]
   st = status -sb
@@ -11,7 +12,7 @@
   br = branch
   mongod = C:/mongodb/bin/mongod.exe
   mongo = C:/mongodb/bin/mongo.exe
-  
+
 [color]
   ui = auto
   status = auto

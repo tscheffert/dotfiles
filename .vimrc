@@ -350,20 +350,25 @@ set lines=50 columns=90
 
 " Colors!
 if has('gui_running')
-    " Set the default font to Consolas (Which is what Visual Studio uses)
-    set guifont=Consolas:h11:cANSI
-    set background=dark
-    colorscheme molokai
-    let g:airline_theme='molokai'
+    " OS X Specific stuff
+    if has("mac")
+        " Stuff here
+    elseif
+        " Set the default font to Consolas (Which is what Visual Studio uses)
+        set guifont=Consolas:h11:cANSI
+        set background=dark
+        colorscheme molokai
+        let g:airline_theme='molokai'
 
-    " Set vim to be maximized on opening
-    au GUIEnter * simalt ~x
+        " Set vim to be maximized on opening
+        au GUIEnter * simalt ~x
 
-    " Remove the gui from GVim
-    :set guioptions-=m " Remove menu bar
-    :set guioptions-=T " Remove the toolbar
-    :set guioptions-=r " Remove the right-hand scroll bar
-    :set guioptions-=L " Remove the left-hand scroll bar...bar[]
+        " Remove the gui from GVim
+        :set guioptions-=m " Remove menu bar
+        :set guioptions-=T " Remove the toolbar
+        :set guioptions-=r " Remove the right-hand scroll bar
+        :set guioptions-=L " Remove the left-hand scroll bar...bar[]
+    endif
 " ConEmu specific
 elseif has('win32') && !has('gui_running') && !empty($CONEMUBUILD)
     set term=xterm

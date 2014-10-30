@@ -1,7 +1,7 @@
 [gui]
 [core]
   excludesfile = /Users/tscheffert/.gitignore
-  autocrlf = true
+	autocrlf = input
   editor ='C:/Program Files (x86)/Vim/vim74/gvim.exe' 
 
 [alias]

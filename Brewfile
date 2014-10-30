@@ -29,7 +29,8 @@ install wget --enable-iri
 install vim --override-system-vi
 install homebrew/dupes/grep
 install homebrew/dupes/screen
-install homebrew/php/php55 --with-gmp
+# This failed when I tried to isntall it
+#install homebrew/php/php55 --with-gmp
 
 # Install other useful binaries
 install ack
@@ -47,12 +48,15 @@ install pv # Pipe View Utility - Homepage: http://www.ivarch.com/programs/pv.sht
 install rename # Rename Utility - Homepage: http://plasmasturm.org/code/rename/
 install tree # Directory Listing - Homepage: http://mama.indstate.edu/users/ice/tree/
 install webkit2png # Website Screenshotter - Homepage: http://www.paulhammond.org/webkit2png/
-install xpdf # PDF Utilities - Homepage: http://www.foolabs.com/xpdf/
+# this didn't work for me when I tried to install it. Failed on XQuartz dependency
+#install xpdf # PDF Utilities - Homepage: http://www.foolabs.com/xpdf/
 install zopfli # Improved (slow-ass) Compression - Homepage: https://code.google.com/p/zopfli/
 
 # Programming utilities
 install python
-install homebrew/versions/lua52
+install python3
+# this didn't work for me, needed to tap homebrew/versions
+#install homebrew/versions/lua52
 
 # Remove outdated versions from the cellar
 cleanup

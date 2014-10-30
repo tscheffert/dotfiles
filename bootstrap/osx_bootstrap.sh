@@ -57,6 +57,26 @@ else
 	echo "Vim config complete."
 fi
 
+# Homebrew!
+# Check for Homebrew,
+# Install if we don't have it
+if test ! $(which brew); then
+  echo "Installing homebrew..."
+  ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+fi
+
+# Update homebrew recipes
+brew update
+
+# TODO: Run brew doctor or whatever
+# TODO: Run Brewfile and Caskfile with:
+# # This unlocks the deprecated commands, we want 'bundle'
+# brew tap homebrew/boneyard
+# brew tap homebrew/versions
+# brew bundle Brewfile
+# brew bundle Caskfile
+# brew untap homebrew/boneyard
+# brew untap homebrew/versions
 
 exec $SHELL -l
 

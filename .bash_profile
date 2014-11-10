@@ -1,11 +1,5 @@
 #!/bin/bash
 # TODO: See if I can platform agnosticize this
-# TODO: This runs twice unfortunately
-
-#if [ -f ~/.bashrc ]; then
-
-#   source ~/.bashrc
-#fi
 
 # --- Path ---
 
@@ -55,14 +49,8 @@ append_to_PATH 'C:\Program Files (x86)\GnuWin32\bin'
 # Python Scripts including pip
 append_to_PATH 'C:\tools\python\Scripts'
 
-
-# Load the shell dotfiles, and then some:
-# * ~/.path can be used to extend `$PATH`.
-# * ~/.extra can be used for other settings you don’t want to commit.
-#for file in ~/.{path,bash_prompt,exports,aliases,functions,extra}; do
-#	[ -r "$file" ] && [ -f "$file" ] && source "$file";
-#done;
-#unset file;
+# colors!
+declare -x CLICOLOR=1
 
 # Case-insensitive globbing (used in pathname expansion)
 shopt -s nocaseglob;
@@ -139,3 +127,6 @@ alias ip2="curl -s http://www.showmyip.com/simple/ | awk '{print $1}'"
 
 # refresh shell
 alias reload='source ~/.bash_profile'
+
+# open macvim
+alias mvim ='open -a macvim'

@@ -34,6 +34,8 @@ if [[ -d $HOME/.dotfiles ]]
 	ln -sf $HOME/.dotfiles/.osx $HOME/.osx
 	ln -sf $HOME/.dotfiles/.vimrc $HOME/.vimrc
 	ln -sf $HOME/.dotfiles/.coffeelint.json $HOME/.coffeelint.json
+	ln -sf $HOME/.dotfiles/.slate $HOME/.slate
+
 	echo "Dotfiles have been symlinked to $HOME."
 else
 	echo "Cloning your dotfiles from GitHub..."

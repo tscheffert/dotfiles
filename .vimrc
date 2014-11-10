@@ -174,7 +174,6 @@ set shiftround
 " Only one space when using "join" commands
 set nojoinspaces
 
-
 augroup VisualEffects
     au!
     " Remove any trailing whitespace that is in the file
@@ -367,7 +366,6 @@ if has('gui_running')
         set guifont=Consolas:h11:cANSI
         " Set vim to be maximized on opening
         au GUIEnter * simalt ~x
-
     endif
 " ConEmu specific
 elseif has('win32') && !has('gui_running') && !empty($CONEMUBUILD)
@@ -549,6 +547,29 @@ let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"
+
+
+
+" -----
+" EasyMotion Key Binds
+" -----
+"  From: http://www.robati.com/vim/2014/11/03/vimrc.html
+" " EasyMotion
+" let g:EasyMotion_do_mapping = 0       " Disable default mappings
+" nmap s <Plug>(easymotion-bd-w)
+" nmap t <Plug>(easymotion-t2)
+" map  / <Plug>(easymotion-sn)
+" omap / <Plug>(easymotion-tn)
+" map  n <Plug>(easymotion-next)
+" map  N <Plug>(easymotion-prev)
+" map <Leader>l <Plug>(easymotion-lineforward)
+" map <Leader>j <Plug>(easymotion-j)
+" map <Leader>k <Plug>(easymotion-k)
+" map <Leader>h <Plug>(easymotion-linebackward)
+" let g:EasyMotion_startofline = 0      " keep cursor column when JK motion
+" let g:EasyMotion_smartcase = 1        " type `l` and match `l`&`L`
+" let g:EasyMotion_use_smartsign_us = 1 " type `3` and match `3`&`#`
+
 
 
 " -----

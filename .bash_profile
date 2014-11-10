@@ -1,6 +1,31 @@
 #!/bin/bash
 # TODO: See if I can platform agnosticize this
 
+# --- Platform ---
+# use: if [[ $platform == 'windows']]; then
+platform='unknown'
+if [[ "$OSTYPE" == "darwin"* ]]; then
+    # Mac OSX
+    platform='osx'
+elif [[ "$OSTYPE" == "msys" ]]; then
+    # Lightweight shell and GNU utilities compiled for Windows (part of MinGW)
+    platform='windows'
+elif [[ "$OSTYPE" == "cygwin" ]]; then
+    # POSIX compatibility layer and Linux environment emulation for Windows
+    platform='windows'
+elif [[ "$OSTYPE" == "win32" ]]; then
+    # I'm not sure this can happen.
+    platform='windows'
+elif [[ "$OSTYPE" == "linux-gnu" ]]; then
+    # Linux
+    platform='linux'
+elif [[ "$OSTYPE" == "freebsd"* ]]; then
+    # Linux
+    platform='linux'
+else
+    # Unknown.
+fi
+
 # --- Path ---
 
 # Function to safely, idempotently, append to path
@@ -17,8 +42,13 @@ prepend_to_PATH () {
 
 # -- Prepend --
 
-# Clearly we want vim...
-prepend_to_PATH 'C:\Program Files\Vim\vim74'
+if [[ $platform == 'windows' ]]; then
+    # - Windows -
+
+    # Clearly we want vim...
+    prepend_to_PATH 'C:\Program Files\Vim\vim74'
+
+fi
 
 # Add `~/bin` to the `$PATH`
 prepend_to_PATH "$HOME/bin"
@@ -37,17 +67,22 @@ append_to_PATH () {
     done
 }
 
-# We want IIS Express!
-append_to_PATH 'C:\Program Files (x86)\IIS Express\'
+if [[ $platform == 'windows' ]]; then
+    # - Windows -
 
-# Adb for android debugging
-append_to_PATH 'C:\Users\tscheffert\AppData\Local\Android\android-sdk\platform-tools'
+    # We want IIS Express!
+    append_to_PATH 'C:\Program Files (x86)\IIS Express\'
 
-# GnuWin Make
-append_to_PATH 'C:\Program Files (x86)\GnuWin32\bin'
+    # Adb for android debugging
+    append_to_PATH 'C:\Users\tscheffert\AppData\Local\Android\android-sdk\platform-tools'
 
-# Python Scripts including pip
-append_to_PATH 'C:\tools\python\Scripts'
+    # GnuWin Make
+    append_to_PATH 'C:\Program Files (x86)\GnuWin32\bin'
+
+    # Python Scripts including pip
+    append_to_PATH 'C:\tools\python\Scripts'
+
+fi
 
 # colors!
 declare -x CLICOLOR=1

@@ -1,30 +1,31 @@
-[gui]
-[core]
-  # TODO: Not cross platform!
-  excludesfile = /Users/tscheffert/.gitignore
-  autocrlf = input
-  editor ='C:/Program Files (x86)/Vim/vim74/gvim.exe'
-
-[alias]
-  st = status -sb
-  ci = commit
-  co = checkout
-  br = branch
-  mongod = C:/mongodb/bin/mongod.exe
-  mongo = C:/mongodb/bin/mongo.exe
-
-[color]
-  ui = auto
-  status = auto
-  branc = auto
-  diff = never
-
 [user]
 	name = Trent Scheffert
 	email = trent.scheffert@gmail.com
-[merge]
-	tool = p4merge
-[mergetool "p4merge"]
-	path = C:/Program Files/Perforce/p4merge.exe
+
+[core]
+    # TODO: Not cross platform!
+    editor = vim
+
+[color]
+    ui = auto
+    status = auto
+    branc = auto
+    diff = never
+
 [push]
-	default = matching
+	default = simple
+
+[merge]
+    tool = p4merge
+    prompt = false
+	trustExitCode = false
+	keepBackup = false
+
+[mergetool "p4merge"]
+	cmd = p4merge.exe $BASE $LOCAL $REMOTE $MERGED
+
+[diff]
+	tool = p4merge
+
+[difftool "p4merge"]
+	cmd = p4merge.exe $LOCAL $REMOTE

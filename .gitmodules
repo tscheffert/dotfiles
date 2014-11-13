@@ -19,9 +19,6 @@
 [submodule "vimfiles/bundle/ir_black"]
 	path = vimfiles/bundle/ir_black
 	url = https://github.com/twerth/ir_black.git
-[submodule "vimfiles/bundle/jshint"]
-	path = vimfiles/bundle/jshint
-	url = https://github.com/wookiehangover/jshint.vim
 [submodule "vimfiles/bundle/moria"]
 	path = vimfiles/bundle/moria
 	url = https://github.com/vim-scripts/moria.git

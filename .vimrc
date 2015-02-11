@@ -116,6 +116,11 @@ nnoremap <leader>S ^vg_y:execute @@<cr>:echo 'Sourced line.'<cr>
 " Only care about base 10 digits, not octal or hex
 set nrformats=
 
+" Various characters are "wider" than normal fixed width characters, but the
+" default setting of ambiwidth (single) squeezes them into "normal" width,
+" which sucks.  Setting it to double makes it awesome.
+" -- From derekwyatt
+set ambiwidth=double
 
 " -----
 " Window/Buffers/Tabs
@@ -182,6 +187,8 @@ augroup VisualEffects
     " Save when losing focus
     " NOTE: This doesn't work as well as it should. It's a cool idea though.
     "autocmd FocusLost * :wa
+    " Same thing, haven't tried this version though
+    "autocmd FocusLost * :silent! wall
 
     " Resize splits when the window is resized
     autocmd VimResized * exe "normal! \<c-w>="
@@ -201,6 +208,11 @@ au FileType coffee set noexpandtab
 " Fold by indentation in CoffeeScript
 au BufNewFile,BufReadPost *.coffee setl foldmethod=indent nofoldenable
 
+augroup XmlFiles
+    au!
+    let g:xml_syntax_folding=1
+    au FileType xml setlocal foldmethod=syntax
+augroup END
 
 " -----
 " Typing Behaviors
@@ -359,14 +371,14 @@ if has('gui_running')
     :set guioptions-=L " Remove the left-hand scroll bar...bar[]
 
     " OS X Specific stuff
-    if has("mac")
+   " if has('mac')
         " Stuff here
-    elseif
+    " elseif
         " Set the default font to Consolas (Which is what Visual Studio uses)
         set guifont=Consolas:h11:cANSI
         " Set vim to be maximized on opening
         au GUIEnter * simalt ~x
-    endif
+    " endif
 " ConEmu specific
 elseif has('win32') && !has('gui_running') && !empty($CONEMUBUILD)
     set term=xterm
@@ -393,6 +405,10 @@ set synmaxcol=2048
 " When the page starts to scroll, keep the cursor 8 lines from
 " the top and 8 lines from the bottom
 set scrolloff=8
+
+" Keep some columns visible when horizontally scrolling
+set sidescroll=1
+set sidescroll=8
 
 " Set off the other paren by FLASHING
 highlight MatchParen ctermbg=4
@@ -644,6 +660,9 @@ noremap S i<Space><Esc>r
 map <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
         \ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
         \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
+
+" Xml formatting!
+autocmd FileType xml noremap <buffer> <c-e><c-f> :silent %!xmllint % --format --recover<CR>
 
 
 " -----

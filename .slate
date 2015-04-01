@@ -1,6 +1,3 @@
-# This is the default .slate file.
-# If no ~/.slate file exists this is the file that will be used.
-
 config defaultToCurrentScreen true
 config nudgePercentOf screenSize
 config resizePercentOf screenSize
@@ -24,16 +21,6 @@ alias bottomleft corner bottom-left resize:screenSizeX/2;screenSizeY/2
 alias bottomright corner bottom-right resize:screenSizeX/2;screenSizeY/2
 alias bottomhalf move screenOriginX;screenOriginY+screenSizeY/2 screenSizeX;screenSizeY/2
 
-# # Resize Bindings
-# bind right:alt       resize +10% +0
-# bind left:alt        resize -10% +0
-# bind up:alt          resize +0   -10%
-# bind down:alt        resize +0   +10%
-# bind right:ctrl;alt  resize -10% +0 bottom-right
-# bind left:ctrl;alt   resize +10% +0 bottom-right
-# bind up:ctrl;alt     resize +0   +10% bottom-right
-# bind down:ctrl;alt   resize +0   -10% bottom-right
-
 ## Push Bindings
 # bind right:ctrl;cmd  push right bar-resize:screenSizeX/3
 # bind left:ctrl;cmd   push left  bar-resize:screenSizeX/3
@@ -41,17 +28,19 @@ alias bottomhalf move screenOriginX;screenOriginY+screenSizeY/2 screenSizeX;scre
 # bind down:ctrl;cmd   push down  bar-resize:screenSizeY/2
 
 # Abstract Position Bindings
-bind left:ctrl;alt ${lefthalf}
-bind right:ctrl;alt ${righthalf}
-bind up:ctrl;alt ${tophalf}
-bind down:ctrl;alt ${bottomhalf}
-bind up:shift;ctrl ${full}
+bind h:ctrl;alt ${lefthalf}
+bind l:ctrl;alt ${righthalf}
+bind k:ctrl;alt ${tophalf}
+bind j:ctrl;alt ${bottomhalf}
+
+# Full screen
+bind k:shift;ctrl ${full}
 
 # Nudge Bindings
-bind right:shift;alt nudge +10% +0
-bind left:shift;alt  nudge -10% +0
-bind up:shift;alt    nudge +0   -10%
-bind down:shift;alt  nudge +0   +10%
+bind l:shift;alt nudge +10% +0
+bind h:shift;alt nudge -10% +0
+bind k:shift;alt nudge +0   -10%
+bind j:shift;alt nudge +0   +10%
 
 # # Throw Bindings
 # bind 1:ctrl;alt         throw 0 resize

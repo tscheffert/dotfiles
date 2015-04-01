@@ -5,31 +5,20 @@
 " Clear all autocommands
 autocmd!
 
-let use_pathogen = 0
-let use_neobundle = 1
+" Start with filetype off for plugin loading
+filetype off
+
+let s:use_pathogen = 0
+let s:use_neobundle = 1
 
 " If using Pathogen do all the startup stuff
-if use_pathogen
+if s:use_pathogen
     " Start Pathogen
     execute pathogen#infect()
     execute pathogen#helptags()
-
-    " Forget being compatible with good ol' vi
-    set nocompatible
-
-    " Get that filetype stuff happening
-    filetype on
-
-    " Syntax and indent by filetype
-    filetype plugin on
-    filetype indent on
-    filetype plugin indent on
-
-    " Turn on that syntax highlighting
-    syntax on
 endif
 
-if use_neobundle
+if s:use_neobundle
     if has('vim_starting')
         " Required for NeoBundle
         set runtimepath +=~/.vim/bundle/neobundle.vim/
@@ -95,6 +84,11 @@ if use_neobundle
     " If there are uninstalled bundles found on startup,
     " this will conveniently prompt you to install them.
     NeoBundleCheck
+
+    if !has('vim_starting')
+        " Call on_source hook when reloading .vimrc
+        call neobundle#call_hook('on_source')
+    endif
 endif
 
 " Forget being compatible with good ol' vi
@@ -136,10 +130,6 @@ augroup END
 " Vim Preferences
 " -----
 
-" Keep all of the temporary and backup files in one place
-" set backupdir=~/vimfiles/backup
-" set directory=~/vimfiles/tmp
-
 " Why is this not a default
 set hidden
 
@@ -158,7 +148,9 @@ set undoreload=10000
 " Save undo's after file closes
 "set undofile
 " Set where to save undo histories
-set undodir=~/vimfiles/tmp/undo//     " Fancy undo file location. The trailing '//' makes the files saved be path unique
+" Fancy undo file location. The trailing '//' makes a unique path by using the
+" full path of the original file.
+set undodir=~/vimfiles/tmp/undo//
 set backupdir=~/vimfiles/tmp/backup// " Backups
 set directory=~/vimfiles/tmp/swap//   " Swap Files
 set backup                        " Enable backups
@@ -174,7 +166,6 @@ endif
 if !isdirectory(expand(&directory))
     call mkdir(expand(&directory), "p")
 endif
-
 
 " Don't stop and say 'more' for long files
 "set nomore

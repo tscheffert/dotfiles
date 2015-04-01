@@ -71,13 +71,24 @@ if use_neobundle
 
     call neobundle#end()
 
-
-    filetype plugin indent on
-
     " If there are uninstalled bundles found on startup,
     " this will conveniently prompt you to install them.
     NeoBundleCheck
 endif
+
+" Forget being compatible with good ol' vi
+set nocompatible
+
+" Get that filetype stuff happening
+filetype on
+
+" Syntax and indent by filetype
+filetype plugin on
+filetype indent on
+filetype plugin indent on
+
+" Turn on that syntax highlighting
+syntax on
 
 " Restore cursor position from last time you editted the file
 augroup line_return
@@ -426,15 +437,15 @@ if has('gui_running')
     :set guioptions-=r " Remove the right-hand scroll bar
     :set guioptions-=L " Remove the left-hand scroll bar...bar[]
 
-    " OS X Specific stuff
-   " if has('mac')
-        " Stuff here
-    " elseif
+    " Windows Specific stuff
+   if has('win32')
         " Set the default font to Consolas (Which is what Visual Studio uses)
         set guifont=Consolas:h11:cANSI
         " Set vim to be maximized on opening
         au GUIEnter * simalt ~x
-    " endif
+        " Stuff here
+        " elseif
+    endif
 " ConEmu specific
 elseif has('win32') && !has('gui_running') && !empty($CONEMUBUILD)
     set term=xterm

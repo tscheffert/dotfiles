@@ -3,8 +3,9 @@
 .elasticbeanstalk/
 
 # Vim Stuff in DotFiles
-# We're not actually going to ignore bundle because we're gonna use submodules!
-# vimfiles/bundle/
+# Ignore bundles. Neobundle is already in there and managed, everything else we can safely ignore
+vimfiles/bundle/
+# Ignore the generated backup Stuff
 vimfiles/tmp/
 
 # SQLite Databse

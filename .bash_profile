@@ -126,6 +126,12 @@ fi;
 
 
 # --- Exports ---
+if [[ $platform == 'osx' ]]; then
+    # Make MacVim the default visual editor.
+    # '-f' tells it not to fork a new process. Works better with shell.
+    export VISUAL='mvim -f'
+fi
+
 # Make vim the default editor
 export EDITOR="vim";
 

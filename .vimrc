@@ -31,43 +31,64 @@ endif
 
 if use_neobundle
     if has('vim_starting')
-        " Required:
+        " Required for NeoBundle
         set runtimepath +=~/.vim/bundle/neobundle.vim/
     endif
 
-    " Required:
+    " Required for NeoBundle
     call neobundle#begin(expand('~/.vim/bundle/'))
 
     " Let NeoBundle manage NeoBundle
     NeoBundleFetch 'Shougo/neobundle.vim'
 
     " My bundles:
-    " TODO: Remove unused addons, sort them, comment them, put them into directories
-    NeoBundle 'mileszs/ack.vim.git'
-    NeoBundle 'vim-scripts/BufOnly.vim.git'
-    NeoBundle 'vim-scripts/Color-Sampler-Pack.git'
-    NeoBundle 'kien/ctrlp.vim.git'
-    NeoBundle 'Raimondi/delimitmate.git'
-    NeoBundle 'sjl/gundo.vim.git'
+    " Colors
     NeoBundle 'twerth/ir_black.git'
     NeoBundle 'vim-scripts/moria.git'
-    NeoBundle 'scrooloose/nerdtree.git'
+    NeoBundle 'vim-scripts/Color-Sampler-Pack.git'
     NeoBundle 'vim-scripts/ScrollColors.git'
-    NeoBundle 'SirVer/ultisnips.git'
-    NeoBundle 'tpope/vim-abolish.git'
-    NeoBundle 'bling/vim-airline.git'
     NeoBundle 'altercation/vim-colors-solarized.git'
-    NeoBundle 'tpope/vim-commentary.git'
-    NeoBundle 'Lokaltog/vim-easymotion.git'
+    NeoBundle 'tomasr/molokai.git'
+    NeoBundle 'nanotech/jellybeans.vim'
+
+    " Search with ack easier
+    NeoBundle 'mileszs/ack.vim.git'
+
+    " Buffer management
+    NeoBundle 'vim-scripts/BufOnly.vim.git'
+
+    " File management
+    NeoBundle 'kien/ctrlp.vim.git'
+    NeoBundle 'scrooloose/nerdtree.git'
+    " Forces nerdtree to open with each tab
+    " NeoBundle 'jistr/vim-nerdtree-tabs.git'
+
+    " Auto parentheses
+    NeoBundle 'Raimondi/delimitmate.git'
+
+    " Improved Undo functionality
+    NeoBundle 'sjl/gundo.vim.git'
+
+    " Snippets
+    NeoBundle 'SirVer/ultisnips.git'
+    NeoBundle 'honza/vim-snippets.git'
+
+    " Language specific
     NeoBundle 'jelera/vim-javascript-syntax.git'
-    NeoBundle 'maksimr/vim-jsbeautify.git'
     NeoBundle 'elzr/vim-json.git'
     NeoBundle 'groenewege/vim-less.git'
-    NeoBundle 'jistr/vim-nerdtree-tabs.git'
-    NeoBundle 'tpope/vim-pathogen.git'
-    NeoBundle 'honza/vim-snippets.git'
+    NeoBundle 'maksimr/vim-jsbeautify.git'
+
+    " Status bar
+    NeoBundle 'bling/vim-airline.git'
+
+    " Easier file movement
+    NeoBundle 'Lokaltog/vim-easymotion.git'
+
+    " tpope  rocks
+    NeoBundle 'tpope/vim-commentary.git'
     NeoBundle 'tpope/vim-surround.git'
-    NeoBundle 'tomasr/molokai.git'
+    NeoBundle 'tpope/vim-abolish.git'
 
     call neobundle#end()
 
@@ -531,13 +552,9 @@ map - <Plug>(easymotion-prefix)
 " and bwds
 map <SPACE> <Plug>(easymotion-s2)
 
-" Set up the Ack path
-" NOTE: Unsure if this works still
-let g:ackprg="C:\\strawberryPerl\\perl\\bin\\ack.pl -H --nocolor --nogroup --column"
-
 
 " -----
-" Airline
+" Plugin: Airline
 " -----
 
 " Automatically displays all buffers when theres only one tab open

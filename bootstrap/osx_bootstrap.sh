@@ -14,7 +14,7 @@ if [[ -d $HOME/.dotfiles ]]
     #                   can use . or ~ or other relative paths
     #
     #   Options:
-    #   -f If the target file alre4ady exists, then unlink it so that the link may occur.
+    #   -f If the target file already exists, then unlink it so that the link may occur.
 
 	# Symlink directories
 	ln -sf $HOME/.dotfiles/bin $HOME/bin
@@ -48,14 +48,11 @@ else
 fi
 
 # Setup vimfiles
-if [[ -d $HOME/.vim/bundle ]]
+if [[ -d $HOME/.vim/bundle/neobundle.vim ]]
 	then
-	echo "You've already gotten your vim plugins, updating."
-	git submodule foreach git pull origin master
-	echo "Update complete"
-else
-    echo "update and init on submodules"
-	git submodule update --init
+	echo "Found ~/.vim/bundle/neobundle.vim directory"
+	echo "Running NeoBundle Install"
+	vim +NeoBundleInstall +qall
 	echo "Vim config complete."
 fi
 

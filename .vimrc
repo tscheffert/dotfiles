@@ -5,23 +5,79 @@
 " Clear all autocommands
 autocmd!
 
-" Start Pathogen
-execute pathogen#infect()
-execute pathogen#helptags()
+let use_pathogen = 0
+let use_neobundle = 1
 
-" Forget being compatible with good ol' vi
-set nocompatible
+" If using Pathogen do all the startup stuff
+if use_pathogen
+    " Start Pathogen
+    execute pathogen#infect()
+    execute pathogen#helptags()
 
-" Get that filetype stuff happening
-filetype on
+    " Forget being compatible with good ol' vi
+    set nocompatible
 
-" Syntax and indent by filetype
-filetype plugin on
-filetype indent on
-filetype plugin indent on
+    " Get that filetype stuff happening
+    filetype on
 
-" Turn on that syntax highlighting
-syntax on
+    " Syntax and indent by filetype
+    filetype plugin on
+    filetype indent on
+    filetype plugin indent on
+
+    " Turn on that syntax highlighting
+    syntax on
+endif
+
+if use_neobundle
+    if has('vim_starting')
+        " Required:
+        set runtimepath +=~/.vim/bundle/neobundle.vim/
+    endif
+
+    " Required:
+    call neobundle#begin(expand('~/.vim/bundle/'))
+
+    " Let NeoBundle manage NeoBundle
+    NeoBundleFetch 'Shougo/neobundle.vim'
+
+    " My bundles:
+    " TODO: Remove unused addons, sort them, comment them, put them into directories
+    NeoBundle 'mileszs/ack.vim.git'
+    NeoBundle 'vim-scripts/BufOnly.vim.git'
+    NeoBundle 'vim-scripts/Color-Sampler-Pack.git'
+    NeoBundle 'kien/ctrlp.vim.git'
+    NeoBundle 'Raimondi/delimitmate.git'
+    NeoBundle 'sjl/gundo.vim.git'
+    NeoBundle 'twerth/ir_black.git'
+    NeoBundle 'vim-scripts/moria.git'
+    NeoBundle 'scrooloose/nerdtree.git'
+    NeoBundle 'vim-scripts/ScrollColors.git'
+    NeoBundle 'SirVer/ultisnips.git'
+    NeoBundle 'tpope/vim-abolish.git'
+    NeoBundle 'bling/vim-airline.git'
+    NeoBundle 'altercation/vim-colors-solarized.git'
+    NeoBundle 'tpope/vim-commentary.git'
+    NeoBundle 'Lokaltog/vim-easymotion.git'
+    NeoBundle 'jelera/vim-javascript-syntax.git'
+    NeoBundle 'maksimr/vim-jsbeautify.git'
+    NeoBundle 'elzr/vim-json.git'
+    NeoBundle 'groenewege/vim-less.git'
+    NeoBundle 'jistr/vim-nerdtree-tabs.git'
+    NeoBundle 'tpope/vim-pathogen.git'
+    NeoBundle 'honza/vim-snippets.git'
+    NeoBundle 'tpope/vim-surround.git'
+    NeoBundle 'tomasr/molokai.git'
+
+    call neobundle#end()
+
+
+    filetype plugin indent on
+
+    " If there are uninstalled bundles found on startup,
+    " this will conveniently prompt you to install them.
+    NeoBundleCheck
+endif
 
 " Restore cursor position from last time you editted the file
 augroup line_return

@@ -79,6 +79,9 @@ if s:use_neobundle
     NeoBundle 'tpope/vim-surround.git'
     NeoBundle 'tpope/vim-abolish.git'
 
+    " Ruby stuff
+    NeoBundle 'tpope/vim-rails'
+
     call neobundle#end()
 
     " If there are uninstalled bundles found on startup,
@@ -642,6 +645,9 @@ let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"
+
+" Custom snippets directory
+let g:UltiSnipsSnippetDirectories=[$HOME.'/.vim/UltiSnips']
 
 
 

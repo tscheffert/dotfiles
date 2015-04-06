@@ -1,5 +1,4 @@
 #!/bin/bash
-# TODO: See if I can platform agnosticize this
 
 # --- Platform ---
 # use: if [[ $platform == 'windows']]; then
@@ -161,6 +160,7 @@ export HISTIGNORE="ls:cd:cd -:pwd:exit:date:* --help";
 # history -n - append the history lines not already read from the history file to the current history list.
 export PROMPT_COMMAND="history -a; history -n;"
 
+
 # --- Ruby Stuff ---
 if [[ $platform == 'osx' ]]; then
     # Use HOmebrew's directories rather than ~/.rbenv
@@ -182,6 +182,16 @@ alias pg-start='pg_ctl -l $PGDATA/server.log start'
 alias pg-stop='pg_ctl stop -m fast'
 alias pg-status='pg_ctl status'
 alias pg-restart='pg_ctl reload'
+
+
+# --- Git Prompt ---
+if [ -f ~/.git-prompt.sh ]; then
+    # Enable the __git_ps1
+    source ~/.git-prompt.sh
+
+    # Set status line
+    export PS1='[\W]$(__git_ps1 "(%s)")$ '
+fi
 
 
 # --- Aliases ---

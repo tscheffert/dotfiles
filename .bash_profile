@@ -139,6 +139,9 @@ export EDITOR="vim";
 export LANG="en_US.UTF-8";
 export LC_ALL="en_US.UTF-8";
 
+# Github API Key!
+export HOMEBREW_GITHUB_API_TOKEN=b378ad9787685006e70642743a402d838e6fac64;
+
 # -- History --
 # larger bash history (allow 32^3 entries; default is 500)
 export HISTSIZE=32768;
@@ -157,6 +160,28 @@ export HISTIGNORE="ls:cd:cd -:pwd:exit:date:* --help";
 # history -a - used instead of "shopt -s histappend" as this appends every line individually rather then when the shell exits
 # history -n - append the history lines not already read from the history file to the current history list.
 export PROMPT_COMMAND="history -a; history -n;"
+
+# --- Ruby Stuff ---
+if [[ $platform == 'osx' ]]; then
+    # Use HOmebrew's directories rather than ~/.rbenv
+    export RBENV_ROOT=/usr/local/var/rbenv
+
+    # Enable shims and autocompletion
+    if which rbenv > /dev/null ; then eval "$(rbenv init -)"; fi
+fi
+
+
+# --- Postgres ---
+if [[ $platform == 'osx' ]]; then
+    # Set the required env variable for postgres
+    export PGDATA='/usr/local/var/postgres'
+    export PGGHOST=localhost
+fi
+
+alias pg-start='pg_ctl -l $PGDATA/server.log start'
+alias pg-stop='pg_ctl stop -m fast'
+alias pg-status='pg_ctl status'
+alias pg-restart='pg_ctl reload'
 
 
 # --- Aliases ---
@@ -179,6 +204,11 @@ alias ip2="curl -s http://www.showmyip.com/simple/ | awk '{print $1}'"
 
 # refresh shell
 alias reload='source ~/.bash_profile'
+
+# --- Git Aliases ---
+
+# status!
+alias gs='git status'
 
 
 # --- Functions ---

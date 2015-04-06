@@ -79,6 +79,12 @@ brew update
 
 exec $SHELL -l
 
+
+# --- Next Steps ---
+# 1. There's iTerm2 preferences in the dotfiles
+# 2. Download Slate and set it to always startup
+
+# TODO: Fix this for neobundle...
 # This is really cool but I don't use vundle at the moment
 # # Don't try to clone the vundle repo again if it already exists
 # if [[ -d $HOME/.vim ]]

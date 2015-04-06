@@ -356,7 +356,7 @@
 	<key>HiddenAdvancedFontRendering</key>
 	<false/>
 	<key>HideActivityIndicator</key>
-	<false/>
+	<true/>
 	<key>HideMenuBarInFullscreen</key>
 	<true/>
 	<key>HideScrollbar</key>
@@ -1124,7 +1124,7 @@
 			<key>Vertical Spacing</key>
 			<real>1</real>
 			<key>Visual Bell</key>
-			<true/>
+			<false/>
 			<key>Window Type</key>
 			<integer>0</integer>
 			<key>Working Directory</key>

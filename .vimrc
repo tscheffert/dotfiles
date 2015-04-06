@@ -81,6 +81,7 @@ if s:use_neobundle
 
     " Ruby stuff
     NeoBundle 'tpope/vim-rails'
+    NeoBundle 'tpope/vim-bundler'
 
     call neobundle#end()
 

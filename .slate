@@ -28,10 +28,10 @@ alias bottomhalf move screenOriginX;screenOriginY+screenSizeY/2 screenSizeX;scre
 # bind down:ctrl;cmd   push down  bar-resize:screenSizeY/2
 
 # Abstract Position Bindings
-bind h:ctrl;alt ${lefthalf}
-bind l:ctrl;alt ${righthalf}
-bind k:ctrl;alt ${tophalf}
-bind j:ctrl;alt ${bottomhalf}
+bind h:ctrl;cmd ${lefthalf}
+bind l:ctrl;cmd ${righthalf}
+bind k:ctrl;cmd ${tophalf}
+bind j:ctrl;cmd ${bottomhalf}
 
 # Full screen
 bind k:shift;ctrl ${full}

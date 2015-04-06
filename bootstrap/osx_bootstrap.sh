@@ -29,6 +29,7 @@ if [[ -d $HOME/.dotfiles ]]
 	ln -sf $HOME/.dotfiles/.editorconfig $HOME/.editorconfig
 	ln -sf $HOME/.dotfiles/.gitconfig $HOME/.gitconfig
 	ln -sf $HOME/.dotfiles/.gitignore $HOME/.gitignore
+	ln -sf $HOME/.dotfiles/.git-prompt.sh $HOME/.git-prompt.sh
 	ln -sf $HOME/.dotfiles/.jscs.json $HOME/.jscs.json
 	ln -sf $HOME/.dotfiles/.jshintrc $HOME/.jshintrc
 	ln -sf $HOME/.dotfiles/.osx $HOME/.osx

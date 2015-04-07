@@ -1,0 +1,43 @@
+#!/bin/sh
+#
+# You need to configure vim to load .git/tags (or install Fugitive.vim).
+# Also cannot have .git in your wildignore vimrc settings.
+#
+
+# Adapted from tpope
+#   Source: http://tbaggery.com/2011/08/08/effortless-ctags-with-git.html
+# set -e
+# LANGS="-sql,-cobol,-javascript"
+# dir="'git rev-parse --git-dir'"
+# trap 'rm -f  "$dir/$$.tags"' EXIT
+
+# if [[ -f Rakefile || -f Gemfile ]]; then
+#     # Ruby-only tags
+#     # ls-files pipes into the ctags so that the tracked files get tagged
+#     git ls-files | \
+#         ripper-tags -R --force --tag-relative -f "$dir/$$.tags"
+# else
+#     # General purpose ctags
+#     # ls-files pipes into the ctags so that the tracked files get tagged
+#     git ls-files | \
+#         ctags --tag-relative -L - -f "$dir/$$.tags" "--languages=$LANGS"
+# fi
+# mv "$dir/$$.tags" "$dir/tags"
+
+
+
+# lzap uses the following instead
+LANGS="-sql,-javascript"
+
+mkdir .git/tags_lock 2>/dev/null || exit 0
+trap "rmdir .git/tags_lock; rm -f .git/tags.tmp" EXIT
+
+if [[ -f Rakefile || -f Gemfile ]]; then
+  # ruby-only tags
+  ripper-tags -R --force --tag-relative -f .git/tags.tmp
+else
+  # general purpose ctags
+  ctags --tag-relative -R -f .git/tags.tmp --exclude=.git "--languages=$LANGS"
+fi
+
+mv .git/tags.tmp .git/tags

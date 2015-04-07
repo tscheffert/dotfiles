@@ -1,6 +1,6 @@
 [user]
 	name = Trent Scheffert
-	email = trent.scheffert@gmail.com
+	email = trent@purchasingplatform.com
 
 [core]
     # TODO: Not cross platform!
@@ -10,7 +10,7 @@
     ui = auto
     status = auto
     branc = auto
-    diff = never
+    diff = auto
 
 [push]
 	default = simple
@@ -22,10 +22,12 @@
 	keepBackup = false
 
 [mergetool "p4merge"]
-	cmd = p4merge.exe $BASE $LOCAL $REMOTE $MERGED
+	cmd = /Applications/p4merge.app/Contents/MacOS/p4merge "$BASE" "$LOCAL" "$REMOTE" "$MERGED"
 
 [diff]
 	tool = p4merge
 
 [difftool "p4merge"]
-	cmd = p4merge.exe $LOCAL $REMOTE
+	cmd = /Applications/p4merge.app/Contents/MacOS/p4merge "$LOCAL" "$REMOTE"
+[init]
+	templatedir = ~/.git_template

@@ -20,6 +20,7 @@ if [[ -d $HOME/.dotfiles ]]
 	ln -sf $HOME/.dotfiles/bin $HOME/bin
 	ln -sf $HOME/.dotfiles/init $HOME/init
 	ln -sf $HOME/.dotfiles/vimfiles $HOME/.vim
+	ln -sf $HOME/.dotfiles/.git_template $HOME/.git_template
 
 	# Symlink files
 	ln -sf $HOME/.dotfiles/.bash_profile $HOME/.bash_profile
@@ -38,14 +39,6 @@ if [[ -d $HOME/.dotfiles ]]
 	ln -sf $HOME/.dotfiles/.slate $HOME/.slate
 
 	echo "Dotfiles have been symlinked to $HOME."
-else
-	echo "Cloning your dotfiles from GitHub..."
-	git clone https://github.com/tscheffe/dotfiles.git $HOME/.dotfiles
-	#echo "Cloning Pure Zshell config from GitHub..."
-	#git clone https://github.com/sindresorhus/pure $HOME/Code/pure-zsh/
-	#echo "Linking Pure Zshell prompt to Zsh functions..."
-	#ln -s "$HOME/Code/pure-zsh/pure.zsh" /usr/local/share/zsh/site-functions/prompt_pure_setup
-	echo "Dotfiles install complete."
 fi
 
 # Setup vimfiles
@@ -84,22 +77,5 @@ exec $SHELL -l
 # --- Next Steps ---
 # 1. There's iTerm2 preferences in the dotfiles
 # 2. Download Slate and set it to always startup
-
-# TODO: Fix this for neobundle...
-# This is really cool but I don't use vundle at the moment
-# # Don't try to clone the vundle repo again if it already exists
-# if [[ -d $HOME/.vim ]]
-	# then
-	# echo "You've already set up your vim config."
-# else
-	# mkdir -p $HOME/.vim/bundle/ && cd $_
-	# git init
-	# git clone https://github.com/gmarik/vundle.git $HOME/.vim/bundle/vundle
-	# ln -sf $DOTFILES/vimrc $HOME/.vimrc
-	# ln -sf $DOTFILES/vimrc.bundles $HOME/.vimrc.bundles
-	# ln -sf $DOTFILES/gvimrc $HOME/.gvimrc
-
-	# vim +BundleInstall +qall
-	# echo "Vim config complete."
-# fi
-
+# 3. brew install exuberant-ctags
+# 4. ripper-tags from https://github.com/lzap/gem-ripper-tags

@@ -83,6 +83,9 @@ if s:use_neobundle
     NeoBundle 'tpope/vim-rails'
     NeoBundle 'tpope/vim-bundler'
 
+    " Git!
+    NeoBundle 'tpope/vim-fugitive'
+
     call neobundle#end()
 
     " If there are uninstalled bundles found on startup,
@@ -244,6 +247,13 @@ set shiftwidth=4
 set softtabstop=4
 set tabstop=4
 
+augroup FiletypeSpecifics
+    au!
+    autocmd Filetype ruby setlocal shiftwidth=2
+    autocmd Filetype ruby setlocal softtabstop=2
+    autocmd Filetype ruby setlocal tabstop=2
+augroup END
+
 " Set the cursor at the same indent as line above
 set autoindent
 
@@ -320,12 +330,13 @@ set wildmode=list:longest,full
 " |glob()| which many plugins use to find stuff on the system (e.g. VCS related
 " plugins look for .git/, .hg/,... some other plugins look for external *.exe
 " tools on Windows). So be a little mindful of what you put in your |wildignore|.
-set wildignore+=*.sw?                           " Vim swap files
-set wildignore+=*.gitignore,*.sln,.hg,.git      " Version Control
-set wildignore+=*.pyc                           " Python byte code
+set wildignore+=*.sw?                            " Vim swap files
+set wildignore+=*.gitignore,*.sln,.hg            " Version Control, tpope says don't ignore .git
+" set wildignore+=*.gitignore,*.sln,.hg,.git     " Version Control
+set wildignore+=*.pyc                            " Python byte code
 set wildignore+=*.o,*.obj,*.exe,*.dll,*.manifest " Compiled objects
-set wildignore+=*.DS_Store                      " OSX Sucks
-set wildignore+=*.jpg,*.jpeg,*.bmp,*.gif,*.png  " Binary images
+set wildignore+=*.DS_Store                       " OSX Sucks
+set wildignore+=*.jpg,*.jpeg,*.bmp,*.gif,*.png   " Binary images
 
 " Set the forward slash to be the slash of note.  Backslashes suck
 " Matters only on Windows

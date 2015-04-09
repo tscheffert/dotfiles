@@ -692,8 +692,13 @@ let g:UltiSnipsSnippetDirectories=[$HOME.'/.vim/UltiSnips']
 " Ctrl-j/k deletes blank line below/above, and Alt-j/k inserts.
 nnoremap <silent><C-j> m`:silent +g/\m^\s*$/d<CR>``:noh<CR>
 nnoremap <silent><C-k> m`:silent -g/\m^\s*$/d<CR>``:noh<CR>
-nnoremap <silent><A-j> :set paste<CR>m`o<Esc>``:set nopaste<CR>j
-nnoremap <silent><A-k> :set paste<CR>m`O<Esc>``:set nopaste<CR>k
+if has("mac")
+    nnoremap <silent>∆ :set paste<CR>m`o<Esc>``:set nopaste<CR>j
+    nnoremap <silent>˚ :set paste<CR>m`O<Esc>``:set nopaste<CR>k
+else
+    nnoremap <silent><A-j> :set paste<CR>m`o<Esc>``:set nopaste<CR>j
+    nnoremap <silent><A-k> :set paste<CR>m`O<Esc>``:set nopaste<CR>k
+endif
 
 "" Don't hlsearch, but when I do search for something set hlsearch, then
 "" remove it when entering insert mode

@@ -124,6 +124,19 @@ fi;
 [ -e "$HOME/.ssh/config" ] && complete -o "default" -o "nospace" -W "$(grep "^Host" ~/.ssh/config | grep -v "[?*]" | cut -d " " -f2 | tr ' ' '\n')" scp sftp ssh;
 
 
+# --- Colors ---
+# TODO: What do these colors do?
+export CLICOLOR=1
+export LSCOLORS=exfxcxdxbxegedabagacad
+export LS_COLORS="di=1;0;34:ln=0;35:so=32:pi=0;33:ex=0;31:bd=37;46:cd=37;43:su=37;41:sg=37;46:tw=37;42:ow=37;43:or=37;45:mi=37;43:"
+
+if echo hello | grep --color=auto l >/dev/null 2>&1; then
+  export GREP_OPTIONS='--color=auto'
+  export GREP_COLOR='0;32'
+  export GREP_COLORS="sl=0;37:cx=1;32:mt=1;35:fn=0;32:ln=1;34:se=1;33"
+fi
+
+
 # --- Exports ---
 if [[ $platform == 'osx' ]]; then
     # Make MacVim the default visual editor.
@@ -163,7 +176,7 @@ export PROMPT_COMMAND="history -a; history -n;"
 
 # --- Ruby Stuff ---
 if [[ $platform == 'osx' ]]; then
-    # Use HOmebrew's directories rather than ~/.rbenv
+    # Use Homebrew's directories rather than ~/.rbenv
     export RBENV_ROOT=/usr/local/var/rbenv
 
     # Enable shims and autocompletion
@@ -208,6 +221,9 @@ alias ip1="ifconfig -a | perl -nle'/(\d+\.\d+\.\d+\.\d+)/ && print $1'"
 # external ip
 alias ip2="curl -s http://www.showmyip.com/simple/ | awk '{print $1}'"
 
+# See hidden files with ls
+alias ls="ls -a"
+
 # grep with color
 # for whatever reason this doesn't work with my grep on windows
 #alias grep='grep --color=auto'
@@ -219,6 +235,8 @@ alias reload='source ~/.bash_profile'
 
 # status!
 alias gs='git status'
+
+alias test='bundle exec rspec'
 
 
 # --- Functions ---

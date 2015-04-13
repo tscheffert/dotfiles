@@ -28,6 +28,8 @@ vimfiles/tmp/
 *.un~
 Session.vim
 .netrwhist
+# ripper-tags auto generates tags for engines. Usually they're in .git/ but engines aren't
+components/**/tags
 
 # ----- Windows -----
 # Windows image file caches

@@ -82,6 +82,8 @@ if s:use_neobundle
     " Ruby stuff
     NeoBundle 'tpope/vim-rails'
     NeoBundle 'tpope/vim-bundler'
+    NeoBundle 'tpope/vim-rake'
+    NeoBundle 'tpope/vim-projectionist'
 
     " Git!
     NeoBundle 'tpope/vim-fugitive'

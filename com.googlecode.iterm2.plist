@@ -19,7 +19,7 @@
 	<key>CheckTestRelease</key>
 	<true/>
 	<key>ClosingHotkeySwitchesSpaces</key>
-	<false/>
+	<true/>
 	<key>CommandSelection</key>
 	<true/>
 	<key>Control</key>
@@ -402,7 +402,7 @@
 	<key>NSWindow Frame Preferences</key>
 	<string>87 213 924 485 0 0 1440 900 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>162 91 650 476 0 0 1440 877 </string>
+	<string>162 91 650 476 0 0 1440 900 </string>
 	<key>New Bookmarks</key>
 	<array>
 		<dict>
@@ -662,6 +662,13 @@
 			</array>
 			<key>Keyboard Map</key>
 			<dict>
+				<key>0x19-0x60000</key>
+				<dict>
+					<key>Action</key>
+					<integer>31</integer>
+					<key>Text</key>
+					<string></string>
+				</dict>
 				<key>0x2d-0x40000</key>
 				<dict>
 					<key>Action</key>
@@ -717,6 +724,13 @@
 					<integer>11</integer>
 					<key>Text</key>
 					<string>0x7f</string>
+				</dict>
+				<key>0x9-0x40000</key>
+				<dict>
+					<key>Action</key>
+					<integer>30</integer>
+					<key>Text</key>
+					<string></string>
 				</dict>
 				<key>0xf700-0x220000</key>
 				<dict>

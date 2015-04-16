@@ -213,13 +213,17 @@ fi
 alias lh='ls -lhaG'
 
 # simple ip
-alias ip='ifconfig | grep "inet " | grep -v 127.0.0.1 | cut -d\ -f2'
+# TODO: Right now this fails, saying "cut: bad delimiter"
+# alias ip='ifconfig | grep "inet " | grep -v 127.0.0.1 | cut -d\ -f2'
+
 
 # more details
-alias ip1="ifconfig -a | perl -nle'/(\d+\.\d+\.\d+\.\d+)/ && print $1'"
+# TODO: This works, but not sure what it means...
+# alias ip1="ifconfig -a | perl -nle'/(\d+\.\d+\.\d+\.\d+)/ && print $1'"
 
 # external ip
-alias ip2="curl -s http://www.showmyip.com/simple/ | awk '{print $1}'"
+# TODO: Fix this, getting external IP would be awesome. Right now it just hangs
+# alias ip2="curl -s http://www.showmyip.com/simple/ | awk '{print $1}'"
 
 # See hidden files with ls
 alias ls="ls -a"

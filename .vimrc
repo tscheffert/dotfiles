@@ -249,13 +249,6 @@ set shiftwidth=4
 set softtabstop=4
 set tabstop=4
 
-augroup FiletypeSpecifics
-    au!
-    autocmd Filetype ruby setlocal shiftwidth=2
-    autocmd Filetype ruby setlocal softtabstop=2
-    autocmd Filetype ruby setlocal tabstop=2
-augroup END
-
 " Set the cursor at the same indent as line above
 set autoindent
 
@@ -292,6 +285,16 @@ augroup END
 " Fix indents when linewrap is on
 set breakindent
 
+" -----
+" Column length!
+" -----
+
+if exists('+colorcolumn')
+    set colorcolumn=80
+else
+    highlight OverLength ctermbg=red ctermfg=white guibg=#592929
+    match OverLength /\%81v.\+/
+endif
 
 " -----
 " File Specific Display stuff like tabs
@@ -308,6 +311,19 @@ augroup XmlFiles
     let g:xml_syntax_folding=1
     au FileType xml setlocal foldmethod=syntax
 augroup END
+
+augroup FiletypeSpecifics
+    au!
+    " Ruby!
+    autocmd Filetype ruby setlocal shiftwidth=2
+    autocmd Filetype ruby setlocal softtabstop=2
+    autocmd Filetype ruby setlocal tabstop=2
+    " YAML (used with ruby)
+    autocmd Filetype yaml setlocal shiftwidth=2
+    autocmd Filetype yaml setlocal softtabstop=2
+    autocmd Filetype yaml setlocal tabstop=2
+augroup END
+
 
 " -----
 " Typing Behaviors

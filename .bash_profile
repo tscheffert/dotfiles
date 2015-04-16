@@ -236,7 +236,12 @@ alias reload='source ~/.bash_profile'
 # status!
 alias gs='git status'
 
-alias test='bundle exec rspec'
+# -- Ruby Aliases --
+# Run Rubocop gem
+alias rbc='rubocop'
+
+# Run Rubocop gem and autocorrect detected violations when available
+alias rbca='rubocop --auto-correct'
 
 
 # --- Functions ---

@@ -231,10 +231,16 @@ alias ls="ls -a"
 # refresh shell
 alias reload='source ~/.bash_profile'
 
-# --- Git Aliases ---
+# -- Git Aliases --
 
 # status!
 alias gs='git status'
+
+alias ga='git add'
+
+alias gaa='git add .'
+
+alias gcm='git commit -m'
 
 # -- Ruby Aliases --
 # Run Rubocop gem

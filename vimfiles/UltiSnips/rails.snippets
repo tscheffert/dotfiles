@@ -49,7 +49,7 @@ $0
 endsnippet
 
 snippet cla "Create functional test class"
-require 'test_helper'
+require "test_helper"
 
 class ${1:Model}ControllerTest < ActionController::TestCase
 	test$0
@@ -69,7 +69,7 @@ endsnippet
 
 # FIXME: handling literal bracket pair inside of nested tab groups?
 snippet tcr "Create references column"
-t.references :${1:taggable}${2:, :polymorphic => ${3:{ :default => '${4:Photo}' \}}}
+t.references :${1:taggable}${2:, :polymorphic => ${3:{ :default => "${4:Photo}" \}}}
 $0
 endsnippet
 
@@ -119,7 +119,7 @@ class ${1:Model}sController < ApplicationController
 
 		respond_to do |wants|
 			if @${1/./\l$0/}.save
-				flash[:notice] = '${1:Model} was successfully created.'
+				flash[:notice] = "${1:Model} was successfully created."
 				wants.html { redirect_to(@${1/./\l$0/}) }
 				wants.xml  { render :xml => @${1/./\l$0/}, :status => :created, :location => @${1/./\l$0/} }
 			else
@@ -134,7 +134,7 @@ class ${1:Model}sController < ApplicationController
 	def update
 		respond_to do |wants|
 			if @${1/./\l$0/}.update_attributes(params[:${1/./\l$0/}])
-				flash[:notice] = '${1:Model} was successfully updated.'
+				flash[:notice] = "${1:Model} was successfully updated."
 				wants.html { redirect_to(@${1/./\l$0/}) }
 				wants.xml  { head :ok }
 			else
@@ -290,7 +290,7 @@ assert_rjs :${1:replace}, ${2:"${3:dom id}"}
 endsnippet
 
 snippet ass "assert_select"
-assert_select '${1:path}'${2:, :${3:text} => ${4:'${5:inner_html}'}}${6: do
+assert_select "${1:path}"${2:, :${3:text} => ${4:"${5:inner_html}"}}${6: do
 	$0
 end}
 endsnippet
@@ -337,7 +337,7 @@ def create
 	$0
 	respond_to do |wants|
 		if @$1.save
-			flash[:notice] = '$2 was successfully created.'
+			flash[:notice] = "$2 was successfully created."
 			wants.html { redirect_to(@$1) }
 			wants.xml { render :xml => @$1, :status => :created, :location => @$1 }
 		else
@@ -374,11 +374,11 @@ end
 endsnippet
 
 snippet fina "find(:all)"
-find(:all${1:, :conditions => ['${2:${3:field} = ?}', ${5:true}]})
+find(:all${1:, :conditions => ["${2:${3:field} = ?}", ${5:true}]})
 endsnippet
 
 snippet finf "find(:first)"
-find(:first${1:, :conditions => ['${2:${3:field} = ?}', ${5:true}]})
+find(:first${1:, :conditions => ["${2:${3:field} = ?}", ${5:true}]})
 endsnippet
 
 snippet fini "find(id)"
@@ -449,7 +449,7 @@ ${1:map}.catch_all "*${2:anything}", :controller => "${3:default}", :action => "
 endsnippet
 
 snippet map "map.named_route"
-${1:map}.${2:connect} '${3::controller/:action/:id}'
+${1:map}.${2:connect} "${3::controller/:action/:id}"
 endsnippet
 
 snippet mapr "map.resource"
@@ -465,7 +465,7 @@ end}
 endsnippet
 
 snippet mapwo "map.with_options"
-${1:map}.with_options :${2:controller} => '${3:thing}' do |${4:$3}|
+${1:map}.with_options :${2:controller} => "${3:thing}" do |${4:$3}|
 	$0
 end
 
@@ -476,17 +476,17 @@ mattr_accessor :${0:attr_names}
 endsnippet
 
 snippet ncl "named_scope lambda"
-named_scope :name, lambda { |${1:param}| { :conditions => ${3:['${4:${5:field} = ?}', ${6:$1}]} } }
+named_scope :name, lambda { |${1:param}| { :conditions => ${3:["${4:${5:field} = ?}", ${6:$1}]} } }
 
 endsnippet
 
 snippet nc "named_scope"
-named_scope :name${1:, :joins => :${2:table}}, :conditions => ${3:['${4:${5:field} = ?}', ${6:true}]}
+named_scope :name${1:, :joins => :${2:table}}, :conditions => ${3:["${4:${5:field} = ?}", ${6:true}]}
 
 endsnippet
 
 snippet dscope "default_scope"
-default_scope ${1:order(${2:'${3:created_at DESC}'})}
+default_scope ${1:order(${2:"${3:created_at DESC}"})}
 endsnippet
 
 snippet flash "flash[...]"
@@ -550,15 +550,15 @@ render :file => "${1:filepath}", :use_full_path => ${2:false}
 endsnippet
 
 snippet ri "render (inline) (ri)"
-render :inline => "${1:<%= 'hello' %>}"
+render :inline => "${1:<%= "hello" %>}"
 endsnippet
 
 snippet ril "render (inline,locals) (ril)"
-render :inline => "${1:<%= 'hello' %>}", :locals => { ${2::name} => "${3:value}"$4 }
+render :inline => "${1:<%= "hello" %>}", :locals => { ${2::name} => "${3:value}"$4 }
 endsnippet
 
 snippet rit "render (inline,type) (rit)"
-render :inline => "${1:<%= 'hello' %>}", :type => ${2::rxml}
+render :inline => "${1:<%= "hello" %>}", :type => ${2::rxml}
 endsnippet
 
 snippet rl "render (layout) (rl)"
@@ -655,7 +655,7 @@ t.$0
 endsnippet
 
 snippet t. "t.references (tcr)"
-t.references :${1:taggable}${2:, :polymorphic => ${3:{ :default => '${4:Photo}' \}}}
+t.references :${1:taggable}${2:, :polymorphic => ${3:{ :default => "${4:Photo}" \}}}
 t.$0
 endsnippet
 
@@ -775,7 +775,7 @@ verify :only => [:$1], :method => :post, :render => {:status => 500, :text => "u
 endsnippet
 
 snippet verify "verify -- redirect"
-verify :only => [:$1], :session => :user, :params => :id, :redirect_to => {:action => '${2:index}'}
+verify :only => [:$1], :session => :user, :params => :id, :redirect_to => {:action => "${2:index}"}
 
 endsnippet
 
@@ -800,7 +800,7 @@ xhr :put, :${1:update}, :id => ${2:1}, :${3:object} => { $4 }$0
 endsnippet
 
 snippet finl "find(:last)"
-find(:last${1:, :conditions => ['${2:${3:field} = ?}', ${5:true}]})
+find(:last${1:, :conditions => ["${2:${3:field} = ?}", ${5:true}]})
 endsnippet
 
 snippet sweeper "Create sweeper class"
@@ -839,15 +839,15 @@ format.${1:html|xml|json|js|any} { $0 }
 endsnippet
 
 snippet gem "gem"
-gem '${1:name}'${2:${3:, "${4:1.0}"}${5:${6:, :require => ${7:"${8:$1}"}}${9:, :group => :${10:test}}}}
+gem "${1:name}"${2:${3:, "${4:1.0}"}${5:${6:, :require => ${7:"${8:$1}"}}${9:, :group => :${10:test}}}}
 endsnippet
 
 snippet gemg "gem :git"
-gem '${1:paperclip}', :git => "${2:git://github.com/thoughtbot/paperclip.git}"${3:, :branch => "${4:rails3}"}
+gem "${1:paperclip}", :git => "${2:git://github.com/thoughtbot/paperclip.git}"${3:, :branch => "${4:rails3}"}
 endsnippet
 
 snippet match "match"
-match '${1:${2::controller}${3:/${4::action}${5:/${6::id}${7:(.:format)}}}}'${8: => '${9:$2}#${10:$4}'${11:, :as => :${12:$10}}}
+match "${1:${2::controller}${3:/${4::action}${5:/${6::id}${7:(.:format)}}}}"${8: => "${9:$2}#${10:$4}"${11:, :as => :${12:$10}}}
 endsnippet
 
 snippet member "member routes"
@@ -866,7 +866,7 @@ end}
 endsnippet
 
 snippet scope "scope"
-scope :${1:name}, ${2:joins(:${3:table}).}where(${4:'${5:$3.${6:field}} = ?', ${7:'${8:value}'}})
+scope :${1:name}, ${2:joins(:${3:table}).}where(${4:"${5:$3.${6:field}} = ?', ${7:"${8:value}"}})
 endsnippet
 
 snippet scopel "scope lambda"
@@ -874,7 +874,7 @@ scope :${1:name}, lambda { |${2:param}| ${3:where(${4::${5:field} => ${6:"${7:va
 endsnippet
 
 snippet scopee "scope with extension"
-scope :${1:name}, ${2:where(${3::${4:field} => ${5:'${6:value}'}})} do
+scope :${1:name}, ${2:where(${3::${4:field} => ${5:"${6:value}"}})} do
 	def ${7:method_name}
 		$0
 	end
@@ -892,13 +892,13 @@ end
 endsnippet
 
 snippet trans "Translation snippet"
-I18n.t('`!v substitute(substitute(substitute(@%, substitute(getcwd() . "/", "\/", "\\\\/", "g"), "", ""), "\\(\\.\\(html\\|js\\)\\.\\(haml\\|erb\\)\\|\\(_controller\\)\\?\\.rb\\)$", "", ""), "/", ".", "g")`.${2:${1/[^\w]/_/g}}${3}', :default => "${1:some_text}"${4})${5:$0}
+I18n.t("`!v substitute(substitute(substitute(@%, substitute(getcwd() . "/", "\/", "\\\\/", "g"), "", ""), "\\(\\.\\(html\\|js\\)\\.\\(haml\\|erb\\)\\|\\(_controller\\)\\?\\.rb\\)$", "", ""), "/", ".", "g")`.${2:${1/[^\w]/_/g}}${3}", :default => "${1:some_text}"${4})${5:$0}
 endsnippet
 
 snippet route_spec
-it 'routes to #${1:action}' do
-	${2:get}('/${3:url}').should route_to('`!v substitute(expand('%:t:r'), '_routing_spec$', '', '')`#$1'${4:, ${5:params}})${6}
+it "routes to #${1:action}" do
+	${2:get}("/${3:url}").should route_to("`!v substitute(expand("%:t:r"), "_routing_spec$", "", "")`#$1"${4:, ${5:params}})${6}
 end
 endsnippet
 
-# vim:ft=snippets:
+# vim: ts=2 sw=2 expandtab ft=snippets:

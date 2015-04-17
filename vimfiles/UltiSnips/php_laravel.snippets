@@ -11,25 +11,25 @@ class $1 extends ${3: BaseController} {
     function __construct() {
         ${4}
     }
-    
+
     public function index() {
     }
-    
+
     public function create() {
     }
-    
+
     public function store($id) {
     }
-    
+
     public function show($id) {
     }
-    
+
     public function edit($id) {
     }
-    
+
     public function update($id) {
     }
-    
+
     public function destroy($id) {
     }
 }
@@ -50,7 +50,7 @@ namespace $1;
 use Illuminate\Support\ServiceProvider;
 
 class $2 extends ServiceProvider {
-    
+
     public function register() {
         $this->app->bind('${4}Service', function ($app) {
             return new ${5}(
@@ -92,7 +92,7 @@ class $3 extends ServiceProvider {
 
     /*!
      * \brief   If $defer == true need this fn
-     */ 
+     */
     public function provides() {
         return ['$2\\$1Interface'];
     }
@@ -222,7 +222,7 @@ use ${4:Repositories\\${5:Interface}};
 
 class $2 {
     protected $${6:repo};
-    
+
     /*!
      * \fn      __construct
      */
@@ -255,3 +255,5 @@ class $2 extends Facade {
     protected static function getFacadeAccessor() { return '${5:${4}Service}'; }
 }
 endsnippet
+
+# vim:ft=snippets:

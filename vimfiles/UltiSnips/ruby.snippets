@@ -136,25 +136,25 @@ endsnippet
 
 snippet "(\S+)\.Map" ".map { |<element>| <block> }" r
 `!p snip.rv=match.group(1)`.map { |${1:`!p
-element_name = match.group(1).lstrip('$@')
+element_name = match.group(1).lstrip("$@")
 ematch = re.search("([A-Za-z][A-Za-z0-9_]+?)s?[^A-Za-z0-9_]*?$", element_name)
 try:
 	wmatch = re.search("([A-Za-z][A-Za-z0-9_]+)$", ematch.group(1))
 	snip.rv = wmatch.group(1).lower()
 except:
-	snip.rv = 'element'
+	snip.rv = "element"
 `}| $0 }
 endsnippet
 
 snippet "(\S+)\.map" ".map do |<element>| <block> end" r
 `!p snip.rv=match.group(1)`.map do |${1:`!p
-element_name = match.group(1).lstrip('$@')
+element_name = match.group(1).lstrip("$@")
 ematch = re.search("([A-Za-z][A-Za-z0-9_]+?)s?[^A-Za-z0-9_]*?$", element_name)
 try:
 	wmatch = re.search("([A-Za-z][A-Za-z0-9_]+)$", ematch.group(1))
 	snip.rv = wmatch.group(1).lower()
 except:
-	snip.rv = 'element'
+	snip.rv = "element"
 `}|
 	$0
 end
@@ -162,25 +162,25 @@ endsnippet
 
 snippet "(\S+)\.Rev(erse)?_?each" ".reverse_each { |<element>| <block> }" r
 `!p snip.rv=match.group(1)`.reverse_each { |${1:`!p
-element_name = match.group(1).lstrip('$@')
+element_name = match.group(1).lstrip("$@")
 ematch = re.search("([A-Za-z][A-Za-z0-9_]+?)s?[^A-Za-z0-9_]*?$", element_name)
 try:
 	wmatch = re.search("([A-Za-z][A-Za-z0-9_]+)$", ematch.group(1))
 	snip.rv = wmatch.group(1).lower()
 except:
-	snip.rv = 'element'
+	snip.rv = "element"
 `}| $0 }
 endsnippet
 
 snippet "(\S+)\.rev(erse)?_?each" ".reverse_each do |<element>| <block> end" r
 `!p snip.rv=match.group(1)`.reverse_each do |${1:`!p
-element_name = match.group(1).lstrip('$@')
+element_name = match.group(1).lstrip("$@")
 ematch = re.search("([A-Za-z][A-Za-z0-9_]+?)s?[^A-Za-z0-9_]*?$", element_name)
 try:
 	wmatch = re.search("([A-Za-z][A-Za-z0-9_]+)$", ematch.group(1))
 	snip.rv = wmatch.group(1).lower()
 except:
-	snip.rv = 'element'
+	snip.rv = "element"
 `}|
 	$0
 end
@@ -188,25 +188,25 @@ endsnippet
 
 snippet "(\S+)\.Each" ".each { |<element>| <block> }" r
 `!p snip.rv=match.group(1)`.each { |${1:`!p
-element_name = match.group(1).lstrip('$@')
+element_name = match.group(1).lstrip("$@")
 ematch = re.search("([A-Za-z][A-Za-z0-9_]+?)s?[^A-Za-z0-9_]*?$", element_name)
 try:
 	wmatch = re.search("([A-Za-z][A-Za-z0-9_]+)$", ematch.group(1))
 	snip.rv = wmatch.group(1).lower()
 except:
-	snip.rv = 'element'
+	snip.rv = "element"
 `}| $0 }
 endsnippet
 
 snippet "(\S+)\.each" ".each do |<element>| <block> end" r
 `!p snip.rv=match.group(1)`.each do |${1:`!p
-element_name = match.group(1).lstrip('$@')
+element_name = match.group(1).lstrip("$@")
 ematch = re.search("([A-Za-z][A-Za-z0-9_]+?)s?[^A-Za-z0-9_]*?$", element_name)
 try:
 	wmatch = re.search("([A-Za-z][A-Za-z0-9_]+)$", ematch.group(1))
 	snip.rv = wmatch.group(1).lower()
 except:
-	snip.rv = 'element'
+	snip.rv = "element"
 `}|
 	$0
 end
@@ -214,25 +214,25 @@ endsnippet
 
 snippet "(\S+)\.Each_?w(ith)?_?i(ndex)?" ".each_with_index { |<element>,<i>| <block> }" r
 `!p snip.rv=match.group(1)`.each_with_index { |${1:`!p
-element_name = match.group(1).lstrip('$@')
+element_name = match.group(1).lstrip("$@")
 ematch = re.search("([A-Za-z][A-Za-z0-9_]+?)s?[^A-Za-z0-9_]*?$", element_name)
 try:
 	wmatch = re.search("([A-Za-z][A-Za-z0-9_]+)$", ematch.group(1))
 	snip.rv = wmatch.group(1).lower()
 except:
-	snip.rv = 'element'
+	snip.rv = "element"
 `},${2:i}| $0 }
 endsnippet
 
 snippet "(\S+)\.each_?w(ith)?_?i(ndex)?" ".each_with_index do |<element>,<i>| <block> end" r
 `!p snip.rv=match.group(1)`.each_with_index do |${1:`!p
-element_name = match.group(1).lstrip('$@')
+element_name = match.group(1).lstrip("$@")
 ematch = re.search("([A-Za-z][A-Za-z0-9_]+?)s?[^A-Za-z0-9_]*?$", element_name)
 try:
 	wmatch = re.search("([A-Za-z][A-Za-z0-9_]+)$", ematch.group(1))
 	snip.rv = wmatch.group(1).lower()
 except:
-	snip.rv = 'element'
+	snip.rv = "element"
 `},${2:i}|
 	$0
 end
@@ -374,4 +374,4 @@ snippet ###
 =end
 endsnippet
 
-# vim: set ts=2 sw=2 expandtab:
+# vim: ts=2 sw=2 expandtab ft=snippets:

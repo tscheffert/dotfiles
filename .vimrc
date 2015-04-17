@@ -91,8 +91,7 @@ if s:use_neobundle
     " Considering!
     " NeoBundle 'vim-ruby/vim-ruby' " Ruby support stuff
     " NeoBundle 'tpope/vim-repeat' " Wrap stuff for . command
-    " NeoBundle 'AndrewRadev/splitjoin.vim' " Works with ruby to swap single
-    " single liners into multi lines
+    " NeoBundle 'AndrewRadev/splitjoin.vim' " Works with ruby to swap single liners into multi lines
 
     call neobundle#end()
 
@@ -182,9 +181,6 @@ if !isdirectory(expand(&directory))
     call mkdir(expand(&directory), "p")
 endif
 
-" Don't stop and say 'more' for long files
-"set nomore
-
 " Show filename in titlebar of window
 set title
 
@@ -203,10 +199,6 @@ augroup myvimrc
     au BufWritePost .vimrc,_vimrc,vimrc,.gvimrc,_gvimrc,gvimrc so $MYVIMRC " | if has('gui_running') | so $MYGVIMRC | endif
 augroup END
 
-" Source
-vnoremap <leader>S y:execute @@<cr>:echo 'Sourced selection.'<cr>
-nnoremap <leader>S ^vg_y:execute @@<cr>:echo 'Sourced line.'<cr>
-
 " Only care about base 10 digits, not octal or hex
 set nrformats=
 
@@ -215,6 +207,7 @@ set nrformats=
 " which sucks.  Setting it to double makes it awesome.
 " -- From derekwyatt
 set ambiwidth=double
+
 
 " -----
 " Window/Buffers/Tabs
@@ -291,6 +284,7 @@ augroup END
 " Fix indents when linewrap is on
 set breakindent
 
+
 " -----
 " Column length!
 " -----
@@ -298,9 +292,11 @@ set breakindent
 if exists('+colorcolumn')
     set colorcolumn=80
 else
+    " If we don't support colorcolumn, then highlight the characters past column 80
     highlight OverLength ctermbg=red ctermfg=white guibg=#592929
     match OverLength /\%81v.\+/
 endif
+
 
 " -----
 " File Specific Display stuff like tabs
@@ -349,7 +345,6 @@ set wildmode=list:longest,full
 " File types to ignore for wildmode
 " Note #0: These are from :help ctrlp
 " Note #1: the `*/` in front of each directory glob is required.
-
 " Note #2: |wildignore| influences the result of |expand()|, |globpath()| and
 " |glob()| which many plugins use to find stuff on the system (e.g. VCS related
 " plugins look for .git/, .hg/,... some other plugins look for external *.exe
@@ -413,6 +408,10 @@ set wrapmargin=0 " Similar to textwidth but relative to terminal width
 " "<c-d>" or "gg"
 set nostartofline
 
+" Don't include _ as a character for movements like 'w', 'b', 'e', '*', etc.
+" Defaults are: iskeyword=@,48-57,_,192-255
+set iskeyword-=_
+
 
 " -----
 " Searching
@@ -449,7 +448,6 @@ endfunction
 
 vnoremap * :<C-u>call <SID>VSetSearch()<CR>//<CR><c-o>
 vnoremap # :<C-u>call <SID>VSetSearch()<CR>??<CR><c-o>
-
 
 
 " -----
@@ -584,7 +582,7 @@ set virtualedit=block
 " Disable vim-json conceal settings
 let g:vim_json_syntax_conceal = 0
 
-" Set the easy motion leader key to be ' so it's activated with '
+" Set the easy motion leader key to be - so it's activated with -
 map - <Plug>(easymotion-prefix)
 
 " Using easy motion show all the places where two characters appear, both fwds
@@ -626,9 +624,9 @@ let g:ctrlp_follow_symlinks = 0
 let g:ctrlp_cache_dir = $HOME.'/vimfiles/tmp/ctrlp/cache'
 
 
-" ---
-"  Key Binds!
-" ---
+" -----
+"  Key Maps
+" -----
 
 " Set the leader key
 let mapleader = ","
@@ -639,8 +637,101 @@ let mapleader = ","
 " Keys waiting for a second key could also be used to start a mapping:
 " "f t d c g z v y m ' [ ]"
 
+
 " -----
-" Gundo Key Binds
+" General Key Maps
+" -----
+
+" Ctrl-j/k deletes blank line below/above, and Alt-j/k inserts.
+nnoremap <silent><C-j> m`:silent +g/\m^\s*$/d<CR>``:noh<CR>
+nnoremap <silent><C-k> m`:silent -g/\m^\s*$/d<CR>``:noh<CR>
+if has("mac")
+    nnoremap <silent>∆ :set paste<CR>m`o<Esc>``:set nopaste<CR>j
+    nnoremap <silent>˚ :set paste<CR>m`O<Esc>``:set nopaste<CR>k
+else
+    nnoremap <silent><A-j> :set paste<CR>m`o<Esc>``:set nopaste<CR>j
+    nnoremap <silent><A-k> :set paste<CR>m`O<Esc>``:set nopaste<CR>k
+endif
+
+" cd to the directory containing the file in th buffer
+nnoremap <Leader>cd :lcd %:h
+
+" Make the directory that contains the file in the current buffer.
+" This is useful when you edit a file in a directory that doesn't
+" (yet) exist
+nnoremap <Leader>md :!mkdir -p %:p:h
+
+" Yank all
+nnoremap <Leader>a :%y+<CR>
+
+" Quickly edit/reload the vimrc file
+nnoremap <silent> <Leader>ev :e $MYVIMRC<CR>
+nnoremap <silent> <Leader>so :so $MYVIMRC<CR>
+
+" Maximize window
+" Note: Only works on windows
+nnoremap <silent> <leader>mm :simalt ~x<CR>
+
+"Highlight whitespaces
+nnoremap <silent> <leader>hws :set list listchars=tab:>.,trail:.,extends:#,nbsp:.<CR>
+nnoremap <silent> <Leader>nhws :set nolist<CR>
+
+" Close all buffers except current
+nnoremap <silent> <Leader>bd :BufOnly<CR>
+
+" Fix ^M line endings
+nnoremap <silent> <Leader>le :s%/\r/\r/g<CR>
+
+" Insert a single character and go back to command mode
+noremap S i<Space><Esc>r
+
+" <F10> will echo the syntax group for the word under mouse
+map <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
+        \ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
+        \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
+
+" Xml formatting!
+autocmd FileType xml noremap <buffer> <c-e><c-f> :silent %!xmllint % --format --recover<CR>
+
+
+" -----
+" Override Default Behavior Key Maps
+" -----
+
+" Switch ; and : so ; acts as the command leader
+noremap ; :
+noremap : ;
+" TODO: Why do I need this?
+nnoremap q; q:
+
+
+" -----
+" Searching Key Maps
+" -----
+
+"" Don't hlsearch, but when I do search for something set hlsearch, then
+"" remove it when entering insert mode
+set nohlsearch
+noremap / :set hlsearch<CR>/
+au InsertEnter * :set nohlsearch
+
+" n and N turn on hlsearch too
+noremap n :set hlsearch<CR>nzzzv
+noremap N :set hlsearch<CR>Nzzzv
+
+
+" -----
+" Insert Mode Keybinds
+" -----
+
+" ctrl-'forward' jump to end of line
+imap <c-f> <c-O>$
+" ctrl-'back' jump to start of line
+imap <c-b> <c-O>^
+
+
+" -----
+" Gundo Key Maps
 " -----
 
 " Mapping for Gundo
@@ -654,7 +745,7 @@ let g:gundo_right=1
 
 
 " -----
-" JsBeautify Key Binds
+" JsBeautify Key Maps
 " -----
 
 " JsBeautify
@@ -676,7 +767,7 @@ autocmd FileType css vnoremap <buffer> <c-e><c-f> :call RangeCSSBeautify()<cr>
 
 
 " -----
-" UltiSnips Key Binds
+" UltiSnips Key Maps
 " -----
 
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
@@ -688,14 +779,17 @@ let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 let g:UltiSnipsEditSplit="vertical"
 
 " Custom snippets directory
+" When you specifiy only one directory then UltiSnips will not search
+" the runtimepath, which is faster. It will search for Snipmate snippets on
+" the runtimepath though.
 let g:UltiSnipsSnippetDirectories=[$HOME.'/.vim/UltiSnips']
 
+" Don't load snipmate snippets.
 let g:UltiSnipsEnableSnipMate=0
 
 
-
 " -----
-" EasyMotion Key Binds
+" EasyMotion Key Maps
 " -----
 "  From: http://www.robati.com/vim/2014/11/03/vimrc.html
 " " EasyMotion
@@ -713,97 +807,3 @@ let g:UltiSnipsEnableSnipMate=0
 " let g:EasyMotion_startofline = 0      " keep cursor column when JK motion
 " let g:EasyMotion_smartcase = 1        " type `l` and match `l`&`L`
 " let g:EasyMotion_use_smartsign_us = 1 " type `3` and match `3`&`#`
-
-
-
-" -----
-" General Key Binds
-" -----
-
-" Ctrl-j/k deletes blank line below/above, and Alt-j/k inserts.
-nnoremap <silent><C-j> m`:silent +g/\m^\s*$/d<CR>``:noh<CR>
-nnoremap <silent><C-k> m`:silent -g/\m^\s*$/d<CR>``:noh<CR>
-if has("mac")
-    nnoremap <silent>∆ :set paste<CR>m`o<Esc>``:set nopaste<CR>j
-    nnoremap <silent>˚ :set paste<CR>m`O<Esc>``:set nopaste<CR>k
-else
-    nnoremap <silent><A-j> :set paste<CR>m`o<Esc>``:set nopaste<CR>j
-    nnoremap <silent><A-k> :set paste<CR>m`O<Esc>``:set nopaste<CR>k
-endif
-
-"" Don't hlsearch, but when I do search for something set hlsearch, then
-"" remove it when entering insert mode
-set nohlsearch
-noremap / :set hlsearch<CR>/
-au InsertEnter * :set nohlsearch
-
-" n and N turn on hlsearch too
-noremap n :set hlsearch<CR>nzzzv
-noremap N :set hlsearch<CR>Nzzzv
-
-" Quickly open a scratch buffer
-map <leader>qs :e ~/buffer<cr>
-
-" cd to the directory containing the file in th buffer
-nnoremap <Leader>cd :lcd %:h
-
-" Make the directory that contains the file in the current buffer.
-" This is useful when you edit a file in a directory that doesn't
-" (yet) exist
-nnoremap <Leader>md :!mkdir -p %:p:h
-
-" Compile the coffeescript
-nnoremap <Leader>cc :CoffeeCompile<cr>
-
-" Switch ; and : so ; acts as the command leader
-noremap ; :
-noremap : ;
-nnoremap q; q:
-
-nnoremap <Leader>a :%y+<CR>
-
-"TAB navigation like firefox
-"nnoremap <C-S-tab> :tabprevious<cr>
-"nnoremap <C-tab> :tabnext<cr>
-"nnoremap <C-t> :tabnew<cr>
-
-"inoremap <C-S-tab> <ESC>:tabprevious<cr>i
-"inoremap <C-tab> <ESC>:tabnext<cr>i
-"inoremap <C-t> <ESC>:tabnew<cr>i
-
-" Quickly edit/reload the vimrc file
-nnoremap <silent> <Leader>ev :e $MYVIMRC<CR>
-nnoremap <silent> <Leader>so :so $MYVIMRC<CR>
-nnoremap <silent> <leader>mm :simalt ~x<CR>
-
-"Highlight whitespaces
-nnoremap <silent> <leader>st :set list listchars=tab:>.,trail:.,extends:#,nbsp:.<CR>
-nnoremap <silent> <Leader>dt :set nolist<CR>
-
-" Close all buffers except current
-nnoremap <silent> <Leader>bd :BufOnly<CR>
-
-" Fix ^M line endings
-nnoremap <silent> <Leader>le :s%/\r/\r/g<CR>
-
-" Insert a single character and go back to command mode
-noremap S i<Space><Esc>r
-
-" <F10> will echo the syntax group for the word under mouse
-map <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
-        \ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
-        \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
-
-" Xml formatting!
-autocmd FileType xml noremap <buffer> <c-e><c-f> :silent %!xmllint % --format --recover<CR>
-
-
-" -----
-" Insert Mode Keybinds
-" -----
-
-" ctrl-'forward' jump to end of line
-imap <c-f> <c-O>$
-" ctrl-'back' jump to start of line
-imap <c-b> <c-O>^
-

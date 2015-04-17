@@ -88,6 +88,10 @@ if s:use_neobundle
     " Git!
     NeoBundle 'tpope/vim-fugitive' " Awesome git wrapper
 
+    " Syntax
+    NeoBundle 'scrooloose/syntastic' " Easy syntax messages
+    NeoBundle 'dbakker/vim-lint' " Linting for vim and vimL files.
+
     " Considering!
     " NeoBundle 'vim-ruby/vim-ruby' " Ruby support stuff
     " NeoBundle 'tpope/vim-repeat' " Wrap stuff for . command
@@ -625,6 +629,20 @@ let g:ctrlp_cache_dir = $HOME.'/vimfiles/tmp/ctrlp/cache'
 
 
 " -----
+" Plugin: Syntastic
+" -----
+" Default settings sill
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+
+
+" -----
 "  Key Maps
 " -----
 
@@ -703,6 +721,10 @@ noremap ; :
 noremap : ;
 " TODO: Why do I need this?
 nnoremap q; q:
+
+" Deleting single character shouldn't squash the paste buffer
+nnoremap <silent> x "_x
+vnoremap <silent> x "_x
 
 
 " -----

@@ -87,10 +87,15 @@ if s:use_neobundle
 
     " Git!
     NeoBundle 'tpope/vim-fugitive' " Awesome git wrapper
+    NeoBundle 'airblade/vim-gitgutter'
 
     " Syntax
     NeoBundle 'scrooloose/syntastic' " Easy syntax messages
     NeoBundle 'dbakker/vim-lint' " Linting for vim and vimL files.
+
+    " Easy Alignment!
+    " TODO: Why do I like this more than junegunn/vim-easy-align?
+    NeoBundle 'godlygeek/tabular'
 
     " Considering!
     " NeoBundle 'vim-ruby/vim-ruby' " Ruby support stuff

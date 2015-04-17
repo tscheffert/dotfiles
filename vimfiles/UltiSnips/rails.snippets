@@ -901,4 +901,96 @@ it "routes to #${1:action}" do
 end
 endsnippet
 
+##########################
+#     Rspec snippets     #
+##########################
+
+snippet desc
+describe ${1:`substitute(substitute(vim_snippets#Filename(), "_spec$", "", ""), "\(_\|^\)\(.\)", "\u\2", "g")`} do
+	${0}
+end
+endsnippet
+
+snippet descm
+describe "${1:#method}" do
+	${0:pending "Not implemented"}
+end
+endsnippet
+
+snippet cont
+context "${1:message}" do
+	${0}
+end
+endsnippet
+
+snippet bef
+before :${1:each} do
+	${0}
+end
+endsnippet
+
+snippet aft
+after :${1:each} do
+	${0}
+end
+endsnippet
+
+snippet let
+let(:${1:object}) { ${0} }
+endsnippet
+
+snippet let!
+let!(:${1:object}) { ${0} }
+endsnippet
+
+snippet subj
+subject { ${0} }
+endsnippet
+
+snippet s.
+subject.${0:method}
+endsnippet
+
+snippet spec
+specify { subject.${0} }
+endsnippet
+
+snippet exp
+expect(${1:object}).to ${0}
+endsnippet
+
+snippet expb
+expect { ${1:object} }.to ${0}
+endsnippet
+
+snippet experr
+expect { ${1:object} }.to raise_error ${2:StandardError}, /${0:message_regex}/
+endsnippet
+
+snippet shared
+shared_examples ${0:"shared examples name"}
+endsnippet
+
+snippet ibl
+it_behaves_like ${0:"shared examples name"}
+endsnippet
+
+snippet it
+it "${1:spec_name}" do
+	${0}
+end
+endsnippet
+
+snippet its
+its(:${1:method}) { should ${0} }
+endsnippet
+
+snippet is
+it { should ${0} }
+endsnippet
+
+snippet isn
+it { should_not ${0} }
+endsnippet
+
 # vim: ts=2 sw=2 expandtab ft=snippets:

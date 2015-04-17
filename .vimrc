@@ -60,7 +60,6 @@ if s:use_neobundle
 
     " Snippets
     NeoBundle 'SirVer/ultisnips.git'
-    NeoBundle 'honza/vim-snippets.git'
 
     " Language specific
     NeoBundle 'jelera/vim-javascript-syntax.git'
@@ -670,14 +669,16 @@ autocmd FileType css vnoremap <buffer> <c-e><c-f> :call RangeCSSBeautify()<cr>
 
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
 let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<c-j>"
-let g:UltiSnipsJumpBackwardTrigger="<c-k>"
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"
 
 " Custom snippets directory
 let g:UltiSnipsSnippetDirectories=[$HOME.'/.vim/UltiSnips']
+
+let g:UltiSnipsEnableSnipMate=0
 
 
 

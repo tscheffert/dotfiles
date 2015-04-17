@@ -80,12 +80,19 @@ if s:use_neobundle
 
     " Ruby stuff
     NeoBundle 'tpope/vim-rails'
-    NeoBundle 'tpope/vim-bundler'
-    NeoBundle 'tpope/vim-rake'
-    NeoBundle 'tpope/vim-projectionist'
+    NeoBundle 'tpope/vim-bundler' " Works with vim-rails and vim-rake for bundler goodness
+    NeoBundle 'tpope/vim-rake' " vim-rails (with vim-projectionist) for non rails projects
+    NeoBundle 'tpope/vim-projectionist' " Project management for navigation n such
+    NeoBundle 'tpope/vim-endwise' " Add matching 'end's for blocks
 
     " Git!
-    NeoBundle 'tpope/vim-fugitive'
+    NeoBundle 'tpope/vim-fugitive' " Awesome git wrapper
+
+    " Considering!
+    " NeoBundle 'vim-ruby/vim-ruby' " Ruby support stuff
+    " NeoBundle 'tpope/vim-repeat' " Wrap stuff for . command
+    " NeoBundle 'AndrewRadev/splitjoin.vim' " Works with ruby to swap single
+    " single liners into multi lines
 
     call neobundle#end()
 
@@ -392,6 +399,11 @@ set formatoptions-=o
 
 " Don't continue comments when pressing <Enter>
 set formatoptions-=r
+
+" Don't let anything wrap my lines unless I choose to
+set formatoptions-=t " Don't automatically wrap
+set textwidth=0 " If we were to auto wrap, or something added fo+=t then still don't
+set wrapmargin=0 " Similar to textwidth but relative to terminal width
 
 
 " -----

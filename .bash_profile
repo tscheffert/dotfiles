@@ -276,3 +276,13 @@ if [[ $platform == 'osx' ]]; then
         fi
     }
 fi
+
+# Count of files in folder, ignoring dotfiles.
+# Source: http://unix.stackexchange.com/questions/1125/how-can-i-get-a-count-of-files-in-a-directory-using-the-command-line
+function filecount {
+    local i=0;
+    for f in *; do
+        let i++;
+    done;
+    echo "$i";
+}

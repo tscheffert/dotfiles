@@ -259,13 +259,6 @@
 	<real>1</real>
 	<key>GlobalKeyMap</key>
 	<dict>
-		<key>0x19-0x60000</key>
-		<dict>
-			<key>Action</key>
-			<integer>2</integer>
-			<key>Text</key>
-			<string></string>
-		</dict>
 		<key>0x74-0x40000</key>
 		<dict>
 			<key>Action</key>
@@ -273,12 +266,12 @@
 			<key>Text</key>
 			<string>54C13283-80B8-427B-9646-1775034D54DB</string>
 		</dict>
-		<key>0x9-0x40000</key>
+		<key>0x77-0x40000</key>
 		<dict>
 			<key>Action</key>
-			<integer>0</integer>
+			<integer>25</integer>
 			<key>Text</key>
-			<string></string>
+			<string>Close</string>
 		</dict>
 		<key>0xf700-0x300000</key>
 		<dict>
@@ -402,7 +395,7 @@
 	<key>NSWindow Frame Preferences</key>
 	<string>87 213 924 485 0 0 1440 900 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>162 91 650 476 0 0 1440 900 </string>
+	<string>162 91 650 476 0 0 1440 877 </string>
 	<key>New Bookmarks</key>
 	<array>
 		<dict>
@@ -665,7 +658,7 @@
 				<key>0x19-0x60000</key>
 				<dict>
 					<key>Action</key>
-					<integer>31</integer>
+					<integer>2</integer>
 					<key>Text</key>
 					<string></string>
 				</dict>
@@ -728,7 +721,7 @@
 				<key>0x9-0x40000</key>
 				<dict>
 					<key>Action</key>
-					<integer>30</integer>
+					<integer>0</integer>
 					<key>Text</key>
 					<string></string>
 				</dict>
@@ -1209,7 +1202,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2015-04-09T15:50:51Z</date>
+	<date>2015-04-21T15:01:09Z</date>
 	<key>SavePasteHistory</key>
 	<true/>
 	<key>ShowBookmarkName</key>
@@ -1253,6 +1246,6 @@
 	<key>WordCharacters</key>
 	<string>/-+\~_.</string>
 	<key>iTerm Version</key>
-	<string>2.0.0.20141103</string>
+	<string>2.0.0.20150412</string>
 </dict>
 </plist>

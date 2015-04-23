@@ -801,7 +801,7 @@ autocmd FileType css vnoremap <buffer> <c-e><c-f> :call RangeCSSBeautify()<cr>
 
 
 " -----
-" UltiSnips Key Maps
+" UltiSnips Key Maps and Settings
 " -----
 
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
@@ -820,6 +820,12 @@ let g:UltiSnipsSnippetDirectories=[$HOME.'/.vim/UltiSnips']
 
 " Don't load snipmate snippets.
 let g:UltiSnipsEnableSnipMate=0
+
+
+" -----
+" NERDTree Key Maps
+" -----
+nnoremap <leader>nt :NERDTreeToggle<CR>
 
 
 " -----

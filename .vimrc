@@ -84,6 +84,7 @@ if s:use_neobundle
     NeoBundle 'tpope/vim-rake' " vim-rails (with vim-projectionist) for non rails projects
     NeoBundle 'tpope/vim-projectionist' " Project management for navigation n such
     NeoBundle 'tpope/vim-endwise' " Add matching 'end's for blocks
+    NeoBundle 'vim-ruby/vim-ruby' " Ruby support stuff
 
     " Git!
     NeoBundle 'tpope/vim-fugitive' " Awesome git wrapper
@@ -92,13 +93,16 @@ if s:use_neobundle
     " Syntax
     NeoBundle 'scrooloose/syntastic' " Easy syntax messages
     NeoBundle 'dbakker/vim-lint' " Linting for vim and vimL files.
+    NeoBundle 'lilydjwg/colorizer' " Highlights hex codes with their colors
 
     " Easy Alignment!
     " TODO: Why do I like this more than junegunn/vim-easy-align?
     NeoBundle 'godlygeek/tabular'
 
+    "Multiple Curosrs!
+    NeoBundle 'terryma/vim-multiple-cursors'
+
     " Considering!
-    " NeoBundle 'vim-ruby/vim-ruby' " Ruby support stuff
     " NeoBundle 'tpope/vim-repeat' " Wrap stuff for . command
     " NeoBundle 'AndrewRadev/splitjoin.vim' " Works with ruby to swap single liners into multi lines
 
@@ -691,7 +695,7 @@ nnoremap <Leader>a :%y+<CR>
 
 " Quickly edit/reload the vimrc file
 nnoremap <silent> <Leader>ev :e $MYVIMRC<CR>
-nnoremap <silent> <Leader>so :so $MYVIMRC<CR>
+nnoremap <silent> <Leader>sv :so $MYVIMRC<CR>
 
 " Maximize window
 " Note: Only works on windows
@@ -711,9 +715,10 @@ nnoremap <silent> <Leader>le :s%/\r/\r/g<CR>
 noremap S i<Space><Esc>r
 
 " <F10> will echo the syntax group for the word under mouse
-map <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
-        \ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
-        \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
+" TODO: This doesn't work
+" map <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
+"         \ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
+"         \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
 
 " Xml formatting!
 autocmd FileType xml noremap <buffer> <c-e><c-f> :silent %!xmllint % --format --recover<CR>

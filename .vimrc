@@ -102,6 +102,9 @@ if s:use_neobundle
     "Multiple Curosrs!
     NeoBundle 'terryma/vim-multiple-cursors'
 
+    " Better Text Objects
+    NeoBundle 'wellle/targets.vim'
+
     " Considering!
     " NeoBundle 'tpope/vim-repeat' " Wrap stuff for . command
     " NeoBundle 'AndrewRadev/splitjoin.vim' " Works with ruby to swap single liners into multi lines
@@ -636,6 +639,9 @@ let g:ctrlp_follow_symlinks = 0
 " Where to do ctrlp caching
 let g:ctrlp_cache_dir = $HOME.'/vimfiles/tmp/ctrlp/cache'
 
+" Jump to buffer in the same tab if already open
+let g:ctrlp_switch_buffer = 1
+
 
 " -----
 " Plugin: Syntastic
@@ -651,6 +657,20 @@ let g:syntastic_always_populate_loc_list = 1
 " let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
+
+" -----
+" Plugin: vim-rails
+" -----
+" we want:
+"   components/vendors/style_crest/lib/style_crest/shipping.rb
+"   to map to alternate at:
+"   spec/components/vendors/style_crest/lib/shipping.rb
+let g:rails_projections = {
+        \ "components/*.rb": {
+        \   "test": "spec/components/{}_spec.rb",
+        \ },
+        \ "spec/components/*_spec.rb": {
+        \   "test": "components/{}.rb"}}
 
 
 " -----

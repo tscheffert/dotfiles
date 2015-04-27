@@ -210,10 +210,11 @@ set autoread
 set laststatus=2
 
 " Reload .vimrc when we see it get written!
-augroup myvimrc
-    au!
-    au BufWritePost .vimrc,_vimrc,vimrc,.gvimrc,_gvimrc,gvimrc so $MYVIMRC " | if has('gui_running') | so $MYGVIMRC | endif
-augroup END
+" COOL
+" augroup myvimrc
+"     au!
+"     au BufWritePost .vimrc,_vimrc,vimrc,.gvimrc,_gvimrc,gvimrc so $MYVIMRC " | if has('gui_running') | so $MYGVIMRC | endif
+" augroup END
 
 " Only care about base 10 digits, not octal or hex
 set nrformats=
@@ -523,7 +524,8 @@ if has('gui_running')
 
     " Set the default font to Source Code Pro (with escaped spaces) which I
     " use everywhere!
-    set guifont=Source\ Code\ Pro:h12
+    " set guifont=Source\ Code\ Pro\ for\ Powerline:h12
+    set guifont=Source\ Code\ Pro:h12 " Not using the powerline symbols for now
     " Set the default font to Consolas (Which is what Visual Studio uses)
     " set guifont=Consolas:h11:cANSI
 
@@ -626,6 +628,25 @@ map <SPACE> <Plug>(easymotion-s2)
 
 " Automatically displays all buffers when theres only one tab open
 let g:airline#extensions#tabline#enabled = 1
+
+" Ensure symbols dictionary exists
+if !exists('g:airline_symbols')
+    let g:airline_symbols = {}
+endif
+
+" Set custom symbols
+" let g:airline_left_sep = '◣'
+" let g:airline_right_sep = '◢'
+" let g:airline_left_sep = '▸'
+" let g:airline_right_sep = '◂'
+" let g:airline_left_sep = '◗'
+" let g:airline_right_sep = '◖'
+let g:airline_left_sep = '►'
+let g:airline_right_sep = '◄'
+" let g:airline_left_sep = '▶'
+" let g:airline_right_sep = '◀'
+
+" Set up status line
 let g:airline#extensions#tabline#left_alt_sep = '|'
 let g:airline_section_y=' [%n] '
 let g:airline_section_z='%3p%% : %3l/%-3L :%4c '
@@ -634,6 +655,8 @@ let g:airline#extensions#default#layout = [
             \ [ 'x', 'y', 'z', 'warning' ]
             \ ]
 
+" Disable paste detection
+let g:airline_detect_paste=1
 
 " -----
 " Plugin: Ctrl-p

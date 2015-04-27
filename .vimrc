@@ -734,11 +734,21 @@ nnoremap <silent> <Leader>le :s%/\r/\r/g<CR>
 " Insert a single character and go back to command mode
 noremap S i<Space><Esc>r
 
-" <F10> will echo the syntax group for the word under mouse
-" TODO: This doesn't work
-" map <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
-"         \ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
-"         \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
+" Return highlight group syntax under the cursor
+function! SyntaxItem()
+    return synIDattr(synID(line("."), col("."), 1), "name")
+endfunction
+
+function! SyntaxItemTrans()
+    return synIDattr(synID(line("."), col("."), 0), "name")
+endfunction
+
+map <F10> :echo "hi<" . SyntaxItem() . "> trans<"
+    \ . synIDattr(synID(line("."), col("."), 0), "name") . "> lo<"
+    \ . SyntaxItem() . ">"<CR>
+
+nnoremap <Leader>sg :echo "Syntax Group:" SyntaxItem()<CR>
+nnoremap <Leader>sh :echo "Syntax Group(trans):" SyntaxItemTrans()<CR>
 
 " Xml formatting!
 autocmd FileType xml noremap <buffer> <c-e><c-f> :silent %!xmllint % --format --recover<CR>

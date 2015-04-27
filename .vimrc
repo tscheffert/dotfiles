@@ -734,24 +734,21 @@ nnoremap <silent> <Leader>le :s%/\r/\r/g<CR>
 " Insert a single character and go back to command mode
 noremap S i<Space><Esc>r
 
-" Return highlight group syntax under the cursor
-function! SyntaxItem()
-    return synIDattr(synID(line("."), col("."), 1), "name")
-endfunction
-
-function! SyntaxItemTrans()
-    return synIDattr(synID(line("."), col("."), 0), "name")
-endfunction
-
-map <F10> :echo "hi<" . SyntaxItem() . "> trans<"
-    \ . synIDattr(synID(line("."), col("."), 0), "name") . "> lo<"
-    \ . SyntaxItem() . ">"<CR>
-
-nnoremap <Leader>sg :echo "Syntax Group:" SyntaxItem()<CR>
-nnoremap <Leader>sh :echo "Syntax Group(trans):" SyntaxItemTrans()<CR>
-
 " Xml formatting!
 autocmd FileType xml noremap <buffer> <c-e><c-f> :silent %!xmllint % --format --recover<CR>
+
+
+" -----
+" Syntax Highlighting Utility Kemaps
+" -----
+
+" Return highlight group under cursor, if trans is zero it returns the "effective" group
+function! SyntaxItem(trans)
+    return synIDattr(synID(line("."), col("."), a:trans), "name")
+endfunction
+
+nnoremap <Leader>sg :echo "Syntax Group:" SyntaxItem(1)<CR>
+nnoremap <Leader>sh :echo "Syntax Group(trans=0):" SyntaxItem(0)<CR>
 
 
 " -----

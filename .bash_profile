@@ -262,7 +262,9 @@ alias rails-c='bundle exec rails c'
 alias rails-s='bundle exec rails s'
 
 # First part of running a style-crest rake task
-alias rake-sc='bundle exec rake style_crest'
+function rake-sc {
+    eval 'bundle exec rake style_crest:$1'
+}
 
 
 # --- Functions ---

@@ -191,11 +191,6 @@ if [[ $platform == 'osx' ]]; then
     export PGGHOST=localhost
 fi
 
-alias pg-start='pg_ctl -l $PGDATA/server.log start'
-alias pg-stop='pg_ctl stop -m fast'
-alias pg-status='pg_ctl status'
-alias pg-restart='pg_ctl reload'
-
 
 # --- Git Prompt ---
 if [ -f ~/.git-prompt.sh ]; then
@@ -235,6 +230,13 @@ alias ls="ls -a"
 # refresh shell
 alias reload='source ~/.bash_profile'
 
+# -- Postgres Aliases --
+
+alias pg-start='pg_ctl -l $PGDATA/server.log start'
+alias pg-stop='pg_ctl stop -m fast'
+alias pg-status='pg_ctl status'
+alias pg-restart='pg_ctl reload'
+
 # -- Git Aliases --
 
 # status!
@@ -252,6 +254,15 @@ alias rbc='rubocop'
 
 # Run Rubocop gem and autocorrect detected violations when available
 alias rbca='rubocop --auto-correct'
+
+# Start a rails console
+alias rails-c='bundle exec rails c'
+
+# Start a rails server
+alias rails-s='bundle exec rails s'
+
+# First part of running a style-crest rake task
+alias rake-sc='bundle exec rake style_crest'
 
 
 # --- Functions ---

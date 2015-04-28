@@ -635,16 +635,8 @@ if !exists('g:airline_symbols')
 endif
 
 " Set custom symbols
-" let g:airline_left_sep = '◣'
-" let g:airline_right_sep = '◢'
-" let g:airline_left_sep = '▸'
-" let g:airline_right_sep = '◂'
-" let g:airline_left_sep = '◗'
-" let g:airline_right_sep = '◖'
 let g:airline_left_sep = '►'
 let g:airline_right_sep = '◄'
-" let g:airline_left_sep = '▶'
-" let g:airline_right_sep = '◀'
 
 " Set up status line
 let g:airline#extensions#tabline#left_alt_sep = '|'

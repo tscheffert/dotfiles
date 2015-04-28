@@ -49,6 +49,8 @@ if s:use_neobundle
     " File management
     NeoBundle 'kien/ctrlp.vim.git'
     NeoBundle 'scrooloose/nerdtree.git'
+    NeoBundle 'Xuyuanp/nerdtree-git-plugin' " Show git marks in nerdtree
+    NeoBundle 'low-ghost/nerdtree-fugitive' " Adds git menu to nerdtree
     " Forces nerdtree to open with each tab
     " NeoBundle 'jistr/vim-nerdtree-tabs.git'
 
@@ -700,6 +702,23 @@ let g:rails_projections = {
         \ },
         \ "spec/components/*_spec.rb": {
         \   "test": "components/{}.rb"}}
+
+
+" -----
+" Plugin: nerdtree-git-plugin
+" -----
+" Change the indicators
+let g:NERDTreeIndicatorMap = {
+                \ "Modified"  : "~",
+                \ "Staged"    : "☈",
+                \ "Untracked" : "♦",
+                \ "Renamed"   : "⁕",
+                \ "Unmerged"  : "⥮",
+                \ "Deleted"   : "␡",
+                \ "Dirty"     : "✗",
+                \ "Clean"     : "✓",
+                \ "Unknown"   : "?"
+                \ }
 
 
 " -----

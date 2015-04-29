@@ -8,15 +8,7 @@ autocmd!
 " Start with filetype off for plugin loading
 filetype off
 
-let s:use_pathogen = 0
 let s:use_neobundle = 1
-
-" If using Pathogen do all the startup stuff
-if s:use_pathogen
-    " Start Pathogen
-    execute pathogen#infect()
-    execute pathogen#helptags()
-endif
 
 if s:use_neobundle
     if has('vim_starting')
@@ -146,30 +138,19 @@ augroup line_return
         \ endif
 augroup END
 
-" function! ResCur()
-"     if line("'\"") <= line("$")
-"         normal! g`"
-"         return 1
-"     endif
-" endfunction
-" augroup resCur
-"     autocmd!
-"     autocmd BufWinEnter * call ResCur()
-" augroup END
-
 
 " -----
 " Vim Preferences
 " -----
 
-" Why is this not a default
+" Allow dirtied buffers to be hidden
 set hidden
 
 " Show what you are typing as a command
 set showcmd
 
 " Keep some stuff in the history
-set history=1000
+set history=10000
 
 " Use lots of undo levels
 set undolevels=1000
@@ -211,13 +192,6 @@ set autoread
 " Last window always has a statusline
 set laststatus=2
 
-" Reload .vimrc when we see it get written!
-" COOL
-" augroup myvimrc
-"     au!
-"     au BufWritePost .vimrc,_vimrc,vimrc,.gvimrc,_gvimrc,gvimrc so $MYVIMRC " | if has('gui_running') | so $MYGVIMRC | endif
-" augroup END
-
 " Only care about base 10 digits, not octal or hex
 set nrformats=
 
@@ -232,22 +206,19 @@ set ambiwidth=double
 " Window/Buffers/Tabs
 " -----
 
-" NOTE: This would be great but NerdTree fucks with it :*(
-" TODO: Fix this
-" Show help files in a new tab
 " Only apply to .txt files...
-"augroup HelpInTabs
-"    autocmd!
-"    autocmd BufEnter  *.txt   call HelpInNewTab()
-"augroup END
+augroup HelpInVerticalRightSplit
+    autocmd!
+    autocmd BufEnter  *.txt   call HelpInVSplit()
+augroup END
 
 "Only apply to help files...
-"function! HelpInNewTab ()
-"    if &buftype == 'help'
-"        "Convert the help window to a tab...
-"        execute "normal \<C-W>T"
-"    endif
-"endfunction
+function! HelpInVSplit()
+    if &buftype == 'help'
+        "Convert the help window to right-side veritcal split
+        execute "normal \<C-W>L"
+    endif
+endfunction
 
 " left and right are for switching buffers
 noremap <right> <ESC>:bn<return>
@@ -584,6 +555,19 @@ set shortmess=atI
 set splitbelow
 set splitright
 
+" Using the mouse in the terminal
+if has('mouse')
+    set mouse=a
+    if has('mouse_sgr') || v:version > 703 ||
+                \ v:version == 703 && has('patch632')
+        " Ideal mouse setting, backwards compatible with xterm and xterm2
+        set ttymouse=sgr
+    else
+        " Fallback
+        set ttymouse=xterm2
+    endif
+endif
+
 
 " -----
 " Visual Mode Better
@@ -652,6 +636,7 @@ let g:airline#extensions#default#layout = [
 " Disable paste detection
 let g:airline_detect_paste=1
 
+
 " -----
 " Plugin: Ctrl-p
 " -----
@@ -688,6 +673,7 @@ let g:syntastic_always_populate_loc_list = 1
 " let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
+
 
 " -----
 " Plugin: vim-rails

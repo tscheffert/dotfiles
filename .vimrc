@@ -313,6 +313,10 @@ augroup RubyFiles
     autocmd Filetype ruby setlocal shiftwidth=2
     autocmd Filetype ruby setlocal softtabstop=2
     autocmd Filetype ruby setlocal tabstop=2
+    autocmd Filetype eruby setlocal shiftwidth=2
+    autocmd Filetype eruby setlocal softtabstop=2
+    autocmd Filetype eruby setlocal tabstop=2
+
 augroup END
 
 augroup RSpecFiles

@@ -11,6 +11,9 @@ vimfiles/tmp/
 # SQLite Databse
 *.sqlite
 
+# Generated tags for ruby projects
+components/*/*/tags
+components/*/tags
 
 # ----- Default...? -----
 .DS_Store

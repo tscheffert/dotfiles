@@ -116,8 +116,7 @@ if s:use_neobundle
     " Considering!
     " NeoBundle 'tpope/vim-repeat' " Wrap stuff for . command
     " NeoBundle 'AndrewRadev/splitjoin.vim' " Works with ruby to swap single liners into multi lines
-    " https://github.com/chrisbra/vim-diff-enhanced " Improved diff's using
-    "     histogram and patience
+    " https://github.com/chrisbra/vim-diff-enhanced " Improved diff's using histogram and patience algorithms
 
     call neobundle#end()
 

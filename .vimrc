@@ -81,6 +81,10 @@ if s:use_neobundle
     "       'Hello world!'
     NeoBundle 'tpope/vim-surround.git'
 
+    " If I ever do a lot of json stuff, apparently this is **must** have.
+    " https://github.com/tpope/vim-jdaddy
+    " NeoBundle 'tpope/vim-jdaddy'
+
     " Ruby stuff
     NeoBundle 'tpope/vim-rails'
     NeoBundle 'tpope/vim-bundler' " Works with vim-rails and vim-rake for bundler goodness
@@ -111,6 +115,8 @@ if s:use_neobundle
     " Considering!
     " NeoBundle 'tpope/vim-repeat' " Wrap stuff for . command
     " NeoBundle 'AndrewRadev/splitjoin.vim' " Works with ruby to swap single liners into multi lines
+    " https://github.com/chrisbra/vim-diff-enhanced " Improved diff's using
+    "     histogram and patience
 
     call neobundle#end()
 
@@ -342,6 +348,12 @@ augroup YAMLFiles
     autocmd Filetype yaml setlocal tabstop=2
 augroup END
 
+augroup VimFiles
+    au!
+
+    " Vim's built in file type stuff doesn't like to respect my settings!
+    autocmd Filetype vim setlocal textwidth=0
+augroup END
 
 " -----
 " Typing Behaviors

@@ -793,10 +793,12 @@ nnoremap <Leader>sh :echo "Syntax Group(trans=0):" SyntaxItem(0)<CR>
 " Override Default Behavior Key Maps
 " -----
 
-" Switch ; and : so ; acts as the command leader
+" Switch ; and :, so ; acts as the command leader
 noremap ; :
 noremap : ;
-" TODO: Why do I need this?
+
+" Keep the mental mapping going and use ; as : for
+"   ommand-line window too. See `:help cmdline-window`
 nnoremap q; q:
 
 " Deleting single character shouldn't squash the paste buffer

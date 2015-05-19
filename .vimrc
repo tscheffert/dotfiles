@@ -107,7 +107,8 @@ if s:use_neobundle
     NeoBundle 'godlygeek/tabular'
 
     "Multiple Curosrs!
-    NeoBundle 'terryma/vim-multiple-cursors'
+    " NeoBundle 'terryma/vim-multiple-cursors'
+    NeoBundle 'kana/vim-niceblock' " make |v_b_I| and |v_b_A| available in all visual modes
 
     " Better Text Objects
     NeoBundle 'wellle/targets.vim'

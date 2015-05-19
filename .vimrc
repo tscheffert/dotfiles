@@ -102,6 +102,9 @@ if s:use_neobundle
     NeoBundle 'dbakker/vim-lint' " Linting for vim and vimL files.
     NeoBundle 'lilydjwg/colorizer' " Highlights hex codes with their colors
 
+    " Pulse after searches
+    NeoBundle 'inside/vim-search-pulse'
+
     " Easy Alignment!
     " TODO: Why do I like this more than junegunn/vim-easy-align?
     NeoBundle 'godlygeek/tabular'
@@ -741,6 +744,19 @@ let g:surround_indent = 1
 " Don't automatically create insert mode mappings, I'll do that myself if
 "   needed
 let g:surround_no_insert_mappings = 1
+
+
+" -----
+" Plugin: vim-search-pulse
+" -----
+" Only pulse on matched pattern, not the line
+let g:vim_search_pulse_mode = 'pattern'
+
+" Don't create mappings on |n| and |N|, we'll do it ourselves
+" let g:vim_search_pulse_disable_auto_mappings = 1
+
+let g:vim_search_pulse_color_list = ["#F92672", "#A6E22E", "#AE81FF"]
+let g:vim_search_pulse_duration = 600
 
 
 " -----

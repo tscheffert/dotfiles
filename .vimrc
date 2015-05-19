@@ -45,6 +45,7 @@ if s:use_neobundle
     NeoBundle 'low-ghost/nerdtree-fugitive' " Adds git menu to nerdtree
     " Forces nerdtree to open with each tab
     " NeoBundle 'jistr/vim-nerdtree-tabs.git'
+    NeoBundle 'kopischke/vim-fetch' " Enable vim to open with line numbers appended
 
     " Auto parentheses
     NeoBundle 'Raimondi/delimitmate.git'
@@ -69,8 +70,16 @@ if s:use_neobundle
 
     " tpope  rocks
     NeoBundle 'tpope/vim-commentary.git'
-    NeoBundle 'tpope/vim-surround.git'
     NeoBundle 'tpope/vim-abolish.git'
+
+    " Surrounding shit
+    "   Given
+    "       "Hello world!"
+    "   press
+    "       cs"'
+    "   to change to
+    "       'Hello world!'
+    NeoBundle 'tpope/vim-surround.git'
 
     " Ruby stuff
     NeoBundle 'tpope/vim-rails'
@@ -709,6 +718,18 @@ let g:NERDTreeIndicatorMap = {
                 \ "Clean"     : "✓",
                 \ "Unknown"   : "?"
                 \ }
+
+
+" -----
+" Plugin: vim-surround
+" -----
+" Enable automatic re-indenting by Vim, = command style
+let g:surround_indent = 1
+
+" Don't automatically create insert mode mappings, I'll do that myself if
+"   needed
+let g:surround_no_insert_mappings = 1
+
 
 
 " -----

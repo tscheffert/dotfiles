@@ -731,7 +731,6 @@ let g:surround_indent = 1
 let g:surround_no_insert_mappings = 1
 
 
-
 " -----
 "  Key Maps
 " -----

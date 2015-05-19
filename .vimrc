@@ -102,11 +102,10 @@ if s:use_neobundle
     NeoBundle 'dbakker/vim-lint' " Linting for vim and vimL files.
     NeoBundle 'lilydjwg/colorizer' " Highlights hex codes with their colors
 
-    " Pulse after searches
-    NeoBundle 'inside/vim-search-pulse'
+    " Improved searches
+    NeoBundle 'inside/vim-search-pulse' " Pulse after searches
 
     " Easy Alignment!
-    " TODO: Why do I like this more than junegunn/vim-easy-align?
     NeoBundle 'godlygeek/tabular'
 
     "Multiple Curosrs!

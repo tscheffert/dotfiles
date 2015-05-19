@@ -770,6 +770,7 @@ map g/ <Plug>(incsearch-stay)
 set hlsearch
 let g:incsearch#auto_nohlsearch = 1
 
+" We could use |n| in other mappings, this is a drop in replacement so don't noremap it
 map n  <Plug>(incsearch-nohl-n)
 map N  <Plug>(incsearch-nohl-N)
 map *  <Plug>(incsearch-nohl-*)
@@ -778,7 +779,14 @@ map g* <Plug>(incsearch-nohl-g*)
 map g# <Plug>(incsearch-nohl-g#)
 
 " Exit hlsearch when entering insert as well
-au InsertEnter * :set nohlsearch
+" TODO: Fix this
+" au InsertEnter * :set nohlsearch
+
+" Tell incsearch that we're using 'magic' search
+let g:incsearch#magic = '\m'
+
+" Highlight matched pattern separately with forward matches and backward matches
+let g:incsearch#separate_highlight = 1
 
 
 " -----

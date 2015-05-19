@@ -104,6 +104,7 @@ if s:use_neobundle
 
     " Improved searches
     NeoBundle 'inside/vim-search-pulse' " Pulse after searches
+    NeoBundle 'haya14busa/incsearch.vim' " Show all matches as typed, auto nohl
 
     " Easy Alignment!
     NeoBundle 'godlygeek/tabular'
@@ -752,10 +753,32 @@ let g:surround_no_insert_mappings = 1
 let g:vim_search_pulse_mode = 'pattern'
 
 " Don't create mappings on |n| and |N|, we'll do it ourselves
-" let g:vim_search_pulse_disable_auto_mappings = 1
+let g:vim_search_pulse_disable_auto_mappings = 1
 
 let g:vim_search_pulse_color_list = ["#F92672", "#A6E22E", "#AE81FF"]
 let g:vim_search_pulse_duration = 600
+
+
+" -----
+" Plugin: incsearch.vim
+" -----
+map /  <Plug>(incsearch-forward)
+map ?  <Plug>(incsearch-backward)
+map g/ <Plug>(incsearch-stay)
+
+" Automatically turn off hlsearch after cursor move
+set hlsearch
+let g:incsearch#auto_nohlsearch = 1
+
+map n  <Plug>(incsearch-nohl-n)
+map N  <Plug>(incsearch-nohl-N)
+map *  <Plug>(incsearch-nohl-*)
+map #  <Plug>(incsearch-nohl-#)
+map g* <Plug>(incsearch-nohl-g*)
+map g# <Plug>(incsearch-nohl-g#)
+
+" Exit hlsearch when entering insert as well
+au InsertEnter * :set nohlsearch
 
 
 " -----
@@ -851,21 +874,6 @@ nnoremap q; q:
 " Deleting single character shouldn't squash the paste buffer
 nnoremap <silent> x "_x
 vnoremap <silent> x "_x
-
-
-" -----
-" Searching Key Maps
-" -----
-
-"" Don't hlsearch, but when I do search for something set hlsearch, then
-"" remove it when entering insert mode
-set nohlsearch
-noremap / :set hlsearch<CR>/
-au InsertEnter * :set nohlsearch
-
-" n and N turn on hlsearch too
-noremap n :set hlsearch<CR>nzzzv
-noremap N :set hlsearch<CR>Nzzzv
 
 
 " -----

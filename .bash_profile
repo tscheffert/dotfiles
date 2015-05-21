@@ -248,6 +248,24 @@ alias gaa='git add .'
 
 alias gcm='git commit -m'
 
+function git-show {
+    # Show all of the files that were changed between my branch and master
+    # Note: --name-status would show what happened to them, so we could do stuff
+    #   based on add/delete/modify.
+    # --diff-filter: Added (A), Copied (C), Deleted (D), Modified (M), Renamed (R),
+    #   have their type (i.e. regular file, symlink, submodule, …) changed (T),
+    #   are Unmerged (U), are Unknown (X), or have had their pairing Broken (B)
+    git show --pretty="format:" --name-only --diff-filter=$1 origin/master..HEAD
+}
+
+function git-show-added {
+    git-show A
+}
+
+function git-show-modified {
+    git-show M
+}
+
 # -- Ruby Aliases --
 # Run Rubocop gem
 alias rbc='rubocop'

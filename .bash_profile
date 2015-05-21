@@ -287,14 +287,6 @@ function git-show {
         | xargs -n1 bash -c '[ -e $@ ] && echo $@' _
 }
 
-function git-show-added {
-    git-show A
-}
-
-function git-show-modified {
-    git-show M
-}
-
 # -- Ruby Aliases --
 # Run Rubocop gem
 alias rbc='rubocop'

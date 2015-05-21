@@ -268,16 +268,15 @@ function git-show {
     #   'NF'.  Discussed here: http://www.thelinuxrain.com/articles/how-to-kill-blank-lines-elegantly
     # | sort - Sorts!  Input has to be sorted for uniq to work
     # | uniq - Ensures that there are no repeats.
+    # | "xargs -n1 bash -c '<snippet>' _"
+    #     -xargs n1 - Run utility once for each line.
+    #     bash -c '<snippet>' _ - Use bash as utility.
+    #     <snippet> - Test if the file exists and echo if it does.
     git show --pretty="format:" --name-only --diff-filter=$1 origin/master..HEAD \
         | awk NF \
         | sort \
-        | uniq
-
-
-    # | grep -v '^$'
-    #   -v - List everything BUT matches
-    #   '^$' - Matches blank lines
-        # | grep -v '^$'
+        | uniq \
+        | xargs -n1 bash -c '[ -e $@ ] && echo $@' _
 }
 
 function git-show-added {

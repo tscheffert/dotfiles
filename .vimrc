@@ -576,8 +576,9 @@ set showmatch mat=6 " show matching parens for 600ms
 " Shows report when any ammount of lines are changed (read always)
 set report=0
 
-" Shorten messages and don't show intro
-set shortmess=atI
+" 'a' = Shorten messages, 'oO' = overwrite read/write messages (required for vim-fetch),
+" 'tT' = truncate messages that are too long, and 'I' = skip the Vim :intro
+set shortmess=aoOtTI
 
 " Open new split panes to the right and bottom, feels a lot more natural
 set splitbelow

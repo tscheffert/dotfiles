@@ -263,7 +263,21 @@ function git-show {
     #   are Unmerged (U), are Unknown (X), or have had their pairing Broken (B).
     #   Pass in the options you want to see as variables to git-show.  An empty
     #   $1 will default to showing all.
-    git show --pretty="format:" --name-only --diff-filter=$1 origin/master..HEAD
+
+    # | awk NF - Run it through awk which skips lines with no fields thanks to
+    #   'NF'.  Discussed here: http://www.thelinuxrain.com/articles/how-to-kill-blank-lines-elegantly
+    # | sort - Sorts!  Input has to be sorted for uniq to work
+    # | uniq - Ensures that there are no repeats.
+    git show --pretty="format:" --name-only --diff-filter=$1 origin/master..HEAD \
+        | awk NF \
+        | sort \
+        | uniq
+
+
+    # | grep -v '^$'
+    #   -v - List everything BUT matches
+    #   '^$' - Matches blank lines
+        # | grep -v '^$'
 }
 
 function git-show-added {

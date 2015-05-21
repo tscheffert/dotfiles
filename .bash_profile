@@ -305,6 +305,11 @@ function rake-sc {
     eval 'bundle exec rake style_crest:$1'
 }
 
+# Rubocop modified files
+function rbc-m {
+    git-show AM | xargs rubocop
+}
+
 
 # --- Functions ---
 # what the hell?

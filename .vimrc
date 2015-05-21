@@ -756,7 +756,14 @@ let g:vim_search_pulse_mode = 'pattern'
 let g:vim_search_pulse_disable_auto_mappings = 1
 
 let g:vim_search_pulse_color_list = ["#F92672", "#A6E22E", "#AE81FF"]
-let g:vim_search_pulse_duration = 600
+let g:vim_search_pulse_duration = 400
+
+augroup SearchPulseOnEnter
+    au!
+
+    " Pulses the first match after hitting the enter key
+    autocmd User IncSearchExecute :call search_pulse#Pulse()
+augroup END
 
 
 " -----
@@ -771,12 +778,13 @@ set hlsearch
 let g:incsearch#auto_nohlsearch = 1
 
 " We could use |n| in other mappings, this is a drop in replacement so don't noremap it
-map n  <Plug>(incsearch-nohl-n)
-map N  <Plug>(incsearch-nohl-N)
-map *  <Plug>(incsearch-nohl-*)
-map #  <Plug>(incsearch-nohl-#)
-map g* <Plug>(incsearch-nohl-g*)
-map g# <Plug>(incsearch-nohl-g#)
+" Include the <Plug>Pulse to call vim-search-pulse as well
+map n  <Plug>(incsearch-nohl-n)<Plug>Pulse
+map N  <Plug>(incsearch-nohl-N)<Plug>Pulse
+map *  <Plug>(incsearch-nohl-*)<Plug>Pulse
+map #  <Plug>(incsearch-nohl-#)<Plug>Pulse
+map g* <Plug>(incsearch-nohl-g*)<Plug>Pulse
+map g# <Plug>(incsearch-nohl-g#)<Plug>Pulse
 
 " Exit hlsearch when entering insert as well
 " TODO: Fix this

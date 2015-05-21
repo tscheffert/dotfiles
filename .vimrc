@@ -786,9 +786,15 @@ map #  <Plug>(incsearch-nohl-#)<Plug>Pulse
 map g* <Plug>(incsearch-nohl-g*)<Plug>Pulse
 map g# <Plug>(incsearch-nohl-g#)<Plug>Pulse
 
-" Exit hlsearch when entering insert as well
-" TODO: Fix this
-" au InsertEnter * :set nohlsearch
+augroup NoHlOnInsert
+    au!
+
+    " Exit hlsearch when entering insert as well
+    autocmd InsertEnter * :set nohlsearch
+
+    " Reenable it so that future searchs do hlsearch
+    autocmd InsertLeave * :set hlsearch
+augroup END
 
 " Tell incsearch that we're using 'magic' search
 let g:incsearch#magic = '\m'

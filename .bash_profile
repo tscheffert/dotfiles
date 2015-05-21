@@ -249,12 +249,20 @@ alias gaa='git add .'
 alias gcm='git commit -m'
 
 function git-show {
-    # Show all of the files that were changed between my branch and master
-    # Note: --name-status would show what happened to them, so we could do stuff
-    #   based on add/delete/modify.
-    # --diff-filter: Added (A), Copied (C), Deleted (D), Modified (M), Renamed (R),
+    # Show all of the files that were affected between master and
+    #   HEAD (of my branch).
+
+    # Options:
+    # --pretty="format:" - The "format:<string>" pretty-format option is like
+    #   'printf' in that you can use '%' prefixed placeholders.  An empty string
+    #   simply prints without any frills.
+    # --name-only - Shows only their names.  --name-status would show operation in
+    #   addition to the name.  --diff-filter means we don't really need that.
+    # --diff-filter - Added (A), Copied (C), Deleted (D), Modified (M), Renamed (R),
     #   have their type (i.e. regular file, symlink, submodule, …) changed (T),
-    #   are Unmerged (U), are Unknown (X), or have had their pairing Broken (B)
+    #   are Unmerged (U), are Unknown (X), or have had their pairing Broken (B).
+    #   Pass in the options you want to see as variables to git-show.  An empty
+    #   $1 will default to showing all.
     git show --pretty="format:" --name-only --diff-filter=$1 origin/master..HEAD
 }
 

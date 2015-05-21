@@ -305,9 +305,23 @@ function rake-sc {
     eval 'bundle exec rake style_crest:$1'
 }
 
-# Rubocop modified files
+function git-show-exclude-ruby-files {
+    # Takes the list of files from git-show AM and removes excluded files with grep.
+    git-show AM \
+        | grep -vE -e 'routes\.rb|schema\.rb|\.html\.erb'
+}
+
 function rbc-m {
-    git-show AM | xargs rubocop
+    # Runs rubocop with all of the files
+    git-show-exclude-ruby-files \
+        | xargs rubocop
+}
+
+function rbca-m {
+    # Runs rubocop with autocorrect, (-n1) once for each file,
+    #   and (-p) while asking permission.
+    exlude-ruby-files \
+        | xargs -n1 -p rubocop --auto-correct
 }
 
 

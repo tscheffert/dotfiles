@@ -245,16 +245,16 @@ alias gs='git status'
 alias ga='git add'
 
 # "Git add patched"
-alias ga-p='git add -p'
+alias gap='git add -p'
 
 # "Git add all"
-alias ga-a='git add .'
+alias gaa='git add .'
 
 alias gcm='git commit -m'
 
 alias gd='git diff'
 
-alias gd-s='git diff --staged'
+alias gds='git diff --staged'
 
 function git-show {
     # Show all of the files that were affected between master and

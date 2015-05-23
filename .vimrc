@@ -116,6 +116,11 @@ if s:use_neobundle
     " Better Text Objects
     NeoBundle 'wellle/targets.vim'
 
+    " Better Markdown
+    " NeoBundle 'suan/vim-instant-markdown'
+    NeoBundle 'shime/vim-livedown'
+
+
     " Considering!
     " NeoBundle 'tpope/vim-repeat' " Wrap stuff for . command
     " NeoBundle 'AndrewRadev/splitjoin.vim' " Works with ruby to swap single liners into multi lines
@@ -805,6 +810,19 @@ let g:incsearch#separate_highlight = 1
 
 
 " -----
+" Plugin: vim-livedown
+" -----
+" Should the markdown preview get shown automatically upon opening markdown buffer
+let g:livedown_autorun = 0
+
+" Should the browser window pop-up upon previewing
+let g:livedown_open = 1
+
+" Port to run Livedown on
+let g:livedown_port = 3030
+
+
+" -----
 "  Key Maps
 " -----
 
@@ -971,6 +989,12 @@ let g:UltiSnipsEnableSnipMate=0
 " NERDTree Key Maps
 " -----
 nnoremap <leader>nt :NERDTreeToggle<CR>
+
+" -----
+" vim-livedown Key Maps
+" -----
+nnoremap <Leader>ld :LivedownPreview<CR>
+nnoremap <Leader>ld :LivedownKill<CR>
 
 
 " -----

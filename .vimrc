@@ -994,7 +994,7 @@ nnoremap <leader>nt :NERDTreeToggle<CR>
 " vim-livedown Key Maps
 " -----
 nnoremap <Leader>ld :LivedownPreview<CR>
-nnoremap <Leader>ld :LivedownKill<CR>
+nnoremap <Leader>lk :LivedownKill<CR>
 
 
 " -----

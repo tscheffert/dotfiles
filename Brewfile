@@ -34,6 +34,7 @@ install homebrew/dupes/screen
 
 # Install other useful binaries
 install ack
+install pt # I use this instead of grep or ack, pretty nice
 #install bfg
 #install exiv2
 #install foremost
@@ -51,6 +52,7 @@ install webkit2png # Website Screenshotter - Homepage: http://www.paulhammond.or
 # this didn't work for me when I tried to install it. Failed on XQuartz dependency
 #install xpdf # PDF Utilities - Homepage: http://www.foolabs.com/xpdf/
 install zopfli # Improved (slow-ass) Compression - Homepage: https://code.google.com/p/zopfli/
+install dos2unix # Great utility to change line endings for files
 
 # Programming utilities
 install python

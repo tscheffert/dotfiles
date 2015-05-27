@@ -37,6 +37,7 @@ if [[ -d $HOME/.dotfiles ]]
 	ln -sf $HOME/.dotfiles/.vimrc $HOME/.vimrc
 	ln -sf $HOME/.dotfiles/.coffeelint.json $HOME/.coffeelint.json
 	ln -sf $HOME/.dotfiles/.slate $HOME/.slate
+	ln -sf $HOME/.dotfiles/.ptignore $HOME/.ptignore
 
 	echo "Dotfiles have been symlinked to $HOME."
 fi

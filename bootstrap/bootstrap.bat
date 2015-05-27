@@ -17,6 +17,7 @@ mklink /h C:\Users\tscheffert\coffeelint.json C:\Users\tscheffert\.dotfiles\coff
 mklink /h C:\Windows\System32\WindowsPowerShell\v1.0\profile.ps1 C:\Users\tscheffert\.dotfiles\PowerShell\profile.ps1
 mklink /h C:\Users\tscheffert\Documents\WindowsPowerShell\PowerTabConfig.xml C:\Users\tscheffert\.dotfiles\PowerShell\PowerTabConfig.xml
 mklink /h C:\Users\tscheffert\Documents\WindowsPowerShell\TabExpansion.xml C:\Users\tscheffert\.dotfiles\PowerShell\TabExpansion.xml
+mklink /h C:\Users\tscheffert\.ptignore C:\Users\tscheffert\.dotfiles\.ptignore
 
 
 pause

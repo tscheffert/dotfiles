@@ -308,7 +308,7 @@ function rake-sc {
 function git-show-exclude-ruby-files {
     # Takes the list of files from git-show AM and removes excluded files with grep.
     git-show AM \
-        | grep -vE -e 'routes\.rb|schema\.rb|\.html\.erb'
+        | grep -vE -e 'routes\.rb|schema\.rb|\.html\.erb|\.yml'
 }
 
 function rbc-m {
@@ -320,7 +320,7 @@ function rbc-m {
 function rbca-m {
     # Runs rubocop with autocorrect, (-n1) once for each file,
     #   and (-p) while asking permission.
-    exlude-ruby-files \
+    git-show-exclude-ruby-files \
         | xargs -n1 -p rubocop --auto-correct
 }
 

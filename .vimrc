@@ -13,11 +13,19 @@ let s:use_neobundle = 1
 if s:use_neobundle
     if has('vim_starting')
         " Required for NeoBundle
-        set runtimepath +=~/.vim/bundle/neobundle.vim/
+		if has('win32')
+			set runtimepath +=~/vimfiles/bundle/neobundle.vim/
+		else
+			set runtimepath +=~/.vim/bundle/neobundle.vim/
+		endif
     endif
 
     " Required for NeoBundle
-    call neobundle#begin(expand('~/.vim/bundle/'))
+	if has('win32')
+		call neobundle#begin(expand('~/vimfiles/bundle/'))
+	else
+		call neobundle#begin(expand('~/.vim/bundle/'))
+	elseif
 
     " Let NeoBundle manage NeoBundle
     NeoBundleFetch 'Shougo/neobundle.vim'

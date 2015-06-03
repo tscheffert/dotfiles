@@ -5,6 +5,8 @@
 [core]
     # TODO: Not cross platform!
     editor = vim
+    encoding = utf-8
+    autocrlf = false
 
 [color]
     ui = auto

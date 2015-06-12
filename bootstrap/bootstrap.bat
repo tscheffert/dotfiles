@@ -10,7 +10,6 @@ mklink C:\Users\Trent\.curlrc C:\Users\Trent\.dotfiles\.curlrc
 mklink C:\Users\Trent\.editorconfig C:\Users\Trent\.dotfiles\.editorconfig
 mklink C:\Users\Trent\.gitconfig C:\Users\Trent\.dotfiles\.gitconfig
 mklink C:\Users\Trent\.gitignore C:\Users\Trent\.dotfiles\.gitignore
-mklink C:\Users\Trent\.git-prompt.sh C:\Users\Trent\.dotfiles\.git-prompt.sh
 mklink C:\Users\Trent\.jscs.json C:\Users\Trent\.dotfiles\.jscs.json
 mklink C:\Users\Trent\.jshintrc C:\Users\Trent\.dotfiles\.jshintrc
 mklink C:\Users\Trent\.osx C:\Users\Trent\.dotfiles\.osx

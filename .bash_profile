@@ -73,7 +73,7 @@ if [[ $platform == 'windows' ]]; then
     append_to_PATH 'C:\Program Files (x86)\IIS Express\'
 
     # Adb for android debugging
-    append_to_PATH 'C:\Users\tscheffert\AppData\Local\Android\android-sdk\platform-tools'
+    # append_to_PATH 'C:\Users\tscheffert\AppData\Local\Android\android-sdk\platform-tools'
 
     # Python Scripts including pip
     append_to_PATH 'C:\tools\python\Scripts'
@@ -192,13 +192,16 @@ if [[ $platform == 'osx' ]]; then
 fi
 
 
-# --- Git Prompt ---
-if [ -f ~/.git-prompt.sh ]; then
-    # Enable the __git_ps1
-    source ~/.git-prompt.sh
+# --- Git Prompt, only on OSX ---
+#   Mingw, which I use, already has a nice prompt and it's colorful!
+if [[ $platform == 'osx' ]]; then
+    if [ -f ~/.git-prompt.sh ]; then
+        # Enable the __git_ps1
+        source ~/.git-prompt.sh
 
-    # Set status line
-    export PS1='[\W]$(__git_ps1 "(%s)")$ '
+        # Set status line
+        export PS1='[\W]$(__git_ps1 "(%s)")$ '
+    fi
 fi
 
 

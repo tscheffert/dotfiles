@@ -6,6 +6,7 @@ mklink /j C:\Users\Trent\.git_template C:\Users\Trent\.dotfiles\.git_template
 mklink C:\Users\Trent\.bash_profile C:\Users\Trent\.dotfiles\.bash_profile
 mklink C:\Users\Trent\.bash_prompt C:\Users\Trent\.dotfiles\.bash_prompt
 mklink C:\Users\Trent\.bashrc C:\Users\Trent\.dotfiles\.bashrc
+mklink "C:\\Program Files\\ConEmu\\ConEmu.xml C:\Users\Trent\.dotfiles\ConEmu.xml
 mklink C:\Users\Trent\.curlrc C:\Users\Trent\.dotfiles\.curlrc
 mklink C:\Users\Trent\.editorconfig C:\Users\Trent\.dotfiles\.editorconfig
 mklink C:\Users\Trent\.gitconfig C:\Users\Trent\.dotfiles\.gitconfig

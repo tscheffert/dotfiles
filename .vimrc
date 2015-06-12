@@ -542,19 +542,17 @@ if has('gui_running')
     :set guioptions-=r " Remove the right-hand scroll bar
     :set guioptions-=L " Remove the left-hand scroll bar...bar[]
 
-    " Set the default font to Source Code Pro (with escaped spaces) which I
-    " use everywhere!
-    " set guifont=Source\ Code\ Pro\ for\ Powerline:h12
-    set guifont=Source\ Code\ Pro:h12 " Not using the powerline symbols for now
-    " Set the default font to Consolas (Which is what Visual Studio uses)
-    " set guifont=Consolas:h11:cANSI
-
     " Windows Specific stuff
-   if has('win32')
+    if has('win32')
         " Set vim to be maximized on opening
         au GUIEnter * simalt ~x
-        " Stuff here
-        " elseif
+        " Set the default font to Consolas (Which is what Visual Studio uses)
+        set guifont=Consolas:h12:cANSI
+    else
+        " Set the default font to Source Code Pro (with escaped spaces) which I
+        " use everywhere!
+        " set guifont=Source\ Code\ Pro\ for\ Powerline:h12
+        set guifont=Source\ Code\ Pro:h12 " Not using the powerline symbols for now
     endif
 " ConEmu specific
 elseif has('win32') && !has('gui_running') && !empty($CONEMUBUILD)

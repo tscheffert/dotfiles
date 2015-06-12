@@ -25,7 +25,7 @@ if s:use_neobundle
 		call neobundle#begin(expand('~/vimfiles/bundle/'))
 	else
 		call neobundle#begin(expand('~/.vim/bundle/'))
-	elseif
+	endif
 
     " Let NeoBundle manage NeoBundle
     NeoBundleFetch 'Shougo/neobundle.vim'

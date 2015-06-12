@@ -525,6 +525,12 @@ au GUIEnter * set visualbell t_vb=
 " Sets the default size of gvim on open
 set lines=50 columns=90
 
+" Set the possible encodings
+set fileencodings=ucs-bom,utf-8,latin1
+
+" Set encoding
+set encoding=utf-8
+
 " Colors!
 if has('gui_running')
     set background=dark

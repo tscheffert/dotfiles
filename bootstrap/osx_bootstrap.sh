@@ -21,6 +21,7 @@ if [[ -d $HOME/.dotfiles ]]
 	ln -sf $HOME/.dotfiles/init $HOME/init
 	ln -sf $HOME/.dotfiles/vimfiles $HOME/.vim
 	ln -sf $HOME/.dotfiles/.git_template $HOME/.git_template
+	ln -sf $HOME/.dotfiles/iTerm $HOME/iTerm
 
 	# Symlink files
 	ln -sf $HOME/.dotfiles/.bash_profile $HOME/.bash_profile
@@ -51,32 +52,10 @@ if [[ -d $HOME/.vim/bundle/neobundle.vim ]]
 	echo "Vim config complete."
 fi
 
-# Homebrew!
-# Check for Homebrew,
-# Install if we don't have it
-if test ! $(which brew); then
-  echo "Installing homebrew..."
-  ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-fi
-
-# Update homebrew recipes
-brew update
-
-# TODO: Run brew doctor or whatever
-# TODO: Run Brewfile and Caskfile with:
-# # This unlocks the deprecated commands, we want 'bundle'
-# brew tap homebrew/boneyard
-# brew tap homebrew/versions
-# brew bundle Brewfile
-# brew bundle Caskfile
-# brew untap homebrew/boneyard
-# brew untap homebrew/versions
-
 exec $SHELL -l
 
-
 # --- Next Steps ---
-# 1. There's iTerm2 preferences in the dotfiles
+# 1. Setup iTerm2 to use it's preferences
 # 2. Download Slate and set it to always startup
-# 3. brew install exuberant-ctags
+# 3. Figure out how to install exuberant-ctags
 # 4. ripper-tags from https://github.com/lzap/gem-ripper-tags

@@ -49,6 +49,14 @@ if [[ $platform == 'windows' ]]; then
 
 fi
 
+if [[ $platform == 'osx' ]]; then
+    # For homebrewed 'coreutils'
+    prepend_to_PATH '/usr/local/opt/coreutils/libexec/gnubin'
+
+    # For man files for 'coreutils'
+    MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
+fi
+
 # Add `~/bin` to the `$PATH`
 prepend_to_PATH "$HOME/bin"
 
@@ -81,6 +89,8 @@ if [[ $platform == 'windows' ]]; then
     # Xmllint from libxml2
     append_to_PATH 'C:\tools\xmllint'
 fi
+
+
 
 
 # --- Options ---

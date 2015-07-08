@@ -826,6 +826,9 @@ let g:incsearch#separate_highlight = 1
 " -----
 " Plugin: vim-livedown
 " -----
+" To setup:
+"   npm install -g livedown
+
 " Should the markdown preview get shown automatically upon opening markdown buffer
 let g:livedown_autorun = 0
 
@@ -1005,7 +1008,7 @@ let g:UltiSnipsEnableSnipMate=0
 nnoremap <leader>nt :NERDTreeToggle<CR>
 
 " -----
-" vim-livedown Key Maps
+" vim-livedown (for Markdown) Key Maps
 " -----
 nnoremap <Leader>ld :LivedownPreview<CR>
 nnoremap <Leader>lk :LivedownKill<CR>

@@ -44,13 +44,15 @@ if [[ -d $HOME/.dotfiles ]]
 fi
 
 # Setup vimfiles
-if [[ -d $HOME/.vim/bundle/neobundle.vim ]]
-	then
-	echo "Found ~/.vim/bundle/neobundle.vim directory"
-	echo "Running NeoBundle Install"
-	vim +NeoBundleInstall +qall
-	echo "Vim config complete."
+if [[ ! -d $HOME/.vim/bundle/neobundle.vim ]]
+    then
+    git clone git@github.com:Shougo/neobundle.vim.git $HOME/.vim/bundle/neobundle.vim
 fi
+
+echo "Found ~/.vim/bundle/neobundle.vim directory"
+echo "Running NeoBundle Install"
+vim +NeoBundleInstall +qall
+echo "Vim config complete."
 
 exec $SHELL -l
 

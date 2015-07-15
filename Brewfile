@@ -27,6 +27,7 @@ install bash-completion
 
 # Install more recent versions of some OS X tools
 install macvim --override-system-vim
+# Then do `brew linkapps macvim`
 
 # install homebrew/dupes/grep
 # install homebrew/dupes/screen
@@ -48,13 +49,13 @@ install lua
 install rbenv ruby-build
 
 # Things I haven't installed but could
-install nmap # Network Map Hacker Tool - Homepage: http://nmap.org
-install pigz # Parallelized Implementation of gzip - Homepage: http://www.zlib.net/pigz/
-install pv # Pipe View Utility - Homepage: http://www.ivarch.com/programs/pv.shtml
-install rename # Rename Utility - Homepage: http://plasmasturm.org/code/rename/
-install tree # Directory Listing - Homepage: http://mama.indstate.edu/users/ice/tree/
-install webkit2png # Website Screenshotter - Homepage: http://www.paulhammond.org/webkit2png/
-install zopfli # Improved (slow-ass) Compression - Homepage: https://code.google.com/p/zopfli/
+# install nmap # Network Map Hacker Tool - Homepage: http://nmap.org
+# install pigz # Parallelized Implementation of gzip - Homepage: http://www.zlib.net/pigz/
+# install pv # Pipe View Utility - Homepage: http://www.ivarch.com/programs/pv.shtml
+# install rename # Rename Utility - Homepage: http://plasmasturm.org/code/rename/
+# install tree # Directory Listing - Homepage: http://mama.indstate.edu/users/ice/tree/
+# install webkit2png # Website Screenshotter - Homepage: http://www.paulhammond.org/webkit2png/
+# install zopfli # Improved (slow-ass) Compression - Homepage: https://code.google.com/p/zopfli/
 
 # Remove outdated versions from the cellar
 cleanup

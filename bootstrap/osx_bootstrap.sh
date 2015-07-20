@@ -40,6 +40,10 @@ if [[ -d $HOME/.dotfiles ]]
 	ln -sf $HOME/.dotfiles/.slate $HOME/.slate
 	ln -sf $HOME/.dotfiles/.ptignore $HOME/.ptignore
 
+	ln -sf $HOME/.dotfiles/.rubocop.yml $HOME/.rubocop.yml
+	ln -sf $HOME/.dotfiles/.rubocop-enabled.yml $HOME/.rubocop-enabled.yml
+	ln -sf $HOME/.dotfiles/.rubocop-disabled.yml $HOME/.rubocop-disabled.yml
+
 	echo "Dotfiles have been symlinked to $HOME."
 fi
 

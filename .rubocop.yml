@@ -131,6 +131,7 @@ Style/AlignParameters:
   #     method_call(a,
   #       b)
   EnforcedStyle: with_fixed_indentation
+  SupportedStyles:
     - with_first_parameter
     - with_fixed_indentation
 

@@ -95,7 +95,7 @@ fi
 
 # --- Options ---
 # colors!
-declare -x CLICOLOR=1
+# declare -x CLICOLOR=1
 
 # Case-insensitive globbing (used in pathname expansion)
 shopt -s nocaseglob;
@@ -182,6 +182,9 @@ export HISTIGNORE="ls:cd:cd -:pwd:exit:date:* --help";
 # history -a - used instead of "shopt -s histappend" as this appends every line individually rather then when the shell exits
 # history -n - append the history lines not already read from the history file to the current history list.
 export PROMPT_COMMAND="history -a; history -n;"
+
+# For Docker!
+export DOCKER_HOST=tcp://192.168.23.2:2375
 
 
 # --- Ruby Stuff ---

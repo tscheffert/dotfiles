@@ -7,6 +7,10 @@ Style/Documentation:
   Description: 'Document classes and non-namespace modules.'
   Enabled: false
 
+Style/ExtraSpacing:
+  Description: 'Do not use unnecessary spacing.'
+  Enabled: false
+
 Style/InlineComment:
   Description: 'Avoid inline comments.'
   Enabled: false

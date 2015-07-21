@@ -781,6 +781,18 @@ Lint/DefEndAlignment:
     - def
   AutoCorrect: false
 
+# TODO: Fix later or raise issue about missing SupportedStyles after 0.32.1
+# Unused block params auto-correct from { |x, y| puts x } to { |x, _y| puts x } and
+# we prefer { |x, _| puts x }
+Lint/UnusedBlockArgument:
+  AutoCorrect: false
+
+# TODO: Also raise issue about Lint/UnusedAssignment not auto-correcting and
+# not having config, after 0.32.1. Actual it would be for cop/mixin/unused_argument.rb
+# to support replace instead of just insert_before.
+#
+# TODO: Also Style/TrailingUnderscoreVariable would get in the way of that :(
+
 ##################### Rails ##################################
 
 Rails/ActionFilter:

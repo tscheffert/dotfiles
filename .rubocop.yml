@@ -532,7 +532,7 @@ Style/RaiseArgs:
 
 Style/RedundantReturn:
   # When true allows code like `return x, y`.
-  AllowMultipleReturnValues: false
+  AllowMultipleReturnValues: true
 
 # Use / or %r around regular expressions.
 Style/RegexpLiteral:

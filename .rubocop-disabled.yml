@@ -37,6 +37,13 @@ Style/SymbolArray:
   StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#percent-i'
   Enabled: false
 
+# Enabled by default, but it messes with stuff
+Style/TrailingUnderscoreVariable:
+  Description: >-
+                 Checks for the usage of unneeded trailing underscores at the
+                 end of parallel variable assignment.
+  Enabled: false
+
 Lint/LiteralInInterpolation:
   Description: 'Avoid interpolating literals in strings'
   AutoCorrect: false

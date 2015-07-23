@@ -136,15 +136,15 @@ fi;
 
 # --- Colors ---
 # TODO: What do these colors do?
-export CLICOLOR=1
-export LSCOLORS=exfxcxdxbxegedabagacad
-export LS_COLORS="di=1;0;34:ln=0;35:so=32:pi=0;33:ex=0;31:bd=37;46:cd=37;43:su=37;41:sg=37;46:tw=37;42:ow=37;43:or=37;45:mi=37;43:"
+# export CLICOLOR=1
+# export LSCOLORS=exfxcxdxbxegedabagacad
+# export LS_COLORS="di=1;0;34:ln=0;35:so=32:pi=0;33:ex=0;31:bd=37;46:cd=37;43:su=37;41:sg=37;46:tw=37;42:ow=37;43:or=37;45:mi=37;43:"
 
-if echo hello | grep --color=auto l >/dev/null 2>&1; then
-  export GREP_OPTIONS='--color=auto'
-  export GREP_COLOR='0;32'
-  export GREP_COLORS="sl=0;37:cx=1;32:mt=1;35:fn=0;32:ln=1;34:se=1;33"
-fi
+# if echo hello | grep --color=auto l >/dev/null 2>&1; then
+#   export GREP_OPTIONS='--color=auto'
+#   export GREP_COLOR='0;32'
+#   export GREP_COLORS="sl=0;37:cx=1;32:mt=1;35:fn=0;32:ln=1;34:se=1;33"
+# fi
 
 
 # --- Exports ---
@@ -237,7 +237,7 @@ alias lh='ls -lhaG'
 # alias ip2="curl -s http://www.showmyip.com/simple/ | awk '{print $1}'"
 
 # See hidden files with ls
-alias ls="ls -a"
+alias ls="ls -a --color=always"
 
 # grep with color
 # for whatever reason this doesn't work with my grep on windows

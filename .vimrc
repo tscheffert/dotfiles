@@ -400,6 +400,7 @@ set wildignore+=*.pyc                            " Python byte code
 set wildignore+=*.o,*.obj,*.exe,*.dll,*.manifest " Compiled objects
 set wildignore+=*.DS_Store                       " OSX Sucks
 set wildignore+=*.jpg,*.jpeg,*.bmp,*.gif,*.png   " Binary images
+set wildignore+=*/.bundle/*                      " Ruby bundle stuff
 
 " Set the forward slash to be the slash of note.  Backslashes suck
 " Matters only on Windows

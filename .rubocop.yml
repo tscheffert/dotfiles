@@ -488,7 +488,7 @@ Style/MultilineOperationIndentation:
     - indented
 
 Style/NumericLiterals:
-  MinDigits: 5
+  MinDigits: 9
 
 # Allow safe assignment in conditions.
 Style/ParenthesesAroundCondition:

@@ -7,6 +7,7 @@ Style/Documentation:
   Description: 'Document classes and non-namespace modules.'
   Enabled: false
 
+# TODO: Would be nice to use this but man does it fuck with Align-Hash
 Style/ExtraSpacing:
   Description: 'Do not use unnecessary spacing.'
   Enabled: false

@@ -310,11 +310,8 @@ alias rbc='rubocop'
 # Run Rubocop gem and autocorrect detected violations when available
 alias rbca='rubocop --auto-correct'
 
-# Start a rails console
-alias rails-c='bundle exec rails c'
-
-# Start a rails server
-alias rails-s='bundle exec rails s'
+# Bundle exec rake shortcut
+alias ber='bundle exec rake'
 
 # First part of running a style-crest rake task
 function rake-sc {

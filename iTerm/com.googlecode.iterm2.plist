@@ -386,9 +386,9 @@
 	<key>NSScrollAnimationEnabled</key>
 	<false/>
 	<key>NSWindow Frame Preferences</key>
-	<string>249 309 924 485 0 0 1440 877 </string>
+	<string>2229 533 924 485 1440 -202 2560 1417 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>720 4 720 873 0 0 1440 877 </string>
+	<string>1440 -183 2554 1398 1440 -202 2560 1417 </string>
 	<key>New Bookmarks</key>
 	<array>
 		<dict>
@@ -1146,7 +1146,7 @@
 	<key>NoSyncTimeOfLastPromo</key>
 	<real>458675261.68183899</real>
 	<key>NoSyncTimeOfLastPromoDownload</key>
-	<real>459046930.375642</real>
+	<real>459359661.88462698</real>
 	<key>OnlyWhenMoreTabs</key>
 	<false/>
 	<key>OpenArrangementAtStartup</key>
@@ -1209,7 +1209,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2015-07-20T01:00:21Z</date>
+	<date>2015-07-23T15:50:20Z</date>
 	<key>SavePasteHistory</key>
 	<true/>
 	<key>ShowBookmarkName</key>
@@ -1252,6 +1252,10 @@
 	<integer>2</integer>
 	<key>WordCharacters</key>
 	<string>/-+\~_.</string>
+	<key>findIgnoreCase_iTerm</key>
+	<true/>
+	<key>findRegex_iTerm</key>
+	<false/>
 	<key>iTerm Version</key>
 	<string>2.1.1</string>
 </dict>

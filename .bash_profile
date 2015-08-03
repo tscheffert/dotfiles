@@ -313,6 +313,9 @@ alias rbca='rubocop --auto-correct'
 # Bundle exec rake shortcut
 alias ber='bundle exec rake'
 
+# Bundle exec rspec
+alias be-rspec='bundle exec rspec'
+
 # First part of running a style-crest rake task
 function rake-sc {
     eval 'bundle exec rake style_crest:$1'

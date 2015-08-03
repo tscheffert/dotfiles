@@ -324,7 +324,7 @@ function rake-sc {
 function git-show-exclude-ruby-files {
     # Takes the list of files from git-show AM and removes excluded files with grep.
     git-show AM \
-        | grep -vE -e 'routes\.rb|schema\.rb|\.html\.erb|\.yml'
+        | grep -vE -e 'routes\.rb|schema\.rb|\.html\.erb|\.yml|Gemfile|Gemfile\.lock|\.json'
 }
 
 function rbc-m {

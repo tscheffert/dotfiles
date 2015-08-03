@@ -341,7 +341,7 @@ Style/EmptyLinesAroundClassBody:
     - no_empty_lines
 
 Style/EmptyLinesAroundModuleBody:
-  EnforcedStyle: no_empty_lines
+  EnforcedStyle: empty_lines
   SupportedStyles:
     - empty_lines
     - no_empty_lines

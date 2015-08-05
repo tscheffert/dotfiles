@@ -482,7 +482,7 @@ Style/MethodName:
     - camelCase
 
 Style/MultilineOperationIndentation:
-  EnforcedStyle: aligned
+  EnforcedStyle: indented
   SupportedStyles:
     - aligned
     - indented

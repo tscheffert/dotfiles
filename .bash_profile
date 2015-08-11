@@ -272,6 +272,10 @@ alias gd='git diff'
 
 alias gds='git diff --staged'
 
+alias gr='git rebase'
+
+alias grc='git rebase --continue'
+
 function git-show {
     # Show all of the files that were affected between master and
     #   HEAD (of my branch).

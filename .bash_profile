@@ -300,7 +300,7 @@ function git-show {
     #     -xargs n1 - Run utility once for each line.
     #     bash -c '<snippet>' _ - Use bash as utility.
     #     <snippet> - Test if the file exists and echo if it does.
-    git show --pretty="format:" --name-only --diff-filter=$1 origin/master..HEAD \
+    git show --pretty="format:" --name-only --diff-filter=$1 master..HEAD \
         | awk NF \
         | sort \
         | uniq \

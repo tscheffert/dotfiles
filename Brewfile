@@ -46,6 +46,7 @@ install python
 install python3
 install lua
 # rbenv makes managing versions easier, ruby-build assists by adding "rbenv install"
+# Also need https://github.com/sstephenson/rbenv-gem-rehash
 install rbenv ruby-build
 
 # Things I haven't installed but could

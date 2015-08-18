@@ -20,6 +20,7 @@ mklink C:\Windows\System32\WindowsPowerShell\v1.0\profile.ps1 C:\Users\Trent\.do
 mklink C:\Users\Trent\Documents\WindowsPowerShell\PowerTabConfig.xml C:\Users\Trent\.dotfiles\PowerShell\PowerTabConfig.xml
 mklink C:\Users\Trent\Documents\WindowsPowerShell\TabExpansion.xml C:\Users\Trent\.dotfiles\PowerShell\TabExpansion.xml
 mklink C:\Users\Trent\.ptignore C:\Users\Trent\.dotfiles\.ptignore
+mklink C:\Users\Trent\.pryrc C:\Users\Trent\.dotfiles\.pryrc
 
 
 pause

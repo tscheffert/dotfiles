@@ -15,7 +15,9 @@
     diff = auto
 
 [push]
-	default = simple
+    # Current pushes to remote branch with the same name, regardless of if that
+    #   branch exists. Simple double checks that the branch exists on remote first.
+	default = current
 
 [merge]
     tool = p4merge

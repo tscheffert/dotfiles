@@ -276,6 +276,13 @@ alias gr='git rebase'
 
 alias grc='git rebase --continue'
 
+alias gp='git pull'
+
+alias gcom='git checkout master'
+
+# Follow it up with a double-quoted message, like 'gcm'
+alias gcob='git checkout -b'
+
 function git-show {
     # Show all of the files that were affected between master and
     #   HEAD (of my branch).

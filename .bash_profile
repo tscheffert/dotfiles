@@ -278,6 +278,8 @@ alias grc='git rebase --continue'
 
 alias gp='git pull'
 
+alias gpu='git push'
+
 alias gcom='git checkout master'
 
 # Follow it up with a double-quoted message, like 'gcm'

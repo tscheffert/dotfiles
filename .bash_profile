@@ -186,6 +186,9 @@ export PROMPT_COMMAND="history -a; history -n;"
 # For Docker!
 export DOCKER_HOST=tcp://192.168.23.2:2375
 
+# All the colorful logs
+export LOG_FORMAT=colored
+
 
 # --- Ruby Stuff ---
 if [[ $platform == 'osx' ]]; then

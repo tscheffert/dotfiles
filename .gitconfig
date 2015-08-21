@@ -7,6 +7,8 @@
     editor = vim
     encoding = utf-8
     autocrlf = false
+[alias]
+	lg = log --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr %an)%Creset' --abbrev-commit --date=relative
 
 [color]
     ui = auto

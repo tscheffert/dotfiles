@@ -352,6 +352,11 @@ function rbca-m {
         | xargs -n1 -p rubocop --auto-correct
 }
 
+# -- Other Aliases
+alias ..='cd ..'         # Go up one directory
+alias ...='cd ../..'     # Go up two directories
+alias ....='cd ../../..' # Go up three directories
+alias -- -='cd -'        # Go back
 
 # --- Functions ---
 # what the hell?

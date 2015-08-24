@@ -136,6 +136,7 @@ fi;
 
 # --- Colors ---
 # TODO: What do these colors do?
+# More examples https://github.com/Bash-it/bash-it/blob/master/lib/appearance.bash
 # export CLICOLOR=1
 # export LSCOLORS=exfxcxdxbxegedabagacad
 # export LS_COLORS="di=1;0;34:ln=0;35:so=32:pi=0;33:ex=0;31:bd=37;46:cd=37;43:su=37;41:sg=37;46:tw=37;42:ow=37;43:or=37;45:mi=37;43:"
@@ -283,6 +284,8 @@ alias gp='git pull'
 
 alias gpu='git push'
 
+alias gco='git checkout'
+
 alias gcom='git checkout master'
 
 # Follow it up with a double-quoted message, like 'gcm'
@@ -390,3 +393,6 @@ function filecount {
     done;
     echo "$i";
 }
+
+# TODO:
+# Do I want any completions? https://github.com/Bash-it/bash-it/tree/master/completion/available

@@ -261,6 +261,9 @@ alias pg-restart='pg_ctl reload'
 
 # -- Git Aliases --
 
+# Standard!
+alias g='git'
+
 # status!
 alias gs='git status'
 
@@ -273,6 +276,9 @@ alias gap='git add -p'
 alias gaa='git add .'
 
 alias gcm='git commit -m'
+
+# --amend changes the latest commit, and --no-edit tells it we don't want to change the messge
+alias gca='git commit --amend --no-edit'
 
 alias gd='git diff'
 
@@ -290,7 +296,7 @@ alias gco='git checkout'
 
 alias gcom='git checkout master'
 
-# Follow it up with a double-quoted message, like 'gcm'
+# Follow it up with a hyphen delimited branch name like: 'gcob my-branch-name'
 alias gcob='git checkout -b'
 
 function git-show {

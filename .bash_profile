@@ -329,6 +329,9 @@ alias rbc='rubocop'
 # Run Rubocop gem and autocorrect detected violations when available
 alias rbca='rubocop --auto-correct'
 
+# Bundle exec
+alias be='bundle exec'
+
 # Bundle exec rake shortcut
 alias ber='bundle exec rake'
 

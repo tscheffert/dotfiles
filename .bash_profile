@@ -224,6 +224,8 @@ fi
 
 # --- Aliases ---
 
+alias cd-d='cd ~/.dotfiles'
+
 # ls alias for color-mode
 alias lh='ls -lhaG'
 

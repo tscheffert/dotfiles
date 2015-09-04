@@ -22,16 +22,15 @@ if [[ -d $HOME/.dotfiles ]]
 	ln -sf $HOME/.dotfiles/vimfiles $HOME/.vim
 	ln -sf $HOME/.dotfiles/.git_template $HOME/.git_template
 	ln -sf $HOME/.dotfiles/iTerm $HOME/iTerm
+	ln -sf $HOME/.dotfiles/prompts $HOME/.prompts
 
 	# Symlink files
 	ln -sf $HOME/.dotfiles/.bash_profile $HOME/.bash_profile
-	ln -sf $HOME/.dotfiles/.bash_prompt $HOME/.bash_prompt
 	ln -sf $HOME/.dotfiles/.bashrc $HOME/.bashrc
 	ln -sf $HOME/.dotfiles/.curlrc $HOME/.curlrc
 	ln -sf $HOME/.dotfiles/.editorconfig $HOME/.editorconfig
 	ln -sf $HOME/.dotfiles/.gitconfig $HOME/.gitconfig
 	ln -sf $HOME/.dotfiles/.gitignore $HOME/.gitignore
-	ln -sf $HOME/.dotfiles/.git-prompt.sh $HOME/.git-prompt.sh
 	ln -sf $HOME/.dotfiles/.jscs.json $HOME/.jscs.json
 	ln -sf $HOME/.dotfiles/.jshintrc $HOME/.jshintrc
 	ln -sf $HOME/.dotfiles/.osx $HOME/.osx

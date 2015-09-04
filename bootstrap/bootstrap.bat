@@ -3,8 +3,8 @@ mklink /j C:\Users\Trent\init C:\Users\Trent\.dotfiles\init
 mklink /j C:\Users\Trent\source C:\Users\Trent\.dotfiles\source
 mklink /j C:\Users\Trent\vimfiles C:\Users\Trent\.dotfiles\vimfiles
 mklink /j C:\Users\Trent\.git_template C:\Users\Trent\.dotfiles\.git_template
+mklink /j C:\Users\Trent\.prompts C:\Users\Trent\.dotfiles\prompts
 mklink C:\Users\Trent\.bash_profile C:\Users\Trent\.dotfiles\.bash_profile
-mklink C:\Users\Trent\.bash_prompt C:\Users\Trent\.dotfiles\.bash_prompt
 mklink C:\Users\Trent\.bashrc C:\Users\Trent\.dotfiles\.bashrc
 mklink "C:\\Program Files\\ConEmu\\ConEmu.xml C:\Users\Trent\.dotfiles\ConEmu.xml
 mklink C:\Users\Trent\.curlrc C:\Users\Trent\.dotfiles\.curlrc

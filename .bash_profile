@@ -212,9 +212,9 @@ fi
 # --- Git Prompt, only on OSX ---
 #   Mingw, which I use, already has a nice prompt and it's colorful!
 if [[ $platform == 'osx' ]]; then
-    if [ -f ~/.git-prompt.sh ]; then
+    if [ -f ~/.prompts/.git-prompt.sh ]; then
         # Enable the __git_ps1
-        source ~/.git-prompt.sh
+        source ~/.prompts/.git-prompt.sh
 
         # Set status line
         export PS1='[\W]$(__git_ps1 "(%s)")$ '

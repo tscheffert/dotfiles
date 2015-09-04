@@ -269,6 +269,10 @@ alias gs='git status'
 
 alias ga='git add'
 
+alias gb='git branch'
+
+alias gbd='git branch -d'
+
 # "Git add patched"
 alias gap='git add -p'
 

@@ -1,5 +1,4 @@
 mklink /j C:\Users\Trent\bin C:\Users\Trent\.dotfiles\bin
-mklink /j C:\Users\Trent\source C:\Users\Trent\.dotfiles\source
 mklink /j C:\Users\Trent\vimfiles C:\Users\Trent\.dotfiles\vimfiles
 mklink /j C:\Users\Trent\.git_template C:\Users\Trent\.dotfiles\.git_template
 mklink /j C:\Users\Trent\.prompts C:\Users\Trent\.dotfiles\prompts

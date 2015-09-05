@@ -33,7 +33,6 @@ if [[ -d $HOME/.dotfiles ]]
 
 	# Symlink directories
 	link_if_needed $HOME/.dotfiles/bin $HOME/bin
-	link_if_needed $HOME/.dotfiles/init $HOME/init
 	link_if_needed $HOME/.dotfiles/vimfiles $HOME/.vim
 	link_if_needed $HOME/.dotfiles/.git_template $HOME/.git_template
 	link_if_needed $HOME/.dotfiles/iTerm $HOME/iTerm

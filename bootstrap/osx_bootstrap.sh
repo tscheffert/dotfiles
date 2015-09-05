@@ -1,4 +1,19 @@
 # Based on the Kevin Suttle's https://github.com/kevinSuttle/dotfiles/blob/master/install.zsh
+
+link_if_needed() {
+    local from=$1
+    local to=$2
+
+    if [[ -d $from ]]; then
+        if [[ -h $to ]]; then
+            echo "Directory '${to}' already exists, skipping link"
+        else
+            echo "Linking directory ${from} to ${to}"
+            ln -sf $from $to
+        fi
+    fi
+}
+
 # Don't try to clone the dotfile repo again if it already exists
 if [[ -d $HOME/.dotfiles ]]
 	then
@@ -17,12 +32,12 @@ if [[ -d $HOME/.dotfiles ]]
     #   -f If the target file already exists, then unlink it so that the link may occur.
 
 	# Symlink directories
-	ln -sf $HOME/.dotfiles/bin $HOME/bin
-	ln -sf $HOME/.dotfiles/init $HOME/init
-	ln -sf $HOME/.dotfiles/vimfiles $HOME/.vim
-	ln -sf $HOME/.dotfiles/.git_template $HOME/.git_template
-	ln -sf $HOME/.dotfiles/iTerm $HOME/iTerm
-	ln -sf $HOME/.dotfiles/prompts $HOME/.prompts
+	link_if_needed $HOME/.dotfiles/bin $HOME/bin
+	link_if_needed $HOME/.dotfiles/init $HOME/init
+	link_if_needed $HOME/.dotfiles/vimfiles $HOME/.vim
+	link_if_needed $HOME/.dotfiles/.git_template $HOME/.git_template
+	link_if_needed $HOME/.dotfiles/iTerm $HOME/iTerm
+	link_if_needed $HOME/.dotfiles/prompts $HOME/.prompts
 
 	# Symlink files
 	ln -sf $HOME/.dotfiles/.bash_profile $HOME/.bash_profile

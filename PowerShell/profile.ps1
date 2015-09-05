@@ -1,1 +1,0 @@
-$env:PSModulePath = $env:PSModulePath + ";c:\Users\tscheffert\.dotfiles\PowerShell\Modules"

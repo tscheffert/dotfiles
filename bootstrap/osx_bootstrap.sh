@@ -1,3 +1,5 @@
+#! /usr/env/bin bash
+#
 # Based on the Kevin Suttle's https://github.com/kevinSuttle/dotfiles/blob/master/install.zsh
 
 link_if_needed() {

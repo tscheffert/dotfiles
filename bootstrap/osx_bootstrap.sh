@@ -16,6 +16,10 @@ link_if_needed() {
     fi
 }
 
+test_exists() {
+    type $1 >/dev/null 2>&1
+}
+
 # Don't try to clone the dotfile repo again if it already exists
 if [[ -d $HOME/.dotfiles ]]
 	then
@@ -62,6 +66,24 @@ if [[ -d $HOME/.dotfiles ]]
 	ln -sf $HOME/.dotfiles/.tmux.conf $HOME/.tmux.conf
 
 	echo "Dotfiles have been symlinked to $HOME."
+fi
+
+# Ensure Homebrew
+if ! test_exists brew; then
+    echo "You don't have brew installed!"
+
+    echo "Go to http://brew.sh/ and install it before re-running."
+    exit 1
+else
+    echo "has brew, check"
+fi
+
+# Ensure tmux
+if ! test_exists tmux; then
+    echo "installing tmux:"
+    brew install tmux
+else
+    echo "has tmux, check"
 fi
 
 # Setup vimfiles

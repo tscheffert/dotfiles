@@ -69,6 +69,7 @@ if s:use_neobundle
     NeoBundle 'elzr/vim-json.git'
     NeoBundle 'groenewege/vim-less.git'
     NeoBundle 'maksimr/vim-jsbeautify.git'
+    NeoBundle 'tmux-plugins/vim-tmux.git'
 
     " Status bar
     NeoBundle 'bling/vim-airline.git'

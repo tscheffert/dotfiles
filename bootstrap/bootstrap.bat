@@ -19,6 +19,7 @@ mklink C:\Users\Trent\coffeelint.json C:\Users\Trent\.dotfiles\coffeelint.json
 ::mklink C:\Users\Trent\Documents\WindowsPowerShell\TabExpansion.xml C:\Users\Trent\.dotfiles\PowerShell\TabExpansion.xml
 mklink C:\Users\Trent\.ptignore C:\Users\Trent\.dotfiles\.ptignore
 mklink C:\Users\Trent\.pryrc C:\Users\Trent\.dotfiles\.pryrc
+mklink C:\Users\Trent\.tmux.conf C:\Users\Trent\.dotfiles\.tmux.conf
 
 
 pause

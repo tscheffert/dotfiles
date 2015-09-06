@@ -59,6 +59,7 @@ if [[ -d $HOME/.dotfiles ]]
 	ln -sf $HOME/.dotfiles/.rubocop.yml $HOME/.rubocop.yml
 	ln -sf $HOME/.dotfiles/.rubocop-enabled.yml $HOME/.rubocop-enabled.yml
 	ln -sf $HOME/.dotfiles/.rubocop-disabled.yml $HOME/.rubocop-disabled.yml
+	ln -sf $HOME/.dotfiles/.tmux.conf $HOME/.tmux.conf
 
 	echo "Dotfiles have been symlinked to $HOME."
 fi

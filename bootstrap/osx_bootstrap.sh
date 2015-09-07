@@ -88,7 +88,7 @@ fi
 
 # Set up tmux plugins
 if [[ ! -d $HOME/.tmux/plugins/tpm ]]; then
-    git clone git@github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+    git clone https://github.com/tmux-plugins/tpm $HOME/.tmux/plugins/tpm
 fi
 
 # Setup vimfiles

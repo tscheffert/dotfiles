@@ -87,8 +87,7 @@ else
 fi
 
 # Setup vimfiles
-if [[ ! -d $HOME/.vim/bundle/neobundle.vim ]]
-    then
+if [[ ! -d $HOME/.vim/bundle/neobundle.vim ]]; then
     git clone git@github.com:Shougo/neobundle.vim.git $HOME/.vim/bundle/neobundle.vim
 fi
 

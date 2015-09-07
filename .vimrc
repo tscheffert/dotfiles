@@ -446,6 +446,9 @@ set formatoptions-=t " Don't automatically wrap
 set textwidth=0 " If we were to auto wrap, or something added fo+=t then still don't
 set wrapmargin=0 " Similar to textwidth but relative to terminal width
 
+" Use the system clipboard for yanking
+set clipboard=unnamed
+
 
 " -----
 " Movement
@@ -935,6 +938,8 @@ nnoremap q; q:
 nnoremap <silent> x "_x
 vnoremap <silent> x "_x
 
+" Pasting in insert shouldn't squash the paste buffer
+vnoremap <silent> p "_xp
 
 " -----
 " Insert Mode Keybinds

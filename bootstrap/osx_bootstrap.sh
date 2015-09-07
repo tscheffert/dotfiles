@@ -86,6 +86,11 @@ else
     echo "has tmux, check"
 fi
 
+# Set up tmux plugins
+if [[ ! -d $HOME/.tmux/plugins/tpm ]]; then
+    git clone git@github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+fi
+
 # Setup vimfiles
 if [[ ! -d $HOME/.vim/bundle/neobundle.vim ]]; then
     git clone git@github.com:Shougo/neobundle.vim.git $HOME/.vim/bundle/neobundle.vim

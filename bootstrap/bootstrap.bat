@@ -2,6 +2,7 @@ mklink /j C:\Users\Trent\bin C:\Users\Trent\.dotfiles\bin
 mklink /j C:\Users\Trent\vimfiles C:\Users\Trent\.dotfiles\vimfiles
 mklink /j C:\Users\Trent\.git_template C:\Users\Trent\.dotfiles\.git_template
 mklink /j C:\Users\Trent\.prompts C:\Users\Trent\.dotfiles\prompts
+mklink /j C:\Users\Trent\.zsh C:\Users\Trent\.dotfiles\zsh
 mklink C:\Users\Trent\.bash_profile C:\Users\Trent\.dotfiles\.bash_profile
 mklink C:\Users\Trent\.bashrc C:\Users\Trent\.dotfiles\.bashrc
 mklink "C:\\Program Files\\ConEmu\\ConEmu.xml C:\Users\Trent\.dotfiles\ConEmu.xml
@@ -21,6 +22,7 @@ mklink C:\Users\Trent\.ptignore C:\Users\Trent\.dotfiles\.ptignore
 mklink C:\Users\Trent\.pryrc C:\Users\Trent\.dotfiles\.pryrc
 mklink C:\Users\Trent\.gemrc C:\Users\Trent\.dotfiles\.gemrc
 mklink C:\Users\Trent\.tmux.conf C:\Users\Trent\.dotfiles\.tmux.conf
+mklink C:\Users\Trent\.zshrc C:\Users\Trent\.dotfiles\.zshrc
 
 
 pause

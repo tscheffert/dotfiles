@@ -43,6 +43,7 @@ if [[ -d $HOME/.dotfiles ]]
 	link_if_needed $HOME/.dotfiles/.git_template $HOME/.git_template
 	link_if_needed $HOME/.dotfiles/iTerm $HOME/iTerm
 	link_if_needed $HOME/.dotfiles/prompts $HOME/.prompts
+	link_if_needed $HOME/.dotfiles/zsh $HOME/.zsh
 
 	# Symlink files
 	ln -sf $HOME/.dotfiles/.bash_profile $HOME/.bash_profile
@@ -59,11 +60,12 @@ if [[ -d $HOME/.dotfiles ]]
 	ln -sf $HOME/.dotfiles/.slate $HOME/.slate
 	ln -sf $HOME/.dotfiles/.ptignore $HOME/.ptignore
 	ln -sf $HOME/.dotfiles/.pryrc $HOME/.pryrc
-    ln -sf $HOME/.dotfiles/.gemrc $HOME/.gemrc
+  ln -sf $HOME/.dotfiles/.gemrc $HOME/.gemrc
 	ln -sf $HOME/.dotfiles/.rubocop.yml $HOME/.rubocop.yml
 	ln -sf $HOME/.dotfiles/.rubocop-enabled.yml $HOME/.rubocop-enabled.yml
 	ln -sf $HOME/.dotfiles/.rubocop-disabled.yml $HOME/.rubocop-disabled.yml
 	ln -sf $HOME/.dotfiles/.tmux.conf $HOME/.tmux.conf
+	ln -sf $HOME/.dotfiles/.zshrc $HOME/.zshrc
 
 	echo "Dotfiles have been symlinked to $HOME."
 fi

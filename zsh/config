@@ -35,6 +35,7 @@ SAVEHIST=1000000
 
 # --- Options ---
 # TODO: More from http://zsh.sourceforge.net/Guide/zshguide02.html#l13
+# TODO: Good ones here too http://askubuntu.com/questions/1577/moving-from-bash-to-zsh
 
 # Options from the zsh-newusuer-install
 setopt appendhistory nomatch notify

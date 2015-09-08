@@ -1,6 +1,7 @@
 # vi: ft=zsh
 
 # Source: http://michaelheap.com/pimp-your-zsh/
+autoload -U colors && colors
 
 function prompt_char {
     git branch >/dev/null 2>/dev/null && echo '±' && return

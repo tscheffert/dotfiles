@@ -9,7 +9,9 @@ bindkey -e # for emacs
 # Set out functions to autoload
 fpath=(~/.zsh/functions $fpath)
 autoload -U ~/.zsh/functions/*(:t)
-autoload -U colors && colors
+
+# This needs to be in this file, it can't be in zsh/prompt and I don't know why
+# autoload -U colors && colors
 
 
 # -- History --
@@ -40,7 +42,8 @@ unsetopt autocd beep extendedglob
 
 # Autoloaded functions from files are wrapped in functions rather than just
 #   containing the body of the function
-setopt KSH_AUTOLOAD
+# TODO: This breaks zsh/prompt autoloading for whatever reason, we can't autoload colors then
+# setopt KSH_AUTOLOAD
 
 # TODO: See HIST_SAVE_BY_COPY option
 

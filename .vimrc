@@ -266,9 +266,9 @@ set expandtab
 set smarttab
 
 " Who wants an 8 character tab?  Not me!
-set shiftwidth=4
-set softtabstop=4
-set tabstop=4
+set shiftwidth=2
+set softtabstop=2
+set tabstop=2
 
 " Set the cursor at the same indent as line above
 set autoindent

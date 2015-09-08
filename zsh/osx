@@ -1,0 +1,48 @@
+# vi: ft=zsh
+
+# --- Path ---
+
+# For man files for 'coreutils'
+export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
+
+
+# -- Prepend --
+
+# For homebrewed 'coreutils'
+prepend_to_path '/usr/local/opt/coreutils/libexec/gnubin'
+
+
+# --- Exports ---
+
+# Make MacVim the default visual editor.
+#   '-f' tells it not to fork a new process. Works better with shell.
+export VISUAL='mvim -f'
+
+
+# --- Ruby ---
+# Rbenv was installed with homebrew, the paths will be osx specific
+
+# Use Homebrew's directories rather than ~/.rbenv
+export RBENV_ROOT=/usr/local/var/rbenv
+
+# Enable shims and autocompletion
+if which rbenv > /dev/null ; then eval "$(rbenv init -)"; fi
+
+
+# --- Postgres ---
+
+# Set the required env variable for postgres
+export PGDATA='/usr/local/var/postgres'
+export PGGHOST=localhost
+
+
+# --- Git Prompt, only on OSX ---
+#   Mingw, which I use, already has a nice prompt and it's colorful!
+prompt=~/.prompts/.git-prompt.sh
+if [ -f "${prompt}" ]; then
+  # Enable the __git_ps1
+  source $prompt
+
+  # Set status line
+  export PS1='[\W]$(__git_ps1 "(%s)")$ '
+fi

@@ -1,0 +1,109 @@
+# vi: ft=zsh
+
+alias cd-d='cd ~/.dotfiles'
+
+# ls alias for color-mode
+alias lh='ls -lhaG'
+
+# simple ip
+# TODO: Right now this fails, saying "cut: bad delimiter"
+# alias ip='ifconfig | grep "inet " | grep -v 127.0.0.1 | cut -d\ -f2'
+
+
+# more details
+# TODO: This works, but not sure what it means...
+# alias ip1="ifconfig -a | perl -nle'/(\d+\.\d+\.\d+\.\d+)/ && print $1'"
+
+# external ip
+# TODO: Fix this, getting external IP would be awesome. Right now it just hangs
+# alias ip2="curl -s http://www.showmyip.com/simple/ | awk '{print $1}'"
+
+# See hidden files with ls
+alias ls="ls -a --color=always"
+
+# grep with color
+# for whatever reason this doesn't work with my grep on windows
+#alias grep='grep --color=auto'
+
+# refresh shell
+alias reload='source ~/.bash_profile'
+
+# -- Postgres Aliases --
+
+alias pg-start='pg_ctl -l $PGDATA/server.log start'
+alias pg-stop='pg_ctl stop -m fast'
+alias pg-status='pg_ctl status'
+alias pg-restart='pg_ctl reload'
+
+# -- Git Aliases --
+
+# Standard!
+alias g='git'
+
+# status!
+alias gs='git status'
+
+alias ga='git add'
+
+alias gb='git branch'
+
+alias gbd='git branch -d'
+
+# "Git add patched"
+alias gap='git add -p'
+
+# "Git add all"
+alias gaa='git add .'
+
+alias gcm='git commit -m'
+
+# --amend changes the latest commit, and --no-edit tells it we don't want to change the messge
+alias gca='git commit --amend --no-edit'
+
+alias gd='git diff'
+
+alias gds='git diff --staged'
+
+alias gr='git rebase'
+
+alias grc='git rebase --continue'
+
+alias gp='git pull'
+
+alias gpu='git push'
+
+alias gco='git checkout'
+
+alias gcom='git checkout master'
+
+# Follow it up with a hyphen delimited branch name like: 'gcob my-branch-name'
+alias gcob='git checkout -b'
+
+# -- Ruby Aliases --
+# Run Rubocop gem
+alias rbc='rubocop'
+
+# Run Rubocop gem and autocorrect detected violations when available
+alias rbca='rubocop --auto-correct'
+
+# Bundle exec
+alias be='bundle exec'
+
+# Bundle exec rake shortcut
+alias ber='bundle exec rake'
+
+# Bundle exec rspec
+alias be-rspec='bundle exec rspec'
+
+# Runs rubocop with all of the changed files
+alias rbc-m="git_show_exclude_ruby_files | xargs rubocop"
+
+# Runs rubocop with autocorrect, (-n1) once for each file,
+#   and (-p) while asking permission.
+alias rbca-m="git_show_exclude_ruby_files | xargs -n1 -p rubocop --auto-correct"
+
+# -- Other Aliases
+alias ..='cd ..'         # Go up one directory
+alias ...='cd ../..'     # Go up two directories
+alias ....='cd ../../..' # Go up three directories
+alias -- -='cd -'        # Go back

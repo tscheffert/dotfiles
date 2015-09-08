@@ -1,0 +1,32 @@
+# vi: ft=zsh
+
+function git_show() {
+    # Show all of the files that were affected between master and
+    #   HEAD (of my branch).
+
+    # Options:
+    # --pretty="format:" - The "format:<string>" pretty-format option is like
+    #   'printf' in that you can use '%' prefixed placeholders.  An empty string
+    #   simply prints without any frills.
+    # --name-only - Shows only their names.  --name-status would show operation in
+    #   addition to the name.  --diff-filter means we don't really need that.
+    # --diff-filter - Added (A), Copied (C), Deleted (D), Modified (M), Renamed (R),
+    #   have their type (i.e. regular file, symlink, submodule, …) changed (T),
+    #   are Unmerged (U), are Unknown (X), or have had their pairing Broken (B).
+    #   Pass in the options you want to see as variables to git-show.  An empty
+    #   $1 will default to showing all.
+
+    # | awk NF - Run it through awk which skips lines with no fields thanks to
+    #   'NF'.  Discussed here: http://www.thelinuxrain.com/articles/how-to-kill-blank-lines-elegantly
+    # | sort - Sorts!  Input has to be sorted for uniq to work
+    # | uniq - Ensures that there are no repeats.
+    # | "xargs -n1 bash -c '<snippet>' _"
+    #     -xargs n1 - Run utility once for each line.
+    #     bash -c '<snippet>' _ - Use bash as utility.
+    #     <snippet> - Test if the file exists and echo if it does.
+    git show --pretty="format:" --name-only --diff-filter=$1 master..HEAD \
+        | awk NF \
+        | sort \
+        | uniq \
+        | xargs -n1 bash -c '[ -e $@ ] && echo $@' _
+}

@@ -1,0 +1,23 @@
+# vi: ft=zsh
+
+# --- Path ---
+
+# -- Prepend --
+
+# Clearly we want vim...
+prepend_to_path 'C:\Program Files\Vim\vim74'
+
+
+# -- Append --
+
+# We want IIS Express!
+append_to_path 'C:\Program Files (x86)\IIS Express\'
+
+# Adb for android debugging
+# append_to_path 'C:\Users\tscheffert\AppData\Local\Android\android-sdk\platform-tools'
+
+# Python Scripts including pip
+append_to_path 'C:\tools\python\Scripts'
+
+# Xmllint from libxml2
+append_to_path 'C:\tools\xmllint'

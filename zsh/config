@@ -9,6 +9,7 @@ bindkey -e # for emacs
 # Set out functions to autoload
 fpath=(~/.zsh/functions $fpath)
 autoload -U ~/.zsh/functions/*(:t)
+autoload -U colors && colors
 
 
 # -- History --

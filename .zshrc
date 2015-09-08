@@ -30,6 +30,7 @@ fi
 . ~/.zsh/exports
 . ~/.zsh/aliases
 . ~/.zsh/completion
+. ~/.zsh/prompt
 
 if [[ $platform == 'osx' ]]; then
   . ~/.zsh/osx

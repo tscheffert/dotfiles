@@ -3,8 +3,7 @@
 # The following lines were added by compinstall
 zstyle :compinstall filename '/Users/trentscheffert/.zshrc'
 
-autoload -Uz compinit
-compinit
+autoload -Uz compinit && compinit
 # End of lines added by compinstall
 
 

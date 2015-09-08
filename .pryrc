@@ -3,15 +3,35 @@
 # Set the prompt_name to the foldername
 Pry.config.prompt_name = File.basename(Dir.pwd)
 
-Pry::Commands.block_command "pretty_methods",
-  "Arg.public_methods minus Object.public_methods, sorted" do |obj, cols|
-  list = (obj.public_methods - Object.public_methods).sort
+Pry::Commands.block_command "pretty_methods", "Arg.public_methods minus Object.public_methods, sorted" do |obj_string, cols|
+  obj = target.eval(obj_string)
 
-  cols = cols.to_i
-  cols = 5 if cols == 0
+  list = nil
+  if obj.class == Class
+    list = (obj.instance_methods - obj.superclass.instance_methods).sort
+  else
+    list = (obj.public_methods - obj.superclass.public_methods).sort
+  end
+
+  cols = default_columns_for_size(list.length, cols)
 
   # print_row_sorted(list)
   print_column_sorted(list, cols)
+end
+
+def default_columns_for_size(size, cols)
+  default_cols = nil
+  if size < 15
+    default_cols = 1
+  elsif size < 30
+    default_cols = 3
+  elsif size < 100
+    default_cols = 5
+  end
+  cols = cols.to_i
+  cols = default_cols if cols == 0
+
+  cols
 end
 
 def print_row_sorted(string_array, columns)

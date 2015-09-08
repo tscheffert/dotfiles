@@ -182,7 +182,7 @@ export HISTIGNORE="ls:cd:cd -:pwd:exit:date:* --help";
 # make sure the history is updated at every command
 # history -a - used instead of "shopt -s histappend" as this appends every line individually rather then when the shell exits
 # history -n - append the history lines not already read from the history file to the current history list.
-export PROMPT_COMMAND="history -a; history -n;"
+# export PROMPT_COMMAND="history -a; history -n;"
 
 # For Docker!
 export DOCKER_HOST=tcp://192.168.23.2:2375

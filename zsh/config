@@ -41,6 +41,12 @@ SAVEHIST=1000000
 setopt appendhistory nomatch notify
 unsetopt autocd beep extendedglob
 
+# Autocompletion of command line switches for aliases
+setopt completealiases
+
+# Ignore duplicates in the history
+setopt HIST_IGNORE_DUPS
+
 # Autoloaded functions from files are wrapped in functions rather than just
 #   containing the body of the function
 # TODO: This breaks zsh/prompt autoloading for whatever reason, we can't autoload colors then

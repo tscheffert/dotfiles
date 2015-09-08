@@ -1,5 +1,8 @@
 # vi: ft=ruby
 
+# Described here: https://github.com/michaeldv/awesome_print
+
 AwesomePrint.defaults = {
-  indent: 2
+  indent: 2, # Indent 2 spaces
+  index: false # Don't show array indicies
 }

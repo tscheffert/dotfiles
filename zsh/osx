@@ -39,11 +39,11 @@ export PGGHOST=localhost
 
 # --- Git Prompt, only on OSX ---
 #   Mingw, which I use, already has a nice prompt and it's colorful!
-prompt=~/.prompts/.git-prompt.sh
-if [ -f "${prompt}" ]; then
-  # Enable the __git_ps1
-  source $prompt
+# prompt=~/.prompts/.git-prompt.sh
+# if [ -f "${prompt}" ]; then
+#   # Enable the __git_ps1
+#   source $prompt
 
-  # Set status line
-  export PS1='[\W]$(__git_ps1 "(%s)")$ '
-fi
+#   # Set status line
+#   export PS1='[\W]$(__git_ps1 "(%s)")$ '
+# fi

@@ -26,7 +26,8 @@ export VISUAL='mvim -f'
 export RBENV_ROOT=/usr/local/var/rbenv
 
 # Enable shims and autocompletion
-if which rbenv > /dev/null ; then eval "$(rbenv init -)"; fi
+# TODO: This isn't working
+# if which rbenv > /dev/null ; then eval "$(rbenv init -)"; fi
 
 
 # --- Postgres ---

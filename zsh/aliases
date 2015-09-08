@@ -9,7 +9,6 @@ alias lh='ls -lhaG'
 # TODO: Right now this fails, saying "cut: bad delimiter"
 # alias ip='ifconfig | grep "inet " | grep -v 127.0.0.1 | cut -d\ -f2'
 
-
 # more details
 # TODO: This works, but not sure what it means...
 # alias ip1="ifconfig -a | perl -nle'/(\d+\.\d+\.\d+\.\d+)/ && print $1'"
@@ -19,7 +18,9 @@ alias lh='ls -lhaG'
 # alias ip2="curl -s http://www.showmyip.com/simple/ | awk '{print $1}'"
 
 # See hidden files with ls
-alias ls="ls -a --color=always"
+# TODO: Fix ls!
+alias ls="ls -a"
+# alias ls="ls -a --color=always"
 
 # grep with color
 # for whatever reason this doesn't work with my grep on windows

@@ -42,7 +42,8 @@ function comp_name() {
 
 function path() {
   local color="%{$fg[yellow]%}"
-  # %~ expands to the path
+  # %~ expands to the current working directory but if it starts with $HOME
+  #   then replace that with a '~'
   local dir="%~"
   echo "$color$dir"
 }

@@ -1,6 +1,9 @@
 # vi: ft=zsh
 
 # Source: http://michaelheap.com/pimp-your-zsh/
+# More prompt expansion info at http://zsh.sourceforge.net/Doc/Release/Prompt-Expansion.html
+
+# Fills the color array so that we can do the '%{fg[red]%}'
 autoload -U colors && colors
 
 # Different char for each version control

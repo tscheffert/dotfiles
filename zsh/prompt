@@ -53,7 +53,13 @@ function reset_colors() {
   echo "$reset"
 }
 
+function line_number() {
+  local color="%{$fg[magenta]%}"
+  local ln="%!"
+  echo "$color$ln"
+}
+
 function precmd() {
-  PROMPT="$(name)$(comp_name) $(path) $(reset_colors)$(prompt_char) "
+  PROMPT="$(line_number) $(name)$(comp_name) $(path) $(testing) $(reset_colors)$(prompt_char) "
   RPROMPT="$(git_branch)$(reset_colors)"
 }

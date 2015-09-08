@@ -1,0 +1,5 @@
+# vi: ft=ruby
+
+AwesomePrint.defaults = {
+  indent: 2
+}

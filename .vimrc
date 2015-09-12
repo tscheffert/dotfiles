@@ -583,6 +583,7 @@ else
 
   " Enable cursor switching in different modes
   "   Source: http://vim.wikia.com/wiki/Change_cursor_shape_in_different_modes
+  "   Source: http://vim.wikia.com/wiki/Configuring_the_cursor
   if InTmuxSession()
     let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
     let &t_SR = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=2\x7\<Esc>\\"
@@ -590,12 +591,30 @@ else
   else
     " Doesn't set the cursor to the correct one when entering vim, doesn't set it back
     "   on exit of vim
-    " Use CursorShape 1 (bar) in insert mode
-    let &t_SI = "\<Esc>]50;CursorShape=1\x7"
-    " Set replace mode CursorShape 2 (underline)
-    let &t_SR = "\<Esc>]50;CursorShape=2\x7"
-    " Use CursorShape 0 (block) when exiting insert or replace mode
-    let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+
+    " t_SI is cursor when entering insert mode
+    " t_SR is cursor when entering replace mode
+    " t_EI is cursor after exiting insert or replace mode
+
+    " Cursor shape option 1:
+    "   Works with iTerm2
+    " vertical bar "\<Esc>]50;CursorShape=1\x7"
+    " underscore "\<Esc>]50;CursorShape=2\x7"
+    " block "\<Esc>]50;CursorShape=0\x7"
+
+    " Cursor shape option 2:
+    "   Works with VTE compatible terminals. (iTerm2 works)
+    " "\<ESC>[{num} q" where num:
+    " 1 or 0 -> blinking block
+    " 2 -> solid underscore
+    " 3 -> blinking underscore
+    " 4 -> solid block
+    " 5 -> blinking vertical bar
+    " 6 -> solid vertical bar
+    let &t_SI = "\<Esc>[6 q"
+    let &t_SR = "\<Esc>[4 q"
+    let &t_EI = "\<Esc>[2 q"
+
   endif
   " Set the cursor back on exit?
   " TODO: this

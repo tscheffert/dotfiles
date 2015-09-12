@@ -536,6 +536,15 @@ set fileencodings=ucs-bom,utf-8,latin1
 " Set encoding
 set encoding=utf-8
 
+" Session Detection fun
+function! InConEmuSession()
+  return has('win32') && !has('gui_running') && !empty($CONEMUBUILD)
+endfunction
+
+function! InTmuxSession()
+  return $TMUX != ''
+endfunction
+
 " Colors!
 if has('gui_running')
   set background=dark
@@ -559,16 +568,6 @@ if has('gui_running')
     " set guifont=Source\ Code\ Pro\ for\ Powerline:h12
     set guifont=Source\ Code\ Pro:h12 " Not using the powerline symbols for now
   endif
-  " ConEmu specific
-elseif has('win32') && !has('gui_running') && !empty($CONEMUBUILD)
-  set term=xterm
-  set t_Co=256
-  let &t_AB="\e[48;5;%dm"
-  let &t_AF="\e[38;5;%dm"
-  set background=dark
-  colorscheme jellybeans
-  let g:airline_theme='jellybeans'
-  " Everything else
 else
   set term=xterm
   set t_Co=256
@@ -577,6 +576,27 @@ else
   set background=dark
   colorscheme jellybeans
   let g:airline_theme='jellybeans'
+
+  " ConEmu specific
+  " if InConEmuSession()
+  " endif
+
+  " Enable cursor switching in different modes
+  "   Source: http://vim.wikia.com/wiki/Change_cursor_shape_in_different_modes
+  if InTmuxSession()
+    let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
+    let &t_SR = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=2\x7\<Esc>\\"
+    let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
+  else
+    " Doesn't set the cursor to the correct one when entering vim, doesn't set it back
+    "   on exit of vim
+    let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+    let &t_SR = "\<Esc>]50;CursorShape=2\x7"
+    let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+  endif
+  " Set the cursor back on exit?
+  " TODO: this
+  " au VimLeave * silent let &t_SI = "\<Esc>]50;CursorShape=1\x7"
 endif
 
 " Long lines make syntax highlighting slow

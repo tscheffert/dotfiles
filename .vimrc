@@ -623,7 +623,7 @@ else
 
     augroup CorrectCursor
       au!
-      " Set the cursor to blinkning vertical block on enter
+      " Set the cursor to solid vertical block on enter
       au VimEnter * silent !echo -ne "\033[2 q"
       " Set the cursor back to solid vertical bar on exit
       au VimLeave * !echo -ne "\033[6 q"

@@ -129,6 +129,9 @@ if s:use_neobundle
   " NeoBundle 'suan/vim-instant-markdown'
   NeoBundle 'shime/vim-livedown'
 
+  " Better Buffer management
+  "   Disabled because I'm going to implement only the pieces I need myself
+  " NeoBundle 'mhinz/vim-sayonara'
 
   " Considering!
   " NeoBundle 'tpope/vim-repeat' " Wrap stuff for . command
@@ -694,6 +697,35 @@ vmap aa VGo1G
 
 " Visual block beyond the characters in the line, ie virtually
 set virtualedit=block
+
+
+" -----
+" NERDTree customization
+" -----
+" Source: https://github.com/jistr/vim-nerdtree-tabs
+" Source: https://github.com/mhinz/vim-sayonara
+" Source: https://github.com/scrooloose/nerdtree
+
+augroup NERDTreeCustomization
+  autocmd!
+
+  " This should happen:
+  "   When I :bd the last buffer and only NERDTree is left
+  "   When I ZZ the window and only NERDTree is left
+  " autocmd WinEnter * call WinEnterHandler()
+  " autocmd BufWinEnter * call CloseIfNERDTreeIsLast()
+  autocmd BufDelete * call CloseIfNERDTreeIsLast()
+augroup END
+
+fun! CloseIfNERDTreeIsLast()
+  " TODO: This isn't working
+
+  " Close all open buffers on entering a window if the only
+  "   buffer that's left is the NERDTree buffer
+  if exists("t:NERDTreeBufName") && bufwinnr(t:NERDTreeBufName) != -1 && winnr("$") == 1
+    q
+  endif
+endfun
 
 
 " -----

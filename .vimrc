@@ -545,6 +545,11 @@ function! InTmuxSession()
   return $TMUX != ''
 endfunction
 
+function! InItermSession()
+  " This would work with other programs, Apple_Terminal for one
+  return $TERM_PROGRAM =~ "iTerm"
+endfunction
+
 " Colors!
 if has('gui_running')
   set background=dark
@@ -584,14 +589,14 @@ else
   " Enable cursor switching in different modes
   "   Source: http://vim.wikia.com/wiki/Change_cursor_shape_in_different_modes
   "   Source: http://vim.wikia.com/wiki/Configuring_the_cursor
+  "   Source: https://gist.github.com/andyfowler/1195581
   if InTmuxSession()
+    " TODO: This should have enter exit features as well
+    " http://ass.kameli.org/cursor_tricks.html is nice as well
     let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
     let &t_SR = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=2\x7\<Esc>\\"
     let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
   else
-    " Doesn't set the cursor to the correct one when entering vim, doesn't set it back
-    "   on exit of vim
-
     " t_SI is cursor when entering insert mode
     " t_SR is cursor when entering replace mode
     " t_EI is cursor after exiting insert or replace mode
@@ -615,10 +620,15 @@ else
     let &t_SR = "\<Esc>[4 q"
     let &t_EI = "\<Esc>[2 q"
 
+
+    augroup CorrectCursor
+      au!
+      " Set the cursor to blinkning vertical block on enter
+      au VimEnter * silent !echo -ne "\033[2 q"
+      " Set the cursor back to solid vertical bar on exit
+      au VimLeave * !echo -ne "\033[6 q"
+    augroup END
   endif
-  " Set the cursor back on exit?
-  " TODO: this
-  " au VimLeave * silent let &t_SI = "\<Esc>]50;CursorShape=1\x7"
 endif
 
 " Long lines make syntax highlighting slow

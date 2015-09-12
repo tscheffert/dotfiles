@@ -598,16 +598,16 @@ else
 
     " Cursor shape option 1:
     "   Works with iTerm2
-    " vertical bar "\<Esc>]50;CursorShape=1\x7"
-    " underscore "\<Esc>]50;CursorShape=2\x7"
     " block "\<Esc>]50;CursorShape=0\x7"
+    " vertical bar "\<Esc>]50;CursorShape=1\x7"
+    " underline "\<Esc>]50;CursorShape=2\x7"
 
     " Cursor shape option 2:
     "   Works with VTE compatible terminals. (iTerm2 works)
     " "\<ESC>[{num} q" where num:
     " 1 or 0 -> blinking block
-    " 2 -> solid underscore
-    " 3 -> blinking underscore
+    " 2 -> solid underline
+    " 3 -> blinking underline
     " 4 -> solid block
     " 5 -> blinking vertical bar
     " 6 -> solid vertical bar

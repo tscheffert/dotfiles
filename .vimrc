@@ -590,8 +590,11 @@ else
   else
     " Doesn't set the cursor to the correct one when entering vim, doesn't set it back
     "   on exit of vim
+    " Use CursorShape 1 (bar) in insert mode
     let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+    " Set replace mode CursorShape 2 (underline)
     let &t_SR = "\<Esc>]50;CursorShape=2\x7"
+    " Use CursorShape 0 (block) when exiting insert or replace mode
     let &t_EI = "\<Esc>]50;CursorShape=0\x7"
   endif
   " Set the cursor back on exit?

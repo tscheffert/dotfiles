@@ -11,140 +11,140 @@ filetype off
 let s:use_neobundle = 1
 
 if s:use_neobundle
-    if has('vim_starting')
-        " Required for NeoBundle
+  if has('vim_starting')
+    " Required for NeoBundle
 		if has('win32')
 			set runtimepath +=~/vimfiles/bundle/neobundle.vim/
 		else
 			set runtimepath +=~/.vim/bundle/neobundle.vim/
 		endif
-    endif
+  endif
 
-    " Required for NeoBundle
+  " Required for NeoBundle
 	if has('win32')
 		call neobundle#begin(expand('~/vimfiles/bundle/'))
 	else
 		call neobundle#begin(expand('~/.vim/bundle/'))
 	endif
 
-    " Let NeoBundle manage NeoBundle
-    NeoBundleFetch 'Shougo/neobundle.vim'
+  " Let NeoBundle manage NeoBundle
+  NeoBundleFetch 'Shougo/neobundle.vim'
 
-    " My bundles:
-    " Colors
-    NeoBundle 'twerth/ir_black.git'
-    NeoBundle 'vim-scripts/moria.git'
-    NeoBundle 'vim-scripts/Color-Sampler-Pack.git'
-    NeoBundle 'vim-scripts/ScrollColors.git'
-    NeoBundle 'altercation/vim-colors-solarized.git'
-    NeoBundle 'tomasr/molokai.git'
-    NeoBundle 'nanotech/jellybeans.vim'
+  " My bundles:
+  " Colors
+  NeoBundle 'twerth/ir_black.git'
+  NeoBundle 'vim-scripts/moria.git'
+  NeoBundle 'vim-scripts/Color-Sampler-Pack.git'
+  NeoBundle 'vim-scripts/ScrollColors.git'
+  NeoBundle 'altercation/vim-colors-solarized.git'
+  NeoBundle 'tomasr/molokai.git'
+  NeoBundle 'nanotech/jellybeans.vim'
 
-    " Search with ack easier
-    NeoBundle 'mileszs/ack.vim.git'
+  " Search with ack easier
+  NeoBundle 'mileszs/ack.vim.git'
 
-    " Buffer management
-    NeoBundle 'vim-scripts/BufOnly.vim.git'
+  " Buffer management
+  NeoBundle 'vim-scripts/BufOnly.vim.git'
 
-    " File management
-    NeoBundle 'kien/ctrlp.vim.git'
-    NeoBundle 'scrooloose/nerdtree.git'
-    NeoBundle 'Xuyuanp/nerdtree-git-plugin' " Show git marks in nerdtree
-    NeoBundle 'low-ghost/nerdtree-fugitive' " Adds git menu to nerdtree
-    " Forces nerdtree to open with each tab
-    " NeoBundle 'jistr/vim-nerdtree-tabs.git'
-    NeoBundle 'kopischke/vim-fetch' " Enable vim to open with line numbers appended
+  " File management
+  NeoBundle 'kien/ctrlp.vim.git'
+  NeoBundle 'scrooloose/nerdtree.git'
+  NeoBundle 'Xuyuanp/nerdtree-git-plugin' " Show git marks in nerdtree
+  NeoBundle 'low-ghost/nerdtree-fugitive' " Adds git menu to nerdtree
+  " Forces nerdtree to open with each tab
+  " NeoBundle 'jistr/vim-nerdtree-tabs.git'
+  NeoBundle 'kopischke/vim-fetch' " Enable vim to open with line numbers appended
 
-    " Auto parentheses
-    NeoBundle 'Raimondi/delimitmate.git'
+  " Auto parentheses
+  NeoBundle 'Raimondi/delimitmate.git'
 
-    " Improved Undo functionality
-    NeoBundle 'sjl/gundo.vim.git'
+  " Improved Undo functionality
+  NeoBundle 'sjl/gundo.vim.git'
 
-    " Snippets
-    NeoBundle 'SirVer/ultisnips.git'
+  " Snippets
+  NeoBundle 'SirVer/ultisnips.git'
 
-    " Language specific
-    NeoBundle 'jelera/vim-javascript-syntax.git'
-    NeoBundle 'elzr/vim-json.git'
-    NeoBundle 'groenewege/vim-less.git'
-    NeoBundle 'maksimr/vim-jsbeautify.git'
-    NeoBundle 'tmux-plugins/vim-tmux.git'
+  " Language specific
+  NeoBundle 'jelera/vim-javascript-syntax.git'
+  NeoBundle 'elzr/vim-json.git'
+  NeoBundle 'groenewege/vim-less.git'
+  NeoBundle 'maksimr/vim-jsbeautify.git'
+  NeoBundle 'tmux-plugins/vim-tmux.git'
 
-    " Status bar
-    NeoBundle 'bling/vim-airline.git'
+  " Status bar
+  NeoBundle 'bling/vim-airline.git'
 
-    " Easier file movement
-    NeoBundle 'Lokaltog/vim-easymotion.git'
+  " Easier file movement
+  NeoBundle 'Lokaltog/vim-easymotion.git'
 
-    " tpope  rocks
-    NeoBundle 'tpope/vim-commentary.git'
-    NeoBundle 'tpope/vim-abolish.git'
+  " tpope  rocks
+  NeoBundle 'tpope/vim-commentary.git'
+  NeoBundle 'tpope/vim-abolish.git'
 
-    " Surrounding shit
-    "   Given
-    "       "Hello world!"
-    "   press
-    "       cs"'
-    "   to change to
-    "       'Hello world!'
-    NeoBundle 'tpope/vim-surround.git'
+  " Surrounding shit
+  "   Given
+  "       "Hello world!"
+  "   press
+  "       cs"'
+  "   to change to
+  "       'Hello world!'
+  NeoBundle 'tpope/vim-surround.git'
 
-    " If I ever do a lot of json stuff, apparently this is **must** have.
-    " https://github.com/tpope/vim-jdaddy
-    " NeoBundle 'tpope/vim-jdaddy'
+  " If I ever do a lot of json stuff, apparently this is **must** have.
+  " https://github.com/tpope/vim-jdaddy
+  " NeoBundle 'tpope/vim-jdaddy'
 
-    " Ruby stuff
-    NeoBundle 'tpope/vim-rails'
-    NeoBundle 'tpope/vim-bundler' " Works with vim-rails and vim-rake for bundler goodness
-    NeoBundle 'tpope/vim-rake' " vim-rails (with vim-projectionist) for non rails projects
-    NeoBundle 'tpope/vim-projectionist' " Project management for navigation n such
-    NeoBundle 'tpope/vim-endwise' " Add matching 'end's for blocks
-    NeoBundle 'vim-ruby/vim-ruby' " Ruby support stuff
+  " Ruby stuff
+  NeoBundle 'tpope/vim-rails'
+  NeoBundle 'tpope/vim-bundler' " Works with vim-rails and vim-rake for bundler goodness
+  NeoBundle 'tpope/vim-rake' " vim-rails (with vim-projectionist) for non rails projects
+  NeoBundle 'tpope/vim-projectionist' " Project management for navigation n such
+  NeoBundle 'tpope/vim-endwise' " Add matching 'end's for blocks
+  NeoBundle 'vim-ruby/vim-ruby' " Ruby support stuff
 
-    " Git!
-    NeoBundle 'tpope/vim-fugitive' " Awesome git wrapper
-    NeoBundle 'airblade/vim-gitgutter'
+  " Git!
+  NeoBundle 'tpope/vim-fugitive' " Awesome git wrapper
+  NeoBundle 'airblade/vim-gitgutter'
 
-    " Syntax
-    NeoBundle 'scrooloose/syntastic' " Easy syntax messages
-    NeoBundle 'dbakker/vim-lint' " Linting for vim and vimL files.
-    NeoBundle 'lilydjwg/colorizer' " Highlights hex codes with their colors
+  " Syntax
+  NeoBundle 'scrooloose/syntastic' " Easy syntax messages
+  NeoBundle 'dbakker/vim-lint' " Linting for vim and vimL files.
+  NeoBundle 'lilydjwg/colorizer' " Highlights hex codes with their colors
 
-    " Improved searches
-    NeoBundle 'inside/vim-search-pulse' " Pulse after searches
-    NeoBundle 'haya14busa/incsearch.vim' " Show all matches as typed, auto nohl
+  " Improved searches
+  NeoBundle 'inside/vim-search-pulse' " Pulse after searches
+  NeoBundle 'haya14busa/incsearch.vim' " Show all matches as typed, auto nohl
 
-    " Easy Alignment!
-    NeoBundle 'godlygeek/tabular'
+  " Easy Alignment!
+  NeoBundle 'godlygeek/tabular'
 
-    "Multiple Curosrs!
-    " NeoBundle 'terryma/vim-multiple-cursors'
-    NeoBundle 'kana/vim-niceblock' " make |v_b_I| and |v_b_A| available in all visual modes
+  "Multiple Curosrs!
+  " NeoBundle 'terryma/vim-multiple-cursors'
+  NeoBundle 'kana/vim-niceblock' " make |v_b_I| and |v_b_A| available in all visual modes
 
-    " Better Text Objects
-    NeoBundle 'wellle/targets.vim'
+  " Better Text Objects
+  NeoBundle 'wellle/targets.vim'
 
-    " Better Markdown
-    " NeoBundle 'suan/vim-instant-markdown'
-    NeoBundle 'shime/vim-livedown'
+  " Better Markdown
+  " NeoBundle 'suan/vim-instant-markdown'
+  NeoBundle 'shime/vim-livedown'
 
 
-    " Considering!
-    " NeoBundle 'tpope/vim-repeat' " Wrap stuff for . command
-    " NeoBundle 'AndrewRadev/splitjoin.vim' " Works with ruby to swap single liners into multi lines
-    " https://github.com/chrisbra/vim-diff-enhanced " Improved diff's using histogram and patience algorithms
+  " Considering!
+  " NeoBundle 'tpope/vim-repeat' " Wrap stuff for . command
+  " NeoBundle 'AndrewRadev/splitjoin.vim' " Works with ruby to swap single liners into multi lines
+  " https://github.com/chrisbra/vim-diff-enhanced " Improved diff's using histogram and patience algorithms
 
-    call neobundle#end()
+  call neobundle#end()
 
-    " If there are uninstalled bundles found on startup,
-    " this will conveniently prompt you to install them.
-    NeoBundleCheck
+  " If there are uninstalled bundles found on startup,
+  " this will conveniently prompt you to install them.
+  NeoBundleCheck
 
-    if !has('vim_starting')
-        " Call on_source hook when reloading .vimrc
-        call neobundle#call_hook('on_source')
-    endif
+  if !has('vim_starting')
+    " Call on_source hook when reloading .vimrc
+    call neobundle#call_hook('on_source')
+  endif
 endif
 
 " Forget being compatible with good ol' vi
@@ -163,8 +163,8 @@ syntax on
 
 " Restore cursor position from last time you editted the file
 augroup line_return
-    autocmd!
-    autocmd BufReadPost *
+  autocmd!
+  autocmd BufReadPost *
         \ if line("'\"") > 0 && line("'\"") <= line("$") |
         \       execute 'normal! g`"zvzz' |
         \ endif
@@ -203,13 +203,13 @@ set noswapfile                    " No More Collisions!
 
 " Make those folders automatically if they don't already exist.
 if !isdirectory(expand(&undodir))
-    call mkdir(expand(&undodir), "p")
+  call mkdir(expand(&undodir), "p")
 endif
 if !isdirectory(expand(&backupdir))
-    call mkdir(expand(&backupdir), "p")
+  call mkdir(expand(&backupdir), "p")
 endif
 if !isdirectory(expand(&directory))
-    call mkdir(expand(&directory), "p")
+  call mkdir(expand(&directory), "p")
 endif
 
 " Show filename in titlebar of window
@@ -240,16 +240,16 @@ set ambiwidth=double
 
 " Only apply to .txt files...
 augroup HelpInVerticalRightSplit
-    autocmd!
-    autocmd BufEnter  *.txt   call HelpInVSplit()
+  autocmd!
+  autocmd BufEnter  *.txt   call HelpInVSplit()
 augroup END
 
 "Only apply to help files...
 function! HelpInVSplit()
-    if &buftype == 'help'
-        "Convert the help window to right-side veritcal split
-        execute "normal \<C-W>L"
-    endif
+  if &buftype == 'help'
+    "Convert the help window to right-side veritcal split
+    execute "normal \<C-W>L"
+  endif
 endfunction
 
 " left and right are for switching buffers
@@ -289,18 +289,18 @@ set shiftround
 set nojoinspaces
 
 augroup VisualEffects
-    au!
-    " Remove any trailing whitespace that is in the file
-    autocmd BufRead,BufWrite * if ! &bin | silent! %s/\s\+$//ge | endif
+  au!
+  " Remove any trailing whitespace that is in the file
+  autocmd BufRead,BufWrite * if ! &bin | silent! %s/\s\+$//ge | endif
 
-    " Save when losing focus
-    " NOTE: This doesn't work as well as it should. It's a cool idea though.
-    "autocmd FocusLost * :wa
-    " Same thing, haven't tried this version though
-    "autocmd FocusLost * :silent! wall
+  " Save when losing focus
+  " NOTE: This doesn't work as well as it should. It's a cool idea though.
+  "autocmd FocusLost * :wa
+  " Same thing, haven't tried this version though
+  "autocmd FocusLost * :silent! wall
 
-    " Resize splits when the window is resized
-    autocmd VimResized * exe "normal! \<c-w>="
+  " Resize splits when the window is resized
+  autocmd VimResized * exe "normal! \<c-w>="
 augroup END
 
 " Fix indents when linewrap is on
@@ -312,11 +312,11 @@ set breakindent
 " -----
 
 if exists('+colorcolumn')
-    set colorcolumn=80
+  set colorcolumn=80
 else
-    " If we don't support colorcolumn, then highlight the characters past column 80
-    highlight OverLength ctermbg=red ctermfg=white guibg=#592929
-    match OverLength /\%81v.\+/
+  " If we don't support colorcolumn, then highlight the characters past column 80
+  highlight OverLength ctermbg=red ctermfg=white guibg=#592929
+  match OverLength /\%81v.\+/
 endif
 
 
@@ -325,51 +325,51 @@ endif
 " -----
 
 augroup CoffeeScriptFiles
-    au!
-    " File specific tabs, Do not think this works
-    au FileType coffee set noexpandtab
+  au!
+  " File specific tabs, Do not think this works
+  au FileType coffee set noexpandtab
 
-    " Fold by indentation in CoffeeScript
-    au BufNewFile,BufReadPost *.coffee setl foldmethod=indent nofoldenable
+  " Fold by indentation in CoffeeScript
+  au BufNewFile,BufReadPost *.coffee setl foldmethod=indent nofoldenable
 augroup END
 
 augroup XmlFiles
-    au!
+  au!
 
-    let g:xml_syntax_folding=1
-    au FileType xml setlocal foldmethod=syntax
+  let g:xml_syntax_folding=1
+  au FileType xml setlocal foldmethod=syntax
 augroup END
 
 augroup RubyFiles
-    au!
-    autocmd Filetype ruby setlocal shiftwidth=2
-    autocmd Filetype ruby setlocal softtabstop=2
-    autocmd Filetype ruby setlocal tabstop=2
-    autocmd Filetype eruby setlocal shiftwidth=2
-    autocmd Filetype eruby setlocal softtabstop=2
-    autocmd Filetype eruby setlocal tabstop=2
+  au!
+  autocmd Filetype ruby setlocal shiftwidth=2
+  autocmd Filetype ruby setlocal softtabstop=2
+  autocmd Filetype ruby setlocal tabstop=2
+  autocmd Filetype eruby setlocal shiftwidth=2
+  autocmd Filetype eruby setlocal softtabstop=2
+  autocmd Filetype eruby setlocal tabstop=2
 
 augroup END
 
 augroup RSpecFiles
-    au!
-    " rails-vim doesn't correctly assign buffer types for all of the files, manually do some of it
-    autocmd BufNewFile,BufRead *_spec.rb syntax keyword rubyRailsTestMethod describe context it specify it_should_behave_like before after setup subject its shared_examples_for shared_context let expect it to be eq
+  au!
+  " rails-vim doesn't correctly assign buffer types for all of the files, manually do some of it
+  autocmd BufNewFile,BufRead *_spec.rb syntax keyword rubyRailsTestMethod describe context it specify it_should_behave_like before after setup subject its shared_examples_for shared_context let expect it to be eq
 augroup END
 
 augroup YAMLFiles
-    au!
+  au!
 
-    autocmd Filetype yaml setlocal shiftwidth=2
-    autocmd Filetype yaml setlocal softtabstop=2
-    autocmd Filetype yaml setlocal tabstop=2
+  autocmd Filetype yaml setlocal shiftwidth=2
+  autocmd Filetype yaml setlocal softtabstop=2
+  autocmd Filetype yaml setlocal tabstop=2
 augroup END
 
 augroup VimFiles
-    au!
+  au!
 
-    " Vim's built in file type stuff doesn't like to respect my settings!
-    autocmd Filetype vim setlocal textwidth=0
+  " Vim's built in file type stuff doesn't like to respect my settings!
+  autocmd Filetype vim setlocal textwidth=0
 augroup END
 
 " -----
@@ -378,8 +378,8 @@ augroup END
 
 " Use english for spellchecking, but don't spellcheck by default
 if version >= 700
-    set spl=en spell
-    set nospell
+  set spl=en spell
+  set nospell
 endif
 
 " Enable enhanced command-line completion. Presumes you have compiled
@@ -538,45 +538,45 @@ set encoding=utf-8
 
 " Colors!
 if has('gui_running')
-    set background=dark
-    colorscheme molokai
-    let g:airline_theme='molokai'
-    " Remove the gui from GVim
-    :set guioptions-=m " Remove menu bar
-    :set guioptions-=T " Remove the toolbar
-    :set guioptions-=r " Remove the right-hand scroll bar
-    :set guioptions-=L " Remove the left-hand scroll bar...bar[]
+  set background=dark
+  colorscheme molokai
+  let g:airline_theme='molokai'
+  " Remove the gui from GVim
+  :set guioptions-=m " Remove menu bar
+  :set guioptions-=T " Remove the toolbar
+  :set guioptions-=r " Remove the right-hand scroll bar
+  :set guioptions-=L " Remove the left-hand scroll bar...bar[]
 
-    " Windows Specific stuff
-    if has('win32')
-        " Set vim to be maximized on opening
-        au GUIEnter * simalt ~x
-        " Set the default font to Consolas (Which is what Visual Studio uses)
-        set guifont=Consolas:h12:cANSI
-    else
-        " Set the default font to Source Code Pro (with escaped spaces) which I
-        " use everywhere!
-        " set guifont=Source\ Code\ Pro\ for\ Powerline:h12
-        set guifont=Source\ Code\ Pro:h12 " Not using the powerline symbols for now
-    endif
-" ConEmu specific
+  " Windows Specific stuff
+  if has('win32')
+    " Set vim to be maximized on opening
+    au GUIEnter * simalt ~x
+    " Set the default font to Consolas (Which is what Visual Studio uses)
+    set guifont=Consolas:h12:cANSI
+  else
+    " Set the default font to Source Code Pro (with escaped spaces) which I
+    " use everywhere!
+    " set guifont=Source\ Code\ Pro\ for\ Powerline:h12
+    set guifont=Source\ Code\ Pro:h12 " Not using the powerline symbols for now
+  endif
+  " ConEmu specific
 elseif has('win32') && !has('gui_running') && !empty($CONEMUBUILD)
-    set term=xterm
-    set t_Co=256
-    let &t_AB="\e[48;5;%dm"
-    let &t_AF="\e[38;5;%dm"
-    set background=dark
-    colorscheme jellybeans
-    let g:airline_theme='jellybeans'
-" Everything else
+  set term=xterm
+  set t_Co=256
+  let &t_AB="\e[48;5;%dm"
+  let &t_AF="\e[38;5;%dm"
+  set background=dark
+  colorscheme jellybeans
+  let g:airline_theme='jellybeans'
+  " Everything else
 else
-    set term=xterm
-    set t_Co=256
-    let &t_AB="\e[48;5;%dm"
-    let &t_AF="\e[38;5;%dm"
-    set background=dark
-    colorscheme jellybeans
-    let g:airline_theme='jellybeans'
+  set term=xterm
+  set t_Co=256
+  let &t_AB="\e[48;5;%dm"
+  let &t_AF="\e[38;5;%dm"
+  set background=dark
+  colorscheme jellybeans
+  let g:airline_theme='jellybeans'
 endif
 
 " Long lines make syntax highlighting slow
@@ -608,15 +608,15 @@ set splitright
 
 " Using the mouse in the terminal
 if has('mouse')
-    set mouse=a
-    if has('mouse_sgr') || v:version > 703 ||
-                \ v:version == 703 && has('patch632')
-        " Ideal mouse setting, backwards compatible with xterm and xterm2
-        set ttymouse=sgr
-    else
-        " Fallback
-        set ttymouse=xterm2
-    endif
+  set mouse=a
+  if has('mouse_sgr') || v:version > 703 ||
+        \ v:version == 703 && has('patch632')
+    " Ideal mouse setting, backwards compatible with xterm and xterm2
+    set ttymouse=sgr
+  else
+    " Fallback
+    set ttymouse=xterm2
+  endif
 endif
 
 
@@ -668,7 +668,7 @@ let g:airline#extensions#tabline#enabled = 1
 
 " Ensure symbols dictionary exists
 if !exists('g:airline_symbols')
-    let g:airline_symbols = {}
+  let g:airline_symbols = {}
 endif
 
 " Set custom symbols
@@ -680,9 +680,9 @@ let g:airline#extensions#tabline#left_alt_sep = '|'
 let g:airline_section_y=' [%n] '
 let g:airline_section_z='%3p%% : %3l/%-3L :%4c '
 let g:airline#extensions#default#layout = [
-            \ [ 'a', 'c' ],
-            \ [ 'x', 'y', 'z', 'warning' ]
-            \ ]
+      \ [ 'a', 'c' ],
+      \ [ 'x', 'y', 'z', 'warning' ]
+      \ ]
 
 " Disable paste detection
 let g:airline_detect_paste=1
@@ -694,8 +694,8 @@ let g:airline_detect_paste=1
 
 " Ignore stuff
 let g:ctrlp_custom_ignore = {
-    \ 'dir': '\v[\/](\.git|\.hg|\.svn|_site)$',
-    \ }
+      \ 'dir': '\v[\/](\.git|\.hg|\.svn|_site)$',
+      \ }
 
 " Don't ignore hidden files
 let g:ctrlp_show_hidden = 1
@@ -715,9 +715,9 @@ let g:ctrlp_switch_buffer = 1
 " -----
 " Default settings sill
 if exists(':SyntasticStatuslineFlag')
-    set statusline+=%#warningmsg#
-    set statusline+=%{SyntasticStatuslineFlag()}
-    set statusline+=%*
+  set statusline+=%#warningmsg#
+  set statusline+=%{SyntasticStatuslineFlag()}
+  set statusline+=%*
 endif
 
 " Always put errors into the location list
@@ -736,11 +736,11 @@ endif
 "   to map to alternate at:
 "   spec/components/vendors/style_crest/lib/shipping.rb
 let g:rails_projections = {
-        \ "components/*.rb": {
-        \   "test": "spec/components/{}_spec.rb",
-        \ },
-        \ "spec/components/*_spec.rb": {
-        \   "test": "components/{}.rb"}}
+      \ "components/*.rb": {
+      \   "test": "spec/components/{}_spec.rb",
+      \ },
+      \ "spec/components/*_spec.rb": {
+      \   "test": "components/{}.rb"}}
 
 
 " -----
@@ -748,16 +748,16 @@ let g:rails_projections = {
 " -----
 " Change the indicators
 let g:NERDTreeIndicatorMap = {
-                \ "Modified"  : "~",
-                \ "Staged"    : "☈",
-                \ "Untracked" : "♦",
-                \ "Renamed"   : "⁕",
-                \ "Unmerged"  : "⥮",
-                \ "Deleted"   : "␡",
-                \ "Dirty"     : "✗",
-                \ "Clean"     : "✓",
-                \ "Unknown"   : "?"
-                \ }
+      \ "Modified"  : "~",
+      \ "Staged"    : "☈",
+      \ "Untracked" : "♦",
+      \ "Renamed"   : "⁕",
+      \ "Unmerged"  : "⥮",
+      \ "Deleted"   : "␡",
+      \ "Dirty"     : "✗",
+      \ "Clean"     : "✓",
+      \ "Unknown"   : "?"
+      \ }
 
 
 " -----
@@ -784,10 +784,10 @@ let g:vim_search_pulse_color_list = ["#F92672", "#A6E22E", "#AE81FF"]
 let g:vim_search_pulse_duration = 400
 
 augroup SearchPulseOnEnter
-    au!
+  au!
 
-    " Pulses the first match after hitting the enter key
-    autocmd User IncSearchExecute :call search_pulse#Pulse()
+  " Pulses the first match after hitting the enter key
+  autocmd User IncSearchExecute :call search_pulse#Pulse()
 augroup END
 
 
@@ -812,13 +812,13 @@ map g* <Plug>(incsearch-nohl-g*)<Plug>Pulse
 map g# <Plug>(incsearch-nohl-g#)<Plug>Pulse
 
 augroup NoHlOnInsert
-    au!
+  au!
 
-    " Exit hlsearch when entering insert as well
-    autocmd InsertEnter * :set nohlsearch
+  " Exit hlsearch when entering insert as well
+  autocmd InsertEnter * :set nohlsearch
 
-    " Reenable it so that future searchs do hlsearch
-    autocmd InsertLeave * :set hlsearch
+  " Reenable it so that future searchs do hlsearch
+  autocmd InsertLeave * :set hlsearch
 augroup END
 
 " Tell incsearch that we're using 'magic' search
@@ -866,11 +866,11 @@ let mapleader = ","
 nnoremap <silent><C-j> m`:silent +g/\m^\s*$/d<CR>``:noh<CR>
 nnoremap <silent><C-k> m`:silent -g/\m^\s*$/d<CR>``:noh<CR>
 if has("mac")
-    nnoremap <silent>∆ :set paste<CR>m`o<Esc>``:set nopaste<CR>j
-    nnoremap <silent>˚ :set paste<CR>m`O<Esc>``:set nopaste<CR>k
+  nnoremap <silent>∆ :set paste<CR>m`o<Esc>``:set nopaste<CR>j
+  nnoremap <silent>˚ :set paste<CR>m`O<Esc>``:set nopaste<CR>k
 else
-    nnoremap <silent><A-j> :set paste<CR>m`o<Esc>``:set nopaste<CR>j
-    nnoremap <silent><A-k> :set paste<CR>m`O<Esc>``:set nopaste<CR>k
+  nnoremap <silent><A-j> :set paste<CR>m`o<Esc>``:set nopaste<CR>j
+  nnoremap <silent><A-k> :set paste<CR>m`O<Esc>``:set nopaste<CR>k
 endif
 
 " cd to the directory containing the file in th buffer
@@ -915,7 +915,7 @@ autocmd FileType xml noremap <buffer> <c-e><c-f> :silent %!xmllint % --format --
 
 " Return highlight group under cursor, if trans is zero it returns the "effective" group
 function! SyntaxItem(trans)
-    return synIDattr(synID(line("."), col("."), a:trans), "name")
+  return synIDattr(synID(line("."), col("."), a:trans), "name")
 endfunction
 
 nnoremap <Leader>sg :echo "Syntax Group:" SyntaxItem(1)<CR>
@@ -939,7 +939,8 @@ nnoremap <silent> x "_x
 vnoremap <silent> x "_x
 
 " Pasting in insert shouldn't squash the paste buffer
-vnoremap <silent> p "_xp
+" TODO: Fix this
+" vnoremap <silent> p "_xp
 
 " -----
 " Insert Mode Keybinds

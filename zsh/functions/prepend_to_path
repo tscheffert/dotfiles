@@ -5,9 +5,6 @@ function prepend_to_path() {
   for d; do
     d=$(cd -- "$d" && { pwd -P || pwd; }) 2>/dev/null # canonicalize symbolic links (? what?)
     if [ -z "$d" ]; then continue; fi # skip nonexistent directory
-    case ":$PATH:" in
-        *":$d:"*) :;;
-        *) PATH=$d:$PATH;;
-    esac
+    path=($d $path) # add it to the front of the path array
   done
 }

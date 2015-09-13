@@ -130,8 +130,7 @@ if s:use_neobundle
   NeoBundle 'shime/vim-livedown'
 
   " Better Buffer management
-  "   Disabled because I'm going to implement only the pieces I need myself
-  " NeoBundle 'mhinz/vim-sayonara'
+  NeoBundle 'mhinz/vim-sayonara'
 
   " Considering!
   " NeoBundle 'tpope/vim-repeat' " Wrap stuff for . command
@@ -990,7 +989,10 @@ nnoremap <silent> <leader>hws :set list listchars=tab:>.,trail:.,extends:#,nbsp:
 nnoremap <silent> <Leader>nhws :set nolist<CR>
 
 " Close all buffers except current
-nnoremap <silent> <Leader>bd :BufOnly<CR>
+nnoremap <silent> <Leader>bo :BufOnly<CR>
+
+" Close the current buffer, preserving the window
+nnoremap <silent> <Leader>bd :Sayonara!<CR>
 
 " Fix ^M line endings
 nnoremap <silent> <Leader>le :s%/\r/\r/g<CR>

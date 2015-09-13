@@ -709,6 +709,10 @@ set virtualedit=block
 augroup NERDTreeCustomization
   autocmd!
 
+  " Open NERDTree if vim is openned without a file specificed
+  autocmd StdinReadPre * let s:std_in=1
+  autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+
   " This should happen:
   "   When I :bd the last buffer and only NERDTree is left
   "   When I ZZ the window and only NERDTree is left

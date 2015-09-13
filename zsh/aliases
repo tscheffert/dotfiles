@@ -18,9 +18,7 @@ alias lh='ls -lhaG'
 # alias ip2="curl -s http://www.showmyip.com/simple/ | awk '{print $1}'"
 
 # See hidden files with ls
-# TODO: Fix ls!
-alias ls="ls -a"
-# alias ls="ls -a --color=always"
+alias ls="ls -a --color=always"
 
 # grep with color
 # for whatever reason this doesn't work with my grep on windows

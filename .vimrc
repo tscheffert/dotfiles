@@ -718,7 +718,8 @@ augroup NERDTreeCustomization
   "   When I ZZ the window and only NERDTree is left
   " autocmd WinEnter * call WinEnterHandler()
   " autocmd BufWinEnter * call CloseIfNERDTreeIsLast()
-  autocmd BufDelete * call CloseIfNERDTreeIsLast()
+  autocmd BufEnter * call CloseIfNERDTreeIsPrimary()
+  " autocmd BufDelete * call CloseIfNERDTreeIsLast()
 augroup END
 
 fun! CloseIfNERDTreeIsLast()
@@ -730,6 +731,12 @@ fun! CloseIfNERDTreeIsLast()
     q
   endif
 endfun
+
+function! CloseIfNERDTreeIsPrimary()
+  if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary")
+    q
+  endif
+endfunction
 
 
 " -----

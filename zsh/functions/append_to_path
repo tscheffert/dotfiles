@@ -5,10 +5,12 @@ function append_to_path() {
   for d; do
     d=$(cd -- "$d" && { pwd -P || pwd; }) 2>/dev/null # canonicalize symbolic links (? what?)
     if [ -z "$d" ]; then continue; fi # skip nonexistent directory
-    case ":$PATH:" in
-        *":$d:"*) :;;
-        *) PATH=$PATH:$d;;
-    esac
+
+    # Append to the path
+    # NOTE: because of 'typeset -U path' set in zsh/config this won't relocate an
+    #   existing entry to the end of the path, it'll just cease to exist as the right-most
+    #   duplicate is removed.
+    path=($path $d)
   done
 }
 

@@ -9,9 +9,14 @@ spectrum # Load spectrum function to enable $FG[010] stuff
 
 # Different char for each version control
 function prompt_char {
-  git branch >/dev/null 2>/dev/null && echo '±' && return
-  hg root >/dev/null 2>/dev/null && echo '☿' && return
-  echo '$'
+  local color_one="%{$fg[red]%}"
+  local color_two="%{$fg[yellow]%}"
+  local color_three="%{$fg[green]%}"
+  local char="❯"
+  # git branch >/dev/null 2>/dev/null && echo '±' && return
+  # hg root >/dev/null 2>/dev/null && echo '☿' && return
+  # echo '$'
+  echo "$color_one$char$color_two$char$color_three$char"
 }
 
 function git_branch {
@@ -66,6 +71,6 @@ function line_number() {
 }
 
 function precmd() {
-PROMPT="$(line_number) $(name)$(path)$(git_branch) $(reset_colors)$(prompt_char) "
+PROMPT="$(line_number) $(name)$(path)$(git_branch) $(prompt_char)$(reset_colors) "
   # RPROMPT="$(git_branch)$(reset_colors)"
 }

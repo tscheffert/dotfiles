@@ -713,18 +713,15 @@ augroup NERDTreeCustomization
   autocmd StdinReadPre * let s:std_in=1
   autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 
+  " Close NERDTree in certain situations
   " This should happen:
-  "   When I :bd the last buffer and only NERDTree is left
+  "   TODO: When I :bd the last buffer and only NERDTree is left
   "   When I ZZ the window and only NERDTree is left
-  " autocmd WinEnter * call WinEnterHandler()
   " autocmd BufWinEnter * call CloseIfNERDTreeIsLast()
   autocmd BufEnter * call CloseIfNERDTreeIsPrimary()
-  " autocmd BufDelete * call CloseIfNERDTreeIsLast()
 augroup END
 
 fun! CloseIfNERDTreeIsLast()
-  " TODO: This isn't working
-
   " Close all open buffers on entering a window if the only
   "   buffer that's left is the NERDTree buffer
   if exists("t:NERDTreeBufName") && bufwinnr(t:NERDTreeBufName) != -1 && winnr("$") == 1

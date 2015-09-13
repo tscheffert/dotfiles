@@ -20,7 +20,9 @@ function git_branch {
     COL="%{$fg[green]%}" # Everything's fine
     [[ $(git log origin/master..HEAD 2> /dev/null ) != "" ]] && COL="%{$fg[blue]%}" # We have changes to push
     [[ $(git status --porcelain 2> /dev/null) != "" ]] && COL="%{$fg[red]%}" # We have uncommited changes
-    echo "$parens_color($COL$BRANCH$parens_color)"
+    local left_parens="$parens_color("
+    local right_parens="$parens_color)"
+    echo "$left_parens$COL$BRANCH$right_parens"
   fi
 }
 

@@ -46,7 +46,9 @@ function path() {
   # %~ expands to the current working directory but if it starts with $HOME
   #   then replace that with a '~'
   local dir="%~"
-  echo "$color\[$dir\]"
+  local left_bracket="["
+  local right_bracket="]"
+  echo "$color$left_bracket$dir$right_bracket"
 }
 
 function reset_colors() {

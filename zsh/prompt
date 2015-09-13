@@ -16,18 +16,19 @@ function prompt_char {
 function git_branch {
   BRANCH="$(git symbolic-ref HEAD 2>/dev/null | cut -d'/' -f3)"
   if ! test -z $BRANCH; then
+    local bracket_color="%{$fg[green]%}"
     COL="%{$fg[green]%}" # Everything's fine
     [[ $(git log origin/master..HEAD 2> /dev/null ) != "" ]] && COL="%{$fg[blue]%}" # We have changes to push
     [[ $(git status --porcelain 2> /dev/null) != "" ]] && COL="%{$fg[red]%}" # We have uncommited changes
-    echo "$COL$BRANCH"
+    echo "$bracket_color($COL$BRANCH$bracket_color)"
   fi
 }
 
 function name() {
   # Only show name if it's different than my usual
   NAME=""
-  if [[ $(whoami) != "michael" ]]; then
-    NAME="%n%{$reset_color%}@"
+  if [[ $(whoami) != "trentscheffert" ]]; then
+    NAME="%n%{$reset_color%}"
   fi
 
   echo "%{$fg[red]%}$NAME"
@@ -45,7 +46,7 @@ function path() {
   # %~ expands to the current working directory but if it starts with $HOME
   #   then replace that with a '~'
   local dir="%~"
-  echo "$color$dir"
+  echo "$color\[$dir\]"
 }
 
 function reset_colors() {
@@ -60,6 +61,6 @@ function line_number() {
 }
 
 function precmd() {
-  PROMPT="$(line_number) $(name)$(comp_name) $(path) $(testing) $(reset_colors)$(prompt_char) "
-  RPROMPT="$(git_branch)$(reset_colors)"
+PROMPT="$(line_number) $(name)$(path)$(git_branch) $(reset_colors)$(prompt_char) "
+  # RPROMPT="$(git_branch)$(reset_colors)"
 }

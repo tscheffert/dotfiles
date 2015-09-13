@@ -710,8 +710,9 @@ augroup NERDTreeCustomization
   autocmd!
 
   " Open NERDTree if vim is openned without a file specificed
-  autocmd StdinReadPre * let s:std_in=1
-  autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+  " Note: I don't think I like this behavior
+  " autocmd StdinReadPre * let s:std_in=1
+  " autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 
   " Close NERDTree in certain situations
   " This should happen:

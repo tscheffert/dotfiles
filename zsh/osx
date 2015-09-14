@@ -22,12 +22,16 @@ export VISUAL='mvim -f'
 # --- Ruby ---
 # Rbenv was installed with homebrew, the paths will be osx specific
 
-# Use Homebrew's directories rather than ~/.rbenv
-export RBENV_ROOT=/usr/local/var/rbenv
+#  1. Sets up shims path, based on RBENV_ROOT
+#  2. Installs autocompletion for zsh
+#  3. Rehashes shims, which makes sure they're all up to date
+#  4. Installs the sh dispatcher which enables stuff
+if which rbenv > /dev/null ; then
+  # Use Homebrew's directories rather than ~/.rbenv
+  export RBENV_ROOT=/usr/local/var/rbenv
 
-# Enable shims and autocompletion
-# TODO: This isn't working
-# if which rbenv > /dev/null ; then eval "$(rbenv init -)"; fi
+  eval "$(rbenv init - zsh)"
+fi
 
 
 # --- Postgres ---

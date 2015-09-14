@@ -24,7 +24,7 @@ function git_branch {
   if ! test -z $BRANCH; then
     local parens_color="$FG[000]"
     COL="%{$fg[green]%}" # Everything's fine
-    [[ $(git log origin/master..HEAD 2> /dev/null ) != "" ]] && COL="%{$fg[blue]%}" # We have changes to push
+    [[ $(git log origin/$BRANCH..HEAD 2> /dev/null ) != "" ]] && COL="%{$fg[blue]%}" # We have changes to push
     [[ $(git status --porcelain 2> /dev/null) != "" ]] && COL="%{$fg[red]%}" # We have uncommited changes
     local left_parens="$parens_color("
     local right_parens="$parens_color)"

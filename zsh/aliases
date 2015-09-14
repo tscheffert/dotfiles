@@ -40,7 +40,7 @@ alias pg-restart='pg_ctl reload'
 alias g='git'
 
 # status!
-alias gs='git status'
+alias gs='git status -s'
 
 alias ga='git add'
 

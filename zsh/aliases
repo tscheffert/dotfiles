@@ -101,6 +101,10 @@ alias rbc-m="git_show_exclude_ruby_files | xargs rubocop"
 #   and (-p) while asking permission.
 alias rbca-m="git_show_exclude_ruby_files | xargs -n1 -p rubocop --auto-correct"
 
+# Run migrations
+alias db-migrate="bundle exec rake db:migrate && RACK_ENV=test bundle exec rake db:migrate"
+
+
 # -- Other Aliases
 alias ..='cd ..'         # Go up one directory
 alias ...='cd ../..'     # Go up two directories

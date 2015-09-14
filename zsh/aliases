@@ -25,7 +25,7 @@ alias ls="ls -a --color=always"
 #alias grep='grep --color=auto'
 
 # refresh shell
-alias reload='source ~/.bash_profile'
+alias reload='source ~/.zshrc'
 
 # -- Postgres Aliases --
 

@@ -48,6 +48,8 @@ alias gb='git branch'
 
 alias gbd='git branch -d'
 
+alias gbd-m='git_delete_merged'
+
 # "Git add patched"
 alias gap='git add -p'
 

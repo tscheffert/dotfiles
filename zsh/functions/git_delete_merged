@@ -1,0 +1,10 @@
+# vi: ft=zsh
+
+# Delete branchs which have already been merged into master
+#   Source: http://stevenharman.net/git-clean-delete-already-merged-branches
+function git_delete_merged() {
+  git branch --merged master \
+    | grep -v "\* master" \
+    | xargs -n 1 git branch -d
+}
+

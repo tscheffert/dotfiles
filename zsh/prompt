@@ -32,7 +32,7 @@ function git_branch {
     # elif [[ $(git log origin/master..HEAD 2> /dev/null) != "" ]]; then
     #   # We have changes on local that aren't on server
     #   COL="%{$fg[blue]%}"
-    elif [[ $(git log origin/$BRANCH..HEAD 2> /dev/null) != "" ]]; then
+    elif [[ $(git log @{u}..HEAD 2> /dev/null) != "" ]]; then
       # We have changes to push
       COL="%{$fg[blue]%}"
     fi

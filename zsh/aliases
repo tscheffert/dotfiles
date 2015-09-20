@@ -80,6 +80,8 @@ alias gcom='git checkout master'
 # Follow it up with a hyphen delimited branch name like: 'gcob my-branch-name'
 alias gcob='git checkout -b'
 
+alias glg='git_pretty_log'
+
 # -- Ruby Aliases --
 # Run Rubocop gem
 alias rbc='rubocop'

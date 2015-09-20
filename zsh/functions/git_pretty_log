@@ -1,0 +1,20 @@
+# vi: ft=zsh
+
+# Output a pretty, oneline, columnized, git log for the last twenty commits
+function git_pretty_log() {
+  local red_short_hash='%Cred%h%Creset'
+
+  local truncation_amount=35
+  local truncated_message="%<($truncation_amount,trunc)%s"
+
+  local blue_date='%Cblue%cr%Creset'
+
+  local truncate='%<(12,trunc)'
+  local green_name="%Cgreen$truncate%an%Creset"
+
+  local yellow_refs='%C(yellow)%d%Creset'
+
+  local format_string="$red_short_hash - $truncated_message $blue_date $green_name$yellow_refs"
+
+	git log -20 --pretty=format:$format_string --abbrev-commit --date=relative
+}

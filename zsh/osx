@@ -2,8 +2,12 @@
 
 # --- Path ---
 
-# For man files for 'coreutils'
-export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
+# Set up the manpath
+initialize_osx_manpath
+
+# Find man files for 'coreutils'
+typeset -U manpath
+manpath=('/usr/local/opt/coreutils/libexec/gnuman' $manpath)
 
 
 # -- Prepend --

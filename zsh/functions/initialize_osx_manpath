@@ -1,0 +1,26 @@
+# vi: ft=zsh
+
+# Setup MANPATH for osx
+#   MANPATH: path for the man command to search.
+#   Source: http://zsh.sourceforge.net/Contrib/startup/users/debbiep/dot.zshenv
+function initialize_osx_manpath() {
+  if whence manpath >/dev/null 2>&1; then
+    # Set value to the 'manpath' output.
+    MANPATH="`manpath`"
+  else
+    # Manually noted the manpath output
+    manpath=(
+      /usr/local/share/man
+      /usr/share/man
+      /Applications/Xcode.app/Contents/Developer/usr/share/man
+      /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/share/man
+    )
+
+    # TODO: WTH is this?
+    # rationalize-path manpath
+  fi
+  # And, as always, no duplicate entries are needed.
+  #   TODO: Why doesn't this value persist?
+  typeset -U manpath
+  export MANPATH
+}

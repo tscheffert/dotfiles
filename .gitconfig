@@ -16,8 +16,9 @@
   autoSetupRebase = always
 
 [color]
-  # Sets the default for all color preferences to auto
+  # Sets the default for most color preferences to auto
   ui = auto
+  interactive = auto
 
 [pull]
   # Rebase fetched branches when a 'git pull' is run instead of merge

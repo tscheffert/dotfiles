@@ -31,7 +31,6 @@
 
 [status]
   short = true
-  branch = true
 
 [merge]
   tool = p4merge

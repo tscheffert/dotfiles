@@ -20,6 +20,9 @@
   ui = auto
   interactive = auto
 
+[diff]
+  algorithm = histogram
+
 [pull]
   # Rebase fetched branches when a 'git pull' is run instead of merge
   rebase = true

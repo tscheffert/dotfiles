@@ -355,6 +355,12 @@ augroup VimFiles
   autocmd Filetype vim setlocal textwidth=0
 augroup END
 
+augroup GitConfigFiles
+  au!
+
+  autocmd FileType gitconfig setlocal commentstring=#%s
+augroup END
+
 " -----
 " Typing Behaviors
 " -----

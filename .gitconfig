@@ -28,6 +28,10 @@
   #   branch exists. Simple double checks that the branch exists on remote first.
 	default = current
 
+[status]
+  short = true
+  branch = true
+
 [merge]
   tool = p4merge
   prompt = false

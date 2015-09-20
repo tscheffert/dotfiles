@@ -11,6 +11,10 @@
 [alias]
 	lg = log -20 --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr %an)%Creset' --abbrev-commit --date=relative
 
+[branch]
+  autoSetupMerge = true
+  autoSetupRebase = always
+
 [color]
   ui = auto
   status = auto

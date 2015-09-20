@@ -342,29 +342,10 @@ augroup XmlFiles
   au FileType xml setlocal foldmethod=syntax
 augroup END
 
-augroup RubyFiles
-  au!
-  autocmd Filetype ruby setlocal shiftwidth=2
-  autocmd Filetype ruby setlocal softtabstop=2
-  autocmd Filetype ruby setlocal tabstop=2
-  autocmd Filetype eruby setlocal shiftwidth=2
-  autocmd Filetype eruby setlocal softtabstop=2
-  autocmd Filetype eruby setlocal tabstop=2
-
-augroup END
-
 augroup RSpecFiles
   au!
   " rails-vim doesn't correctly assign buffer types for all of the files, manually do some of it
   autocmd BufNewFile,BufRead *_spec.rb syntax keyword rubyRailsTestMethod describe context it specify it_should_behave_like before after setup subject its shared_examples_for shared_context let expect it to be eq
-augroup END
-
-augroup YAMLFiles
-  au!
-
-  autocmd Filetype yaml setlocal shiftwidth=2
-  autocmd Filetype yaml setlocal softtabstop=2
-  autocmd Filetype yaml setlocal tabstop=2
 augroup END
 
 augroup VimFiles

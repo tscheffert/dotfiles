@@ -61,9 +61,9 @@ alias gcm='git commit -m'
 # --amend changes the latest commit, and --no-edit tells it we don't want to change the messge
 alias gca='git commit --amend --no-edit'
 
-alias gd='git diff'
+alias gd='git diff --color-words'
 
-alias gds='git diff --staged'
+alias gds='git diff --staged --color-words'
 
 alias gr='git rebase'
 

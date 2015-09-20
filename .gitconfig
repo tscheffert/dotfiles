@@ -16,10 +16,8 @@
   autoSetupRebase = always
 
 [color]
+  # Sets the default for all color preferences to auto
   ui = auto
-  status = auto
-  branch = auto
-  diff = auto
 
 [push]
   # Current pushes to remote branch with the same name, regardless of if that

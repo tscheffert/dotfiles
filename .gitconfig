@@ -19,6 +19,10 @@
   # Sets the default for all color preferences to auto
   ui = auto
 
+[pull]
+  # Rebase fetched branches when a 'git pull' is run instead of merge
+  rebase = true
+
 [push]
   # Current pushes to remote branch with the same name, regardless of if that
   #   branch exists. Simple double checks that the branch exists on remote first.

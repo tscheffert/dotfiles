@@ -3,27 +3,28 @@
 	email = trent.scheffert@gmail.com
 
 [core]
-    # TODO: Not cross platform!
-    editor = vim
-    encoding = utf-8
-    autocrlf = false
+  # TODO: Not cross platform!
+  editor = vim
+  encoding = utf-8
+  autocrlf = false
+
 [alias]
 	lg = log -20 --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr %an)%Creset' --abbrev-commit --date=relative
 
 [color]
-    ui = auto
-    status = auto
-    branc = auto
-    diff = auto
+  ui = auto
+  status = auto
+  branc = auto
+  diff = auto
 
 [push]
-    # Current pushes to remote branch with the same name, regardless of if that
-    #   branch exists. Simple double checks that the branch exists on remote first.
+  # Current pushes to remote branch with the same name, regardless of if that
+  #   branch exists. Simple double checks that the branch exists on remote first.
 	default = current
 
 [merge]
-    tool = p4merge
-    prompt = false
+  tool = p4merge
+  prompt = false
 	trustExitCode = false
 	keepBackup = false
 
@@ -35,5 +36,6 @@
 
 [difftool "p4merge"]
 	cmd = /Applications/p4merge.app/Contents/MacOS/p4merge "$LOCAL" "$REMOTE"
+
 [init]
 	templatedir = ~/.git_template

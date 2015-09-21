@@ -542,8 +542,9 @@ endfunction
 " Colors!
 if has('gui_running')
   set background=dark
-  colorscheme molokai
-  let g:airline_theme='molokai'
+  colorscheme inkpot
+  " More schemes at https://github.com/bling/vim-airline/wiki/Screenshots
+  let g:airline_theme='luna'
   " Remove the gui from GVim
   :set guioptions-=m " Remove menu bar
   :set guioptions-=T " Remove the toolbar

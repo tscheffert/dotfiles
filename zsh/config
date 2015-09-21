@@ -53,7 +53,7 @@ setopt nobeep
 # Append history to the history file once a shell exists
 setopt APPEND_HISTORY
 
-# Ignore duplicates in the history
+# Ignore duplicated sequential lines in the history
 setopt HIST_IGNORE_DUPS
 
 # Save timestamps (in epoch) and duration (in seconds) in history as well

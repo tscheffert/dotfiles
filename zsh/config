@@ -38,11 +38,14 @@ SAVEHIST=1000000
 # TODO: Good ones here too http://askubuntu.com/questions/1577/moving-from-bash-to-zsh
 
 # Options from the zsh-newusuer-install
-setopt appendhistory nomatch notify
+setopt nomatch notify
 unsetopt autocd extendedglob
 
 # Autocompletion of command line switches for aliases
 setopt completealiases
+
+# Append history to the history file once a shell exists
+setopt APPEND_HISTORY
 
 # Ignore duplicates in the history
 setopt HIST_IGNORE_DUPS

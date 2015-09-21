@@ -26,14 +26,17 @@ function git_branch {
     # Default to everything is fine
     COL="%{$fg[green]%}"
 
-    if [[ $(git status --porcelain 2> /dev/null) != "" ]]; then
+    if [[ -n $(git status --porcelain 2> /dev/null) ]]; then
       # We have uncommited changes
       COL="%{$fg[red]%}"
     # elif [[ $(git log origin/master..HEAD 2> /dev/null) != "" ]]; then
     #   # We have changes on local that aren't on server
     #   COL="%{$fg[blue]%}"
-    elif [[ $(git log @{u}..HEAD 2> /dev/null) != "" ]]; then
+    elif [[ -n $(git log origin/$BRANCH.. 2> /dev/null) ]]; then
       # We have changes to push
+      COL="%{$fg[blue]%}"
+    elif [[ -n $(git log master.. 2> /dev/null) ]]; then
+      # We have haven't pushed our branch to master
       COL="%{$fg[blue]%}"
     fi
 

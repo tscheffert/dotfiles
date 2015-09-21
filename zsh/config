@@ -44,14 +44,17 @@ unsetopt autocd extendedglob
 # Autocompletion of command line switches for aliases
 setopt completealiases
 
+# Don't beep if you're angry
+setopt nobeep
+
+
+# -- History Options --
+
 # Append history to the history file once a shell exists
 setopt APPEND_HISTORY
 
 # Ignore duplicates in the history
 setopt HIST_IGNORE_DUPS
-
-# Don't beep if you're angry
-setopt nobeep
 
 # Autoloaded functions from files are wrapped in functions rather than just
 #   containing the body of the function

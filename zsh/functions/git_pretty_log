@@ -7,10 +7,11 @@ function git_pretty_log() {
   local truncation_amount=35
   local truncated_message="%<($truncation_amount,trunc)%s"
 
-  local blue_date='%Cblue%cr%Creset'
+  local truncate_date='%<(10,trunc)'
+  local blue_date="%Cblue$truncate_date%cr%Creset"
 
-  local truncate='%<(12,trunc)'
-  local green_name="%Cgreen$truncate%an%Creset"
+  local truncate_name='%<(12,trunc)'
+  local green_name="%Cgreen$truncate_name%an%Creset"
 
   local yellow_refs='%C(yellow)%d%Creset'
 

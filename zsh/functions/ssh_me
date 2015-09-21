@@ -1,0 +1,21 @@
+# vi: ft=zsh
+
+function ssh_me() {
+  local environment="$1"
+
+  if [[ ! -f ./Capfile ]]; then
+    echo "No Capfile in current directory" && exit 1
+  fi
+
+  local line="$(cat ./Capfile | sed -n -e "/task \:$environment/,\$p" | sed -n -e "/server/,\$p" | head -n 1)"
+
+  if [[ $line =~ "\'(.+aws1.+)\'" ]]; then
+    local location=$match[1]
+
+    echo "sshing to $environment at $location"
+
+    ssh tscheffert@$location
+  else
+    echo "Couldn't find server in the Capfile"
+  fi
+}

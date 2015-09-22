@@ -807,6 +807,9 @@ endif
 " let g:syntastic_check_on_open = 1
 " let g:syntastic_check_on_wq = 0
 
+" Use the rbenv ruby instead of system (outdated) ruby
+let g:syntastic_ruby_mri_exec = '/usr/local/var/rbenv/shims/ruby'
+
 
 " -----
 " Plugin: vim-rails

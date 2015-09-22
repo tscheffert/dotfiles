@@ -26,18 +26,40 @@ function git_branch {
     # Default to everything is fine
     COL="%{$fg[green]%}"
 
-    if [[ -n $(git status --porcelain 2> /dev/null) ]]; then
-      # We have uncommited changes
-      COL="%{$fg[red]%}"
-    # elif [[ $(git log origin/master..HEAD 2> /dev/null) != "" ]]; then
-    #   # We have changes on local that aren't on server
-    #   COL="%{$fg[blue]%}"
-    elif [[ -n $(git log origin/$BRANCH.. 2> /dev/null) ]]; then
-      # We have changes to push
-      COL="%{$fg[blue]%}"
-    elif [[ -n $(git log master..origin/master 2> /dev/null) ]]; then
-      # We have haven't pushed our branch to master
-      COL="%{$fg[blue]%}"
+    if [[ "$BRANCH" == 'master' ]]; then
+      # Our branch is master, set branch color this way
+      if [[ -n $(git status --porcelain 2> /dev/null) ]]; then
+        # We have uncommited changes
+        COL="%{$fg[red]%}"
+      elif [[ -n $(git log origin/$BRANCH.. 2> /dev/null) ]]; then
+        # We have changes to push
+        COL="%{$fg[blue]%}"
+      elif [[ -n $(git log master..origin/master 2> /dev/null) ]]; then
+        # We haven't pushed our changes
+        COL="%{$fg[blue]%}"
+      fi
+    else
+      # We have an actual branch
+      if [[ -n $(git status --porcelain 2> /dev/null) ]]; then
+        # We have uncommited changes
+        COL="%{$fg[red]%}"
+      else
+        if [[ -n $(git branch -r | grep "origin/$BRANCH") ]]; then
+          # We have pushed our branch, check if we've diverged from origin
+
+          if [[ -n $(git log origin/$BRANCH.. 2> /dev/null) ]]; then
+            # We have changes to push
+            COL="%{$fg[blue]%}"
+          fi
+        else
+          # We have not pushed, check if we've diverged from master
+
+          if [[ -n $(git log master..$BRANCH 2> /dev/null) ]]; then
+            # We've diverged from master
+            COL="%{$fg[blue]%}"
+          fi
+        fi
+      fi
     fi
 
     local left_parens="$parens_color("

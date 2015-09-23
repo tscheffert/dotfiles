@@ -356,7 +356,9 @@ augroup RubyFiles
 
   " vim-ruby screws up my formatting options
   "   We don't want to continue comments when pressing o/O
-  autocmd Filetype ruby setlocal formatoptions-=0
+  autocmd Filetype ruby setlocal formatoptions-=o
+  "   Don't continue comments after pressing <Enter> in insert either
+  autocmd Filetype ruby setlocal formatoptions-=r
 augroup END
 
 augroup VimFiles
@@ -367,6 +369,8 @@ augroup VimFiles
   autocmd Filetype vim setlocal textwidth=0
   "   We don't want to continue comments when pressing o/O
   autocmd Filetype vim setlocal formatoptions-=o
+  "   Don't continue comments after pressing <Enter> in insert either
+  autocmd Filetype vim setlocal formatoptions-=r
 augroup END
 
 augroup GitConfigFiles
@@ -448,6 +452,9 @@ set formatoptions-=r
 set formatoptions-=t " Don't automatically wrap
 set textwidth=0 " If we were to auto wrap, or something added fo+=t then still don't
 set wrapmargin=0 " Similar to textwidth but relative to terminal width
+
+" When it makes sense, remove comment leader when joining lines
+set formatoptions+=j
 
 " Use the system clipboard for yanking
 set clipboard=unnamed

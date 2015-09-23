@@ -801,7 +801,7 @@ let g:ctrlp_custom_ignore = {
 " Don't ignore hidden files
 let g:ctrlp_show_hidden = 1
 
-" Don't ignore symlinks
+" Don't follow symbolic links
 let g:ctrlp_follow_symlinks = 0
 
 " Where to do ctrlp caching

@@ -807,8 +807,8 @@ let g:ctrlp_follow_symlinks = 0
 " Where to do ctrlp caching
 let g:ctrlp_cache_dir = $HOME.'/vimfiles/tmp/ctrlp/cache'
 
-" Jump to buffer in the same tab if already open
-let g:ctrlp_switch_buffer = 1
+" Always jump to open buffers
+let g:ctrlp_switch_buffer = 'ETVH'
 
 
 " -----

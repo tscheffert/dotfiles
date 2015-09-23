@@ -132,8 +132,11 @@ if s:use_neobundle
   " Better Buffer management
   NeoBundle 'mhinz/vim-sayonara'
 
+  " Allow . to repeat things more often. Enables plugins (like gitgutter) and I can
+  "   map it myself
+  NeoBundle 'tpope/vim-repeat' " Wrap stuff for . command
+
   " Considering!
-  " NeoBundle 'tpope/vim-repeat' " Wrap stuff for . command
   " NeoBundle 'AndrewRadev/splitjoin.vim' " Works with ruby to swap single liners into multi lines
   " https://github.com/chrisbra/vim-diff-enhanced " Improved diff's using histogram and patience algorithms
 

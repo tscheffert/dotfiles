@@ -355,7 +355,9 @@ augroup VimFiles
   au!
 
   " Vim's built in file type stuff doesn't like to respect my settings!
+  "   Don't auto wrap test
   autocmd Filetype vim setlocal textwidth=0
+  "   We don't want to continue comments when pressing o/O
   autocmd Filetype vim setlocal formatoptions-=o
 augroup END
 

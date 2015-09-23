@@ -351,6 +351,14 @@ augroup RSpecFiles
   autocmd BufNewFile,BufRead *_spec.rb syntax keyword rubyRailsTestMethod describe context it specify it_should_behave_like before after setup subject its shared_examples_for shared_context let expect it to be eq
 augroup END
 
+augroup RubyFiles
+  au!
+
+  " vim-ruby screws up my formatting options
+  "   We don't want to continue comments when pressing o/O
+  autocmd Filetype ruby setlocal formatoptions-=0
+augroup END
+
 augroup VimFiles
   au!
 

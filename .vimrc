@@ -353,6 +353,7 @@ augroup VimFiles
 
   " Vim's built in file type stuff doesn't like to respect my settings!
   autocmd Filetype vim setlocal textwidth=0
+  autocmd Filetype vim setlocal formatoptions-=o
 augroup END
 
 augroup GitConfigFiles

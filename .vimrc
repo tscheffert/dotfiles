@@ -810,6 +810,13 @@ let g:ctrlp_cache_dir = $HOME.'/vimfiles/tmp/ctrlp/cache'
 " Always jump to open buffers
 let g:ctrlp_switch_buffer = 'ETVH'
 
+" Working directory as such:
+"   1. Try find a vcs (.git, .gh, .svn) root to use
+"   2. Is the working directory of the owning shell an ancestor of the
+"       current file? Use that.
+"   3. Use directory of the current file
+let g:ctrlp_working_path_mode = 'ra'
+
 
 " -----
 " Plugin: Syntastic

@@ -15,6 +15,9 @@ manpath=('/usr/local/opt/coreutils/libexec/gnuman' $manpath)
 # For homebrewed 'coreutils'
 prepend_to_path '/usr/local/opt/coreutils/libexec/gnubin'
 
+# Brew Doctor told me to add this because I have utilities that put things here
+prepend_to_path '/usr/local/sbin'
+
 
 # --- Exports ---
 

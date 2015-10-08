@@ -56,6 +56,7 @@ if s:use_neobundle
   NeoBundle 'kopischke/vim-fetch' " Enable vim to open with line numbers appended
 
   " Auto parentheses
+  "   NOTE: This breaks the dot command
   NeoBundle 'Raimondi/delimitmate.git'
 
   " Improved Undo functionality
@@ -437,7 +438,16 @@ set mousehide
 " In general you should endeavour to avoid that type of
 " situation because waiting 'timeoutlen' milliseconds is
 " like an eternity.
-set timeoutlen=50
+set timeoutlen=500
+" Use a different length for key-codes
+set ttimeoutlen=50
+
+" Escape from insert mode faster
+augroup FastEscape
+  autocmd!
+  au InsertEnter * set timeoutlen=0
+  au InsertLeave * set timeoutlen=500
+augroup END
 
 " These commands open folds
 set foldopen=block,insert,jump,mark,percent,quickfix,search,tag,undo

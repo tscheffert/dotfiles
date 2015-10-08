@@ -437,7 +437,7 @@ set mousehide
 " In general you should endeavour to avoid that type of
 " situation because waiting 'timeoutlen' milliseconds is
 " like an eternity.
-set timeoutlen=500
+set timeoutlen=50
 
 " These commands open folds
 set foldopen=block,insert,jump,mark,percent,quickfix,search,tag,undo

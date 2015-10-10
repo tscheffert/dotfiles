@@ -15,7 +15,9 @@ EOF
 }
 
 function do_dev() {
-  DATABASE_URL=`egrep -o 'DATABASE_URL=(.*)' $TC_WORKSPACE/$REPO/development.env | sed s/^DATABASE_URL=// | sed s/\?.*$//`
+  DATABASE_URL=`egrep -o 'DATABASE_URL=(.*)' $TC_WORKSPACE/$REPO/development.env \
+    | sed s/^DATABASE_URL=// \
+    | sed s/\?.*$//`
   if [ "$VERBOSE" = 1 ]; then
     printf "Connecting to $DATABASE_URL\n"
   fi
@@ -35,7 +37,10 @@ function do_staging_prod() {
     sudo -u deployer -i
     grep '\bDATABASE_URL' /var/app/$REPO/$TC_ENV.env
 EOF)
-  DATABASE_URL=`echo $ENV_DAT | egrep -o 'DATABASE_URL=(.*)' | sed -E 's/DATABASE_URL=(jdbc:)?//' | sed -E 's/^(postgresql:\/\/)(.*)\?.*user=([^&]+).*&password=([^&]+).*$/\1\3:\4@\2/'`
+  DATABASE_URL=`echo $ENV_DAT \
+    | egrep -o 'DATABASE_URL=(.*)' \
+    | sed -E 's/DATABASE_URL=(jdbc:)?//' \
+    | sed -E 's/^(postgresql:\/\/)(.*)\?.*user=([^&]+).*&password=([^&]+).*$/\1\3:\4@\2/'`
 
   if [[ "$TC_ENV" = "production" ]]; then
     printf "*** YOU ARE CONNECTING TO A PRODUCTION DATABASE, EXERCISE GOOD JUDGEMENT ***\n"
@@ -74,10 +79,6 @@ function psql_me() {
   done
   shift "$((OPTIND-1))"
 
-  if [[ -z "$TC_WORKSPACE" ]]; then
-    TC_WORKSPACE="$HOME/workspace"
-  fi
-
   if [[ -z $1 ]]; then
     echo "Missing required argument: repo"
     usage
@@ -92,6 +93,10 @@ function psql_me() {
     TC_ENV=$2
   fi
 
+  if [[ -z "$TC_WORKSPACE" ]]; then
+    TC_WORKSPACE="$HOME/workspace"
+  fi
+
   if [[ ! -d "$TC_WORKSPACE" ]]; then
     echo "Path does not exist: $TC_WORKSPACE"
     usage
@@ -99,7 +104,7 @@ function psql_me() {
   fi
 
   if [[ ! -d "$TC_WORKSPACE/$REPO" ]]; then
-    if $(git clone git@github.com:trunkclub/$REPO.git $TC_WORKSPACE/$REPO) ; then
+    if $(git clone git@github.com:trunkclub/$REPO.git $TC_WORKSPACE/$REPO); then
       printf "Downloaded $REPO repo\n"
     else
       exit 1

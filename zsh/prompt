@@ -20,43 +20,43 @@ function prompt_char {
 }
 
 function git_branch {
-  BRANCH="$(git symbolic-ref HEAD 2>/dev/null | cut -d'/' -f3)"
-  if [[ -n "$BRANCH" ]]; then
+  local branch="$(git symbolic-ref HEAD 2>/dev/null | cut -d'/' -f3)"
+  if [[ -n "$branch" ]]; then
     local parens_color="$FG[000]"
     # Default to everything is fine
-    COL="%{$fg[green]%}"
+    local prompt_color="%{$fg[green]%}"
 
-    if [[ "$BRANCH" == 'master' ]]; then
+    if [[ "$branch" == 'master' ]]; then
       # Our branch is master, set branch color this way
       if [[ -n $(git status --porcelain 2> /dev/null) ]]; then
         # We have uncommited changes
-        COL="%{$fg[red]%}"
-      elif [[ -n $(git log origin/$BRANCH.. 2> /dev/null) ]]; then
+        prompt_color="%{$fg[red]%}"
+      elif [[ -n $(git log origin/$branch.. 2> /dev/null) ]]; then
         # We have changes to push
-        COL="%{$fg[blue]%}"
+        prompt_color="%{$fg[blue]%}"
       elif [[ -n $(git log master..origin/master 2> /dev/null) ]]; then
         # We haven't pushed our changes
-        COL="%{$fg[blue]%}"
+        prompt_color="%{$fg[blue]%}"
       fi
     else
       # We have an actual branch
       if [[ -n $(git status --porcelain 2> /dev/null) ]]; then
         # We have uncommited changes
-        COL="%{$fg[red]%}"
+        prompt_color="%{$fg[red]%}"
       else
-        if [[ -n $(git branch -r | grep "origin/$BRANCH") ]]; then
+        if [[ -n $(git branch -r | grep "origin/$branch") ]]; then
           # We have pushed our branch, check if we've diverged from origin
 
-          if [[ -n $(git log origin/$BRANCH.. 2> /dev/null) ]]; then
+          if [[ -n $(git log origin/$branch.. 2> /dev/null) ]]; then
             # We have changes to push
-            COL="%{$fg[blue]%}"
+            prompt_color="%{$fg[blue]%}"
           fi
         else
           # We have not pushed, check if we've diverged from master
 
-          if [[ -n $(git log master..$BRANCH 2> /dev/null) ]]; then
+          if [[ -n $(git log master..$branch 2> /dev/null) ]]; then
             # We've diverged from master
-            COL="%{$fg[blue]%}"
+            prompt_color="%{$fg[blue]%}"
           fi
         fi
       fi
@@ -64,18 +64,18 @@ function git_branch {
 
     local left_parens="$parens_color("
     local right_parens="$parens_color)"
-    echo "$left_parens$COL$BRANCH$right_parens"
+    echo "$left_parens$prompt_color$branch$right_parens"
   fi
 }
 
 function name() {
   # Only show name if it's different than my usual
-  NAME=""
+  local name=""
   if [[ $(whoami) != "trentscheffert" ]]; then
-    NAME="%n%{$reset_color%}"
+    name="%n%{$reset_color%}"
   fi
 
-  echo "%{$fg[red]%}$NAME"
+  echo "%{$fg[red]%}$name"
 }
 
 function comp_name() {

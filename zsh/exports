@@ -16,4 +16,29 @@ export DOCKER_HOST=tcp://192.168.23.2:2375
 # All the colorful logs
 export LOG_FORMAT=colored
 
+# Use 'less' as the pager
+export PAGER='less'
 
+# Options for LESS are read from here the $LESS variable
+#   --IGNORE-CASE: Ignore case in searches, even if the search contains a capital letter
+#   --quit-if-one-screen: Automatically exit if entire file can be
+#     displayed on one screen
+#   --hilite-search: When searching, only highlight last matched string
+#     instead of all matches
+#   --RAW-CONTROL-CHARS: Ouput ANSI color escape sequences in "raw" form
+#   --jump-target=.2: Jumps (including search) end at the specified line or
+#     percentage of the screen
+#   --status-column: Displays a status column at the left edge of the screen which
+#     shows the lines that matched the current search.
+#   --HILITE-UNREAD: Temporarily highlights the first "new" line after a forward
+#     movement larger than one page.
+# local less_opts=''
+# NOTE: Git sets "-FRX" by default, so if we want to preserve git behavior we need those
+local less_opts='--IGNORE-CASE'
+less_opts+=' --quit-if-one-screen'
+less_opts+=' --hilite-search'
+less_opts+=' --RAW-CONTROL-CHARS'
+less_opts+=' --jump-target=.4'
+less_opts+=' --status-column'
+less_opts+=' --HILITE-UNREAD'
+export LESS="$less_opts"

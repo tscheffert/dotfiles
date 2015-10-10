@@ -10,9 +10,6 @@ bindkey -e # for emacs
 fpath=(~/.zsh/functions $fpath)
 autoload -U ~/.zsh/functions/*(:t)
 
-# This needs to be in this file, it can't be in zsh/prompt and I don't know why
-# autoload -U colors && colors
-
 
 # -- History --
 function _setup_history() {
@@ -35,19 +32,6 @@ function _setup_history() {
 }
 
 _setup_history
-
-# TODO: Figure out replacements for these
-# larger bash history (allow 32^3 entries; default is 500)
-# export HISTSIZE=32768;
-# export HISTFILESIZE=$HISTSIZE;
-
-# changes how commands are saved on the history list
-# ignorespace - lines which begin with a space character are not saved in the history list
-# ignoredups - lines matching the previous history entry to not be saved
-# export HISTCONTROL=ignoredups:ignorespace;
-
-# Make some commands not show up in history
-# export HISTIGNORE="ls:cd:cd -:pwd:exit:date:* --help";
 
 
 # --- Options ---
@@ -103,8 +87,6 @@ setopt NO_HIST_BEEP
 # TODO: This breaks zsh/prompt autoloading for whatever reason, we can't autoload colors then
 # setopt KSH_AUTOLOAD
 
-# TODO: See HIST_SAVE_BY_COPY option
-
 # TODO: Replace these
 # # Case-insensitive globbing (used in pathname expansion)
 # shopt -s nocaseglob;
@@ -115,13 +97,6 @@ setopt NO_HIST_BEEP
 # # Autocorrect typos in path names when using `cd`
 # shopt -s cdspell;
 
-# # Enable some Bash 4 features when possible:
-# # * `autocd`, e.g. `**/qux` will enter `./foo/bar/baz/qux`
-# # * Recursive globbing, e.g. `echo **/*.txt`
-# for option in autocd globstar; do
-# 	shopt -s "$option" 2> /dev/null;
-# done;
-
 
 # --- Path ---
 
@@ -129,7 +104,6 @@ setopt NO_HIST_BEEP
 typeset -U path
 
 prepend_to_path "$HOME/bin"
-
 
 
 # --- Colors ---

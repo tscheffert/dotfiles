@@ -15,7 +15,7 @@ EOF
 }
 
 function do_dev() {
-  DATABASE_URL=`egrep -o 'DATABASE_URL=(.*)' $TC_WORKSPACE/$REPO/development.env \
+  DATABASE_URL=`egrep -o 'DATABASE_URL=(.*)' ./development.env \
     | sed s/^DATABASE_URL=// \
     | sed s/\?.*$//`
   if [ "$VERBOSE" = 1 ]; then
@@ -30,9 +30,9 @@ function do_staging_prod() {
   else
     ENV_PRE="stg"
   fi
-  CMD="ack -o -m1 (app|prx)\d+\.$ENV_PRE.aws\d+.trunkclub.systems $TC_WORKSPACE/$REPO/Capfile"
+  CMD="ack -o -m1 (app|prx)\d+\.$ENV_PRE.aws\d+.trunkclub.systems ./Capfile"
   SERVER=$($CMD)
-  printf "Connecting to $TC_SSH_USER$SERVER (read from $TC_WORKSPACE/$REPO/Capfile)\n"
+  printf "Connecting to $TC_SSH_USER$SERVER (read from ./Capfile)\n"
   ENV_DAT=$(ssh $TC_SSH_USER$SERVER <<EOF
     sudo -u deployer -i
     grep '\bDATABASE_URL' /var/app/$REPO/$TC_ENV.env
@@ -45,7 +45,6 @@ EOF)
   if [[ "$TC_ENV" = "production" ]]; then
     printf "*** YOU ARE CONNECTING TO A PRODUCTION DATABASE, EXERCISE GOOD JUDGEMENT ***\n"
     printf "!!! FOR SERIOUS, DON'T GET YOURSELF FIRED !!!\n"
-    printf "*** (JASON KASKEL IS NOT LIABLE FOR ANYTHING IDIOTIC YOU DO) ***\n"
   fi
   if [[ "$VERBOSE" = 1 ]]; then
     printf "Connecting to $DATABASE_URL\n"
@@ -54,11 +53,8 @@ EOF)
 }
 
 function psql_me() {
-  while getopts :p:u:v opt; do
+  while getopts :u:v opt; do
     case $opt in
-      p)
-        TC_WORKSPACE=$OPTARG
-        ;;
       u)
         TC_SSH_USER="$OPTARG"
         ;;
@@ -80,42 +76,16 @@ function psql_me() {
   shift "$((OPTIND-1))"
 
   if [[ -z $1 ]]; then
-    echo "Missing required argument: repo"
-    usage
-    exit 1
-  else
-    REPO=$1
-  fi
-
-  if [[ -z $2 ]]; then
     TC_ENV="development"
   else
-    TC_ENV=$2
-  fi
-
-  if [[ -z "$TC_WORKSPACE" ]]; then
-    TC_WORKSPACE="$HOME/workspace"
-  fi
-
-  if [[ ! -d "$TC_WORKSPACE" ]]; then
-    echo "Path does not exist: $TC_WORKSPACE"
-    usage
-    exit 1
-  fi
-
-  if [[ ! -d "$TC_WORKSPACE/$REPO" ]]; then
-    if $(git clone git@github.com:trunkclub/$REPO.git $TC_WORKSPACE/$REPO); then
-      printf "Downloaded $REPO repo\n"
-    else
-      exit 1
-    fi
+    TC_ENV=$1
   fi
 
   if [[ "$TC_SSH_USER" != "" ]]; then
     TC_SSH_USER="$TC_SSH_USER@"
   fi
 
-  printf "Running psql for $TC_WORKSPACE/$REPO ($TC_ENV)\n"
+  printf "Running psql for $REPO ($TC_ENV)\n"
 
   if [[ "$TC_ENV" == "development" ]]; then
     do_dev

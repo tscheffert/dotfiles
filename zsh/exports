@@ -10,13 +10,6 @@ export LC_ALL="en_US.UTF-8";
 # Github API Key!
 export HOMEBREW_GITHUB_API_TOKEN=b378ad9787685006e70642743a402d838e6fac64;
 
-
-# Contains a regular bash command that is executed just before the command prompt is displayed
-#   make sure the history is updated at every command
-#   history -a - used instead of "shopt -s histappend" as this appends every line individually rather then when the shell exits
-#   history -n - append the history lines not already read from the history file to the current history list.
-# export PROMPT_COMMAND="history -a; history -n;"
-
 # For Docker!
 export DOCKER_HOST=tcp://192.168.23.2:2375
 

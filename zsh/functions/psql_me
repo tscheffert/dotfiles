@@ -1,0 +1,120 @@
+# vi: ft=zsh
+
+function usage() {
+  cat << EOF
+usage: tcpsql -p path/to/workspace -u username -v repo environment
+  repo is the name of the repository database you want to connect to, e.g. members_api (required)
+  environment is the environment you want to connect to, e.g. development (default), staging or production
+
+General options:
+  -v verbose, when passed will print connection string to terminal
+  -p path/to/your/local/workspace, when absent defaults to \$TC_WORKSPACE or ~/workspace
+  -u username, username to SSH to staging/production server as, defaults to your system user
+
+EOF
+}
+
+function do_dev() {
+  DATABASE_URL=`egrep -o 'DATABASE_URL=(.*)' $TC_WORKSPACE/$REPO/development.env | sed s/^DATABASE_URL=// | sed s/\?.*$//`
+  if [ "$VERBOSE" = 1 ]; then
+    printf "Connecting to $DATABASE_URL\n"
+  fi
+  psql $DATABASE_URL
+}
+
+function do_staging_prod() {
+  if [[ "$TC_ENV" = "production" ]]; then
+    ENV_PRE="prd"
+  else
+    ENV_PRE="stg"
+  fi
+  CMD="ack -o -m1 (app|prx)\d+\.$ENV_PRE.aws\d+.trunkclub.systems $TC_WORKSPACE/$REPO/Capfile"
+  SERVER=$($CMD)
+  printf "Connecting to $TC_SSH_USER$SERVER (read from $TC_WORKSPACE/$REPO/Capfile)\n"
+  ENV_DAT=$(ssh $TC_SSH_USER$SERVER <<EOF
+    sudo -u deployer -i
+    grep '\bDATABASE_URL' /var/app/$REPO/$TC_ENV.env
+EOF)
+  DATABASE_URL=`echo $ENV_DAT | egrep -o 'DATABASE_URL=(.*)' | sed -E 's/DATABASE_URL=(jdbc:)?//' | sed -E 's/^(postgresql:\/\/)(.*)\?.*user=([^&]+).*&password=([^&]+).*$/\1\3:\4@\2/'`
+
+  if [[ "$TC_ENV" = "production" ]]; then
+    printf "*** YOU ARE CONNECTING TO A PRODUCTION DATABASE, EXERCISE GOOD JUDGEMENT ***\n"
+    printf "!!! FOR SERIOUS, DON'T GET YOURSELF FIRED !!!\n"
+    printf "*** (JASON KASKEL IS NOT LIABLE FOR ANYTHING IDIOTIC YOU DO) ***\n"
+  fi
+  if [[ "$VERBOSE" = 1 ]]; then
+    printf "Connecting to $DATABASE_URL\n"
+  fi
+  psql $DATABASE_URL
+}
+
+function psql_me() {
+  while getopts :p:u:v opt; do
+    case $opt in
+      p)
+        TC_WORKSPACE=$OPTARG
+        ;;
+      u)
+        TC_SSH_USER="$OPTARG"
+        ;;
+      v)
+        VERBOSE=1
+        ;;
+      \?)
+        echo "Invalid option: -$OPTARG"
+        usage
+        exit 1
+        ;;
+      :)
+        echo "Option -$OPTARG requires an argument"
+        usage
+        exit 1
+        ;;
+    esac
+  done
+  shift "$((OPTIND-1))"
+
+  if [[ -z "$TC_WORKSPACE" ]]; then
+    TC_WORKSPACE="$HOME/workspace"
+  fi
+
+  if [[ -z $1 ]]; then
+    echo "Missing required argument: repo"
+    usage
+    exit 1
+  else
+    REPO=$1
+  fi
+
+  if [[ -z $2 ]]; then
+    TC_ENV="development"
+  else
+    TC_ENV=$2
+  fi
+
+  if [[ ! -d "$TC_WORKSPACE" ]]; then
+    echo "Path does not exist: $TC_WORKSPACE"
+    usage
+    exit 1
+  fi
+
+  if [[ ! -d "$TC_WORKSPACE/$REPO" ]]; then
+    if $(git clone git@github.com:trunkclub/$REPO.git $TC_WORKSPACE/$REPO) ; then
+      printf "Downloaded $REPO repo\n"
+    else
+      exit 1
+    fi
+  fi
+
+  if [[ "$TC_SSH_USER" != "" ]]; then
+    TC_SSH_USER="$TC_SSH_USER@"
+  fi
+
+  printf "Running psql for $TC_WORKSPACE/$REPO ($TC_ENV)\n"
+
+  if [[ "$TC_ENV" == "development" ]]; then
+    do_dev
+  else
+    do_staging_prod
+  fi
+}

@@ -55,7 +55,7 @@ _setup_history
 # TODO: Good ones here too http://askubuntu.com/questions/1577/moving-from-bash-to-zsh
 
 # Options from the zsh-newusuer-install
-setopt nomatch notify
+setopt notify
 unsetopt autocd extendedglob
 
 # Autocompletion of command line switches for aliases
@@ -63,6 +63,20 @@ setopt completealiases
 
 # Don't beep if you're angry
 setopt nobeep
+
+
+# -- Expansion and Globbing Options
+
+# Print a warning message when a global parameter is created in a function
+#   by an assignment
+setopt warn_create_global
+
+# If a pattern for filename generation has no matches print an error instead of
+#   leaving it unchanged in the argument list.
+setopt no_match
+
+# If a pattern for filename generation is badly formed print an error
+setopt bad_pattern
 
 
 # -- History Options --

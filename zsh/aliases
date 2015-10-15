@@ -82,6 +82,18 @@ alias gcob='git checkout -b'
 
 alias glg='git_pretty_log'
 
+# Temporarily ignore changes but leave them in the filesystem
+#   'git ignore add', follow up with a <file>
+alias gi-a='git update-index --assume-unchanged'
+
+# Stop ignoring a file
+#   'git ignore remove'
+alias gi-r='git update-index --no-assume-unchanged'
+
+# List all ignored files
+#   'git ignore list'
+alias gi-l="git ls-files -v | grep '^[[:lower:]]' | cut -f2 -d' '"
+
 # -- Ruby Aliases --
 # Run Rubocop gem
 alias rbc='rubocop'

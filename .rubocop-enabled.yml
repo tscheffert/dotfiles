@@ -335,6 +335,11 @@ Style/InfiniteLoop:
   StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#infinite-loop'
   Enabled: true
 
+Style/InitialIndentation:
+  Description: >-
+    Checks the indentation of the first non-blank non-comment line in a file.
+  Enabled: true
+
 Style/Lambda:
   Description: 'Use the new lambda literal syntax for single-line blocks.'
   StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#lambda-multi-line'
@@ -411,6 +416,11 @@ Style/MultilineTernaryOperator:
   StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#no-multiline-ternary'
   Enabled: true
 
+# Disabled by default
+Style/MutableConstant:
+  Description: 'Do not assign mutable objects to constants.'
+  Enabled: true
+
 Style/NegatedIf:
   Description: >-
                  Favor unless over if for negative conditions
@@ -467,14 +477,24 @@ Style/OpMethod:
   StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#other-arg'
   Enabled: true
 
+Style/OptionalArguments:
+  Description: >-
+                 Checks for optional arguments that do not appear at the end
+                 of the argument list
+  StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#optional-arguments'
+  Enabled: true
+
+# Disabled by default
+Style/OptionHash:
+  Description: "Don't use option hashes when you can use keyword arguments."
+  Enabled: true
+
 Style/ParallelAssignment:
   Description: >-
                   Check for simple usages of parallel assignment.
                   It will only warn when the number of variables
                   matches on both sides of the assignment.
-                  This also provides performance benefits
   StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#parallel-assignment'
-  Reference: 'https://github.com/JuanitoFatas/fast-ruby#parallel-assignment-vs-sequential-assignment-code'
   Enabled: true
 
 Style/ParenthesesAroundCondition:
@@ -523,6 +543,10 @@ Style/RedundantException:
   StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#no-explicit-runtimeerror'
   Enabled: true
 
+Style/RedundantFreeze:
+  Description: "Checks usages of Object#freeze on immutable objects."
+  Enabled: true
+
 Style/RedundantReturn:
   Description: "Don't use return where it's not required."
   StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#no-explicit-return'
@@ -536,6 +560,10 @@ Style/RedundantSelf:
 Style/RegexpLiteral:
   Description: 'Use / or %r around regular expressions.'
   StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#percent-r'
+  Enabled: true
+
+Style/RescueEnsureAlignment:
+  Description: 'Align rescues and ensures correctly.'
   Enabled: true
 
 Style/RescueModifier:
@@ -553,6 +581,14 @@ Style/SelfAssignment:
 Style/Semicolon:
   Description: "Don't use semicolons to terminate expressions."
   StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#no-semicolon'
+  Enabled: true
+
+# Disabled by default
+Style/Send:
+  Description: >-
+                 Prefer `Object#__send__` or `Object#public_send` to `send`,
+                 as `send` may overlap with existing methods.
+  StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#prefer-public-send'
   Enabled: true
 
 Style/SignalException:
@@ -685,6 +721,11 @@ Style/SpecialGlobalVars:
   StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#no-cryptic-perlisms'
   Enabled: true
 
+Style/StabbyLambdaParentheses:
+  Description: 'Check for the usage of parentheses around stabby lambda arguments.'
+  StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#stabby-lambda-with-args'
+  Enabled: true
+
 Style/StringLiterals:
   Description: 'Checks if uses of quotes match the configured preference.'
   StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#consistent-string-literals'
@@ -694,6 +735,10 @@ Style/StringLiteralsInInterpolation:
   Description: >-
                  Checks if uses of quotes inside expressions in interpolated
                  strings match the configured preference.
+  Enabled: true
+
+Style/StringMethods:
+  Description: 'Checks if configured preferred methods are used over non-preferred.'
   Enabled: true
 
 Style/StructInheritance:
@@ -881,6 +926,10 @@ Lint/DuplicateMethods:
   Description: 'Check for duplicate methods calls.'
   Enabled: true
 
+Lint/DuplicatedKey:
+  Description: 'Check for duplicate keys in hash literals.'
+  Enabled: true
+
 Lint/EachWithObjectArgument:
   Description: 'Check for immutable argument given to each_with_object.'
   Enabled: true
@@ -914,16 +963,14 @@ Lint/Eval:
   Description: 'The use of eval represents a serious security risk.'
   Enabled: true
 
+Lint/FormatParameterMismatch:
+  Description: 'The number of parameters to format/sprint must match the fields.'
+  Enabled: true
+
 Lint/HandleExceptions:
   Description: "Don't suppress exception."
   StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#dont-hide-exceptions'
   Enabled: true
-
-# Not available in 0.31.1
-# Style/InitialIndentation:
-#   Description: >-
-#     Checks the indentation of the first non-blank non-comment line in a file.
-#   Enabled: true
 
 Lint/InvalidCharacterLiteral:
   Description: >-
@@ -1032,13 +1079,6 @@ Lint/UselessElseWithoutRescue:
   Description: 'Checks for useless `else` in `begin..end` without `rescue`.'
   Enabled: true
 
-# Not availabile in 0.32.1
-# Lint/UselessOptionalArgument:
-#   Description: >-
-#                  Checks for optional arguments that do not appear at the end
-#                  of the argument list
-#   Enabled: true
-
 Lint/UselessSetterCall:
   Description: 'Checks for useless setter call to a local variable.'
   Enabled: true
@@ -1048,6 +1088,12 @@ Lint/Void:
   Enabled: true
 
 ##################### Performance #############################
+
+Performance/CaseWhenSplat:
+  Description: >-
+                  Place `when` conditions that use splat at the end
+                  of the list of `when` branches.
+  Enabled: true
 
 Performance/Count:
   Description: >-
@@ -1061,6 +1107,10 @@ Performance/Detect:
                   Use `detect` instead of `select.first`, `find_all.first`,
                   `select.last`, and `find_all.last`.
   Reference: 'https://github.com/JuanitoFatas/fast-ruby#enumerabledetect-vs-enumerableselectfirst-code'
+  Enabled: true
+
+Performance/FixedSize:
+  Description: 'Do not compute the size of statically sized objects except in constants'
   Enabled: true
 
 Performance/FlatMap:
@@ -1095,14 +1145,14 @@ Performance/Size:
   Reference: 'https://github.com/JuanitoFatas/fast-ruby#arraycount-vs-arraysize-code'
   Enabled: true
 
-# Not available in 0.32.1
-# Performance/StringReplacement:
-#   Description: >-
-#                   Use `tr` instead of `gsub` when you are replacing the same
-#                   number of characters. Use `delete` instead of `gsub` when
-#                   you are deleting characters.
-#   Reference: 'https://github.com/JuanitoFatas/fast-ruby#stringgsub-vs-stringtr-code'
-#   Enabled: true
+Performance/StringReplacement:
+  Description: >-
+                  Use `tr` instead of `gsub` when you are replacing the same
+                  number of characters. Use `delete` instead of `gsub` when
+                  you are deleting characters.
+  Reference: 'https://github.com/JuanitoFatas/fast-ruby#stringgsub-vs-stringtr-code'
+  Enabled: true
+
 
 ##################### Rails ##################################
 

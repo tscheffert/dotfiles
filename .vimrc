@@ -471,6 +471,31 @@ set clipboard=unnamed
 
 
 " -----
+" Completion
+" :help ins-completion
+"   CTRL-Y: Stop completion and accept currently selected entry
+"   CTRL-E: Stop completion and return to originally typed text
+"   See: :help popupmenu-keys
+" More options:
+"   pumheight
+" Highlight options:
+" Pmenu      normal item  |hl-Pmenu|
+" PmenuSel   selected item  |hl-PmenuSel|
+" PmenuSbar  scrollbar  |hl-PmenuSbar|
+" PmenuThumb thumb of the scrollbar  |hl-PmenuThumb|
+"
+" Look into:
+"   let g:rubycomplete_buffer_loading = 1
+"   let g:rubycomplete_classes_in_global = 1
+" -----
+
+" Use a popup menu to show possible completions one there is one or more matches
+"   and show extra information about the currently selected completion
+set completeopt=menuone,preview
+
+
+
+" -----
 " Movement
 " -----
 " Don't move cursor to start of line when using certain movement commands like

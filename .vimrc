@@ -259,8 +259,13 @@ function! HelpInVSplit()
 endfunction
 
 " left and right are for switching buffers
-noremap <right> <ESC>:bn<return>
-noremap <left> <ESC>:bp<return>
+noremap <right> :bn<return>
+noremap <left> :bp<return>
+
+" ctrl + tab and ctrl + shift + tab too, like firefox/chrome/iterm
+noremap <C-Tab> :bn<return>
+noremap <C-S-Tab> :bp<return>
+
 
 
 " -----

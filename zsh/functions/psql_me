@@ -10,8 +10,15 @@ General options:
   -v verbose, when passed will print connection string to terminal
   -p path/to/your/local/workspace, when absent defaults to \$TC_WORKSPACE or ~/workspace
   -u username, username to SSH to staging/production server as, defaults to your system user
+  -X Dry Run, doesn't run psql
 
 EOF
+}
+
+function connect_to_psql() {
+  if [[ -z "$DO_NOT_RUN" ]]; then
+    psql $1
+  fi
 }
 
 function do_dev() {
@@ -21,7 +28,8 @@ function do_dev() {
   if [[ -n "$VERBOSE" ]]; then
     printf "Connecting to $DATABASE_URL\n"
   fi
-  psql $DATABASE_URL
+
+  connect_to_psql $DATABASE_URL
 }
 
 function do_staging_prod() {
@@ -49,7 +57,8 @@ EOF)
   if [[ -n "$VERBOSE" ]]; then
     printf "Connecting to $DATABASE_URL\n"
   fi
-  psql $DATABASE_URL
+
+  connect_to_psql $DATABASE_URL
 }
 
 function psql_me() {
@@ -60,6 +69,9 @@ function psql_me() {
         ;;
       v)
         VERBOSE=1
+        ;;
+      X)
+        DO_NOT_RUN=1
         ;;
       \?)
         echo "Invalid option: -$OPTARG"

@@ -35,14 +35,16 @@ function do_staging_prod() {
   else
     ENV_PRE="stg"
   fi
-  CMD="ack -o -m1 (app|prx)\d+\.$ENV_PRE.aws\d+.trunkclub.systems ./Capfile"
-  SERVER=$($CMD)
-  printf "Connecting to $TC_SSH_USER$SERVER (read from ./Capfile)\n"
-  ENV_DAT=$(ssh $TC_SSH_USER$SERVER
-    sudo -u deployer -i
-    grep '\bDATABASE_URL' /var/app/$REPO/$TC_ENV.env)
+  SERVER=`ack -o -m1 --match "(app|prx)\d+\.$ENV_PRE\.aws\d+\.trunkclub\.systems" ./Capfile`
 
-  DATABASE_URL=`echo $ENV_DAT \
+  echo "Connecting to $TC_SSH_USER$SERVER (read from ./Capfile)"
+  local env_dat=$(ssh -T $TC_SSH_USER$SERVER << EOF
+    sudo -u deployer -i;
+    grep '\bDATABASE_URL' /var/app/rewards_svc/$TC_ENV.env
+EOF
+  )
+
+  local database_url=`echo $env_dat \
     | egrep -o 'DATABASE_URL=(.*)' \
     | sed -E 's/DATABASE_URL=(jdbc:)?//' \
     | sed -E 's/^(postgresql:\/\/)(.*)\?.*user=([^&]+).*&password=([^&]+).*$/\1\3:\4@\2/'`
@@ -52,10 +54,10 @@ function do_staging_prod() {
     echo "!!! FOR SERIOUS, DON'T GET YOURSELF FIRED !!!"
   fi
   if [[ -n "$VERBOSE" ]]; then
-    echo "Connecting to $DATABASE_URL"
+    echo "Connecting to $database_url"
   fi
 
-  connect_to_psql $DATABASE_URL
+  connect_to_psql $database_url
 }
 
 function psql_me() {

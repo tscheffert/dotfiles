@@ -1,0 +1,30 @@
+# vi: ft=zsh
+
+function token_me() {
+  if [[ -z $1 ]]; then
+    ENTITY_TYPE='member'
+  else
+    ENTITY_TYPE=$1
+  fi
+
+  if [[  -z $2 ]] || [[ "$2" == "any" ]]; then
+    ENTITY_SQL=''
+  else
+    ENTITY_SQL=" and entity_id='$2' "
+  fi
+
+  if [[ -z $3 ]]; then
+    ENVIRONMENT='development'
+  else
+    ENVIRONMENT=$3
+  fi
+
+  # TODO: DATABASE_URL=
+  QUERY="select access_token, entity_id, entity_type \
+    from access_tokens \
+    where entity_type='$ENTITY_TYPE' $ENTITY_SQL \
+    order by created_at desc limit 1"
+  # CMD="psql -c \"$QUERY\" $DATABASE_URL"
+  # eval $CMD
+  psql -c "$QUERY" $DATABASE_URL
+}

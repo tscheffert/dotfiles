@@ -18,7 +18,7 @@ function do_dev() {
   DATABASE_URL=`egrep -o 'DATABASE_URL=(.*)' ./development.env \
     | sed s/^DATABASE_URL=// \
     | sed s/\?.*$//`
-  if [ "$VERBOSE" = 1 ]; then
+  if [[ -n "$VERBOSE" ]]; then
     printf "Connecting to $DATABASE_URL\n"
   fi
   psql $DATABASE_URL
@@ -46,7 +46,7 @@ EOF)
     printf "*** YOU ARE CONNECTING TO A PRODUCTION DATABASE, EXERCISE GOOD JUDGEMENT ***\n"
     printf "!!! FOR SERIOUS, DON'T GET YOURSELF FIRED !!!\n"
   fi
-  if [[ "$VERBOSE" = 1 ]]; then
+  if [[ -n "$VERBOSE" ]]; then
     printf "Connecting to $DATABASE_URL\n"
   fi
   psql $DATABASE_URL
@@ -75,13 +75,13 @@ function psql_me() {
   done
   shift "$((OPTIND-1))"
 
-  if [[ -z $1 ]]; then
-    TC_ENV="development"
-  else
+  if [[ -n $1 ]]; then
     TC_ENV=$1
+  else
+    TC_ENV="development"
   fi
 
-  if [[ "$TC_SSH_USER" != "" ]]; then
+  if [[ -n "$TC_SSH_USER" ]]; then
     TC_SSH_USER="$TC_SSH_USER@"
   fi
 

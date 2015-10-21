@@ -32,6 +32,19 @@ if s:use_neobundle
   NeoBundleFetch 'Shougo/neobundle.vim'
 
   " My bundles:
+
+  " Default install from github
+  "   Other windows make: 'windows': '"C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\nmake.exe" make_msvc32.mak',
+  NeoBundle 'Shougo/vimproc.vim', {
+  \ 'build' : {
+  \     'windows' : 'tools\\update-dll-mingw',
+  \     'cygwin' : 'make -f make_cygwin.mak',
+  \     'mac' : 'make',
+  \     'linux' : 'make',
+  \     'unix' : 'gmake',
+  \    },
+  \ }
+
   " Colors
   NeoBundle 'twerth/ir_black.git'
   NeoBundle 'vim-scripts/moria.git'

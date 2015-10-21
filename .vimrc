@@ -9,6 +9,7 @@ autocmd!
 filetype off
 
 let s:use_ctrlp = 1
+let s:use_unite = 1
 let s:use_neobundle = 1
 
 if s:use_neobundle
@@ -63,6 +64,11 @@ if s:use_neobundle
   " Searching for stuff
   if s:use_ctrlp
     NeoBundle 'kien/ctrlp.vim.git'
+  endif
+
+  if s:use_unite
+    NeoBundle 'Shougo/unite.vim'
+    NeoBundle 'Shougo/neomru.vim'
   endif
 
   " File management
@@ -895,6 +901,48 @@ if s:use_ctrlp
   let g:ctrlp_working_path_mode = 'ra'
 
 endif
+
+
+" -----
+" Plugin: Unite
+" -----
+if s:use_unite
+  " Tons of good shit at https://github.com/bling/dotvim/blob/master/vimrc#L563
+
+
+  " Quickfix source:
+  " https://github.com/osyo-manga/unite-quickfix
+
+  " Tag source:
+  " https://github.com/tsukkee/unite-tag
+
+  " -- Supposed Ctrl-P replacement from https://gist.github.com/meatcar/5667617
+  " nnoremap <leader>t :<C-u>Unite file_mru file_rec/async:! -start-insert -buffer-name=files<CR>
+  " nnoremap <leader>cd :<C-u>Unite directory_mru directory -start-insert -buffer-name=cd -default-action=cd<CR>
+
+  " -- Source: https://reinteractive.net/posts/166-awesome-vim-plugins
+  " Search recently edited files
+  nnoremap <silent> <Leader>m :Unite -buffer-name=recent -winheight=10 file_mru<cr>
+
+  " Search open buffers
+  nnoremap <Leader>b :Unite -buffer-name=buffers -winheight=10 buffer<cr>
+
+  " Search application
+  nnoremap <Leader>f :Unite grep:.<cr>
+
+  " File searching just like Ctrl-P
+  if exists(':Unite')
+    call unite#filters#matcher_default#use(['matcher_fuzzy'])
+    call unite#filters#sorter_default#use(['sorter_rank'])
+    call unite#custom#source('file_rec/async','sorters','sorter_rank')
+  endif
+  " replacing unite with ctrl-p
+  if !s:use_unite
+    nnoremap <silent> <C-p> :Unite -start-insert -buffer-name=files -winheight=10 file_rec/async<cr>
+  endif
+
+endif
+
 
 " -----
 " Plugin: Syntastic

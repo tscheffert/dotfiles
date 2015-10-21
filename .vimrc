@@ -95,6 +95,7 @@ if s:use_neobundle
 
   " Easier file movement
   NeoBundle 'Lokaltog/vim-easymotion.git'
+  " Look into https://github.com/justinmk/vim-sneak as an alternative
 
   " tpope  rocks
   NeoBundle 'tpope/vim-commentary.git'
@@ -158,6 +159,7 @@ if s:use_neobundle
   " Considering!
   " NeoBundle 'AndrewRadev/splitjoin.vim' " Works with ruby to swap single liners into multi lines
   " https://github.com/chrisbra/vim-diff-enhanced " Improved diff's using histogram and patience algorithms
+  " https://github.com/thoughtbot/vim-rspec " Sweet rspec integration
 
   call neobundle#end()
 

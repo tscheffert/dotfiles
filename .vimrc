@@ -748,6 +748,21 @@ set virtualedit=block
 
 
 " -----
+" Plugin settings
+" -----
+
+" Disable vim-json conceal settings
+let g:vim_json_syntax_conceal = 0
+
+" Set the easy motion leader key to be - so it's activated with -
+map - <Plug>(easymotion-prefix)
+
+" Using easy motion show all the places where two characters appear, both fwds
+" and bwds
+map <SPACE> <Plug>(easymotion-s2)
+
+
+" -----
 " NERDTree customization
 " -----
 " Source: https://github.com/jistr/vim-nerdtree-tabs
@@ -783,21 +798,6 @@ function! CloseIfNERDTreeIsPrimary()
     q
   endif
 endfunction
-
-
-" -----
-" Plugin settings
-" -----
-
-" Disable vim-json conceal settings
-let g:vim_json_syntax_conceal = 0
-
-" Set the easy motion leader key to be - so it's activated with -
-map - <Plug>(easymotion-prefix)
-
-" Using easy motion show all the places where two characters appear, both fwds
-" and bwds
-map <SPACE> <Plug>(easymotion-s2)
 
 
 " -----

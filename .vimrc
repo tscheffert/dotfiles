@@ -8,6 +8,7 @@ autocmd!
 " Start with filetype off for plugin loading
 filetype off
 
+let s:use_ctrlp = 1
 let s:use_neobundle = 1
 
 if s:use_neobundle
@@ -46,8 +47,12 @@ if s:use_neobundle
   " Buffer management
   NeoBundle 'vim-scripts/BufOnly.vim.git'
 
+  " Searching for stuff
+  if s:use_ctrlp
+    NeoBundle 'kien/ctrlp.vim.git'
+  endif
+
   " File management
-  NeoBundle 'kien/ctrlp.vim.git'
   NeoBundle 'scrooloose/nerdtree.git'
   NeoBundle 'Xuyuanp/nerdtree-git-plugin' " Show git marks in nerdtree
   NeoBundle 'low-ghost/nerdtree-fugitive' " Adds git menu to nerdtree
@@ -849,30 +854,32 @@ let g:airline_detect_paste=1
 " Plugin: Ctrl-p
 " -----
 
-" Ignore stuff
-let g:ctrlp_custom_ignore = {
-      \ 'dir': '\v[\/](\.git|\.hg|\.svn|_site)$',
-      \ }
+if s:use_ctrlp
+  " Ignore stuff
+  let g:ctrlp_custom_ignore = {
+        \ 'dir': '\v[\/](\.git|\.hg|\.svn|_site)$',
+        \ }
 
-" Don't ignore hidden files
-let g:ctrlp_show_hidden = 1
+  " Don't ignore hidden files
+  let g:ctrlp_show_hidden = 1
 
-" Don't follow symbolic links
-let g:ctrlp_follow_symlinks = 0
+  " Don't follow symbolic links
+  let g:ctrlp_follow_symlinks = 0
 
-" Where to do ctrlp caching
-let g:ctrlp_cache_dir = $HOME.'/vimfiles/tmp/ctrlp/cache'
+  " Where to do ctrlp caching
+  let g:ctrlp_cache_dir = $HOME.'/vimfiles/tmp/ctrlp/cache'
 
-" Always jump to open buffers
-let g:ctrlp_switch_buffer = 'ETVH'
+  " Always jump to open buffers
+  let g:ctrlp_switch_buffer = 'ETVH'
 
-" Working directory as such:
-"   1. Try find a vcs (.git, .gh, .svn) root to use
-"   2. Is the working directory of the owning shell an ancestor of the
-"       current file? Use that.
-"   3. Use directory of the current file
-let g:ctrlp_working_path_mode = 'ra'
+  " Working directory as such:
+  "   1. Try find a vcs (.git, .gh, .svn) root to use
+  "   2. Is the working directory of the owning shell an ancestor of the
+  "       current file? Use that.
+  "   3. Use directory of the current file
+  let g:ctrlp_working_path_mode = 'ra'
 
+endif
 
 " -----
 " Plugin: Syntastic

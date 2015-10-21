@@ -18,7 +18,7 @@ mklink C:\Users\Trent\coffeelint.json C:\Users\Trent\.dotfiles\coffeelint.json
 ::mklink C:\Windows\System32\WindowsPowerShell\v1.0\profile.ps1 C:\Users\Trent\.dotfiles\PowerShell\profile.ps1
 ::mklink C:\Users\Trent\Documents\WindowsPowerShell\PowerTabConfig.xml C:\Users\Trent\.dotfiles\PowerShell\PowerTabConfig.xml
 ::mklink C:\Users\Trent\Documents\WindowsPowerShell\TabExpansion.xml C:\Users\Trent\.dotfiles\PowerShell\TabExpansion.xml
-mklink C:\Users\Trent\.ptignore C:\Users\Trent\.dotfiles\.ptignore
+mklink C:\Users\Trent\.agignore C:\Users\Trent\.dotfiles\.agignore
 mklink C:\Users\Trent\.pryrc C:\Users\Trent\.dotfiles\.pryrc
 mklink C:\Users\Trent\.gemrc C:\Users\Trent\.dotfiles\.gemrc
 mklink C:\Users\Trent\.tmux.conf C:\Users\Trent\.dotfiles\.tmux.conf

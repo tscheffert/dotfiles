@@ -1,0 +1,19 @@
+# vi: ft=zsh
+
+function git_me() {
+  local github_path=$1
+
+  local author=${github_path%/*}
+  local plugin=${github_path#*/}
+
+  # Default the author if we didn't provide one
+  if [[ $author == $plugin ]]; then
+    author='trunkclub'
+  fi
+
+  local repository="git@github.com:$author/$plugin.git"
+
+  local directory="~/dev/$plugin"
+
+  git clone $repository $directory && cd $directory
+}

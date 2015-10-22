@@ -26,6 +26,16 @@ prepend_to_path '/usr/local/sbin'
 export VISUAL='mvim -f'
 
 
+# --- Aliases ---
+
+# Hide/Show dot prefaced files in finder
+#   Source: http://ianlunn.co.uk/articles/quickly-showhide-hidden-files-mac-os-x-mavericks/
+alias finder-show-hidden-files='defaults write com.apple.finder AppleShowAllFiles YES; \
+  killall Finder /System/Library/CoreServices/Finder.app'
+alias finder-hide-hidden-files='defaults write com.apple.finder AppleShowAllFiles NO; \
+  killall Finder /System/Library/CoreServices/Finder.app'
+
+
 # --- Ruby ---
 # Rbenv was installed with homebrew, the paths will be osx specific
 

@@ -909,6 +909,7 @@ endif
 " -----
 if s:use_unite
   " Tons of good shit at https://github.com/bling/dotvim/blob/master/vimrc#L563
+  " Look at http://mouki.io/2013/08/15/Vim-CtrlP-behaviour-with-Unite.html
 
 
   " Quickfix source:

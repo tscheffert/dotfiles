@@ -55,8 +55,9 @@ if s:use_neobundle
   NeoBundle 'tomasr/molokai.git'
   NeoBundle 'nanotech/jellybeans.vim'
 
-  " Search with ack easier
-  NeoBundle 'mileszs/ack.vim.git'
+  " Code searching
+  " NeoBundle 'mileszs/ack.vim.git'
+  NeoBundle 'rking/ag.vim'
 
   " Buffer management
   NeoBundle 'vim-scripts/BufOnly.vim.git'

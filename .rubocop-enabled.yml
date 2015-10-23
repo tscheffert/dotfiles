@@ -721,10 +721,11 @@ Style/SpecialGlobalVars:
   StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#no-cryptic-perlisms'
   Enabled: true
 
-Style/StabbyLambdaParentheses:
-  Description: 'Check for the usage of parentheses around stabby lambda arguments.'
-  StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#stabby-lambda-with-args'
-  Enabled: true
+# Not available in 0.34.2
+# Style/StabbyLambdaParentheses:
+#   Description: 'Check for the usage of parentheses around stabby lambda arguments.'
+#   StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#stabby-lambda-with-args'
+#   Enabled: true
 
 Style/StringLiterals:
   Description: 'Checks if uses of quotes match the configured preference.'
@@ -1109,9 +1110,10 @@ Performance/Detect:
   Reference: 'https://github.com/JuanitoFatas/fast-ruby#enumerabledetect-vs-enumerableselectfirst-code'
   Enabled: true
 
-Performance/FixedSize:
-  Description: 'Do not compute the size of statically sized objects except in constants'
-  Enabled: true
+# Not available in 0.34.2
+# Performance/FixedSize:
+#   Description: 'Do not compute the size of statically sized objects except in constants'
+#   Enabled: true
 
 Performance/FlatMap:
   Description: >-

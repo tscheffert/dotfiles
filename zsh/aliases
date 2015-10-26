@@ -20,6 +20,9 @@ alias lh='ls -lhaG'
 # See hidden files with ls
 alias ls="ls -a --color=always"
 
+# Hidden files for the_silver_searcher
+alias ag="ag --hidden"
+
 # grep with color
 # for whatever reason this doesn't work with my grep on windows
 #alias grep='grep --color=auto'

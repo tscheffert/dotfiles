@@ -128,6 +128,7 @@ if s:use_neobundle
   NeoBundle 'tpope/vim-projectionist' " Project management for navigation n such
   NeoBundle 'tpope/vim-endwise' " Add matching 'end's for blocks
   NeoBundle 'vim-ruby/vim-ruby' " Ruby support stuff
+  NeoBundle 'jgdavey/vim-blockle' " Switch between `do ... end` and `{ ... }`
 
   " Git!
   NeoBundle 'tpope/vim-fugitive' " Awesome git wrapper
@@ -804,6 +805,9 @@ map - <Plug>(easymotion-prefix)
 " Using easy motion show all the places where two characters appear, both fwds
 " and bwds
 map <SPACE> <Plug>(easymotion-s2)
+
+" Override default Blockle mapping, <Leader>b, to toggle ruby blocks
+let g:blockle_mapping = '<Leader>bl'
 
 
 " -----

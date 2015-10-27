@@ -142,9 +142,6 @@ if s:use_neobundle
   NeoBundle 'inside/vim-search-pulse' " Pulse after searches
   NeoBundle 'haya14busa/incsearch.vim' " Show all matches as typed, auto nohl
 
-  " Easy Alignment!
-  NeoBundle 'godlygeek/tabular'
-
   "Multiple Curosrs!
   " NeoBundle 'terryma/vim-multiple-cursors'
   NeoBundle 'kana/vim-niceblock' " make |v_b_I| and |v_b_A| available in all visual modes
@@ -167,6 +164,10 @@ if s:use_neobundle
   " NeoBundle 'AndrewRadev/splitjoin.vim' " Works with ruby to swap single liners into multi lines
   " https://github.com/chrisbra/vim-diff-enhanced " Improved diff's using histogram and patience algorithms
   " https://github.com/thoughtbot/vim-rspec " Sweet rspec integration
+
+  " No longer using:
+  " This is almost entirely handled by `rubocop --auto-correct` for ruby files
+  " NeoBundle 'godlygeek/tabular' " Easy Alignment!
 
   call neobundle#end()
 

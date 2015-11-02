@@ -2,3 +2,5 @@
 *.css
 *.scss
 *.html.erb
+logs/
+.git/tags

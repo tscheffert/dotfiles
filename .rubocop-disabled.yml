@@ -45,6 +45,13 @@ Style/TrailingUnderscoreVariable:
                  end of parallel variable assignment.
   Enabled: false
 
+# Enabled by default, but it gets spammy
+Rails/TimeZone:
+  Description: 'Checks the correct usage of time zone aware methods.'
+  StyleGuide: 'https://github.com/bbatsov/rails-style-guide#time'
+  Reference: 'http://danilenko.org/2012/7/6/rails_timezones'
+  Enabled: false
+
 Lint/LiteralInInterpolation:
   Description: 'Avoid interpolating literals in strings'
   AutoCorrect: false

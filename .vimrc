@@ -1255,7 +1255,7 @@ vnoremap <silent> x "_x
 " vnoremap <silent> p "_xp
 
 " -----
-" Insert Mode Keybinds
+" Insert Mode Key Maps
 " -----
 
 " ctrl-'forward' jump to end of line

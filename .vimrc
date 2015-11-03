@@ -811,6 +811,10 @@ map - <Plug>(easymotion-prefix)
 " and bwds
 map <SPACE> <Plug>(easymotion-s2)
 
+" If <BS> is already mapped then delimitmate won't remap it
+inoremap <BS> <BS>
+
+
 " -----
 " Blockle function
 " -----

@@ -5,6 +5,9 @@ alias cd-d='cd ~/.dotfiles'
 # ls alias for color-mode
 alias lh='ls -lhaG'
 
+# Prompt me if deleting more than three files or doing it recursively
+alias rm='rm -I'
+
 # simple ip
 # TODO: Right now this fails, saying "cut: bad delimiter"
 # alias ip='ifconfig | grep "inet " | grep -v 127.0.0.1 | cut -d\ -f2'

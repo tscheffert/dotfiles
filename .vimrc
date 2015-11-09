@@ -170,9 +170,11 @@ if s:use_neobundle
   NeoBundle 'danro/rename.vim'
 
   " Considering!
-  " NeoBundle 'AndrewRadev/splitjoin.vim' " Works with ruby to swap single liners into multi lines
   " https://github.com/chrisbra/vim-diff-enhanced " Improved diff's using histogram and patience algorithms
   " https://github.com/thoughtbot/vim-rspec " Sweet rspec integration
+  " NeoBundle 'yegappan/mru' " :MRU Most Recently Used files
+  " NeoBundle 'dougnukem/vim-swap-lines' " Swap two lines
+
 
   " No longer using:
   " This is almost entirely handled by `rubocop --auto-correct` for ruby files

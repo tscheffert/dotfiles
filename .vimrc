@@ -143,6 +143,8 @@ if s:use_neobundle
   NeoBundle 'scrooloose/syntastic' " Easy syntax messages
   NeoBundle 'dbakker/vim-lint' " Linting for vim and vimL files.
   NeoBundle 'lilydjwg/colorizer' " Highlights hex codes with their colors
+  NeoBundle 'pearofducks/ansible-vim' " Syntax highlighting for ansible files
+
 
   " Improved searches
   NeoBundle 'inside/vim-search-pulse' " Pulse after searches

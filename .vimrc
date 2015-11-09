@@ -166,6 +166,9 @@ if s:use_neobundle
   "   map it myself
   NeoBundle 'tpope/vim-repeat' " Wrap stuff for . command
 
+  " Rename a buffer and on disk
+  NeoBundle 'danro/rename.vim'
+
   " Considering!
   " NeoBundle 'AndrewRadev/splitjoin.vim' " Works with ruby to swap single liners into multi lines
   " https://github.com/chrisbra/vim-diff-enhanced " Improved diff's using histogram and patience algorithms

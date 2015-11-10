@@ -18,7 +18,7 @@ let s:N3 = [ '#404040' , '#5faf5f' , 236 , 2   ] " StatusLine
 
 let g:airline#themes#PaperColorRecharged#palette.normal = airline#themes#generate_color_map(s:N3, s:N2, s:N1)
 let g:airline#themes#PaperColorRecharged#palette.normal_modified = {
-      \ 'airline_c': [ '#404040' , '#5faf5f' , 236 , 2 , '' ] ,
+      \ 'airline_c': [ '#5faf5f' , '#585858' , 2 , 240 , '' ] ,
       \ }
 
 
@@ -29,8 +29,9 @@ let s:I3 = [ '#eeeeee' , '#005f87' , 255 , 4   ] " StatusLine
 
 
 let g:airline#themes#PaperColorRecharged#palette.insert = airline#themes#generate_color_map(s:I3, s:I2, s:I1)
+" Blue is already super dark, use the light-blue text instead of the usual dark
 let g:airline#themes#PaperColorRecharged#palette.insert_modified = {
-      \ 'airline_c': [ '#eeeeee' , '#005f87' , 255 , 4 , '' ] ,
+      \ 'airline_c': [ '#0087af' , '#585858' , 4 , 240 , '' ] ,
       \ }
 
 
@@ -38,7 +39,7 @@ let g:airline#themes#PaperColorRecharged#palette.insert_modified = {
 let g:airline#themes#PaperColorRecharged#palette.replace = copy(g:airline#themes#PaperColorRecharged#palette.insert)
 let g:airline#themes#PaperColorRecharged#palette.replace.airline_a = [ '#d7005f' , '#e4e4e4' , 1 , 254 , '' ]
 let g:airline#themes#PaperColorRecharged#palette.replace_modified = {
-      \ 'airline_c': [ '#eeeeee' , '#005f87' , 255 , 1 , '' ] ,
+      \ 'airline_c': [ '#d7005f' , '#e4e4e4' , 1 , 254 , '' ] ,
       \ }
 
 
@@ -49,7 +50,7 @@ let s:V3 = [ '#404040' , '#df875f' , 236 , 3   ]
 
 let g:airline#themes#PaperColorRecharged#palette.visual = airline#themes#generate_color_map(s:V3, s:V2, s:V1)
 let g:airline#themes#PaperColorRecharged#palette.visual_modified = {
-      \ 'airline_c': [ '#404040' , '#df875f' , 236 , 3 ] ,
+      \ 'airline_c': [ '#df875f' , '#585858' , 3 , 240 , '' ] ,
       \ }
 
 " Inactive:

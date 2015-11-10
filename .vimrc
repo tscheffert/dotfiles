@@ -104,6 +104,7 @@ if s:use_neobundle
 
   " Status bar
   NeoBundle 'bling/vim-airline.git'
+  NeoBundle 'ntpeters/vim-airline-colornum' " Highlight the current line number with the color of the current mode
 
   " Easier file movement
   NeoBundle 'Lokaltog/vim-easymotion.git'
@@ -963,6 +964,10 @@ let g:airline#extensions#default#layout = [
 
 " Disable paste detection
 let g:airline_detect_paste=1
+
+" Enable the cursorline coloring
+:set cursorline
+hi clear CursorLine
 
 
 " -----

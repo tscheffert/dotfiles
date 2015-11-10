@@ -648,11 +648,11 @@ if has('gui_running')
 
   if HasColorscheme('PaperColor')
     colorscheme PaperColor
+    let g:airline_theme='PaperColor'
   else
     colorscheme inkpot
+    let g:airline_theme='luna'
   endif
-  " More schemes at https://github.com/bling/vim-airline/wiki/Screenshots
-  let g:airline_theme='luna'
   " Remove the gui from GVim
   :set guioptions-=m " Remove menu bar
   :set guioptions-=T " Remove the toolbar
@@ -679,11 +679,12 @@ else
   set background=dark
   if HasColorscheme('jellybeans')
     colorscheme jellybeans
+    let g:airline_theme='jellybeans'
   else
     colorscheme inkpot
+    let g:airline_theme='luna'
   endif
 
-  let g:airline_theme='jellybeans'
 
   " ConEmu specific
   " if InConEmuSession()

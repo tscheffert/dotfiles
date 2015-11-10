@@ -950,8 +950,9 @@ if !exists('g:airline_symbols')
 endif
 
 " Set custom symbols
+" TODO: Doesn't work in terminal vim
 let g:airline_left_sep = '►'
-let g:airline_right_sep = '◄'
+let g:airline_right_sep = '◄' " Does work in terminal...?
 
 " Set up status line
 let g:airline#extensions#tabline#left_alt_sep = '|'

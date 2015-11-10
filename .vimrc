@@ -55,7 +55,7 @@ if s:use_neobundle
   NeoBundle 'tomasr/molokai.git'
   NeoBundle 'nanotech/jellybeans.vim'
   NeoBundle 'NLKNguyen/papercolor-theme'
-
+  NeoBundle 'lilydjwg/colorizer' " Highlights hex codes with their colors
 
   " Code searching
   " NeoBundle 'mileszs/ack.vim.git'
@@ -98,6 +98,7 @@ if s:use_neobundle
   NeoBundle 'groenewege/vim-less.git'
   NeoBundle 'maksimr/vim-jsbeautify.git'
   NeoBundle 'tmux-plugins/vim-tmux.git'
+  NeoBundle 'pearofducks/ansible-vim' " Syntax highlighting for ansible files
 
   " Status bar
   NeoBundle 'bling/vim-airline.git'
@@ -131,12 +132,6 @@ if s:use_neobundle
   NeoBundle 'tpope/vim-endwise' " Add matching 'end's for blocks
   NeoBundle 'vim-ruby/vim-ruby' " Ruby support stuff
 
-
-  " Switching between single and multiple lines
-  " vim-blockle doesn't work going from 'do .. end' to '{ ... }'
-  " NeoBundle 'jgdavey/vim-blockle'
-  " NeoBundle 'AndrewRadev/splitjoin.vim'
-
   " Git!
   NeoBundle 'tpope/vim-fugitive' " Awesome git wrapper
   NeoBundle 'airblade/vim-gitgutter'
@@ -144,9 +139,6 @@ if s:use_neobundle
   " Syntax
   NeoBundle 'scrooloose/syntastic' " Easy syntax messages
   NeoBundle 'dbakker/vim-lint' " Linting for vim and vimL files.
-  NeoBundle 'lilydjwg/colorizer' " Highlights hex codes with their colors
-  NeoBundle 'pearofducks/ansible-vim' " Syntax highlighting for ansible files
-
 
   " Improved searches
   NeoBundle 'inside/vim-search-pulse' " Pulse after searches

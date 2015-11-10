@@ -12,20 +12,20 @@ let g:airline#themes#PaperColorRecharged#palette.accents = {
 
 
 " Normal Mode:
-let s:N1 = [ '#e4e4e4' , '#585858' , 254 , 240 ] " Mode
-let s:N2 = [ '#585858' , '#87d787' , 240 , 10  ] " Info
-let s:N3 = [ '#404040' , '#5faf5f' , 236 , 2   ] " StatusLine
+let s:N1 = [ '#e4e4e4' , '#585858' , 254 , 240 ] " Center
+let s:N2 = [ '#585858' , '#87d787' , 240 , 10  ] " Middle
+let s:N3 = [ '#404040' , '#5faf5f' , 236 , 2   ] " Outside
 
 let g:airline#themes#PaperColorRecharged#palette.normal = airline#themes#generate_color_map(s:N3, s:N2, s:N1)
 let g:airline#themes#PaperColorRecharged#palette.normal_modified = {
       \ 'airline_c': [ '#5faf5f' , '#585858' , 2 , 240 , '' ] ,
-      \ }
+      \ } " Changes { Middle: filename }, but not { Middle: filetype }
 
 
 " Insert Mode:
-let s:I1 = [ '#e4e4e4' , '#585858' , 254 , 240 ] " Mode
-let s:I2 = [ '#e4e4e4' , '#0087af' , 254 , 12  ] " Info
-let s:I3 = [ '#eeeeee' , '#005f87' , 255 , 4   ] " StatusLine
+let s:I1 = [ '#e4e4e4' , '#585858' , 254 , 240 ]
+let s:I2 = [ '#e4e4e4' , '#0087af' , 254 , 12  ]
+let s:I3 = [ '#eeeeee' , '#005f87' , 255 , 4   ]
 
 let g:airline#themes#PaperColorRecharged#palette.insert = airline#themes#generate_color_map(s:I3, s:I2, s:I1)
 " Blue is already super dark, use the light-blue text instead of the usual dark

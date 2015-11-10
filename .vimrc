@@ -942,7 +942,15 @@ endfunction
 " -----
 
 " Automatically displays all buffers when theres only one tab open
+" TODO: investigate airline-tabline for more options
 let g:airline#extensions#tabline#enabled = 1
+
+" Enable syntastic integration
+let g:airline#extensions#syntastic#enabled = 1
+
+" TODO: investigate airline-hunks (and mhinz/vim-signify + tomtom/quickfixsigns_vim)
+" TODO: investigate airline-ctrlp for show_adjacent_modes
+" TODO: investigate airline-wordcount
 
 " Ensure symbols dictionary exists
 if !exists('g:airline_symbols')
@@ -1049,11 +1057,12 @@ endif
 " Plugin: Syntastic
 " -----
 " Default settings sill
-if exists(':SyntasticStatuslineFlag')
-  set statusline+=%#warningmsg#
-  set statusline+=%{SyntasticStatuslineFlag()}
-  set statusline+=%*
-endif
+" if exists(':SyntasticStatuslineFlag')
+"   " TODO: I don't think this is required, airline does stuff without it
+"   set statusline+=%#warningmsg#
+"   set statusline+=%{SyntasticStatuslineFlag()}
+"   set statusline+=%*
+" endif
 
 " Always put errors into the location list
 " let g:syntastic_always_populate_loc_list = 1

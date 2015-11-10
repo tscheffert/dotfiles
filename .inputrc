@@ -1,0 +1,4 @@
+# Delete key works, rather than just entering '~'
+"\e[3~": delete-char
+
+#

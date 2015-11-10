@@ -67,6 +67,7 @@ if [[ -d $HOME/.dotfiles ]]
 	ln -sf $HOME/.dotfiles/.tmux.conf $HOME/.tmux.conf
 	ln -sf $HOME/.dotfiles/.zshrc $HOME/.zshrc
 	ln -sf $HOME/.dotfiles/.aprc $HOME/.aprc
+	ln -sf $HOME/.dotfiles/.inputrc $HOME/.inputrc
 
 	echo "Dotfiles have been symlinked to $HOME."
 fi

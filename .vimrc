@@ -649,7 +649,7 @@ if has('gui_running')
 
   if HasColorscheme('PaperColor')
     colorscheme PaperColor
-    let g:airline_theme='PaperColor'
+    let g:airline_theme='PaperColorRecharged'
   else
     colorscheme inkpot
     let g:airline_theme='luna'

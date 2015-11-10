@@ -35,10 +35,13 @@ let g:airline#themes#PaperColorRecharged#palette.insert_modified = {
 
 
 " Replace Mode:
-let g:airline#themes#PaperColorRecharged#palette.replace = copy(g:airline#themes#PaperColorRecharged#palette.insert)
-let g:airline#themes#PaperColorRecharged#palette.replace.airline_a = [ '#d7005f' , '#e4e4e4' , 1 , 254 , '' ]
+let s:R1 = [ '#e4e4e4' , '#585858' , 254 , 240 ]
+let s:R2 = [ '#e4e4e4' , '#ff2887' , 254 , 12  ]
+let s:R3 = [ '#eeeeee' , '#d7005f' , 255 , 1   ]
+
+let g:airline#themes#PaperColorRecharged#palette.replace = airline#themes#generate_color_map(s:R3, s:R2, s:R1)
 let g:airline#themes#PaperColorRecharged#palette.replace_modified = {
-      \ 'airline_c': [ '#d7005f' , '#e4e4e4' , 1 , 254 , '' ] ,
+      \ 'airline_c': [ '#d7005f' , '#585858' , 1 , 240 , '' ] ,
       \ }
 
 

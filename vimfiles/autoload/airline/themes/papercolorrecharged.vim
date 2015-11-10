@@ -24,13 +24,13 @@ let g:airline#themes#PaperColorRecharged#palette.normal_modified = {
 
 " Insert Mode:
 let s:I1 = [ '#e4e4e4' , '#585858' , 254 , 240 ]
-let s:I2 = [ '#e4e4e4' , '#0087af' , 254 , 12  ]
+let s:I2 = [ '#e4e4e4' , '#2387af' , 254 , 12  ]
 let s:I3 = [ '#eeeeee' , '#005f87' , 255 , 4   ]
 
 let g:airline#themes#PaperColorRecharged#palette.insert = airline#themes#generate_color_map(s:I3, s:I2, s:I1)
 " Blue is already super dark, use the light-blue text instead of the usual dark
 let g:airline#themes#PaperColorRecharged#palette.insert_modified = {
-      \ 'airline_c': [ '#0087af' , '#585858' , 4 , 240 , '' ] ,
+      \ 'airline_c': [ '#2387af' , '#585858' , 4 , 240 , '' ] ,
       \ }
 
 
@@ -70,6 +70,6 @@ endif
 " TODO: Fix this
 let g:airline#themes#PaperColorRecharged#palette.ctrlp = airline#extensions#ctrlp#generate_color_map(
       \ [ '#e4e4e4' , '#005f87' , 254 , 4   , ''     ] ,
-      \ [ '#e4e4e4' , '#0087af' , 254 , 12  , ''     ] ,
+      \ [ '#e4e4e4' , '#2387af' , 254 , 12  , ''     ] ,
       \ [ '#585858' , '#e4e4e4' , 240 , 254 , 'bold' ] )
 

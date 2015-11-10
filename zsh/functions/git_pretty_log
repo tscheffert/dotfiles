@@ -4,7 +4,7 @@
 function git_pretty_log() {
   local red_short_hash='%Cred%h%Creset'
 
-  local truncation_amount=35
+  local truncation_amount=51
   local truncated_message="%<($truncation_amount,trunc)%s"
 
   local truncate_date='%<(10,trunc)'

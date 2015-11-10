@@ -99,6 +99,8 @@ if s:use_neobundle
   NeoBundle 'maksimr/vim-jsbeautify.git'
   NeoBundle 'tmux-plugins/vim-tmux.git'
   NeoBundle 'pearofducks/ansible-vim' " Syntax highlighting for ansible files
+  NeoBundle 'docker/docker', { 'rtp': '/contrib/syntax/vim' }
+  NeoBundle 'nginx/nginx',   { 'rtp': '/contrib/vim' }
 
   " Status bar
   NeoBundle 'bling/vim-airline.git'

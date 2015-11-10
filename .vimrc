@@ -54,6 +54,8 @@ if s:use_neobundle
   NeoBundle 'altercation/vim-colors-solarized.git'
   NeoBundle 'tomasr/molokai.git'
   NeoBundle 'nanotech/jellybeans.vim'
+  NeoBundle 'NLKNguyen/papercolor-theme'
+
 
   " Code searching
   " NeoBundle 'mileszs/ack.vim.git'
@@ -641,10 +643,20 @@ function! InItermSession()
   return $TERM_PROGRAM =~ "iTerm"
 endfunction
 
+function! HasColorscheme(name)
+    let pat = 'colors/'.a:name.'.vim'
+    return !empty(globpath(&rtp, pat))
+endfunction
+
 " Colors!
 if has('gui_running')
   set background=dark
-  colorscheme inkpot
+
+  if HasColorscheme('PaperColor')
+    colorscheme PaperColor
+  else
+    colorscheme inkpot
+  endif
   " More schemes at https://github.com/bling/vim-airline/wiki/Screenshots
   let g:airline_theme='luna'
   " Remove the gui from GVim
@@ -671,7 +683,12 @@ else
   let &t_AB="\e[48;5;%dm"
   let &t_AF="\e[38;5;%dm"
   set background=dark
-  colorscheme jellybeans
+  if HasColorscheme('jellybeans')
+    colorscheme jellybeans
+  else
+    colorscheme inkpot
+  endif
+
   let g:airline_theme='jellybeans'
 
   " ConEmu specific

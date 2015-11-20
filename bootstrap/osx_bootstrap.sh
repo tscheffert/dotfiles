@@ -68,6 +68,7 @@ if [[ -d $HOME/.dotfiles ]]
 	ln -sf $HOME/.dotfiles/.zshrc $HOME/.zshrc
 	ln -sf $HOME/.dotfiles/.aprc $HOME/.aprc
 	ln -sf $HOME/.dotfiles/.inputrc $HOME/.inputrc
+	ln -sf $HOME/.dotfiles/.irbrc $HOME/.irbrc
 
 	echo "Dotfiles have been symlinked to $HOME."
 fi

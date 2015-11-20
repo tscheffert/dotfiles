@@ -33,6 +33,21 @@ def as
   require 'active_support/all'
 end
 
+def clear_sidekiq
+  require 'sidekiq'
+  ss = Sidekiq::ScheduledSet.new
+  puts "Clearing #{ss.size} from ScheduledSet"
+  ss.clear
+
+  rs = Sidekiq::RetrySet.new
+  puts "Clearing #{rs.size} from RetrySet"
+  rs.clear
+
+  ds = Sidekiq::DeadSet.new
+  puts "Clearing #{ds.size} from DeadSet"
+  ds.clear
+end
+
 def exceptions
   ObjectSpace.each_object(Class).each_with_object([]) do |cls,ex|
     ex << cls if cls.ancestors.include? Exception

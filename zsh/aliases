@@ -40,6 +40,9 @@ alias pg-stop='pg_ctl stop -m fast'
 alias pg-status='pg_ctl status'
 alias pg-restart='pg_ctl reload'
 
+# Run psql for my local instance
+alias pg-local='psql postgres://trunkclub:trunkclub@192.168.23.2/postgres'
+
 # -- Git Aliases --
 
 # Standard!

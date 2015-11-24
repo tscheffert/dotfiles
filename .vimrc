@@ -1258,6 +1258,13 @@ noremap S i<Space><Esc>r
 " Xml formatting!
 autocmd FileType xml noremap <buffer> <c-e><c-f> :silent %!xmllint % --format --recover<CR>
 
+" -----
+" Macro Key Maps
+" -----
+
+" Insert a binding.pry
+nnoremap <Leader>pr orequire 'pry'; binding.pry<Esc>
+
 
 " -----
 " Syntax Highlighting Utility Kemaps

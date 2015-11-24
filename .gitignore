@@ -2,12 +2,6 @@
 # AWS ElasticBeanstalk generated files
 .elasticbeanstalk/
 
-# Vim Stuff in DotFiles
-# Ignore bundles. Neobundle is already in there and managed, everything else we can safely ignore
-vimfiles/bundle/
-# Ignore the generated backup Stuff
-vimfiles/tmp/
-
 # SQLite Databse
 *.sqlite
 
@@ -15,13 +9,22 @@ vimfiles/tmp/
 components/*/*/tags
 components/*/tags
 
+
+# ----- DotFiles -----
+# Ignore bundles. Neobundle is already in there and managed, everything
+#   else we can safely ignore.
+vimfiles/bundle/
+
+# Ignore the generated backup Stuff
+vimfiles/tmp/
+
+
 # ----- Default...? -----
 .DS_Store
 ._*
 .svn
 .hg
 .*.swp
-
 
 
 # The following from https://github.com/github/gitignore
@@ -33,6 +36,7 @@ Session.vim
 .netrwhist
 # ripper-tags auto generates tags for engines. Usually they're in .git/ but engines aren't
 components/**/tags
+
 
 # ----- Windows -----
 # Windows image file caches
@@ -50,6 +54,7 @@ $RECYCLE.BIN/
 *.msi
 *.msm
 *.msp
+
 
 # ----- C++ -----
 # Compiled Object files
@@ -73,6 +78,7 @@ $RECYCLE.BIN/
 *.exe
 *.out
 *.app
+
 
 # ----- C -----
 # Object files
@@ -99,6 +105,7 @@ $RECYCLE.BIN/
 *.x86_64
 *.hex
 
+
 # ----- Haskell -----
 dist
 cabal-dev
@@ -112,6 +119,7 @@ cabal-dev
 cabal.sandbox.config
 cabal.config
 
+
 # ----- Unity 3D ----
 [Ll]ibrary/
 [Tt]emp/
@@ -123,6 +131,7 @@ cabal.config
 /*.userprefs
 /*.pidb
 /*.booproj-
+
 
 # ----- Visual Studio -----
 ## Ignore Visual Studio temporary files, build results, and
@@ -300,6 +309,7 @@ UpgradeLog*.htm
 
 # Microsoft Fakes
 FakesAssemblies/
+
 
 # ----- Yeomen -----
 node_modules/

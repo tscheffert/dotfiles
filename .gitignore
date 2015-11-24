@@ -18,6 +18,10 @@ vimfiles/bundle/
 # Ignore the generated backup Stuff
 vimfiles/tmp/
 
+# Ignore local and private configs
+.zshrc.private
+.zshrc.local
+
 
 # ----- Default...? -----
 .DS_Store

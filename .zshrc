@@ -38,5 +38,10 @@ elif [[ $platform == 'windows' ]]; then
   . ~/.zsh/windows
 fi
 
-# use .localrc for settings specific to one system
+# Use .zshrc.local for settings specific to one system
+[[ -f ~/.zshrc.local ]] && . ~/.zshrc.local
+
+# Use .zshrc.private for private variables like keys
+#   Includes:
+#     HOMEBREW_GITHUB_API_TOKEN
 [[ -f ~/.zshrc.local ]] && . ~/.zshrc.local

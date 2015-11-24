@@ -20,6 +20,14 @@ link_file() {
   ln -sf $HOME/.dotfiles/$file $HOME/$file
 }
 
+link_optional_file() {
+  local file=$1
+
+  if [[ -f $HOME/.dotfiles/$file ]]; then
+    ln -sf $HOME/.dotfiles/$file $HOME/$file
+  fi
+}
+
 test_exists() {
   type $1 >/dev/null 2>&1
 }
@@ -72,6 +80,10 @@ if [[ -d $HOME/.dotfiles ]]; then
   link_file .aprc
   link_file .inputrc
   link_file .irbrc
+
+  # Symlink Optional files
+  link_optional_file .zshrc.local
+  link_optional_file .zshrc.private
 
   echo "Dotfiles have been symlinked to $HOME."
 fi

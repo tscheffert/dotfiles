@@ -51,6 +51,15 @@ if which rbenv > /dev/null ; then
 fi
 
 
+# --- Node ---
+# nvm installed with homebrew too
+if which nvm > /dev/null; then
+  # Set up NVM
+  export NVM_DIR=~/.nvm
+  source $(brew --prefix nvm)/nvm.sh
+fi
+
+
 # --- Postgres ---
 
 # Set the required env variable for postgres

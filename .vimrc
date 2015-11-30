@@ -93,14 +93,22 @@ if s:use_neobundle
   NeoBundle 'SirVer/ultisnips.git'
 
   " Language specific
-  NeoBundle 'jelera/vim-javascript-syntax.git'
   NeoBundle 'elzr/vim-json.git'
   NeoBundle 'groenewege/vim-less.git'
-  NeoBundle 'maksimr/vim-jsbeautify.git'
   NeoBundle 'tmux-plugins/vim-tmux.git'
-  NeoBundle 'pearofducks/ansible-vim' " Syntax highlighting for ansible files
+  NeoBundle 'pearofducks/ansible-vim'
   NeoBundle 'docker/docker', { 'rtp': '/contrib/syntax/vim' }
   NeoBundle 'nginx/nginx',   { 'rtp': '/contrib/vim' }
+
+  " CoffeeScript
+  NeoBundle 'kchmck/vim-coffee-script'
+  NeoBundle 'mtscout6/vim-cjsx'
+
+  " JS/React
+  " othree/javascript-libraries-syntax.vim would be good if I got into it
+  NeoBundleLazy 'jelera/vim-javascript-syntax', {'autoload':{'filetypes':['javascript']}}
+  NeoBundleLazy 'maksimr/vim-jsbeautify', {'autoload':{'filetypes':['javascript']}}
+  NeoBundle 'jsx/jsx.vim'
 
   " Status bar
   NeoBundle 'bling/vim-airline.git'
@@ -376,7 +384,7 @@ endif
 augroup CoffeeScriptFiles
   au!
   " File specific tabs, Do not think this works
-  au FileType coffee set noexpandtab
+  " au FileType coffee set noexpandtab
 
   " Fold by indentation in CoffeeScript
   au BufNewFile,BufReadPost *.coffee setl foldmethod=indent nofoldenable
@@ -823,6 +831,9 @@ endfunction
 
 " Disable vim-json conceal settings
 let g:vim_json_syntax_conceal = 0
+
+" Prevent vim.jsx from setting up keymaps
+let g:jsx_no_default_key_mappings = 1
 
 " Set the easy motion leader key to be - so it's activated with -
 map - <Plug>(easymotion-prefix)

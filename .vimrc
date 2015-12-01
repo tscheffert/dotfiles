@@ -270,7 +270,7 @@ set title
 " Don't set the title to something weird when we're saving/closing
 set titleold=
 
-" Always reload buffer when external chagnes detected
+" Always reload buffer when external changes detected
 set autoread
 
 " Last window always has a statusline

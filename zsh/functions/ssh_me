@@ -1,7 +1,11 @@
 # vi: ft=zsh
 
 function ssh_me() {
-  local environment="$1"
+  if [[ -n $1 ]]; then
+    local environment=$1
+  else
+    local environment="staging"
+  fi
 
   if [[ ! -f ./Capfile ]]; then
     echo "No Capfile in current directory" && exit 1

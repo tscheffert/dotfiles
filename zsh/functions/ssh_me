@@ -7,6 +7,10 @@ function ssh_me() {
     local environment="staging"
   fi
 
+  if [[ ! -d ./.git ]]; then
+    echo "Current directory not a git repo" && return
+  fi
+
   if [[ ! -f ./Capfile ]]; then
     echo "No Capfile in current directory" && return
   fi

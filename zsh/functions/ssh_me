@@ -8,7 +8,7 @@ function ssh_me() {
   fi
 
   if [[ ! -f ./Capfile ]]; then
-    echo "No Capfile in current directory" && exit 1
+    echo "No Capfile in current directory" && return
   fi
 
   local line="$(cat ./Capfile | sed -n -e "/task \:$environment/,\$p" | sed -n -e "/server/,\$p" | head -n 1)"

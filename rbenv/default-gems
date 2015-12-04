@@ -1,0 +1,9 @@
+# vi: ft=ruby
+
+bundler
+#gem-ripper-tags
+pry
+pry-byebug
+rake
+ripper-tags
+rubocop

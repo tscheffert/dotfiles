@@ -111,6 +111,22 @@ if [[ ! -d $HOME/.tmux/plugins/tpm ]]; then
   git clone https://github.com/tmux-plugins/tpm $HOME/.tmux/plugins/tpm
 fi
 
+# Ensure rbenv
+if ! test_exists rbenv; then
+  brew install rbenv
+  echo "Run bootstrap/rben-plugins.sh to install rbenv plugins"
+fi
+
+# Set up the default-gems
+if test_exists rbenv; then
+  ln -sf $HOME/.dotfiles/rbenv/default-gems /usr/local/var/rbenv/default-gems
+fi
+
+# Ensure ruby-build
+if ! test_exists ruby-build; then
+  brew install ruby-build
+fi
+
 # Setup vimfiles
 if [[ ! -d $HOME/.vim/bundle/neobundle.vim ]]; then
   git clone git@github.com:Shougo/neobundle.vim.git $HOME/.vim/bundle/neobundle.vim

@@ -1289,6 +1289,12 @@ endfunction
 nnoremap <Leader>sg :echo "Syntax Group:" SyntaxItem(1)<CR>
 nnoremap <Leader>sh :echo "Syntax Group(trans=0):" SyntaxItem(0)<CR>
 
+" -----
+" Nop Key maps
+" -----
+" I keep pressing shift-k accidentally and it runs shell commands, ignore it instead
+nnoremap <s-k> <Nop>
+
 
 " -----
 " Override Default Behavior Key Maps
@@ -1305,9 +1311,6 @@ nnoremap q; q:
 " Deleting single character shouldn't squash the paste buffer
 nnoremap <silent> x "_x
 vnoremap <silent> x "_x
-
-" I keep pressing shift-k accidentally and it runs shell commands, ignore it instead
-nnoremap <s-k> <nop>
 
 " Pasting in insert shouldn't squash the paste buffer
 " TODO: Fix this

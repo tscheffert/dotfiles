@@ -1295,9 +1295,6 @@ nnoremap <Leader>sh :echo "Syntax Group(trans=0):" SyntaxItem(0)<CR>
 " I keep pressing shift-k accidentally and it runs shell commands, ignore it instead
 nnoremap <s-k> <Nop>
 
-" Don't open a tab with ctrl-t
-nnoremap <c-t> <Nop>
-
 
 " -----
 " Override Default Behavior Key Maps

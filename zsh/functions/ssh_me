@@ -25,13 +25,7 @@ function ssh_me() {
     local target_dir="$(git remote show origin -n | \
       ack -m1 --match "\bFetch URL:.*\/(?<repo_name>.*?)(?:\.git|$)" --output "$+{repo_name}")"
 
-    # Shove destination directory onto the clipboard
-    if [[ $platform == 'osx' ]]; then
-      echo "cd /var/app/$target_dir" | pbcopy
-    fi
-
-    # TODO: Figure out how we can run `cd /var/app/$target_dir` after switching to deployer
-    ssh -t tscheffert@$location "sudo -u deployer -i"
+    ssh -t tscheffert@$location "sudo -u deployer sh -c 'cd /var/app/$target_dir && exec bash'"
   else
     echo "Couldn't find server in the Capfile"
   fi

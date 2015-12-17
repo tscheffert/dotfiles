@@ -91,6 +91,10 @@ alias gcob='git checkout -b'
 
 alias glg='git_pretty_log'
 
+alias grom='git rebase origin/master'
+
+alias griom='git rebase -i origin/master'
+
 # Temporarily ignore changes but leave them in the filesystem
 #   'git ignore add', follow up with a <file>
 alias gi-a='git update-index --assume-unchanged'

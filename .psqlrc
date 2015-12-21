@@ -1,0 +1,36 @@
+-- Sources:
+--   http://phili.pe/posts/postgresql-on-the-command-line/
+--   https://robots.thoughtbot.com/improving-the-command-line-postgres-experience
+
+-- Autocomplete sel[tab] to SELECT
+\set COMP_KEYWORD_CASE upper
+
+-- Smart output. Table format with headers on top by default, switch to expanded
+--   table format instead of wrapping.
+\x auto
+
+
+-- Display something for null
+\pset null '[NULL]'
+
+-- Verbose error reports
+\set VERBOSITY verbose
+
+-- Separate history file per-database
+\set HISTFILE ~/.psql_history :DBNAME
+
+-- Ignore repeated commands in history
+\set HISTCONTROL ignoredups
+
+-- Prompt
+-- Colors:       |  Formats:
+-- 30 - black    |  0 - Normal
+-- 31 - red      |  1 - Bold
+-- 32 - green    |  2 - Normal (again?)
+-- 33 - yellow   |  3 - Background
+-- 34 - blue     |  4 - Underline
+-- 35 - magenta  |  5 - Blinking
+-- 36 - cyan     |
+-- 37 - white    |
+\set PROMPT1 '%[%033[0;34m%]%M %n@%/ %R%#%[%033[0m%] '
+\set PROMPT2 '%[%033[0;34m%][more] %R >%[%033[0m%] '

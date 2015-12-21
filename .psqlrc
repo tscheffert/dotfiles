@@ -2,6 +2,10 @@
 --   http://phili.pe/posts/postgresql-on-the-command-line/
 --   https://robots.thoughtbot.com/improving-the-command-line-postgres-experience
 
+-- Silence output
+\set QUIET 1
+
+
 -- Autocomplete sel[tab] to SELECT
 \set COMP_KEYWORD_CASE upper
 
@@ -34,3 +38,7 @@
 -- 37 - white    |
 \set PROMPT1 '%[%033[0;34m%]%M %n@%/ %R%#%[%033[0m%] '
 \set PROMPT2 '%[%033[0;34m%][more] %R >%[%033[0m%] '
+
+
+-- Renable output
+\unset QUIET

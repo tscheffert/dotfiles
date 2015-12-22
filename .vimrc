@@ -1392,8 +1392,12 @@ nnoremap <leader>nt :NERDTreeToggle<CR>
 " -----
 " vim-livedown (for Markdown) Key Maps
 " -----
-nnoremap <Leader>ld :LivedownPreview<CR>
-nnoremap <Leader>lk :LivedownKill<CR>
+augroup LivedownMarkdownKeyMaps
+  au!
+
+  autocmd FileType markdown nnoremap <Leader>ld :LivedownPreview<CR>
+  autocmd FileType markdown nnoremap <Leader>lk :LivedownKill<CR>
+augroup END
 
 
 " -----

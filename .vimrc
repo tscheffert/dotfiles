@@ -47,26 +47,26 @@ if s:use_neobundle
         \ }
 
   " Colors
-  NeoBundle 'twerth/ir_black.git'
-  NeoBundle 'vim-scripts/moria.git'
-  NeoBundle 'vim-scripts/Color-Sampler-Pack.git'
-  NeoBundle 'vim-scripts/ScrollColors.git'
-  NeoBundle 'altercation/vim-colors-solarized.git'
-  NeoBundle 'tomasr/molokai.git'
+  NeoBundle 'twerth/ir_black'
+  NeoBundle 'vim-scripts/moria'
+  NeoBundle 'vim-scripts/Color-Sampler-Pack'
+  NeoBundle 'vim-scripts/ScrollColors'
+  NeoBundle 'altercation/vim-colors-solarized'
+  NeoBundle 'tomasr/molokai'
   NeoBundle 'nanotech/jellybeans.vim'
   NeoBundle 'NLKNguyen/papercolor-theme'
   NeoBundle 'lilydjwg/colorizer' " Highlights hex codes with their colors
 
   " Code searching
-  " NeoBundle 'mileszs/ack.vim.git'
+  " NeoBundle 'mileszs/ack.vim'
   NeoBundle 'rking/ag.vim'
 
   " Buffer management
-  NeoBundle 'vim-scripts/BufOnly.vim.git'
+  NeoBundle 'vim-scripts/BufOnly.vim'
 
   " Searching for stuff
   if s:use_ctrlp
-    NeoBundle 'kien/ctrlp.vim.git'
+    NeoBundle 'kien/ctrlp.vim'
   endif
 
   if s:use_unite
@@ -75,7 +75,7 @@ if s:use_neobundle
   endif
 
   " File management
-  NeoBundle 'scrooloose/nerdtree.git'
+  NeoBundle 'scrooloose/nerdtree'
   NeoBundle 'Xuyuanp/nerdtree-git-plugin' " Show git marks in nerdtree
   NeoBundle 'low-ghost/nerdtree-fugitive' " Adds git menu to nerdtree
   " Forces nerdtree to open with each tab
@@ -84,18 +84,18 @@ if s:use_neobundle
 
   " Auto parentheses
   "   NOTE: This breaks the dot command
-  NeoBundle 'Raimondi/delimitmate.git'
+  NeoBundle 'Raimondi/delimitmate'
 
   " Improved Undo functionality
-  NeoBundle 'sjl/gundo.vim.git'
+  NeoBundle 'sjl/gundo.vim'
 
   " Snippets
-  NeoBundle 'SirVer/ultisnips.git'
+  NeoBundle 'SirVer/ultisnips'
 
   " Language specific
-  NeoBundle 'elzr/vim-json.git'
-  NeoBundle 'groenewege/vim-less.git'
-  NeoBundle 'tmux-plugins/vim-tmux.git'
+  NeoBundle 'elzr/vim-json'
+  NeoBundle 'groenewege/vim-less'
+  NeoBundle 'tmux-plugins/vim-tmux'
   NeoBundle 'pearofducks/ansible-vim'
   NeoBundle 'docker/docker', { 'rtp': '/contrib/syntax/vim' }
   NeoBundle 'nginx/nginx',   { 'rtp': '/contrib/vim' }
@@ -111,16 +111,16 @@ if s:use_neobundle
   NeoBundle 'jsx/jsx.vim'
 
   " Status bar
-  NeoBundle 'bling/vim-airline.git'
+  NeoBundle 'bling/vim-airline'
   NeoBundle 'ntpeters/vim-airline-colornum' " Highlight the current line number with the color of the current mode
 
   " Easier file movement
-  NeoBundle 'Lokaltog/vim-easymotion.git'
+  NeoBundle 'Lokaltog/vim-easymotion'
   " Look into https://github.com/justinmk/vim-sneak as an alternative
 
   " tpope  rocks
-  NeoBundle 'tpope/vim-commentary.git'
-  NeoBundle 'tpope/vim-abolish.git'
+  NeoBundle 'tpope/vim-commentary'
+  NeoBundle 'tpope/vim-abolish'
 
   " Surrounding shit
   "   Given
@@ -129,7 +129,7 @@ if s:use_neobundle
   "       cs"'
   "   to change to
   "       'Hello world!'
-  NeoBundle 'tpope/vim-surround.git'
+  NeoBundle 'tpope/vim-surround'
 
   " If I ever do a lot of json stuff, apparently this is **must** have.
   " https://github.com/tpope/vim-jdaddy

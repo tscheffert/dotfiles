@@ -15,19 +15,19 @@ let s:use_neobundle = 1
 if s:use_neobundle
   if has('vim_starting')
     " Required for NeoBundle
-		if has('win32')
-			set runtimepath +=~/vimfiles/bundle/neobundle.vim/
-		else
-			set runtimepath +=~/.vim/bundle/neobundle.vim/
-		endif
+    if has('win32')
+      set runtimepath +=~/vimfiles/bundle/neobundle.vim/
+    else
+      set runtimepath +=~/.vim/bundle/neobundle.vim/
+    endif
   endif
 
   " Required for NeoBundle
-	if has('win32')
-		call neobundle#begin(expand('~/vimfiles/bundle/'))
-	else
-		call neobundle#begin(expand('~/.vim/bundle/'))
-	endif
+  if has('win32')
+    call neobundle#begin(expand('~/vimfiles/bundle/'))
+  else
+    call neobundle#begin(expand('~/.vim/bundle/'))
+  endif
 
   " Let NeoBundle manage NeoBundle
   NeoBundleFetch 'Shougo/neobundle.vim'
@@ -37,14 +37,14 @@ if s:use_neobundle
   " Default install from github
   "   Other windows make: 'windows': '"C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\nmake.exe" make_msvc32.mak',
   NeoBundle 'Shougo/vimproc.vim', {
-  \ 'build' : {
-  \     'windows' : 'tools\\update-dll-mingw',
-  \     'cygwin' : 'make -f make_cygwin.mak',
-  \     'mac' : 'make',
-  \     'linux' : 'make',
-  \     'unix' : 'gmake',
-  \    },
-  \ }
+        \ 'build' : {
+        \     'windows' : 'tools\\update-dll-mingw',
+        \     'cygwin' : 'make -f make_cygwin.mak',
+        \     'mac' : 'make',
+        \     'linux' : 'make',
+        \     'unix' : 'gmake',
+        \    },
+        \ }
 
   " Colors
   NeoBundle 'twerth/ir_black.git'
@@ -632,6 +632,9 @@ set fileencodings=ucs-bom,utf-8,latin1
 " Set encoding
 set encoding=utf-8
 
+" Show tabs
+set listchars=tab:▸\
+
 " Session Detection fun
 function! InConEmuSession()
   return has('win32') && !has('gui_running') && !empty($CONEMUBUILD)
@@ -647,8 +650,8 @@ function! InItermSession()
 endfunction
 
 function! HasColorscheme(name)
-    let pat = 'colors/'.a:name.'.vim'
-    return !empty(globpath(&rtp, pat))
+  let pat = 'colors/'.a:name.'.vim'
+  return !empty(globpath(&rtp, pat))
 endfunction
 
 " Colors!

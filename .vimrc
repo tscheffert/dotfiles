@@ -145,6 +145,7 @@ if s:use_neobundle
 
   " Git!
   NeoBundle 'tpope/vim-fugitive' " Awesome git wrapper
+  NeoBundle 'tpope/vim-git' " Git runtime files
   NeoBundle 'airblade/vim-gitgutter'
 
   " Syntax
@@ -425,10 +426,16 @@ augroup VimFiles
   autocmd Filetype vim setlocal formatoptions-=r
 augroup END
 
-augroup GitConfigFiles
+augroup GitFiles
   au!
 
-  autocmd FileType gitconfig setlocal commentstring=#%s
+  " Highlight the point at which the message is too long
+  autocmd Filetype gitcommit setlocal colorcolumn=51
+  " Correctly wrap body message lines, at 72 characters
+  autocmd Filetype gitcommit setlocal textwidth=72
+
+  " Comment string to comment instead of removing files
+  autocmd Filetype gitconfig setlocal commentstring=#%s
 augroup END
 
 " -----

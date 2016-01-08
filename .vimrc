@@ -100,15 +100,25 @@ if s:use_neobundle
   NeoBundle 'docker/docker', { 'rtp': '/contrib/syntax/vim' }
   NeoBundle 'nginx/nginx',   { 'rtp': '/contrib/vim' }
 
-  " CoffeeScript
-  NeoBundle 'kchmck/vim-coffee-script'
+  " JS/React/CoffeeScript
+
+  " What Peter P. suggested, TODO: Summaries
+  NeoBundle 'pangloss/vim-javascript'
+  NeoBundle 'mxw/vim-jsx'
+  NeoBundle 'othree/yajs.vim'
+  NeoBundle 'git@github.com:othree/es.next.syntax.vim'
+  NeoBundle 'othree/javascript-libraries-syntax.vim'
+  NeoBundle 'othree/html5.vim'
+  NeoBundle 'jason0x43/vim-js-indent'
   NeoBundle 'mtscout6/vim-cjsx'
 
-  " JS/React
+  " What I had:
+  " NeoBundle 'kchmck/vim-coffee-script'
+  " NeoBundle 'mtscout6/vim-cjsx'
   " othree/javascript-libraries-syntax.vim would be good if I got into it
-  NeoBundleLazy 'jelera/vim-javascript-syntax', {'autoload':{'filetypes':['javascript']}}
-  NeoBundleLazy 'maksimr/vim-jsbeautify', {'autoload':{'filetypes':['javascript']}}
-  NeoBundle 'jsx/jsx.vim'
+  " NeoBundleLazy 'jelera/vim-javascript-syntax', {'autoload':{'filetypes':['javascript']}}
+  " NeoBundleLazy 'maksimr/vim-jsbeautify', {'autoload':{'filetypes':['javascript']}}
+  " NeoBundle 'jsx/jsx.vim'
 
   " Status bar
   NeoBundle 'bling/vim-airline'

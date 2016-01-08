@@ -53,11 +53,10 @@ fi
 
 # --- Node ---
 # nvm installed with homebrew too
-if which nvm > /dev/null; then
-  # Set up NVM
-  export NVM_DIR=~/.nvm
-  source $(brew --prefix nvm)/nvm.sh
-fi
+# Set up NVM
+# TODO: Resolve the "scalar parameter CONSTANT_VALUE created globally in function" warning
+export NVM_DIR=~/.nvm
+source $(brew --prefix nvm)/nvm.sh
 
 
 # --- Postgres ---

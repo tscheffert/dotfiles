@@ -382,13 +382,14 @@ endif
 " File Specific Display stuff like tabs
 " -----
 
-augroup CoffeeScriptFiles
+augroup JavaScriptFiles
   au!
-  " File specific tabs, Do not think this works
-  " au FileType coffee set noexpandtab
 
   " Fold by indentation in CoffeeScript
-  au BufNewFile,BufReadPost *.coffee setl foldmethod=indent nofoldenable
+  autocmd BufNewFile,BufRead *.coffee setlocal foldmethod=indent nofoldenable
+
+  " Detect .es6 files
+  autocmd BufNewFile,BufRead *.es6 setlocal filetype=javascript
 augroup END
 
 augroup XmlFiles

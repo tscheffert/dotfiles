@@ -46,6 +46,11 @@ def clear_sidekiq
   ds = Sidekiq::DeadSet.new
   puts "Clearing #{ds.size} from DeadSet"
   ds.clear
+
+  Sidekiq::Queue.all.each do |q|
+    puts "Clearing #{q.size} from #{q.name}"
+    q.clear
+  end
 end
 
 def exceptions

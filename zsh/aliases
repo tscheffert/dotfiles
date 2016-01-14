@@ -65,7 +65,11 @@ alias gap='git add -p'
 # "Git add all"
 alias gaa='git add .'
 
-alias gcm='git commit -m'
+# "Git commit"
+alias gc='git commit'
+
+# Trying to use `git commit` without the command line flag, disabling this will help
+# alias gcm='git commit -m'
 
 # --amend changes the latest commit, and --no-edit tells it we don't want to change the messge
 alias gca='git commit --amend --no-edit'

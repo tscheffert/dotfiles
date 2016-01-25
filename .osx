@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 # find out more at http://osxnotes.net/defaults.html
+# Explanation about how to find other settings:
+#   http://superuser.com/questions/455755/how-to-explore-more-defaults-write-tweaks-on-os-x
 #TODO: Set the system timezone
 
 # Ask for the administrator password upfront
@@ -114,10 +116,10 @@ defaults write com.apple.SoftwareUpdate ScheduleFrequency -int 1
 # Disable Notification Center and remove the menu bar icon
 launchctl unload -w /System/Library/LaunchAgents/com.apple.notificationcenterui.plist 2> /dev/null
 
-# Disable smart quotes as they’re annoying when typing code
+# Disable smart quotes as they're annoying when typing code
 defaults write NSGlobalDomain NSAutomaticQuoteSubstitutionEnabled -bool false
 
-# Disable smart dashes as they’re annoying when typing code
+# Disable smart dashes as they're annoying when typing code
 defaults write NSGlobalDomain NSAutomaticDashSubstitutionEnabled -bool false
 
 # Set a custom wallpaper image. `DefaultDesktop.jpg` is already a symlink, and

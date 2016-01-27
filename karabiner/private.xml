@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<root>
+  <item>
+    <name>Disable Command+Tab</name>
+    <appendix>Change cmd+tab to F19</appendix>
+    <appendix>Change cmd+shift+tab to shift+F19</appendix>
+    <identifier>private.diable_command_plus_tab</identifier>
+    <autogen>__KeyToKey__ KeyCode::TAB, ModifierFlag::COMMAND_L | ModifierFlag::NONE, KeyCode::F19</autogen>
+    <autogen>__KeyToKey__ KeyCode::TAB, ModifierFlag::COMMAND_L | ModifierFlag::SHIFT_L | ModifierFlag::NONE, KeyCode::F19, ModifierFlag::SHIFT_L</autogen>
+  </item>
+</root>

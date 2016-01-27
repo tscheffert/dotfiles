@@ -44,4 +44,4 @@ fi
 # Use .zshrc.private for private variables like keys
 #   Includes:
 #     HOMEBREW_GITHUB_API_TOKEN
-[[ -f ~/.zshrc.local ]] && . ~/.zshrc.local
+[[ -f ~/.zshrc.private ]] && . ~/.zshrc.private

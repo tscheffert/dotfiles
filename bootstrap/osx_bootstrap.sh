@@ -28,6 +28,16 @@ link_optional_file() {
   fi
 }
 
+link_file_with_directory() {
+  local dir=$1
+  local file=$2
+
+  if [[ ! -d $HOME/$dir ]]; then
+    mkdir $HOME/$dir
+  fi
+  ln -sf $HOME/.dotfiles/$dir/$file $HOME/$dir/$file
+}
+
 test_exists() {
   type $1 >/dev/null 2>&1
 }
@@ -86,8 +96,14 @@ if [[ -d $HOME/.dotfiles ]]; then
   link_optional_file .zshrc.local
   link_optional_file .zshrc.private
 
+  # Other links
+  link_file_with_directory .hammerspoon init.lua
+  # ln -sf $HOME/.dotfiles/.hammerspoon/init.lua $HOME/$file
+
   echo "Dotfiles have been symlinked to $HOME."
 fi
+
+exit 0
 
 # Ensure Homebrew
 if ! test_exists brew; then

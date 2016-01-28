@@ -65,8 +65,8 @@ setopt bad_pattern
 
 # -- History Options --
 
-# Append history to the history file once a shell exists
-setopt APPEND_HISTORY
+# Append commands to the history file after once they've finished executing
+setopt INC_APPEND_HISTORY_TIME
 
 # Ignore duplicated sequential lines in the history
 setopt HIST_IGNORE_DUPS

@@ -65,6 +65,11 @@ source $(brew --prefix nvm)/nvm.sh
 export PGDATA='/usr/local/var/postgres'
 export PGGHOST=localhost
 
+# --- Android ---
+
+# Android from `brew install android-sdk`
+export ANDROID_HOME='/usr/local/opt/android-sdk'
+
 
 # --- Git Prompt, only on OSX ---
 #   Mingw, which I use, already has a nice prompt and it's colorful!

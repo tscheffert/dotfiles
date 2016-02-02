@@ -78,10 +78,6 @@ alias gd='git diff --color-words'
 
 alias gds='git diff --staged --color-words'
 
-alias gr='git rebase'
-
-alias grc='git rebase --continue'
-
 alias gp='git pull'
 
 alias gpu='git push'
@@ -94,6 +90,10 @@ alias gcom='git checkout master'
 alias gcob='git checkout -b'
 
 alias glg='git_pretty_log'
+
+alias gr='git rebase'
+
+alias grc='git rebase --continue'
 
 alias grom='git rebase origin/master'
 

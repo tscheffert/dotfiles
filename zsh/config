@@ -48,6 +48,9 @@ setopt completealiases
 # Don't beep if you're angry
 setopt nobeep
 
+# Enable gco='git-checkout' aliasing
+setopt no_complete_aliases
+
 
 # -- Expansion and Globbing Options
 

@@ -45,3 +45,5 @@ fi
 #   Includes:
 #     HOMEBREW_GITHUB_API_TOKEN
 [[ -f ~/.zshrc.private ]] && . ~/.zshrc.private
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

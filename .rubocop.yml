@@ -170,7 +170,7 @@ Style/BarePercentLiterals:
     - bare_percent
 
 Style/BlockDelimiters:
-  EnforcedStyle: line_count_based
+  EnforcedStyle: braces_for_chaining
   SupportedStyles:
     # The `line_count_based` style enforces braces around single line blocks and
     # do..end around multi-line blocks.
@@ -185,6 +185,11 @@ Style/BlockDelimiters:
     # method) but exceptions are permitted in the `ProceduralMethods`,
     # `FunctionalMethods` and `IgnoredMethods` sections below.
     - semantic
+    # The `braces_for_chaining` style enforces braces around single line blocks
+    # and do..end around multi-line blocks, except for multi-line blocks whose
+    # return value is being chained with another method (in which case braces
+    # are enforced).
+    - braces_for_chaining
   ProceduralMethods:
     # Methods that are known to be procedural in nature but look functional from
     # their usage, e.g.
@@ -465,6 +470,7 @@ Style/IndentHash:
   SupportedStyles:
     - special_inside_parentheses
     - consistent
+    - align_braces
 
 Style/LambdaCall:
   EnforcedStyle: call
@@ -476,13 +482,14 @@ Style/Next:
   # With `always` all conditions at the end of an iteration needs to be
   # replaced by next - with `skip_modifier_ifs` the modifier if like this one
   # are ignored: [1, 2].each { |a| return 'yes' if a == 1 }
-  EnforcedStyle: always
+  EnforcedStyle: skip_modifier_ifs
   # `MinBodyLength` defines the number of lines of the a body of an if / unless
   # needs to have to trigger this cop
   MinBodyLength: 3
   SupportedStyles:
     - skip_modifier_ifs
     - always
+  AutoCorrect: false
 
 Style/NonNilCheck:
   # With `IncludeSemanticChanges` set to `true`, this cop reports offenses for
@@ -498,6 +505,7 @@ Style/MethodDefParentheses:
   SupportedStyles:
     - require_parentheses
     - require_no_parentheses
+    - require_no_parentheses_except_multiline
 
 Style/MethodName:
   EnforcedStyle: snake_case
@@ -535,8 +543,8 @@ Style/PercentLiteralDelimiters:
     '%Q': ()
     '%r': '{}'
     '%s': ()
-    '%w': ()
-    '%W': ()
+    '%w': []
+    '%W': []
     '%x': ()
 
 Style/PercentQLiterals:
@@ -556,6 +564,10 @@ Style/PredicateName:
     - is_
     - has_
     - have_
+  # Predicate names which, despite having a blacklisted prefix, or no ?,
+  # should still be accepted
+  NameWhitelist:
+    - is_a?
 
 Style/RaiseArgs:
   EnforcedStyle: exploded
@@ -604,12 +616,11 @@ Style/SingleLineBlockParams:
 Style/SingleLineMethods:
   AllowIfMethodIsEmpty: false
 
-# Not available in 0.34.2
-# Style/StabbyLambdaParentheses:
-#   EnforcedStyle: require_parentheses
-#   SupportedStyles:
-#     - require_parentheses
-#     - require_no_parentheses
+Style/StabbyLambdaParentheses:
+  EnforcedStyle: require_parentheses
+  SupportedStyles:
+    - require_parentheses
+    - require_no_parentheses
 
 Style/StringLiterals:
   EnforcedStyle: single_quotes
@@ -830,15 +841,18 @@ Lint/DefEndAlignment:
     - def
   AutoCorrect: false
 
-# Not Available in 0.34.2
-# Checks for unused method arguments.
-# Lint/UnusedMethodArgument:
-#   AllowUnusedKeywordArguments: false
-
 # TODO: Fix later or raise issue about missing SupportedStyles after 0.32.1
 # Unused block params auto-correct from { |x, y| puts x } to { |x, _y| puts x } and
 # we prefer { |x, _| puts x }
+# Checks for unused block arguments
 Lint/UnusedBlockArgument:
+  IgnoreEmptyBlocks: true
+  AutoCorrect: false
+
+# Checks for unused method arguments.
+Lint/UnusedMethodArgument:
+  AllowUnusedKeywordArguments: false
+  IgnoreEmptyMethods: true
   AutoCorrect: false
 
 # TODO: Also raise issue about Lint/UnusedAssignment not auto-correcting and

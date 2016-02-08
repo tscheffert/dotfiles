@@ -45,12 +45,17 @@ Style/TrailingUnderscoreVariable:
                  end of parallel variable assignment.
   Enabled: false
 
-# Enabled by default, but it gets spammy
+# Too rails specific
+Rails/Delegate:
+  Description: 'Prefer delegate method for delegations.'
+  Enabled: false
+
+# Enabled by default, but super chatty and it's not useful with activesupport
 Rails/TimeZone:
   Description: 'Checks the correct usage of time zone aware methods.'
   StyleGuide: 'https://github.com/bbatsov/rails-style-guide#time'
   Reference: 'http://danilenko.org/2012/7/6/rails_timezones'
-  Enabled: false
+  Enabled: true
 
 Lint/LiteralInInterpolation:
   Description: 'Avoid interpolating literals in strings'

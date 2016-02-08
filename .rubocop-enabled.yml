@@ -262,6 +262,38 @@ Style/FileName:
   StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#snake-case-files'
   Enabled: true
 
+# TODO: Review
+# Disabled by default
+Style/FirstArrayElementLineBreak:
+  Description: >-
+                 Checks for a line break before the first element in a
+                 multi-line array.
+  Enabled: true
+
+# TODO: Review
+# Disabled by default
+Style/FirstHashElementLineBreak:
+  Description: >-
+                 Checks for a line break before the first element in a
+                 multi-line hash.
+  Enabled: true
+
+# TODO: Review
+# Disabled by default
+Style/FirstMethodArgumentLineBreak:
+  Description: >-
+                 Checks for a line break before the first argument in a
+                 multi-line method call.
+  Enabled: true
+
+# TODO: Review
+# Disabled by default
+Style/FirstMethodParameterLineBreak:
+  Description: >-
+                 Checks for a line break before the first parameter in a
+                 multi-line method parameter definition.
+  Enabled: true
+
 Style/FirstParameterIndentation:
   Description: 'Checks the indentation of the first parameter in a method call.'
   Enabled: true
@@ -431,6 +463,10 @@ Style/NegatedIf:
 Style/NegatedWhile:
   Description: 'Favor until over while for negative conditions.'
   StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#until-for-negatives'
+  Enabled: true
+
+Style/NestedModifier:
+  Description: 'Avoid using nested modifiers.'
   Enabled: true
 
 Style/NestedTernaryOperator:
@@ -722,10 +758,10 @@ Style/SpecialGlobalVars:
   Enabled: true
 
 # Not available in 0.34.2
-# Style/StabbyLambdaParentheses:
-#   Description: 'Check for the usage of parentheses around stabby lambda arguments.'
-#   StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#stabby-lambda-with-args'
-#   Enabled: true
+Style/StabbyLambdaParentheses:
+  Description: 'Check for the usage of parentheses around stabby lambda arguments.'
+  StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#stabby-lambda-with-args'
+  Enabled: true
 
 Style/StringLiterals:
   Description: 'Checks if uses of quotes match the configured preference.'
@@ -902,6 +938,10 @@ Lint/AssignmentInCondition:
 
 Lint/BlockAlignment:
   Description: 'Align block ends correctly.'
+  Enabled: true
+
+Lint/CircularArgumentReference:
+  Description: "Default values in optional keyword arguments and optional ordinal arguments should not refer back to the name of the argument."
   Enabled: true
 
 Lint/ConditionPosition:
@@ -1110,10 +1150,9 @@ Performance/Detect:
   Reference: 'https://github.com/JuanitoFatas/fast-ruby#enumerabledetect-vs-enumerableselectfirst-code'
   Enabled: true
 
-# Not available in 0.34.2
-# Performance/FixedSize:
-#   Description: 'Do not compute the size of statically sized objects except in constants'
-#   Enabled: true
+Performance/FixedSize:
+  Description: 'Do not compute the size of statically sized objects except in constants'
+  Enabled: true
 
 Performance/FlatMap:
   Description: >-
@@ -1172,10 +1211,6 @@ Rails/DefaultScope:
   Description: 'Checks if the argument passed to default_scope is a block.'
   Enabled: true
 
-Rails/Delegate:
-  Description: 'Prefer delegate method for delegations.'
-  Enabled: true
-
 Rails/FindBy:
   Description: 'Prefer find_by over where.first.'
   Enabled: true
@@ -1190,6 +1225,10 @@ Rails/HasAndBelongsToMany:
 
 Rails/Output:
   Description: 'Checks for calls to puts, print, etc.'
+  Enabled: true
+
+Rails/PluralizationGrammar:
+  Description: 'Checks for incorrect grammar when using methods like `3.day.ago`.'
   Enabled: true
 
 Rails/ReadWriteAttribute:

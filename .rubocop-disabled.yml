@@ -33,6 +33,18 @@ Style/MissingElse:
     - case
     - both
 
+Style/MultilineArrayBraceLayout:
+  Description: >-
+                 Checks that the closing brace in an array literal is
+                 symmetrical with respect to the opening brace and the
+                 array elements.
+  Enabled: false
+
+Style/MultilineAssignmentLayout:
+  Description: 'Check for a newline after the assignment operator in multi-line assignments.'
+  StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#indent-conditional-assignment'
+  Enabled: false
+
 Style/SymbolArray:
   Description: 'Use %i or %I for arrays of symbols.'
   StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#percent-i'

@@ -29,6 +29,7 @@ AllCops:
     - '**/Vagabondfile'
   Exclude:
     - 'vendor/**/*'
+    - 'db/schema.rb'
   # Default formatter will be used if no -f/--format option is given.
   DefaultFormatter: progress
   # Cop names are not displayed in offense messages by default. Change behavior
@@ -405,7 +406,10 @@ Style/ExtraSpacing:
 Style/FileName:
   # File names listed in AllCops:Include are excluded by default. Add extra
   # excludes here.
-  Exclude: []
+  Exclude:
+    - 'config/**/*'
+    - 'db/**/*'
+    - 'spec/**/*'
   # When true, requires that each source file should define a class or module
   # with a name which matches the file name (converted to ... case).
   # It further expects it to be nested inside modules which match the names
@@ -655,8 +659,8 @@ Style/PercentLiteralDelimiters:
     '%Q': ()
     '%r': '{}'
     '%s': ()
-    '%w': []
-    '%W': []
+    '%w': '[]'
+    '%W': '[]'
     '%x': ()
 
 Style/PercentQLiterals:
@@ -910,9 +914,8 @@ Style/VariableName:
 Style/WhileUntilModifier:
   MaxLineLength: 80
 
-# TODO: How is this different from `PercentLiteralDelimiters?
 Style/WordArray:
-  EnforcedStyle: brackets
+  EnforcedStyle: percent
   SupportedStyles:
     - percent
     - brackets

@@ -701,10 +701,6 @@ Style/SpaceAfterComma:
   StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#spaces-operators'
   Enabled: true
 
-Style/SpaceAfterControlKeyword:
-  Description: 'Use spaces after if/elsif/unless/while/until/case/when.'
-  Enabled: true
-
 Style/SpaceAfterMethodName:
   Description: >-
                  Do not put a space between a method name and the opening
@@ -719,6 +715,27 @@ Style/SpaceAfterNot:
 
 Style/SpaceAfterSemicolon:
   Description: 'Use spaces after semicolons.'
+  StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#spaces-operators'
+  Enabled: true
+
+Style/SpaceAroundBlockParameters:
+  Description: 'Checks the spacing inside and after block parameters pipes.'
+  Enabled: true
+
+Style/SpaceAroundEqualsInParameterDefault:
+  Description: >-
+                 Checks that the equals signs in parameter default assignments
+                 have or don't have surrounding space depending on
+                 configuration.
+  StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#spaces-around-equals'
+  Enabled: true
+
+Style/SpaceAroundKeyword:
+  Description: 'Use a space around keywords if appropriate.'
+  Enabled: true
+
+Style/SpaceAroundOperators:
+  Description: 'Use a single space around operators.'
   StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#spaces-operators'
   Enabled: true
 
@@ -749,31 +766,10 @@ Style/SpaceInsideBlockBraces:
                  or doesn't have trailing space.
   Enabled: true
 
-Style/SpaceAroundBlockParameters:
-  Description: 'Checks the spacing inside and after block parameters pipes.'
-  Enabled: true
-
-Style/SpaceAroundEqualsInParameterDefault:
-  Description: >-
-                 Checks that the equals signs in parameter default assignments
-                 have or don't have surrounding space depending on
-                 configuration.
-  StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#spaces-around-equals'
-  Enabled: true
-
-Style/SpaceAroundOperators:
-  Description: 'Use a single space around operators.'
-  StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#spaces-operators'
-  Enabled: true
-
 Style/SpaceBeforeFirstArg:
   Description: >-
                  Checks that exactly one space is used between a method name
                  and the first argument for method calls without parentheses.
-  Enabled: true
-
-Style/SpaceBeforeModifierKeyword:
-  Description: 'Put one space before the modifier keyword.'
   Enabled: true
 
 Style/SpaceInsideBrackets:
@@ -922,6 +918,10 @@ Style/WhileUntilModifier:
 Style/WordArray:
   Description: 'Use %w or %W for arrays of words.'
   StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#percent-w'
+  Enabled: true
+
+Style/ZeroLengthPredicate:
+  Description: 'Use #empty? when testing for objects of length 0.'
   Enabled: true
 
 
@@ -1216,7 +1216,9 @@ Lint/Void:
 ##################### Performance #############################
 
 Performance/Casecmp:
-  Description: 'Use `casecmp` rather than `downcase ==`.'
+  Description: >-
+                  Use `casecmp` rather than `downcase ==`, `upcase ==`,
+                  `== downcase`, or `== upcase`.
   Reference: 'https://github.com/JuanitoFatas/fast-ruby#stringcasecmp-vs-stringdowncase---code'
   Enabled: true
 
@@ -1297,7 +1299,7 @@ Performance/RedundantMatch:
   Enabled: true
 
 Performance/RedundantMerge:
-  Description: 'Use Hash#[]=, rather than Hash#merge! with a single key-value pair.'
+  Description: 'Use Hash#[]=, rather than Hash#merge! or Hash#update with a single key-value pair.'
   Reference: 'https://github.com/JuanitoFatas/fast-ruby#hashmerge-vs-hash-code'
   Enabled: true
 

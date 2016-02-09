@@ -1,7 +1,7 @@
 # This started as the default configuration and then I have modified it to suite
 # my preferences.
 
-# Version: 0.36.0
+# Version: 0.37.0
 
 inherit_from:
   - .rubocop-enabled.yml
@@ -710,7 +710,7 @@ Style/Semicolon:
   AllowAsExpressionSeparator: false
 
 Style/SignalException:
-  EnforcedStyle: semantic
+  EnforcedStyle: only_raise
   SupportedStyles:
     - only_raise
     - only_fail
@@ -945,7 +945,7 @@ Metrics/CyclomaticComplexity:
 Metrics/LineLength:
   Max: 95
   # To make it possible to copy or click on URIs in the code, we allow lines
-  # contaning a URI to be longer than Max.
+  # containing a URI to be longer than Max.
   AllowHeredoc: true
   AllowURI: true
   URISchemes:
@@ -1015,6 +1015,14 @@ Lint/UnusedMethodArgument:
 # to support replace instead of just insert_before.
 #
 # TODO: Also Style/TrailingUnderscoreVariable would get in the way of that :(
+
+
+##################### Performance ############################
+
+Performance/RedundantMerge:
+  # Max number of key-value pairs to consider an offense
+  MaxKeyValuePairs: 1
+
 
 ##################### Rails ##################################
 

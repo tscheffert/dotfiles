@@ -156,6 +156,20 @@ if ! test_exists ruby-build; then
   brew install ruby-build
 fi
 
+# Ensure Pyments
+if ! test_exists pygmentize; then
+  echo 'installing Pygments'
+  pip install pygments
+else
+  echo 'has Pygments'
+fi
+if ! $(pip list | grep pygments-style-solarized >/dev/null 2>&1); then
+  echo 'installing pygments-style-solarized'
+  pip install pygments-style-solarized
+else
+  echo 'has Solarized Pygments theme'
+fi
+
 # Setup vimfiles
 if [[ ! -d $HOME/.vim/bundle/neobundle.vim ]]; then
   git clone git@github.com:Shougo/neobundle.vim.git $HOME/.vim/bundle/neobundle.vim

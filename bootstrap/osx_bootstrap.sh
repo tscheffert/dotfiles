@@ -145,6 +145,12 @@ if test_exists rbenv; then
   ln -sf $HOME/.dotfiles/rbenv/default-gems /usr/local/var/rbenv/default-gems
 fi
 
+# Ensure fuzzy finder
+if ! test_exists fzf; then
+  echo 'installing fzf'
+  brew install fzf
+fi
+
 # Ensure ruby-build
 if ! test_exists ruby-build; then
   brew install ruby-build

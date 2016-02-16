@@ -46,3 +46,19 @@ export RUBY_HEAP_SLOTS_INCREMENT=1000000
 export RUBY_HEAP_SLOTS_GROWTH_FACTOR=1
 export RUBY_GC_MALLOC_LIMIT=1000000000
 export RUBY_HEAP_FREE_MIN=500000
+
+# --- Colorful LS ---
+# Good examples:
+#   https://github.com/Bash-it/bash-it/blob/master/lib/appearance.bash
+#   http://altoidnerd.com/2015/10/06/using-ls_colors-to-colorize-your-shell-by-filename-filetype/
+
+# LS_COLORS for non-GNU systems (BSD) (from: http://geoff.greer.fm/lscolors/)
+export CLICOLOR=1
+export LSCOLORS=ExFxdxdxcxacaccxxxExEh
+
+# TODO: Grep colors too
+# if echo hello | grep --color=auto l >/dev/null 2>&1; then
+#   export GREP_OPTIONS='--color=auto'
+#   export GREP_COLOR='0;32'
+#   export GREP_COLORS="sl=0;37:cx=1;32:mt=1;35:fn=0;32:ln=1;34:se=1;33"
+# fi

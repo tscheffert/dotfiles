@@ -77,7 +77,6 @@ if [[ -d $HOME/.dotfiles ]]; then
   link_file .jshintrc
   link_file .osx
   link_file .vimrc
-  link_file .coffeelint.json
   link_file .slate
   link_file .agignore
   link_file .pryrc

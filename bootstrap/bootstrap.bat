@@ -14,7 +14,6 @@ mklink C:\Users\Trent\.jscs.json C:\Users\Trent\.dotfiles\.jscs.json
 mklink C:\Users\Trent\.jshintrc C:\Users\Trent\.dotfiles\.jshintrc
 mklink C:\Users\Trent\.osx C:\Users\Trent\.dotfiles\.osx
 mklink C:\Users\Trent\.vimrc C:\Users\Trent\.dotfiles\.vimrc
-mklink C:\Users\Trent\coffeelint.json C:\Users\Trent\.dotfiles\coffeelint.json
 ::mklink C:\Windows\System32\WindowsPowerShell\v1.0\profile.ps1 C:\Users\Trent\.dotfiles\PowerShell\profile.ps1
 ::mklink C:\Users\Trent\Documents\WindowsPowerShell\PowerTabConfig.xml C:\Users\Trent\.dotfiles\PowerShell\PowerTabConfig.xml
 ::mklink C:\Users\Trent\Documents\WindowsPowerShell\TabExpansion.xml C:\Users\Trent\.dotfiles\PowerShell\TabExpansion.xml

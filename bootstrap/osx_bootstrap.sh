@@ -115,6 +115,12 @@ else
   echo "has brew, check"
 fi
 
+# Ensure ~/.ItermHist
+if [[ ! -d ~/.iTermHist ]]; then
+  echo "creating ~/.iTermHist"
+  mkdir ~/.ItermHist
+fi
+
 # Ensure tmux
 if ! test_exists tmux; then
   echo "installing tmux:"

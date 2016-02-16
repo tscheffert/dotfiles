@@ -55,6 +55,13 @@ function alertShowCannotMoveWindow()
   hs.alert.show("Can't move window")
 end
 
+function withModifiers(app_name, frame)
+  if app_name == 'iTerm2' then
+    frame.w = frame.w + 5
+  end
+
+  return frame
+end
 
 -- Move current window to full screen
 hs.hotkey.bind({"shift", "ctrl"}, "K", function ()
@@ -67,11 +74,11 @@ hs.hotkey.bind({"shift", "ctrl"}, "K", function ()
   local screen = win:screen()
   local max = screen:frame()
 
-
   f.x = max.x
   f.y = max.y
   f.w = max.w
   f.h = max.h
+
   win:setFrame(f)
 end)
 
@@ -82,15 +89,17 @@ hs.hotkey.bind({"cmd", "ctrl"}, "H", function ()
     alertShowCannotMoveWindow()
     return
   end
+  local app_name = win:application():title()
   local f = win:frame()
   local screen = win:screen()
-  local max = screen:frame()
-
+  local max = screen:fullFrame()
 
   f.x = max.x
   f.y = max.y
   f.w = max.w / 2
   f.h = max.h
+
+  f = withModifiers(app_name, f)
   win:setFrame(f)
 end)
 
@@ -101,15 +110,18 @@ hs.hotkey.bind({"cmd", "ctrl"}, "L", function ()
     alertShowCannotMoveWindow()
     return
   end
+  local app_name = win:application():title()
   local f = win:frame()
   local screen = win:screen()
-  local max = screen:frame()
-
+  local max = screen:fullFrame()
 
   f.x = max.x + (max.w / 2)
   f.y = max.y
   f.w = max.w / 2
   f.h = max.h
+
+  f = withModifiers(app_name, f)
+
   win:setFrame(f)
 end)
 
@@ -120,15 +132,17 @@ hs.hotkey.bind({"cmd", "ctrl"}, "J", function ()
     alertShowCannotMoveWindow()
     return
   end
+  local app_name = win:application():title()
   local f = win:frame()
   local screen = win:screen()
-  local max = screen:frame()
-
+  local max = screen:fullFrame()
 
   f.x = max.x
   f.y = max.y + (max.h / 2)
   f.w = max.w
   f.h = max.h / 2
+
+  f = withModifiers(app_name, f)
   win:setFrame(f)
 end)
 
@@ -139,15 +153,18 @@ hs.hotkey.bind({"cmd", "ctrl"}, "K", function ()
     alertShowCannotMoveWindow()
     return
   end
+  local app_name = win:application():title()
   local f = win:frame()
   local screen = win:screen()
-  local max = screen:frame()
+  local max = screen:fullFrame()
 
 
   f.x = max.x
   f.y = max.y
   f.w = max.w
   f.h = max.h / 2
+
+  f = withModifiers(app_name, f)
   win:setFrame(f)
 end)
 

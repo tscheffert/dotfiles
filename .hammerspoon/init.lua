@@ -155,7 +155,7 @@ end)
 -- Window Hints like slate
 --   I used Karabiner to change cmd+tab to emmit F19
 hs.hotkey.bind({""}, "F19", function ()
-  hs.hints.windowHints(nil)
+  hs.hints.windowHints(nil, nil, true)
 end)
 
 

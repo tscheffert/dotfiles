@@ -1,0 +1,34 @@
+# vi: ft=zsh
+
+function ccat() {
+  pygmentize -O style=solarizeddark -f terminal16m -g -- "$@"
+}
+
+# murphy
+# algol
+# xcode
+# perldoc
+# manni
+# fruity
+# default -- Garbage
+# emacs
+# vs -- Garbage
+# lovelace -- Garbage
+# colorful -- Garbage
+# pastie -- Garbage
+# algo_nu -- Garbage
+# native -- Really nice
+# igor
+# bw
+# autumn -- Garbage
+# friendly -- Pretty but hard to read
+# trac
+# tango
+# paraiso-dark -- Really nice
+# paraiso-light -- Doesn't work
+# vim -- Just the worst
+# monokai -- Not the worst, super bright
+# rrt
+# borland -- Garbage
+# solarizeddark -- Pretty dece
+# solarizedlight

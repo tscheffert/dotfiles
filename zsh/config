@@ -1,3 +1,4 @@
+#!/usr/bin/env zsh
 # vi: ft=zsh
 
 # -- Keybinds --
@@ -114,4 +115,3 @@ prepend_to_path "$HOME/bin"
 unalias run-help
 autoload run-help
 HELPDIR=/usr/local/share/zsh/help
-

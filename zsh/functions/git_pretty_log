@@ -1,3 +1,4 @@
+#!/usr/bin/env zsh
 # vi: ft=zsh
 
 # Output a pretty, oneline, columnized, git log for the last twenty commits

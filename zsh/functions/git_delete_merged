@@ -1,3 +1,4 @@
+#!/usr/bin/env zsh
 # vi: ft=zsh
 
 # Delete branchs which have already been merged into master

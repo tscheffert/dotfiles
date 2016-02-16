@@ -1,3 +1,4 @@
+#!/usr/bin/env zsh
 # vi: ft=zsh
 
 # A script to make using 256 colors in zsh less painful.

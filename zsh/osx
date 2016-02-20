@@ -61,7 +61,9 @@ fi
 # Set up NVM
 # TODO: Resolve the "scalar parameter CONSTANT_VALUE created globally in function" warning
 export NVM_DIR=~/.nvm
-source $(brew --prefix nvm)/nvm.sh
+function init_nvm() {
+  source $(brew --prefix nvm)/nvm.sh
+}
 
 
 # --- Postgres ---

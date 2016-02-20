@@ -1,0 +1,28 @@
+#!/usr/bin/env zsh
+# vi: ft=zsh
+
+function psql_fix_extension() {
+  if [[ -z "$POSTGRES_CONNECTION_STRING" ]]; then
+    echo "Must export POSTGRES_CONNECTION_STRING"
+    return 1
+  fi
+
+  if [[ -z "$1" ]]; then
+    echo "Must specify extension"
+    echo "  e.g. uuid-ossp"
+    return 1
+  fi
+
+  if [[ -z "$2" ]]; then
+    echo "Must specify a target service"
+    echo "  e.g. rules_svc"
+    return 1
+  fi
+
+  local extension="$1"
+  local target_service="$2"
+  psql "$POSTGRES_CONNECTION_STRING" << SQL
+    ALTER EXTENSION $extension SET SCHEMA PUBLIC;
+    GRANT usage ON SCHEMA PUBLIC TO $target_service;
+SQL
+}

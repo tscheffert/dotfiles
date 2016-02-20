@@ -1,0 +1,33 @@
+#!/usr/bin/env zsh
+# vi: ft=zsh
+
+function psql_create_db() {
+  if [[ -z "$POSTGRES_CONNECTION_STRING" ]]; then
+    echo "Must export POSTGRES_CONNECTION_STRING"
+    return 1
+  fi
+
+  if [[ -z "$POSTGRES_ROOT_USER" ]]; then
+    echo "Must export POSTGRES_ROOT_USER"
+    return 1
+  fi
+
+  if [[ -z "$1" ]]; then
+    echo "Must specify a db"
+    echo "  e.g. members_svc_test"
+    return 1
+  fi
+
+  local db="$1"
+  psql "$POSTGRES_CONNECTION_STRING" << SQL
+    CREATE USER $db WITH PASSWORD '$db';
+    CREATE SCHEMA $db;
+    CREATE DATABASE $db OWNER $db;
+    GRANT ALL ON SCHEMA $db TO $db;
+    GRANT USAGE ON SCHEMA $db TO readonly;
+    GRANT $db TO $POSTGRES_ROOT_USER;
+    ALTER DEFAULT PRIVILEGES FOR ROLE $db GRANT SELECT ON TABLES TO readonly;
+    ALTER DEFAULT PRIVILEGES FOR ROLE $db GRANT SELECT ON SEQUENCES TO readonly;
+    REVOKE $db FROM $POSTGRES_ROOT_USER;
+SQL
+}

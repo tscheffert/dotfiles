@@ -9,7 +9,10 @@ bindkey -e # for emacs
 
 # Set out functions to autoload
 fpath=(~/.zsh/functions $fpath)
-autoload -U ~/.zsh/functions/*(:t)
+autoload -U ~/.zsh/functions/*(.:t)
+
+fpath=(~/.zsh/functions/psql $fpath)
+autoload -U ~/.zsh/functions/psql/*(.:t)
 
 
 # -- History --

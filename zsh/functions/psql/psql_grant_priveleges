@@ -1,0 +1,20 @@
+#!/usr/bin/env zsh
+# vi: ft=zsh
+
+function psql_grant_priveleges() {
+  if [[ -z "$POSTGRES_CONNECTION_STRING" ]]; then
+    echo "Must export POSTGRES_CONNECTION_STRING"
+    return 1
+  fi
+
+  if [[ -z $1 ]]; then
+    echo "Must specify a user"
+    echo "  e.g. members_svc"
+    exit 1
+  fi
+
+  local database_user="$1"
+  psql "$POSTGRES_CONNECTION_STRING" << SQL
+    ALTER ROLE $database_user WITH SUPERUSER
+SQL
+}

@@ -399,7 +399,7 @@ augroup JavaScriptFiles
   autocmd BufNewFile,BufRead *.coffee setlocal foldmethod=indent nofoldenable
 
   " Detect .es6 files
-  autocmd BufNewFile,BufRead *.es6 setlocal filetype=javascript
+  autocmd BufNewFile,BufRead *.es6 setlocal filetype=javascript.jsx
 augroup END
 
 augroup XmlFiles
@@ -855,6 +855,9 @@ let g:vim_json_syntax_conceal = 0
 
 " Prevent vim.jsx from setting up keymaps
 let g:jsx_no_default_key_mappings = 1
+
+" Let JSX run in normal JS files
+let g:jsx_ext_required = 0
 
 " Set the easy motion leader key to be - so it's activated with -
 map - <Plug>(easymotion-prefix)

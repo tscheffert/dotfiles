@@ -247,6 +247,9 @@ set showcmd
 " Keep some stuff in the history
 set history=10000
 
+" Save undo's after file closes
+set undofile
+
 " Use lots of undo levels
 set undolevels=1000
 

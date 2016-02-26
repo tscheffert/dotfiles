@@ -16,7 +16,14 @@ end
 
 class Object
   def interesting_methods
-    (self.methods - Object.instance_methods).sort
+    case self.class
+    when Class
+      (self.public_methods - Object.public_methods).sort
+    when Module
+      (self.public_methods - Module.public_methods).sort
+    else
+      (self.public_methods - Object.new.instance_methods).sort
+    end
   end
 
   def pbcopy(stuff)

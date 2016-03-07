@@ -1,4 +1,7 @@
 *.js
+*.js.map
+*.json
+*.min.js
 *.css
 *.scss
 *.html.erb
@@ -6,3 +9,5 @@ logs/
 .git/tags
 log/
 .git/
+node_modules/
+vendor/

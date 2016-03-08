@@ -88,3 +88,7 @@ export ANDROID_HOME='/usr/local/opt/android-sdk'
 #   # Set status line
 #   export PS1='[\W]$(__git_ps1 "(%s)")$ '
 # fi
+
+
+# --- Docker-Machine ---
+eval $(docker-machine env service-manager)

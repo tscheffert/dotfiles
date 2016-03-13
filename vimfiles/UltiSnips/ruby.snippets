@@ -1,0 +1,49 @@
+priority 0
+
+# Helpers
+global !p
+import string, os
+
+# Partially from:
+#		http://inflection.readthedocs.org/en/latest/_modules/inflection.html#camelize
+def camelize(underscore_word, include_modules=False):
+    """
+    Convert strings to CamelCase.
+
+    Examples::
+
+        >>> camelize("device_type")
+        "DeviceType"
+        >>> camelize("directory/device_type")
+        "DeviceType"
+        >>> camelize("directory/device_type", True)
+        "Directory::DeviceType"
+
+    :param include_modules: if set to `True` :func:`camelize` detects modules
+    		in the path and includes them in the path. If set to `False` :func:`camelize`
+    		uses the "basename" from the supplied path. Defaults to `False`.
+    """
+    if include_modules:
+			words = underscore_word.split('/')
+			return map(lambda w: camelize(w), words)
+    else:
+			underscore_word = os.path.basename(underscore_word)
+			return re.sub(r"(?:^|_)(.)", lambda m: m.group(1).upper(), underscore_word)
+endglobal
+
+
+# -- File Templates
+
+# TODO: For whatever reason, starting 'class_to_test' with a 'c' will put a
+#		quote in the camelized version
+snippet spec "spec file template" sm
+require 'spec_helper'
+
+require '${1:class_to_test}'
+
+describe `!p snip.rv = camelize(t[1])` do
+	$0
+end
+endsnippet
+
+# vim: ts=2 sw=2 expandtab ft=snippets:

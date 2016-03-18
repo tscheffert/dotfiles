@@ -4,10 +4,9 @@ require 'irb/completion'
 require 'irb/ext/save-history'
 require 'logger'
 
-require 'readline'
-if Readline::VERSION =~ /editline/i
-  warn "Warning: Using Editline instead of Readline."
-end
+require '~/console_config.rb'
+ConsoleConfig::SetupReadline.do
+ConsoleConfig::ReplaceActiveRecordLoggers.do
 
 IRB.conf[:USE_READLINE] = true
 IRB.conf[:EVAL_HISTORY] = 1000
@@ -42,11 +41,6 @@ IRB.conf[:PROMPT][:SIMPLE_COLOR] =
     AUTO_INDENT: true
   }
 IRB.conf[:PROMPT_MODE] = :SIMPLE_COLOR
-
-if defined?(ActiveRecord)
-  ActiveRecord::Base.logger = Logger.new(STDOUT)
-  ActiveRecord::Base.clear_active_connections!
-end
 
 class Object
   def interesting_methods

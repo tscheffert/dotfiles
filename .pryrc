@@ -1,9 +1,8 @@
 # Customize Pry! more info: https://github.com/pry/pry/wiki/Customization-and-configuration
 
-require 'readline'
-if Readline::VERSION =~ /editline/i
-  warn "Warning: Using Editline instead of Readline."
-end
+require '~/console_config.rb'
+ConsoleConfig::SetupReadline.do
+ConsoleConfig::ReplaceActiveRecordLoggers.do
 
 # Set the prompt_name to the foldername
 Pry.config.prompt_name = File.basename(Dir.pwd)

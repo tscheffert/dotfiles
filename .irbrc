@@ -1,13 +1,13 @@
 # Better IRB, started from: https://github.com/dstrelau/dotfiles/blob/master/irbrc
 
+require 'irb/completion'
+require 'irb/ext/save-history'
+require 'logger'
+
 # IRB.conf[:USE_READLINE] = true
 IRB.conf[:PROMPT_MODE] = :SIMPLE if IRB.conf[:PROMPT_MODE] == :DEFAULT
 IRB.conf[:EVAL_HISTORY] = 1000
 IRB.conf[:SAVE_HISTORY] = 1000
-
-require 'irb/completion'
-require 'irb/ext/save-history'
-require 'logger'
 
 if defined?(ActiveRecord)
   ActiveRecord::Base.logger = Logger.new(STDOUT)

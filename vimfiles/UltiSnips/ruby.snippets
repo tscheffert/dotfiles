@@ -46,4 +46,17 @@ describe `!p snip.rv = camelize(t[1])` do
 end
 endsnippet
 
+# Templates to write:
+# - Generate an interactor/spec/model given the file name and location
+
+# -- Snippets
+
+snippet reqi "require 'interactors/'" sm
+require 'interactors/${1:interactor}'$0
+endsnippet
+
+snippet reqm "require 'models/'" sm
+require 'models/${1:model}'$0
+endsnippet
+
 # vim: ts=2 sw=2 expandtab ft=snippets:

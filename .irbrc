@@ -4,7 +4,12 @@ require 'irb/completion'
 require 'irb/ext/save-history'
 require 'logger'
 
-# IRB.conf[:USE_READLINE] = true
+require 'readline'
+if Readline::VERSION =~ /editline/i
+  warn "Warning: Using Editline instead of Readline."
+end
+
+IRB.conf[:USE_READLINE] = true
 IRB.conf[:EVAL_HISTORY] = 1000
 IRB.conf[:SAVE_HISTORY] = 1000
 

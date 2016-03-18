@@ -7,14 +7,14 @@ ConsoleConfig::ReplaceActiveRecordLoggers.do
 # Set the prompt_name to the foldername
 Pry.config.prompt_name = File.basename(Dir.pwd)
 
-Pry::Commands.block_command "pretty_methods", "Arg.public_methods minus Object.public_methods, sorted" do |obj_string, cols|
+Pry::Commands.block_command 'pretty_methods', 'Arg.public_methods minus Object.public_methods, sorted' do |obj_string, cols|
   obj = target.eval(obj_string)
 
   list = nil
-  if obj.class == Class
-    list = (obj.instance_methods - obj.superclass.instance_methods).sort
-  else
-    list = (obj.public_methods - obj.superclass.public_methods).sort
+  list = if obj.class == Class
+           (obj.instance_methods - obj.superclass.instance_methods).sort
+         else
+           (obj.public_methods - obj.superclass.public_methods).sort
   end
 
   cols = default_columns_for_size(list.length, cols)
@@ -40,13 +40,13 @@ end
 
 def print_row_sorted(string_array, columns)
   largest = string_array.max.length
-  string_array.each_slice(columns) { |row| output.puts row.map { |e| "%#{largest}s" % e}.join("  ") }
+  string_array.each_slice(columns) { |row| output.puts row.map { |e| "%#{largest}s" % e }.join('  ') }
 end
 
 def print_column_sorted(string_array, columns)
   largest = string_array.max.length
 
-  rows = ((string_array.size+2)/columns)
+  rows = ((string_array.size + 2) / columns)
   cols = string_array.each_slice(rows).to_a
-  cols.first.zip( *cols[1..-1] ).each {|row| output.puts row.map{|e| e ? "%#{largest}s" % e : ' ' * largest}.join("  ")}
+  cols.first.zip(*cols[1..-1]).each { |row| output.puts row.map { |e| e ? "%#{largest}s" % e : ' ' * largest }.join('  ') }
 end

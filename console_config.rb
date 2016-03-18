@@ -28,8 +28,6 @@ module ConsoleConfig
         ActiveRecord::Base.clear_active_connections!
       end
     end
-
   end
 
 end
-

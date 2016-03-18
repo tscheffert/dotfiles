@@ -13,19 +13,19 @@ IRB.conf[:EVAL_HISTORY] = 1000
 IRB.conf[:SAVE_HISTORY] = 1000
 
 ANSI = {
-  RESET: "\e[0m",
-  BOLD: "\e[1m",
+  RESET:     "\e[0m",
+  BOLD:      "\e[1m",
   UNDERLINE: "\e[4m",
-  LGRAY: "\e[0;37m",
-  GRAY: "\e[1;30m",
-  RED: "\e[31m",
-  GREEN: "\e[32m",
-  YELLOW: "\e[33m",
-  BLUE: "\e[34m",
-  MAGENTA: "\e[35m",
-  CYAN: "\e[36m",
-  WHITE: "\e[37m"
-}
+  LGRAY:     "\e[0;37m",
+  GRAY:      "\e[1;30m",
+  RED:       "\e[31m",
+  GREEN:     "\e[32m",
+  YELLOW:    "\e[33m",
+  BLUE:      "\e[34m",
+  MAGENTA:   "\e[35m",
+  CYAN:      "\e[36m",
+  WHITE:     "\e[37m"
+}.freeze
 ANSI.each do |_, v|
   v.replace("\001#{v}\002")
 end
@@ -43,25 +43,27 @@ IRB.conf[:PROMPT][:SIMPLE_COLOR] =
 IRB.conf[:PROMPT_MODE] = :SIMPLE_COLOR
 
 class Object
+
   def interesting_methods
     case self.class
     when Class
-      (self.public_methods - Object.public_methods).sort
+      (public_methods - Object.public_methods).sort
     when Module
-      (self.public_methods - Module.public_methods).sort
+      (public_methods - Module.public_methods).sort
     else
-      (self.public_methods - Object.new.instance_methods).sort
+      (public_methods - Object.new.instance_methods).sort
     end
   end
 
   def pbcopy(stuff)
-    IO.popen('pbcopy', 'r+') {|c| c.puts stuff }
+    IO.popen('pbcopy', 'r+') { |c| c.puts stuff }
     stuff
   end
 
   def pbpaste
     `pbpaste`.chomp
   end
+
 end
 
 def as
@@ -89,10 +91,10 @@ def clear_sidekiq
 end
 
 def exceptions
-  ObjectSpace.each_object(Class).each_with_object([]) do |cls,ex|
+  ObjectSpace.each_object(Class).each_with_object([]) { |cls, ex|
     ex << cls if cls.ancestors.include? Exception
-  end.uniq
+  }.uniq
 end
 
 # Ensure colors are reset at exit
-Kernel.at_exit { puts "#{ANSI[:RESET]}" }
+Kernel.at_exit { puts (ANSI[:RESET]).to_s }

@@ -1,4 +1,5 @@
 # Better IRB, started from: https://github.com/dstrelau/dotfiles/blob/master/irbrc
+# Also good: https://github.com/jasoncodes/dotfiles/blob/master/config/irbrc
 
 require 'irb/completion'
 require 'irb/ext/save-history'

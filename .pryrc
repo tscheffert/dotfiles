@@ -1,4 +1,5 @@
 # Customize Pry! more info: https://github.com/pry/pry/wiki/Customization-and-configuration
+# Also good: https://github.com/jasoncodes/dotfiles/blob/master/config/pryrc
 
 require '~/console_config.rb'
 ConsoleConfig::SetupReadline.do

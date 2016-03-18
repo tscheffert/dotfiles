@@ -5,9 +5,38 @@ require 'irb/ext/save-history'
 require 'logger'
 
 # IRB.conf[:USE_READLINE] = true
-IRB.conf[:PROMPT_MODE] = :SIMPLE if IRB.conf[:PROMPT_MODE] == :DEFAULT
 IRB.conf[:EVAL_HISTORY] = 1000
 IRB.conf[:SAVE_HISTORY] = 1000
+
+ANSI = {
+  RESET: "\e[0m",
+  BOLD: "\e[1m",
+  UNDERLINE: "\e[4m",
+  LGRAY: "\e[0;37m",
+  GRAY: "\e[1;30m",
+  RED: "\e[31m",
+  GREEN: "\e[32m",
+  YELLOW: "\e[33m",
+  BLUE: "\e[34m",
+  MAGENTA: "\e[35m",
+  CYAN: "\e[36m",
+  WHITE: "\e[37m"
+}
+ANSI.each do |_, v|
+  v.replace("\001#{v}\002")
+end
+
+# Build a simple colourful IRB prompt
+IRB.conf[:PROMPT][:SIMPLE_COLOR] =
+  {
+    PROMPT_I:    "#{ANSI[:BLUE]}>>#{ANSI[:RESET]} ",
+    PROMPT_N:    "#{ANSI[:BLUE]}>>#{ANSI[:RESET]} ",
+    PROMPT_C:    "#{ANSI[:RED]}?>#{ANSI[:RESET]} ",
+    PROMPT_S:    "#{ANSI[:YELLOW]}?>#{ANSI[:RESET]} ",
+    RETURN:      "#{ANSI[:GREEN]}=>#{ANSI[:RESET]} %s\n",
+    AUTO_INDENT: true
+  }
+IRB.conf[:PROMPT_MODE] = :SIMPLE_COLOR
 
 if defined?(ActiveRecord)
   ActiveRecord::Base.logger = Logger.new(STDOUT)
@@ -65,3 +94,6 @@ def exceptions
     ex << cls if cls.ancestors.include? Exception
   end.uniq
 end
+
+# Ensure colors are reset at exit
+Kernel.at_exit { puts "#{ANSI[:RESET]}" }

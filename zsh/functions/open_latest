@@ -1,0 +1,27 @@
+#!/usr/bin/env zsh
+# vi: ft=zsh
+
+# Source: https://minhajuddin.com/2016/02/19/how-to-open-the-most-recent-file-created-in-vim/
+
+# Takes a directory as an argument
+function latest() {
+  # finding latest file from the directory and ignoring hidden files
+  echo $(gfind $1 -type f -printf "%T@|%p\n" | \
+    sort -n | \
+    grep -Ev '^\.|/\.' | \
+    tail -n 1 | \
+    cut -d '|' -f2)
+}
+
+function open_latest() {
+  if [[ -z $1 ]]; then
+    local dir=.
+  else
+    local dir=$1
+  fi
+
+
+  ${EDITOR-vim} "$(latest $dir)"
+}
+
+open_latest "$@"

@@ -93,3 +93,4 @@ Rails/TimeZone:
 Lint/LiteralInInterpolation:
   Description: 'Avoid interpolating literals in strings'
   AutoCorrect: false
+  Enabled: false

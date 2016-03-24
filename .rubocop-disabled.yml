@@ -94,3 +94,7 @@ Lint/LiteralInInterpolation:
   Description: 'Avoid interpolating literals in strings'
   AutoCorrect: false
   Enabled: false
+
+Lint/UselessAccessModifier:
+  Description: 'Checks for useless access modifiers.'
+  Enabled: false

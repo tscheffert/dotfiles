@@ -1187,10 +1187,6 @@ Lint/UnreachableCode:
   Description: 'Unreachable code.'
   Enabled: true
 
-Lint/UselessAccessModifier:
-  Description: 'Checks for useless access modifiers.'
-  Enabled: true
-
 Lint/UselessAssignment:
   Description: 'Checks for useless assignment to a local variable.'
   StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#underscore-unused-vars'

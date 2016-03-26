@@ -9,7 +9,7 @@ autocmd!
 filetype off
 
 let s:use_ctrlp = 1
-let s:use_unite = 1
+let s:use_unite = 0
 let s:use_neobundle = 1
 
 if s:use_neobundle

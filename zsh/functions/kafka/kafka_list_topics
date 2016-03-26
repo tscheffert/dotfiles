@@ -1,0 +1,36 @@
+#!/usr/bin/env zsh
+# vi: ft=zsh
+
+# List the topics for a particular kafka env
+function kafka_list_topics() {
+  if [[ -n $1 ]]; then
+    local tc_env=$1
+  else
+    local tc_env="development"
+  fi
+
+  if [[ "$tc_env" == "development" ]]; then
+    local zookeeper_url=$ZOOKEEPER_DEVELOPMENT
+  elif [[ "$tc_env" == "staging" ]]; then
+    local zookeeper_url=$ZOOKEEPER_STAGING
+  elif [[ "$tc_env" == "production" ]]; then
+    local zookeeper_url=$ZOOKEEPER_PRODUCTION
+  else
+    echo "Unrecognized environment: $tc_env"
+    local failed=true
+  fi
+
+  if [[ -z "$zookeeper_url" ]]; then
+    echo "Must export \$ZOOKEEPER_{env} for $tc_env"
+    local failed=true
+  fi
+
+  if [[ $failed ]]; then
+    echo "Usage:"
+    echo "  kafka_list_topics {env}"
+    echo "  - env: The environment to pull from, one of development|staging|production"
+    return 1
+  fi
+
+  kafka-topics.sh --zookeeper "$zookeeper_url" --list
+}

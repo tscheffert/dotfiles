@@ -1,0 +1,50 @@
+#!/usr/bin/env zsh
+# vi: ft=zsh
+
+# List the topics for a particular kafka env
+function kafka_get_message() {
+  if [[ -n "$1" ]]; then
+    local tc_env=$1
+  else
+    echo "Must provide environment"
+    local failed=true
+  fi
+
+  if [[ -n "$2" ]]; then
+    local topic=$2
+  else
+    echo "Must provide topic"
+    local failed=true
+  fi
+
+  if [[ "$tc_env" == "development" ]]; then
+    local broker_url=$KAFKA_DEVELOPMENT
+  elif [[ "$tc_env" == "staging" ]]; then
+    local broker_url=$KAFKA_STAGING
+  elif [[ "$tc_env" == "production" ]]; then
+    local broker_url=$KAFKA_PRODUCTION
+  else
+    echo "Unrecognized environment: $tc_env"
+    local failed=true
+  fi
+
+  if [[ -z "$broker_url" ]]; then
+    echo "Must export \$KAFKA_{env} for $tc_env"
+    local failed=true
+  fi
+
+  if [[ $failed ]]; then
+    echo "Usage:"
+    echo "  kafka_get_message {env} {topic}"
+    echo "  - env: The environment to pull from, one of development|staging|production"
+    echo "  - topic: The topic to pull from, like members_svc.referral_events.v1"
+    return 1
+  fi
+
+  kafka-simple-consumer-shell.sh \
+    --broker-list "$broker_url" \
+    --topic "$topic" \
+    --max-messages 1 \
+    --offset 2 \
+    --partition 0
+}

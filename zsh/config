@@ -14,6 +14,9 @@ autoload -U ~/.zsh/functions/*(.:t)
 fpath=(~/.zsh/functions/psql $fpath)
 autoload -U ~/.zsh/functions/psql/*(.:t)
 
+fpath=(~/.zsh/functions/kafka $fpath)
+autoload -U ~/.zsh/functions/kafka/*(.:t)
+
 
 # -- History --
 function _setup_history() {

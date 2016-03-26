@@ -191,3 +191,6 @@ exec $SHELL -l
 # 5. brew install zsh zsh-completions
 # 6. Add zsh to /etc/shells with 'command -v zsh | sudo tee -a /etc/shells'
 # 7. Set zsh to default shell with 'chsh -s "$(command -v zsh)"'
+
+# -- Pip utilities to install
+# open-repo

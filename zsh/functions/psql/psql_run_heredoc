@@ -1,0 +1,16 @@
+#!/usr/bin/env zsh
+# vi: ft=zsh
+
+function psql_run_heredoc() {
+  local db_url="postgres://trunkclub:trunkclub@postgres.trunkclub.dev/postgres"
+
+  local user=$(echo "$db_url" | pcregrep -o '(?<=postgres:\/\/)\w+?(?=:)')
+
+  local database=${db_url##*/}
+
+  echo "Running query as '$user' against '$database'"
+
+  psql "$db_url" << SQL
+    ALTER TABLE "finance.invoices"
+SQL
+}

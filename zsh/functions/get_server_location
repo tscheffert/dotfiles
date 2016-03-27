@@ -1,0 +1,40 @@
+#!/usr/bin/env zsh
+# vi: ft=zsh
+
+function validate_env() {
+  if [[ ! -d ./.git ]]; then
+    echo "Current directory not a git repo" && return 1
+  fi
+
+  if [[ ! -f ./Capfile ]]; then
+    echo "No Capfile in current directory" && return 1
+  fi
+
+}
+
+function get_server_location() {
+  validate_env
+
+  echo "validate didn't work"
+  if [[ -n $1 ]]; then
+    local environment=$1
+  else
+    local environment="staging"
+  fi
+
+  if [[ "$environment" == "production" ]]; then
+    local env_pre="prd"
+  elif [["$environment" == "staging" ]]; then
+    local env_pre="stg"
+  else
+    echo ""
+  fi
+
+  local server=`ack -o -m1 --match "(app|prx)\d+\.$env_pre\.aws\d+\.trunkclub\.systems" ./Capfile`
+
+  if [[ -n $server ]]; then
+    echo "$server"
+  else
+    echo "Couldn't find server in the Capfile" && return 1
+  fi
+}

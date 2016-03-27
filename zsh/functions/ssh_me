@@ -9,11 +9,11 @@ function ssh_me() {
   fi
 
   if [[ ! -d ./.git ]]; then
-    echo "Current directory not a git repo" && return
+    echo "Current directory not a git repo" && return 1
   fi
 
   if [[ ! -f ./Capfile ]]; then
-    echo "No Capfile in current directory" && return
+    echo "No Capfile in current directory" && return 1
   fi
 
   local line="$(cat ./Capfile | sed -n -e "/task \:$environment/,\$p" | sed -n -e "/server/,\$p" | head -n 1)"

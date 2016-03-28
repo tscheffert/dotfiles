@@ -31,14 +31,18 @@ ANSI.each do |_, v|
   v.replace("\001#{v}\002")
 end
 
+def colorize(str, color, trailing = '')
+  "#{ANSI[color]}#{str}#{ANSI[:RESET]}#{trailing}"
+end
+
 # Build a simple colourful IRB prompt
 IRB.conf[:PROMPT][:SIMPLE_COLOR] =
   {
-    PROMPT_I:    "#{ANSI[:BLUE]}>>#{ANSI[:RESET]} ",
-    PROMPT_N:    "#{ANSI[:BLUE]}>>#{ANSI[:RESET]} ",
-    PROMPT_C:    "#{ANSI[:RED]}?>#{ANSI[:RESET]} ",
-    PROMPT_S:    "#{ANSI[:YELLOW]}?>#{ANSI[:RESET]} ",
-    RETURN:      "#{ANSI[:GREEN]}=>#{ANSI[:RESET]} %s\n",
+    PROMPT_I:    colorize('>>', :BLUE,   ' '),
+    PROMPT_N:    colorize('>>', :BLUE,   ' '),
+    PROMPT_C:    colorize('?>', :RED,    ' '),
+    PROMPT_S:    colorize('?>', :YELLOW, ' '),
+    RETURN:      colorize('=>', :GREEN,  "%s\n"),
     AUTO_INDENT: true
   }
 IRB.conf[:PROMPT_MODE] = :SIMPLE_COLOR

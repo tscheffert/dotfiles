@@ -39,7 +39,7 @@ end
 IRB.conf[:PROMPT][:SIMPLE_COLOR] =
   {
     PROMPT_I:    colorize('>>', :BLUE,   ' '),
-    PROMPT_N:    colorize('>>', :BLUE,   ' '),
+    PROMPT_N:    colorize('>>', :GREEN,  ' '),
     PROMPT_C:    colorize('?>', :RED,    ' '),
     PROMPT_S:    colorize('?>', :YELLOW, ' '),
     RETURN:      colorize('=>', :GREEN,  "%s\n"),

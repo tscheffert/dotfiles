@@ -1,7 +1,6 @@
 # Better IRB, started from: https://github.com/dstrelau/dotfiles/blob/master/irbrc
 # Also good: https://github.com/jasoncodes/dotfiles/blob/master/config/irbrc
 
-require 'irb/completion'
 require 'irb/ext/save-history'
 require 'logger'
 
@@ -46,6 +45,9 @@ IRB.conf[:PROMPT][:SIMPLE_COLOR] =
     AUTO_INDENT: true
   }
 IRB.conf[:PROMPT_MODE] = :SIMPLE_COLOR
+
+ConsoleConfig::Helpers.extend_console('wirb') { Wirb.start } unless defined? Wirb
+ConsoleConfig::Helpers.extend_console('bond') { Bond.start } unless defined? Bond
 
 class Object
 

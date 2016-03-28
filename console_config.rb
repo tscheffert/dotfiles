@@ -1,5 +1,24 @@
 module ConsoleConfig
 
+  module Helpers
+
+    def self.extend_console(name, options = {})
+      options = { require: true }.merge(options)
+      options = options.map { |k, v| v.is_a?(Proc) ? [k, v.call] : [k, v] }.to_h
+
+      return if options.include?(:if) && !options[:if]
+      require name if options[:require]
+
+      yield if block_given?
+    rescue LoadError
+      warn "-- #{colorize('Warning:', :RED)} could not load '#{name}'"
+      puts '-- Is it installed?'
+
+      exit if options[:exit]
+    end
+
+  end
+
   module SetupReadline
 
     def self.perform

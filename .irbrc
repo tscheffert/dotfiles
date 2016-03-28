@@ -6,8 +6,8 @@ require 'irb/ext/save-history'
 require 'logger'
 
 require '~/console_config.rb'
-ConsoleConfig::SetupReadline.do
-ConsoleConfig::ReplaceActiveRecordLoggers.do
+ConsoleConfig::SetupReadline.perform
+ConsoleConfig::ReplaceActiveRecordLoggers.perform
 
 IRB.conf[:USE_READLINE] = true
 IRB.conf[:EVAL_HISTORY] = 1000

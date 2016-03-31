@@ -30,6 +30,7 @@ alias ag="ag --hidden"
 # grep with color
 # for whatever reason this doesn't work with my grep on windows
 #alias grep='grep --color=auto'
+alias grep='grep -i'
 
 # refresh shell
 alias reload='exec zsh -l'

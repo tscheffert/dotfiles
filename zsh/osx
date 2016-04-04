@@ -30,6 +30,9 @@ export VISUAL='mvim -f'
 #   requires /gnubin in the path already
 eval "$(dircolors ~/.dir_colors)"
 
+# Install to global /Applications, not user local ~/Applications
+export HOMEBREW_CASK_OPTS="--appdir=/Applications"
+
 
 # --- Aliases ---
 

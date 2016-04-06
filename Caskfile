@@ -2,70 +2,46 @@
 # Usage: `brew bundle Caskfile`
 # TODO: Validate what I do, or do not, want to install
 
-install caskroom/cask/brew-cask
-tap caskroom/versions
-
-#cask install dropbox 2> /dev/null
-cask install google-chrome 2> /dev/null
-cask install google-chrome-canary 2> /dev/null
-#cask install imagealpha 2> /dev/null
-#cask install imageoptim 2> /dev/null
-cask install iterm2 2> /dev/null
-#cask install macvim 2> /dev/null
-#cask install miro-video-converter 2> /dev/null
-#cask install opera 2> /dev/null
-#cask install opera-developer 2> /dev/null
-#cask install opera-next 2> /dev/null
-#cask install sublime-text 2> /dev/null
-#cask install the-unarchiver 2> /dev/null
-#cask install torbrowser 2> /dev/null
-#cask install transmission 2> /dev/null
-#cask install ukelele 2> /dev/null
-#cask install virtualbox 2> /dev/null
-#cask install vlc 2> /dev/null
+cask install 1password                            # Password manager
+cask install alfred                               # Improved app launcher
+cask install appcleaner                           # Completely uninstall macapps
+cask install atom                                 # Text editor for pairing with non vimers
+cask install caffeine                             # Menu bar icon to keep screen on
+cask install google-chrome                        # Web browser
+cask install iterm2                               # Improved terminal application
+cask install karabiner                            # Keymapping for everything osx
+cask install screenhereo                          # For remote pairing
+cask install sdformatter                          # Graphical tool for formatting sd cards
+cask install slack                                # Chat client for work
+cask install spotify                              # Music streaming client
+cask install the-unarchiver                       # Automatically unzip archived files
+cask install vlc                                  # Video player of champions
 
 # from:
 # Apps
 # apps=(
-#   alfred
-#   dropbox
-#   google-chrome
-#   qlcolorcode
-#   screenflick
-#   slack
-#   transmit
-#   appcleaner
-#   firefox
-#   hazel
-#   qlmarkdown
-#   seil
-#   spotify
-#   vagrant
 #   arq
-#   flash
-#   iterm2
-#   qlprettypatch
-#   shiori
-#   sublime-text3
-#   virtualbox
-#   atom
+#   cloudup
+#   firefox
 #   flux
+#   hazel
+#   iterm2
 #   mailbox
+#   qlcolorcode
+#   qlmarkdown
+#   qlprettypatch
 #   qlstephen
+#   quicklook-json
+#   screenflick
+#   seil
+#   shiori
 #   sketch
 #   tower
+#   transmit
 #   vlc
-#   cloudup
-#   nvalt
-#   quicklook-json
-#   skype
-#   transmission
 # )
 #
 # # Install apps to /Applications
 # # Default is: /Users/$user/Applications
 # echo "installing apps..."
 # brew cask install --appdir="/Applications" ${apps[@]}
-#
-# Alfred users can do:
-# brew cask alfred link

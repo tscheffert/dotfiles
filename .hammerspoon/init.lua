@@ -56,9 +56,9 @@ function alertShowCannotMoveWindow()
 end
 
 function withModifiers(app_name, frame)
-  if app_name == 'iTerm2' then
-    frame.w = frame.w + 5
-  end
+  -- if app_name == 'iTerm2' then
+  --   frame.w = frame.w + 5
+  -- end
 
   return frame
 end

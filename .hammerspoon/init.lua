@@ -70,16 +70,10 @@ hs.hotkey.bind({"shift", "ctrl"}, "K", function ()
     alertShowCannotMoveWindow()
     return
   end
-  local f = win:frame()
   local screen = win:screen()
   local max = screen:frame()
 
-  f.x = max.x
-  f.y = max.y
-  f.w = max.w
-  f.h = max.h
-
-  win:setFrame(f)
+  win:setFrame(max)
 end)
 
 -- Move current window one screen East

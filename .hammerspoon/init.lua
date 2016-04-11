@@ -82,6 +82,28 @@ hs.hotkey.bind({"shift", "ctrl"}, "K", function ()
   win:setFrame(f)
 end)
 
+-- Move current window one screen East
+hs.hotkey.bind({"shift", "ctrl"}, "L", function ()
+  local win = hs.window.focusedWindow()
+  if not win then
+    alertShowCannotMoveWindow()
+    return
+  end
+
+  win:moveOneScreenEast()
+end)
+
+-- Move current window one screen West
+hs.hotkey.bind({"shift", "ctrl"}, "H", function ()
+  local win = hs.window.focusedWindow()
+  if not win then
+    alertShowCannotMoveWindow()
+    return
+  end
+
+  win:moveOneScreenWest()
+end)
+
 -- Move current window to left half of screen
 hs.hotkey.bind({"cmd", "ctrl"}, "H", function ()
   local win = hs.window.focusedWindow()
@@ -167,7 +189,6 @@ hs.hotkey.bind({"cmd", "ctrl"}, "K", function ()
   f = withModifiers(app_name, f)
   win:setFrame(f)
 end)
-
 
 -- Window Hints like slate
 --   I used Karabiner to change cmd+tab to emmit F19

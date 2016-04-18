@@ -1296,6 +1296,13 @@ noremap S i<Space><Esc>r
 " Xml formatting!
 autocmd FileType xml noremap <buffer> <c-e><c-f> :silent %!xmllint % --format --recover<CR>
 
+" " Easier vertical splitting with '|'
+nnoremap <silent> <Bar> :vsplit<CR>
+
+" " Easier horizontal splitting with '_'
+nnoremap <silent> _ :split<CR>
+
+
 " -----
 " Macro Key Maps
 " -----

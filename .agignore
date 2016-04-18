@@ -5,6 +5,8 @@
 *.css
 *.scss
 *.html.erb
+*.p
+*.pkl
 logs/
 .git/tags
 log/

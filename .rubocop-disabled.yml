@@ -12,6 +12,12 @@ Style/ExtraSpacing:
   Description: 'Do not use unnecessary spacing.'
   Enabled: false
 
+Lint/IneffectiveAccessModifier:
+  Description: >-
+                 Checks for attempts to use `private` or `protected` to set
+                 the visibility of a class method, which does not work.
+  Enabled: false
+
 Style/InlineComment:
   Description: 'Avoid inline comments.'
   Enabled: false

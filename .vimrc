@@ -1230,6 +1230,16 @@ let g:livedown_port = 3030
 
 
 " -----
+" Plugin: vim-gitgutter
+" -----
+" Extra commandline arguments for git diff
+let g:gitgutter_diff_args = '-w'
+
+nmap [h <Plug>GitGutterPrevHunk
+nmap ]h <Plug>GitGutterNextHunk
+
+
+" -----
 "  Key Maps
 " -----
 

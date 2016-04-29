@@ -1109,6 +1109,9 @@ endif
 " let g:syntastic_check_on_open = 1
 " let g:syntastic_check_on_wq = 0
 
+" Don't use any checkers for python, too slow
+let g:syntastic_python_checkers = []
+
 " Use the rbenv ruby instead of system (outdated) ruby
 let g:syntastic_ruby_mri_exec = '/usr/local/var/rbenv/shims/ruby'
 

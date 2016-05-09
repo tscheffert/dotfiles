@@ -121,7 +121,8 @@ if s:use_neobundle
   " NeoBundle 'jsx/jsx.vim'
 
   " Status bar
-  NeoBundle 'bling/vim-airline'
+  NeoBundle 'vim-airline/vim-airline'
+  NeoBundle 'vim-airline/vim-airline-themes'
   NeoBundle 'ntpeters/vim-airline-colornum' " Highlight the current line number with the color of the current mode
 
   " Easier file movement

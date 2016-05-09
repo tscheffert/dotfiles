@@ -34,6 +34,20 @@ eval "$(dircolors ~/.dir_colors)"
 export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 
 
+# --- Go ---
+# Add GOROOT-based install location to path
+# append_to_path '/usr/local/opt/go/libexec/bin'
+
+# This is where of the depedencies and such
+if [[ ! -d ~/go ]]; then
+  mkdir ~/go
+fi
+export GOPATH="$HOME/go"
+
+# Add golang tooling that I download to the path
+append_to_path "$GOPATH/bin"
+
+
 # --- Aliases ---
 
 # Hide/Show dot prefaced files in finder

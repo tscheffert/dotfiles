@@ -187,6 +187,9 @@ if s:use_neobundle
   " Rename a buffer and on disk
   NeoBundle 'danro/rename.vim'
 
+  " Go!
+  NeoBundle 'fatih/vim-go'
+
   " Considering!
   " https://github.com/chrisbra/vim-diff-enhanced " Improved diff's using histogram and patience algorithms
   " https://github.com/thoughtbot/vim-rspec " Sweet rspec integration
@@ -1214,6 +1217,12 @@ let g:incsearch#magic = '\m'
 
 " Highlight matched pattern separately with forward matches and backward matches
 let g:incsearch#separate_highlight = 1
+
+
+" -----
+" Plugin: vim-go
+" -----
+let g:go_fmt_command = "goimports"
 
 
 " -----

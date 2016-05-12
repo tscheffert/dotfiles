@@ -2,8 +2,8 @@
 # Also good: https://github.com/jasoncodes/dotfiles/blob/master/config/pryrc
 
 require '~/console_config.rb'
-ConsoleConfig::SetupReadline.do
-ConsoleConfig::ReplaceActiveRecordLoggers.do
+ConsoleConfig::SetupReadline.perform
+ConsoleConfig::ReplaceActiveRecordLoggers.perform
 
 # Set the prompt_name to the foldername
 Pry.config.prompt_name = File.basename(Dir.pwd)

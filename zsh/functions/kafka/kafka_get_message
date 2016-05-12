@@ -17,6 +17,12 @@ function kafka_get_message() {
     local failed=true
   fi
 
+  if [[ -n "$3" ]]; then
+    local offset="$3"
+  else
+    local offset="-1"
+  fi
+
   if [[ "$tc_env" == "development" ]]; then
     local broker_url=$KAFKA_DEVELOPMENT
   elif [[ "$tc_env" == "staging" ]]; then
@@ -45,6 +51,6 @@ function kafka_get_message() {
     --broker-list "$broker_url" \
     --topic "$topic" \
     --max-messages 1 \
-    --offset 2 \
+    --offset "$offset" \
     --partition 0
 }

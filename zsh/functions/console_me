@@ -1,0 +1,33 @@
+#!/usr/bin/env zsh
+# vi: ft=zsh
+
+function console_me() {
+  if [[ -n $1 ]]; then
+    local environment=$1
+  else
+    local environment="staging"
+  fi
+
+  if [[ ! -d ./.git ]]; then
+    echo "Current directory not a git repo" && return 1
+  fi
+
+  if [[ ! -f ./Capfile ]]; then
+    echo "No Capfile in current directory" && return 1
+  fi
+
+  local line="$(cat ./Capfile | sed -n -e "/task \:$environment/,\$p" | sed -n -e "/server/,\$p" | head -n 1)"
+
+  if [[ $line =~ "\'(.+aws1.+)\'" ]]; then
+    local location=$match[1]
+
+    echo "sshing to $environment at $location"
+
+    local target_dir="$(git remote show origin -n | \
+      ack -m1 --match "\bFetch URL:.*\/(?<repo_name>.*?)(?:\.git|$)" --output "$+{repo_name}")"
+
+    ssh -t tscheffert@$location "sudo -u deployer sh -c 'cd /var/app/$target_dir && exec script/console'"
+  else
+    echo "Couldn't find server in the Capfile"
+  fi
+}

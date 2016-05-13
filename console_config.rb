@@ -44,8 +44,17 @@ module ConsoleConfig
     def self.perform
       return unless defined? ActiveRecord
 
+      original_logger = ActiveRecord::Base.logger
+
       ActiveRecord::Base.logger = Logger.new(STDOUT)
       ActiveRecord::Base.clear_active_connections!
+
+      if defined? Pry
+        Pry.hooks.add_hook :after_session, :restore_logger do |*_|
+          ActiveRecord::Base.logger = original_logger
+          ActiveRecord::Base.clear_active_connections!
+        end
+      end
     end
 
   end

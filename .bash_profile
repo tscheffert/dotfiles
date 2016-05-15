@@ -162,9 +162,6 @@ export EDITOR="vim";
 export LANG="en_US.UTF-8";
 export LC_ALL="en_US.UTF-8";
 
-# Github API Key!
-export HOMEBREW_GITHUB_API_TOKEN=b378ad9787685006e70642743a402d838e6fac64;
-
 # -- History --
 # larger bash history (allow 32^3 entries; default is 500)
 export HISTSIZE=32768;

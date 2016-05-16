@@ -1119,6 +1119,7 @@ let g:syntastic_python_checkers = []
 " Use 'yamllint' for yaml files
 "   Further Info: http://yamllint.readthedocs.io/en/latest/
 let g:syntastic_yaml_checkers = ['yamllint']
+let g:syntastic_yaml_yamllint_args = '-c ' . shellescape($HOME . '/.yamllint')
 
 " Use the rbenv ruby instead of system (outdated) ruby
 let g:syntastic_ruby_mri_exec = '/usr/local/var/rbenv/shims/ruby'

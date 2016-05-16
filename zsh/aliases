@@ -146,5 +146,8 @@ alias ...='cd ../..'     # Go up two directories
 alias ....='cd ../../..' # Go up three directories
 alias -- -='cd -'        # Go back
 
+# Provide a config file to yamllint
+alias yamllint='yamllint -c $HOME/.yamllint'
+
 # Run the last command as sudo
 alias ok='sudo $(fc -ln -1)'

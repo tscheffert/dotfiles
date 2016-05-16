@@ -92,6 +92,7 @@ if [[ -d $HOME/.dotfiles ]]; then
   link_file .psqlrc
   link_file .dir_colors
   link_file console_config.rb
+  link_file .yamllint
 
   # Symlink Optional files
   link_optional_file .zshrc.local

@@ -3,22 +3,22 @@ dotfiles
 
 TScheffe's take on .dotfiles
 
-### Installation ###
+## Installation ###
 *Note, this is for me to remember as much as for others to follow!*
 
-#### To Start ####
+### To Start ####
 ````shell
 cd ~
 
 git clone https://github.com/tscheffe/dotfiles.git .dotfiles
 ```
 
-#### For OSX ####
+### For OSX ####
 ```shell
 bash bootstrap/osx_bootstrap.sh
 ```
 
-#### For Windows ####
+### For Windows ####
 ```shell
 bootstrap/bootstrap.bat
 
@@ -34,4 +34,10 @@ Run:
 (git submodule update --init)
 
 git submodule foreach "(git rm --cached -r . && git reset --hard && git pull origin master)"
+```
+
+
+### Install Python dependencies
+```shell
+pip install -r requirements.txt
 ```

@@ -99,7 +99,6 @@ if [[ -d $HOME/.dotfiles ]]; then
 
   # Other links
   link_file_with_directory .hammerspoon init.lua
-  # ln -sf $HOME/.dotfiles/.hammerspoon/init.lua $HOME/$file
 
   echo "Dotfiles have been symlinked to $HOME."
 fi

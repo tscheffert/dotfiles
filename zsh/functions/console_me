@@ -26,7 +26,7 @@ function console_me() {
     local target_dir="$(git remote show origin -n | \
       ack -m1 --match "\bFetch URL:.*\/(?<repo_name>.*?)(?:\.git|$)" --output "$+{repo_name}")"
 
-    ssh -t tscheffert@$location "sudo -u deployer sh -c 'cd /var/app/$target_dir && exec script/console'"
+    ssh -t tscheffert@$location "sudo -u deployer sh -c 'cd /var/app/$target_dir && exec script/console $environment'"
   else
     echo "Couldn't find server in the Capfile"
   fi

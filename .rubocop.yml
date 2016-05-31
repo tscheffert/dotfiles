@@ -294,7 +294,7 @@ Style/ClassAndModuleChildren:
   #   end
   #
   # The compact style is only forced, for classes / modules with one child.
-  EnforcedStyle: nested
+  EnforcedStyle: compact
   SupportedStyles:
     - nested
     - compact

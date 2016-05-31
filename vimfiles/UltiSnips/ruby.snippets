@@ -42,7 +42,20 @@ require 'spec_helper'
 require '${1:class_to_test}'
 
 describe `!p snip.rv = camelize(t[1])` do
-	$0
+  $0
+end
+endsnippet
+
+
+snippet specc "spec file template" sm
+require 'spec_helper'
+require 'shared_contexts/controller'
+
+require 'controllers/${1:controller_to_test}'
+
+describe `!p snip.rv = camelize(t[1])` do
+  include_context 'Controller'
+  $0
 end
 endsnippet
 

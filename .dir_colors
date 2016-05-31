@@ -41,10 +41,15 @@ TERM xterm*
 # string consists of one or more of the following numeric codes:
 # Attribute codes:
 # 00=none 01=bold 04=underscore 05=blink 07=reverse 08=concealed
+# -- Colors:
 # Text color codes:
-# 30=black 31=red 32=green 33=yellow 34=blue 35=magenta 36=cyan 37=white
+#   Regular: 30=grey 31=red 32=green 33=yellow 34=blue 35=magenta 36=cyan 37=white
+#   Light:   90=grey 91=red 92=green 93=yellow 94=blue 95=magenta 96=cyan 37=???
+#
 # Background color codes:
-# 40=black 41=red 42=green 43=yellow 44=blue 45=magenta 46=cyan 47=white
+#   Regular:  40=black  41=red  42=green  43=yellow  44=blue  45=magenta  46=cyan  47=white
+#   Light:   100=black 101=red 102=green 103=yellow 104=blue 105=magenta 106=cyan 107=white?
+#
 #NORMAL 00 # no color code at all
 FILE 00;37 # regular file: use no color at all
 RESET 0 # reset to "normal" color

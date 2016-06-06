@@ -113,6 +113,9 @@ alias gi-r='git update-index --no-assume-unchanged'
 #   'git ignore list'
 alias gi-l="git ls-files -v | grep '^[[:lower:]]' | cut -f2 -d' '"
 
+# Git Branch Fix Upstream
+alias gbfu="git branch --set-upstream-to=origin/$(git symbolic-ref HEAD 2>/dev/null | cut -d'/' -f3)"
+
 # -- Ruby Aliases --
 # Run Rubocop gem
 alias rbc='rubocop'

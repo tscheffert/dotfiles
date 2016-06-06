@@ -1,0 +1,77 @@
+#!/bin/bash
+
+# Ensure we have rubocop installed
+if ! gem list rubocop -i &> /dev/null; then
+    gem install rubocop --no-document
+fi
+
+function untracked-files() {
+  # List of files that are currently "untracked"
+
+  # git status:
+  #   --porcelain - Radically trimmed down status message, with only
+  #     {A,M,D,??} to indicate status followed by a space then the file name
+  #   -u - Only show status on untracked-files
+  # | grep "^?? " - Match lines that start with "?? "
+  # | sed
+  #   -e - Expression, adds a script to execute
+  #   's/^[?]* //' - Substitute matching the first part with the second part
+  git status --porcelain -u \
+    | grep "^?? " \
+    | sed -e 's/^[?]* //'
+}
+
+function unstaged-files() {
+  # List of files that are currently "unstaged"
+
+  # git status:
+  #   --porcelain - Radically trimmed down status message, with only
+  #     {A,M,D,??} to indicate status followed by a space then the file name
+  #   -u - Only show status on untracked-files
+  # | grep
+  #   -E - behave like egrep, use regexs
+  #   -e "" - The regex to match
+  #   "^(?: |.)M " - Match lines where the start has " M " or ".M ", basically
+  #     where the second character is an M
+  # | sed
+  #   -e - Expression, adds a script to execute
+  #   's/^[ A-Z]M //' - Substitute matching the first part with the second part
+  git status --porcelain -u \
+    | grep -E -e"^(?: |.)M " \
+    | sed -e 's/^[ A-Z]M //'
+}
+
+function join-pipe() {
+  # Take a bunch of newline separated input and change the separator to a |
+    ruby -e "\$stdout.puts ARGF.read.lines.map(&:chomp).join('|')"
+}
+
+untracked=$(untracked-files)
+unstaged=$(unstaged-files)
+
+# Create a list of files that we won't want to run against rubocop --auto-correct
+dont_rbca=$(echo "$untracked
+$unstaged
+"| awk NF | join-pipe)
+
+# Don't autocorrect generated files
+additional_excludes='routes\.rb|schema\.rb'
+
+# Get the staged files that we do want to auto-correct
+staged=$(git diff --cached --name-only --diff-filter=ACMRT)
+
+# Get our list of filtered files
+to_rbca=$(echo "$staged" \
+  | grep \.rb$ \
+  | grep -vE -e "$additional_excludes")
+
+if [[ -n "$dont_rbca" ]]; then
+  to_rbca=$(echo "$to_rbca" \
+    | grep -vE -e "$dont_rbca")
+fi
+
+# Run files through rubocop --auto-correct
+echo "$to_rbca" | xargs rubocop --auto-correct &> /dev/null
+
+# Commit the now corrected files
+echo "$to_rbca" | xargs git add &> /dev/null

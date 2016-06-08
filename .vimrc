@@ -1340,10 +1340,10 @@ noremap S i<Space><Esc>r
 " Xml formatting!
 autocmd FileType xml noremap <buffer> <c-e><c-f> :silent %!xmllint % --format --recover<CR>
 
-" " Easier vertical splitting with '|'
+" Easier vertical splitting with '|'
 nnoremap <silent> <Bar> :vsplit<CR>
 
-" " Easier horizontal splitting with '_'
+" Easier horizontal splitting with '_'
 nnoremap <silent> _ :split<CR>
 
 
@@ -1466,6 +1466,7 @@ let g:UltiSnipsEnableSnipMate=0
 " NERDTree Key Maps
 " -----
 nnoremap <leader>nt :NERDTreeToggle<CR>
+
 
 " -----
 " vim-livedown (for Markdown) Key Maps

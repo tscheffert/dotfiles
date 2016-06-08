@@ -968,12 +968,13 @@ fun! CloseIfNERDTreeIsLast()
   " Close all open buffers on entering a window if the only
   "   buffer that's left is the NERDTree buffer
   if exists("t:NERDTreeBufName") && bufwinnr(t:NERDTreeBufName) != -1 && winnr("$") == 1
+    echom "CLOSING"
     q
   endif
 endfun
 
 function! CloseIfNERDTreeIsPrimary()
-  if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary")
+  if winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()
     q
   endif
 endfunction

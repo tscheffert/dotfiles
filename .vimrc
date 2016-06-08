@@ -948,6 +948,21 @@ augroup END
 " Source: https://github.com/mhinz/vim-sayonara
 " Source: https://github.com/scrooloose/nerdtree
 
+" Close NERDTree after openning a file
+let NERDTreeQuitOnOpen=1
+
+" Show hidden files by default
+let NERDTreeShowHidden=1
+
+" Hide helper text at the top
+let NERDTreeMinimalUI=1
+
+" Cascae open while selected directory has only one child thats a directory
+let NERDTreeCascadeOpenSingleChildDir=1
+
+" Automatically remove a buffer when a file is deleted or renamed
+let NERDTreeAutoDeleteBuffer=1
+
 augroup NERDTreeCustomization
   autocmd!
 

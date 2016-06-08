@@ -1346,6 +1346,10 @@ nnoremap <silent> <Bar> :vsplit<CR>
 " Easier horizontal splitting with '_'
 nnoremap <silent> _ :split<CR>
 
+" Set the buffer to <Scratch>
+" TODO: Consider setting this by default when we just open vim with no file specified
+nnoremap <silent> <Leader>s :setlocal buftype=nofile<CR>
+
 
 " -----
 " Macro Key Maps

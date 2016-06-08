@@ -971,22 +971,11 @@ augroup NERDTreeCustomization
   " autocmd StdinReadPre * let s:std_in=1
   " autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 
-  " Close NERDTree in certain situations
+  " Close NERDTree
   " This should happen:
-  "   TODO: When I :bd the last buffer and only NERDTree is left
-  "   When I ZZ the window and only NERDTree is left
-  " autocmd BufWinEnter * call CloseIfNERDTreeIsLast()
+  "   When I ZZ the window and only the NERDTree window is left
   autocmd BufEnter * call CloseIfNERDTreeIsPrimary()
 augroup END
-
-fun! CloseIfNERDTreeIsLast()
-  " Close all open buffers on entering a window if the only
-  "   buffer that's left is the NERDTree buffer
-  if exists("t:NERDTreeBufName") && bufwinnr(t:NERDTreeBufName) != -1 && winnr("$") == 1
-    echom "CLOSING"
-    q
-  endif
-endfun
 
 function! CloseIfNERDTreeIsPrimary()
   if winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()
@@ -1329,7 +1318,16 @@ nnoremap <silent> <Leader>nhws :set nolist<CR>
 nnoremap <silent> <Leader>bo :BufOnly<CR>
 
 " Close the current buffer, preserving the window
-nnoremap <silent> <Leader>bd :Sayonara!<CR>
+nnoremap <silent> <Leader>bd :call BetterBufferDelete()<CR>
+
+function! BetterBufferDelete()
+  if exists("t:NERDTreeBufName") && bufwinnr(t:NERDTreeBufName) != -1 && winnr("$") == 2
+    execute "bdelete" bufnr("%")
+    quit
+  else
+    execute "Sayonara!"
+  endif
+endfunction
 
 " Fix ^M line endings
 nnoremap <silent> <Leader>le :s%/\r/\r/g<CR>

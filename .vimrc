@@ -456,6 +456,14 @@ augroup GitFiles
   autocmd Filetype gitconfig setlocal commentstring=#%s
 augroup END
 
+augroup ZshFiles
+  au!
+
+  " Don't continue comments, with o/O or <Enter>, _seriously_
+  autocmd Filetype zsh setlocal formatoptions-=ro
+augroup END
+
+
 " -----
 " Typing Behaviors
 " -----

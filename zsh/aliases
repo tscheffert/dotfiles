@@ -1,7 +1,9 @@
 #!/usr/bin/env zsh
 # vi: ft=zsh
 
+# Folder shortcuts
 alias cd-d='cd ~/.dotfiles'
+alias cd-dev='cd ~/dev'
 
 # ls alias for color-mode
 alias lh='ls -lhaG'

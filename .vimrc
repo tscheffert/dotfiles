@@ -1256,7 +1256,7 @@ let g:livedown_port = 3030
 " Plugin: vim-markdown
 " -----
 " Enable syntax highlighting for fenced code blocks
-let g:markdown_fenced_languages = ['html', 'python', 'bash=sh', 'shell=sh', 'css', 'sass', 'less'
+let g:markdown_fenced_languages = ['html', 'python', 'bash=sh', 'shell=sh', 'css', 'sass', 'less',
       \ 'zsh=sh', 'ruby', 'erb=eruby', 'javascript', 'js=javascript', 'json=javascript']
 
 

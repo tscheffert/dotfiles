@@ -1,12 +1,34 @@
 # Better IRB, started from: https://github.com/dstrelau/dotfiles/blob/master/irbrc
 # Also good: https://github.com/jasoncodes/dotfiles/blob/master/config/irbrc
+# Load hooks from: https://github.com/itspriddle/dotfiles/blob/master/irb.d/on_load.rb
 
 require 'irb/ext/save-history'
 require 'logger'
-
 require '~/console_config.rb'
+
+module IRB
+  def self.hooks
+    @hooks ||= []
+  end
+
+  def self.on_load
+    hooks << Proc.new
+  end
+
+  def self.run_onload!
+    hooks.shift.call while hooks.any?
+  end
+
+  IRB.conf[:IRB_RC] = Proc.new do
+    IRB.run_onload!
+  end
+end
+
 ConsoleConfig::SetupReadline.perform
-ConsoleConfig::ReplaceActiveRecordLoggers.perform
+
+IRB.on_load do
+  ConsoleConfig::ReplaceActiveRecordLoggers.perform
+end
 
 IRB.conf[:USE_READLINE] = true
 IRB.conf[:EVAL_HISTORY] = 1000

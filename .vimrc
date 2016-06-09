@@ -175,8 +175,8 @@ if s:use_neobundle
   NeoBundle 'wellle/targets.vim'
 
   " Better Markdown
-  " NeoBundle 'suan/vim-instant-markdown'
   NeoBundle 'shime/vim-livedown'
+  NeoBundle 'tpope/vim-markdown'
 
   " Better Buffer management
   NeoBundle 'mhinz/vim-sayonara'
@@ -1250,6 +1250,14 @@ let g:livedown_open = 1
 
 " Port to run Livedown on
 let g:livedown_port = 3030
+
+
+" -----
+" Plugin: vim-markdown
+" -----
+" Enable syntax highlighting for fenced code blocks
+let g:markdown_fenced_languages = ['html', 'python', 'bash=sh', 'shell=sh', 'css', 'sass', 'less'
+      \ 'zsh=sh', 'ruby', 'erb=eruby', 'javascript', 'js=javascript', 'json=javascript']
 
 
 " -----

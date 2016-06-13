@@ -1,0 +1,31 @@
+#!/usr/bin/env zsh
+# vi: ft=zsh
+
+# From: http://blog.tdg5.com/sixty-bash-tastic-git-aliases/
+function git_branch_recent() {
+  local GBRR_DEFAULT_COUNT=5
+  local count=${1-$GBRR_DEFAULT_COUNT}
+
+  IFS=$'\r\n'
+  local branches=($(
+    git reflog | \
+    sed -n 's/.*checkout: moving from .* to \(.*\)/\1/p' | \
+    perl -ne 'print unless $a{$_}++' | \
+    head -n "$count"
+  ))
+
+  # For some reason the first element in 'branches' is always blank, just start at 1
+  local i
+  for ((i = 1; i < ${#branches[@]}; i++)); do
+    echo "$i) ${branches[$i]}"
+  done
+
+  # Note: Could be used to switch to those branches as well
+  # read -p "Switch to which branch? "
+  # if [[ $REPLY != "" ]] && [[ ${branches[$REPLY]} != "" ]]; then
+  #   echo
+  #   git checkout ${branches[$REPLY]}
+  # else
+  #   echo Aborted.
+  # fi
+}

@@ -1,0 +1,13 @@
+#!/usr/bin/env zsh
+# vi: ft=zsh
+
+# Adapted from: http://blog.tdg5.com/sixty-bash-tastic-git-aliases/
+function git_grep_open() {
+  local matches=($(git grep --name-only "$@"))
+
+  if [[ ${#matches[@]} -eq 0 ]]; then
+    echo "No matches"
+  else
+    $EDITOR $matches
+  fi
+}

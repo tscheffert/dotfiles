@@ -63,20 +63,32 @@ alias gbd='git branch -d'
 
 alias gbd-m='git_delete_merged'
 
-# "Git add patched"
+# List the recent git branches
+alias gbr='git_branch_recent'
+
+# Git add patched
 alias gap='git add -p'
 
-# "Git add all"
+# Git add all
 alias gaa='git add .'
 
-# "Git commit"
+# Git add only updated files, no new files
+alias gau='git add -u'
+
+# Git add new, adds a blank file for untracked files, useful for things like git diff
+alias gan='git add -N'
+
+# Git commit
 alias gc='git commit'
 
-# Trying to use `git commit` without the command line flag, disabling this will help
-# alias gcm='git commit -m'
+# Git commit with message
+alias gcm='git commit -m'
 
 # --amend changes the latest commit, and --no-edit tells it we don't want to change the messge
 alias gca='git commit --amend --no-edit'
+
+# Git commit ammend, with edit (the message)
+alias gcae='git commit --amend'
 
 alias gd='git diff --color-words'
 
@@ -90,18 +102,34 @@ alias gco='git checkout'
 
 alias gcom='git checkout master'
 
+# Git checkout all
+alias gcoa='git checkout -- .'
+
 # Follow it up with a hyphen delimited branch name like: 'gcob my-branch-name'
 alias gcob='git checkout -b'
 
 alias glg='git_pretty_log'
 
+# Show the diffs for recent commits with git log
+alias glp='git log -p'
+
 alias gr='git rebase'
 
 alias grc='git rebase --continue'
 
+alias gra='git rebase --abort'
+
 alias grom='git rebase origin/master'
 
 alias griom='git rebase -i origin/master'
+
+# Git reset to head
+alias grs='git reset HEAD'
+
+# Undo the last commit(s)
+alias grh1='git reset HEAD~1'
+alias grh2='git reset HEAD~2'
+alias grh3='git reset HEAD~3'
 
 # Temporarily ignore changes but leave them in the filesystem
 #   'git ignore add', follow up with a <file>
@@ -117,6 +145,36 @@ alias gi-l="git ls-files -v | grep '^[[:lower:]]' | cut -f2 -d' '"
 
 # Git Branch Fix Upstream
 alias gbfu="git branch --set-upstream-to=origin/$(git symbolic-ref HEAD 2>/dev/null | cut -d'/' -f3)"
+
+# Git Branch Previous
+alias gbrp='git reflog | sed -n "s/.*checkout: moving from .* to \(.*\)/\1/p" | sed "2q;d"'
+
+# Stash all tracked, unstaged files
+alias gst='git stash'
+
+# Stash with a message, includes untracked and ignored files
+alias gss='git stash save --include-untracked'
+
+# List all stashed files
+alias gsl='git stash list'
+
+# Pop the last changes off the stash
+alias gsp='git stash pop'
+
+# Show a stashed item
+#   '-p' makes it more like 'git show'
+#   use with 'stash@{n}' to reference a particular stash item
+alias gssh='git stash show -p'
+
+# Drop a stash item, latest by default and specify with 'stash@{n}'
+alias gsd='git stash drop'
+
+# Git Grep for a list of files that contain the string
+alias ggno='git grep --name-only'
+
+# Git grep for files that contain string and open them in vim
+alias ggo='git_grep_open'
+
 
 # -- Ruby Aliases --
 # Run Rubocop gem
@@ -156,3 +214,4 @@ alias yamllint='yamllint -c $HOME/.yamllint'
 
 # Run the last command as sudo
 alias ok='sudo $(fc -ln -1)'
+

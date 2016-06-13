@@ -1,0 +1,10 @@
+#!/usr/bin/env zsh
+# vi: ft=zsh
+
+# CD to root of git repo -> CD to home dir -> CD to root of filesystem
+# From: http://blog.tdg5.com/sixty-bash-tastic-git-aliases/
+function up() {
+  [ $(git rev-parse --show-toplevel 2>/dev/null || echo ~) = $(pwd) ] \
+    && cd $([ $(echo ~) = $(pwd) ] && echo / || echo) \
+    || cd $(git rev-parse --show-toplevel 2>/dev/null)
+}

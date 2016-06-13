@@ -1,0 +1,20 @@
+#!/usr/bin/env zsh
+# vi: ft=zsh
+
+# Generates a list of most frequently used 1-2 word commands
+# Idea from: http://blog.tdg5.com/sixty-bash-tastic-git-aliases/
+function topcmds() {
+  # Set the number of commands we want to display, with a default
+  [ ! -z $1 ] && local n="$1" || local n="10"
+
+  # I set a new history file for each day, get a list of all the files
+  local hist_files=($(find ${HISTFILE%/*} -type f))
+
+  # 1. I use 'setopt EXTENDED_HISTORY', get rid of that
+  # 2. Count the number of times each unique command is in history
+  # 3. Sort the commands by count
+  # 4. Output the top $n
+  awk '{ cmd=$0; sub(/: [0-9]*:[0-9]*;/, "", cmd); a[cmd]++} END { for (i in a){ print a[i] " " i } }' $hist_files \
+    | sort -rn \
+    | head -n $n
+}

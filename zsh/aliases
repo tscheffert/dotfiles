@@ -215,3 +215,6 @@ alias yamllint='yamllint -c $HOME/.yamllint'
 # Run the last command as sudo
 alias ok='sudo $(fc -ln -1)'
 
+# Open changed files in (m)vim
+alias mvim-gd='mvim $(git diff --name-only)'
+alias vim-gd='vim $(git diff --name-only)'

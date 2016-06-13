@@ -1,6 +1,16 @@
-#! /usr/env/bin bash
+#!/usr/env/bin bash
 #
 # Install my preferred rbenv plugins!
+
+echo ""
+echo " -- Installing rbenv plugins --"
+
+if ! type rbenv >/dev/null 2>&1; then
+  warn "rbenv required to install rbenv plugins..."
+  exit 1
+else
+  echo "rbenv found"
+fi
 
 ensure_exists() {
   if [[ ! -d $1 ]]; then
@@ -36,3 +46,5 @@ install_plugin tpope/rbenv-communal-gems
 install_plugin nicknovitski/rbenv-gem-update
 install_plugin rkh/rbenv-whatis
 install_plugin toy/rbenv-update-rubies
+
+echo " -- Finished installing rbenv plugins --"

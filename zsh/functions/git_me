@@ -16,5 +16,11 @@ function git_me() {
 
   local directory=~/dev/$plugin
 
+  if [[ -d "$directory" ]]; then
+    echo "$plugin already exists, changing directory"
+    cd "$directory"
+    return 0
+  fi
+
   git clone $repository $directory && cd $directory
 }

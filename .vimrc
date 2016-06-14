@@ -1001,7 +1001,7 @@ let g:airline#extensions#disable_rtp_load = 1
 
 " Don't load any extensions by default
 let g:airline_extensions = [
-      \ 'default', 'quickfix', 'syntastic', 'ctrlp', 'whitespace', 'tabline'
+      \ 'quickfix', 'syntastic', 'ctrlp', 'whitespace', 'tabline'
       \ ]
 
 " Must be all spaces or all tabs

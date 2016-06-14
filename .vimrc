@@ -996,6 +996,17 @@ endfunction
 " Plugin: Airline
 " -----
 
+" Don't load extensions based on runtime path
+let g:airline#extensions#disable_rtp_load = 1
+
+" Don't load any extensions by default
+let g:airline_extensions = [
+      \ 'default', 'quickfix', 'syntastic', 'ctrlp', 'whitespace', 'tabline'
+      \ ]
+
+" Must be all spaces or all tabs
+let g:airline#extensions#whitespace#mixed_indent_algo = 1
+
 " Automatically displays all buffers when theres only one tab open
 " TODO: investigate airline-tabline for more options
 let g:airline#extensions#tabline#enabled = 1
@@ -1003,9 +1014,7 @@ let g:airline#extensions#tabline#enabled = 1
 " Enable syntastic integration
 let g:airline#extensions#syntastic#enabled = 1
 
-" TODO: investigate airline-hunks (and mhinz/vim-signify + tomtom/quickfixsigns_vim)
 " TODO: investigate airline-ctrlp for show_adjacent_modes
-" TODO: investigate airline-wordcount
 
 " Ensure symbols dictionary exists
 if !exists('g:airline_symbols')
@@ -1013,9 +1022,8 @@ if !exists('g:airline_symbols')
 endif
 
 " Set custom symbols
-" TODO: Doesn't work in terminal vim
 let g:airline_left_sep = '►'
-let g:airline_right_sep = '◄' " Does work in terminal...?
+let g:airline_right_sep = '◄'
 
 " Set up status line
 let g:airline#extensions#tabline#left_alt_sep = '|'
@@ -1023,11 +1031,17 @@ let g:airline_section_y=' [%n] '
 let g:airline_section_z='%3p%% : %3l/%-3L :%4c '
 let g:airline#extensions#default#layout = [
       \ [ 'a', 'c' ],
-      \ [ 'x', 'y', 'z', 'warning' ]
+      \ [ 'x', 'y', 'z', 'error', 'warning' ]
       \ ]
 
 " Disable paste detection
 let g:airline_detect_paste=1
+
+" Don't draw separators that are empty
+" let g:airline_skip_empty_sections = 1
+
+" let g:airline_detect_iminsert=0
+" let g:airline_inactive_collapse=1
 
 " Enable the cursorline coloring
 :set cursorline

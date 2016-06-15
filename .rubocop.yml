@@ -1,3 +1,4 @@
+---
 # This started as the default configuration and then I have modified it to suite
 # my preferences.
 
@@ -923,7 +924,7 @@ Style/WordArray:
   # The regular expression WordRegex decides what is considered a word.
   WordRegex: !ruby/regexp '/\A[\p{Word}\n\t]+\z/'
 
-##################### Metrics ##################################
+# ##################### Metrics #####################
 
 Metrics/AbcSize:
   # The ABC size is a calculated magnitude, so this number can be a Fixnum or
@@ -966,7 +967,7 @@ Metrics/ParameterLists:
 Metrics/PerceivedComplexity:
   Max: 7
 
-##################### Lint ##################################
+# ##################### Lint #####################
 
 # Allow safe assignment in conditions.
 Lint/AssignmentInCondition:
@@ -1020,14 +1021,14 @@ Lint/UnusedMethodArgument:
 # TODO: Also Style/TrailingUnderscoreVariable would get in the way of that :(
 
 
-##################### Performance ############################
+# ##################### Performance #####################
 
 Performance/RedundantMerge:
   # Max number of key-value pairs to consider an offense
   MaxKeyValuePairs: 1
 
 
-##################### Rails ##################################
+# ##################### Rails #####################
 
 Rails/ActionFilter:
   EnforcedStyle: action

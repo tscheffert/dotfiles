@@ -1,3 +1,4 @@
+---
 # These are all the cops that are enabled in the default configuration.
 
 Style/AccessModifierIndentation:
@@ -929,7 +930,7 @@ Style/ZeroLengthPredicate:
   Enabled: true
 
 
-#################### Metrics ################################
+# ##################### Metrics #####################
 
 Metrics/AbcSize:
   Description: >-
@@ -979,8 +980,8 @@ Metrics/PerceivedComplexity:
   Enabled: true
 
 
-#################### Lint ################################
-### Warnings
+# ##################### Lint #####################
+# ## Warnings
 
 Lint/AmbiguousOperator:
   Description: >-
@@ -1207,7 +1208,7 @@ Lint/Void:
   Enabled: true
 
 
-##################### Performance #############################
+# ##################### Performance #####################
 
 Performance/Casecmp:
   Description: >-
@@ -1338,7 +1339,7 @@ Performance/TimesMap:
   Enabled: true
 
 
-##################### Rails ##################################
+# ##################### Rails #####################
 
 # By default, the rails cops are not run. Override in project or home
 # directory .rubocop.yml files, or by giving the -R/--rails option.

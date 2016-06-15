@@ -1,3 +1,5 @@
+---
+
 Style/Copyright:
   Description: 'Include a copyright notice in each file before any code.'
   Enabled: false

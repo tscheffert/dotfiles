@@ -153,7 +153,10 @@ alias gbrp='git reflog | sed -n "s/.*checkout: moving from .* to \(.*\)/\1/p" | 
 alias gst='git stash'
 
 # Stash with a message, includes untracked and ignored files
-alias gss='git stash save --include-untracked'
+alias gssa='git stash save --include-untracked'
+
+# Git stash save with patch
+alias gssap='git stash save --patch'
 
 # List all stashed files
 alias gsl='git stash list'
@@ -164,7 +167,7 @@ alias gsp='git stash pop'
 # Show a stashed item
 #   '-p' makes it more like 'git show'
 #   use with 'stash@{n}' to reference a particular stash item
-alias gssh='git stash show -p'
+alias gss='git stash show -p'
 
 # Drop a stash item, latest by default and specify with 'stash@{n}'
 alias gsd='git stash drop'

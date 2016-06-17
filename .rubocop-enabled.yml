@@ -205,6 +205,10 @@ Style/ElseAlignment:
   Description: 'Align elses and elsifs correctly.'
   Enabled: true
 
+Style/EmptyCaseCondition:
+  Description: 'Avoid empty condition in case statements.'
+  Enabled: true
+
 Style/EmptyElse:
   Description: 'Avoid empty else-clauses.'
   Enabled: true
@@ -461,6 +465,13 @@ Style/ModuleFunction:
   StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#module-function'
   Enabled: true
 
+Style/MultilineArrayBraceLayout:
+  Description: >-
+                 Checks that the closing brace in an array literal is
+                 symmetrical with respect to the opening brace and the
+                 array elements.
+  Enabled: true
+
 Style/MultilineBlockChain:
   Description: 'Avoid multi-line chains of blocks.'
   StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#single-line-blocks'
@@ -470,15 +481,36 @@ Style/MultilineBlockLayout:
   Description: 'Ensures newlines after multiline block do statements.'
   Enabled: true
 
+Style/MultilineHashBraceLayout:
+  Description: >-
+                 Checks that the closing brace in a hash literal is
+                 symmetrical with respect to the opening brace and the
+                 hash elements.
+  Enabled: true
+
 Style/MultilineIfThen:
   Description: 'Do not use then for multi-line if/unless.'
   StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#no-then'
+  Enabled: true
+
+Style/MultilineMethodCallBraceLayout:
+  Description: >-
+                 Checks that the closing brace in a method call is
+                 symmetrical with respect to the opening brace and the
+                 method arguments.
   Enabled: true
 
 Style/MultilineMethodCallIndentation:
   Description: >-
                  Checks indentation of method calls with the dot operator
                  that span more than one line.
+  Enabled: true
+
+Style/MultilineMethodDefinitionBraceLayout:
+  Description: >-
+                 Checks that the closing brace in a method definition is
+                 symmetrical with respect to the opening brace and the
+                 method parameters.
   Enabled: true
 
 Style/MultilineOperationIndentation:
@@ -1188,6 +1220,10 @@ Lint/UnreachableCode:
   Description: 'Unreachable code.'
   Enabled: true
 
+Lint/UselessArraySplat:
+  Description: 'Checks for useless array splats.'
+  Enabled: true
+
 Lint/UselessAssignment:
   Description: 'Checks for useless assignment to a local variable.'
   StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#underscore-unused-vars'
@@ -1381,6 +1417,10 @@ Rails/ReadWriteAttribute:
 
 Rails/ScopeArgs:
   Description: 'Checks the arguments of ActiveRecord scopes.'
+  Enabled: true
+
+Rails/UniqBeforePluck:
+  Description: 'Prefer the use of uniq before pluck.'
   Enabled: true
 
 Rails/Validation:

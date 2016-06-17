@@ -2,7 +2,7 @@
 # This started as the default configuration and then I have modified it to suite
 # my preferences.
 
-# Version: 0.39.0
+# Version: 0.40.0
 
 inherit_from:
   - .rubocop-enabled.yml
@@ -403,10 +403,11 @@ Style/EmptyLinesAroundModuleBody:
 # AutoCorrectEncodingComment must match the regex
 # /#.*coding\s?[:=]\s?(?:UTF|utf)-8/
 Style/Encoding:
-  EnforcedStyle: when_needed
+  EnforcedStyle: never
   SupportedStyles:
     - when_needed
     - always
+    - never
   AutoCorrectEncodingComment: '# encoding: utf-8'
 
 Style/ExtraSpacing:
@@ -572,6 +573,13 @@ Style/IndentHash:
   # But it can be overridden by setting this parameter
   IndentationWidth: ~
 
+Style/Lambda:
+  EnforcedStyle: literal
+  SupportedStyles:
+    - line_count_dependent
+    - lambda
+    - literal
+
 Style/LambdaCall:
   EnforcedStyle: call
   SupportedStyles:
@@ -613,6 +621,16 @@ Style/MethodName:
     - snake_case
     - camelCase
 
+Style/MultilineArrayBraceLayout:
+  EnforcedStyle: symmetrical
+  SupportedStyles:
+    # symmetrical: closing brace is positioned in same way as opening brace
+    # new_line: closing brace is always on a new line
+    # same_line: closing brace is always on the same line as last element
+    - symmetrical
+    - new_line
+    - same_line
+
 Style/MultilineAssignmentLayout:
   # The types of assignments which are subject to this rule.
   SupportedTypes:
@@ -631,6 +649,26 @@ Style/MultilineAssignmentLayout:
     # for the set of supported types.
     - new_line
 
+Style/MultilineHashBraceLayout:
+  EnforcedStyle: symmetrical
+  SupportedStyles:
+    # symmetrical: closing brace is positioned in same way as opening brace
+    # new_line: closing brace is always on a new line
+    # same_line: closing brace is always on same line as last element
+    - symmetrical
+    - new_line
+    - same_line
+
+Style/MultilineMethodCallBraceLayout:
+  EnforcedStyle: symmetrical
+  SupportedStyles:
+    # symmetrical: closing brace is positioned in same way as opening brace
+    # new_line: closing brace is always on a new line
+    # same_line: closing brace is always on the same line as last argument
+    - symmetrical
+    - new_line
+    - same_line
+
 Style/MultilineMethodCallIndentation:
   EnforcedStyle: indented
   SupportedStyles:
@@ -639,6 +677,16 @@ Style/MultilineMethodCallIndentation:
   # By default, the indentation width from Style/IndentationWidth is used
   # But it can be overridden by setting this parameter
   IndentationWidth: ~
+
+Style/MultilineMethodDefinitionBraceLayout:
+  EnforcedStyle: symmetrical
+  SupportedStyles:
+    # symmetrical: closing brace is positioned in same way as opening brace
+    # new_line: closing brace is always on a new line
+    # same_line: closing brace is always on the same line as last parameter
+    - symmetrical
+    - new_line
+    - same_line
 
 Style/MultilineOperationIndentation:
   EnforcedStyle: indented
@@ -698,6 +746,10 @@ Style/PredicateName:
   # should still be accepted
   NameWhitelist:
     - is_a?
+  # Exclude Rspec specs because there is a strong convetion to write spec
+  # helpers in the form of `have_something` or `be_something`.
+  Exclude:
+    - 'spec/**/*'
 
 Style/RaiseArgs:
   EnforcedStyle: exploded
@@ -848,6 +900,7 @@ Style/SymbolProc:
   # The names should be fairly unique, otherwise you'll end up ignoring lots of code.
   IgnoredMethods:
     - respond_to
+    - define_method
 
 Style/TrailingBlankLines:
   EnforcedStyle: final_newline
@@ -928,11 +981,17 @@ Style/VariableName:
 Style/WhileUntilModifier:
   MaxLineLength: 80
 
+# WordArray enforces how array literals of word-like strings should be expressed.
 Style/WordArray:
   EnforcedStyle: percent
   SupportedStyles:
+    # percent style: %w(word1 word2)
     - percent
+    # bracket style: ['word1', 'word2']
     - brackets
+  # The MinSize option causes the WordArray rule to be ignored for arrays
+  # smaller than a certain size.  The rule is only applied to arrays
+  # whose element count is greater than or equal to MinSize.
   MinSize: 0
   # The regular expression WordRegex decides what is considered a word.
   WordRegex: !ruby/regexp '/\A[\p{Word}\n\t]+\z/'
@@ -1029,8 +1088,9 @@ Lint/DefEndAlignment:
 # TODO: Fix later or raise issue about missing SupportedStyles after 0.32.1
 # Unused block params auto-correct from { |x, y| puts x } to { |x, _y| puts x } and
 # we prefer { |x, _| puts x }
-# Checks for unused block arguments
+# Checks for unused block arguments.
 Lint/UnusedBlockArgument:
+  AllowUnusedKeywordArguments: false
   IgnoreEmptyBlocks: true
   AutoCorrect: false
 

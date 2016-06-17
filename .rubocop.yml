@@ -2,7 +2,7 @@
 # This started as the default configuration and then I have modified it to suite
 # my preferences.
 
-# Version: 0.37.0
+# Version: 0.38.0
 
 inherit_from:
   - .rubocop-enabled.yml
@@ -972,6 +972,19 @@ Metrics/PerceivedComplexity:
 # Allow safe assignment in conditions.
 Lint/AssignmentInCondition:
   AllowSafeAssignment: true
+
+# checks whether the end keywords are aligned properly for `do` `end` blocks.
+Lint/BlockAlignment:
+  # The value `start_of_block` means that the `end` should be aligned with line
+  # where the `do` keyword appears.
+  # The value `start_of_line` means it should be aligned with the whole
+  # expression's starting line.
+  # The value `either` means both are allowed.
+  AlignWith: either
+  SupportedStyles:
+    - either
+    - start_of_block
+    - start_of_line
 
 # Align ends correctly.
 Lint/EndAlignment:

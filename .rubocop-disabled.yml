@@ -93,11 +93,6 @@ Rails/TimeZone:
   Reference: 'http://danilenko.org/2012/7/6/rails_timezones'
   Enabled: false
 
-Lint/LiteralInInterpolation:
-  Description: 'Avoid interpolating literals in strings'
-  AutoCorrect: false
-  Enabled: false
-
 Lint/UselessAccessModifier:
   Description: 'Checks for useless access modifiers.'
   Enabled: false

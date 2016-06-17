@@ -167,9 +167,6 @@ Style/ConditionalAssignment:
                  assignment to a variable and variable comparison instead
                  of assigning that variable inside of each branch.
   Enabled: true
-  SingleLineConditionsOnly: true
-  # Whether the cop should register offenses for conditionals whose branches
-  # contain more than one statement a piece
 
 Style/CommentIndentation:
   Description: 'Indentation of comments.'
@@ -368,6 +365,11 @@ Style/IfUnlessModifier:
                  Favor modifier if/unless usage when you have a
                  single-line body.
   StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#if-as-a-modifier'
+  Enabled: true
+
+Style/IfUnlessModifierOfIfUnless:
+  Description: >-
+                 Avoid modifier if/unless usage on conditionals.
   Enabled: true
 
 Style/IfWithSemicolon:
@@ -1259,11 +1261,6 @@ Performance/FlatMap:
                   or `Enumberable#collect..Array#flatten(1)`
   Reference: 'https://github.com/JuanitoFatas/fast-ruby#enumerablemaparrayflatten-vs-enumerableflat_map-code'
   Enabled: true
-  EnabledForFlattenWithoutParams: false
-  # If enabled, this cop will warn about usages of
-  # `flatten` being called without any parameters.
-  # This can be dangerous since `flat_map` will only flatten 1 level, and
-  # `flatten` without any parameters can flatten multiple levels.
 
 Performance/HashEachMethods:
   Description: >-

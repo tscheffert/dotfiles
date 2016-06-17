@@ -2,7 +2,7 @@
 # This started as the default configuration and then I have modified it to suite
 # my preferences.
 
-# Version: 0.38.0
+# Version: 0.39.0
 
 inherit_from:
   - .rubocop-enabled.yml
@@ -343,6 +343,19 @@ Style/CommentAnnotation:
     - OPTIMIZE
     - HACK
     - REVIEW
+
+Style/ConditionalAssignment:
+  EnforcedStyle: assign_to_condition
+  SupportedStyles:
+    - assign_to_condition
+    - assign_inside_condition
+  # When configured to `assign_to_condition`, `SingleLineConditionsOnly`
+  # will only register an offense when all branches of a condition are
+  # a single line.
+  # When configured to `assign_inside_condition`, `SingleLineConditionsOnly`
+  # will only register an offense for assignment to a condition that has
+  # at least one multiline branch.
+  SingleLineConditionsOnly: true
 
 # Multi-line method chaining should be done with leading dots.
 Style/DotPosition:
@@ -1035,6 +1048,27 @@ Lint/UnusedMethodArgument:
 
 
 # ##################### Performance #####################
+
+Performance/Count:
+  # This cop has known compatibility issues with `ActiveRecord` and other
+  # frameworks. ActiveRecord's `count` ignores the block that is passed to it.
+  # For more information, see the documentation in the cop itself.
+  # If you understand the known risk, you can disable `SafeMode`.
+  SafeMode: false
+
+Performance/Detect:
+  # This cop has known compatibility issues with `ActiveRecord` and other
+  # frameworks. `ActiveRecord` does not implement a `detect` method and `find`
+  # has its own meaning. Correcting `ActiveRecord` methods with this cop
+  # should be considered unsafe.
+  SafeMode: true
+
+Performance/FlatMap:
+  # If enabled, this cop will warn about usages of
+  # `flatten` being called without any parameters.
+  # This can be dangerous since `flat_map` will only flatten 1 level, and
+  # `flatten` without any parameters can flatten multiple levels.
+  EnabledForFlattenWithoutParams: true
 
 Performance/RedundantMerge:
   # Max number of key-value pairs to consider an offense

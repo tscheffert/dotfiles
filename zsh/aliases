@@ -96,6 +96,9 @@ alias gds='git diff --staged --color-words'
 
 alias gp='git pull'
 
+# Git force push, --force-with-lease ensures that we have the latest info from origin before allowing the force
+alias gfpu='git push --force-with-lease'
+
 alias gpu='git push'
 
 alias gco='git checkout'

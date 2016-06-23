@@ -441,7 +441,7 @@ Style/FileName:
   IgnoreExecutableScripts: true
 
 Style/FirstParameterIndentation:
-  EnforcedStyle: special_for_inner_method_call_in_parentheses
+  EnforcedStyle: consistent
   SupportedStyles:
     # The first parameter should always be indented one step more than the
     # preceding line.

@@ -660,7 +660,7 @@ Style/MultilineHashBraceLayout:
     - same_line
 
 Style/MultilineMethodCallBraceLayout:
-  EnforcedStyle: symmetrical
+  EnforcedStyle: same_line
   SupportedStyles:
     # symmetrical: closing brace is positioned in same way as opening brace
     # new_line: closing brace is always on a new line

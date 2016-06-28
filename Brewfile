@@ -25,6 +25,9 @@ install bash
 # But let's try it anyways
 install bash-completion
 
+# Watch executes a program periodically showing output fullscreen
+install watch
+
 # Install more recent versions of some OS X tools
 install macvim --override-system-vim
 # Then do `brew linkapps macvim`

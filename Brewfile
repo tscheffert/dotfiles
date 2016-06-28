@@ -37,7 +37,7 @@ install macvim --override-system-vim
 
 # Install other useful binaries
 install ack
-install pt # I use this instead of grep or ack, pretty nice
+install the_silver_searcher # I use this instead of grep or ack, pretty nice
 install git
 install imagemagick --with-webp
 install node # This installs `npm` too using the recommended installation method

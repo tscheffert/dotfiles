@@ -1001,7 +1001,7 @@ Style/WordArray:
 Metrics/AbcSize:
   # The ABC size is a calculated magnitude, so this number can be a Fixnum or
   # a Float.
-  Max: 15
+  Max: 25
 
 Metrics/BlockNesting:
   Max: 3

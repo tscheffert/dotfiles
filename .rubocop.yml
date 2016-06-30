@@ -1052,11 +1052,13 @@ Lint/BlockAlignment:
   # The value `start_of_line` means it should be aligned with the whole
   # expression's starting line.
   # The value `either` means both are allowed.
-  AlignWith: either
+  AlignWith: start_of_block
   SupportedStyles:
     - either
     - start_of_block
     - start_of_line
+  # Conflicts with Style/IndentationWidth, don't autocorrect
+  AutoCorrect: false
 
 Lint/Debugger:
   # Autocorrect doesn't remove a preceding `require 'pry';`, only warn
@@ -1082,11 +1084,12 @@ Lint/EndAlignment:
   # situations, `end` should still be aligned with the keyword.
   # The value `start_of_line` means that `end` should be aligned with the start
   # of the line which the matching keyword appears on.
-  AlignWith: start_of_line
+  AlignWith: keyword
   SupportedStyles:
     - keyword
     - variable
     - start_of_line
+  # Sometimes conflicts with Style/IndentAssignment, don't autocorrect
   AutoCorrect: false
 
 # TODO: Fix later or raise issue about missing SupportedStyles after 0.32.1

@@ -59,6 +59,8 @@ alias ga='git add'
 
 alias gb='git branch'
 
+alias gba='git branch -a'
+
 alias gbd='git branch -d'
 
 alias gbd-m='git_delete_merged'

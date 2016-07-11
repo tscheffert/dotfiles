@@ -63,6 +63,9 @@ alias gba='git branch -a'
 
 alias gbd='git branch -d'
 
+# Git branch force delete
+alias gbfd='git branch -D'
+
 alias gbd-m='git_delete_merged'
 
 # List the recent git branches

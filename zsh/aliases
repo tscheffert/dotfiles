@@ -121,6 +121,9 @@ alias glg='git_pretty_log'
 # Show the diffs for recent commits with git log
 alias glp='git log -p'
 
+# Git log files, shows all the files in each commit and how much they've changed
+alias glf='git log --stat --oneline origin/master..HEAD'
+
 alias gr='git rebase'
 
 alias grc='git rebase --continue'

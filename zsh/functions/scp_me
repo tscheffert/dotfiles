@@ -1,0 +1,43 @@
+#!/usr/bin/env zsh
+# vi: ft=zsh
+
+function scp_me() {
+  if [[ -n $1 ]]; then
+    local environment=$1
+  else
+    echo "Must specify environment"
+    return 1
+  fi
+
+  if [[ -n $2 ]]; then
+    local local_file=$2
+  else
+    echo "Must specify local_file"
+    return 1
+  fi
+
+  if [[ ! -d ./.git ]]; then
+    echo "Current directory not a git repo" && return
+  fi
+
+  if [[ ! -f ./Capfile ]]; then
+    echo "No Capfile in current directory" && return
+  fi
+
+  local line="$(cat ./Capfile | sed -n -e "/task \:$environment/,\$p" | sed -n -e "/server/,\$p" | head -n 1)"
+
+  if [[ $line =~ "\'(.+aws1.+)\'" ]]; then
+    local location=$match[1]
+
+
+    local target_dir="$(git remote show origin -n | \
+      ack -m1 --match "\bFetch URL:.*\/(?<repo_name>.*?)(?:\.git|$)" --output "$+{repo_name}")"
+
+    echo "scping to $local_file to $location:/var/app/$target_dir/"
+
+    # scp $local_file tsheffert@$location:/var/app/$target_dir/
+    # ssh -t tscheffert@$location "sudo -u deployer sh -c 'cd /var/app/$target_dir && exec bash'"
+  else
+    echo "Couldn't find server in the Capfile"
+  fi
+}

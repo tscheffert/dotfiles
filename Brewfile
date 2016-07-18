@@ -61,5 +61,9 @@ install rbenv ruby-build
 # install webkit2png # Website Screenshotter - Homepage: http://www.paulhammond.org/webkit2png/
 # install zopfli # Improved (slow-ass) Compression - Homepage: https://code.google.com/p/zopfli/
 
+# For api-blueprint vim plugin syntax checking
+# brew install --HEAD \
+#   https://raw.github.com/apiaryio/drafter/master/tools/homebrew/drafter.rb
+
 # Remove outdated versions from the cellar
 cleanup

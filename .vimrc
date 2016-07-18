@@ -191,6 +191,9 @@ if s:use_neobundle
   " Go!
   NeoBundle 'fatih/vim-go'
 
+  " Api Blueprint
+  NeoBundle 'kylef/apiblueprint.vim'
+
   " Considering!
   " https://github.com/chrisbra/vim-diff-enhanced " Improved diff's using histogram and patience algorithms
   " https://github.com/thoughtbot/vim-rspec " Sweet rspec integration

@@ -1,0 +1,60 @@
+#!/usr/bin/env zsh
+# vi: ft=zsh
+
+# ssh to a specified aws server, 'cd'ing to the same git folder you're in if possible
+function ssh_to() {
+  if [[ -n $1 ]]; then
+    local environment=$1
+  else
+    echo "Must provide environment argument"
+    local failed=true
+  fi
+
+  if [[ -n $2 ]]; then
+    local server=$2
+  else
+    echo "Must provide server argument"
+    local failed=true
+  fi
+
+  if [[ -z "$APPENDED_AWS_CNAME" ]]; then
+    echo "Must export \$APPENDED_AWS_CNAME"
+    local failed=true
+  fi
+
+  case "$environment" in
+    staging|stg)
+      local location=$server.stg.$APPENDED_AWS_CNAME
+      environment=staging
+      ;;
+    production|prod|prd)
+      local location=$server.prd.$APPENDED_AWS_CNAME
+      environment=production
+      ;;
+    *)
+      echo "Environment must be one of staging|production"
+      local failed=true
+      ;;
+  esac
+
+  if [[ $failed ]]; then
+    echo "Usage:"
+    echo "  ssh_to {env} {server}"
+    echo "  - env: The environment to ssh into, one of staging|stg|production|prod|prd"
+    echo "  - server: The server name to ssh into, like mbr01 or sci04"
+    echo "    If using from a git repo it will ssh into that directory on the server"
+    return 1
+  fi
+
+  echo "sshing to $environment at $location"
+
+  # TODO: Test that this works with spaces
+  local expanded_git_dir=$(git rev-parse --show-toplevel 2>/dev/null)
+  if [[ -n "$expanded_git_dir" ]]; then
+    local target_dir=${expanded_git_dir##*/}
+
+    ssh -t tscheffert@$location "sudo -u deployer sh -c 'cd /var/app/$target_dir && exec bash'"
+  else
+    ssh -t tscheffert@$location "sudo -u deployer sh -c 'exec bash'"
+  fi
+}

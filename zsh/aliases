@@ -166,6 +166,9 @@ alias gbfu="git branch --set-upstream-to=origin/$(git symbolic-ref HEAD 2>/dev/n
 # Git Branch Previous
 alias gbrp='git reflog | sed -n "s/.*checkout: moving from .* to \(.*\)/\1/p" | sed "2q;d"'
 
+# Git show
+alias gsh='git show'
+
 # Stash all tracked, unstaged files
 alias gst='git stash'
 

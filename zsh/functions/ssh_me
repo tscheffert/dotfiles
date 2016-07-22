@@ -1,6 +1,8 @@
 #!/usr/bin/env zsh
 # vi: ft=zsh
 
+# TODO: Accept additional number parameter for which of the matches to go for
+# TODO: Accept additional role parameter for which role to match on
 function ssh_me() {
   if [[ -n $1 ]]; then
     local environment=$1

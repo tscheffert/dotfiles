@@ -1,0 +1,25 @@
+#!/usr/bin/env zsh
+# vi: ft=zsh
+
+# Github API Key!
+export HOMEBREW_GITHUB_API_TOKEN=
+
+# Postgres stuff
+export POSTGRES_ROOT_USER=
+export POSTGRES_CONNECTION_STRING=
+
+# Kafka Stuff
+export KAFKA_DEVELOPMENT=
+export KAFKA_STAGING=
+export KAFKA_PRODUCTION=
+
+export ZOOKEEPER_DEVELOPMENT=
+export ZOOKEEPER_STAGING=
+export ZOOKEEPERS_STAGING=
+export ZOOKEEPER_PRODUCTION=
+export ZOOKEEPERS_PRODUCTION=
+
+export ZK_HOSTS=
+
+# AWS ec2 instance CNAME
+export APPENDED_AWS_CNAME=

@@ -18,6 +18,12 @@ function ssh_me() {
 
   local line="$(cat ./Capfile | sed -n -e "/task \:$environment/,\$p" | sed -n -e "/server/,\$p" | head -n 1)"
 
+  local MATCH
+  local MBEGIN
+  local MEND
+  local match
+  local mbegin
+  local mend
   if [[ $line =~ "\'(.+aws1.+)\'" ]]; then
     local location=$match[1]
 

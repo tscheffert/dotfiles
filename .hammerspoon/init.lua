@@ -197,3 +197,11 @@ end)
 hs.hotkey.bind({"ctrl", "shift"}, "P", function()
   hs.spotify.playpause()
 end)
+
+hs.hotkey.bind({"ctrl", "shift"}, "]", function()
+  hs.spotify.next()
+end)
+
+hs.hotkey.bind({"ctrl", "shift"}, "[", function()
+  hs.spotify.previous()
+end)

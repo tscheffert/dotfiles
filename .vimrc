@@ -466,6 +466,15 @@ augroup ZshFiles
   autocmd Filetype zsh setlocal formatoptions-=ro
 augroup END
 
+augroup ApiBlueprintFiles
+  au!
+
+  " Use 4 spaces for tabs
+  autocmd Filetype apiblueprint setlocal shiftwidth=4
+  autocmd Filetype apiblueprint setlocal softtabstop=4
+  autocmd Filetype apiblueprint setlocal tabstop=4
+augroup END
+
 
 " -----
 " Typing Behaviors

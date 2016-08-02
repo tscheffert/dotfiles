@@ -66,7 +66,7 @@ if s:use_neobundle
 
   " Searching for stuff
   if s:use_ctrlp
-    NeoBundle 'kien/ctrlp.vim'
+    NeoBundle 'ctrlpvim/ctrlp.vim'
   endif
 
   if s:use_unite

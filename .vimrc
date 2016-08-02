@@ -1361,8 +1361,12 @@ nnoremap <silent> <Leader>bo :BufOnly<CR>
 " Close the current buffer, preserving the window
 nnoremap <silent> <Leader>bd :call BetterBufferDelete()<CR>
 
+function! BufferCount()
+  return len(filter(range(1, bufnr('$')), 'buflisted(v:val)'))
+endfunction
+
 function! BetterBufferDelete()
-  if exists("t:NERDTreeBufName") && bufwinnr(t:NERDTreeBufName) != -1 && winnr("$") == 2
+  if exists("t:NERDTreeBufName") && bufwinnr(t:NERDTreeBufName) != -1 && winnr("$") == 2 && BufferCount() == 1
     execute "bdelete" bufnr("%")
     quit
   else

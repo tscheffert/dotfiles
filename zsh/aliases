@@ -105,6 +105,9 @@ alias gd='git diff --color-words'
 
 alias gds='git diff --staged --color-words'
 
+# Git diff (with) origin master
+alias gdom='git diff origin/master..'
+
 alias gp='git pull'
 
 # Git force push, --force-with-lease ensures that we have the latest info from origin before allowing the force

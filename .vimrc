@@ -149,7 +149,7 @@ if s:use_neobundle
   " Ruby stuff
   NeoBundle 'tpope/vim-rails'
   NeoBundle 'tpope/vim-bundler' " Works with vim-rails and vim-rake for bundler goodness
-  NeoBundle 'tpope/vim-rake' " vim-rails (with vim-projectionist) for non rails projects
+  " NeoBundle 'tpope/vim-rake' " vim-rails (with vim-projectionist) for non rails projects
   NeoBundle 'tpope/vim-projectionist' " Project management for navigation n such
   NeoBundle 'tpope/vim-endwise' " Add matching 'end's for blocks
   NeoBundle 'vim-ruby/vim-ruby' " Ruby support stuff
@@ -1204,6 +1204,21 @@ let g:surround_indent = 1
 " Don't automatically create insert mode mappings, I'll do that myself if
 "   needed
 let g:surround_no_insert_mappings = 1
+
+" -----
+" Plugin: vim-projectionist
+" -----
+" Doesn't work as expected
+" let g:projectionist_heuristics = {
+"       \     "app/*.rb": {
+"       \         "alternate": "spec/unit/{}_spec.rb",
+"       \         "type": "source"
+"       \     },
+"       \     "spec/unit/*_spec.rb": {
+"       \         "alternate": "app/{}.rb",
+"       \         "type": "test"
+"       \     }
+"       \ }
 
 
 " -----

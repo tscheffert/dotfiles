@@ -9,6 +9,8 @@
 components/*/*/tags
 components/*/tags
 
+# vim-projectionist project configs
+.projections.json
 
 # ----- DotFiles -----
 # Ignore bundles. Neobundle is already in there and managed, everything

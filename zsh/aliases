@@ -98,6 +98,9 @@ alias gcm='git commit -m'
 # --amend changes the latest commit, and --no-edit tells it we don't want to change the messge
 alias gca='git commit --amend --no-edit'
 
+# Git commit amend message
+alias gcam='git commit --amend'
+
 # Git commit ammend, with edit (the message)
 alias gcae='git commit --amend'
 

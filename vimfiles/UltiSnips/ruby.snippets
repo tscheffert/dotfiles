@@ -49,12 +49,10 @@ endsnippet
 
 snippet specc "spec file template" sm
 require 'spec_helper'
-require 'shared_contexts/controller'
 
 require 'controllers/${1:controller_to_test}'
 
-describe `!p snip.rv = camelize(t[1])` do
-  include_context 'Controller'
+describe `!p snip.rv = camelize(t[1])`, :controller do
   $0
 end
 endsnippet

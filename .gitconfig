@@ -10,6 +10,7 @@
   # Start less with '--no-init' which will stop it from clearing the screen and
   #   make the git commands work
   pager = less -X
+  excludesfile = /Users/trentscheffert/.gitignore
 
 [alias]
 	lg = log -20 --pretty=format:'%Cred%h%Creset - %s %Cgreen(%cr %an)%Creset%C(yellow)%d%Creset' --abbrev-commit --date=relative

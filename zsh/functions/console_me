@@ -8,6 +8,18 @@ function console_me() {
     local environment="staging"
   fi
 
+  case "$environment" in
+    staging|stg)
+      environment=staging
+      ;;
+    production|prod|prd)
+      environment=production
+      ;;
+    *)
+      echo "Environment must be one of staging|production" && return 1
+      ;;
+  esac
+
   if [[ ! -d ./.git ]]; then
     echo "Current directory not a git repo" && return 1
   fi

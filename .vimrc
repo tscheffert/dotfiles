@@ -421,9 +421,18 @@ augroup END
 
 augroup RSpecFiles
   au!
-  " rails-vim doesn't correctly assign buffer types for all of the files, manually do some of it
-  autocmd BufNewFile,BufRead *_spec.rb syntax keyword rubyRailsTestMethod describe context it specify it_should_behave_like before after setup subject its shared_examples_for shared_context let expect it to be eq
+
+  " rails-vim doesn't correctly assign buffer types for all of the files, making
+  "   highlighting is inconsistent. Do some of it by hand.
+  autocmd BufNewFile,BufRead *_spec.rb call RSpecSyntax()
+  " Might want to surround the call with `if ! RailsDetect() | ... | endif`
 augroup END
+
+function! RSpecSyntax()
+  hi def link rubyRailsTestMethod Function
+
+  syntax keyword rubyRailsTestMethod describe context it specify it_should_behave_like before after setup subject its shared_examples_for shared_context let expect it to be eq include
+endfunction
 
 augroup RubyFiles
   au!

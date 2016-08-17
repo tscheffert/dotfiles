@@ -76,6 +76,12 @@ describe '${1:method}' do
 end$0
 endsnippet
 
+snippet cont "context 'something'" sm
+context '${1:when/where}' do
+  $2
+end$0
+endsnippet
+
 snippet let "let(:something) { }" sm
 let(:${1:something}) { ${2:value} }$0
 endsnippet

@@ -21,7 +21,8 @@ function prompt_char {
 }
 
 function git_branch {
-  local branch="$(git symbolic-ref HEAD 2>/dev/null | cut -d'/' -f3)"
+  # If trimming is needed pipe to: tr -d '[[:space:]]'
+  local branch="$(git symbolic-ref --quiet --short HEAD 2>/dev/null)"
   if [[ -n "$branch" ]]; then
     local parens_color="$FG[000]"
     # Default to everything is fine

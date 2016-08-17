@@ -167,7 +167,7 @@ alias gi-r='git update-index --no-assume-unchanged'
 alias gi-l="git ls-files -v | grep '^[[:lower:]]' | cut -f2 -d' '"
 
 # Git Branch Fix Upstream
-alias gbfu="git branch --set-upstream-to=origin/$(git symbolic-ref HEAD 2>/dev/null | cut -d'/' -f3)"
+alias gbfu="git branch --set-upstream-to=origin/$(git symbolic-ref --quiet --short HEAD 2>/dev/null)"
 
 # Git Branch Previous
 alias gbrp='git reflog | sed -n "s/.*checkout: moving from .* to \(.*\)/\1/p" | sed "2q;d"'

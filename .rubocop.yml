@@ -716,7 +716,7 @@ Style/ParenthesesAroundCondition:
 Style/PercentLiteralDelimiters:
   PreferredDelimiters:
     '%':  ()
-    '%i': ()
+    '%i': '[]'
     '%q': ()
     '%Q': ()
     '%r': '{}'

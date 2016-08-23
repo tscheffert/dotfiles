@@ -90,4 +90,13 @@ snippet fkey "key: @object.fetch('value')" sm
 ${1:key}: @object.fetch('$1')$0
 endsnippet
 
+snippet error "error do" sm
+error do
+  e = env['sinatra.error']
+
+  require 'pry'; binding.pry
+end
+$0
+endsnippet
+
 # vim: ts=2 sw=2 expandtab ft=snippets:

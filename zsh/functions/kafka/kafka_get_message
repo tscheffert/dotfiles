@@ -47,7 +47,7 @@ function kafka_get_message() {
     return 1
   fi
 
-  kafka-simple-consumer-shell.sh \
+  kafka-simple-consumer-shell \
     --broker-list "$broker_url" \
     --topic "$topic" \
     --max-messages 1 \

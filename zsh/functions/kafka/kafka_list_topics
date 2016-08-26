@@ -32,5 +32,5 @@ function kafka_list_topics() {
     return 1
   fi
 
-  kafka-topics.sh --zookeeper "$zookeeper_url" --list
+  kafka-topics --zookeeper "$zookeeper_url" --list
 }

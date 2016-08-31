@@ -1471,8 +1471,13 @@ vnoremap <silent> x "_x
 
 " ctrl-'forward' jump to end of line
 imap <c-f> <c-O>$
+" Emacs 'jump to end of line' too
+imap <c-e> <c-O>$
+
 " ctrl-'back' jump to start of line
 imap <c-b> <c-O>^
+" Emacs 'jump to start of line' too
+imap <c-a> <c-O>^
 
 
 " -----

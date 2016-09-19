@@ -205,3 +205,30 @@ end)
 hs.hotkey.bind({"ctrl", "shift"}, "[", function()
   hs.spotify.previous()
 end)
+
+
+-- [[
+--    Caffeine/Caffeinate/Amphetamine/KeepingYouAwake Replacement
+--    TODO:
+--      - Try to get SVG/path icons rather than files
+--      - Support a right click menu with "Turn On for Duration"
+--      - Support toggling it off at a certain battery percentage
+--    Icons from Gloria Kang: https://dribbble.com/shots/2049777-Retina-Caffeine-Menubar-Icons
+-- ]]
+
+
+local caffeine = {}
+
+caffeine.menu    = hs.menubar.new()
+caffeine.iconOn  = 'icons/caffeinate-on.png'
+caffeine.iconOff = 'icons/caffeinate-off.png'
+
+local function setIcon(state)
+  caffeine.menu:setIcon(state and caffeine.iconOn or caffeine.iconOff)
+end
+
+caffeine.menu:setClickCallback(function()
+  setIcon(hs.caffeinate.toggle("displayIdle"))
+end)
+
+setIcon(hs.caffeinate.get("displayIdle"))

@@ -103,6 +103,8 @@ link_optional_file .zshrc.private
 
 # Other links
 link_file_with_directory .hammerspoon init.lua
+link_file_with_directory .hammerspoon/icons caffeinate-on.png
+link_file_with_directory .hammerspoon/icons caffeinate-off.png
 
 echo "Dotfiles have been symlinked to $HOME."
 

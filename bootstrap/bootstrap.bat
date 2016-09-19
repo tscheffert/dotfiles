@@ -23,6 +23,7 @@ mklink C:\Users\Trent\.gemrc C:\Users\Trent\.dotfiles\.gemrc
 mklink C:\Users\Trent\.tmux.conf C:\Users\Trent\.dotfiles\.tmux.conf
 mklink C:\Users\Trent\.zshrc C:\Users\Trent\.dotfiles\.zshrc
 mklink C:\Users\Trent\.aprc C:\Users\Trent\.dotfiles\.aprc
+mklink C:\Users\Trent\.ctags C:\Users\Trent\.dotfiles\.ctags
 
 
 pause

@@ -100,6 +100,14 @@ if s:use_neobundle
   NeoBundle 'docker/docker', { 'rtp': '/contrib/syntax/vim' }
   NeoBundle 'nginx/nginx',   { 'rtp': '/contrib/vim' }
 
+
+  " Lua Support
+  " Alternatives:
+  " - http://www.vim.org/scripts/script.php?script_id=4950
+  " - https://github.com/xolox/vim-lua-ftplugin
+  " - https://github.com/xolox/vim-lua-inspect
+  NeoBundleLazy 'tbastos/vim-lua', {'autoload':{'filetypes':['lua']}}
+
   " JS/React/CoffeeScript
 
   " What Peter P. suggested, TODO: Summaries

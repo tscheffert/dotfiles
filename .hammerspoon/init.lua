@@ -226,6 +226,12 @@ caffeine = {}
 caffeine.menu = hs.menubar.new(false)
 caffeine.iconOn  = 'icons/caffeinate-on.png'
 caffeine.iconOff = 'icons/caffeinate-off.png'
+caffeine.menuTable = {
+  { title = 'Exit', fn = function()
+      exitCaffeine()
+    end
+  }
+}
 
 function exitCaffeine()
   caffeine.menu:delete()
@@ -236,9 +242,15 @@ function setIcon(state)
   caffeine.menu:setIcon(state and caffeine.iconOn or caffeine.iconOff)
 end
 
-caffeine.menu:setClickCallback(function()
-  setIcon(hs.caffeinate.toggle("displayIdle"))
+setIcon(hs.caffeinate.get("displayIdle"))
+
+caffeine.menu:setMenu(function(modifiers)
+  if modifiers.ctrl then
+    return caffeine.menuTable
+  else
+    setIcon(hs.caffeinate.toggle("displayIdle"))
+    return {}
+  end
 end)
 
-setIcon(hs.caffeinate.get("displayIdle"))
 caffeine.menu:returnToMenuBar()

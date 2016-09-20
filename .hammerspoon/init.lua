@@ -11,12 +11,17 @@ function reloadConfig(files)
     end
   end
   if doReload then
-    hs.reload()
+    reloadHammerspoon()
   end
 end
 
-hs.hotkey.bind({"cmd", "ctrl"}, "R", function()
+function reloadHammerspoon()
+  if caffeine then exitCaffeine() end
   hs.reload()
+end
+
+hs.hotkey.bind({"cmd", "ctrl"}, "R", function()
+  reloadHammerspoon()
 end)
 -- hs.pathwatcher.new(os.getenv("HOME") .. "/.dotfiles/.hammerspoon/", reloadConfig):start()
 hs.alert.show("Config loaded")
@@ -216,14 +221,18 @@ end)
 --    Icons from Gloria Kang: https://dribbble.com/shots/2049777-Retina-Caffeine-Menubar-Icons
 -- ]]
 
+caffeine = {}
 
-local caffeine = {}
-
-caffeine.menu    = hs.menubar.new()
+caffeine.menu = hs.menubar.new(false)
 caffeine.iconOn  = 'icons/caffeinate-on.png'
 caffeine.iconOff = 'icons/caffeinate-off.png'
 
-local function setIcon(state)
+function exitCaffeine()
+  caffeine.menu:delete()
+  caffeine = nil
+end
+
+function setIcon(state)
   caffeine.menu:setIcon(state and caffeine.iconOn or caffeine.iconOff)
 end
 
@@ -232,3 +241,4 @@ caffeine.menu:setClickCallback(function()
 end)
 
 setIcon(hs.caffeinate.get("displayIdle"))
+caffeine.menu:returnToMenuBar()

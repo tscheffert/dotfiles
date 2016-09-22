@@ -83,8 +83,8 @@ if s:use_neobundle
   NeoBundle 'kopischke/vim-fetch' " Enable vim to open with line numbers appended
 
   " Auto parentheses
-  "   NOTE: This breaks the dot command
-  NeoBundle 'Raimondi/delimitmate'
+  " NeoBundle 'Raimondi/delimitmate' " NOTE: This breaks the dot command
+  NeoBundle 'jiangmiao/auto-pairs' " Alternative
 
   " Improved Undo functionality
   NeoBundle 'sjl/gundo.vim'

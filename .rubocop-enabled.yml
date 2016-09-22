@@ -8,6 +8,7 @@ Style/AccessModifierIndentation:
 
 Style/AccessorMethodName:
   Description: Check the naming of accessor methods for get_/set_.
+  StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#accessor_mutator_method_names'
   Enabled: true
 
 Style/Alias:
@@ -182,8 +183,8 @@ Style/DefWithParentheses:
   StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#method-parens'
   Enabled: true
 
-Style/DeprecatedHashMethods:
-  Description: 'Checks for use of deprecated Hash methods.'
+Style/PreferredHashMethods:
+  Description: 'Checks use of `has_key?` and `has_value?` Hash methods.'
   StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#hash-key'
   Enabled: true
 
@@ -195,6 +196,12 @@ Style/DotPosition:
 Style/DoubleNegation:
   Description: 'Checks for uses of double negation (!!).'
   StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#no-bang-bang'
+  Enabled: true
+
+Style/EachForSimpleLoop:
+  Description: >-
+                 Use `Integer#times` for a simple loop which iterates a fixed
+                 number of times.
   Enabled: true
 
 Style/EachWithObject:
@@ -585,6 +592,11 @@ Style/NumericLiterals:
   StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#underscores-in-numerics'
   Enabled: true
 
+Style/NumericLiteralPrefix:
+  Description: 'Use smallcase prefixes for numeric literals.'
+  StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#numeric-literal-prefixes'
+  Enabled: true
+
 Style/OneLineConditional:
   Description: >-
                  Favor the ternary operator(?:) over
@@ -811,6 +823,14 @@ Style/SpaceBeforeFirstArg:
                  and the first argument for method calls without parentheses.
   Enabled: true
 
+Style/SpaceInsideArrayPercentLiteral:
+  Description: 'No unnecessary additional spaces between elements in %i/%w literals.'
+  Enabled: true
+
+Style/SpaceInsidePercentLiteralDelimiters:
+  Description: 'No unnecessary spaces inside delimiters of %i/%w/%x literals.'
+  Enabled: true
+
 Style/SpaceInsideBrackets:
   Description: 'No spaces after [ or before ].'
   StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#no-spaces-braces'
@@ -887,7 +907,7 @@ Style/TrailingBlankLines:
 
 Style/TrailingCommaInArguments:
   Description: 'Checks for trailing comma in argument lists.'
-  StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#no-trailing-array-commas'
+  StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#no-trailing-params-comma'
   Enabled: true
 
 Style/TrailingCommaInLiteral:
@@ -1124,6 +1144,10 @@ Lint/ImplicitStringConcatenation:
                  could better be represented as a single string literal.
   Enabled: true
 
+Lint/InheritException:
+  Description: 'Avoid inheriting from the `Exception` class.'
+  Enabled: true
+
 Lint/InvalidCharacterLiteral:
   Description: >-
                  Checks for invalid character literals with a non-escaped
@@ -1167,6 +1191,16 @@ Lint/ParenthesesAsGroupedExpression:
   StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#parens-no-spaces'
   Enabled: true
 
+Lint/PercentStringArray:
+  Description: >-
+                 Checks for unwanted commas and quotes in %w/%W literals.
+  Enabled: true
+
+Lint/PercentSymbolArray:
+  Description: >-
+                 Checks for unwanted commas and colons in %i/%I literals.
+  Enabled: true
+
 Lint/RandOne:
   Description: >-
                  Checks for `rand(1)` calls. Such calls always return `0`
@@ -1182,6 +1216,12 @@ Lint/RequireParentheses:
 Lint/RescueException:
   Description: 'Avoid rescuing the Exception class.'
   StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#no-blind-rescues'
+  Enabled: true
+
+Lint/ShadowedException:
+  Description: >-
+                  Avoid rescuing a higher level exception
+                  before a lower level exception.
   Enabled: true
 
 Lint/ShadowingOuterLocalVariable:
@@ -1310,6 +1350,10 @@ Performance/LstripRstrip:
   Description: 'Use `strip` instead of `lstrip.rstrip`.'
   Enabled: true
 
+Performance/PushSplat:
+  Description: 'Use `concat` instead of `push(*)`.'
+  Enabled: true
+
 Performance/RangeInclude:
   Description: 'Use `Range#cover?` instead of `Range#include?`.'
   Reference: 'https://github.com/JuanitoFatas/fast-ruby#cover-vs-include-code'
@@ -1389,6 +1433,13 @@ Rails/Date:
                   such as Date.today, Date.current etc.
   Enabled: true
 
+Rails/Exit:
+  Description: >-
+                  Favor `fail`, `break`, `return`, etc. over `exit` in
+                  application or library code outside of Rake files to avoid
+                  exits during unit testing or running in production.
+  Enabled: true
+
 Rails/FindBy:
   Description: 'Prefer find_by over where.first.'
   Enabled: true
@@ -1405,6 +1456,10 @@ Rails/Output:
   Description: 'Checks for calls to puts, print, etc.'
   Enabled: true
 
+Rails/OutputSafety:
+  Description: 'The use of `html_safe` or `raw` may be a security risk.'
+  Enabled: true
+
 Rails/PluralizationGrammar:
   Description: 'Checks for incorrect grammar when using methods like `3.day.ago`.'
   Enabled: true
@@ -1415,12 +1470,16 @@ Rails/ReadWriteAttribute:
                  write_attribute(:attr, val).
   Enabled: true
 
+Rails/RequestReferer:
+  Description: 'Use consistent syntax for request.referrer.'
+  Enabled: true
+
 Rails/ScopeArgs:
   Description: 'Checks the arguments of ActiveRecord scopes.'
   Enabled: true
 
 Rails/UniqBeforePluck:
-  Description: 'Prefer the use of uniq before pluck.'
+  Description: 'Prefer the use of uniq or distinct before pluck.'
   Enabled: true
 
 Rails/Validation:

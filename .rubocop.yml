@@ -2,7 +2,7 @@
 # This started as the default configuration and then I have modified it to suite
 # my preferences.
 
-# Version: 0.41.1
+# Version: 0.42.0
 
 inherit_from:
   - .rubocop-enabled.yml
@@ -71,8 +71,11 @@ AllCops:
   # cache location is secure from this kind of attack, and wish to use a
   # symlinked cache location, set this value to "true".
   AllowSymlinksInCacheRootDirectory: false
-  # What version of the Ruby interpreter is the inspected code intended to
+  # What MRI version of the Ruby interpreter is the inspected code intended to
   # run on? (If there is more than one, set this to the lowest version.)
+  # If a value is specified for TargetRubyVersion then it is used.
+  # Else if .ruby-version exists and it contains an MRI version it is used.
+  # Otherwise we fallback to the oldest officially supported Ruby version (2.0).
   TargetRubyVersion: 2.1
 
 # Indent private/protected/public as deep as method definitions
@@ -621,6 +624,12 @@ Style/NonNilCheck:
   # offenses for `!x.nil?` and does no changes that might change behavior.
   IncludeSemanticChanges: true
 
+Style/NumericPredicate:
+  EnforcedStyle: predicate
+  SupportedStyles:
+    - predicate
+    - comparison
+
 Style/MethodDefParentheses:
   EnforcedStyle: require_parentheses
   SupportedStyles:
@@ -930,6 +939,13 @@ Style/SymbolProc:
   IgnoredMethods:
     - respond_to
     - define_method
+
+Style/TernaryParentheses:
+  EnforcedStyle: require_no_parentheses
+  SupportedStyles:
+    - require_parentheses
+    - require_no_parentheses
+  AllowSafeAssignment: true
 
 Style/TrailingBlankLines:
   EnforcedStyle: final_newline

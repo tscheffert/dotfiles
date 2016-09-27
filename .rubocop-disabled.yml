@@ -74,3 +74,4 @@ Rails/TimeZone:
 Lint/UselessAccessModifier:
   Description: 'Checks for useless access modifiers.'
   Enabled: false
+  ContextCreatingMethods: []

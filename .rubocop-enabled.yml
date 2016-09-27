@@ -467,6 +467,11 @@ Style/MethodName:
   StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#snake-case-symbols-methods-vars'
   Enabled: true
 
+Style/MethodMissing:
+  Description: 'Avoid using `method_missing`.'
+  StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#no-method-missing'
+  Enabled: true
+
 Style/ModuleFunction:
   Description: 'Checks for usage of `extend self` in modules.'
   StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#module-function'
@@ -595,6 +600,12 @@ Style/NumericLiterals:
 Style/NumericLiteralPrefix:
   Description: 'Use smallcase prefixes for numeric literals.'
   StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#numeric-literal-prefixes'
+  Enabled: true
+
+Style/NumericPredicate:
+  Description: >-
+                 Checks for the use of predicate- or comparison methods for
+                 numeric comparisons.
   Enabled: true
 
 Style/OneLineConditional:
@@ -898,6 +909,10 @@ Style/SymbolProc:
 Style/Tab:
   Description: 'No hard tabs.'
   StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#spaces-indentation'
+  Enabled: true
+
+Style/TernaryParentheses:
+  Description: 'Checks for use of parentheses around ternary conditions.'
   Enabled: true
 
 Style/TrailingBlankLines:
@@ -1442,14 +1457,17 @@ Rails/Exit:
 
 Rails/FindBy:
   Description: 'Prefer find_by over where.first.'
+  StyleGuide: 'https://github.com/bbatsov/rails-style-guide#find_by'
   Enabled: true
 
 Rails/FindEach:
   Description: 'Prefer all.find_each over all.find.'
+  StyleGuide: 'https://github.com/bbatsov/rails-style-guide#find-each'
   Enabled: true
 
 Rails/HasAndBelongsToMany:
   Description: 'Prefer has_many :through to has_and_belongs_to_many.'
+  StyleGuide: 'https://github.com/bbatsov/rails-style-guide#has-many-through'
   Enabled: true
 
 Rails/Output:
@@ -1468,10 +1486,17 @@ Rails/ReadWriteAttribute:
   Description: >-
                  Checks for read_attribute(:attr) and
                  write_attribute(:attr, val).
+  StyleGuide: 'https://github.com/bbatsov/rails-style-guide#read-attribute'
   Enabled: true
 
 Rails/RequestReferer:
   Description: 'Use consistent syntax for request.referrer.'
+  Enabled: true
+
+# Disabled by default but I think it's a great idea
+Rails/SaveBang:
+  Description: 'Identifies possible cases where Active Record save! or related should be used.'
+  StyleGuide: 'https://github.com/bbatsov/rails-style-guide#save-bang'
   Enabled: true
 
 Rails/ScopeArgs:

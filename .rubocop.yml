@@ -2,7 +2,7 @@
 # This started as the default configuration and then I have modified it to suite
 # my preferences.
 
-# Version: 0.42.0
+# Version: 0.43.0
 
 inherit_from:
   - .rubocop-enabled.yml
@@ -512,9 +512,14 @@ Style/GuardClause:
 Style/HashSyntax:
   EnforcedStyle: ruby19
   SupportedStyles:
+    # checks for 1.9 syntax (e.g. {a: 1}) for all symbol keys
     - ruby19
-    - ruby19_no_mixed_keys
+    # checks for hash rocket syntax for all hashes
     - hash_rockets
+    # forbids mixed key syntaxes (e.g. {a: 1, :b => 2})
+    - no_mixed_keys
+    # enforces both ruby19 and no_mixed_keys styles
+    - ruby19_no_mixed_keys
   # Force hashes that have a symbol value to use hash rockets
   UseHashRocketsWithSymbolValues: false
   # Do not suggest { a?: 1 } over { :a? => 1 } in ruby19 style
@@ -629,6 +634,10 @@ Style/NumericPredicate:
   SupportedStyles:
     - predicate
     - comparison
+  # Exclude RSpec specs because assertions like `expect(1).to be > 0` cause
+  # false positives.
+  Exclude:
+    - 'spec/**/*'
 
 Style/MethodDefParentheses:
   EnforcedStyle: require_parentheses
@@ -1023,6 +1032,13 @@ Style/VariableName:
     - snake_case
     - camelCase
 
+Style/VariableNumber:
+  EnforcedStyle: normalcase
+  SupportedStyles:
+    - snake_case
+    - normalcase
+    - non_integer
+
 Style/WhileUntilModifier:
   MaxLineLength: 80
 
@@ -1044,7 +1060,7 @@ Style/WordArray:
 # ##################### Metrics #####################
 
 Metrics/AbcSize:
-  # The ABC size is a calculated magnitude, so this number can be a Fixnum or
+  # The ABC size is a calculated magnitude, so this number can be an Integer or
   # a Float.
   Max: 25
 
@@ -1235,6 +1251,10 @@ Rails/HasAndBelongsToMany:
   Include:
     - app/models/**/*.rb
 
+Rails/NotNullColumn:
+  Include:
+    - db/migrate/*.rb
+
 Rails/Output:
   Include:
     - app/**/*.rb
@@ -1251,6 +1271,13 @@ Rails/RequestReferer:
   SupportedStyles:
     - referer
     - referrer
+
+Rails/SafeNavigation:
+  # This will convert usages of `try` to use safe navigation as well as `try!`.
+  # `try` and `try!` work slighly differently. `try!` and safe navigation will
+  # both raise a `NoMethodError` if the receiver of the method call does not
+  # implement the intended method. `try` will not raise an exception for this.
+  ConvertTry: false
 
 Rails/ScopeArgs:
   Include:

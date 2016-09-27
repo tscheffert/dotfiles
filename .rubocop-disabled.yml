@@ -9,6 +9,13 @@ Style/Documentation:
   Description: 'Document classes and non-namespace modules.'
   Enabled: false
 
+Style/DocumentationMethod:
+  Description: 'Public methods.'
+  Enabled: false
+  Exclude:
+    - 'spec/**/*'
+    - 'test/**/*'
+
 Lint/IneffectiveAccessModifier:
   Description: >-
                  Checks for attempts to use `private` or `protected` to set
@@ -22,7 +29,7 @@ Style/ImplicitRuntimeError:
   Enabled: false
 
 Style/InlineComment:
-  Description: 'Avoid inline comments.'
+  Description: 'Avoid trailing inline comments.'
   Enabled: false
 
 Style/MissingElse:

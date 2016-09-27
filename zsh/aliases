@@ -83,6 +83,9 @@ alias gap='git add -p'
 # Git add all
 alias gaa='git add .'
 
+# Git add all (and) commit
+alias gaac='git add . && git commit'
+
 # Git add only updated files, no new files
 alias gau='git add -u'
 

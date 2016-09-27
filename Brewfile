@@ -52,6 +52,9 @@ install lua
 # Also need https://github.com/sstephenson/rbenv-gem-rehash
 install rbenv ruby-build
 
+# Awesome linting tool for bash scripts
+install shellcheck
+
 # Things I haven't installed but could
 # install nmap # Network Map Hacker Tool - Homepage: http://nmap.org
 # install pigz # Parallelized Implementation of gzip - Homepage: http://www.zlib.net/pigz/

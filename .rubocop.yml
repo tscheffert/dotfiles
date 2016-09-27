@@ -1241,11 +1241,13 @@ Rails/Exit:
 
 Rails/FindBy:
   Include:
-    - app/models/**/*.rb
+    - app/**/*.rb
+    - lib/**/*.rb
 
 Rails/FindEach:
   Include:
-    - app/models/**/*.rb
+    - app/**/*.rb
+    - lib/**/*.rb
 
 Rails/HasAndBelongsToMany:
   Include:

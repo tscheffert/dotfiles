@@ -1337,6 +1337,7 @@ nmap ]h <Plug>GitGutterNextHunk
 
 " -----
 "  Key Maps
+" see :help key-notation
 " -----
 
 " Set the leader key
@@ -1347,6 +1348,33 @@ let mapleader = ","
 " also " - (my leader), H, L, <CR>"
 " Keys waiting for a second key could also be used to start a mapping:
 " "f t d c g z v y m ' [ ]"
+
+" Takes a dictionary to map commands across multiple platforms
+" Example:
+"   call NormalMap({'win32': '<A-[>', 'mac': '<D-[>', 'perform': ':wincmd W'})
+function! NormalMap(keymap)
+  " Check for keys that are hard to map generically and fail the mapping
+  let invalid = 0
+  for k in [a:keymap['win32'], a:keymap['mac']]
+    if k =~ '|'|| k =~ "'" || k =~ '"'
+      echo 'Unsupported key: ' . k . ' in: ' . string(a:keymap)
+      let invalid=1
+    endif
+  endfor
+  if invalid
+    return 1
+  endif
+
+  " Use execute to evaluate a string as vimscript which allows us to build up the mapping per platform
+  if has("mac")
+    execute 'nnoremap <silent> ' . a:keymap['mac'] . ' ' . a:keymap['perform']
+  elseif has("win32")
+    execute 'nnoremap <silent> ' . a:keymap['win32'] . ' ' . a:keymap['perform']
+  else
+    echo "Couldn't map" . string(a:keymap) . " because we don't have 'win32' or 'mac'"
+    return 1
+  endif
+endfunction
 
 
 " -----

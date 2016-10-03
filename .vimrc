@@ -1382,15 +1382,11 @@ endfunction
 " -----
 
 " Ctrl-j/k deletes blank line below/above, and Alt-j/k inserts.
+" TODO: Maybe not working on windows
 nnoremap <silent><C-j> m`:silent +g/\m^\s*$/d<CR>``:noh<CR>
 nnoremap <silent><C-k> m`:silent -g/\m^\s*$/d<CR>``:noh<CR>
-if has("mac")
-  nnoremap <silent>∆ :set paste<CR>m`o<Esc>``:set nopaste<CR>j
-  nnoremap <silent>˚ :set paste<CR>m`O<Esc>``:set nopaste<CR>k
-else
-  nnoremap <silent><A-j> :set paste<CR>m`o<Esc>``:set nopaste<CR>j
-  nnoremap <silent><A-k> :set paste<CR>m`O<Esc>``:set nopaste<CR>k
-endif
+call NormalMap({'win32': '<A-j>', 'mac': '∆', 'perform': ':set paste<CR>m`o<Esc>``:set nopaste<CR>j'})
+call NormalMap({'win32': '<A-k>', 'mac': '˚', 'perform': ':set paste<CR>m`O<Esc>``:set nopaste<CR>k'})
 
 " cd to the directory containing the file in th buffer
 nnoremap <Leader>cd :lcd %:h

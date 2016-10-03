@@ -1404,6 +1404,66 @@ nmap ]h <Plug>GitGutterNextHunk
 
 
 " -----
+" Plugin: auto-pairs
+" TODO: Investigate http://vimawesome.com/plugin/auto-pairs-gentle for gentle patch example
+" -----
+" Which pairs are included in AutoPairs behavior
+  " Default:
+  " let g:AutoPairs = {'(': ')', '[': ']', '{': '}',"'": "'",'"': '"', '`': '`'}
+
+" Set buffer level pairs
+" gu Filetype FILETYPE let b:AutoPairs = {"(": ")"}
+  " Default:
+  " let b:AutoPairs = g:AutoPairs
+
+" Toggle AutoPairs behavior
+  " Default:
+  " let g:AutoPairsShortcutToggle = '<M-p>'
+
+" Fast wrap the word, all pairs will be considered as a black (including `<>`)
+  " TODO: How does this work? I can't seem to get it going
+  "Default:
+  " let g:AutoPairsShortcutFastWrap = '<M-e>'
+
+" Jump to the next closed pair
+  " Default:
+  " let g:AutoPairsShortcutJump = '<M-n>'
+
+" Map <BS> to delete brackets, quotes in pair
+  " Default:
+  " let g:AutoPairsMapBS = 1
+
+" Map <C-h> to delete brackets, quotes in pair
+  " Default:
+  " let g:AutoPairsMapCh = 1
+
+" Map <CR> to insert a new indented line if cursor in (|), {|} [|], '|', "|"
+  " Default:
+  " let g:AutoPairsMapCR = 1
+
+" When g:AutoPairsMapCR is on, center current line after return if the line is at the bottom 1/3 of the window.
+  " Default:
+  " let g:AutoPairsCenterLine = 1
+
+" Map <space> to insert a space after the opening character and before the closing one.
+  " Default:
+  " let g:AutoPairsMapSpace = 1
+
+" Fly mode will always force closed-pair jumping instead of inserting for ')', '}', and ']'
+  " Default:
+  " let g:AutoPairsFlyMode = 0
+
+" When you press the key for the closing pair (e.g. ')') it jumps past it.
+"   If set to 1, then it'll jump to the next line, if there is only whitespace.
+"   If set to 0, then it'll only jump to a closing pair on the same line.
+" let g:AutoPairsMultilineClose = 1
+
+" Works with FlyMode, insert the key at the Fly Mode jumped position
+  " Default:
+  " let g:AutoPairsShortcutBackInsert = '<M-b>'
+
+
+" -----
 "  Key Maps
 " see :help key-notation
 " -----

@@ -462,7 +462,17 @@ augroup VimFiles
   autocmd Filetype vim setlocal formatoptions-=o
   "   Don't continue comments after pressing <Enter> in insert either
   autocmd Filetype vim setlocal formatoptions-=r
+
+  " Override default vim filetype syntax
+  autocmd Filetype vim call VimSyntax()
 augroup END
+
+function! VimSyntax()
+  " Problem: Quoted things are highlighted in vim comments
+  " Solution: Set vimCommentString syntax group back to regular
+  "   comment highlighting, with bang for force
+  hi! def link vimCommentString Comment
+endfunction
 
 augroup GitFiles
   au!

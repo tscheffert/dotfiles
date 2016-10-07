@@ -42,7 +42,6 @@ ensure_exists $rbenv_plugins_path
 
 install_plugin sstephenson/rbenv-gem-rehash
 install_plugin sstephenson/rbenv-default-gems
-install_plugin tpope/rbenv-communal-gems
 install_plugin nicknovitski/rbenv-gem-update
 install_plugin rkh/rbenv-whatis
 install_plugin toy/rbenv-update-rubies

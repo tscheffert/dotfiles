@@ -1227,14 +1227,20 @@ endif
 "   set statusline+=%*
 " endif
 
+" Use the sign column for errors
+let g:syntastic_enable_signs = 1
+
 " Always put errors into the location list
-" let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_always_populate_loc_list = 1
+
 " Open the location list when errors are found
 " let g:syntastic_auto_loc_list = 1
-" let g:syntastic_check_on_wq = 0
 
 " Check syntastic errors when files are openned
 let g:syntastic_check_on_open = 1
+
+" Don't check on :wq, :x, or :ZZ
+let g:syntastic_check_on_wq = 0
 
 " Don't use any checkers for python, too slow
 let g:syntastic_python_checkers = []
@@ -1246,6 +1252,11 @@ let g:syntastic_yaml_yamllint_args = '-c ' . shellescape($HOME . '/.yamllint')
 
 " Use the rbenv ruby instead of system (outdated) ruby
 let g:syntastic_ruby_mri_exec = '/usr/local/var/rbenv/shims/ruby'
+
+nnoremap <silent> [l :lprevious<CR>zv
+nnoremap <silent> [L :lfirst<CR>zv
+nnoremap <silent> ]l :lnext<CR>zv
+nnoremap <silent> ]L :llast<CR>zv
 
 
 " -----

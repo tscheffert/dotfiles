@@ -39,6 +39,9 @@
 \set PROMPT1 '%[%033[0;34m%]%M %n@%/ %R%#%[%033[0m%] '
 \set PROMPT2 '%[%033[1;34m%][more] %R >%[%033[0m%] '
 
+-- Show how long each query takes to execute
+\timing
+
 
 -- Renable output
 \unset QUIET

@@ -4,12 +4,16 @@ echo ""
 echo " -- Setting up vim config --"
 
 # Setup vimfiles
-if [[ ! -d $HOME/.vim/bundle/neobundle.vim ]]; then
-  git clone git@github.com:Shougo/neobundle.vim.git $HOME/.vim/bundle/neobundle.vim
+INSTALL_PATH="$HOME/.vim/autoload/plug.vim"
+if [[ ! -f $INSTALL_PATH ]]; then
+  echo "Downloading vim-plug to $INSTALL_PATH"
+  curl -fLo "$INSTALL_PATH" --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+else
+  echo "Found existing $INSTALL_PATH directory"
 fi
 
-echo "Found ~/.vim/bundle/neobundle.vim directory"
-echo "Running NeoBundle Install"
-vim +NeoBundleInstall +qall
+echo "Running vim-plug Install"
+vim +PlugUpgrade +PlugInstall +qall
 
 echo " -- Finished vim config --"

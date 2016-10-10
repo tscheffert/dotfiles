@@ -10,220 +10,182 @@ filetype off
 
 let s:use_ctrlp = 1
 let s:use_unite = 0
-let s:use_neobundle = 1
 
-if s:use_neobundle
-  if has('vim_starting')
-    " Required for NeoBundle
-    if has('win32')
-      set runtimepath +=~/vimfiles/bundle/neobundle.vim/
-    else
-      set runtimepath +=~/.vim/bundle/neobundle.vim/
-    endif
-  endif
-
-  " Required for NeoBundle
-  if has('win32')
-    call neobundle#begin(expand('~/vimfiles/bundle/'))
-  else
-    call neobundle#begin(expand('~/.vim/bundle/'))
-  endif
-
-  " Let NeoBundle manage NeoBundle
-  NeoBundleFetch 'Shougo/neobundle.vim'
-
-  " My bundles:
-
-  " Default install from github
-  "   Other windows make: 'windows': '"C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\nmake.exe" make_msvc32.mak',
-  NeoBundle 'Shougo/vimproc.vim', {
-        \ 'build' : {
-        \     'windows' : 'tools\\update-dll-mingw',
-        \     'cygwin' : 'make -f make_cygwin.mak',
-        \     'mac' : 'make',
-        \     'linux' : 'make',
-        \     'unix' : 'gmake',
-        \    },
-        \ }
-
-  " Colors
-  NeoBundle 'twerth/ir_black'
-  NeoBundle 'vim-scripts/moria'
-  NeoBundle 'vim-scripts/Color-Sampler-Pack'
-  NeoBundle 'vim-scripts/ScrollColors'
-  NeoBundle 'altercation/vim-colors-solarized'
-  NeoBundle 'tomasr/molokai'
-  NeoBundle 'nanotech/jellybeans.vim'
-  NeoBundle 'NLKNguyen/papercolor-theme'
-  NeoBundle 'lilydjwg/colorizer' " Highlights hex codes with their colors
-
-  " Code searching
-  " NeoBundle 'mileszs/ack.vim'
-  NeoBundle 'rking/ag.vim'
-
-  " Buffer management
-  NeoBundle 'vim-scripts/BufOnly.vim'
-
-  " Searching for stuff
-  if s:use_ctrlp
-    NeoBundle 'ctrlpvim/ctrlp.vim'
-  endif
-
-  if s:use_unite
-    NeoBundle 'Shougo/unite.vim'
-    NeoBundle 'Shougo/neomru.vim'
-  endif
-
-  " File management
-  NeoBundle 'scrooloose/nerdtree'
-  NeoBundle 'Xuyuanp/nerdtree-git-plugin' " Show git marks in nerdtree
-  NeoBundle 'low-ghost/nerdtree-fugitive' " Adds git menu to nerdtree
-  " Forces nerdtree to open with each tab
-  " NeoBundle 'jistr/vim-nerdtree-tabs.git'
-  NeoBundle 'kopischke/vim-fetch' " Enable vim to open with line numbers appended
-
-  " Auto parentheses
-  " NeoBundle 'Raimondi/delimitmate' " NOTE: This breaks the dot command
-  NeoBundle 'jiangmiao/auto-pairs' " Alternative
-
-  " Improved Undo functionality
-  NeoBundle 'sjl/gundo.vim'
-
-  " Snippets
-  NeoBundle 'SirVer/ultisnips'
-
-  " Language specific
-  NeoBundle 'elzr/vim-json'
-  NeoBundle 'groenewege/vim-less'
-  NeoBundle 'tmux-plugins/vim-tmux'
-  NeoBundle 'pearofducks/ansible-vim'
-  NeoBundle 'docker/docker', { 'rtp': '/contrib/syntax/vim' }
-  NeoBundle 'nginx/nginx',   { 'rtp': '/contrib/vim' }
-
-
-  " Lua Support
-  " Alternatives:
-  " - http://www.vim.org/scripts/script.php?script_id=4950
-  " - https://github.com/xolox/vim-lua-ftplugin
-  " - https://github.com/xolox/vim-lua-inspect
-  NeoBundleLazy 'tbastos/vim-lua', {'autoload':{'filetypes':['lua']}}
-
-  " JS/React/CoffeeScript
-
-  " What Peter P. suggested, TODO: Summaries
-  NeoBundle 'pangloss/vim-javascript'
-  NeoBundle 'mxw/vim-jsx'
-  NeoBundle 'othree/yajs.vim'
-  NeoBundle 'git@github.com:othree/es.next.syntax.vim'
-  NeoBundle 'othree/javascript-libraries-syntax.vim'
-  NeoBundle 'othree/html5.vim'
-  NeoBundle 'jason0x43/vim-js-indent'
-  NeoBundle 'mtscout6/vim-cjsx'
-
-  " What I had:
-  " NeoBundle 'kchmck/vim-coffee-script'
-  " NeoBundle 'mtscout6/vim-cjsx'
-  " othree/javascript-libraries-syntax.vim would be good if I got into it
-  " NeoBundleLazy 'jelera/vim-javascript-syntax', {'autoload':{'filetypes':['javascript']}}
-  " NeoBundleLazy 'maksimr/vim-jsbeautify', {'autoload':{'filetypes':['javascript']}}
-  " NeoBundle 'jsx/jsx.vim'
-
-  " Status bar
-  NeoBundle 'vim-airline/vim-airline'
-  NeoBundle 'vim-airline/vim-airline-themes'
-  NeoBundle 'ntpeters/vim-airline-colornum' " Highlight the current line number with the color of the current mode
-
-  " Easier file movement
-  NeoBundle 'Lokaltog/vim-easymotion'
-  " Look into https://github.com/justinmk/vim-sneak as an alternative
-
-  " tpope  rocks
-  NeoBundle 'tpope/vim-commentary'
-  NeoBundle 'tpope/vim-abolish'
-
-  " Surrounding shit
-  "   Given
-  "       "Hello world!"
-  "   press
-  "       cs"'
-  "   to change to
-  "       'Hello world!'
-  NeoBundle 'tpope/vim-surround'
-
-  " If I ever do a lot of json stuff, apparently this is **must** have.
-  " https://github.com/tpope/vim-jdaddy
-  " NeoBundle 'tpope/vim-jdaddy'
-
-  " Ruby stuff
-  NeoBundle 'tpope/vim-rails'
-  NeoBundle 'tpope/vim-bundler' " Works with vim-rails and vim-rake for bundler goodness
-  " NeoBundle 'tpope/vim-rake' " vim-rails (with vim-projectionist) for non rails projects
-  NeoBundle 'tpope/vim-projectionist' " Project management for navigation n such
-  NeoBundle 'tpope/vim-endwise' " Add matching 'end's for blocks
-  NeoBundle 'vim-ruby/vim-ruby' " Ruby support stuff
-
-  " Git!
-  NeoBundle 'tpope/vim-fugitive' " Awesome git wrapper
-  NeoBundle 'tpope/vim-git' " Git runtime files
-  NeoBundle 'airblade/vim-gitgutter'
-
-  " Syntax
-  NeoBundle 'scrooloose/syntastic' " Easy syntax messages
-  NeoBundle 'dbakker/vim-lint' " Linting for vim and vimL files.
-
-  " Improved searches
-  NeoBundle 'inside/vim-search-pulse' " Pulse after searches
-  NeoBundle 'haya14busa/incsearch.vim' " Show all matches as typed, auto nohl
-
-  "Multiple Curosrs!
-  " NeoBundle 'terryma/vim-multiple-cursors'
-  NeoBundle 'kana/vim-niceblock' " make |v_b_I| and |v_b_A| available in all visual modes
-
-  " Better Text Objects
-  NeoBundle 'wellle/targets.vim'
-
-  " Better Markdown
-  NeoBundle 'shime/vim-livedown'
-  NeoBundle 'tpope/vim-markdown'
-
-  " Better Buffer management
-  NeoBundle 'mhinz/vim-sayonara'
-
-  " Allow . to repeat things more often. Enables plugins (like gitgutter) and I can
-  "   map it myself
-  NeoBundle 'tpope/vim-repeat' " Wrap stuff for . command
-
-  " Rename a buffer and on disk
-  NeoBundle 'danro/rename.vim'
-
-  " Go!
-  NeoBundle 'fatih/vim-go'
-
-  " Api Blueprint
-  NeoBundle 'kylef/apiblueprint.vim'
-
-  " Considering!
-  " https://github.com/chrisbra/vim-diff-enhanced " Improved diff's using histogram and patience algorithms
-  " https://github.com/thoughtbot/vim-rspec " Sweet rspec integration
-  " NeoBundle 'yegappan/mru' " :MRU Most Recently Used files
-  " NeoBundle 'dougnukem/vim-swap-lines' " Swap two lines
-
-
-  " No longer using:
-  " This is almost entirely handled by `rubocop --auto-correct` for ruby files
-  " NeoBundle 'godlygeek/tabular' " Easy Alignment!
-
-  call neobundle#end()
-
-  " If there are uninstalled bundles found on startup,
-  " this will conveniently prompt you to install them.
-  NeoBundleCheck
-
-  if !has('vim_starting')
-    " Call on_source hook when reloading .vimrc
-    call neobundle#call_hook('on_source')
-  endif
+" Start vim-plug
+if has('win32')
+  call plug#begin(expand('~/vimfiles/bundle/'))
+else
+  call plug#begin(expand('~/.vim/bundle/'))
 endif
+
+" Colors
+Plug 'vim-scripts/ScrollColors'
+Plug 'twerth/ir_black'
+Plug 'vim-scripts/moria'
+Plug 'vim-scripts/Color-Sampler-Pack'
+Plug 'altercation/vim-colors-solarized'
+Plug 'tomasr/molokai'
+Plug 'nanotech/jellybeans.vim'
+Plug 'NLKNguyen/papercolor-theme'
+Plug 'lilydjwg/colorizer' " Highlights hex codes with their colors
+
+" Code searching
+" Plug 'mileszs/ack.vim'
+Plug 'rking/ag.vim'
+
+" Buffer management
+Plug 'vim-scripts/BufOnly.vim'
+
+" Searching for stuff
+if s:use_ctrlp
+  Plug 'ctrlpvim/ctrlp.vim'
+endif
+
+if s:use_unite
+  Plug 'Shougo/unite.vim'
+  Plug 'Shougo/neomru.vim'
+endif
+
+" File management
+Plug 'scrooloose/nerdtree'
+Plug 'Xuyuanp/nerdtree-git-plugin' " Show git marks in nerdtree
+Plug 'low-ghost/nerdtree-fugitive' " Adds git menu to nerdtree
+" Forces nerdtree to open with each tab
+" Plug 'jistr/vim-nerdtree-tabs.git'
+Plug 'kopischke/vim-fetch' " Enable vim to open with line numbers appended
+
+" Auto parentheses
+" Plug 'Raimondi/delimitmate' " NOTE: This breaks the dot command
+Plug 'jiangmiao/auto-pairs' " Alternative
+
+" Improved Undo functionality
+Plug 'sjl/gundo.vim'
+
+" Snippets
+Plug 'SirVer/ultisnips'
+
+" Language specific
+Plug 'elzr/vim-json'
+Plug 'groenewege/vim-less'
+Plug 'tmux-plugins/vim-tmux'
+Plug 'pearofducks/ansible-vim'
+Plug 'docker/docker', { 'rtp': '/contrib/syntax/vim' }
+Plug 'nginx/nginx',   { 'rtp': '/contrib/vim' }
+
+
+" Lua Support
+" Alternatives:
+" - http://www.vim.org/scripts/script.php?script_id=4950
+" - https://github.com/xolox/vim-lua-ftplugin
+" - https://github.com/xolox/vim-lua-inspect
+Plug 'tbastos/vim-lua', { 'for': ['lua'] }
+
+" JS/React/CoffeeScript
+
+" What Peter P. suggested, TODO: Summaries
+Plug 'pangloss/vim-javascript'
+Plug 'mxw/vim-jsx'
+Plug 'othree/yajs.vim'
+Plug 'git@github.com:othree/es.next.syntax.vim'
+Plug 'othree/javascript-libraries-syntax.vim'
+Plug 'othree/html5.vim'
+Plug 'jason0x43/vim-js-indent'
+Plug 'mtscout6/vim-cjsx'
+
+" What I had:
+" Plug 'kchmck/vim-coffee-script'
+" Plug 'mtscout6/vim-cjsx'
+" othree/javascript-libraries-syntax.vim would be good if I got into it
+" Plug 'jelera/vim-javascript-syntax', { 'for': ['javascript'] }
+" Plug 'maksimr/vim-jsbeautify', { 'for': ['javascript'] }
+" Plug 'jsx/jsx.vim'
+
+" Status bar
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'ntpeters/vim-airline-colornum' " Highlight the current line number with the color of the current mode
+
+" Easier file movement
+Plug 'Lokaltog/vim-easymotion'
+" Look into https://github.com/justinmk/vim-sneak as an alternative
+
+" tpope  rocks
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-abolish'
+
+" Surrounding shit
+"   Given
+"       "Hello world!"
+"   press
+"       cs"'
+"   to change to
+"       'Hello world!'
+Plug 'tpope/vim-surround'
+
+" If I ever do a lot of json stuff, apparently this is **must** have.
+" https://github.com/tpope/vim-jdaddy
+" Plug 'tpope/vim-jdaddy'
+
+" Ruby stuff
+Plug 'tpope/vim-rails'
+Plug 'tpope/vim-bundler' " Works with vim-rails and vim-rake for bundler goodness
+" Plug 'tpope/vim-rake' " vim-rails (with vim-projectionist) for non rails projects
+Plug 'tpope/vim-projectionist' " Project management for navigation n such
+Plug 'tpope/vim-endwise' " Add matching 'end's for blocks
+Plug 'vim-ruby/vim-ruby' " Ruby support stuff
+
+" Git!
+Plug 'tpope/vim-fugitive' " Awesome git wrapper
+Plug 'tpope/vim-git' " Git runtime files
+Plug 'airblade/vim-gitgutter'
+
+" Syntax
+Plug 'scrooloose/syntastic' " Easy syntax messages
+Plug 'dbakker/vim-lint' " Linting for vim and vimL files.
+
+" Improved searches
+Plug 'inside/vim-search-pulse' " Pulse after searches
+Plug 'haya14busa/incsearch.vim' " Show all matches as typed, auto nohl
+
+"Multiple Curosrs!
+" Plug 'terryma/vim-multiple-cursors'
+" Plug 'kana/vim-niceblock' " make |v_b_I| and |v_b_A| available in all visual modes
+
+" Better Text Objects
+Plug 'wellle/targets.vim'
+
+" Better Markdown
+Plug 'shime/vim-livedown'
+Plug 'tpope/vim-markdown'
+
+" Better Buffer management
+Plug 'mhinz/vim-sayonara'
+
+" Allow . to repeat things more often. Enables plugins (like gitgutter) and I can
+"   map it myself
+Plug 'tpope/vim-repeat' " Wrap stuff for . command
+
+" Rename a buffer and on disk
+Plug 'danro/rename.vim'
+
+" Go!
+Plug 'fatih/vim-go'
+
+" Api Blueprint
+Plug 'kylef/apiblueprint.vim'
+
+" Considering!
+" https://github.com/chrisbra/vim-diff-enhanced " Improved diff's using histogram and patience algorithms
+" https://github.com/thoughtbot/vim-rspec " Sweet rspec integration
+" Plug 'yegappan/mru' " :MRU Most Recently Used files
+" Plug 'dougnukem/vim-swap-lines' " Swap two lines
+
+
+" No longer using:
+" This is almost entirely handled by `rubocop --auto-correct` for ruby files
+" Plug 'godlygeek/tabular' " Easy Alignment!
+
+call plug#end()
 
 " Forget being compatible with good ol' vi
 set nocompatible

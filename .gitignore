@@ -17,6 +17,9 @@ components/*/tags
 #   else we can safely ignore.
 vimfiles/bundle/
 
+# Ignore plug.vim which curl down to install for vim-plug
+vimfiles/autoload/plug.vim
+
 # Ignore the generated backup Stuff
 vimfiles/tmp/
 

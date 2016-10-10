@@ -19,21 +19,28 @@ else
 endif
 
 " Colors
-Plug 'vim-scripts/ScrollColors'
-Plug 'twerth/ir_black'
-Plug 'vim-scripts/moria'
-Plug 'vim-scripts/Color-Sampler-Pack'
-Plug 'altercation/vim-colors-solarized'
-Plug 'tomasr/molokai'
-Plug 'nanotech/jellybeans.vim'
-Plug 'NLKNguyen/papercolor-theme'
-Plug 'lilydjwg/colorizer' " Highlights hex codes with their colors
+Plug 'vim-scripts/ScrollColors', { 'on': 'LoadColors' }
+Plug 'twerth/ir_black', { 'on': 'LoadColors' }
+Plug 'vim-scripts/moria', { 'on': 'LoadColors' }
+Plug 'vim-scripts/Color-Sampler-Pack', { 'on': 'LoadColors' }
+Plug 'altercation/vim-colors-solarized', { 'on': 'LoadColors' }
+Plug 'tomasr/molokai', { 'on': 'LoadColors' }
+
+if has('gui_running')
+  Plug 'NLKNguyen/papercolor-theme'
+else
+  Plug 'nanotech/jellybeans.vim'
+endif
+
+" Highlights hex codes with their colors
+Plug 'lilydjwg/colorizer'
 
 " Code searching
 " Plug 'mileszs/ack.vim'
 Plug 'rking/ag.vim'
 
-" Buffer management
+" Better Buffer management
+Plug 'mhinz/vim-sayonara'
 Plug 'vim-scripts/BufOnly.vim'
 
 " Searching for stuff
@@ -50,8 +57,6 @@ endif
 Plug 'scrooloose/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin' " Show git marks in nerdtree
 Plug 'low-ghost/nerdtree-fugitive' " Adds git menu to nerdtree
-" Forces nerdtree to open with each tab
-" Plug 'jistr/vim-nerdtree-tabs.git'
 Plug 'kopischke/vim-fetch' " Enable vim to open with line numbers appended
 
 " Auto parentheses
@@ -83,19 +88,18 @@ Plug 'tbastos/vim-lua', { 'for': ['lua'] }
 " JS/React/CoffeeScript
 
 " What Peter P. suggested, TODO: Summaries
-Plug 'pangloss/vim-javascript'
-Plug 'mxw/vim-jsx'
-Plug 'othree/yajs.vim'
-Plug 'git@github.com:othree/es.next.syntax.vim'
-Plug 'othree/javascript-libraries-syntax.vim'
-Plug 'othree/html5.vim'
-Plug 'jason0x43/vim-js-indent'
-Plug 'mtscout6/vim-cjsx'
+Plug 'mxw/vim-jsx',                              { 'for': ['javascript', 'js'] }
+Plug 'othree/yajs.vim',                          { 'for': ['javascript', 'js'] }
+Plug 'mtscout6/vim-cjsx',                        { 'for': ['javascript', 'js'] }
+Plug 'jason0x43/vim-js-indent',                  { 'for': ['javascript', 'js'] }
+Plug 'pangloss/vim-javascript',                  { 'for': ['javascript', 'js'] }
+Plug 'othree/javascript-libraries-syntax.vim',   { 'for': ['javascript', 'js'] }
+Plug 'git@github.com:othree/es.next.syntax.vim', { 'for': ['javascript', 'js'] }
+Plug 'othree/html5.vim',                         { 'for': ['html'] }
 
 " What I had:
 " Plug 'kchmck/vim-coffee-script'
 " Plug 'mtscout6/vim-cjsx'
-" othree/javascript-libraries-syntax.vim would be good if I got into it
 " Plug 'jelera/vim-javascript-syntax', { 'for': ['javascript'] }
 " Plug 'maksimr/vim-jsbeautify', { 'for': ['javascript'] }
 " Plug 'jsx/jsx.vim'
@@ -127,21 +131,20 @@ Plug 'tpope/vim-surround'
 " Plug 'tpope/vim-jdaddy'
 
 " Ruby stuff
-Plug 'tpope/vim-rails'
-Plug 'tpope/vim-bundler' " Works with vim-rails and vim-rake for bundler goodness
-" Plug 'tpope/vim-rake' " vim-rails (with vim-projectionist) for non rails projects
-Plug 'tpope/vim-projectionist' " Project management for navigation n such
-Plug 'tpope/vim-endwise' " Add matching 'end's for blocks
-Plug 'vim-ruby/vim-ruby' " Ruby support stuff
+Plug 'vim-ruby/vim-ruby'                            " Ruby support stuff
+Plug 'tpope/vim-rails',         { 'for': ['ruby'] } " Fancy pr
+Plug 'tpope/vim-bundler',       { 'for': ['ruby'] } " Works with vim-rails and vim-rake for bundler goodness
+Plug 'tpope/vim-endwise',       { 'for': ['ruby'] } " Add matching 'end's for blocks
+Plug 'tpope/vim-projectionist', { 'for': ['ruby'] } " Project management for navigation n such
 
 " Git!
-Plug 'tpope/vim-fugitive' " Awesome git wrapper
-Plug 'tpope/vim-git' " Git runtime files
-Plug 'airblade/vim-gitgutter'
+Plug 'airblade/vim-gitgutter' " Shows git changes in the sign column
+Plug 'tpope/vim-fugitive'     " Awesome git wrapper
+Plug 'tpope/vim-git'          " Git runtime files
 
 " Syntax
 Plug 'scrooloose/syntastic' " Easy syntax messages
-Plug 'dbakker/vim-lint' " Linting for vim and vimL files.
+Plug 'dbakker/vim-lint'     " Linting for vim and vimL files.
 
 " Improved searches
 Plug 'inside/vim-search-pulse' " Pulse after searches
@@ -155,11 +158,8 @@ Plug 'haya14busa/incsearch.vim' " Show all matches as typed, auto nohl
 Plug 'wellle/targets.vim'
 
 " Better Markdown
-Plug 'shime/vim-livedown'
-Plug 'tpope/vim-markdown'
-
-" Better Buffer management
-Plug 'mhinz/vim-sayonara'
+Plug 'shime/vim-livedown', { 'for': ['markdown'] }
+Plug 'tpope/vim-markdown', { 'for': ['markdown'] }
 
 " Allow . to repeat things more often. Enables plugins (like gitgutter) and I can
 "   map it myself
@@ -169,7 +169,7 @@ Plug 'tpope/vim-repeat' " Wrap stuff for . command
 Plug 'danro/rename.vim'
 
 " Go!
-Plug 'fatih/vim-go'
+Plug 'fatih/vim-go', { 'for': ['go'] }
 
 " Api Blueprint
 Plug 'kylef/apiblueprint.vim'

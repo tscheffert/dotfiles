@@ -68,6 +68,8 @@ IRB.conf[:PROMPT][:SIMPLE_COLOR] =
   }
 IRB.conf[:PROMPT_MODE] = :SIMPLE_COLOR
 
+ConsoleConfig::Debundler.debundle!
+
 ConsoleConfig::Helpers.extend_console('wirb') { Wirb.start } unless defined? Wirb
 ConsoleConfig::Helpers.extend_console('bond') { Bond.start } unless defined? Bond
 

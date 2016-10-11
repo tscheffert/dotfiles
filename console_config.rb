@@ -59,4 +59,25 @@ module ConsoleConfig
 
   end
 
+  module Debundler
+    # Comes with <3 from https://github.com/janlelis/debundle.rb
+
+    def self.debundle!
+      return unless defined?(Bundler)
+      return unless Gem.post_reset_hooks.reject! do |hook|
+        hook.source_location.first =~ %r{/bundler/}
+      end
+      if defined?(Bundler::EnvironmentPreserver)
+        ENV.replace(Bundler::EnvironmentPreserver.new(ENV, %w[GEM_PATH]).backup)
+      end
+      Gem.clear_paths
+
+      load 'rubygems/core_ext/kernel_require.rb'
+      load 'rubygems/core_ext/kernel_gem.rb'
+    rescue
+      warn 'Debundling failed!'
+    end
+
+  end
+
 end

@@ -70,6 +70,7 @@ IRB.conf[:PROMPT_MODE] = :SIMPLE_COLOR
 
 ConsoleConfig::Debundler.debundle!
 
+ConsoleConfig::Helpers.extend_console('awesome_print') { AwesomePrint.irb! } unless defined? AwesomePrint
 ConsoleConfig::Helpers.extend_console('wirb') { Wirb.start } unless defined? Wirb
 ConsoleConfig::Helpers.extend_console('bond') { Bond.start } unless defined? Bond
 

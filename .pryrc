@@ -5,6 +5,8 @@ require '~/console_config.rb'
 ConsoleConfig::SetupReadline.perform
 ConsoleConfig::ReplaceActiveRecordLoggers.perform
 
+# TODO: Debundler.debundle! working for pry so we can awesome_print here too
+
 # Set the prompt_name to the foldername
 Pry.config.prompt_name = File.basename(Dir.pwd)
 

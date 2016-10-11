@@ -70,7 +70,17 @@ IRB.conf[:PROMPT_MODE] = :SIMPLE_COLOR
 
 ConsoleConfig::Debundler.debundle!
 
-ConsoleConfig::Helpers.extend_console('awesome_print') { AwesomePrint.irb! } unless defined? AwesomePrint
+if !defined? AwesomePrint
+  ConsoleConfig::Helpers.extend_console('awesome_print') do
+    AwesomePrint.irb!
+
+    IRB.on_load do
+      # Set up ActiveRecord pretty printing
+      require 'awesome_print/ext/active_record'  if defined?(ActiveRecord) #|| AwesomePrint.rails_console?
+      require 'awesome_print/ext/active_support' if defined?(ActiveSupport) #  || AwesomePrint.rails_console?
+    end
+  end
+end
 ConsoleConfig::Helpers.extend_console('wirb') { Wirb.start } unless defined? Wirb
 ConsoleConfig::Helpers.extend_console('bond') { Bond.start } unless defined? Bond
 

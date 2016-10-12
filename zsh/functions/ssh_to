@@ -3,17 +3,18 @@
 
 # ssh to a specified aws server, 'cd'ing to the same git folder you're in if possible
 function ssh_to() {
+
   if [[ -n $1 ]]; then
-    local environment=$1
+    local server=$1
   else
-    echo "Must provide environment argument"
+    echo "Must provide server argument"
     local failed=true
   fi
 
   if [[ -n $2 ]]; then
-    local server=$2
+    local environment=$2
   else
-    echo "Must provide server argument"
+    echo "Must provide environment argument"
     local failed=true
   fi
 
@@ -39,9 +40,9 @@ function ssh_to() {
 
   if [[ $failed ]]; then
     echo "Usage:"
-    echo "  ssh_to {env} {server}"
-    echo "  - env: The environment to ssh into, one of staging|stg|production|prod|prd"
+    echo "  ssh_to {server} {env}"
     echo "  - server: The server name to ssh into, like mbr01 or sci04"
+    echo "  - env: The environment to ssh into, one of staging|stg|production|prod|prd"
     echo "    If using from a git repo it will ssh into that directory on the server"
     return 1
   fi

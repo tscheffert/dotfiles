@@ -17,6 +17,53 @@ module ConsoleConfig
       exit if options[:exit]
     end
 
+    # Silences STDOUT, even for subprocesses.
+    #
+    #   quietly { system 'bundle install' }
+    #
+    # This method is not thread-safe.
+    def self.quietly
+      silence_stream(STDOUT) do
+        yield
+      end
+    end
+
+    # Silences both STDOUT and STDERR, even for subprocesses.
+    #
+    #   quietly { system 'bundle install' }
+    #
+    # This method is not thread-safe.
+    def self.quietly!
+      silence_stream(STDOUT) do
+        silence_stream(STDERR) do
+          yield
+        end
+      end
+    end
+
+    private
+
+    # @private
+    # Silences any stream for the duration of the block.
+    #
+    #   silence_stream(STDOUT) do
+    #     puts 'This will never be seen'
+    #   end
+    #
+    #   puts 'But this will'
+    #
+    # This method is not thread-safe.
+    def self.silence_stream(stream)
+      old_stream = stream.dup
+      stream.reopen(RbConfig::CONFIG['host_os'] =~ /mswin|mingw/ ? 'NUL:' : '/dev/null')
+      stream.sync = true
+      yield
+    ensure
+      stream.reopen(old_stream)
+      old_stream.close
+    end
+    private_class_method :silence_stream
+
   end
 
   module SetupReadline
@@ -60,8 +107,8 @@ module ConsoleConfig
   end
 
   module Debundler
-    # Comes with <3 from https://github.com/janlelis/debundle.rb
 
+    # Comes with <3 from https://github.com/janlelis/debundle.rb
     def self.debundle!
       return unless defined?(Bundler)
       return unless Gem.post_reset_hooks.reject! do |hook|
@@ -72,10 +119,12 @@ module ConsoleConfig
       end
       Gem.clear_paths
 
-      load 'rubygems/core_ext/kernel_require.rb'
-      load 'rubygems/core_ext/kernel_gem.rb'
-    rescue
-      warn 'Debundling failed!'
+      Helpers.quietly! do
+        load 'rubygems/core_ext/kernel_require.rb'
+        load 'rubygems/core_ext/kernel_gem.rb'
+      end
+    rescue => e
+      warn "Debundling failed with error: #{e}"
     end
 
   end

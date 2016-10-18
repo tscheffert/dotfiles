@@ -86,6 +86,9 @@ alias gaa='git add .'
 # Git add all (and) commit
 alias gaac='git add . && git commit'
 
+# Git add all (and) commit (with) message
+alias gaacm='git add . && git commit -m'
+
 # Git add only updated files, no new files
 alias gau='git add -u'
 

@@ -1,0 +1,6 @@
+#!/usr/bin/env zsh
+# vi: ft=zsh
+
+function dev() {
+  cd ~/dev/"$1"
+}

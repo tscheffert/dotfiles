@@ -1,0 +1,11 @@
+#compdef dev
+# vi: ft=zsh
+
+function _dev() {
+  # _files: Autocomplete files
+    # -/ Only directories
+    # -W Specify paths to match filenames but not insert in the result
+  _files -/ -W ~/dev/
+}
+
+_dev "$@"

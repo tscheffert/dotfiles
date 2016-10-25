@@ -7,6 +7,9 @@
 # Enable zsh-completions from brew
 fpath=(/usr/local/share/zsh-completions $fpath)
 
+# Enable custom completions for my functions
+fpath=(~/.zsh/functions/completions/ $fpath)
+
 # The following lines were added by compinstall
 zstyle :compinstall filename '/Users/trentscheffert/.zshrc'
 

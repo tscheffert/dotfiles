@@ -37,6 +37,8 @@ alias grep='grep -i'
 # refresh shell
 alias reload='exec zsh -l'
 
+alias reloadcomp='rm ~/.zcompdump; compinit'
+
 # -- Postgres Aliases --
 
 alias pg-start='pg_ctl -l $PGDATA/server.log start'

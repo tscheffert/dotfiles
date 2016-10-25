@@ -13,9 +13,6 @@ zstyle :compinstall filename '/Users/trentscheffert/.zshrc'
 autoload -Uz compinit && compinit
 # End of lines added by compinstall
 
-# Run git-checkout completion for the gco alias
-compdef _git gco='git-checkout'
-
 # TODO: http://zsh.sourceforge.net/Guide/zshguide06.html#l144
 
 # TODO: Replace these

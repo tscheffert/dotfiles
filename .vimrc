@@ -678,8 +678,11 @@ set fileencodings=ucs-bom,utf-8,latin1
 " Set encoding
 set encoding=utf-8
 
-" Show tabs
-set listchars=tab:▸\
+" Set whitespace characters to display
+"   |<C-k> -,| for the trail digraph
+set listchars=tab:▸-,trail:.,extends:>
+" Actually display them, call :set list! to toggle
+set list
 
 " Session Detection fun
 function! InConEmuSession()

@@ -27,6 +27,8 @@ vimfiles/tmp/
 .zshrc.private
 .zshrc.local
 
+# Ignore old plugins ettings
+vimfiles/old/
 
 # ----- Default...? -----
 .DS_Store

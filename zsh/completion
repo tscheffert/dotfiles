@@ -1,17 +1,17 @@
 #!/usr/bin/env zsh
 # vi: ft=zsh
 
-# The following lines were added by compinstall
-zstyle :compinstall filename '/Users/trentscheffert/.zshrc'
-
-autoload -Uz compinit && compinit
-# End of lines added by compinstall
-
 # Info on how to write completions
 # https://github.com/zsh-users/zsh-completions/blob/master/zsh-completions-howto.org
 
 # Enable zsh-completions from brew
 fpath=(/usr/local/share/zsh-completions $fpath)
+
+# The following lines were added by compinstall
+zstyle :compinstall filename '/Users/trentscheffert/.zshrc'
+
+autoload -Uz compinit && compinit
+# End of lines added by compinstall
 
 # Run git-checkout completion for the gco alias
 compdef _git gco='git-checkout'

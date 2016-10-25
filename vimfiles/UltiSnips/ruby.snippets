@@ -120,4 +120,26 @@ snippet local_gem "Local trunkclub-gem" sm
 gem 'trunkclub', path: '../trunkclub-gem'$0
 endsnippet
 
+snippet before "before :each do" m
+before :each do
+	$0
+end
+endsnippet
+
+snippet it "it '...' do" m
+it '${1:does something}' do
+	$0
+end
+endsnippet
+
+
+# -- Model Snippets
+snippet validates "validates :attribute" sm
+validates :${1:attribute}$0
+endsnippet
+
+snippet validatesp "validates :attribute, presence: true" sm
+validates :${1:attribute}, presence: true$0
+endsnippet
+
 # vim: ts=2 sw=2 expandtab ft=snippets:

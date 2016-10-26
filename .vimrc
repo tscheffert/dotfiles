@@ -680,7 +680,9 @@ set encoding=utf-8
 
 " Set whitespace characters to display
 "   |<C-k> -,| for the trail digraph
-set listchars=tab:▸-,trail:.,extends:>
+"   |<C-k> sB| for the nbsp digraph
+"   |<C-k> <<| for the precedes digraph
+set listchars=tab:▸-,trail:.,extends:>,nbsp:▪,precedes:«
 " Actually display them, call :set list! to toggle
 set list
 

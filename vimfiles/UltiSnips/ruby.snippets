@@ -42,7 +42,7 @@ endglobal
 
 # TODO: For whatever reason, starting 'class_to_test' with a 'c' will put a
 #	 quote in the camelized version
-snippet spec "spec file template" sm
+snippet spec "spec file template" m
 require 'spec_helper'
 
 require '${1:class_to_test}'
@@ -102,6 +102,7 @@ ${1:key}: @object.fetch('$1')$0
 endsnippet
 
 snippet error "error do" sm
+set :raise_errors, false
 error do
 	e = env['sinatra.error']
 

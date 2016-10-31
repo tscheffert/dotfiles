@@ -81,13 +81,13 @@ snippet reqm "require 'models/'" sm
 require 'models/${1:model}'$0
 endsnippet
 
-snippet desc "describe 'something'" sm
+snippet /desc(ribe)?/ "describe 'something'" smr
 describe '${1:method}' do
 	$2
 end$0
 endsnippet
 
-snippet cont "context 'something'" sm
+snippet /cont(ext)?/ "context 'something'" smr
 context '${1:when/where}' do
 	$2
 end$0

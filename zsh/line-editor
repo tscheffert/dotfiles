@@ -1,0 +1,63 @@
+#!/usr/bin/env zsh
+# vi: ft=zsh
+
+# Function to be executed every time a new line is ready to take input
+function zle-line-init {
+
+  # Source: https://www.topbug.net/blog/2016/10/03/restore-the-previously-canceled-command-in-zsh/
+  # Store the last non-empty aborted line in MY_LINE_ABORTED
+  if [[ -n $ZLE_LINE_ABORTED ]]; then
+    local MY_ABORTED_LINE="$ZLE_LINE_ABORTED"
+  fi
+
+  # Restore aborted line on the first undo
+  if [[ -n $MY_LINE_ABORTED ]]; then
+    local savebuf="$BUFFER"
+    local savecur="$CURSOR"
+    BUFFER="$MY_LINE_ABORTED"
+    CURSOR="$#BUFFER"
+    zle split-undo
+    BUFFER="$savebuf"
+    CURSOR="$savecur"
+  fi
+  # NOTE: If zsh-autosuggestions is used then this code breaks it. Adding
+  # '_zsh_autosuggest_widget_clear' here will fix it.
+}
+
+zle -N zle-line-init
+
+# -- Keymaps --
+
+# fn-backspace deletes character
+bindkey '^[[3~' delete-char
+# TODO: Ensure that actual delete key deletes character too
+
+# Missing:
+#   alt/option+backspace deletes the entire word
+#   alt+arrows moves cursor
+
+# Enable undo and redo
+bindkey '^Z' undo
+# bindkey '\C-x\C-r' redo # TODO: this doesn't work!
+bindkey -e "^X^R" redo
+
+# Allow command line editing in an external editor.
+autoload -Uz edit-command-line
+zle -N edit-command-line
+bindkey '\C-x\C-e' edit-command-line
+
+# Meta-LeftArrow - backward one word
+bindkey "[D" backward-word
+# Meta-RightArray - forward one word
+bindkey "[C" forward-word
+
+# Meta-Backspace - backward delete whole word
+# I set iTerm to intercept meta-backspace and send ^H
+bindkey "^H" backward-kill-word
+# TODO: Ensure this works on all keyboards
+
+
+# Info:
+# http://zsh.sourceforge.net/Guide/zshguide04.html
+# http://sgeb.io/posts/2014/04/zsh-zle-custom-widgets/
+# http://zshwiki.org/home/zle/bindkeys

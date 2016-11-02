@@ -30,6 +30,7 @@ fi
 . ~/.zsh/config
 . ~/.zsh/exports
 . ~/.zsh/aliases
+. ~/.zsh/line-editor
 . ~/.zsh/completion
 . ~/.zsh/prompt
 

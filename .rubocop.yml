@@ -1281,6 +1281,12 @@ Rails/SafeNavigation:
   # implement the intended method. `try` will not raise an exception for this.
   ConvertTry: false
 
+Rails/SaveBang:
+  # This will try to change `#create` to `#create!` if the result isn't checked,
+  # which is good but we have some api_client resources that have create methods.
+  # Don't autocorrect, do warn.
+  AutoCorrect: false
+
 Rails/ScopeArgs:
   Include:
     - app/models/**/*.rb

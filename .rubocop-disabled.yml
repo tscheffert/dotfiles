@@ -54,6 +54,11 @@ Style/MultilineAssignmentLayout:
   StyleGuide: '#indent-conditional-assignment'
   Enabled: false
 
+# Enabled by default, but we shouldn't enforce names; leave it up to the user
+Style/SingleLineBlockParams:
+  Description: 'Enforces the names of some block params.'
+  Enabled: false
+
 Style/SymbolArray:
   Description: 'Use %i or %I for arrays of symbols.'
   StyleGuide: '#percent-i'

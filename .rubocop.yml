@@ -2,7 +2,7 @@
 # This started as the default configuration and then I have modified it to suite
 # my preferences.
 
-# Version: 0.44.1
+# Version: 0.45.0
 
 inherit_from:
   - .rubocop-enabled.yml
@@ -606,6 +606,12 @@ Style/Lambda:
     - lambda
     - literal
 
+Style/SpaceInLambdaLiteral:
+  EnforcedStyle: require_space
+  SupportedStyles:
+    - require_no_space
+    - require_space
+
 Style/LambdaCall:
   EnforcedStyle: call
   SupportedStyles:
@@ -766,6 +772,7 @@ Style/PercentLiteralDelimiters:
   PreferredDelimiters:
     '%':  ()
     '%i': '[]'
+    '%I': '[]'
     '%q': ()
     '%Q': ()
     '%r': '{}'

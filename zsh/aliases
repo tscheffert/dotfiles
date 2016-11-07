@@ -4,7 +4,7 @@
 # Folder shortcuts
 alias cd-d='cd ~/.dotfiles'
 alias cd-dev='cd ~/dev'
-alias gem='cd ~/dev/trunkclub-gem'
+alias tgem='cd ~/dev/trunkclub-gem'
 
 # ls alias for color-mode
 alias lh='ls -lhaG'

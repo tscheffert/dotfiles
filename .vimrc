@@ -1585,6 +1585,20 @@ call NormalMap({'win32': '<A-[>', 'mac': '<D-[>', 'perform': ':wincmd W<CR>'})
 " TODO: Consider setting this by default when we just open vim with no file specified
 nnoremap <silent> <Leader>s :setlocal buftype=nofile<CR>
 
+" Like gJ, but always remove spaces
+" With <3 from: http://vi.stackexchange.com/a/440/9963
+function! JoinSpaceless()
+  execute 'normal gJ'
+
+  " Character under cursor is whitespace?
+  if matchstr(getline('.'), '\%' . col('.') . 'c.') =~ '\s'
+    " Then remove it!
+    execute 'normal dw'
+  endif
+endfunction
+
+" Join lines but always remove spaces
+nnoremap <Leader>j :call JoinSpaceless()<CR>
 
 " -----
 " Macro Key Maps

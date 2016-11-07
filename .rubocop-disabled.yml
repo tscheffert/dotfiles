@@ -51,12 +51,12 @@ Style/MissingElse:
 
 Style/MultilineAssignmentLayout:
   Description: 'Check for a newline after the assignment operator in multi-line assignments.'
-  StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#indent-conditional-assignment'
+  StyleGuide: '#indent-conditional-assignment'
   Enabled: false
 
 Style/SymbolArray:
   Description: 'Use %i or %I for arrays of symbols.'
-  StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#percent-i'
+  StyleGuide: '#percent-i'
   Enabled: false
 
 # Enabled by default, but it messes with stuff
@@ -70,6 +70,14 @@ Style/TrailingUnderscoreVariable:
 Rails/Delegate:
   Description: 'Prefer delegate method for delegations.'
   Enabled: false
+
+# Enabled by default but doesn't work with our rack-test
+Rails/HttpPositionalArguments:
+  Description: 'Use keyword arguments instead of positional arguments in http method calls.'
+  Enabled: false
+  Include:
+    - 'spec/**/*'
+    - 'test/**/*'
 
 # Enabled by default, but super chatty and it's not useful with activesupport
 Rails/TimeZone:

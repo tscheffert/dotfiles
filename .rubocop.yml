@@ -2,7 +2,7 @@
 # This started as the default configuration and then I have modified it to suite
 # my preferences.
 
-# Version: 0.43.0
+# Version: 0.44.1
 
 inherit_from:
   - .rubocop-enabled.yml
@@ -41,6 +41,9 @@ AllCops:
   # behavior by overriding DisplayStyleGuide, or by giving the
   # -S/--display-style-guide option.
   DisplayStyleGuide: false
+  # When specifying style guide URLs, any paths and/or fragments will be
+  # evaluated relative to the base URL.
+  StyleGuideBaseURL: https://github.com/bbatsov/ruby-style-guide
   # Additional cops that do not reference a style guide rule may be enabled by
   # default. Change behavior by overriding StyleGuideCopsOnly, or by giving
   # the --only-guide-cops option.
@@ -402,15 +405,17 @@ Style/EmptyLinesAroundBlockBody:
     - no_empty_lines
 
 Style/EmptyLinesAroundClassBody:
-  EnforcedStyle: empty_lines
+  EnforcedStyle: empty_lines_except_namespace
   SupportedStyles:
     - empty_lines
+    - empty_lines_except_namespace
     - no_empty_lines
 
 Style/EmptyLinesAroundModuleBody:
-  EnforcedStyle: empty_lines
+  EnforcedStyle: empty_lines_except_namespace
   SupportedStyles:
     - empty_lines
+    - empty_lines_except_namespace
     - no_empty_lines
 
 # Checks whether the source file has a utf-8 encoding comment or not
@@ -795,6 +800,12 @@ Style/PredicateName:
   Exclude:
     - 'spec/**/*'
 
+Style/PreferredHashMethods:
+  EnforcedStyle: short
+  SupportedStyles:
+    - short
+    - verbose
+
 Style/RaiseArgs:
   EnforcedStyle: exploded
   SupportedStyles:
@@ -818,6 +829,11 @@ Style/RegexpLiteral:
   # If false, the cop will always recommend using %r if one or more slashes
   # are found in the regexp string.
   AllowInnerSlashes: false
+
+Style/SafeNavigation:
+  # Safe navigation may cause a statement to start returning `nil` in addition
+  # to whatever it used to return.
+  ConvertCodeThatCanStartToReturnNil: false
 
 Style/Semicolon:
   # Allow ; to separate several expressions on the same line.
@@ -1088,10 +1104,21 @@ Metrics/LineLength:
   URISchemes:
     - http
     - https
+  # The IgnoreCopDirectives option causes the LineLength rule to ignore cop
+  # directives like '# rubocop: enable ...' when calculating a line's length.
+  IgnoreCopDirectives: false
 
 Metrics/MethodLength:
   CountComments: false  # count full line comments?
   Max: 20
+
+Metrics/BlockLength:
+  CountComments: false  # count full line comments?
+  Max: 25
+  Exclude:
+    - 'Rakefile'
+    - '**/*.rake'
+    - 'spec/**/*.rb'
 
 Metrics/ParameterLists:
   Max: 5
@@ -1230,6 +1257,10 @@ Rails/Date:
   SupportedStyles:
     - strict
     - flexible
+
+Rails/DynamicFindBy:
+  Whitelist:
+    - find_by_sql
 
 Rails/Exit:
   Include:

@@ -205,7 +205,7 @@ alias gsp='git stash pop'
 # Show a stashed item
 #   '-p' makes it more like 'git show'
 #   use with 'stash@{n}' to reference a particular stash item
-alias gss='git stash show -p'
+alias gssh='git stash show -p'
 
 # Drop a stash item, latest by default and specify with 'stash@{n}'
 alias gsd='git stash drop'

@@ -1457,12 +1457,8 @@ endif
 " Plugin: delimitmate
 " -----
 
-if s:use_delimitmate
-  " If <BS> is already mapped then delimitmate won't remap it
-  inoremap <BS> <BS>
-endif
-
-
+" if s:use_delimitmate
+" endif
 
 
 " -----

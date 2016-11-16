@@ -1,0 +1,29 @@
+# Source: https://www.reddit.com/r/linux/comments/39q6xt/some_useful_firefox_tips_to_fix_choppy_scrolling/
+
+layout.frame_rate.precise: true     # Increases animation speed, completely eliminated choppy scrolling
+privacy.trackingprotection.enabled: true # Firefox built-in tracking protection, seemed to increase load speed quite a bit
+
+http.networking.pipelining: true # Send more than one HTTP request at once to servers
+network.http.proxy.pipelining: true # Send more than one HTTP request while on a proxy too
+
+
+# Source: http://techdows.com/2016/08/firefox-48-e10s-enabled-or-disabled-if-disabled-enable.html
+browser.tabs.remote.autostart: true # required for Electrolysis
+create browser.tabs.remote.force-enable: true # Forces on Electrolysis regardless of addon compatability
+accessibility.force_disabled: 1 # Required for Electrolysis, set to 0 by "accessibility tools"
+
+browser.tabs.animate: false # Supposed to make it faster?
+
+nglayout.initialpaint.delay: 100 # Don't wait as long before starting rendering
+
+
+# Source: https://heptagrama.com/best-firefox-configuration.htm
+dom.event.contextmenu.enable: false # Don't let websites control our right-click context menu
+extensions.pocket.enabled: false # We don't want that shit!
+
+# Source: https://wiki.archlinux.org/index.php/Firefox/Tweaks#Turn_off_sponsored_content_and_tiles
+browser.newtabpage.directory.source: blank # Prevent new tab page chatter
+browser.newtabpage.directory.ping: blank   # More chatter prevention
+
+# Source: http://tuxdiary.com/2014/02/27/firefox-memory-tweaks/
+media.autoplay.enabled: false # Don't autoplay media

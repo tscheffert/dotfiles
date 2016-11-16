@@ -219,6 +219,7 @@ end)
 --      - Support a right click menu with "Turn On for Duration"
 --      - Support toggling it off at a certain battery percentage
 --    Icons from Gloria Kang: https://dribbble.com/shots/2049777-Retina-Caffeine-Menubar-Icons
+--    Features to replace: http://semaja2.net/projects/insomniaxinfo/
 -- ]]
 
 caffeine = {}

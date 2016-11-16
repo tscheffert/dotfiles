@@ -787,6 +787,7 @@ else
     let &t_SR = "\<Esc>[4 q"
     let &t_EI = "\<Esc>[2 q"
 
+    " TODO: Something is showing ^[[>0;95;0 when I start new terminals
 
     augroup CorrectCursor
       au!

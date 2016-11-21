@@ -52,3 +52,11 @@ fi
 
 # Set up zsh syntax highlighting
 source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+# --- Paths ---
+
+# Don't allow duplicates in the path. Keep the left-most item
+typeset -U path
+
+# Don't allow duplicates in the manpath either
+typeset -U manpath

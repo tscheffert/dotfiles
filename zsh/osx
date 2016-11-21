@@ -7,7 +7,6 @@
 initialize_osx_manpath
 
 # Find man files for 'coreutils'
-typeset -U manpath
 manpath=('/usr/local/opt/coreutils/libexec/gnuman' $manpath)
 
 

@@ -818,6 +818,7 @@ Style/RaiseArgs:
   SupportedStyles:
     - compact # raise Exception.new(msg)
     - exploded # raise Exception, msg
+  AutoCorrect: false
 
 Style/RedundantReturn:
   # When true allows code like `return x, y`.

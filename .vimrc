@@ -1230,10 +1230,11 @@ let g:syntastic_yaml_yamllint_args = '-c ' . shellescape($HOME . '/.yamllint')
 " Use the rbenv ruby instead of system (outdated) ruby
 let g:syntastic_ruby_mri_exec = '/usr/local/var/rbenv/shims/ruby'
 
-nnoremap <silent> [l :lprevious<CR>zv
-nnoremap <silent> [L :lfirst<CR>zv
-nnoremap <silent> ]l :lnext<CR>zv
-nnoremap <silent> ]L :llast<CR>zv
+" Map "errors" (not list)
+nnoremap <silent> [e :lprevious<CR>zv
+nnoremap <silent> [E :lfirst<CR>zv
+nnoremap <silent> ]e :lnext<CR>zv
+nnoremap <silent> ]E :llast<CR>zv
 
 
 " -----

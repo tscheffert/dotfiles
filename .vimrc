@@ -1236,6 +1236,11 @@ nnoremap <silent> [E :lfirst<CR>zv
 nnoremap <silent> ]e :lnext<CR>zv
 nnoremap <silent> ]E :llast<CR>zv
 
+" Lua stuff!
+"   brew install lua; luarocks install luacheck
+let g:syntastic_lua_checkers = ["luac", "luacheck"]
+let g:syntastic_lua_luacheck_args = "--no-unused-args"
+
 
 " -----
 " Plugin: vim-rails

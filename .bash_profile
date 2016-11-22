@@ -405,5 +405,52 @@ function filecount {
     echo "$i";
 }
 
+# Check that the specified directory exists – and is in the PATH.
+is_dir_in_path()
+{
+  if  [ -z "${1:-}" ]; then
+    printf "The path to a directory must be provided as an argument.\n" >&2
+    return 1
+  fi
+
+  # Check that the specified path is a directory that exists.
+  if ! [ -d "$1" ]; then
+    printf "Error: ‘%s’ is not a directory.\n" "$1" >&2
+    return 1
+  fi
+
+  # Use absolute path for the directory if a relative path was specified.
+  if command -v readlink >/dev/null ; then
+    dir="$(readlink -f "$1")"
+  elif command -v realpath >/dev/null ; then
+    dir="$(realpath "$1")"
+  else
+    case "$1" in
+      /*)
+        # The path of the provided directory is already absolute.
+        dir="$1"
+      ;;
+      *)
+        # Prepend the path of the current directory.
+        dir="$PWD/$1"
+      ;;
+    esac
+    printf "Warning: neither ‘readlink’ nor ‘realpath’ are available.\n"
+    printf "Ensure that the specified directory does not contain ‘..’ in its path.\n"
+  fi
+
+  # Check that dir is in the user’s PATH.
+  case ":$PATH:" in
+    *:"$dir":*)
+      printf "‘%s’ is in the PATH.\n" "$dir"
+      return 0
+      ;;
+    *)
+      printf "‘%s’ is not in the PATH.\n" "$dir"
+      return 1
+      ;;
+  esac
+}
+
 # TODO:
 # Do I want any completions? https://github.com/Bash-it/bash-it/tree/master/completion/available

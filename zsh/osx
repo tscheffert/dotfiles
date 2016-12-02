@@ -107,4 +107,10 @@ export ANDROID_HOME='/usr/local/opt/android-sdk'
 
 
 # --- Docker-Machine ---
-eval $(docker-machine env)
+function docker_machine_running() {
+  docker-machine ip >/dev/null 2>&1
+}
+
+if docker_machine_running; then
+  eval $(docker-machine env)
+fi

@@ -1273,6 +1273,8 @@
 	</dict>
 	<key>PrefsCustomFolder</key>
 	<string>/Users/trentscheffert/.dotfiles/iTerm</string>
+	<key>Print In Black And White</key>
+	<true/>
 	<key>PromptOnQuit</key>
 	<false/>
 	<key>QuitWhenAllWindowsClosed</key>
@@ -1294,7 +1296,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2016-11-01T05:07:43Z</date>
+	<date>2016-11-23T22:49:34Z</date>
 	<key>SavePasteHistory</key>
 	<true/>
 	<key>Show Toolbelt</key>

@@ -1,6 +1,6 @@
 [user]
-	name = Trent Scheffert
-	email = trent.scheffert@gmail.com
+  name = Trent Scheffert
+  email = trent.scheffert@gmail.com
 
 [core]
   # TODO: Not cross platform!
@@ -13,7 +13,7 @@
   excludesfile = /Users/trentscheffert/.gitignore
 
 [alias]
-	lg = log -20 --pretty=format:'%Cred%h%Creset - %s %Cgreen(%cr %an)%Creset%C(yellow)%d%Creset' --abbrev-commit --date=relative
+  lg = log -20 --pretty=format:'%Cred%h%Creset - %s %Cgreen(%cr %an)%Creset%C(yellow)%d%Creset' --abbrev-commit --date=relative
 
 [branch]
   autoSetupMerge = true
@@ -34,7 +34,7 @@
 [push]
   # Current pushes to remote branch with the same name, regardless of if that
   #   branch exists. Simple double checks that the branch exists on remote first.
-	default = current
+  default = current
 
 [status]
   short = true
@@ -42,17 +42,17 @@
 [merge]
   tool = p4merge
   prompt = false
-	trustExitCode = false
-	keepBackup = false
+  trustExitCode = false
+  keepBackup = false
 
 [mergetool "p4merge"]
-	cmd = /Applications/p4merge.app/Contents/MacOS/p4merge "$BASE" "$LOCAL" "$REMOTE" "$MERGED"
+  cmd = /Applications/p4merge.app/Contents/MacOS/p4merge "$BASE" "$LOCAL" "$REMOTE" "$MERGED"
 
 [diff]
-	tool = p4merge
+  tool = p4merge
 
 [difftool "p4merge"]
-	cmd = /Applications/p4merge.app/Contents/MacOS/p4merge "$LOCAL" "$REMOTE"
+  cmd = /Applications/p4merge.app/Contents/MacOS/p4merge "$LOCAL" "$REMOTE"
 
 [init]
-	templatedir = ~/.git_template
+  templatedir = ~/.git_template

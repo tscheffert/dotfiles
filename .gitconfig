@@ -38,6 +38,7 @@
 
 [status]
   short = true
+  showUntrackedFiles = all
 
 [merge]
   tool = p4merge

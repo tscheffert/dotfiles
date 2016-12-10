@@ -3,6 +3,7 @@
 layout.frame_rate.precise: true     # Increases animation speed, completely eliminated choppy scrolling
 privacy.trackingprotection.enabled: true # Firefox built-in tracking protection, seemed to increase load speed quite a bit
 
+# network.http.pipelining on windows
 http.networking.pipelining: true # Send more than one HTTP request at once to servers
 network.http.proxy.pipelining: true # Send more than one HTTP request while on a proxy too
 
@@ -14,6 +15,7 @@ accessibility.force_disabled: 1 # Required for Electrolysis, set to 0 by "access
 
 browser.tabs.animate: false # Supposed to make it faster?
 
+# Create a new integer value
 nglayout.initialpaint.delay: 100 # Don't wait as long before starting rendering
 
 

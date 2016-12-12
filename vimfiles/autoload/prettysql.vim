@@ -1,14 +1,17 @@
-" Inspiration and source come with <3 from: https://github.com/mpyatishev/vim-sqlformat
-" requires 'sudo pip install sqlparse'
+" Inspiration and source come with <3 from:
+"   https://github.com/mpyatishev/vim-sqlformat
+"   and https://github.com/chaosong/orz-scripts/blob/master/vim-sql-formatter/plugin/sql-format.vim
+
+" Must install sqlparse before using: `pip install sqlparse'
 
 if exists("prettysql")
-    finish
+  finish
 endif
 let prettysql = 1
 
 if !has('python')
-    echo "Error: Required vim compiled with +python"
-    finish
+  echo "Error: Required vim compiled with +python"
+  finish
 endif
 
 " TODO: Enforce that we have sqlparse available for python

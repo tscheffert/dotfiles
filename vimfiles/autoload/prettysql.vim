@@ -1,10 +1,5 @@
 " Inspiration and source come with <3 from: https://github.com/mpyatishev/vim-sqlformat
-
-
-  " SQL
-  " requires 'sudo pip install sqlparse'
-  " NeoBundle 'mpyatishev/vim-sqlformat' " Formatting for sql!
-
+" requires 'sudo pip install sqlparse'
 
 if exists("prettysql")
     finish
@@ -18,6 +13,7 @@ endif
 
 function! prettysql#Format()
   " TODO: Accept a range of lines if we're in visual mode
+  "   example: https://github.com/chaosong/orz-scripts/blob/master/vim-sql-formatter/plugin/sql-format.vim
   call prettysql#FormatEntireBuffer()
 endfunction
 

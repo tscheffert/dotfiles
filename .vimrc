@@ -1014,6 +1014,19 @@ augroup blockle
   autocmd FileType ruby nnoremap <silent> <buffer> <Leader>blf :call blocked#DoEndToBrackets()<CR>
 augroup END
 
+
+" ----- Plugin: prettysql
+augroup prettysql
+  autocmd!
+
+  " Required for prettysql as it functions as a formatexpr
+  autocmd FileType sql setlocal formatexpr=prettysql#FormatSQL()
+
+  " TODO: Get this working with ranges here and inside the function
+  autocmd FileType sql nnoremap <silent> <buffer> <C-e><C-f> :call prettysql#Format()<CR>
+augroup END
+
+
 " -----
 " Splitjoin settings
 " -----

@@ -11,29 +11,16 @@ if !has('python')
     finish
 endif
 
-function! prettysql#Format()
-  " TODO: Accept a range of lines if we're in visual mode
-  "   example: https://github.com/chaosong/orz-scripts/blob/master/vim-sql-formatter/plugin/sql-format.vim
-  call prettysql#FormatEntireBuffer()
-endfunction
-
-function! prettysql#FormatEntireBuffer()
-  let l:curw = winsaveview()
-  normal! gggqG
-  " call prettysql#FormatSQL()
-  call winrestview(l:curw)
-endfunction
-
 " TODO: Enforce that we have sqlparse available for python
-function! prettysql#FormatSQL()
+function! prettysql#FormatSQL(start, end)
 
 python << EOF
 
 import vim
 import sqlparse
 
-start = int(vim.eval('v:lnum')) - 1
-end = int(vim.eval('v:count')) + start
+start = int(vim.eval('a:start')) - 1
+end = int(vim.eval('a:end')) - 1
 buf = vim.current.buffer
 NL = '\n'
 

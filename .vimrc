@@ -960,15 +960,15 @@ map - <Plug>(easymotion-prefix)
 map <SPACE> <Plug>(easymotion-s2)
 
 
-" ----- Bindings
-augroup blockle
+" ----- My Plugin: blocked
+augroup blocked
   autocmd!
   autocmd FileType ruby nnoremap <silent> <buffer> <Leader>bld :call blocked#BracketsToDoEnd()<CR>
   autocmd FileType ruby nnoremap <silent> <buffer> <Leader>blf :call blocked#DoEndToBrackets()<CR>
 augroup END
 
 
-" ----- Plugin: prettysql
+" ----- My Plugin: prettysql
 augroup prettysql
   autocmd!
 
@@ -981,7 +981,7 @@ augroup END
 
 
 " -----
-" NERDTree customization
+" Plugin: NERDTree
 " -----
 " Source: https://github.com/jistr/vim-nerdtree-tabs
 " Source: https://github.com/mhinz/vim-sayonara

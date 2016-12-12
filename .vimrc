@@ -960,53 +960,6 @@ map - <Plug>(easymotion-prefix)
 map <SPACE> <Plug>(easymotion-s2)
 
 
-" -----
-" Blockle function
-" -----
-
-function! ConvertDoEndToBrackets()
-  let char = getline('.')[col('.')-1]
-  let w = expand('<cword>')
-
-  if w=='end'
-    norm %
-
-  elseif char == 'o'
-    echo "char == 'o', norm! h"
-    norm! h
-  endif
-  let do_pos = getpos('.')
-  let begin_num = line('.')
-  norm %
-  let try_again = 25
-  while try_again && expand('<cword>') !=# 'end'
-    let try_again = try_again - 1
-    norm %
-  endwhile
-  echo "after try_again cword is"
-  echo expand('<cword>')
-
-  let lines = (line('.')-begin_num+1)
-
-  norm ciw}
-  call setpos('.', do_pos)
-  norm de
-
-  let line = getline(begin_num)
-  let before_do_str = strpart(line, 0, do_pos[2] - 1)
-  let after_do_str  = strpart(line, do_pos[2] - 1)
-
-  call setline(begin_num, before_do_str . "{" . after_do_str)
-
-  if lines == 3
-    norm! JJ
-    " Remove extraneous spaces
-    " if search('  \+', 'c', begin_num) | :.s/\([^ ]\)  \+/\1 /g | endif
-    call setpos('.', do_pos)
-  endif
-endfunction
-
-
 " ----- Bindings
 augroup blockle
   autocmd!
@@ -1025,16 +978,6 @@ augroup prettysql
   " TODO: Get this working with ranges here and inside the function
   autocmd FileType sql nnoremap <silent> <buffer> <C-e><C-f> :call prettysql#Format()<CR>
 augroup END
-
-
-" -----
-" Splitjoin settings
-" -----
-" No curly braces after splitting or joining in Option hashes
-" let g:splitjoin_ruby_curly_braces = 0
-
-" Don't leave arguments hanging
-" let g:splitjoin_ruby_hanging_args = 0
 
 
 " -----

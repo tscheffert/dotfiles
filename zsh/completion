@@ -16,6 +16,19 @@ zstyle :compinstall filename '/Users/trentscheffert/.zshrc'
 autoload -Uz compinit && compinit
 # End of lines added by compinstall
 
+# Set completion functions that are used.
+#   On the first run use the fast ones, if completion is called a second time then
+#   use the slow ones. Alternate back and forth on subsequent invocations.
+#   See 'Control Functions' in 'COMPLETION SYSTEM CONFIGURATION' (in zshall) for more details
+zstyle -e ':completion:*' completer '
+if [[ $_last_completion_try != "$HISTNO$BUFFER$CURSOR" ]]; then
+  _last_completion_try="$HISTNO$BUFFER$CURSOR"
+  reply=(_complete _match _prefix _expand)
+else
+  _last_completion_try=null
+  reply=(_ignored _correct _approximate)
+fi'
+
 # TODO: http://zsh.sourceforge.net/Guide/zshguide06.html#l144
 
 # TODO: Replace these

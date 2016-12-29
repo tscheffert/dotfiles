@@ -13,7 +13,7 @@ install coreutils
 # Install some other useful utilities like `sponge`
 install moreutils
 # Install GNU `find`, `locate`, `updatedb`, and `xargs`, `g`-prefixed
-install findutils
+install findutils # With --default-names maybe?
 # Install GNU `sed`, overwriting the built-in `sed`
 # Note: using --with-default-names instead of the path stuff
 install gnu-sed --with-default-names
@@ -29,7 +29,7 @@ install bash-completion
 install watch
 
 # Install more recent versions of some OS X tools
-install macvim --override-system-vim
+install macvim --override-system-vim --with-lua --with-luajit --with-python3
 # Then do `brew linkapps macvim`
 
 # install homebrew/dupes/grep

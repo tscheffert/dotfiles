@@ -25,10 +25,6 @@ prepend_to_path '/usr/local/sbin'
 #   '-f' tells it not to fork a new process. Works better with shell.
 export VISUAL='mvim -f'
 
-# LS_COLORS helper for GNU systems
-#   requires /gnubin in the path already
-eval "$(dircolors ~/.dir_colors)"
-
 # Install to global /Applications, not user local ~/Applications
 export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 

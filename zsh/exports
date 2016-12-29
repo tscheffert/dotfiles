@@ -59,6 +59,13 @@ export RUBY_HEAP_FREE_MIN=500000
 export CLICOLOR=1
 export LSCOLORS=ExFxdxdxcxacaccxxxExEh
 
+# LS_COLORS helper for GNU systems
+#   requires /gnubin in the path already
+eval "$(dircolors ~/.dir_colors)"
+
+# Zsh completion can use LS_COLORS too!
+zstyle ':completion:*:default' list-colors "${(@s.:.)LS_COLORS}"
+
 # TODO: Grep colors too
 # if echo hello | grep --color=auto l >/dev/null 2>&1; then
 #   export GREP_OPTIONS='--color=auto'

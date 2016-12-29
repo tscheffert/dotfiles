@@ -58,7 +58,7 @@ $unstaged
 additional_excludes='routes\.rb|schema\.rb'
 
 # Get the staged files that we do want to auto-correct
-staged=$(git diff --cached --name-only)
+staged=$(git diff --cached --name-only --diff-filter=ACMRT)
 
 # Get our list of filtered files
 to_rbca=$(echo "$staged" \

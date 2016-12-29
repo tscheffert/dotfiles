@@ -187,6 +187,9 @@ Plug 'fatih/vim-go', { 'for': ['go'] }
 " Api Blueprint
 Plug 'kylef/apiblueprint.vim'
 
+" Mimic macvim cursor toggling
+Plug 'jszakmeister/vim-togglecursor'
+
 " Considering!
 " https://github.com/chrisbra/vim-diff-enhanced " Improved diff's using histogram and patience algorithms
 " https://github.com/thoughtbot/vim-rspec " Sweet rspec integration
@@ -747,56 +750,6 @@ else
   else
     colorscheme inkpot
     let g:airline_theme='luna'
-  endif
-
-
-  " ConEmu specific
-  " if InConEmuSession()
-  " endif
-
-  " Enable cursor switching in different modes
-  "   Source: http://vim.wikia.com/wiki/Change_cursor_shape_in_different_modes
-  "   Source: http://vim.wikia.com/wiki/Configuring_the_cursor
-  "   Source: https://gist.github.com/andyfowler/1195581
-  if InTmuxSession()
-    " TODO: This should have enter exit features as well
-    " http://ass.kameli.org/cursor_tricks.html is nice as well
-    let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
-    let &t_SR = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=2\x7\<Esc>\\"
-    let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
-  else
-    " t_SI is cursor when entering insert mode
-    " t_SR is cursor when entering replace mode
-    " t_EI is cursor after exiting insert or replace mode
-
-    " Cursor shape option 1:
-    "   Works with iTerm2
-    " block "\<Esc>]50;CursorShape=0\x7"
-    " vertical bar "\<Esc>]50;CursorShape=1\x7"
-    " underline "\<Esc>]50;CursorShape=2\x7"
-
-    " Cursor shape option 2:
-    "   Works with VTE compatible terminals. (iTerm2 works)
-    " "\<ESC>[{num} q" where num:
-    " 1 or 0 -> blinking block
-    " 2 -> solid underline
-    " 3 -> blinking underline
-    " 4 -> solid block
-    " 5 -> blinking vertical bar
-    " 6 -> solid vertical bar
-    let &t_SI = "\<Esc>[6 q"
-    let &t_SR = "\<Esc>[4 q"
-    let &t_EI = "\<Esc>[2 q"
-
-    " TODO: Something is showing ^[[>0;95;0 when I start new terminals
-
-    augroup CorrectCursor
-      au!
-      " Set the cursor to solid vertical block on enter
-      au VimEnter * silent !echo -ne "\033[2 q"
-      " Set the cursor back to solid vertical bar on exit
-      au VimLeave * !echo -ne "\033[6 q"
-    augroup END
   endif
 endif
 
@@ -1422,6 +1375,19 @@ endif
 
 " if s:use_delimitmate
 " endif
+
+" -----
+" Plugin: vim-togglecursor
+" -----
+
+" Default cursor in all modes except insert is block
+let g:togglecursor_default = 'block'
+
+" Cursor in insert mode should be a line
+let g:togglecursor_insert = 'line'
+
+" Set the cursor back to a line when exiting
+let g:togglecursor_leave = 'line'
 
 
 " -----

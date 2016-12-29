@@ -808,7 +808,6 @@ set synmaxcol=2048
 set scrolloff=8
 
 " Keep some columns visible when horizontally scrolling
-set sidescroll=1
 set sidescroll=8
 
 " Set off the other paren by FLASHING

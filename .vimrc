@@ -975,16 +975,28 @@ augroup END
 " Source: https://github.com/mhinz/vim-sayonara
 " Source: https://github.com/scrooloose/nerdtree
 
+" TODO: If I open vim with a directory argument I want the NERDTree root to be that directory
+" http://stackoverflow.com/questions/5817730/changing-root-in-nerdtree
+
+" Change the CWD whenever the NERDTree root changes
+" let NERDTreeChDirMode=1
+
 " Show hidden files by default
 let NERDTreeShowHidden=1
 
 " Hide helper text at the top
 let NERDTreeMinimalUI=1
 
-" Cascae open while selected directory has only one child thats a directory
+" Cascade open while selected directory has only one child thats a directory
 let NERDTreeCascadeOpenSingleChildDir=1
 
 " Automatically remove a buffer when a file is deleted or renamed
+let NERDTreeAutoDeleteBuffer=1
+
+" Highlight the current cursor line in the NERDTree buffer
+let NERDTreeHighlightCursorLine=1
+
+" AutoDelete discarded buffer after a move or rename
 let NERDTreeAutoDeleteBuffer=1
 
 augroup NERDTreeCustomization

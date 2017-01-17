@@ -256,6 +256,11 @@ Style/Encoding:
   StyleGuide: '#utf-8'
   Enabled: true
 
+Style/EmptyMethod:
+  Description: 'Checks the formatting of empty method definitions.'
+  StyleGuide: '#no-single-line-methods'
+  Enabled: true
+
 Style/EndBlock:
   Description: 'Avoid the use of END blocks.'
   StyleGuide: '#no-END-blocks'
@@ -657,7 +662,7 @@ Style/ParenthesesAroundCondition:
   Description: >-
                  Don't use parentheses around the condition of an
                  if/unless/while.
-  StyleGuide: '#no-parens-if'
+  StyleGuide: '#no-parens-around-condition'
   Enabled: true
 
 Style/PercentLiteralDelimiters:
@@ -1457,7 +1462,7 @@ Performance/Size:
   Reference: 'https://github.com/JuanitoFatas/fast-ruby#arraycount-vs-arraysize-code'
   Enabled: true
 
-Performance/SortWithBlock:
+Performance/CompareWithBlock:
   Description: 'Use `sort_by(&:foo)` instead of `sort_by { |a, b| a.foo <=> b.foo }`.'
   Enabled: true
 
@@ -1507,6 +1512,10 @@ Rails/DelegateAllowBlank:
 Rails/DynamicFindBy:
   Description: 'Use `find_by` instead of dynamic `find_by_*`.'
   StyleGuide: 'https://github.com/bbatsov/rails-style-guide#find_by'
+  Enabled: true
+
+Rails/EnumUniqueness:
+  Description: 'Avoid duplicate integers in hash-syntax `enum` declaration.'
   Enabled: true
 
 Rails/Exit:
@@ -1589,3 +1598,21 @@ Security/JSONLoad:
   # on the value of the argument.
   AutoCorrect: false
   Enabled: true
+
+# #################### Bundler #############################
+
+Bundler/DuplicatedGem:
+  Description: 'Checks for duplicate gem entries in Gemfile.'
+  Enabled: true
+  Include:
+    - '**/Gemfile'
+    - '**/gems.rb'
+
+Bundler/OrderedGems:
+  Description: >-
+                 Sort alphabetically gems appearing within a contiguous set
+                 of lines in the Gemfile
+  Enabled: true
+  Include:
+    - '**/Gemfile'
+    - '**/gems.rb'

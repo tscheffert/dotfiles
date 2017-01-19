@@ -49,6 +49,11 @@ Style/MissingElse:
     - case
     - both
 
+Style/MethodCallWithArgsParentheses:
+  Description: 'Use parentheses for method calls with arguments.'
+  StyleGuide: '#method-invocation-parens'
+  Enabled: false
+
 Style/MultilineAssignmentLayout:
   Description: 'Check for a newline after the assignment operator in multi-line assignments.'
   StyleGuide: '#indent-conditional-assignment'
@@ -91,7 +96,10 @@ Rails/TimeZone:
   Reference: 'http://danilenko.org/2012/7/6/rails_timezones'
   Enabled: false
 
+# Enabled by default, but we use `private` for more than syntactic significance and this got in the way of that.
+# TODO: See if recent changes mean we can re-enable this for our scenario
 Lint/UselessAccessModifier:
   Description: 'Checks for useless access modifiers.'
   Enabled: false
   ContextCreatingMethods: []
+  MethodCreatingMethods: []

@@ -1227,7 +1227,7 @@ Metrics/MethodLength:
 Metrics/BlockLength:
   CountComments: false  # count full line comments?
   Max: 25
-  ExcludedMethods: []
+  ExcludedMethods: ['describe', 'context']
 
 Metrics/ParameterLists:
   Max: 5

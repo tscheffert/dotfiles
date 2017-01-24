@@ -1405,9 +1405,6 @@ Rails/NotNullColumn:
 Rails/Output:
   Include:
     - app/**/*.rb
-    - config/**/*.rb
-    - db/**/*.rb
-    - lib/**/*.rb
 
 Rails/ReadWriteAttribute:
   Include:

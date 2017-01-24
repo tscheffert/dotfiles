@@ -190,6 +190,9 @@ Plug 'kylef/apiblueprint.vim'
 " Mimic macvim cursor toggling
 Plug 'jszakmeister/vim-togglecursor'
 
+" Remember where the cursor has been
+Plug 'fergdev/vim-cursor-hist'
+
 " Considering!
 " https://github.com/chrisbra/vim-diff-enhanced " Improved diff's using histogram and patience algorithms
 " https://github.com/thoughtbot/vim-rspec " Sweet rspec integration

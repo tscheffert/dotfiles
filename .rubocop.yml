@@ -522,6 +522,7 @@ Style/FileName:
     - IP
     - JSON
     - LHS
+    - MNG
     - QPS
     - RAM
     - RHS

@@ -29,8 +29,10 @@ Plug 'altercation/vim-colors-solarized', { 'on': 'LoadColors' }
 Plug 'tomasr/molokai', { 'on': 'LoadColors' }
 
 if has('gui_running')
+  " TODO: Install this wether its gui or not
   Plug 'NLKNguyen/papercolor-theme'
 else
+  " TODO: Install this wether its gui or not
   Plug 'nanotech/jellybeans.vim'
 endif
 
@@ -191,6 +193,7 @@ Plug 'kylef/apiblueprint.vim'
 Plug 'jszakmeister/vim-togglecursor'
 
 " Remember where the cursor has been
+" TODO: Does this work? How do I make use of it again?
 Plug 'fergdev/vim-cursor-hist'
 
 " Considering!
@@ -221,6 +224,7 @@ filetype plugin indent on
 syntax on
 
 " Restore cursor position from last time you editted the file
+" TODO: See if we can return the window to the same height too
 augroup line_return
   autocmd!
   autocmd BufReadPost *
@@ -767,8 +771,10 @@ set scrolloff=8
 set sidescroll=8
 
 " Set off the other paren by FLASHING
+" TODO: Pretty sure this doesn't work
 highlight MatchParen ctermbg=4
 
+" TODO: Pretty sure this doesn't work either
 set showmatch mat=6 " show matching parens for 600ms
 
 " Shows report when any ammount of lines are changed (read always)
@@ -1150,8 +1156,10 @@ nnoremap <silent> ]E :llast<CR>zv
 
 " Lua stuff!
 "   brew install lua; luarocks install luacheck
-let g:syntastic_lua_checkers = ["luac", "luacheck"]
-let g:syntastic_lua_luacheck_args = "--no-unused-args"
+" TODO: luac spits out a full page of errors rather than playing nice
+" TODO: luacheck returns status code 73 and doesn't work
+" let g:syntastic_lua_checkers = ["luac", "luacheck"]
+" let g:syntastic_lua_luacheck_args = "--no-unused-args"
 
 
 " -----

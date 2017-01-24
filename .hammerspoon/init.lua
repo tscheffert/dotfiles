@@ -192,7 +192,11 @@ end)
 -- Window Hints like slate
 --   I used Karabiner to change cmd+tab to emmit F19
 hs.hotkey.bind({""}, "F19", function ()
-  hs.hints.windowHints(hs.window.orderedWindows(), nil, true)
+  -- TODO: The most recently used window appears to be the "bottom" one usually,
+  --   but with vim the active window is the "top" one. Is this behavior consistent
+  --   the default "windows"? Can we swap the order of the vim ones?
+  local windows = hs.window.orderedWindows()
+  hs.hints.windowHints(windows, nil, true)
 end)
 
 

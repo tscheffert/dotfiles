@@ -81,6 +81,15 @@ Rails/Delegate:
   Description: 'Prefer delegate method for delegations.'
   Enabled: false
 
+# We actually do `exit` a bunch with scripts
+Rails/Exit:
+  Description: >-
+                  Favor `fail`, `break`, `return`, etc. over `exit` in
+                  application or library code outside of Rake files to avoid
+                  exits during unit testing or running in production.
+  Enabled: false
+
+
 # Enabled by default but doesn't work with our rack-test
 Rails/HttpPositionalArguments:
   Description: 'Use keyword arguments instead of positional arguments in http method calls.'

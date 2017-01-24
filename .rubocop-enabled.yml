@@ -1528,13 +1528,6 @@ Rails/EnumUniqueness:
   Description: 'Avoid duplicate integers in hash-syntax `enum` declaration.'
   Enabled: true
 
-Rails/Exit:
-  Description: >-
-                  Favor `fail`, `break`, `return`, etc. over `exit` in
-                  application or library code outside of Rake files to avoid
-                  exits during unit testing or running in production.
-  Enabled: true
-
 # TODO: Do we actually need this?
 Rails/FilePath:
   Description: 'Use `Rails.root.join` for file path joining.'

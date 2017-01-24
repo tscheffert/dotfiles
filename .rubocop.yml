@@ -840,6 +840,10 @@ Style/MultilineOperationIndentation:
   # But it can be overridden by setting this parameter
   IndentationWidth: ~
 
+# Baker prefers `if !something`, so don't autocorrect, only make manual fixes
+Style/NegatedIf:
+  AutoCorrect: false
+
 Style/NumericLiterals:
   MinDigits: 9
 
@@ -1228,7 +1232,7 @@ Metrics/MethodLength:
 Metrics/BlockLength:
   CountComments: false  # count full line comments?
   Max: 25
-  ExcludedMethods: ['describe', 'context']
+  ExcludedMethods: ['describe', 'context', 'handle', 'create']
 
 Metrics/ParameterLists:
   Max: 5

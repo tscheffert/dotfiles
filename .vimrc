@@ -610,10 +610,9 @@ set completeopt=menuone,preview
 " "<c-d>" or "gg"
 set nostartofline
 
-" Don't include _ as a character for movements like 'w', 'b', 'e', '*', etc.
+" Include - character in words for use with things like "w", "*", and "[i"
 " Defaults are: iskeyword=@,48-57,_,192-255
-" This screws up syntax highlighting and stuff
-" set iskeyword-=_
+set iskeyword+=-
 
 
 " -----

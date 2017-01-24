@@ -60,7 +60,7 @@ alias pg-local='psql postgres://trunkclub:trunkclub@192.168.23.2/postgres'
 alias g='git'
 
 # status!
-alias gs='git status'
+alias gs='git status --short'
 
 alias ga='git add'
 

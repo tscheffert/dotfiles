@@ -37,7 +37,6 @@
   default = current
 
 [status]
-  short = true
   showUntrackedFiles = all
 
 [merge]

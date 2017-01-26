@@ -852,6 +852,7 @@ Style/NumericLiteralPrefix:
   SupportedOctalStyles:
     - zero_with_o
     - zero_only
+  AutoCorrect: false
 
 Style/OptionHash:
   # A list of parameter names that will be flagged by this cop.

@@ -1,0 +1,19 @@
+#!/usr/bin/env zsh
+# vi: ft=zsh
+
+# Show the difference, in commits, between your branch and master
+#   Source: http://stackoverflow.com/a/20419458/2675529
+function git_commitwise_diff() {
+  local current_branch="$(git symbolic-ref --quiet --short HEAD 2>/dev/null)"
+  if [[ ! -n "$current_branch" ]]; then
+    echo 1>&2 "Not in a git repository, cannot git diff"
+    return 1
+  fi
+
+  git rev-list \
+    --reverse \
+    --pretty="%h (<%ae>) %s" \
+    --cherry-pick \
+    --right-only master..."$current_branch"
+}
+

@@ -1,0 +1,14 @@
+#!/usr/bin/env zsh
+# vi: ft=zsh
+
+function cdd() {
+  local dir="$1"
+  if [[ -z "$dir" ]]; then
+    echo 1>&2 "Must specify destination directory"
+    echo 1>&2 "Usage:"
+    echo 1>&2 "  cdd dir"
+    return 1
+  fi
+
+  mkdir -p "$dir" && cd "$dir" || return 1
+}

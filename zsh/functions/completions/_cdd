@@ -1,0 +1,9 @@
+#compdef cdd
+# vi: ft=zsh
+
+function _cdd() {
+  # Complete only directories
+  _files -/
+}
+
+_cdd "$@"

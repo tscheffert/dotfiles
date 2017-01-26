@@ -270,6 +270,3 @@ alias vim-gd='vim $(git diff --name-only)'
 
 # Identify image properties for gifs
 alias igif='identify -format "%f[%s] canvas=%Wx%H size=%wx%h offset=%X%Y %D %Tcs\n"'
-
-# TODO: Probably has to be a function, and description
-alias cdd='mkdir $1 && cd $1'

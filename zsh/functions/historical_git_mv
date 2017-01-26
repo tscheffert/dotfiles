@@ -7,24 +7,21 @@ function historical_git_mv() {
   function usage() {
     echo 1>&2
     echo 1>&2 "Usage:"
-    echo 1>&2 "  historical_git_mv SOURCE DESTINATION"
+    echo 1>&2 "  historical_git_mv DESTINATION SOURCE # For a file"
+    echo 1>&2 "  historical_git_mv DESTINATION dir1 dir2 dir3 ... # For one or more directories"
   }
 
   local failure
-  local source="$1"
-  if [[ -z "$source" ]]; then
-    echo 1>&2 "Must specify SOURCE file"
-    failure=true
-  fi
 
-  local destination="$2"
-  if [[ -z "$destination" ]]; then
+  local destination="$1"
+  if [[ -z "$destination" ]] && [[ -d "$destination" ]]; then
     echo 1>&2 "Must specify DESTINATION directory"
     failure=true
   fi
 
-  if [[ -n "$destination" && -f "$destination" ]]; then
-    echo 1>&2 "DESTINATION must be a directory"
+  local source="$2"
+  if [[ -z "$source" ]]; then
+    echo 1>&2 "Must specify SOURCE file"
     failure=true
   fi
 
@@ -33,9 +30,19 @@ function historical_git_mv() {
     return 1
   fi
 
-  echo "Rewriting history to move $source to $destination/"
+  if [[ -d "$source" ]]; then
+    local destination="$1"
+    shift 1
 
-  git filter-branch --tree-filter \
-    "if [ -f $source ]; then mkdir -p $destination && mv $source $destination/$source; fi" \
-    HEAD
+    # TODO: Test again now that the $destination isn't hardcoded
+    for dir in "$@"; do
+      git filter-branch --tree-filter --force --prune-empty \
+        "if [ -d $dir ]; then mkdir -p $destination && mv $dir/ $destination/; fi" \
+        HEAD
+    done
+  elif [[ -f "$source" ]]; then
+    git filter-branch --tree-filter \
+      "if [ -f $source ]; then mkdir -p $destination && mv $source $destination; fi" \
+      HEAD
+  fi
 }

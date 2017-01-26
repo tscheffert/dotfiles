@@ -16,16 +16,16 @@ function console_me() {
       environment=production
       ;;
     *)
-      echo "Environment must be one of staging|production" && return 1
+      echo 1>&2 "Environment must be one of staging|production" && return 1
       ;;
   esac
 
   if [[ ! -d ./.git ]]; then
-    echo "Current directory not a git repo" && return 1
+    echo 1>&2 "Current directory not a git repo" && return 1
   fi
 
   if [[ ! -f ./Capfile ]]; then
-    echo "No Capfile in current directory" && return 1
+    echo 1>&2 "No Capfile in current directory" && return 1
   fi
 
   local line="$(cat ./Capfile | sed -n -e "/task \:$environment/,\$p" | sed -n -e "/server/,\$p" | head -n 1)"
@@ -46,6 +46,6 @@ function console_me() {
 
     ssh -t tscheffert@$location "sudo -u deployer sh -c 'cd /var/app/$target_dir && exec script/console $environment'"
   else
-    echo "Couldn't find server in the Capfile"
+    echo 1>&2 "Couldn't find server in the Capfile"
   fi
 }

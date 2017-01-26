@@ -16,12 +16,12 @@ function kafka_list_topics() {
   elif [[ "$tc_env" == "production" ]]; then
     local zookeeper_url=$ZOOKEEPER_PRODUCTION
   else
-    echo "Unrecognized environment: $tc_env"
+    echo 1>&2 "Unrecognized environment: $tc_env"
     local failed=true
   fi
 
   if [[ -z "$zookeeper_url" ]]; then
-    echo "Must export \$ZOOKEEPER_{env} for $tc_env"
+    echo 1>&2 "Must export \$ZOOKEEPER_{env} for $tc_env"
     local failed=true
   fi
 

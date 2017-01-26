@@ -3,18 +3,18 @@
 
 function psql_create_db() {
   if [[ -z "$POSTGRES_CONNECTION_STRING" ]]; then
-    echo "Must export POSTGRES_CONNECTION_STRING"
+    echo 1>&2 "Must export POSTGRES_CONNECTION_STRING"
     return 1
   fi
 
   if [[ -z "$POSTGRES_ROOT_USER" ]]; then
-    echo "Must export POSTGRES_ROOT_USER"
+    echo 1>&2 "Must export POSTGRES_ROOT_USER"
     return 1
   fi
 
   if [[ -z "$1" ]]; then
-    echo "Must specify a db"
-    echo "  e.g. members_svc_test"
+    echo 1>&2 "Must specify a db"
+    echo 1>&2 "  e.g. members_svc_test"
     return 1
   fi
 

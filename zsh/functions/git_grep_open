@@ -6,7 +6,7 @@ function git_grep_open() {
   local matches=($(git grep --name-only "$@"))
 
   if [[ ${#matches[@]} -eq 0 ]]; then
-    echo "No matches"
+    echo 1>&2 "No matches"
   else
     $EDITOR $matches
   fi

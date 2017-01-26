@@ -62,12 +62,12 @@ function psql_me() {
         local dry_run=1
         ;;
       \?)
-        echo "Invalid option: -$OPTARG"
+        echo 1>&2 "Invalid option: -$OPTARG"
         usage
         return 1
         ;;
       :)
-        echo "Option -$OPTARG requires an argument"
+        echo 1>&2 "Option -$OPTARG requires an argument"
         usage
         return 1
         ;;

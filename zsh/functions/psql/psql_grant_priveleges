@@ -3,13 +3,13 @@
 
 function psql_grant_priveleges() {
   if [[ -z "$POSTGRES_CONNECTION_STRING" ]]; then
-    echo "Must export POSTGRES_CONNECTION_STRING"
+    echo 1>&2 "Must export POSTGRES_CONNECTION_STRING"
     return 1
   fi
 
   if [[ -z $1 ]]; then
-    echo "Must specify a user"
-    echo "  e.g. members_svc"
+    echo 1>&2 "Must specify a user"
+    echo 1>&2 "  e.g. members_svc"
     return 1
   fi
 

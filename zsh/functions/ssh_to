@@ -7,19 +7,19 @@ function ssh_to() {
   if [[ -n $1 ]]; then
     local server=$1
   else
-    echo "Must provide server argument"
+    echo 1>&2 "Must provide server argument"
     local failed=true
   fi
 
   if [[ -n $2 ]]; then
     local environment=$2
   else
-    echo "Must provide environment argument"
+    echo 1>&2 "Must provide environment argument"
     local failed=true
   fi
 
   if [[ -z "$APPENDED_AWS_CNAME" ]]; then
-    echo "Must export \$APPENDED_AWS_CNAME"
+    echo 1>&2 "Must export \$APPENDED_AWS_CNAME"
     local failed=true
   fi
 

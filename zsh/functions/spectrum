@@ -3,6 +3,8 @@
 
 # A script to make using 256 colors in zsh less painful.
 # Copied from https://github.com/robbyrussell/oh-my-zsh/blob/master/lib/spectrum.zsh
+# TODO: Do we want "graceful degredation" for impoverished terminals which they do here:
+#   https://github.com/sykora/etc/blob/master/zsh/functions/spectrum/ ?
 
 typeset -Ag FX FG BG
 

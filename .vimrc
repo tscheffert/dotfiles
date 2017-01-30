@@ -854,7 +854,7 @@ function! s:FilterLines(cmd, filter)
 
   " Display result in a scratch buffer.
   new
-  setlocal buftype=nofile bufhidden=hide noswapfile
+  setlocal buftype=nofile bufhidden=hide noswapfile nobuflisted
   put =lines
 
   " Delete any blank lines.

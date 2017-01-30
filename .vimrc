@@ -5,9 +5,6 @@
 " Clear all autocommands
 autocmd!
 
-" Start with filetype off for plugin loading
-filetype off
-
 let s:use_ctrlp = 1
 let s:use_unite = 0
 let s:use_delimitmate = 1
@@ -207,21 +204,12 @@ Plug 'fergdev/vim-cursor-hist'
 " This is almost entirely handled by `rubocop --auto-correct` for ruby files
 " Plug 'godlygeek/tabular' " Easy Alignment!
 
+" Update &runtimepath and initialize plugin system. Automatically executes
+" `filetype plugin indent on` and `syntax enable`.
 call plug#end()
 
 " Forget being compatible with good ol' vi
 set nocompatible
-
-" Get that filetype stuff happening
-filetype on
-
-" Syntax and indent by filetype
-filetype plugin on
-filetype indent on
-filetype plugin indent on
-
-" Turn on that syntax highlighting
-syntax on
 
 " Restore cursor position from last time you editted the file
 " TODO: See if we can return the window to the same height too

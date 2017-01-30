@@ -1386,6 +1386,10 @@ endif
 " if s:use_delimitmate
 " endif
 
+" Tell delimitMate which characters should be considered as quotes
+" Default: "\" ' `"
+let delimitMate_quotes = "\" '"
+
 " -----
 " Plugin: vim-togglecursor
 " -----

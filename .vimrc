@@ -216,7 +216,7 @@ set nocompatible
 augroup line_return
   autocmd!
   autocmd BufReadPost *
-        \ if line("'\"") > 0 && line("'\"") <= line("$") |
+        \ if line("'\"") > 0 && line("'\"") <= line("$") && &ft!='gitconfig' |
         \       execute 'normal! g`"zvzz' |
         \ endif
 augroup END

@@ -54,7 +54,7 @@ function ssh_to() {
   if [[ -n "$expanded_git_dir" ]]; then
     local target_dir=${expanded_git_dir##*/}
 
-    ssh -t tscheffert@$location "sudo -u deployer sh -c 'cd /var/app/$target_dir && exec bash'"
+    ssh -t tscheffert@$location "sudo -u deployer sh -c 'cd /var/app/$target_dir; exec bash'"
   else
     ssh -t tscheffert@$location "sudo -u deployer sh -c 'exec bash'"
   fi

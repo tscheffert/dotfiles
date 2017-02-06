@@ -937,6 +937,11 @@ Style/RegexpLiteral:
   # are found in the regexp string.
   AllowInnerSlashes: false
 
+# Autocorrects by default but we tend to use it as a modifier a bunch and the
+# correcting is pretty poor, this gives us a chance to fix it by hand
+Style/RescueModifier:
+  AutoCorrect: false
+
 Style/SafeNavigation:
   # Safe navigation may cause a statement to start returning `nil` in addition
   # to whatever it used to return.

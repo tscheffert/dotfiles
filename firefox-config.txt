@@ -29,3 +29,135 @@ browser.newtabpage.directory.ping: blank   # More chatter prevention
 
 # Source: http://tuxdiary.com/2014/02/27/firefox-memory-tweaks/
 media.autoplay.enabled: false # Don't autoplay media
+
+# With Firefox 52 it blocked non-electrolysis enabled addons by default, I was able to load them with
+extensions.e10sBlocksEnabling: false
+
+
+# "Important Modified Preferences" from 'about:config', most from addons:
+accessibility.force_disabled	1
+accessibility.typeaheadfind.flashBar	0
+browser.cache.disk.capacity	921600
+browser.cache.disk.filesystem_reported	1
+browser.cache.disk.hashstats_reported	1
+browser.cache.disk.smart_size.enabled	false
+browser.cache.disk.smart_size.first_run	false
+browser.cache.disk.smart_size.use_old_max	false
+browser.cache.frecency_experiment	2
+browser.download.importedFromSqlite	true
+browser.places.smartBookmarksVersion	8
+browser.search.update	false
+browser.search.useDBForOrder	true
+browser.sessionstore.max_serialize_back	15
+browser.sessionstore.max_serialize_forward	10
+browser.sessionstore.max_tabs_undo	40
+browser.sessionstore.max_windows_undo	4
+browser.sessionstore.postdata	1
+browser.sessionstore.upgradeBackup.latestBuildID	20170125094131
+browser.startup.homepage_override.buildID	20170125094131
+browser.startup.homepage_override.mstone	51.0.1
+browser.tabs.animate	false
+browser.tabs.remote.autostart	true
+browser.tabs.remote.autostart.2	true
+browser.tabs.remote.force-enable	true
+browser.urlbar.suggest.openpage	false
+browser.urlbar.suggest.searches	true
+browser.urlbar.userMadeSearchSuggestionsChoice	true
+dom.apps.lastUpdate.buildID	20161019084923
+dom.apps.lastUpdate.mstone	49.0.2
+dom.apps.reset-permissions	true
+dom.event.contextmenu.enabled	false
+dom.mozApps.used	true
+dom.push.userAgentID	REDACTED
+extensions.lastAppVersion	51.0.1
+font.internaluseonly.changed	true
+general.autoScroll	false
+gfx.blacklist.direct2d.failureid	FEATURE_FAILURE_DL_BLACKLIST_REDACTED
+gfx.blacklist.layers.direct3d9.failureid	FEATURE_FAILURE_DL_BLACKLIST_REDACTED
+gfx.crash-guard.glcontext.appVersion	45.0.2
+gfx.crash-guard.glcontext.deviceID	REDACTED
+gfx.crash-guard.status.glcontext	2
+media.autoplay.enabled	false
+media.benchmark.vp9.fps	209
+media.benchmark.vp9.versioncheck	1
+media.gmp-gmpopenh264.abi	x86_64-gcc3-u-i386-x86_64
+media.gmp-gmpopenh264.enabled	false
+media.gmp-gmpopenh264.lastUpdate	1471823355
+media.gmp-gmpopenh264.version	1.6
+media.gmp-manager.buildID	REDACTED
+media.gmp-manager.lastCheck	1486745574
+media.gmp-widevinecdm.abi	x86_64-gcc3-u-i386-x86_64
+media.gmp-widevinecdm.enabled	false
+media.gmp-widevinecdm.lastUpdate	1474658126
+media.gmp-widevinecdm.version	1.4.8.903
+media.gmp.storage.version.observed	1
+media.webrtc.debug.aec_log_dir	/Users/REDACTED/Library/Caches/TemporaryItems
+media.webrtc.debug.log_file	/Users/REDACTED/Library/Caches/TemporaryItems/WebRTC.log
+media.youtube-ua.override.to	43
+network.auth.allow-subresource-auth	2
+network.cookie.prefsMigrated	true
+network.dns.disablePrefetch	true
+network.http.pipelining	true
+network.http.proxy.pipelining	true
+network.http.speculative-parallel-limit	0
+network.predictor.cleaned-up	true
+network.prefetch-next	false
+places.database.lastMaintenance	1486742005
+places.history.expiration.transient_current_max_pages	138231
+plugin.disable_full_page_plugin_for_types	application/pdf
+plugin.importedState	true
+plugin.state.default browser	0
+plugin.state.googletalkbrowserplugin	1
+plugin.state.java	0
+plugin.state.meetingjoinplugin	0
+plugin.state.o1dbrowserplugin	1
+plugin.state.sharepointbrowserplugin	0
+print.print_bgcolor	false
+print.print_bgimages	false
+print.print_colorspace
+print.print_command
+print.print_downloadfonts	false
+print.print_duplex	1515870810
+print.print_evenpages	true
+print.print_in_color	true
+print.print_margin_bottom	0.5
+print.print_margin_left	0.5
+print.print_margin_right	0.5
+print.print_margin_top	0.5
+print.print_oddpages	true
+print.print_orientation	0
+print.print_page_delay	50
+print.print_paper_data	0
+print.print_paper_height	11.00
+print.print_paper_name
+print.print_paper_size_type	1
+print.print_paper_size_unit	0
+print.print_paper_width	8.50
+print.print_plex_name
+print.print_resolution	1515870810
+print.print_resolution_name
+print.print_reversed	false
+print.print_scaling	1.00
+print.print_shrink_to_fit	true
+print.print_to_file	false
+print.print_unwriteable_margin_bottom	56
+print.print_unwriteable_margin_left	25
+print.print_unwriteable_margin_right	25
+print.print_unwriteable_margin_top	25
+privacy.clearOnShutdown.passwords	false
+privacy.cpd.extensions-sessionmanager	false
+privacy.cpd.extensions-tabmix	false
+privacy.donottrackheader.enabled	true
+privacy.sanitize.migrateClearSavedPwdsOnExit	true
+privacy.sanitize.migrateFx3Prefs	true
+privacy.trackingprotection.enabled	true
+privacy.trackingprotection.introCount	20
+services.sync.declinedEngines	tabs,forms,history
+services.sync.engine.history	false
+services.sync.engine.prefs.modified	true
+services.sync.engine.tabs	false
+services.sync.lastPing	1486757287
+services.sync.lastSync	Fri Feb 10 2017 14:45:34 GMT-0600 (CST)
+services.sync.numClients	1
+storage.vacuum.last.index	1
+storage.vacuum.last.places.sqlite	1484177547

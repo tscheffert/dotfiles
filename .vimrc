@@ -1031,7 +1031,7 @@ hi clear CursorLine
 if s:use_ctrlp
   " Ignore stuff
   let g:ctrlp_custom_ignore = {
-        \ 'dir': '\v[\/](\.git|\.hg|\.svn|_site|vimfiles|bundle)$',
+        \ 'dir': '\v[\/](\.git|\.hg|\.svn|_site|vimfiles|tmp|bundle)$',
         \ }
 
   " Don't ignore hidden files

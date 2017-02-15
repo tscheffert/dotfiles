@@ -1527,6 +1527,9 @@ endfunction
 " Join lines but always remove spaces
 nnoremap <Leader>j :call JoinSpaceless()<CR>
 
+" Duplicate current line below then comment out current line
+nnoremap <silent> <Leader>cc Ypk:Commentary<CR>
+
 " -----
 " Macro Key Maps
 " -----

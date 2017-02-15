@@ -67,6 +67,7 @@ link_directory $HOME/.dotfiles/.git_template $HOME/.git_template
 link_directory $HOME/.dotfiles/iTerm $HOME/iTerm
 link_directory $HOME/.dotfiles/prompts $HOME/.prompts
 link_directory $HOME/.dotfiles/zsh $HOME/.zsh
+link_directory "$HOME/.dotfiles/Alfred" "$HOME/Alfred"
 
 # Symlink files
 link_file .bash_profile

@@ -1438,6 +1438,9 @@ Rails/SafeNavigation:
   ConvertTry: false
 
 Rails/SaveBang:
+  Include:
+    - app/models/**/*.rb
+    - app/interactors/**/*.rb
   # This will try to change `#create` to `#create!` if the result isn't checked,
   # which is good but we have some api_client resources that have create methods.
   # Don't autocorrect, do warn.

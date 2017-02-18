@@ -45,7 +45,7 @@ if [[ $platform == 'windows' ]]; then
     # - Windows -
 
     # Clearly we want vim...
-    prepend_to_PATH 'C:\Program Files\Vim\vim74'
+    prepend_to_PATH 'C:\Program Files\Vim\vim80'
 
 fi
 

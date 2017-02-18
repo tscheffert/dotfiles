@@ -12,7 +12,7 @@ let s:use_auto_pairs = 0
 
 " Start vim-plug
 if has('win32')
-  call plug#begin(expand('~/vimfiles/bundle/'))
+  call plug#begin('~/vimfiles/bundle/')
 else
   call plug#begin(expand('~/.vim/bundle/'))
 endif

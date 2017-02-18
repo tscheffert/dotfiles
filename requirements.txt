@@ -3,3 +3,4 @@ Pygments                 # Syntax highlighting, used by 'ccat' alias
 pygments-style-solarized # Solarized for Pygments
 yamllint                 # For syntastic linting
 sqlparse                 # SQL parser used by prettysql vim plugin I wrote
+howdoi                   # Searches stack overflow and returns the top answer

@@ -1,0 +1,2 @@
+# Python 2 dependencies
+neovim # Python 2 provider for Neovim!

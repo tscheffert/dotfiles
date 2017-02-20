@@ -1457,8 +1457,8 @@ nnoremap <Leader>md :!mkdir -p %:p:h
 nnoremap <Leader>a :%y+<CR>
 
 " Quickly edit/reload the vimrc file
-nnoremap <silent> <Leader>ev :e $MYVIMRC<CR>
-nnoremap <silent> <Leader>sv :so $MYVIMRC<CR>
+nnoremap <silent> <Leader>ve :e $MYVIMRC<CR>
+nnoremap <silent> <Leader>vs :so $MYVIMRC<CR>
 
 " Maximize window
 " Note: Only works on windows

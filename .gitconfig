@@ -58,3 +58,7 @@
 
 [init]
   templatedir = ~/.git_template
+
+[rerere]
+  # Reuse recorded resolutions, meaning automatically reolve merge conflicts based on past resolutions
+  enabled = 1

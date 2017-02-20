@@ -265,7 +265,8 @@ alias yamllint='yamllint -c $HOME/.yamllint'
 alias ok='sudo $(fc -ln -1)'
 
 # Open changed files in (m)vim
-alias mvim-gd='mvim $(git diff --name-only)'
+#   Redirecting to /dev/null prevents it from staying attached to the shell
+alias mvim-gd='mvim -- $(git diff --name-only) > /dev/null'
 alias vim-gd='vim $(git diff --name-only)'
 
 # Identify image properties for gifs

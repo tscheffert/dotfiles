@@ -1,0 +1,11 @@
+#!/usr/bin/env zsh
+# vi: ft=zsh
+
+function findn() {
+  local name="$1"
+  if [[ -z $name ]]; then
+    echo 1>&2  "Must specify a file name to 'find'"
+    return 1
+  fi
+  find . -name "$name"
+}

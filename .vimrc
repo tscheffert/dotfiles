@@ -127,6 +127,7 @@ Plug 'Lokaltog/vim-easymotion'
 " tpope  rocks
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-abolish'
+Plug 'tpope/vim-characterize' " Improve 'ga' behavior to work with Unicode and other modern stuff
 
 " Surrounding shit
 "   Given

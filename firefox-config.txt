@@ -28,6 +28,7 @@ browser.newtabpage.directory.source: blank # Prevent new tab page chatter
 browser.newtabpage.directory.ping: blank   # More chatter prevention
 
 # Source: http://tuxdiary.com/2014/02/27/firefox-memory-tweaks/
+#   NOTE: This breaks slack video integration, which is super annoying
 media.autoplay.enabled: false # Don't autoplay media
 
 # With Firefox 52 it blocked non-electrolysis enabled addons by default, I was able to load them with

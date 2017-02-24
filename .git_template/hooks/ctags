@@ -25,21 +25,22 @@
 # mv "$dir/$$.tags" "$dir/tags"
 
 
+# $$ is the current pid, which prevents collisions if two processes kick off at the same time
 
 # lzap uses the following instead
 LANGS="-sql,-javascript"
 
 mkdir .git/tags_lock 2>/dev/null || exit 0
-trap "rmdir .git/tags_lock; rm -f .git/tags.tmp" EXIT
+trap "rmdir .git/tags_lock; rm -f .git/tags.$$" EXIT
 
 if [[ -f Rakefile || -f Gemfile ]]; then
   # ruby-only tags
   ripper-tags -R --force --tag-relative --extra=q \
     --exclude=.bundle --exclude=bundle --exclude=vendor \
-    -f .git/tags.tmp
+    -f ".git/tags.$$"
 else
   # general purpose ctags
-  ctags --tag-relative -R -f .git/tags.tmp --exclude=.git "--languages=$LANGS"
+  ctags --tag-relative -R -f ".git/tags.$$" --exclude=.git "--languages=$LANGS"
 fi
 
-mv .git/tags.tmp .git/tags
+mv ".git/tags.$$" .git/tags

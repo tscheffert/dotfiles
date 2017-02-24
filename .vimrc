@@ -151,8 +151,9 @@ Plug 'tpope/vim-projectionist', { 'for': ['ruby'] } " Project management for nav
 
 " Git!
 Plug 'airblade/vim-gitgutter' " Shows git changes in the sign column
-Plug 'tpope/vim-fugitive'     " Awesome git wrapper
 Plug 'tpope/vim-git'          " Git runtime files
+Plug 'tpope/vim-fugitive'     " Awesome git wrapper
+Plug 'tpope/vim-rhubarb'      " Github specific features building on fugitive
 Plug 'gregsexton/gitv'        " Enable :gitv! version viewing
 
 " Syntax

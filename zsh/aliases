@@ -274,3 +274,6 @@ alias igif='identify -format "%f[%s] canvas=%Wx%H size=%wx%h offset=%X%Y %D %Tcs
 
 # find . -name '$1'
 alias f='findn'
+
+# open-repo is a python script that opens a git repo in the browser on github
+alias or='open-repo'

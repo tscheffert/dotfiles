@@ -193,7 +193,8 @@ Plug 'jszakmeister/vim-togglecursor'
 
 " Remember where the cursor has been
 " TODO: Does this work? How do I make use of it again?
-Plug 'fergdev/vim-cursor-hist'
+" TODO: This collides with my <Leader>j mapping for joining lines
+" Plug 'fergdev/vim-cursor-hist'
 
 " Considering!
 " https://github.com/chrisbra/vim-diff-enhanced " Improved diff's using histogram and patience algorithms

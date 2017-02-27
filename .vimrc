@@ -25,6 +25,7 @@ Plug 'vim-scripts/Color-Sampler-Pack', { 'on': 'LoadColors' }
 Plug 'altercation/vim-colors-solarized', { 'on': 'LoadColors' }
 Plug 'tomasr/molokai', { 'on': 'LoadColors' }
 
+Plug 'trevordmiller/nova-vim'
 if has('gui_running')
   " TODO: Install this wether its gui or not
   Plug 'NLKNguyen/papercolor-theme'
@@ -710,7 +711,15 @@ endfunction
 if has('gui_running')
   set background=dark
 
-  if HasColorscheme('PaperColor')
+  if HasColorscheme('nova')
+    colorscheme nova
+    let g:airline_theme='nova'
+    " Default: ctermbg=4 guifg=#556873 guibg=#3C4C55
+    " Reset ColorColumn and then set it via my preferences
+    highlight ColorColumn NONE
+    highlight ColorColumn guifg=#C5D4DD guibg=#556873
+  elseif HasColorscheme('PaperColor')
+  " if HasColorscheme('PaperColor')
     colorscheme PaperColor
     let g:airline_theme='PaperColorRecharged'
   else
@@ -733,7 +742,10 @@ if has('gui_running')
     " Set the default font to Source Code Pro (with escaped spaces) which I
     " use everywhere!
     " set guifont=Source\ Code\ Pro\ for\ Powerline:h12
-    set guifont=Source\ Code\ Pro:h12 " Not using the powerline symbols for now
+    " set guifont=Source\ Code\ Pro:h12 " Not using the powerline symbols for now
+
+    set macligatures
+    set guifont=Operator\ Mono\ Book:h13
   endif
 else
   set term=xterm

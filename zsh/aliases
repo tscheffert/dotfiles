@@ -101,7 +101,7 @@ alias gaacm='git add . && git commit -m'
 alias gau='git add -u'
 
 # Git add new, adds a blank file for untracked files, useful for things like git diff
-alias gan='git add -N'
+alias gan='git add --intent-to-add'
 
 # Git commit
 alias gc='git commit'

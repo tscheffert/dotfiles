@@ -201,7 +201,8 @@ hs.hotkey.bind({""}, "F19", function ()
   -- TODO: The most recently used window appears to be the "bottom" one usually,
   --   but with vim the active window is the "top" one. Is this behavior consistent
   --   the default "windows"? Can we swap the order of the vim ones?
-  local windows = hs.window.allWindows()
+  -- TODO: Reversing them doesn't work with more than two windows :'(
+  local windows = hs.window.orderedWindows()
   hs.hints.windowHints(reverse(windows), nil, true)
 end)
 

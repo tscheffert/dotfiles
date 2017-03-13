@@ -229,8 +229,14 @@ alias ggo='git_grep_open'
 # Run Rubocop gem
 alias rbc='rubocop'
 
-# Run Rubocop gem and autocorrect detected violations when available
+# Run Rubocop gem and auto-correct detected violations when available
 alias rbca='rubocop --auto-correct'
+
+# Run Rubocop with a local .rubocop_todo.yml set to inherit from home directory config
+alias rtd='rubocop --config .rubocop_todo.yml'
+
+# Run Rubocop with todo and auto-correct
+alias rtda='rubocop --config .rubocop_todo.yml'
 
 # Bundle exec
 alias be='bundle exec'

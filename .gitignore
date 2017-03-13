@@ -12,6 +12,8 @@ components/*/tags
 # vim-projectionist project configs
 .projections.json
 
+.rubocop_todo.yml
+
 # ----- DotFiles -----
 # Ignore bundles. Neobundle is already in there and managed, everything
 #   else we can safely ignore.

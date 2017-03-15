@@ -26,6 +26,10 @@ end)
 -- hs.pathwatcher.new(os.getenv("HOME") .. "/.dotfiles/.hammerspoon/", reloadConfig):start()
 hs.alert.show("Config loaded")
 
+hs.hotkey.bind({"cmd"}, "Q", function()
+  hs.alert.show("⌘ + Q Disabled")
+end)
+
 
 -- [[
 --    Options

@@ -1,4 +1,111 @@
-# Delete key works, rather than just entering '~'
-"\e[3~": delete-char
+# Include any system-wide bindings and variable assignments from /etc/inputrc
+$include /etc/inputrc
 
-#
+# Note: It is a loose convention that control keystrokes operate on characters while meta keystrokes operate on words.
+# from: https://www.gnu.org/software/bash/manual/bashref.html#Readline-Movement-Commands
+
+##### Options
+# Details: https://www.gnu.org/software/bash/manual/bashref.html#Readline-Init-File-Syntax
+
+# Never ring a bell
+set bell-style none
+
+# Display the common prefix on a set of possible completions with a different color, based on LS_COLORS
+set colored-completion-prefix on
+
+# Display LS_COLORS on possible completions
+set colored-stats on
+
+# Filename matching and completion in a case-insensitive fashion
+set completion-ignore-case on
+
+# Treat '-' and '_' as equivalent for filename matching and completion, only if completion-ignore-case is also on
+set completion-map-case on
+
+# Do not convert 8 bit input to meta-prefixed sequences
+set convert-meta off
+
+# Insert text into editing buffer as a single string of characters, rather than
+# individually. Prevents characters from being interpreted as editing commands
+# Note: This prevents the ENTER key from putting in a new-line
+# set enable-bracketed-paste on
+
+# Scroll horizontally on screen rather than wrapping when line is longer than screen width
+# set horizontal-scroll-mode on
+
+# Enable 8 bit character input, i.e. don't strip characters to 7 bits when reading
+set input-meta on
+
+# The duration in milliseconds that Readline will wait when reading an ambiguous
+# sequence before just using the shorter, completed sequence.
+set keyseq-timeout 500
+
+# Display an asterisk ('*') at the start of history lines which have been modified
+set mark-modified-lines on
+
+# Match filenames whose names begin with '.' when performing filename completion
+set match-hidden-files on
+
+# Display characters with the eighth bit set directly rather than as meta-prefixed characters
+set output-meta on
+
+# Undo all changes to history lines before returning, by default lines may be modified and will retain individual undo lists
+set revert-all-at-newline on
+
+# Words which have more than one completion cause the matches to be listed immediately
+set show-all-if-ambiguous on
+
+# Words which have more than one possible completion, without any possible partial
+# completion, cause the matches to be listed immediately
+set show-all-if-unmodified on
+
+# When performing completions in the middle of a word, do not insert characters
+# from the completion that match characters after the point in the word being completed
+#   ex: 'Makefile|' -> 'Makefile|' rather than 'Makefilefile|'
+set skip-completed-text on
+
+
+##### Binds
+
+# Delete key works, rather than just entering '~'
+# This seems to happen by default
+# "\e[3~": delete-char
+
+# With C-u, clear the entire line rather than just what's before the cursor; same behavior as zsh
+# TODO: Doesn't work in irb for some weird reason
+"\C-u": kill-whole-line
+
+# Incremental undo, separately remembered for each line
+# This doesn't work because ctrl-z is a zsh thing for pause forground task
+# "\C-z": undo
+# bindkey '\C-x\C-r' redo # TODO: this doesn't work!
+# bindkey -e "^X^R" redo
+
+# Allow command line editing in an external editor.
+# Invoke editor on the current command line and execute the result as shell commands
+# TODO: Get this working, info here: https://github.com/tpope/pry-editline/blob/master/lib/pry-editline.rb
+# autoload -Uz edit-command-line
+# zle -N edit-command-line
+# "\C-x\C-e": edit-and-execute-command # This is how readline would do it natively, I think, but it doesn't work
+# bindkey '\C-x\C-e' edit-command-line
+
+# Meta-RightArray - forward one word
+# "\M-\e[C": forward-word
+"\e\e[C": forward-word
+
+# Meta-LeftArrow - backward one word
+# "\M-\e[D": backward-word
+"\e\e[D": backward-word
+
+# Use the text already typed as prefix for searching through history commands
+"\e[B": history-search-forward
+"\e[A": history-search-backward
+
+# Meta-Backspace - Backward delete the whole word
+# Note: I set iTerm to intercept meta-backspace and send ^H (ctrl-h)
+# TODO: Ensure this works on all keyboards
+"\C-h": backward-kill-word
+
+# Meta-Delete - Forward delete the whole word
+# TODO: Get this working
+# "\e[3;3~": kill-word

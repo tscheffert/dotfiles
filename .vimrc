@@ -1593,7 +1593,7 @@ noremap ; :
 noremap : ;
 
 " Keep the mental mapping going and use ; as : for
-"   ommand-line window too. See `:help cmdline-window`
+"   command-line window too. See `:help cmdline-window`
 nnoremap q; q:
 
 " Deleting single character shouldn't squash the paste buffer

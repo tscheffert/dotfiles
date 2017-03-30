@@ -1,6 +1,7 @@
-#!/bin/sh -
+#!/bin/bash -e
 #
 # Source: http://www.imagemagick.org/Usage/scripts/anim2gif
+# Bashified by Trent 'tscheffe' Scheffert,
 #
 # anim2gif [-b BASENAME] file.anim...
 #
@@ -34,10 +35,10 @@
 #
 #  Anthony Thyssen    20 April 1996
 #
-ORIGDIR=`pwd`
-PROGNAME=`type $0 | awk '{print $3}'`  # search for executable on path
-PROGDIR=`dirname $PROGNAME`            # extract directory of program
-PROGNAME=`basename $PROGNAME`          # base name of program
+ORIGDIR=$(pwd)
+PROGNAME=$(type "$0" | awk '{print $3}')  # search for executable on path
+PROGDIR=$(dirname "$PROGNAME")            # extract directory of program
+PROGNAME=$(basename "$PROGNAME")          # base name of program
 Usage() {                              # output the script comments as docs
   echo >&2 "$PROGNAME:" "$@"
   sed >&2 -n '/^###/q; /^#/!q; s/^#//; s/^ //; 3s/^/Usage: /; 2,$ p' \
@@ -78,11 +79,10 @@ for i in "$@" ; do
 
   [ "$VERBOSE" ] && echo "converting \"$i\""
 
-  path=`expr "$i" : '\(.*\)/'`                 # get file path (if any)
-  name=`expr "//$i" : '.*/\([^/]*\)'`           # remove path to file
-  suffix=`expr "$name" : '.*\.\([^./]*\)$'`     # extract last suffix
-  name=`expr "$name" : '\(.*\)\.[^.]*$'`        # remove last suffix
-  : ${path:=.}
+  path=$(dirname "$i")     # get file path (if any)
+  name="${i##*/}"          # remove path to file
+  suffix="${name##*\.}"    # extract last suffix
+  name="${name%\.*}"       # remove last suffix
 
   bname="$name"
   [ "$basename" ] && bname="$basename"
@@ -97,7 +97,7 @@ for i in "$@" ; do
   # The sed script removes comments from the scripts options
   # though ensures it does not remove any #RRGGBB color arguments.
   #
-  cd $path
+  cd "$path"
   [ "$debug" ] && set -x
   #convert -adjoin -colors 256 \
   sed 's/#[^0-9a-fA-F].*//; s/#$//;
@@ -105,14 +105,14 @@ for i in "$@" ; do
        '"$COALESCED"';
        s/BASENAME/'"$bname"'/;
        /^$/d;
-       ' $name.$suffix |\
-  convert `cat` $ORIGDIR/$bname$sfx 2>&1
+       ' "$name.$suffix" | \
+  convert `cat` "$ORIGDIR/$bname$sfx" 2>&1
       #|| echo "anim2gif: Convert returned failed error status $?"
       #|| rm -f $ORIGDIR/$bname$sfx
   [ "$debug" ] && set -
 
   # Return to the original directory
-  cd $ORIGDIR
+  cd "$ORIGDIR"
 
   # Removed as being obsolete.
   #[ -f $bname$sfx ] &&

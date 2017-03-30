@@ -1,6 +1,7 @@
-#!/bin/sh -
+#!/bin/bash -e
 #
 # Source: http://www.imagemagick.org/Usage/scripts/gif2anim
+# Bashified by Trent 'tscheffe' Scheffert
 #
 # gif2anim [options] image_anim.gif...
 #
@@ -211,8 +212,9 @@ for i in "$@" ; do
     fi
   fi
 
-  [ "$VERBOSE" ] && echo " DONE"
-
+  if [[ "$VERBOSE" ]]; then
+    echo " DONE"
+  fi
 done
 
 

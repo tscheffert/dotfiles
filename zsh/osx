@@ -9,11 +9,23 @@ initialize_osx_manpath
 # Find man files for 'coreutils'
 manpath=('/usr/local/opt/coreutils/libexec/gnuman' $manpath)
 
+# Man files for 'findutils'
+manpath=('/usr/local/opt/findutils/libexec/gnuman' $manpath)
+
+# Man files for 'gnu-tar'
+manpath=('/usr/local/opt/gnu-tar/libexec/gnuman' $manpath)
+
 
 # -- Prepend --
 
 # For homebrewed 'coreutils'
 prepend_to_path '/usr/local/opt/coreutils/libexec/gnubin'
+
+# For homebrewed 'findutils'
+prepend_to_path '/usr/local/opt/findutils/libexec/gnubin'
+
+# For homebrewed 'gnu-tar'
+prepend_to_path '/usr/local/opt/gnu-tar/libexec/gnubin'
 
 # Brew Doctor told me to add this because I have utilities that put things here
 prepend_to_path '/usr/local/sbin'

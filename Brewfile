@@ -8,15 +8,24 @@ update
 upgrade
 
 # Install GNU core utilities (those that come with OS X are outdated)
-# Note: already have the path stuff in .bash_profile
+# Note: Overwriting system utils by adding the bin to PATH in my .zshrc
 install coreutils
+
+# Install GNU `tar`
+# Note: Overwriting system tar by adding the bin to PATH in my .zshrc
+install gnu-tar
+
+# Install GNU `find`, `locate`, `updatedb`, and `xargs`
+# Note: Overwriting system utils by adding the bin to PATH in my .zshrc
+install findutils
+
+# Install GNU `sed`, overwriting the built-in `sed`
+# Note: It doesn't look like gnu-sed allows me to do the path stuff
+install gnu-sed --with-default-names
+
 # Install some other useful utilities like `sponge`
 install moreutils
-# Install GNU `find`, `locate`, `updatedb`, and `xargs`, `g`-prefixed
-install findutils # With --default-names maybe?
-# Install GNU `sed`, overwriting the built-in `sed`
-# Note: using --with-default-names instead of the path stuff
-install gnu-sed --with-default-names
+
 # Install Bash 4
 # Note: Don't forget to add `/usr/local/bin/bash` to `/etc/shells` before running `chsh`.
 # It's defaulted to keg-only, mush be added to /etc/shells if I want to use this version as my login shell

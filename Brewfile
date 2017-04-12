@@ -64,12 +64,14 @@ install rbenv ruby-build
 # Awesome linting tool for bash scripts
 install shellcheck
 
+# Fancy utility for displaying organization of a directory, and it's fast
+install tree
+
 # Things I haven't installed but could
 # install nmap # Network Map Hacker Tool - Homepage: http://nmap.org
 # install pigz # Parallelized Implementation of gzip - Homepage: http://www.zlib.net/pigz/
 # install pv # Pipe View Utility - Homepage: http://www.ivarch.com/programs/pv.shtml
 # install rename # Rename Utility - Homepage: http://plasmasturm.org/code/rename/
-# install tree # Directory Listing - Homepage: http://mama.indstate.edu/users/ice/tree/
 # install webkit2png # Website Screenshotter - Homepage: http://www.paulhammond.org/webkit2png/
 # install zopfli # Improved (slow-ass) Compression - Homepage: https://code.google.com/p/zopfli/
 

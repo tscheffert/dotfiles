@@ -44,6 +44,9 @@ alias reload='exec zsh -l'
 
 alias reloadcomp='rm ~/.zcompdump; compinit'
 
+# Use a theme with tldr (for the npm installed tldr)
+alias tldr='tldr --theme base16'
+
 # -- Postgres Aliases --
 
 alias pg-start='pg_ctl -l $PGDATA/server.log start'

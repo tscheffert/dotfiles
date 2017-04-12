@@ -32,6 +32,9 @@ vimfiles/tmp/
 # Ignore old plugins ettings
 vimfiles/old/
 
+# Local, unsynced, Alfred preferences
+Alfred/Alfred.alfredpreferences/preferences/local/
+
 # ----- Default...? -----
 .DS_Store
 ._*

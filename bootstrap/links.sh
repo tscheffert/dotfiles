@@ -15,41 +15,41 @@
 #   -f If the target file already exists, then unlink it so that the link may occur.
 
 link_directory() {
-  local from=$1
-  local to=$2
+  local from="$1"
+  local to="$2"
 
   if [[ -d $from ]]; then
-    if [[ -h $to ]]; then
+    if [[ -h "$to" ]]; then
       echo "Directory '${to}' already exists, skipping link"
     else
       echo "Linking directory ${from} to ${to}"
-      ln -sf $from $to
+      ln -sf "$from" "$to"
     fi
   fi
 }
 
 link_file() {
-  local file=$1
+  local file="$1"
 
-  ln -sf $HOME/.dotfiles/$file $HOME/$file
+  ln -sf "$HOME/.dotfiles/$file" "$HOME/$file"
 }
 
 link_optional_file() {
-  local file=$1
+  local file="$1"
 
-  if [[ -f $HOME/.dotfiles/$file ]]; then
-    ln -sf $HOME/.dotfiles/$file $HOME/$file
+  if [[ -f "$HOME/.dotfiles/$file" ]]; then
+    ln -sf "$HOME/.dotfiles/$file" "$HOME/$file"
   fi
 }
 
 link_file_with_directory() {
-  local dir=$1
-  local file=$2
+  local dir="$1"
+  local file="$2"
 
   if [[ ! -d $HOME/$dir ]]; then
-    mkdir $HOME/$dir
+    mkdir "$HOME/$dir"
   fi
-  ln -sf $HOME/.dotfiles/$dir/$file $HOME/$dir/$file
+  ln -sf "$HOME/.dotfiles/$dir/$file" "$HOME/$dir/$file"
 }
 
 echo ""
@@ -61,12 +61,12 @@ if [[ ! -d $HOME/.dotfiles ]]; then
 fi
 
 # Symlink directories
-link_directory $HOME/.dotfiles/bin $HOME/bin
-link_directory $HOME/.dotfiles/vimfiles $HOME/.vim
-link_directory $HOME/.dotfiles/.git_template $HOME/.git_template
-link_directory $HOME/.dotfiles/iTerm $HOME/iTerm
-link_directory $HOME/.dotfiles/prompts $HOME/.prompts
-link_directory $HOME/.dotfiles/zsh $HOME/.zsh
+link_directory "$HOME/.dotfiles/bin" "$HOME/bin"
+link_directory "$HOME/.dotfiles/vimfiles" "$HOME/.vim"
+link_directory "$HOME/.dotfiles/.git_template" "$HOME/.git_template"
+link_directory "$HOME/.dotfiles/iTerm" "$HOME/iTerm"
+link_directory "$HOME/.dotfiles/prompts" "$HOME/.prompts"
+link_directory "$HOME/.dotfiles/zsh" "$HOME/.zsh"
 link_directory "$HOME/.dotfiles/Alfred" "$HOME/Alfred"
 
 # Symlink files
@@ -108,8 +108,8 @@ link_file_with_directory .hammerspoon/icons caffeinate-on.png
 link_file_with_directory .hammerspoon/icons caffeinate-off.png
 
 # Link karabainer-elements config
-mkdir -p $HOME/.config/karabiner
-ln -sf $HOME/.dotfiles/karabiner.json $HOME/.config/karabiner/karabiner.json
+mkdir -p "$HOME/.config/karabiner"
+ln -sf "$HOME/.dotfiles/karabiner.json" "$HOME/.config/karabiner/karabiner.json"
 
 echo "Dotfiles have been symlinked to $HOME."
 

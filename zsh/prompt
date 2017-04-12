@@ -84,7 +84,7 @@ function check_exit_code() {
 function name() {
   # Only show name if it's different than my usual
   local name=""
-  if [[ $(whoami) != "trentscheffert" ]]; then
+  if [[ $(whoami) != "tscheffe" ]]; then
     name="%n%{$reset_color%}"
   fi
 

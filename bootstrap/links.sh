@@ -108,8 +108,13 @@ link_file_with_directory .hammerspoon/icons caffeinate-on.png
 link_file_with_directory .hammerspoon/icons caffeinate-off.png
 
 # Link karabainer-elements config
+# NOTE: This isn't working yet, still have to use vanilla Karabiner
 mkdir -p "$HOME/.config/karabiner"
 ln -sf "$HOME/.dotfiles/karabiner.json" "$HOME/.config/karabiner/karabiner.json"
+
+# Link karabiner config
+mkdir -p "$HOME/Library/Application Support/Karabiner"
+ln -sf "$HOME/.dotfiles/karabiner/private.xml" "$HOME/Library/Application Support/Karabiner/private.xml"
 
 echo "Dotfiles have been symlinked to $HOME."
 

@@ -27,22 +27,23 @@ install gnu-sed --with-default-names
 install moreutils
 
 # Install Bash 4
-# Note: Don't forget to add `/usr/local/bin/bash` to `/etc/shells` before running `chsh`.
-# It's defaulted to keg-only, mush be added to /etc/shells if I want to use this version as my login shell
+# Note: Don't forget to add `/usr/local/bin/bash` to `/etc/shells` before
+# running `chsh`.
+# It's defaulted to keg-only, mush be added to /etc/shells if I want to use
+# this version as my login shell
 install bash
-# NOTE: I believe that this comes with git or something
-# But let's try it anyways
 install bash-completion
 
 # Watch executes a program periodically showing output fullscreen
 install watch
 
-# Install more recent versions of some OS X tools
-install macvim --override-system-vim --with-lua --with-luajit --with-python3
+# Install macvim with applicable options
+# Note: No --with-python3 because the brewed install can't do both 2 and 3, so
+# let's stick with 2
+install macvim --override-system-vim --with-lua --with-luajit
 # Then do `brew linkapps macvim`
 
 # install homebrew/dupes/grep
-# install homebrew/dupes/screen
 
 # Install other useful binaries
 install ack

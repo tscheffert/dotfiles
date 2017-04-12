@@ -1,31 +1,32 @@
 # Install native apps
 # Usage: `brew bundle Caskfile`
-# TODO: Validate what I do, or do not, want to install
+#
+# # Install apps to /Applications by the default is /Users/$user/Applications
+# (Already in my .zshrc)
+# export HOMEBREW_CASK_OPTS=--appdir=/Applications
 
-cask install 1password                            # Password manager
-cask install alfred                               # Improved app launcher
-cask install appcleaner                           # Completely uninstall macapps
-cask install atom                                 # Text editor for pairing with non vimers
-cask install caffeine                             # Menu bar icon to keep screen on
-cask install google-chrome                        # Web browser
-cask install iterm2                               # Improved terminal application
-cask install karabiner                            # Keymapping for everything osx
-cask install screenhereo                          # For remote pairing
-cask install sdformatter                          # Graphical tool for formatting sd cards
-cask install slack                                # Chat client for work
-cask install spotify                              # Music streaming client
-cask install the-unarchiver                       # Automatically unzip archived files
-cask install vlc                                  # Video player of champions
+cask install hammerspoon         # Windowing and system autiomation utility
+cask install 1password           # Password manager
+cask install alfred              # Improved app launcher
+cask install appcleaner          # Completely uninstall macapps
+cask install atom                # Text editor for pairing with non vimers
+cask install google-chrome       # Web browser
+cask install iterm2              # Improved terminal application
+cask install karabiner           # Keymapping for everything osx
+cask install screenhereo         # For remote pairing
+cask install sdformatter         # Graphical tool for formatting sd cards
+cask install slack               # Chat client for work
+cask install spotify             # Music streaming client
+cask install the-unarchiver      # Automatically unzip archived files
+cask install vlc                 # Video player of champions
 
 # from:
 # Apps
 # apps=(
 #   arq
 #   cloudup
-#   firefox
 #   flux
 #   hazel
-#   iterm2
 #   mailbox
 #   qlcolorcode
 #   qlmarkdown
@@ -40,8 +41,3 @@ cask install vlc                                  # Video player of champions
 #   transmit
 #   vlc
 # )
-#
-# # Install apps to /Applications
-# # Default is: /Users/$user/Applications
-# echo "installing apps..."
-# brew cask install --appdir="/Applications" ${apps[@]}

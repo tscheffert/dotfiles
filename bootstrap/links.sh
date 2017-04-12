@@ -107,6 +107,10 @@ link_file_with_directory .hammerspoon init.lua
 link_file_with_directory .hammerspoon/icons caffeinate-on.png
 link_file_with_directory .hammerspoon/icons caffeinate-off.png
 
+# Link karabainer-elements config
+mkdir -p $HOME/.config/karabiner
+ln -sf $HOME/.dotfiles/karabiner.json $HOME/.config/karabiner/karabiner.json
+
 echo "Dotfiles have been symlinked to $HOME."
 
 echo " -- Finished linking dotfiles --"

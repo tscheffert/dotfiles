@@ -7,6 +7,15 @@ update
 # Upgrade any already-installed formulae
 upgrade
 
+# The best shell around
+install zsh
+
+# On the fly syntax highlighting for my commands
+install zsh-syntax-highlighting
+
+# Additional completions for zsh!
+install zsh-completions
+
 # Install GNU core utilities (those that come with OS X are outdated)
 # Note: Overwriting system utils by adding the bin to PATH in my .zshrc
 install coreutils

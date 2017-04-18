@@ -1,6 +1,8 @@
 #!/usr/bin/env zsh
 # vi: ft=zsh
 
+# --- CONFIG ---
+
 # Make vim the default editor
 export EDITOR="vim";
 
@@ -10,6 +12,9 @@ export LC_ALL="en_US.UTF-8";
 
 # Use 'less' as the pager
 export PAGER='less'
+
+# Prefer exact matching to fuzzy finding when searching history
+export FZF_CTRL_R_OPTS='--exact'
 
 # Options for LESS are read from here the $LESS variable
 #   --IGNORE-CASE: Ignore case in searches, even if the search contains a capital letter

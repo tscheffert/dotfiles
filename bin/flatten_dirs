@@ -1,0 +1,24 @@
+#!/usr/bin/env ruby
+# vi: ft=ruby
+
+require 'fileutils'
+SEP = File::SEPARATOR
+EXISTS_DIR = "exists"
+
+found = `find ./ -type f \( -name "*.mp4" -or -name "*.m4v" -or -name "*.avi" -or -name "*.mkv" -or -name "*.wmv" -or -name "*.mpg" -or -name "*.mpeg" -or -name "*.mov" \)`.split("\n")
+
+found = found.map { |f| f.sub(".#{SEP}", "") }
+in_dir = found.select { |f| f.include?(SEP) }
+exists, to_move = in_dir.partition { |f| File.exists?(File.basename(f)) }
+
+FileUtils.mkdir_p(EXISTS_DIR) if exists.any?
+
+exists.each do |path|
+  FileUtils.mv(path, EXISTS_DIR) unless File.exists?(File.join(EXISTS_DIR, File.basename(path)))
+end
+
+to_move.each do |path|
+  FileUtils.mv(path, Dir.pwd)
+end
+
+(exists + to_move).each { |f| FileUtils.remove_dir(File.dirname(f), true) }

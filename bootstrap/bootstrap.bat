@@ -12,7 +12,6 @@ mklink C:\Users\Trent\.gitconfig C:\Users\Trent\.dotfiles\.gitconfig
 mklink C:\Users\Trent\.gitignore C:\Users\Trent\.dotfiles\.gitignore
 mklink C:\Users\Trent\.jscs.json C:\Users\Trent\.dotfiles\.jscs.json
 mklink C:\Users\Trent\.jshintrc C:\Users\Trent\.dotfiles\.jshintrc
-mklink C:\Users\Trent\.osx C:\Users\Trent\.dotfiles\.osx
 mklink C:\Users\Trent\.vimrc C:\Users\Trent\.dotfiles\.vimrc
 ::mklink C:\Windows\System32\WindowsPowerShell\v1.0\profile.ps1 C:\Users\Trent\.dotfiles\PowerShell\profile.ps1
 ::mklink C:\Users\Trent\Documents\WindowsPowerShell\PowerTabConfig.xml C:\Users\Trent\.dotfiles\PowerShell\PowerTabConfig.xml

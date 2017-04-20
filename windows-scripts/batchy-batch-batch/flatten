@@ -1,0 +1,9 @@
+function flatten() {
+  local files=`find ./ -type f`
+  local commands=`echo $files | awk '{ str=$0; sub(/\.\//, "", str);}'`
+  local gsubbed=`echo $subbed | awk '{ gsub(/\//, "-", str); }'`
+  local mvs=`echo $files | awk '{ str=$0; print "mv \" $0 \" ./to/" str }'`
+  echo $commands
+}
+
+flatten "$@"

@@ -1,0 +1,155 @@
+<job id="ResizeImage">
+    <comment>Written by Sergey Vasilevskiy.</comment>
+    <runtime>
+        <description>
+Resize images in a given directory. By default, resized images are written to a subdirectory. 
+If an original image is smaller than the new size, it is not changed. 
+The script also flips specified width and height for Portrait orientation images (e.g. preserves the orientation).
+
+        </description>
+        <named name="indir" required="true" type="string" helpstring="Input directory with origial image files."/>
+        <named name="outdir" required="false" type="string" 
+               helpstring="Output directory (defaults to new-size-named subdirectory of indir)."/>
+        <named name="width" required="false" type="string" helpstring="New image width."/>
+        <named name="height" required="false" type="string" helpstring="New image height."/>
+        <named name="count" required="false" type="string" helpstring="Maximum number of images to resize."/>
+        <example>Example: resize_image.wsf /indir:"My Pictures" /width:1600 /height:1200 /count:2</example>
+    </runtime>
+    <reference object="WIA.DeviceManager.1" />
+    <object id="DeviceManager1" progid="WIA.DeviceManager.1" />
+    <object id="CommonDialog1" progid="WIA.CommonDialog.1" />
+
+    <script language="JScript">
+    // Code adapted from http://msdn.microsoft.com/en-us/library/ms630819(VS.85).aspx.
+    //
+    
+    // New dimensions.
+    //
+    var scaledWidth = 1600;
+    var scaledHeight = 1200;
+    var fileMask = "jpg";  // extension of files to look for
+    
+    var inDir = "";
+    var outDir = "";
+    var maxCount;
+    
+    var objArgs = WScript.Arguments.Named;
+
+    // Parse input parameters.
+    //
+    if (objArgs.length == 0 || objArgs.Item("indir") == null)
+    {
+        WScript.Arguments.ShowUsage();
+        WScript.Quit();   
+    }
+    else
+    {
+        inDir = objArgs.Item("indir");
+        
+        outDir = objArgs.Item("outdir");
+        
+        if (objArgs.Item("width") != null)
+        {
+            scaledWidth = objArgs.Item("width");
+        }
+        if (objArgs.Item("height") != null)
+        {
+            scaledHeight = objArgs.Item("height");
+        }
+        
+        maxCount = objArgs.Item("count");
+    }
+    
+    if (outDir == null)
+    {
+        outDir = inDir + "\\" + scaledWidth + "x" + scaledHeight;
+    }
+    
+    WScript.Echo ("Resizing images to " + scaledWidth + "x" + scaledHeight + " from \"" + inDir + "\" to \"" + outDir + "\".");
+    
+    // Windows Image Acquisition objects.
+    //
+    var Img = WScript.CreateObject("WIA.ImageFile.1");
+    var IP = WScript.CreateObject("WIA.ImageProcess.1");
+    
+    var fso = WScript.CreateObject("Scripting.FileSystemObject");
+    var f = fso.GetFolder(inDir);
+    var fc = new Enumerator(f.Files);
+    var s="";
+    var fileCount = 0;
+    // Iterate over all files in the folder.
+    //
+    for (; !fc.atEnd() && (maxCount == null || fileCount < maxCount); fc.moveNext())
+    {
+        var file = fc.item().Name;
+        
+        if (fso.GetExtensionName(fc.item()).toLowerCase() == fileMask &&
+            !fso.FileExists(outDir + "\\" + file)
+            )
+        {
+            if (resize(file))
+            {
+                ++fileCount;
+            }
+        }
+    }
+    WScript.Echo("Resized " + fileCount + " files.");
+    
+    // Helper function to do the actual resizing.
+    //
+    function resize(filename)
+    {
+        var path = inDir + "\\" + filename;
+        var newWidth, newHeight;
+        
+        Img.LoadFile(path);
+
+        // Initialize filters once.
+        //
+        if (IP.Filters.Count == 0)
+        {
+            IP.Filters.Add(IP.FilterInfos("Scale").FilterID);
+        }
+        
+        // Find out if the image is Portrait orientation or Landscape.
+        // Maintain its orientation.
+        //
+        if (Img.Width > Img.Height)
+        {
+            newWidth = scaledWidth;
+            newHeight = scaledHeight;
+        }
+        else    // Portrait => flip width with height
+        {
+            newWidth = scaledHeight;
+            newHeight = scaledWidth;
+        }
+        
+        IP.Filters(1).Properties("MaximumWidth") = newWidth;
+        IP.Filters(1).Properties("MaximumHeight") = newHeight;
+
+        if (Img.Width > newWidth || Img.Height > newHeight)
+        {
+            Img = IP.Apply(Img);    // apply filter (this will resize the image in memory)
+
+            // Create subdirectory if needed.
+            //
+            if (!fso.FolderExists(outDir))
+            {
+                fso.CreateFolder(outDir);
+            }
+            
+            var newPath = outDir + "\\" + filename;
+            
+            if (!fso.FileExists(newPath))   // don't overwrite existing files
+            {
+                Img.SaveFile(newPath);
+                return true;
+            }
+        }
+        
+        return false;
+    }
+    </script>
+
+</job>

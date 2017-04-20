@@ -35,6 +35,8 @@ vimfiles/old/
 # Local, unsynced, Alfred preferences
 Alfred/Alfred.alfredpreferences/preferences/local/
 
+!./bin/
+
 # ----- Default...? -----
 .DS_Store
 ._*
@@ -334,3 +336,7 @@ bower_components/
 
 build/
 dist/
+
+# ----- Explicit Include -----
+!bin/
+/*/**/bin/ # Ignore all bins but the "root directory" bin folder

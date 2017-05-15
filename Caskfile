@@ -5,27 +5,37 @@
 # (Already in my .zshrc)
 # export HOMEBREW_CASK_OPTS=--appdir=/Applications
 
-cask install hammerspoon         # Windowing and system autiomation utility
-cask install 1password           # Password manager
-cask install alfred              # Improved app launcher
-cask install appcleaner          # Completely uninstall macapps
-cask install atom                # Text editor for pairing with non vimers
-cask install google-chrome       # Web browser
-cask install iterm2              # Improved terminal application
-cask install karabiner           # Keymapping for everything osx
-cask install screenhereo         # For remote pairing
-cask install sdformatter         # Graphical tool for formatting sd cards
-cask install slack               # Chat client for work
-cask install spotify             # Music streaming client
-cask install the-unarchiver      # Automatically unzip archived files
-cask install vlc                 # Video player of champions
+
+cask install 1password                # Password manager
+cask install alfred                   # Improved app launcher
+cask install android-file-transfer    # Required for android phones file transfers
+cask install appcleaner               # Completely uninstall macOS apps
+cask install atom                     # Text editor for pairing with non vimers
+cask install feeds                    # RSS Style notification center for the menu bar
+cask install font-fira-code
+cask install gimp                     # Open Source image manipulation software
+cask install google-chrome            # Web browser
+cask install hammerspoon              # Windowing and system automation utility
+cask install iterm2                   # Improved terminal application
+cask install karabiner                # Keymapping for everything macOS
+cask install noti                     # Menu bar buddy that replays messages from my phone
+cask install screenhereo              # For remote pairing
+cask install sdformatter              # Graphical tool for formatting SD cards
+cask install slack                    # Chat client for work
+cask install the-unarchiver           # Automatically unzip archived files
+cask install visual-studio-code       # Text Editor similar to atom
+
+# Fun
+cask install battle-net               # Blizzard
+cask install spotify                  # Music streaming client
+cask install steam
+cask install vlc                      # Video player of champions
 
 # from:
 # Apps
 # apps=(
 #   arq
 #   cloudup
-#   flux
 #   hazel
 #   mailbox
 #   qlcolorcode
@@ -39,5 +49,4 @@ cask install vlc                 # Video player of champions
 #   sketch
 #   tower
 #   transmit
-#   vlc
 # )

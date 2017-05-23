@@ -378,6 +378,9 @@ alias -- -='cd -'        # Go back
 # Colors for TLDR!
 alias tldr='tldr --theme base16'
 
+# Doesn't like it when I run the exe directly, run the batch initialization script instead
+alias gvim='gvim.bat'
+
 # --- Functions ---
 # what the hell?
 function f {

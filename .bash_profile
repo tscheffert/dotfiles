@@ -375,6 +375,9 @@ alias ...='cd ../..'     # Go up two directories
 alias ....='cd ../../..' # Go up three directories
 alias -- -='cd -'        # Go back
 
+# Colors for TLDR!
+alias tldr='tldr --theme base16'
+
 # --- Functions ---
 # what the hell?
 function f {

@@ -17,10 +17,10 @@ else
   echo "has brew, check"
 fi
 
-# Ensure ~/.ItermHist
+# Ensure ~/.iTermHist
 if [[ ! -d ~/.iTermHist ]]; then
   echo "creating ~/.iTermHist"
-  mkdir ~/.ItermHist
+  mkdir ~/.iTermHist
 fi
 
 # Ensure tmux

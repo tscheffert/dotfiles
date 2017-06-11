@@ -24,3 +24,6 @@
 - Install macvim
 - pip install -r requirements.txt
 - Run through Brewfile and install stuff
+
+# Photoshop Plugins
+Get ico plugin from: http://www.telegraphics.com.au/sw/product/ICOFormat

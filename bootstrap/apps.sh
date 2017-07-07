@@ -24,6 +24,7 @@ if [[ ! -d ~/.iTermHist ]]; then
 fi
 
 # Ensure tmux
+# TODO: Upgrade?
 if ! test_exists tmux; then
   echo "installing tmux:"
   brew install tmux
@@ -37,6 +38,7 @@ if [[ ! -d $HOME/.tmux/plugins/tpm ]]; then
 fi
 
 # Ensure rbenv
+# TODO: Upgrade?
 if ! test_exists rbenv; then
   brew install rbenv
   echo "Run bootstrap/rben-plugins.sh to install rbenv plugins"
@@ -45,17 +47,20 @@ else
 fi
 
 # Ensure ruby-build
+# TODO: Upgrade?
 if ! test_exists ruby-build; then
   brew install ruby-build
 fi
 
 # Set up the default-gems
+# TODO: Upgrade?
 if test_exists rbenv; then
   ln -sf $HOME/.dotfiles/rbenv/default-gems /usr/local/var/rbenv/default-gems
   echo "set up rbenv default-gems"
 fi
 
 # Ensure fuzzy finder
+# TODO: Upgrade?
 if ! test_exists fzf; then
   echo 'installing fzf'
   brew install fzf

@@ -1,3 +1,13 @@
+# From OneNote
+Steps:
+- Start installing xcode!
+- Wait for XCode
+- Install homebrew
+- Run brew doctor and ensure it's working
+- Git clone dotfiles
+TODO: xcode-select --install first
+- Maybe run xcode-select --install? Does it hang?
+
 # Previous notes:
 1. Setup iTerm2 to use it's preferences
 3. Figure out how to install exuberant-ctags

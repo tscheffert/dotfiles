@@ -24,6 +24,10 @@ install coreutils
 # Note: Overwriting system tar by adding the bin to PATH in my .zshrc
 install gnu-tar
 
+# Install GNU `time`
+# Note: as `time` is a shell keyword, we let this install as `gtime`
+install gnu-time
+
 # Install GNU `find`, `locate`, `updatedb`, and `xargs`
 # Note: Overwriting system utils by adding the bin to PATH in my .zshrc
 install findutils

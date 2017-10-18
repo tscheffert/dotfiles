@@ -106,7 +106,8 @@ Plug 'mtscout6/vim-cjsx',                        { 'for': ['javascript', 'js'] }
 Plug 'jason0x43/vim-js-indent',                  { 'for': ['javascript', 'js'] }
 Plug 'pangloss/vim-javascript',                  { 'for': ['javascript', 'js'] }
 Plug 'othree/javascript-libraries-syntax.vim',   { 'for': ['javascript', 'js'] }
-Plug 'git@github.com:othree/es.next.syntax.vim', { 'for': ['javascript', 'js'] }
+" Can't connect to repo. No longer public?
+" Plug 'git@github.com:othree/es.next.syntax.vim', { 'for': ['javascript', 'js'] }
 Plug 'othree/html5.vim',                         { 'for': ['html'] }
 
 " What I had:

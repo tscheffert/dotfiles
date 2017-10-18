@@ -12,6 +12,8 @@ let s:use_auto_pairs = 0
 
 " Start vim-plug
 if has('win32')
+  set shell=cmd
+  set shellcmdflag=/c
   call plug#begin('~/vimfiles/bundle/')
 else
   call plug#begin(expand('~/.vim/bundle/'))

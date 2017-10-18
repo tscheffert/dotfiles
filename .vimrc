@@ -294,6 +294,8 @@ set nrformats=
 " -- From derekwyatt
 set ambiwidth=double
 
+" Improve smoothness and swiftness of redrawing, because we use modern terminals
+set ttyfast
 
 " -----
 " Window/Buffers/Tabs

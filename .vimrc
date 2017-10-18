@@ -88,7 +88,7 @@ Plug 'tmux-plugins/vim-tmux'
 Plug 'pearofducks/ansible-vim'
 Plug 'docker/docker', { 'rtp': '/contrib/syntax/vim' }
 Plug 'nginx/nginx',   { 'rtp': '/contrib/vim' }
-
+Plug 'PProvost/vim-ps1'
 
 " Lua Support
 " Alternatives:

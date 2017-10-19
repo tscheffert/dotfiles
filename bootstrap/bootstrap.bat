@@ -13,6 +13,8 @@ mklink C:\Users\tscheffert\.gitignore C:\Users\tscheffert\.dotfiles\.gitignore
 mklink C:\Users\tscheffert\.jscs.json C:\Users\tscheffert\.dotfiles\.jscs.json
 mklink C:\Users\tscheffert\.jshintrc C:\Users\tscheffert\.dotfiles\.jshintrc
 mklink C:\Users\tscheffert\.vimrc C:\Users\tscheffert\.dotfiles\.vimrc
+mkdir %userprofile%\Documents\WindowsPowerShell
+mklink C:\Users\tscheffert\Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1 C:\Users\tscheffert\.dotfiles\powershell\Microsoft.PowerShell_profile.ps1
 ::mklink C:\Windows\System32\WindowsPowerShell\v1.0\profile.ps1 C:\Users\tscheffert\.dotfiles\PowerShell\profile.ps1
 ::mklink C:\Users\tscheffert\Documents\WindowsPowerShell\PowerTabConfig.xml C:\Users\tscheffert\.dotfiles\PowerShell\PowerTabConfig.xml
 ::mklink C:\Users\tscheffert\Documents\WindowsPowerShell\TabExpansion.xml C:\Users\tscheffert\.dotfiles\PowerShell\TabExpansion.xml
@@ -23,6 +25,5 @@ mklink C:\Users\tscheffert\.tmux.conf C:\Users\tscheffert\.dotfiles\.tmux.conf
 mklink C:\Users\tscheffert\.zshrc C:\Users\tscheffert\.dotfiles\.zshrc
 mklink C:\Users\tscheffert\.aprc C:\Users\tscheffert\.dotfiles\.aprc
 mklink C:\Users\tscheffert\.ctags C:\Users\tscheffert\.dotfiles\.ctags
-
 
 pause

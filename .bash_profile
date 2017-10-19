@@ -282,6 +282,8 @@ alias gap='git add -p'
 # "Git add all"
 alias gaa='git add .'
 
+alias gc='git commit'
+
 alias gcm='git commit -m'
 
 # --amend changes the latest commit, and --no-edit tells it we don't want to change the messge

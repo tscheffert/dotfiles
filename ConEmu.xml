@@ -77,8 +77,8 @@
 			<value name="DefaultTerminalConfirm" type="hex" data="01"/>
 			<value name="DefaultTerminalApps" type="string" data="explorer.exe"/>
 			<value name="ProcessAnsi" type="hex" data="01"/>
-			<value name="AnsiLog" type="hex" data="00"/>
-			<value name="AnsiLogPath" type="string" data="%ConEmuDir%\Logs\"/>
+			<value name="AnsiLog" type="hex" data="01"/>
+			<value name="AnsiLogPath" type="string" data="%userprofile%\ConEmu-Logs\"/>
 			<value name="ProcessNewConArg" type="hex" data="01"/>
 			<value name="ProcessCmdStart" type="hex" data="01"/>
 			<value name="ConsoleExceptionHandler" type="hex" data="00"/>

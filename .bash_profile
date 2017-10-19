@@ -65,8 +65,12 @@ prepend_to_PATH "$HOME/bin"
 # Function to safely, idempotently, append to path
 append_to_PATH () {
     for d; do
+        # Skip directories that don't exist, preventing warnings during the "canonicalize" step
+        if [[ ! -d "$d" ]]; then
+          continue;
+        fi
         d=$(cd -- "$d" && { pwd -P || pwd; }) 2>/dev/null # canonicalize symbolic links (? what?)
-        if [ -z "$d" ]; then continue; fi # skip nonexistent directory
+        if [[ -z "$d" ]]; then continue; fi # skip nonexistent directory
         case ":$PATH:" in
             *":$d:"*) :;;
             *) PATH=$PATH:$d;;

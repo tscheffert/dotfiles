@@ -134,7 +134,7 @@
 			<value name="bgImageColors" type="dword" data="ffffffff"/>
 			<value name="bgOperation" type="hex" data="00"/>
 			<value name="bgPluginAllowed" type="hex" data="00"/>
-			<value name="AlphaValue" type="hex" data="e9"/>
+			<value name="AlphaValue" type="hex" data="ff"/>
 			<value name="AlphaValueSeparate" type="hex" data="01"/>
 			<value name="AlphaValueInactive" type="hex" data="ca"/>
 			<value name="UserScreenTransparent" type="hex" data="00"/>

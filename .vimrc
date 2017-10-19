@@ -757,6 +757,10 @@ if has('gui_running')
     set guifont=Operator\ Mono\ Book:h13
   endif
 else
+  if InConEmuSession()
+    " Fix <BS> in ConEmu terminals per http://conemu.github.io/en/VimXterm.html#vim-bs-issue
+    inoremap <Char-0x07F> <BS>
+  endif
   set term=xterm
   set t_Co=256
   let &t_AB="\e[48;5;%dm"

@@ -4,57 +4,57 @@
 # use: if [[ $platform == 'windows']]; then
 platform='unknown'
 if [[ "$OSTYPE" == "darwin"* ]]; then
-    # Mac OSX
-    platform='osx'
+  # Mac OSX
+  platform='osx'
 elif [[ "$OSTYPE" == "msys" ]]; then
-    # Lightweight shell and GNU utilities compiled for Windows (part of MinGW)
-    platform='windows'
+  # Lightweight shell and GNU utilities compiled for Windows (part of MinGW)
+  platform='windows'
 elif [[ "$OSTYPE" == "cygwin" ]]; then
-    # POSIX compatibility layer and Linux environment emulation for Windows
-    platform='windows'
+  # POSIX compatibility layer and Linux environment emulation for Windows
+  platform='windows'
 elif [[ "$OSTYPE" == "win32" ]]; then
-    # I'm not sure this can happen.
-    platform='windows'
+  # I'm not sure this can happen.
+  platform='windows'
 elif [[ "$OSTYPE" == "linux-gnu" ]]; then
-    # Linux
-    platform='linux'
+  # Linux
+  platform='linux'
 elif [[ "$OSTYPE" == "freebsd"* ]]; then
-    # Linux
-    platform='linux'
-# else
-    # Unknown.
+  # Linux
+  platform='linux'
+  # else
+  # Unknown.
 fi
 
 # --- Path ---
 
 # Function to safely, idempotently, append to path
 prepend_to_PATH () {
-    for d; do
-        d=$(cd -- "$d" && { pwd -P || pwd; }) 2>/dev/null # canonicalize symbolic links (? what?)
-        if [ -z "$d" ]; then continue; fi # skip nonexistent directory
-        case ":$PATH:" in
-            *":$d:"*) :;;
-            *) PATH=$d:$PATH;;
-        esac
-    done
+  for d; do
+    d=$(cd -- "$d" && { pwd -P || pwd; }) 2>/dev/null # canonicalize symbolic links (? what?)
+    if [ -z "$d" ]; then continue; fi # skip nonexistent directory
+    case ":$PATH:" in
+      *":$d:"*) :;;
+      *) PATH=$d:$PATH;;
+    esac
+  done
 }
 
 # -- Prepend --
 
 if [[ $platform == 'windows' ]]; then
-    # - Windows -
+  # - Windows -
 
-    # Clearly we want vim...
-    prepend_to_PATH 'C:\Program Files\Vim\vim80'
+  # Clearly we want vim...
+  prepend_to_PATH 'C:\Program Files\Vim\vim80'
 
 fi
 
 if [[ $platform == 'osx' ]]; then
-    # For homebrewed 'coreutils'
-    prepend_to_PATH '/usr/local/opt/coreutils/libexec/gnubin'
+  # For homebrewed 'coreutils'
+  prepend_to_PATH '/usr/local/opt/coreutils/libexec/gnubin'
 
-    # For man files for 'coreutils'
-    MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
+  # For man files for 'coreutils'
+  MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
 fi
 
 # Add `~/bin` to the `$PATH`
@@ -64,40 +64,38 @@ prepend_to_PATH "$HOME/bin"
 
 # Function to safely, idempotently, append to path
 append_to_PATH () {
-    for d; do
-        # Skip directories that don't exist, preventing warnings during the "canonicalize" step
-        if [[ ! -d "$d" ]]; then
-          continue;
-        fi
-        d=$(cd -- "$d" && { pwd -P || pwd; }) 2>/dev/null # canonicalize symbolic links (? what?)
-        if [[ -z "$d" ]]; then continue; fi # skip nonexistent directory
-        case ":$PATH:" in
-            *":$d:"*) :;;
-            *) PATH=$PATH:$d;;
-        esac
-    done
+  for d; do
+    # Skip directories that don't exist, preventing warnings during the "canonicalize" step
+    if [[ ! -d "$d" ]]; then
+      continue;
+    fi
+    d=$(cd -- "$d" && { pwd -P || pwd; }) 2>/dev/null # canonicalize symbolic links (? what?)
+    if [[ -z "$d" ]]; then continue; fi # skip nonexistent directory
+    case ":$PATH:" in
+      *":$d:"*) :;;
+      *) PATH=$PATH:$d;;
+    esac
+  done
 }
 
 if [[ $platform == 'windows' ]]; then
-    # - Windows -
+  # - Windows -
 
-    # We want IIS Express!
-    append_to_PATH 'C:\Program Files (x86)\IIS Express\'
+  # We want IIS Express!
+  append_to_PATH 'C:\Program Files (x86)\IIS Express\'
 
-    # Adb for android debugging
-    # append_to_PATH 'C:\Users\tscheffert\AppData\Local\Android\android-sdk\platform-tools'
+  # Adb for android debugging
+  # append_to_PATH 'C:\Users\tscheffert\AppData\Local\Android\android-sdk\platform-tools'
 
-    # Python Scripts including pip
-    append_to_PATH 'C:\tools\python\Scripts'
+  # Python Scripts including pip
+  append_to_PATH 'C:\tools\python\Scripts'
 
-    # Xmllint from libxml2
-    append_to_PATH 'C:\tools\xmllint'
+  # Xmllint from libxml2
+  append_to_PATH 'C:\tools\xmllint'
 
-    # pdfimages from XPDF
-    append_to_PATH 'C:\tools\xpdf'
+  # pdfimages from XPDF
+  append_to_PATH 'C:\tools\xpdf'
 fi
-
-
 
 
 # --- Options ---
@@ -120,14 +118,14 @@ shopt -s cdspell;
 # * `autocd`, e.g. `**/qux` will enter `./foo/bar/baz/qux`
 # * Recursive globbing, e.g. `echo **/*.txt`
 for option in autocd globstar; do
-	shopt -s "$option" 2> /dev/null;
+  shopt -s "$option" 2> /dev/null;
 done;
 
 
 # --- Completion ---
 # Enable tab completion for `g` by marking it as an alias for `git`
 if type _git &> /dev/null && [ -f /usr/local/etc/bash_completion.d/git-completion.bash ]; then
-	complete -o default -o nospace -F _git g;
+  complete -o default -o nospace -F _git g;
 fi;
 
 # Add tab completion for SSH hostnames based on ~/.ssh/config, ignoring wildcards
@@ -153,9 +151,9 @@ fi;
 
 # --- Exports ---
 if [[ $platform == 'osx' ]]; then
-    # Make MacVim the default visual editor.
-    # '-f' tells it not to fork a new process. Works better with shell.
-    export VISUAL='mvim -f'
+  # Make MacVim the default visual editor.
+  # '-f' tells it not to fork a new process. Works better with shell.
+  export VISUAL='mvim -f'
 fi
 
 # Make vim the default editor
@@ -193,19 +191,19 @@ export LOG_FORMAT=colored
 
 # --- Ruby Stuff ---
 if [[ $platform == 'osx' ]]; then
-    # Use Homebrew's directories rather than ~/.rbenv
-    export RBENV_ROOT=/usr/local/var/rbenv
+  # Use Homebrew's directories rather than ~/.rbenv
+  export RBENV_ROOT=/usr/local/var/rbenv
 
-    # Enable shims and autocompletion
-    if which rbenv > /dev/null ; then eval "$(rbenv init -)"; fi
+  # Enable shims and autocompletion
+  if which rbenv > /dev/null ; then eval "$(rbenv init -)"; fi
 fi
 
 
 # --- Postgres ---
 if [[ $platform == 'osx' ]]; then
-    # Set the required env variable for postgres
-    export PGDATA='/usr/local/var/postgres'
-    export PGGHOST=localhost
+  # Set the required env variable for postgres
+  export PGDATA='/usr/local/var/postgres'
+  export PGGHOST=localhost
 fi
 
 
@@ -213,15 +211,15 @@ fi
 #   Mingw, which I use, already has a nice prompt and it's colorful!
 if [[ $platform == 'osx' ]]; then
 
-    prompt=~/.prompts/.git-prompt.sh
+  prompt=~/.prompts/.git-prompt.sh
 
-    if [ -f "${prompt}" ]; then
-        # Enable the __git_ps1
-        source $prompt
+  if [ -f "${prompt}" ]; then
+    # Enable the __git_ps1
+    source $prompt
 
-        # Set status line
-        export PS1='[\W]$(__git_ps1 "(%s)")$ '
-    fi
+    # Set status line
+    export PS1='[\W]$(__git_ps1 "(%s)")$ '
+  fi
 fi
 
 
@@ -235,7 +233,6 @@ alias lh='ls -lhaG'
 # simple ip
 # TODO: Right now this fails, saying "cut: bad delimiter"
 # alias ip='ifconfig | grep "inet " | grep -v 127.0.0.1 | cut -d\ -f2'
-
 
 # more details
 # TODO: This works, but not sure what it means...
@@ -309,34 +306,34 @@ alias gcom='git checkout master'
 alias gcob='git checkout -b'
 
 function git-show {
-    # Show all of the files that were affected between master and
-    #   HEAD (of my branch).
+  # Show all of the files that were affected between master and
+  #   HEAD (of my branch).
 
-    # Options:
-    # --pretty="format:" - The "format:<string>" pretty-format option is like
-    #   'printf' in that you can use '%' prefixed placeholders.  An empty string
-    #   simply prints without any frills.
-    # --name-only - Shows only their names.  --name-status would show operation in
-    #   addition to the name.  --diff-filter means we don't really need that.
-    # --diff-filter - Added (A), Copied (C), Deleted (D), Modified (M), Renamed (R),
-    #   have their type (i.e. regular file, symlink, submodule, …) changed (T),
-    #   are Unmerged (U), are Unknown (X), or have had their pairing Broken (B).
-    #   Pass in the options you want to see as variables to git-show.  An empty
-    #   $1 will default to showing all.
+  # Options:
+  # --pretty="format:" - The "format:<string>" pretty-format option is like
+  #   'printf' in that you can use '%' prefixed placeholders.  An empty string
+  #   simply prints without any frills.
+  # --name-only - Shows only their names.  --name-status would show operation in
+  #   addition to the name.  --diff-filter means we don't really need that.
+  # --diff-filter - Added (A), Copied (C), Deleted (D), Modified (M), Renamed (R),
+  #   have their type (i.e. regular file, symlink, submodule, …) changed (T),
+  #   are Unmerged (U), are Unknown (X), or have had their pairing Broken (B).
+  #   Pass in the options you want to see as variables to git-show.  An empty
+  #   $1 will default to showing all.
 
-    # | awk NF - Run it through awk which skips lines with no fields thanks to
-    #   'NF'.  Discussed here: http://www.thelinuxrain.com/articles/how-to-kill-blank-lines-elegantly
-    # | sort - Sorts!  Input has to be sorted for uniq to work
-    # | uniq - Ensures that there are no repeats.
-    # | "xargs -n1 bash -c '<snippet>' _"
-    #     -xargs n1 - Run utility once for each line.
-    #     bash -c '<snippet>' _ - Use bash as utility.
-    #     <snippet> - Test if the file exists and echo if it does.
-    git show --pretty="format:" --name-only --diff-filter=$1 master..HEAD \
-        | awk NF \
-        | sort \
-        | uniq \
-        | xargs -n1 bash -c '[ -e $@ ] && echo $@' _
+  # | awk NF - Run it through awk which skips lines with no fields thanks to
+  #   'NF'.  Discussed here: http://www.thelinuxrain.com/articles/how-to-kill-blank-lines-elegantly
+  # | sort - Sorts!  Input has to be sorted for uniq to work
+  # | uniq - Ensures that there are no repeats.
+  # | "xargs -n1 bash -c '<snippet>' _"
+  #     -xargs n1 - Run utility once for each line.
+  #     bash -c '<snippet>' _ - Use bash as utility.
+  #     <snippet> - Test if the file exists and echo if it does.
+  git show --pretty="format:" --name-only --diff-filter=$1 master..HEAD \
+    | awk NF \
+    | sort \
+    | uniq \
+    | xargs -n1 bash -c '[ -e $@ ] && echo $@' _
 }
 
 # -- Ruby Aliases --
@@ -356,23 +353,23 @@ alias ber='bundle exec rake'
 alias be-rspec='bundle exec rspec'
 
 function git-show-exclude-ruby-files {
-    # Takes the list of files from git-show AM and removes excluded files with grep.
-    git-show AM \
-        | grep \.rb$ \
-        | grep -vE -e 'routes\.rb|schema\.rb|\.html\.erb|\.yml|Gemfile|Gemfile\.lock|\.json'
+  # Takes the list of files from git-show AM and removes excluded files with grep.
+  git-show AM \
+    | grep \.rb$ \
+    | grep -vE -e 'routes\.rb|schema\.rb|\.html\.erb|\.yml|Gemfile|Gemfile\.lock|\.json'
 }
 
 function rbc-m {
-    # Runs rubocop with all of the files
-    git-show-exclude-ruby-files \
-        | xargs rubocop
+  # Runs rubocop with all of the files
+  git-show-exclude-ruby-files \
+    | xargs rubocop
 }
 
 function rbca-m {
-    # Runs rubocop with autocorrect, (-n1) once for each file,
-    #   and (-p) while asking permission.
-    git-show-exclude-ruby-files \
-        | xargs -n1 -p rubocop --auto-correct
+  # Runs rubocop with autocorrect, (-n1) once for each file,
+  #   and (-p) while asking permission.
+  git-show-exclude-ruby-files \
+    | xargs -n1 -p rubocop --auto-correct
 }
 
 # -- Other Aliases
@@ -390,34 +387,34 @@ alias gvim='gvim.bat'
 # --- Functions ---
 # what the hell?
 function f {
-    find . -type f | grep -v .svn | grep -v .git | grep -i $1
+find . -type f | grep -v .svn | grep -v .git | grep -i $1
 }
 
 # what the hell?
 function gr {
-    find . -type f | grep -v .svn | grep -v .git | xargs grep -i $1 | grep -v Binary
+  find . -type f | grep -v .svn | grep -v .git | xargs grep -i $1 | grep -v Binary
 }
 
 if [[ $platform == 'osx' ]]; then
-    # - Mac OSX -
+  # - Mac OSX -
 
-    # open macvim
-    function gvim {
-        if [ -e $1 ];
-            then open -a MacVim $@;
-            else touch $@ && open -a MacVim $@;
-        fi
-    }
+  # open macvim
+  function gvim {
+    if [ -e $1 ];
+    then open -a MacVim $@;
+    else touch $@ && open -a MacVim $@;
+    fi
+  }
 fi
 
 # Count of files in folder, ignoring dotfiles.
 # Source: http://unix.stackexchange.com/questions/1125/how-can-i-get-a-count-of-files-in-a-directory-using-the-command-line
 function filecount {
-    local i=0;
-    for f in *; do
-        let i++;
-    done;
-    echo "$i";
+  local i=0;
+  for f in *; do
+    let i++;
+  done;
+  echo "$i";
 }
 
 # Check that the specified directory exists – and is in the PATH.
@@ -444,11 +441,11 @@ is_dir_in_path()
       /*)
         # The path of the provided directory is already absolute.
         dir="$1"
-      ;;
+        ;;
       *)
         # Prepend the path of the current directory.
         dir="$PWD/$1"
-      ;;
+        ;;
     esac
     printf "Warning: neither ‘readlink’ nor ‘realpath’ are available.\n"
     printf "Ensure that the specified directory does not contain ‘..’ in its path.\n"

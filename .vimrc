@@ -694,8 +694,12 @@ set listchars=tab:▸-,trail:.,extends:>,nbsp:▪,precedes:«
 set list
 
 " Session Detection fun
+function! InWindowsSession()
+  return has('win32')
+endfunction
+
 function! InConEmuSession()
-  return has('win32') && !has('gui_running') && !empty($CONEMUBUILD)
+  return InWindowsSession() && !has('gui_running') && !empty($CONEMUBUILD)
 endfunction
 
 function! InTmuxSession()
@@ -707,12 +711,12 @@ function! InItermSession()
   return $TERM_PROGRAM =~ "iTerm"
 endfunction
 
+" Colors and Term stuff!
 function! HasColorscheme(name)
   let pat = 'colors/'.a:name.'.vim'
   return !empty(globpath(&rtp, pat))
 endfunction
 
-" Colors!
 if has('gui_running')
   set background=dark
 
@@ -1077,7 +1081,10 @@ if s:use_ctrlp
   if executable('ag')
     set grepprg=ag\ --nogroup\ --nocolor\ --hidden
 
-    let g:ctrlp_use_caching = 0
+    if !InWindowsSession()
+      " In Windows, the shell commands have a high overhead. Elsewhere, super fast
+      let g:ctrlp_use_caching = 0
+    endif
     let g:ctrlp_user_command = 'ag %s --files-with-matches --hidden --nocolor -g ""'
   else
     let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . -co --exclude-standard', 'find %s -type f']

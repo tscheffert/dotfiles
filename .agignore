@@ -1,6 +1,6 @@
-*.js
+/* *.js */
 *.js.map
-*.json
+/* *.json */
 *.min.js
 *.css
 *.scss

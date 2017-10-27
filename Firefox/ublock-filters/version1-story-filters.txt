@@ -1,0 +1,64 @@
+! Previous Strategy: www11.v1host.com##tr:if(> td > div:has-text(/^Assumptions:/))
+
+! Story: release
+www11.v1host.com##tr[id*=_AttributeDefinitionParentStory]
+
+! Story: Portfolio Item
+www11.v1host.com##tr[id*=_AttributeDefinitionSuperStory]
+
+! Story: Actors
+www11.v1host.com##tr[id*=_AttributeDefinitionCustomActors2Story]
+
+! Story: Pre-Conditions
+www11.v1host.com##tr[id*=_AttributeDefinitionCustomPreConditions2Story]
+
+! Story: Post-Conditions
+www11.v1host.com##tr[id*=_AttributeDefinitionCustomPostConditions2Story]
+
+! Story: Normal Course
+www11.v1host.com##tr[id*=_AttributeDefinitionCustomNormalCourse2Story]
+
+! Story: Alternative Course
+www11.v1host.com##tr[id*=_AttributeDefinitionCustomAlternativeCourse2Story]
+
+! Story: Exceptions
+www11.v1host.com##tr[id*=_AttributeDefinitionCustomExceptions2Story]
+
+! Story: Includes
+www11.v1host.com##tr[id*=_AttributeDefinitionCustomIncludes2Story]
+
+! Story: Frequency of Use
+www11.v1host.com##tr[id*=_AttributeDefinitionCustomFrequencyofUseStory]
+
+! Story: Business Rules
+www11.v1host.com##tr[id*=_AttributeDefinitionCustomBusinessRulesStory]
+
+! Story: Special Requirements
+www11.v1host.com##tr[id*=_AttributeDefinitionCustomSpecialRequirementsStory]
+
+! Story: Assumptions
+www11.v1host.com##tr[id*=_AttributeDefinitionCustomAssumptionsStory]
+
+! Story: Notes/Issues
+www11.v1host.com##tr[id*=_AttributeDefinitionCustomNotesIssuesStory]
+
+! Story: Acceptance Criteria
+www11.v1host.com##tr[id*=_AttributeDefinitionCustomAcceptanceCriteriaStory]
+
+! Story: Use Case Graphic
+www11.v1host.com##tr[id*=_AttributeDefinitionCustomUseCaseGraphicStory]
+
+! Story: Dev Type
+www11.v1host.com##tr[id*=_AttributeDefinitionCustomDevTypeStory]
+
+! Story: FixVersion
+www11.v1host.com##tr[id*=_AttributeDefinitionCustomFixVersion2Story]
+
+! Story: Jira KEY
+www11.v1host.com##tr[id*=_AttributeDefinitionCustomJiraKEYStory]
+
+! Story: Class of Service
+www11.v1host.com##tr[id*=_AttributeDefinitionClassOfServiceStory]
+
+! Story: Type
+www11.v1host.com##tr[id*=_AttributeDefinitionCategoryStory]

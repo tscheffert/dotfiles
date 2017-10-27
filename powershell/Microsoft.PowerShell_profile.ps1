@@ -24,4 +24,9 @@ function Search-Help
    Select-String -path $pshelp -Pattern $args[0]
 }
 
+function Get-DllFullName($name)
+{
+  ([System.Reflection.Assembly]::loadfile($name)).FullName
+}
+
 # Clear-Host

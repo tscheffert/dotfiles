@@ -18,4 +18,10 @@ function Filter-ADUser($name)
   Get-ADUser -filter { name -like $name }
 }
 
+function Search-Help
+{
+   $pshelp = "$pshome\es\about_*.txt", "$pshome\en-US\*dll-help.xml"
+   Select-String -path $pshelp -Pattern $args[0]
+}
+
 # Clear-Host

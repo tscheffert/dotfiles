@@ -6,6 +6,7 @@
 #   jdoe = jdoe <jdoe>
 # After:
 #   jdoe = John Doe <john.doe@example.com>
+# Note: If lines with jdoe and JDoe exist, then we want both to exist after transform
 
 $outFile = ".\transformed-authors.txt"
 
@@ -24,7 +25,7 @@ foreach ($line in (Get-Content ".\authors-transform.txt")) {
 
   $user = Get-ADUser -LDAPFilter "(SamAccountName=$samAccountName)"
   if ($null -ne $user) {
-    $transformedLine = "$($user.SamAccountName) = $($user.Name) <$($user.UserPrincipalName.ToLower())>"
+    $transformedLine = "$($samAccountName) = $($user.Name) <$($user.UserPrincipalName.ToLower())>"
 
     $outputWriter.WriteLine($transformedLine)
   }

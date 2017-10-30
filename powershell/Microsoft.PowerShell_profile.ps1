@@ -4,10 +4,6 @@
 # $Shell.WindowTitle="Trent's Powershell"
 # new-item alias:np -value C:WindowsSystem32notepad.exe
 
-### Modules
-# TODO: Figure out how to only do this when it exists
-Import-Module ActiveDirectory
-
 ### Functions
 # Behave like 'which' from bash/zsh
 function which ($cmd) { (Get-Command $cmd).Definition }

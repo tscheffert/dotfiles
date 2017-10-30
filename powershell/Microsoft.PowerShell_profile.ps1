@@ -10,21 +10,21 @@ Import-Module ActiveDirectory
 
 ### Functions
 # Behave like 'which' from bash/zsh
-function which($cmd) { (Get-Command $cmd).Definition }
+function which ($cmd) { (Get-Command $cmd).Definition }
 
 # Get the AD user with name like $name
-function Filter-ADUser($name)
+function Filter-ADUser ($name)
 {
-  Get-ADUser -filter { name -like $name }
+  Get-ADUser -Filter { name -Like $name }
 }
 
 function Search-Help
 {
-   $pshelp = "$pshome\es\about_*.txt", "$pshome\en-US\*dll-help.xml"
-   Select-String -path $pshelp -Pattern $args[0]
+  $pshelp = "$pshome\es\about_*.txt","$pshome\en-US\*dll-help.xml"
+  Select-String -Path $pshelp -Pattern $args[0]
 }
 
-function Get-DllFullName($name)
+function Get-DllFullName ($name)
 {
   ([System.Reflection.Assembly]::loadfile($name)).FullName
 }

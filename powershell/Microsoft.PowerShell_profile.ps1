@@ -13,7 +13,7 @@ Import-Module ActiveDirectory
 function which ($cmd) { (Get-Command $cmd).Definition }
 
 # Get the AD user with name like $name
-function Filter-ADUser ($name)
+function Find-FilteredADUser ($name)
 {
   Get-ADUser -Filter { name -Like $name }
 }

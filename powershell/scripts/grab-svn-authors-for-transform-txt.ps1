@@ -37,4 +37,4 @@ foreach ($line in (Get-Content ".\authors-transform.txt")) {
 # Write remaining buffer to file and release file handle
 $outputWriter.Flush()
 $outputWriter.Close()
-Write-Output 'Completed transforming'
+Write-Output 'Completed transforming, results in $outFile'

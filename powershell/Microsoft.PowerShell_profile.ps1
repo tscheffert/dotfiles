@@ -25,4 +25,22 @@ function Get-DllFullName ($name)
   ([System.Reflection.Assembly]::loadfile($name)).FullName
 }
 
+function Invoke-LintFile ($file)
+{
+  Invoke-ScriptAnalyzer -Path $file
+}
+
+function Edit-BeautifyFile ($file)
+{
+  # TODO: Figure out how to Import better
+
+  # For whatever reason, I can't just import from the absolute path
+  $currentDirectory = ($pwd).path
+  Set-Location "C:\dev\powershell-scripts\PowerShell-Beautifier\src\"
+  Import-Module '.\DTW.PS.Beautifier.psd1'
+  Set-Location $currentDirectory
+
+  Edit-DTWBeautifyScript -SourcePath $file
+}
+
 # Clear-Host

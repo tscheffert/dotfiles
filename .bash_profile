@@ -336,6 +336,17 @@ function git-show {
     | xargs -n1 bash -c '[ -e $@ ] && echo $@' _
 }
 
+# -- PowerShell Aliases/Functions --
+function ps-lint {
+  # Invoke the PSScriptAnalyzer, which is installed via PowerShell Gallery
+  powershell -Command "Invoke-ScriptAnalyzer -Path $1"
+}
+
+function ps-beautify {
+  # Invoke the beautify function defined in my PowerShell profile
+  powershell -Command "Edit-BeautifyFile $1"
+}
+
 # -- Ruby Aliases --
 # Run Rubocop gem
 alias rbc='rubocop'

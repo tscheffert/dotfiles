@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <key name="Software">
 	<key name="ConEmu">
-		<key name=".Vanilla" modified="2017-10-19 13:38:07" build="170910">
+		<key name=".Vanilla" modified="2017-11-02 11:42:44" build="170910">
 			<value name="StartType" type="hex" data="02"/>
 			<value name="CmdLine" type="string" data=""/>
 			<value name="StartTasksFile" type="string" data=""/>
@@ -79,7 +79,7 @@
 			<value name="ProcessAnsi" type="hex" data="01"/>
 			<value name="AnsiLog" type="hex" data="01"/>
 			<value name="AnsiLogPath" type="string" data="%userprofile%\ConEmu-Logs\"/>
-			<value name="ProcessNewConArg" type="hex" data="01"/>
+			<value name="ProcessNewConArg" type="hex" data="00"/>
 			<value name="ProcessCmdStart" type="hex" data="01"/>
 			<value name="ConsoleExceptionHandler" type="hex" data="00"/>
 			<value name="UseClink" type="hex" data="01"/>
@@ -92,7 +92,7 @@
 				<line data="{Chocolatey (Admin)}"/>
 				<line data="{Git Bash CurD} '!ConEmuWorkDir!'"/>
 			</value>
-			<value name="SingleInstance" type="hex" data="00"/>
+			<value name="SingleInstance" type="hex" data="01"/>
 			<value name="ShowHelpTooltips" type="hex" data="01"/>
 			<value name="Multi" type="hex" data="01"/>
 			<value name="Multi.ShowButtons" type="hex" data="00"/>
@@ -136,7 +136,7 @@
 			<value name="bgPluginAllowed" type="hex" data="00"/>
 			<value name="AlphaValue" type="hex" data="ff"/>
 			<value name="AlphaValueSeparate" type="hex" data="01"/>
-			<value name="AlphaValueInactive" type="hex" data="ca"/>
+			<value name="AlphaValueInactive" type="hex" data="e9"/>
 			<value name="UserScreenTransparent" type="hex" data="00"/>
 			<value name="ColorKeyTransparent" type="hex" data="00"/>
 			<value name="ColorKeyValue" type="dword" data="00010101"/>
@@ -163,7 +163,7 @@
 			<value name="ConsoleFontName" type="string" data="Lucida Console"/>
 			<value name="ConsoleFontWidth" type="long" data="3"/>
 			<value name="ConsoleFontHeight" type="long" data="5"/>
-			<value name="DefaultBufferHeight" type="long" data="1000"/>
+			<value name="DefaultBufferHeight" type="long" data="5000"/>
 			<value name="AutoBufferHeight" type="hex" data="01"/>
 			<value name="UseScrollLock" type="hex" data="01"/>
 			<value name="CmdOutputCP" type="long" data="0"/>
@@ -230,7 +230,7 @@
 			<value name="DropUseMenu" type="hex" data="02"/>
 			<value name="DragOverlay" type="hex" data="01"/>
 			<value name="DragShowIcons" type="hex" data="01"/>
-			<value name="DebugSteps" type="hex" data="01"/>
+			<value name="DebugSteps" type="hex" data="00"/>
 			<value name="DragPanel" type="hex" data="02"/>
 			<value name="DragPanelBothEdges" type="hex" data="00"/>
 			<value name="KeyBarRClick" type="hex" data="01"/>
@@ -379,7 +379,7 @@
 			<value name="Update.DownloadPath" type="string" data="%TEMP%\ConEmu"/>
 			<value name="Update.LeavePackages" type="hex" data="00"/>
 			<value name="Update.PostUpdateCmd" type="string" data="echo Last successful update&gt;ConEmuUpdate.info &amp;&amp; date /t&gt;&gt;ConEmuUpdate.info &amp;&amp; time /t&gt;&gt;ConEmuUpdate.info"/>
-			<key name="HotKeys" modified="2017-10-19 13:38:07" build="170910">
+			<key name="HotKeys" modified="2017-11-02 11:42:44" build="170910">
 				<value name="KeyMacroVersion" type="hex" data="02"/>
 				<value name="Multi.Modifier" type="dword" data="0000005b"/>
 				<value name="Multi.ArrowsModifier" type="dword" data="0000005b"/>
@@ -573,9 +573,9 @@
 				<value name="Multi.GroupInputAll" type="dword" data="00105d47"/>
 				<value name="Multi.GroupInputKey" type="dword" data="00125d47"/>
 			</key>
-			<key name="Tasks" modified="2017-10-19 13:38:07" build="170910">
+			<key name="Tasks" modified="2017-11-02 11:42:44" build="170910">
 				<value name="Count" type="long" data="9"/>
-				<key name="Task1" modified="2017-10-19 13:38:07" build="170910">
+				<key name="Task1" modified="2017-11-02 11:42:44" build="170910">
 					<value name="Name" type="string" data="{cmd}"/>
 					<value name="Flags" type="dword" data="00000000"/>
 					<value name="Hotkey" type="dword" data="00000000"/>
@@ -584,7 +584,7 @@
 					<value name="Active" type="long" data="0"/>
 					<value name="Count" type="long" data="1"/>
 				</key>
-				<key name="Task2" modified="2017-10-19 13:38:07" build="170910">
+				<key name="Task2" modified="2017-11-02 11:42:44" build="170910">
 					<value name="Name" type="string" data="{cmd (Admin)}"/>
 					<value name="Flags" type="dword" data="00000000"/>
 					<value name="Hotkey" type="dword" data="00000000"/>
@@ -593,7 +593,7 @@
 					<value name="Active" type="long" data="0"/>
 					<value name="Count" type="long" data="1"/>
 				</key>
-				<key name="Task3" modified="2017-10-19 13:38:07" build="170910">
+				<key name="Task3" modified="2017-11-02 11:42:44" build="170910">
 					<value name="Name" type="string" data="{PowerShell}"/>
 					<value name="Flags" type="dword" data="00000000"/>
 					<value name="Hotkey" type="dword" data="00000000"/>
@@ -602,7 +602,7 @@
 					<value name="Active" type="long" data="0"/>
 					<value name="Count" type="long" data="1"/>
 				</key>
-				<key name="Task4" modified="2017-10-19 13:38:07" build="170910">
+				<key name="Task4" modified="2017-11-02 11:42:44" build="170910">
 					<value name="Name" type="string" data="{PowerShell (Admin)}"/>
 					<value name="Flags" type="dword" data="00000000"/>
 					<value name="Hotkey" type="dword" data="00000000"/>
@@ -611,7 +611,7 @@
 					<value name="Active" type="long" data="0"/>
 					<value name="Count" type="long" data="1"/>
 				</key>
-				<key name="Task5" modified="2017-10-19 13:38:07" build="170910">
+				<key name="Task5" modified="2017-11-02 11:42:44" build="170910">
 					<value name="Name" type="string" data="{Git Bash}"/>
 					<value name="Flags" type="dword" data="00000000"/>
 					<value name="Hotkey" type="dword" data="00000000"/>
@@ -620,7 +620,7 @@
 					<value name="Active" type="long" data="0"/>
 					<value name="Count" type="long" data="1"/>
 				</key>
-				<key name="Task6" modified="2017-10-19 13:38:07" build="170910">
+				<key name="Task6" modified="2017-11-02 12:03:39" build="170910">
 					<value name="Name" type="string" data="{Git Bash CurD}"/>
 					<value name="Flags" type="dword" data="00000000"/>
 					<value name="Hotkey" type="dword" data="00000000"/>
@@ -630,7 +630,7 @@
 					<value name="Active" type="long" data="0"/>
 					<value name="Count" type="long" data="1"/>
 				</key>
-				<key name="Task7" modified="2017-10-19 13:38:07" build="170910">
+				<key name="Task7" modified="2017-11-02 12:03:39" build="170910">
 					<value name="Name" type="string" data="{Chocolatey (Admin)}"/>
 					<value name="Flags" type="dword" data="00000000"/>
 					<value name="Hotkey" type="dword" data="00000000"/>
@@ -640,7 +640,7 @@
 					<value name="Count" type="long" data="1"/>
 					<value name="Cmd2" type="string" data="&quot;%windir%\syswow64\cmd.exe&quot; /k ver &amp; echo This is 32 bit cmd.exe -new_console:s50V"/>
 				</key>
-				<key name="Task8" modified="2017-10-19 13:38:07" build="170910">
+				<key name="Task8" modified="2017-11-02 12:03:39" build="170910">
 					<value name="Name" type="string" data="{Show ANSI colors}"/>
 					<value name="Flags" type="dword" data="00000000"/>
 					<value name="Hotkey" type="dword" data="00000000"/>
@@ -649,7 +649,7 @@
 					<value name="Active" type="long" data="0"/>
 					<value name="Count" type="long" data="1"/>
 				</key>
-				<key name="Task9" modified="2017-10-19 13:38:07" build="170910">
+				<key name="Task9" modified="2017-11-02 12:03:39" build="170910">
 					<value name="Name" type="string" data="{cmd 64/32}"/>
 					<value name="Flags" type="dword" data="00000000"/>
 					<value name="Hotkey" type="dword" data="00000000"/>
@@ -660,10 +660,10 @@
 					<value name="Cmd2" type="string" data="&quot;%windir%\syswow64\cmd.exe&quot; /k ver &amp; echo This is 32 bit cmd.exe -new_console:s50V"/>
 				</key>
 			</key>
-			<key name="Apps" modified="2017-10-19 13:38:07" build="170910">
+			<key name="Apps" modified="2017-11-02 12:03:39" build="170910">
 				<value name="Count" type="long" data="0"/>
 			</key>
-			<key name="Colors" modified="2017-10-19 13:38:07" build="170910">
+			<key name="Colors" modified="2017-11-02 12:03:39" build="170910">
 				<value name="Count" type="long" data="0"/>
 			</key>
 			<value name="StartCreateDelay" type="ulong" data="100"/>

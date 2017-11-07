@@ -165,6 +165,10 @@ export EDITOR="vim";
 export LANG="en_US.UTF-8";
 export LC_ALL="en_US.UTF-8";
 
+# Load Readline configuration please!
+export INPUTRC=~/.inputrc
+
+
 # -- History --
 # larger bash history (allow 32^3 entries; default is 500)
 export HISTSIZE=32768;
@@ -196,9 +200,6 @@ function append_to_PROMPT_COMMAND {
 #   history -c: Clear the existing history list
 #   history -r: Read the history file, picking up changes from outside this session
 append_to_PROMPT_COMMAND "history -a; history -c; history -r"
-
-# Load Readline configuration please!
-export INPUTRC=~/.inputrc
 
 
 # --- Ruby Stuff ---

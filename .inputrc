@@ -22,6 +22,10 @@ set completion-ignore-case on
 # Treat '-' and '_' as equivalent for filename matching and completion, only if completion-ignore-case is also on
 set completion-map-case on
 
+# Turn the shared section in long file names into an ellipsis when completing
+# things, enabling easier difference spotting
+set completion-prefix-display-length 2
+
 # Do not convert 8 bit input to meta-prefixed sequences
 set convert-meta off
 

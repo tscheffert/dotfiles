@@ -29,6 +29,8 @@ fi
 
 # Function to safely, idempotently, append to path
 prepend_to_PATH () {
+# TODO: Read this https://superuser.com/a/1243332
+# TODO: Seek to understand this [[ ":$PATH:" != *":$1:"* ]]
   for d; do
     d=$(cd -- "$d" && { pwd -P || pwd; }) 2>/dev/null # canonicalize symbolic links (? what?)
     if [ -z "$d" ]; then continue; fi # skip nonexistent directory
@@ -170,6 +172,16 @@ export INPUTRC=~/.inputrc
 
 
 # -- History --
+# https://www.gnu.org/software/bash/manual/html_node/Bash-Variables.html#Bash-Variables
+# TODO: Investigate these
+#   histappend
+#   histreedit
+#   'cmdhist' or 'lithist' for newline stuff
+#   histchars
+#   HISTFILE (default ~/.bash_history)
+# https://www.gnu.org/software/bash/manual/html_node/The-Shopt-Builtin.html#The-Shopt-Builtin
+# https://www.gnu.org/software/bash/manual/html_node/Bash-Variables.html#Bash-Variables
+
 # larger bash history (allow 32^3 entries; default is 500)
 export HISTSIZE=32768;
 export HISTFILESIZE=$HISTSIZE;

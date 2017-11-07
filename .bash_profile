@@ -171,7 +171,7 @@ export HISTFILESIZE=$HISTSIZE;
 # changes how commands are saved on the history list
 # ignorespace - lines which begin with a space character are not saved in the history list
 # ignoredups - lines matching the previous history entry to not be saved
-export HISTCONTROL=ignoredups:ignorespace;
+export HISTCONTROL=ignoredups
 
 # Make some commands not show up in history
 export HISTIGNORE="ls:cd:cd -:pwd:exit:date:* --help";

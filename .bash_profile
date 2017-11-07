@@ -185,12 +185,6 @@ export HISTIGNORE="ls:cd:cd -:pwd:exit:date:* --help";
 # Load Readline configuration please!
 export INPUTRC=~/.inputrc
 
-# For Docker!
-export DOCKER_HOST=tcp://192.168.23.2:2375
-
-# All the colorful logs
-export LOG_FORMAT=colored
-
 
 # --- Ruby Stuff ---
 if [[ $platform == 'osx' ]]; then

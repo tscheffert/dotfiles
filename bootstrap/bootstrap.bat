@@ -5,6 +5,7 @@ mklink /j C:\Users\tscheffert\.prompts C:\Users\tscheffert\.dotfiles\prompts
 mklink /j C:\Users\tscheffert\.zsh C:\Users\tscheffert\.dotfiles\zsh
 mklink C:\Users\tscheffert\.bash_profile C:\Users\tscheffert\.dotfiles\.bash_profile
 mklink C:\Users\tscheffert\.bashrc C:\Users\tscheffert\.dotfiles\.bashrc
+mklink C:\Users\tscheffert\.inputrc C:\Users\tscheffert\.dotfiles\.inputrc
 mklink "C:\\Program Files\\ConEmu\\ConEmu.xml" C:\Users\tscheffert\.dotfiles\ConEmu.xml
 mklink C:\Users\tscheffert\.curlrc C:\Users\tscheffert\.dotfiles\.curlrc
 mklink C:\Users\tscheffert\.editorconfig C:\Users\tscheffert\.dotfiles\.editorconfig

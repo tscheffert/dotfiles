@@ -74,6 +74,8 @@ set skip-completed-text on
 # With C-u, clear the entire line rather than just what's before the cursor; same behavior as zsh
 # TODO: Doesn't work in irb for some weird reason
 "\C-u": kill-whole-line
+# In ConEmu, capturing input reports ^U for ctrl+u -> bind to a capital U
+"\C-U": kill-whole-line
 
 # Incremental undo, separately remembered for each line
 # This doesn't work because ctrl-z is a zsh thing for pause forground task
@@ -102,9 +104,19 @@ set skip-completed-text on
 "\e[A": history-search-backward
 
 # Meta-Backspace - Backward delete the whole word
+# For iTerm2
 # Note: I set iTerm to intercept meta-backspace and send ^H (ctrl-h)
 # TODO: Ensure this works on all keyboards
 "\C-h": backward-kill-word
+# For ConEmu
+"\C-_": backward-kill-word
+
+# Fix Backspace in ConEmu
+"\C-?": backward-delete-char
+
+# Ctrl-Del - Forward delete the whole word
+# For ConEmu
+"\e[3;5~": kill-word
 
 # Meta-Delete - Forward delete the whole word
 # TODO: Get this working

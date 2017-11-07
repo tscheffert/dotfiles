@@ -106,7 +106,7 @@ fi
 shopt -s nocaseglob;
 
 # Append to the Bash history file, rather than overwriting it
-shopt -s histappend;
+# shopt -s histappend;
 
 # Bash checks the window size after each command and, if necessary, updates the values of LINES and COLUMNS
 shopt -s checkwinsize
@@ -176,11 +176,24 @@ export HISTCONTROL=ignoredups
 # Make some commands not show up in history
 export HISTIGNORE="ls:cd:cd -:pwd:exit:date:* --help";
 
-# Contains a regular bash command that is executed just before the command prompt is displayed
-# make sure the history is updated at every command
-# history -a - used instead of "shopt -s histappend" as this appends every line individually rather then when the shell exits
-# history -n - append the history lines not already read from the history file to the current history list.
-# export PROMPT_COMMAND="history -a; history -n;"
+# Append to PROMPT_COMMAND idempotently
+#   PROMPT_COMMAND contains a regular bash command that is executed just before the command prompt is displayed
+#   TODO: Determine how we insert ';' as needed
+function append_to_PROMPT_COMMAND {
+  local new_command="$1"
+
+  # Only do the appending if the new_command is not already in the PROMPT_COMMAND
+  if [[ ! "$PROMPT_COMMAND" =~ "$new_command" ]]; then
+    PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND$'\n'}$new_command"
+  fi
+}
+
+# Allow "sharing" of history between instances by appending then reading history in the PROMPT_COMMAND
+#   history -a: Append new history lines to the history file, used instead of
+#     'shopt -s histappend' as this appends every line individually rather then when the shell exits
+#   history -c: Clear the existing history list
+#   history -r: Read the history file, picking up changes from outside this session
+append_to_PROMPT_COMMAND "history -a; history -c; history -r"
 
 # Load Readline configuration please!
 export INPUTRC=~/.inputrc

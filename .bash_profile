@@ -182,6 +182,10 @@ export HISTCONTROL=ignoredups
 # Make some commands not show up in history
 export HISTIGNORE="ls:cd:cd -:pwd:exit:date:* --help";
 
+# Save timestamp in the history file, in RFC-3339 format (with 3 nanoseconds)
+# TODO: This gets truncated when running 'history'
+export HISTTIMEFORMAT="[%F %T:%3N%z] "
+
 # Append to PROMPT_COMMAND idempotently
 #   PROMPT_COMMAND contains a regular bash command that is executed just before the command prompt is displayed
 #   TODO: Determine how we insert ';' as needed

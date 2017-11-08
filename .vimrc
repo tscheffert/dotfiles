@@ -12,8 +12,19 @@ let s:use_auto_pairs = 0
 
 " Start vim-plug
 if has('win32')
-  set shell=cmd
-  set shellcmdflag=/c
+  " " Use cmd as the shell
+  " set shell=cmd
+  " set shellcmdflag=/c
+  " let temp_dir=$HOME."/.vim-tmp"
+  " let $TMPDIR=temp_dir
+  " let $TMP=temp_dir
+  " let $TEMP=temp_dir
+
+  " Use bash, probably from mingw64, as the shell
+  set shell=bash
+  set shellcmdflag=-c
+  set shellxquote=\"
+  set shellslash
   call plug#begin('~/vimfiles/bundle/')
 else
   call plug#begin(expand('~/.vim/bundle/'))
@@ -1094,7 +1105,12 @@ if s:use_ctrlp
       " In Windows, the shell commands have a high overhead. Elsewhere, super fast
       let g:ctrlp_use_caching = 0
     endif
-    let g:ctrlp_user_command = 'ag %s --files-with-matches --hidden --nocolor -g ""'
+    if InWindowsSession()
+      " Per ':help win32-quotes', quotes in command line arguments need to be escaped on windows
+      let g:ctrlp_user_command ='ag %s --files-with-matches --hidden --nocolor -g \"\" --ignore \"Alfred/*\"'
+    else
+      let g:ctrlp_user_command = 'ag %s --files-with-matches --hidden --nocolor -g "" --ignore "Alfred/*"'
+    endif
   else
     let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . -co --exclude-standard', 'find %s -type f']
     let g:ctrlp_prompt_mappings = {

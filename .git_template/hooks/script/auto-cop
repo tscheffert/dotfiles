@@ -70,8 +70,12 @@ if [[ -n "$dont_rbca" ]]; then
     | grep -vE -e "$dont_rbca")
 fi
 
-# Run files through rubocop --auto-correct
-echo "$to_rbca" | xargs rubocop --auto-correct &> /dev/null
+if [[ -n "$to_rbca" ]]; then
+  # Run files through rubocop --auto-correct
+  echo "$to_rbca" | xargs rubocop --auto-correct &> /dev/null
 
-# Commit the now corrected files
-echo "$to_rbca" | xargs git add &> /dev/null
+  # Commit the now corrected files
+  echo "$to_rbca" | xargs git add &> /dev/null
+else
+  echo "No applicable files to auto-correct"
+fi

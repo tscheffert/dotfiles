@@ -13,7 +13,11 @@ function prompt_char {
   local color_one="%{$fg[red]%}"
   local color_two="%{$fg[yellow]%}"
   local color_three="%{$fg[green]%}"
-  local char="❯"
+  if [[ $platform == 'windows' ]]; then
+    local char=">"
+  else
+    local char="❯"
+  fi
   # git branch >/dev/null 2>/dev/null && echo '±' && return
   # hg root >/dev/null 2>/dev/null && echo '☿' && return
   # echo '$'
@@ -84,11 +88,13 @@ function check_exit_code() {
 function name() {
   # Only show name if it's different than my usual
   local name=""
-  if [[ $(whoami) != "tscheffe" ]]; then
-    name="%n%{$reset_color%}"
+  # TODO: Figure out how to make this comparison case-insensitive, such that
+  #       'tscheffe' and 'TScheffe' match
+  if [[ ! $(whoami) =~ "TScheffe" ]]; then
+    name="%n"
   fi
 
-  echo "%{$fg[red]%}$name"
+  echo "%{$fg[red]%}$name%{$reset_color%}"
 }
 
 function comp_name() {

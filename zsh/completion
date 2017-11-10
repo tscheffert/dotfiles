@@ -1,20 +1,34 @@
 #!/usr/bin/env zsh
 # vi: ft=zsh
 
+# Windows TODO:
+#   After completion, once selected, I would expect the preview line to clear but it doesn't
+
 # Info on how to write completions
 # https://github.com/zsh-users/zsh-completions/blob/master/zsh-completions-howto.org
 
-# Enable zsh-completions from brew
-fpath=(/usr/local/share/zsh-completions $fpath)
+if [[ "$platform" == "osx" ]]; then
+  # Enable zsh-completions from brew
+  fpath=(/usr/local/share/zsh-completions $fpath)
+elif [[ "$platform" == "windows" ]]; then
+  # TODO: Get zsh-completions for Windows
+  # zstyle ':completion:*:*:git:*' source '/c/git-sdk-64/mingw64/share/git/completion/git-completion.zsh'
+else
+  echo "No zsh-completions for Linux yet"
+fi
 
 # Enable custom completions for my functions
 fpath=(~/.zsh/functions/completions/ $fpath)
 
-# The following lines were added by compinstall
-zstyle :compinstall filename '/Users/trentscheffert/.zshrc'
+if [[ "$platform" == "osx" ]]; then
+  zstyle :compinstall filename '/Users/trentscheffert/.zshrc'
+elif [[ "$platform" == "windows" ]]; then
+  zstyle :compinstall filename '/Users/tscheffert/.zshrc'
+else
+  echo "No compinstall path for Linux yet"
+fi
 
 autoload -Uz compinit && compinit
-# End of lines added by compinstall
 
 # Set completion functions that are used.
 #   On the first run use the fast ones, if completion is called a second time then
@@ -34,14 +48,14 @@ fi'
 # TODO: Replace these
 # Add tab completion for many Bash commands
 # if which brew > /dev/null && [ -f "$(brew --prefix)/etc/bash_completion" ]; then
-# 	source "$(brew --prefix)/etc/bash_completion";
+#   source "$(brew --prefix)/etc/bash_completion";
 # elif [ -f /etc/bash_completion ]; then
-# 	source /etc/bash_completion;
+#   source /etc/bash_completion;
 # fi;
 
 # # Enable tab completion for `g` by marking it as an alias for `git`
 # if type _git &> /dev/null && [ -f /usr/local/etc/bash_completion.d/git-completion.bash ]; then
-# 	complete -o default -o nospace -F _git g;
+#   complete -o default -o nospace -F _git g;
 # fi;
 
 # # Add tab completion for SSH hostnames based on ~/.ssh/config, ignoring wildcards

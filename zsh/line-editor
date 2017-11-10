@@ -47,15 +47,19 @@ zle -N edit-command-line
 bindkey '\C-x\C-e' edit-command-line
 
 # Meta-LeftArrow - backward one word
-bindkey "[D" backward-word
+bindkey "[D" backward-word     # iTerm2
+bindkey "^[[1;5D" backward-word # ConEmu
 # Meta-RightArray - forward one word
-bindkey "[C" forward-word
+bindkey "[C" forward-word     # iTerm2
+bindkey "^[[1;5C" forward-word # ConEmu
 
 # Meta-Backspace - backward delete whole word
 # I set iTerm to intercept meta-backspace and send ^H
-bindkey "^H" backward-kill-word
-# TODO: Ensure this works on all keyboards
+bindkey "^H" backward-kill-word   # iTerm2
+bindkey "\C-_" backward-kill-word # ConEmu
 
+# Ctrl-Delete - forward delete word
+bindkey "^[[3;5~" kill-word # ConEmu
 
 # Info:
 # http://zsh.sourceforge.net/Guide/zshguide04.html

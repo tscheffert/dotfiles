@@ -6,7 +6,7 @@
 # -- Prepend --
 
 # Clearly we want vim...
-prepend_to_path 'C:\Program Files\Vim\vim74'
+prepend_to_path 'C:\Program Files\Vim\vim80'
 
 
 # -- Append --
@@ -22,3 +22,11 @@ append_to_path 'C:\tools\python\Scripts'
 
 # Xmllint from libxml2
 append_to_path 'C:\tools\xmllint'
+
+# Xmllint from libxml2
+append_to_path '$ConEmuBaseDir'
+
+
+# --- Aliases ---
+
+alias 'csudo'='csudo.cmd'

@@ -3,6 +3,7 @@ mklink /j C:\Users\tscheffert\vimfiles C:\Users\tscheffert\.dotfiles\vimfiles
 mklink /j C:\Users\tscheffert\.git_template C:\Users\tscheffert\.dotfiles\.git_template
 mklink /j C:\Users\tscheffert\.prompts C:\Users\tscheffert\.dotfiles\prompts
 mklink /j C:\Users\tscheffert\.zsh C:\Users\tscheffert\.dotfiles\zsh
+mklink /j %userprofile%\AutoHotkey %userprofile%\.dotfiles\AutoHotkey
 mklink C:\Users\tscheffert\.bash_profile C:\Users\tscheffert\.dotfiles\.bash_profile
 mklink C:\Users\tscheffert\.bashrc C:\Users\tscheffert\.dotfiles\.bashrc
 mklink C:\Users\tscheffert\.inputrc C:\Users\tscheffert\.dotfiles\.inputrc

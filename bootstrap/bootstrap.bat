@@ -7,6 +7,7 @@ mklink /j %userprofile%\AutoHotkey %userprofile%\.dotfiles\AutoHotkey
 mklink C:\Users\tscheffert\.bash_profile C:\Users\tscheffert\.dotfiles\.bash_profile
 mklink C:\Users\tscheffert\.bashrc C:\Users\tscheffert\.dotfiles\.bashrc
 mklink C:\Users\tscheffert\.inputrc C:\Users\tscheffert\.dotfiles\.inputrc
+mklink %userprofile%\.dir_colors mklink %userprofile%\.dotfiles\.dir_colors
 mklink "C:\\Program Files\\ConEmu\\ConEmu.xml" C:\Users\tscheffert\.dotfiles\ConEmu.xml
 mklink C:\Users\tscheffert\.curlrc C:\Users\tscheffert\.dotfiles\.curlrc
 mklink C:\Users\tscheffert\.editorconfig C:\Users\tscheffert\.dotfiles\.editorconfig
@@ -22,10 +23,13 @@ mklink C:\Users\tscheffert\Documents\WindowsPowerShell\Microsoft.PowerShell_prof
 ::mklink C:\Users\tscheffert\Documents\WindowsPowerShell\TabExpansion.xml C:\Users\tscheffert\.dotfiles\PowerShell\TabExpansion.xml
 mklink C:\Users\tscheffert\.agignore C:\Users\tscheffert\.dotfiles\.agignore
 mklink C:\Users\tscheffert\.pryrc C:\Users\tscheffert\.dotfiles\.pryrc
+mklink %userprofile%\.irbrc %userprofile%\.dotfiles\.irbrc
+mklink %userprofile%\console_config.rb %userprofile%\.dotfiles\console_config.rb
 mklink C:\Users\tscheffert\.gemrc C:\Users\tscheffert\.dotfiles\.gemrc
 mklink C:\Users\tscheffert\.tmux.conf C:\Users\tscheffert\.dotfiles\.tmux.conf
 mklink C:\Users\tscheffert\.zshrc C:\Users\tscheffert\.dotfiles\.zshrc
 mklink C:\Users\tscheffert\.aprc C:\Users\tscheffert\.dotfiles\.aprc
 mklink C:\Users\tscheffert\.ctags C:\Users\tscheffert\.dotfiles\.ctags
+mklink %userprofile%\.yamllint mklink %userprofile%\.dotfiles\.yamllint
 
 pause

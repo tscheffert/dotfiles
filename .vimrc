@@ -1588,8 +1588,19 @@ call NormalMap({'win32': '<A-]>', 'mac': '<D-]>', 'perform': ':wincmd w<CR>'})
 call NormalMap({'win32': '<A-[>', 'mac': '<D-[>', 'perform': ':wincmd W<CR>'})
 
 " Set the buffer to <Scratch>
-" TODO: Consider setting this by default when we just open vim with no file specified
-nnoremap <silent> <Leader>s :setlocal buftype=nofile<CR>
+" TODO: Consider calling this by default when we just open vim with no file specified
+" TODO: Investigate
+"       https://github.com/vim-scripts/scratch.vim/blob/master/plugin/scratch.vim
+"       https://github.com/mtth/scratch.vim/blob/master/autoload/scratch.vim
+nnoremap <silent> <Leader>sc :call OpenScratchBuffer()<CR>
+
+function! OpenScratchBuffer()
+  exe "edit <Scratch>"
+  setlocal buftype=nofile
+  setlocal bufhidden=hide
+  setlocal noswapfile
+  setlocal nobuflisted
+endfunction
 
 " Like gJ, but always remove spaces
 " With <3 from: http://vi.stackexchange.com/a/440/9963

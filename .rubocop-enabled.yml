@@ -222,26 +222,42 @@ Style/EmptyLineBetweenDefs:
 
 Style/EmptyLines:
   Description: "Don't use several empty lines in a row."
+  StyleGuide: '#two-or-more-empty-lines'
   Enabled: true
 
 Style/EmptyLinesAroundAccessModifier:
   Description: "Keep blank lines around access modifiers."
+  StyleGuide: '#empty-lines-around-access-modifier'
+  Enabled: true
+
+Style/EmptyLinesAroundBeginBody:
+  Description: "Keeps track of empty lines around begin-end bodies."
+  StyleGuide: '#empty-lines-around-bodies'
   Enabled: true
 
 Style/EmptyLinesAroundBlockBody:
   Description: "Keeps track of empty lines around block bodies."
+  StyleGuide: '#empty-lines-around-bodies'
   Enabled: true
 
 Style/EmptyLinesAroundClassBody:
   Description: "Keeps track of empty lines around class bodies."
+  StyleGuide: '#empty-lines-around-bodies'
+  Enabled: true
+
+Style/EmptyLinesAroundExceptionHandlingKeywords:
+  Description: "Keeps track of empty lines around exception handling keywords."
+  StyleGuide: '#empty-lines-around-bodies'
   Enabled: true
 
 Style/EmptyLinesAroundModuleBody:
   Description: "Keeps track of empty lines around module bodies."
+  StyleGuide: '#empty-lines-around-bodies'
   Enabled: true
 
 Style/EmptyLinesAroundMethodBody:
   Description: "Keeps track of empty lines around method bodies."
+  StyleGuide: '#empty-lines-around-bodies'
   Enabled: true
 
 Style/EmptyLiteral:
@@ -390,6 +406,7 @@ Style/IfWithSemicolon:
 
 Style/IndentationConsistency:
   Description: 'Keep indentation straight.'
+  StyleGuide: '#spaces-indentation'
   Enabled: true
 
 Style/IndentationWidth:
@@ -413,6 +430,11 @@ Style/IndentHash:
   Description: 'Checks the indentation of the first key in a hash literal.'
   Enabled: true
 
+Style/IndentHeredoc:
+  Description: 'This cops checks the indentation of the here document bodies.'
+  StyleGuide: '#squiggly-heredocs'
+  Enabled: true
+
 Style/InfiniteLoop:
   Description: 'Use Kernel#loop for infinite loops.'
   StyleGuide: '#infinite-loop'
@@ -421,6 +443,12 @@ Style/InfiniteLoop:
 Style/InitialIndentation:
   Description: >-
     Checks the indentation of the first non-blank non-comment line in a file.
+  Enabled: true
+
+Style/InverseMethods:
+  Description: >-
+                 Use the inverse method instead of `!.method`
+                 if an inverse method is defined.
   Enabled: true
 
 Style/Lambda:
@@ -474,6 +502,11 @@ Style/MethodName:
 Style/MethodMissing:
   Description: 'Avoid using `method_missing`.'
   StyleGuide: '#no-method-missing'
+  Enabled: true
+
+Style/MixinGrouping:
+  Description: 'Checks for grouping of mixins in `class` and `module` bodies.'
+  StyleGuide: '#mixin-grouping'
   Enabled: true
 
 Style/ModuleFunction:
@@ -581,6 +614,11 @@ Style/NestedParenthesizedCalls:
 Style/NestedTernaryOperator:
   Description: 'Use one expression per branch in a ternary operator.'
   StyleGuide: '#no-nested-ternary'
+  Enabled: true
+
+Style/EmptyLineAfterMagicComment:
+  Description: 'Add an empty line after magic comments to separate them from code.'
+  StyleGuide: '#separate-magic-comments-from-code'
   Enabled: true
 
 Style/Next:
@@ -923,6 +961,11 @@ Style/StructInheritance:
   StyleGuide: '#no-extend-struct-new'
   Enabled: true
 
+Style/SymbolArray:
+  Description: 'Use %i or %I for arrays of symbols.'
+  StyleGuide: '#percent-i'
+  Enabled: true
+
 Style/SymbolLiteral:
   Description: 'Use plain symbols instead of string symbols when possible.'
   Enabled: true
@@ -1028,7 +1071,7 @@ Style/ZeroLengthPredicate:
   Enabled: true
 
 
-#################### Metrics ###############################
+# ################## Metrics ###############################
 
 Metrics/AbcSize:
   Description: >-
@@ -1082,7 +1125,7 @@ Metrics/PerceivedComplexity:
   Enabled: true
 
 
-# ################## Lint ################################ #
+# ################## Lint ##################################
 # ## Warnings
 
 Lint/AmbiguousOperator:
@@ -1090,6 +1133,13 @@ Lint/AmbiguousOperator:
                  Checks for ambiguous operators in the first argument of a
                  method invocation without parentheses.
   StyleGuide: '#method-invocation-parens'
+  Enabled: true
+
+Lint/AmbiguousBlockAssociation:
+  Description: >-
+                 Checks for ambiguous block association with method when param passed without
+                 parentheses.
+  StyleGuide: '#syntax'
   Enabled: true
 
 Lint/AmbiguousRegexpLiteral:
@@ -1153,6 +1203,7 @@ Lint/ElseLayout:
 Lint/EmptyEnsure:
   Description: 'Checks for empty ensure block.'
   Enabled: true
+  AutoCorrect: false
 
 Lint/EmptyExpression:
   Description: 'Checks for empty expressions.'
@@ -1354,7 +1405,7 @@ Lint/Void:
   Enabled: true
 
 
-# ################## Performance ######################### #
+# ################## Performance ###########################
 
 Performance/Casecmp:
   Description: >-
@@ -1498,7 +1549,7 @@ Performance/TimesMap:
   Enabled: true
 
 
-# ################## Rails ############################### #
+# ################## Rails #################################
 
 # By default, the rails cops are not run. Override in project or home
 # directory .rubocop.yml files, or by giving the -R/--rails option.
@@ -1508,6 +1559,23 @@ Rails:
 Rails/ActionFilter:
   Description: 'Enforces consistent use of action filter methods.'
   Enabled: true
+
+Rails/ActiveSupportAliases:
+  Description: >-
+                  Avoid ActiveSupport aliases of standard ruby methods:
+                  `String#starts_with?`, `String#ends_with?`,
+                  `Array#append`, `Array#prepend`.
+  Enabled: true
+
+Rails/Blank:
+  Description: 'Enforce using `blank?` and `present?`.'
+  Enabled: true
+  # Convert checks for `nil` or `empty?` to `blank?`
+  NilOrEmpty: true
+  # Convert usages of not `present?` to `blank?`
+  NotPresent: true
+  # Convert usages of `unless` `present?` to `if` `blank?`
+  UnlessPresent: true
 
 Rails/Date:
   Description: >-
@@ -1564,11 +1632,25 @@ Rails/PluralizationGrammar:
   Description: 'Checks for incorrect grammar when using methods like `3.day.ago`.'
   Enabled: true
 
+Rails/Present:
+  Description: 'Enforce using `blank?` and `present?`.'
+  Enabled: true
+  NotNilAndNotEmpty: true
+  # Convert checks for not `nil` and not `empty?` to `present?`
+  NotBlank: true
+  # Convert usages of not `blank?` to `present?`
+  UnlessBlank: true
+  # Convert usages of `unless` `blank?` to `if` `present?`
+
 Rails/ReadWriteAttribute:
   Description: >-
                  Checks for read_attribute(:attr) and
                  write_attribute(:attr, val).
   StyleGuide: 'https://github.com/bbatsov/rails-style-guide#read-attribute'
+  Enabled: true
+
+Rails/RelativeDateConstant:
+  Description: 'Do not assign relative date to constants.'
   Enabled: true
 
 Rails/RequestReferer:
@@ -1610,7 +1692,7 @@ Rails/Validation:
   Description: 'Use validates :attribute, hash of validations.'
   Enabled: true
 
-# ################## Security ############################ #
+# ################## Security ##############################
 
 Security/Eval:
   Description: 'The use of eval represents a serious security risk.'
@@ -1641,7 +1723,7 @@ Security/YAMLLoad:
   Enabled: true
 
 
-# ################## Bundler ############################# #
+# ################## Bundler ###############################
 
 Bundler/DuplicatedGem:
   Description: 'Checks for duplicate gem entries in Gemfile.'
@@ -1652,8 +1734,7 @@ Bundler/DuplicatedGem:
 
 Bundler/OrderedGems:
   Description: >-
-                 Sort alphabetically gems appearing within a contiguous set
-                 of lines in the Gemfile
+                  Gems within groups in the Gemfile should be alphabetically sorted.
   Enabled: true
   Include:
     - '**/Gemfile'

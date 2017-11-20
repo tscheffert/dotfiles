@@ -2,7 +2,7 @@
 # This started as the default configuration and then I have modified it to suite
 # my preferences.
 
-# Version: 0.47.1
+# Version: 0.48.1
 
 inherit_from:
   - .rubocop-enabled.yml
@@ -53,11 +53,17 @@ AllCops:
   # the `--only-guide-cops` option.
   StyleGuideCopsOnly: false
   # All cops except the ones in disabled.yml are enabled by default. Change
-  # this behavior by overriding `DisabledByDefault`. When `DisabledByDefault` is
-  # `true`, all cops in the default configuration are disabled, and only cops
-  # in user configuration are enabled. This makes cops opt-in instead of
-  # opt-out. Note that when `DisabledByDefault` is `true`, cops in user
-  # configuration will be enabled even if they don't set the Enabled parameter.
+  # this behavior by overriding either `DisabledByDefault` or `EnabledByDefault`.
+  # When `DisabledByDefault` is `true`, all cops in the default configuration
+  # are disabled, and only cops in user configuration are enabled. This makes
+  # cops opt-in instead of opt-out. Note that when `DisabledByDefault` is `true`,
+  # cops in user configuration will be enabled even if they don't set the
+  # Enabled parameter.
+  # When `EnabledByDefault` is `true`, all cops, even those in disabled.yml,
+  # are enabled by default.  Cops can still be disabled in user configuration.
+  # Note that it is invalid to set both EnabledByDefault and DisabledByDefault
+  # to true in the same configuration.
+  EnabledByDefault: false
   DisabledByDefault: true
   # Enables the result cache if `true`. Can be overridden by the `--cache` command
   # line option.
@@ -83,7 +89,8 @@ AllCops:
   # If a value is specified for TargetRubyVersion then it is used.
   # Else if .ruby-version exists and it contains an MRI version it is used.
   # Otherwise we fallback to the oldest officially supported Ruby version (2.0).
-  TargetRubyVersion: 2.1
+  TargetRubyVersion: 2.3
+  TargetRailsVersion: 5.0
 
 # Indent private/protected/public as deep as method definitions
 Style/AccessModifierIndentation:
@@ -435,6 +442,8 @@ Style/EmptyLineBetweenDefs:
   # If `true`, this parameter means that single line method definitions don't
   # need an empty line between them.
   AllowAdjacentOneLineDefs: false
+  # Can be array to specify minimum and maximum number of empty lines, e.g. [1, 2]
+  NumberOfEmptyLines: 1
 
 Style/EmptyLinesAroundBlockBody:
   EnforcedStyle: no_empty_lines
@@ -474,6 +483,16 @@ Style/Encoding:
     - always
     - never
   AutoCorrectEncodingComment: '# encoding: utf-8'
+
+Style/EndOfLine:
+  # The `native` style means that CR+LF (Carriage Return + Line Feed) is
+  # enforced on Windows, and LF is enforced on other platforms. The other styles
+  # mean LF and CR+LF, respectively.
+  EnforcedStyle: lf
+  SupportedStyles:
+    - native
+    - lf
+    - crlf
 
 Style/ExtraSpacing:
   # When true, allows most uses of extra spacing if the intent is to align
@@ -639,6 +658,7 @@ Style/IndentationConsistency:
 Style/IndentationWidth:
   # Number of spaces for each indentation level.
   Width: 2
+  IgnoredPatterns: []
 
 # Checks the indentation of the first element in an array literal.
 Style/IndentArray:
@@ -690,6 +710,37 @@ Style/IndentHash:
   # But it can be overridden by setting this parameter
   IndentationWidth: ~
 
+Style/IndentHeredoc:
+  EnforcedStyle: auto_detection
+  SupportedStyles:
+    - auto_detection
+    - squiggly
+    - active_support
+    - powerpack
+    - unindent
+
+Style/InverseMethods:
+  Enabled: true
+  # `InverseMethods` are methods that can be inverted by a not (`not` or `!`)
+  # The relationship of inverse methods only needs to be defined in one direction.
+  # Keys and values both need to be defined as symbols.
+  InverseMethods:
+    :any?: :none?
+    :even?: :odd?
+    :==: :!=
+    :=~: :!~
+    :<: :>=
+    :>: :<=
+    # `ActiveSupport` defines some common inverse methods. They are listed below,
+    # and not enabled by default.
+    #:present?: :blank?,
+    #:include?: :exclude?
+  # `InverseBlocks` are methods that are inverted by inverting the return
+  # of the block that is passed to the method
+  InverseBlocks:
+    :select: :reject
+    :select!: :reject!
+
 Style/Lambda:
   EnforcedStyle: literal
   SupportedStyles:
@@ -709,37 +760,9 @@ Style/LambdaCall:
     - call
     - braces
 
-Style/Next:
-  # With `always` all conditions at the end of an iteration needs to be
-  # replaced by next - with `skip_modifier_ifs` the modifier if like this one
-  # are ignored: [1, 2].each { |a| return 'yes' if a == 1 }
-  EnforcedStyle: skip_modifier_ifs
-  # `MinBodyLength` defines the number of lines of the a body of an `if` or `unless`
-  # needs to have to trigger this cop
-  MinBodyLength: 3
-  SupportedStyles:
-    - skip_modifier_ifs
-    - always
-  AutoCorrect: false
-
-Style/NonNilCheck:
-  # With `IncludeSemanticChanges` set to `true`, this cop reports offenses for
-  # `!x.nil?` and autocorrects that and `x != nil` to solely `x`, which is
-  # **usually** OK, but might change behavior.
-  #
-  # With `IncludeSemanticChanges` set to `false`, this cop does not report
-  # offenses for `!x.nil?` and does no changes that might change behavior.
-  IncludeSemanticChanges: true
-
-Style/NumericPredicate:
-  EnforcedStyle: predicate
-  SupportedStyles:
-    - predicate
-    - comparison
-  # Exclude RSpec specs because assertions like `expect(1).to be > 0` cause
-  # false positives.
-  Exclude:
-    - 'spec/**/*'
+Style/MethodCallWithArgsParentheses:
+  IgnoreMacros: true
+  IgnoredMethods: []
 
 Style/MethodDefParentheses:
   EnforcedStyle: require_parentheses
@@ -748,14 +771,21 @@ Style/MethodDefParentheses:
     - require_no_parentheses
     - require_no_parentheses_except_multiline
 
-Style/MethodCallWithArgsParentheses:
-  IgnoredMethods: []
-
 Style/MethodName:
   EnforcedStyle: snake_case
   SupportedStyles:
     - snake_case
     - camelCase
+
+# Checks the grouping of mixins (`include`, `extend`, `prepend`) in `class` and
+# `module` bodies.
+Style/MixinGrouping:
+  EnforcedStyle: separated
+  SupportedStyles:
+    # separated: each mixed in module goes in a separate statement.
+    # grouped: mixed in modules are grouped into a single statement.
+    - separated
+    - grouped
 
 Style/ModuleFunction:
   EnforcedStyle: module_function
@@ -801,6 +831,12 @@ Style/MultilineHashBraceLayout:
     - new_line
     - same_line
 
+Style/MultilineMemoization:
+  EnforcedStyle: keyword
+  SupportedStyles:
+    - keyword
+    - braces
+
 Style/MultilineMethodCallBraceLayout:
   EnforcedStyle: same_line
   SupportedStyles:
@@ -840,12 +876,52 @@ Style/MultilineOperationIndentation:
   # But it can be overridden by setting this parameter
   IndentationWidth: ~
 
-# Baker prefers `if !something`, so don't autocorrect, only make manual fixes
 Style/NegatedIf:
+  AutoCorrect: False
+  EnforcedStyle: both
+  SupportedStyles:
+    # both: prefix and postfix negated `if` should both use `unless`
+    # prefix: only use `unless` for negated `if` statements positioned before the body of the statement
+    # postfix: only use `unless` for negated `if` statements positioned after the body of the statement
+    - both
+    - prefix
+    - postfix
+
+Style/Next:
+  # With `always` all conditions at the end of an iteration needs to be
+  # replaced by next - with `skip_modifier_ifs` the modifier if like this one
+  # are ignored: [1, 2].each { |a| return 'yes' if a == 1 }
+  EnforcedStyle: skip_modifier_ifs
+  # `MinBodyLength` defines the number of lines of the a body of an `if` or `unless`
+  # needs to have to trigger this cop
+  MinBodyLength: 3
+  SupportedStyles:
+    - skip_modifier_ifs
+    - always
   AutoCorrect: false
+
+Style/NonNilCheck:
+  # With `IncludeSemanticChanges` set to `true`, this cop reports offenses for
+  # `!x.nil?` and autocorrects that and `x != nil` to solely `x`, which is
+  # **usually** OK, but might change behavior.
+  #
+  # With `IncludeSemanticChanges` set to `false`, this cop does not report
+  # offenses for `!x.nil?` and does no changes that might change behavior.
+  IncludeSemanticChanges: true
+
+Style/NumericPredicate:
+  EnforcedStyle: predicate
+  SupportedStyles:
+    - predicate
+    - comparison
+  # Exclude RSpec specs because assertions like `expect(1).to be > 0` cause
+  # false positives.
+  Exclude:
+    - 'spec/**/*'
 
 Style/NumericLiterals:
   MinDigits: 9
+  Strict: false
 
 Style/NumericLiteralPrefix:
   EnforcedOctalStyle: zero_with_o
@@ -853,6 +929,16 @@ Style/NumericLiteralPrefix:
     - zero_with_o
     - zero_only
   AutoCorrect: false
+
+Style/NumericPredicate:
+  EnforcedStyle: predicate
+  SupportedStyles:
+    - predicate
+    - comparison
+  # Exclude RSpec specs because assertions like `expect(1).to be > 0` cause
+  # false positives.
+  Exclude:
+    - 'spec/**/*'
 
 Style/OptionHash:
   # A list of parameter names that will be flagged by this cop.
@@ -868,7 +954,11 @@ Style/ParenthesesAroundCondition:
   AllowSafeAssignment: true
 
 Style/PercentLiteralDelimiters:
+  # Specify the default preferred delimiter for all types with the 'default' key
+  # Override individual delimiters (even with default specified) by specifying
+  # an individual key
   PreferredDelimiters:
+    default: ()
     '%':  ()
     '%i': '[]'
     '%I': '[]'
@@ -970,12 +1060,68 @@ Style/SingleLineBlockParams:
 Style/SingleLineMethods:
   AllowIfMethodIsEmpty: false
 
+Style/SpaceAroundBlockParameters:
+  EnforcedStyleInsidePipes: no_space
+  SupportedStylesInsidePipes:
+    - space
+    - no_space
+
+Style/SpaceAroundEqualsInParameterDefault:
+  EnforcedStyle: space
+  SupportedStyles:
+    - space
+    - no_space
+
+Style/SpaceAroundOperators:
+  # When `true`, allows most uses of extra spacing if the intent is to align
+  # with an operator on the previous or next line, not counting empty lines
+  # or comment lines.
+  AllowForAlignment: true
+
+Style/SpaceBeforeBlockBraces:
+  EnforcedStyle: space
+  SupportedStyles:
+    - space
+    - no_space
+
+
 # TODO: Extra spacing is tough, does this work for us?
 Style/SpaceBeforeFirstArg:
   # When `true`, allows most uses of extra spacing if the intent is to align
   # things with the previous or next line, not counting empty lines or comment
   # lines.
   AllowForAlignment: true
+
+Style/SpaceInsideBlockBraces:
+  EnforcedStyle: space
+  SupportedStyles:
+    - space
+    - no_space
+  EnforcedStyleForEmptyBraces: no_space
+  SupportedStylesForEmptyBraces:
+    - space
+    - no_space
+  # Space between `{` and `|`. Overrides `EnforcedStyle` if there is a conflict.
+  SpaceBeforeBlockParameters: true
+
+Style/SpaceInsideHashLiteralBraces:
+  EnforcedStyle: compact
+  SupportedStyles:
+    - space
+    - no_space
+    # 'compact' normally requires a space inside hash braces, with the exception
+    # that successive left braces or right braces are collapsed together
+    - compact
+  EnforcedStyleForEmptyBraces: no_space
+  SupportedStylesForEmptyBraces:
+    - space
+    - no_space
+
+Style/SpaceInsideStringInterpolation:
+  EnforcedStyle: no_space
+  SupportedStyles:
+    - space
+    - no_space
 
 Style/SpecialGlobalVars:
   EnforcedStyle: use_english_names
@@ -1013,61 +1159,6 @@ Style/StringMethods:
   #     intern: to_sym
   PreferredMethods:
     intern: to_sym
-
-Style/SpaceAroundBlockParameters:
-  EnforcedStyleInsidePipes: no_space
-  SupportedStylesInsidePipes:
-    - space
-    - no_space
-
-Style/SpaceAroundEqualsInParameterDefault:
-  EnforcedStyle: space
-  SupportedStyles:
-    - space
-    - no_space
-
-Style/SpaceAroundOperators:
-  # When `true`, allows most uses of extra spacing if the intent is to align
-  # with an operator on the previous or next line, not counting empty lines
-  # or comment lines.
-  AllowForAlignment: true
-
-Style/SpaceBeforeBlockBraces:
-  EnforcedStyle: space
-  SupportedStyles:
-    - space
-    - no_space
-
-Style/SpaceInsideBlockBraces:
-  EnforcedStyle: space
-  SupportedStyles:
-    - space
-    - no_space
-  EnforcedStyleForEmptyBraces: no_space
-  SupportedStylesForEmptyBraces:
-    - space
-    - no_space
-  # Space between `{` and `|`. Overrides EnforcedStyle if there is a conflict.
-  SpaceBeforeBlockParameters: true
-
-Style/SpaceInsideHashLiteralBraces:
-  EnforcedStyle: compact
-  SupportedStyles:
-    - space
-    - no_space
-    # 'compact' normally requires a space inside hash braces, with the exception
-    # that successive left braces or right braces are collapsed together
-    - compact
-  EnforcedStyleForEmptyBraces: no_space
-  SupportedStylesForEmptyBraces:
-    - space
-    - no_space
-
-Style/SpaceInsideStringInterpolation:
-  EnforcedStyle: no_space
-  SupportedStyles:
-    - space
-    - no_space
 
 Style/SymbolArray:
   EnforcedStyle: percent
@@ -1191,12 +1282,17 @@ Style/WordArray:
   # The regular expression `WordRegex` decides what is considered a word.
   WordRegex: !ruby/regexp '/\A[\p{Word}\n\t]+\z/'
 
-# ################## Metrics ############################# #
+#################### Metrics ###############################
 
 Metrics/AbcSize:
   # The ABC size is a calculated magnitude, so this number can be an Integer or
   # a Float.
   Max: 25
+
+Metrics/BlockLength:
+  CountComments: false  # count full line comments?
+  Max: 25
+  ExcludedMethods: ['describe', 'context', 'handle', 'create']
 
 Metrics/BlockNesting:
   CountBlocks: false
@@ -1235,10 +1331,10 @@ Metrics/MethodLength:
   CountComments: false  # count full line comments?
   Max: 20
 
-Metrics/BlockLength:
+Metrics/ModuleLength:
   CountComments: false  # count full line comments?
-  Max: 25
-  ExcludedMethods: ['describe', 'context', 'handle', 'create']
+  Max: 100
+  ExcludedMethods: []
 
 Metrics/ParameterLists:
   Max: 5
@@ -1247,7 +1343,7 @@ Metrics/ParameterLists:
 Metrics/PerceivedComplexity:
   Max: 7
 
-# ################## Lint ################################ #
+#################### Lint ##################################
 
 # Allow safe assignment in conditions.
 Lint/AssignmentInCondition:
@@ -1307,6 +1403,13 @@ Lint/InheritException:
     - runtime_error
     - standard_error
 
+Lint/SafeNavigationChain:
+  Whitelist:
+    - present?
+    - blank?
+    - presence
+    - try
+
 # TODO: Fix later or raise issue about missing SupportedStyles after 0.32.1
 # Unused block params auto-correct from { |x, y| puts x } to { |x, _y| puts x } and
 # we prefer { |x, _| puts x }
@@ -1329,7 +1432,7 @@ Lint/UnusedMethodArgument:
 # TODO: Also Style/TrailingUnderscoreVariable would get in the way of that :(
 
 
-# ################## Performance ######################### #
+#################### Performance ###########################
 
 Performance/Count:
   # This cop has known compatibility issues with `ActiveRecord` and other
@@ -1351,6 +1454,11 @@ Performance/FlatMap:
   # This can be dangerous since `flat_map` will only flatten 1 level, and
   # `flatten` without any parameters can flatten multiple levels.
   EnabledForFlattenWithoutParams: true
+
+Performance/DoubleStartEndWith:
+  # Used to check for `starts_with?` and `ends_with?`.
+  # These methods are defined by `ActiveSupport`.
+  IncludeActiveSupportAliases: false
 
 Performance/RedundantMerge:
   # Max number of key-value pairs to consider an offense
@@ -1482,3 +1590,6 @@ Rails/SkipsModelValidations:
 Rails/Validation:
   Include:
     - app/models/**/*.rb
+
+Bundler/OrderedGems:
+  TreatCommentsAsGroupSeparators: true

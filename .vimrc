@@ -1027,8 +1027,8 @@ let g:airline_extensions = [
       \ 'quickfix', 'syntastic', 'ctrlp', 'whitespace', 'tabline'
       \ ]
 
-" Must be all spaces or all tabs
-let g:airline#extensions#whitespace#mixed_indent_algo = 1
+" 0 is the algorithm number for 'must be all spaces or all tabs'
+let g:airline#extensions#whitespace#mixed_indent_algo = 0
 
 " Automatically displays all buffers when theres only one tab open
 " TODO: investigate airline-tabline for more options

@@ -261,6 +261,36 @@ alias rbca-m="git_show_exclude_ruby_files | xargs -n1 -p rubocop --auto-correct"
 alias db-migrate="bundle exec rake db:migrate && RACK_ENV=test bundle exec rake db:migrate"
 
 
+# --- Chef Aliases
+# Chef Exec
+alias ce='chef exec'
+
+# Chef Exec rake tasks
+alias cer='chef exec rake'
+
+function knife-live {
+  # local knife_command=$@
+
+  local live_config=~/.chef/live/knife-dev.rb
+  if [[ ! -f "$live_config" ]]; then
+    echo 1>&2 "No knife config found at $live_config"
+  fi
+
+  knife $@ --config "$live_config"
+}
+
+function knife-sandbox {
+  # local knife_command="$@"
+
+  local sandbox_config=~/.chef/sandbox/knife-dev.rb
+  if [[ ! -f "$sandbox_config" ]]; then
+    echo 1>&2 "No knife config found at $sandbox_config"
+  fi
+
+  knife $@ --config "$sandbox_config"
+}
+
+
 # -- Other Aliases
 alias ..='cd ..'         # Go up one directory
 alias ...='cd ../..'     # Go up two directories

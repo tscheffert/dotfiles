@@ -108,7 +108,12 @@ function path() {
   local color="%{$fg[yellow]%}"
   # %~ expands to the current working directory but if it starts with $HOME
   #   then replace that with a '~'
-  local dir="%~"
+  # local dir="%~"
+  local dir="$(pwd)"
+  # Trim $dir if it's too long
+  if [[ "$dir" =~ "slalom-configuration-management" ]]; then
+    dir="../${dir#/c/dev/gitlab/slalom-configuration-management/}"
+  fi
   local left_bracket="["
   local right_bracket="]"
   echo "$color$left_bracket$dir$right_bracket"

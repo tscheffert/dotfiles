@@ -23,10 +23,22 @@ append_to_path 'C:\tools\python\Scripts'
 # Xmllint from libxml2
 append_to_path 'C:\tools\xmllint'
 
-# Xmllint from libxml2
+# Add ConEmuBaseDir to the path for csudo.cmd
 append_to_path '$ConEmuBaseDir'
+
+# Git repo encryption utility
+append_to_path 'C:\dev\github\elasticdog\transcrypt'
 
 
 # --- Aliases ---
 
 alias 'csudo'='csudo.cmd'
+
+# TODO: Maybe set up in function files like I have other stuff?
+function explorer() {
+  local destination = "$@"
+  if [[ $@ == '' ]]; then
+    destination="./"
+  fi
+  explorer.exe "$(to_windows_path $destination)"
+}

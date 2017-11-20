@@ -1220,6 +1220,13 @@ nnoremap <silent> ]E :llast<CR>zv
 " let g:syntastic_lua_checkers = ["luac", "luacheck"]
 " let g:syntastic_lua_luacheck_args = "--no-unused-args"
 
+" -----
+" Plugin: vim-ruby
+" -----
+
+" Set do...end blocks to align the end with the do
+let g:ruby_indent_block_type = 'do'
+
 
 " -----
 " Plugin: vim-rails

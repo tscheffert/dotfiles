@@ -27,6 +27,10 @@
 [diff]
   algorithm = histogram
 
+[fetch]
+  # Delete stale branches after each fetch
+  prune = true
+
 [pull]
   # Rebase fetched branches when a 'git pull' is run instead of merge
   rebase = true

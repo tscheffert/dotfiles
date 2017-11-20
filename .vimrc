@@ -443,7 +443,15 @@ augroup RubyFiles
   autocmd Filetype ruby setlocal formatoptions-=o
   "   Don't continue comments after pressing <Enter> in insert either
   autocmd Filetype ruby setlocal formatoptions-=r
+
+  " Extend ruby syntax highlighting
+  autocmd Filetype ruby call RubySyntax()
 augroup END
+
+function! RubySyntax()
+  hi! def link rubyCapitalizedMethod rubyConstant
+  " hi def link rubyCapitalizedMethod Function
+endfunction
 
 augroup VimFiles
   au!

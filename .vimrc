@@ -1637,8 +1637,15 @@ function! SyntaxItem(trans)
   return synIDattr(synID(line("."), col("."), a:trans), "name")
 endfunction
 
+function! SyntaxStack()
+  for id in synstack(line("."), col("."))
+    echo synIDattr(id, "name")
+  endfor
+endfunction
+
 nnoremap <Leader>sg :echo "Syntax Group:" SyntaxItem(1)<CR>
 nnoremap <Leader>sh :echo "Syntax Group(trans=0):" SyntaxItem(0)<CR>
+nnoremap <Leader>ss :call SyntaxStack()<CR>
 
 " -----
 " Nop Key maps

@@ -1,6 +1,9 @@
 # Customize Pry! more info: https://github.com/pry/pry/wiki/Customization-and-configuration
 # Also good: https://github.com/jasoncodes/dotfiles/blob/master/config/pryrc
 
+# TODO: Need to run a "clear line" or something, it's fucked atm
+
+
 require '~/console_config.rb'
 ConsoleConfig::SetupReadline.perform
 ConsoleConfig::ReplaceActiveRecordLoggers.perform

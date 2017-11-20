@@ -1,3 +1,5 @@
+# TODO: Investigate https://github.com/janlelis/irbtools more
+
 module ConsoleConfig
 
   module Helpers

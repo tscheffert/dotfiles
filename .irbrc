@@ -2,6 +2,11 @@
 # Also good: https://github.com/jasoncodes/dotfiles/blob/master/config/irbrc
 # Load hooks from: https://github.com/itspriddle/dotfiles/blob/master/irb.d/on_load.rb
 
+# More color info: https://github.com/janlelis/paint
+
+# Terminal code info/examples here:
+# http://wiki.bash-hackers.org/scripting/terminalcodes
+
 require 'irb/ext/save-history'
 require 'logger'
 require '~/console_config.rb'
@@ -34,6 +39,7 @@ IRB.conf[:USE_READLINE] = true
 IRB.conf[:EVAL_HISTORY] = 1000
 IRB.conf[:SAVE_HISTORY] = 1000
 
+  # BLACK:     "\e[30m",
 ANSI = {
   RESET:     "\e[0m",
   BOLD:      "\e[1m",
@@ -48,9 +54,11 @@ ANSI = {
   CYAN:      "\e[36m",
   WHITE:     "\e[37m"
 }.freeze
-ANSI.each do |_, v|
-  v.replace("\001#{v}\002")
-end
+
+# TODO: What exactly does this do? Seems to break Windows
+# ANSI.each do |_, v|
+#   v.replace("\001#{v}\002")
+# end
 
 def colorize(str, color, trailing = '')
   "#{ANSI[color]}#{str}#{ANSI[:RESET]}#{trailing}"

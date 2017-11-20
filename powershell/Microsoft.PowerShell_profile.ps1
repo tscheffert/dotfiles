@@ -43,4 +43,7 @@ function Edit-BeautifyFile ($file)
   Edit-DTWBeautifyScript -SourcePath $file
 }
 
-# Clear-Host
+function Get-PSVersion
+{
+  Write-Host $PSVersionTable.PSVersion
+}

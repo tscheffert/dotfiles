@@ -110,6 +110,10 @@ if [[ $platform == 'windows' ]]; then
 
   # pdfimages from XPDF
   append_to_PATH 'C:\tools\xpdf'
+
+  append_to_PATH 'C:\Program Files (x86)\PWGen'
+
+  append_to_PATH 'C:\dev\github\elasticdog\transcrypt'
 fi
 
 

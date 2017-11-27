@@ -3,7 +3,7 @@
 
 # Output a pretty, oneline, columnized, git log for the last twenty commits
 function git_pretty_log() {
-  local line_wrap='%w(85,0,6)'
+  local line_wrap='%w(87,0,6)'
 
   local red_short_hash='%Cred%h%Creset'
 
@@ -16,9 +16,9 @@ function git_pretty_log() {
   local truncate_name='%<(12,trunc)'
   local green_name="%Cgreen$truncate_name%an%Creset"
 
-  local yellow_refs='%C(yellow)%d%Creset'
+  local yellow_refs='%C(yellow)%D%Creset'
 
-  local format_string="$line_wrap$red_short_hash - $truncated_message $blue_date $green_name$yellow_refs"
+  local format_string="$line_wrap$red_short_hash - $truncated_message $blue_date $green_name $yellow_refs"
 
-	git log -20 --pretty=format:$format_string --abbrev-commit --date=relative
+  git log -20 --pretty=format:$format_string --abbrev-commit --date=relative
 }

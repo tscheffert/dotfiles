@@ -128,8 +128,8 @@ alias gd='git diff --color-words'
 
 alias gds='git diff --staged --color-words'
 
-# Git diff (with) origin master
-alias gdom='git diff origin/master..'
+# Git diff (with) origin HEAD
+alias gdom='git diff origin/$(git_trimmed_origin_head)..'
 
 # Git diff commits
 alias gdc='git_commitwise_diff'
@@ -143,7 +143,8 @@ alias gpu='git push'
 
 alias gco='git checkout'
 
-alias gcom='git checkout master'
+# Transparently treat 'master' as origin/HEAD
+alias gcom='git checkout $(git_trimmed_origin_head)'
 
 # Git checkout all
 alias gcoa='git checkout -- .'
@@ -151,13 +152,15 @@ alias gcoa='git checkout -- .'
 # Follow it up with a hyphen delimited branch name like: 'gcob my-branch-name'
 alias gcob='git checkout -b'
 
+alias gcooh='git checkout $(git_trimmed_origin_head)'
+
 alias glg='git_pretty_log'
 
 # Show the diffs for recent commits with git log
 alias glp='git log -p'
 
 # Git log files, shows all the files in each commit and how much they've changed
-alias glf='git log --stat --oneline origin/master..HEAD'
+alias glf='git log --stat --oneline origin/$(git_trimmed_origin_head)..HEAD'
 
 alias gr='git rebase'
 
@@ -165,9 +168,9 @@ alias grc='git rebase --continue'
 
 alias gra='git rebase --abort'
 
-alias grom='git rebase origin/master'
+alias grom='git rebase origin/$(git_trimmed_origin_head)'
 
-alias griom='git rebase -i origin/master'
+alias griom='git rebase -i origin/$(git_trimmed_origin_head)'
 
 # Git reset to head
 alias grs='git reset HEAD'

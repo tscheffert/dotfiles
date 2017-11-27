@@ -1,0 +1,10 @@
+#!/usr/bin/env zsh
+# vi: ft=zsh
+
+# Returns the "trimmed" branch referred to by origin/HEAD
+#   Example:
+#     origin/HEAD -> origin/master  => 'master'
+#     origin/HEAD -> origin/develop => 'develop'
+function git_trimmed_origin_head() {
+  git symbolic-ref refs/remotes/origin/HEAD | sed 's@^refs/remotes/origin/@@'
+}

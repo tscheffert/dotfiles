@@ -131,6 +131,9 @@ alias gds='git diff --staged --color-words'
 # Git diff (with) origin HEAD
 alias gdom='git diff origin/$(git_trimmed_origin_head)..'
 
+# Git diff _files_ against origin/HEAD
+alias gdfom='git diff origin/$(git_trimmed_origin_head)..HEAD --name-only'
+
 # Git diff commits
 alias gdc='git_commitwise_diff'
 

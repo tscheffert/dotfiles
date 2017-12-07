@@ -5,7 +5,7 @@
 #   Source: http://stevenharman.net/git-clean-delete-already-merged-branches
 #   Another Source: with a ton of info:
 #     http://stackoverflow.com/questions/13064613/how-to-prune-local-tracking-branches-that-do-not-exist-on-remote-anymore
-function git_delete_merged() {
+function git_branch_delete_merged() {
   # Delete local branches that have been merged
   git branch --merged master \
     | grep -v "\* master" \

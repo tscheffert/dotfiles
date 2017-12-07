@@ -83,7 +83,7 @@ alias gbfd='git branch -D'
 
 # Grant branch delete --merged
 # TODO: This (or something else) should delete branches that were present on origin but have no been deleted
-alias gbd-m='git_delete_merged'
+alias gbd-m='git_branch_delete_merged'
 
 # List the recent git branches
 alias gbr='git_branch_recent'

@@ -274,6 +274,9 @@ alias ce='chef exec'
 # Chef Exec rake tasks
 alias cer='chef exec rake'
 
+# Chef gem
+alias cg='chef gem'
+
 function knife-live {
   # local knife_command=$@
 

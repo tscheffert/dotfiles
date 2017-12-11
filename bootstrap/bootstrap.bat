@@ -10,7 +10,7 @@ mklink %userprofile%\.bash_profile %userprofile%\.dotfiles\.bash_profile
 mklink %userprofile%\.bashrc %userprofile%\.dotfiles\.bashrc
 mklink %userprofile%\.ctags %userprofile%\.dotfiles\.ctags
 mklink %userprofile%\.curlrc %userprofile%\.dotfiles\.curlrc
-mklink %userprofile%\.dir_colors mklink %userprofile%\.dotfiles\.dir_colors
+mklink %userprofile%\.dir_colors %userprofile%\.dotfiles\.dir_colors
 mklink %userprofile%\.editorconfig %userprofile%\.dotfiles\.editorconfig
 mklink %userprofile%\.gemrc %userprofile%\.dotfiles\.gemrc
 mklink %userprofile%\.gitconfig %userprofile%\.dotfiles\.gitconfig

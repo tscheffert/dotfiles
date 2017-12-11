@@ -20,6 +20,9 @@ mklink %userprofile%\.irbrc %userprofile%\.dotfiles\.irbrc
 mklink %userprofile%\.jscs.json %userprofile%\.dotfiles\.jscs.json
 mklink %userprofile%\.jshintrc %userprofile%\.dotfiles\.jshintrc
 mklink %userprofile%\.pryrc %userprofile%\.dotfiles\.pryrc
+mklink %userprofile%\.rubocop-disabled.yml %userprofile%\.dotfiles\.rubocop-disabled.yml
+mklink %userprofile%\.rubocop-enabled.yml %userprofile%\.dotfiles\.rubocop-enabled.yml
+mklink %userprofile%\.rubocop.yml %userprofile%\.dotfiles\.rubocop.yml
 mklink %userprofile%\.tmux.conf %userprofile%\.dotfiles\.tmux.conf
 mklink %userprofile%\.vimrc %userprofile%\.dotfiles\.vimrc
 mklink %userprofile%\.yamllint mklink %userprofile%\.dotfiles\.yamllint

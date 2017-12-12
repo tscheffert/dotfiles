@@ -1,5 +1,5 @@
 ---
-# This started as the default configuration and then I have modified it to suite
+# This started as the default configuration and then I have modified it to suit
 # my preferences.
 
 # Version: 0.48.1
@@ -1302,10 +1302,6 @@ Metrics/ClassLength:
   CountComments: false  # count full line comments?
   Max: 250
 
-Metrics/ModuleLength:
-  CountComments: false  # count full line comments?
-  Max: 250
-
 # Avoid complex methods.
 Metrics/CyclomaticComplexity:
   Max: 10
@@ -1334,7 +1330,6 @@ Metrics/MethodLength:
 Metrics/ModuleLength:
   CountComments: false  # count full line comments?
   Max: 100
-  ExcludedMethods: []
 
 Metrics/ParameterLists:
   Max: 5

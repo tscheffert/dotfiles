@@ -111,7 +111,7 @@ function path() {
   # local dir="%~"
   local dir="$(pwd)"
   # Trim $dir if it's too long
-  if [[ "$dir" =~ "slalom-configuration-management" ]]; then
+  if [[ "$dir" =~ "slalom-configuration-management/" ]]; then
     dir="../${dir#/c/dev/gitlab/slalom-configuration-management/}"
   fi
   local left_bracket="["

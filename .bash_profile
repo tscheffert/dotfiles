@@ -351,9 +351,18 @@ alias gcom='git checkout master'
 # Follow it up with a hyphen delimited branch name like: 'gcob my-branch-name'
 alias gcob='git checkout -b'
 
+function git-trimmed-origin-head {
+  git symbolic-ref refs/remotes/origin/HEAD | sed 's@^refs/remotes/origin/@@'
+}
+
+# "git checkout origin head"
+function gcooh {
+  git checkout $(git-trimmed-origin-head)
+}
+
 function git-show {
-  # Show all of the files that were affected between master and
-  #   HEAD (of my branch).
+  # Show all of the files that were modified between the origin/head branch
+  #   (via git-trimmed-origin-head) and HEAD.
 
   # Options:
   # --pretty="format:" - The "format:<string>" pretty-format option is like

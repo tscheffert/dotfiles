@@ -65,3 +65,6 @@ www11.v1host.com##tr[id*=_AttributeDefinitionCategoryStory]
 
 ! Story: Tags
 www11.v1host.com##tr[id*=_AttributeDefinitionTaggedWithStory]
+
+! Request: Tags
+www11.v1host.com##tr[id*=_AttributeDefinitionTaggedWithRequest]

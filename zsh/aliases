@@ -75,6 +75,9 @@ alias gba='git branch -a'
 # Git branch delete
 alias gbd='git branch -d'
 
+# Git branch delete remote
+alias gbdr='git push origin --delete'
+
 # Git branch move (renames the branch to the supplied reflog)
 alias gbm='git branch -m'
 

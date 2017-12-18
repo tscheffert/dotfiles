@@ -48,7 +48,7 @@ fi
 #     HOMEBREW_GITHUB_API_TOKEN
 [[ -f ~/.zshrc.private ]] && . ~/.zshrc.private
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+[[ -f ~/.fzf.zsh ]] && source ~/.fzf.zsh
 
 # Set up zsh syntax highlighting, only on osx for now
 if [[ "$platform" == 'osx' ]]; then

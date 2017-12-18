@@ -234,6 +234,29 @@ function append_to_PROMPT_COMMAND {
 #   history -r: Read the history file, picking up changes from outside this session
 append_to_PROMPT_COMMAND "history -a; history -c; history -r"
 
+# # With <3 from http://thirtysixthspan.com/posts/grep-history-for
+# # ghf - [G]rep [H]istory [F]or top ten commands and execute one
+# # usage:
+# #  Most frequent command in recent history
+# #   ghf
+# #  Most frequent instances of {command} in all history
+# #   ghf {command}
+# #  Execute {command-number} after a call to ghf
+# #   !! {command-number}
+# function latest-history { history | tail -n 50 ; }
+# function grepped-history { history | grep "$1" ; }
+# function chop-first-column { awk '{for (i=2; i<NF; i++) printf $i " "; print $NF}' ; }
+# function add-line-numbers { awk '{print NR " " $0}' ; }
+# function top-ten { sort | uniq -c | sort -r | head -n 10 ; }
+# function unique-history { chop-first-column | top-ten | chop-first-column | add-line-numbers ; }
+# function ghf {
+#   if [ $# -eq 0 ]; then latest-history | unique-history; fi
+#   if [ $# -eq 1 ]; then grepped-history "$1" | unique-history; fi
+#   if [ $# -eq 2 ]; then
+#     `grepped-history "$1" | unique-history | grep ^$2 | chop-first-column`;
+#   fi
+# }
+
 
 # --- Ruby Stuff ---
 if [[ $platform == 'osx' ]]; then
@@ -384,11 +407,21 @@ function git-show {
   #     -xargs n1 - Run utility once for each line.
   #     bash -c '<snippet>' _ - Use bash as utility.
   #     <snippet> - Test if the file exists and echo if it does.
-  git show --pretty="format:" --name-only --diff-filter=$1 master..HEAD \
+  git show --pretty="format:" --name-only --diff-filter=$1 $(git-trimmed-origin-head)..HEAD \
     | awk NF \
     | sort \
     | uniq \
     | xargs -n1 bash -c '[ -e $@ ] && echo $@' _
+}
+
+function pipe-modified-to {
+  local xargs_command="$1"
+
+  git diff origin/$(git-trimmed-origin-head)..HEAD --name-only \
+    | ag -o 'w*?\/\w*?\/' \
+    | sort \
+    | uniq \
+    | xargs "$xargs_command"
 }
 
 # -- PowerShell Aliases/Functions --

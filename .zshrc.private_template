@@ -23,3 +23,7 @@ export ZK_HOSTS=
 
 # AWS ec2 instance CNAME
 export APPENDED_AWS_CNAME=
+
+# Chef knife configs
+export CHEF_KNIFE_LIVE_CONFIG=
+export CHEF_KNIFE_SANDBOX_CONFIG=

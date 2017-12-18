@@ -27,6 +27,7 @@ mklink %userprofile%\.tmux.conf %userprofile%\.dotfiles\.tmux.conf
 mklink %userprofile%\.vimrc %userprofile%\.dotfiles\.vimrc
 mklink %userprofile%\.yamllint mklink %userprofile%\.dotfiles\.yamllint
 mklink %userprofile%\.zshrc %userprofile%\.dotfiles\.zshrc
+mklink %userprofile%\.zshrc.private %userprofile%\.dotfiles\.zshrc.private
 mklink %userprofile%\console_config.rb %userprofile%\.dotfiles\console_config.rb
 
 mkdir %userprofile%\Documents\WindowsPowerShell

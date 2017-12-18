@@ -1,0 +1,61 @@
+#!/usr/bin/env zsh
+# vi: ft=zsh
+
+function knife_upload_environment() {
+  local environment_name="$1"
+  if [[ -z "$environment_name" ]]; then
+    echo 1>&2 "No environment name passed"
+    local failed=true
+  fi
+
+  local target_server="$2"
+  if [[ -z "$target_server" ]]; then
+    echo 1>&2 "No target server specified"
+    local failed=true
+  fi
+
+  if [[ ! -d "./environments/" ]]; then
+    echo 1>&2 "Working directory must be at the root of infrastructure-deploy"
+    local failed=true
+  fi
+
+  local target_environment_file="./environments/$environment_name.json"
+  if [[ ! -f "$target_environment_file" ]]; then
+    echo 1>&2 "Target environment file at $target_environment_file doesn't exist"
+    local failed=true
+  fi
+
+  case "$target_server" in
+    sandbox)
+      if [[ -z "$CHEF_KNIFE_SANDBOX_CONFIG" ]]; then
+        echo 1>&2 "Must export \$CHEF_KNIFE_SANDBOX_CONFIG"
+        local failed=true
+      else
+        local knife_config="$CHEF_KNIFE_SANDBOX_CONFIG"
+      fi
+      ;;
+    live)
+      if [[ -z "$CHEF_KNIFE_LIVE_CONFIG" ]]; then
+        echo 1>&2 "Must export \$CHEF_KNIFE_LIVE_CONFIG"
+        local failed=true
+      else
+        local knife_config="$CHEF_KNIFE_LIVE_CONFIG"
+      fi
+      ;;
+    *)
+      echo 1>&2 "Target server must be one of sandbox|live"
+      local failed=true
+      ;;
+  esac
+
+  if [[ $failed ]]; then
+    echo 1>&2 "\nUsage:"
+    echo 1>&2 "  knife_upload_environment {environment_name} {target_server}"
+    echo 1>&2 "  - environment_name: The server name to ssh into, like mbr01 or sci04"
+    echo 1>&2 "  - target_server: The server to upload the environment to, one of sandbox|live"
+    return 1
+  fi
+
+ knife upload "environments/$environment_name.json" --config "$knife_config"
+}
+

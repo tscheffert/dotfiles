@@ -66,5 +66,8 @@ www11.v1host.com##tr[id*=_AttributeDefinitionCategoryStory]
 ! Story: Tags
 www11.v1host.com##tr[id*=_AttributeDefinitionTaggedWithStory]
 
+! Story: "Last Affected Pipeline Runs"
+www11.v1host.com##tr[id*=_AttributeDefinitionCompletedInBuildRunsStory]
+
 ! Request: Tags
 www11.v1host.com##tr[id*=_AttributeDefinitionTaggedWithRequest]

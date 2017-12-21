@@ -13,6 +13,8 @@
   #   make the git commands work
   pager = less -X
   excludesfile = /Users/trentscheffert/.gitignore
+  # Activate filesystem cache, making Git faster, after a "warm-up", Windows only
+  fscache = true
 
 [alias]
   lg = log -20 --pretty=format:'%Cred%h%Creset - %s %Cgreen(%cr %an)%Creset%C(yellow)%d%Creset' --abbrev-commit --date=relative

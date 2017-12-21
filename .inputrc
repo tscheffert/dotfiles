@@ -80,6 +80,7 @@ set skip-completed-text on
 "\C-u": kill-whole-line
 # In ConEmu, capturing input reports ^U for ctrl+u -> bind to a capital U
 "\C-U": kill-whole-line
+# "\C-U": backward-word
 
 # Incremental undo, separately remembered for each line
 # This doesn't work because ctrl-z is a zsh thing for pause forground task
@@ -117,6 +118,7 @@ set skip-completed-text on
 
 # Fix Backspace in ConEmu
 "\C-?": backward-delete-char
+# "^H": backward-delete-char
 
 # Ctrl-Del - Forward delete the whole word
 # For ConEmu

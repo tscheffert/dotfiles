@@ -1,0 +1,49 @@
+#!/usr/bin/env ruby
+# vim: ft=ruby
+
+require 'dimensions'
+require 'bigdecimal'
+require 'fileutils'
+
+MIN_RATIO = BigDecimal.new('1.77')
+MAX_RATIO = BigDecimal.new('1.78')
+
+IMAGE_EXTENSIONS = ['.png', '.jpg', '.jpeg']
+
+LANDSCAPE_DIR = 'landscape'
+PORTRAIT_DIR = 'portrait'
+BAD_DIR = 'bad'
+FileUtils.mkdir_p(LANDSCAPE_DIR)
+FileUtils.mkdir_p(PORTRAIT_DIR)
+FileUtils.mkdir_p(BAD_DIR)
+
+files = Dir.entries('.').select { |f| File.file?(f) && IMAGE_EXTENSIONS.include?(File.extname(f)) }
+
+landscape, portrait = files.partition do |img|
+  begin
+    width, height = Dimensions.dimensions(img)
+
+    width > height
+  rescue => e
+    puts "File #{img} failed with error #{e}"
+
+    true
+  end
+end
+
+puts "Moving landscape files:"
+puts landscape.to_s
+begin
+  FileUtils.mv(landscape, LANDSCAPE_DIR)
+rescue => e
+  puts "Failed to move landscape files with error #{e}"
+end
+
+puts "Moving portrait files:"
+puts portrait.to_s
+
+begin
+  FileUtils.mv(portrait, PORTRAIT_DIR)
+rescue => e
+  puts "Failed to move portrait files with error #{e}"
+end

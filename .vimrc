@@ -448,6 +448,9 @@ augroup RubyFiles
   "   Don't continue comments after pressing <Enter> in insert either
   autocmd Filetype ruby setlocal formatoptions-=r
 
+  " Prefer CRLF line endings
+  autocmd Filetype ruby setlocal fileformat=unix
+
   " Extend ruby syntax highlighting
   autocmd Filetype ruby call RubySyntax()
 augroup END
@@ -456,6 +459,13 @@ function! RubySyntax()
   hi! def link rubyCapitalizedMethod rubyConstant
   " hi def link rubyCapitalizedMethod Function
 endfunction
+
+augroup YAMLFiles
+  au!
+
+  " Prefer CRLF line endings
+  " autocmd Filetype yaml setlocal fileformat=unix
+augroup END
 
 augroup VimFiles
   au!
@@ -496,6 +506,9 @@ augroup ZshFiles
 
   " Don't continue comments, with o/O or <Enter>, _seriously_
   autocmd Filetype zsh setlocal formatoptions-=ro
+
+  " Prefer CRLF line endings
+  autocmd Filetype zsh setlocal fileformat=unix
 augroup END
 
 augroup ApiBlueprintFiles

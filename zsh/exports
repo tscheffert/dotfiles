@@ -49,5 +49,7 @@ export RUBY_HEAP_SLOTS_INCREMENT=1000000
 export RUBY_HEAP_SLOTS_GROWTH_FACTOR=1
 export RUBY_HEAP_FREE_MIN=500000
 
+export INPUTRC=~/.inputrc
+
 # --- PATH ---
 prepend_to_path "$HOME/bin"

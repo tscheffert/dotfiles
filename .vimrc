@@ -127,7 +127,7 @@ Plug 'othree/html5.vim',                         { 'for': ['html'] }
 " Plug 'kchmck/vim-coffee-script'
 " Plug 'mtscout6/vim-cjsx'
 " Plug 'jelera/vim-javascript-syntax', { 'for': ['javascript'] }
-" Plug 'maksimr/vim-jsbeautify', { 'for': ['javascript'] }
+Plug 'maksimr/vim-jsbeautify', { 'for': ['javascript'] }
 " Plug 'jsx/jsx.vim'
 
 " Status bar
@@ -1717,13 +1717,30 @@ autocmd FileType html noremap <buffer> <c-e><c-f> :call HtmlBeautify()<cr>
 autocmd FileType css noremap <buffer> <c-e><c-f> :call CSSBeautify()<cr>
 " for less
 autocmd FileType less noremap <buffer> <c-e><c-f> :call CSSBeautify()<cr>
-" for json!
-autocmd FileType json noremap <buffer> <c-e><c-f> :%!python -m json.tool<cr>
 " do it by range in visual mode
 autocmd FileType javascript vnoremap <buffer> <c-e><c-f> :call RangeJsBeautify()<cr>
 autocmd FileType html vnoremap <buffer> <c-e><c-f> :call RangeHtmlBeautify()<cr>
 autocmd FileType css vnoremap <buffer> <c-e><c-f> :call RangeCSSBeautify()<cr>
 
+" for json!
+autocmd FileType json noremap <buffer> <c-e><c-f> :%!python -m json.tool<cr>
+
+" TODO: Make this work for Windows
+" autocmd FileType json noremap <buffer> <c-e><c-f> :call RubyJsonBeautify<cr>
+" autocmd FileType json vnoremap <buffer> <c-e><c-f> :call RubyJsonBeautifyRange()<cr>
+
+" function! RubyJsonBeautify(...)
+" ruby << EORUBY
+"   buffer = Vim::Buffer.current
+"   buffer.append(buffer.line, "WHATS UP PARTY PEOPLE")
+" EORUBY
+" endfunction
+
+" " @param {[Number|String]} a:0 Default value '1'
+" " @param {[Number|String]} a:1 Default value '$'
+" function! RubyJsonBeautifyRange() range
+"   call RubyJsonBeautify(a:firstline, a:lastline)
+" endfunction
 
 " -----
 " UltiSnips Key Maps and Settings

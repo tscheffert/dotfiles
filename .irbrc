@@ -95,8 +95,13 @@ if !defined? AwesomePrint
     end
   end
 end
+
 ConsoleConfig::Helpers.extend_console('wirb') { Wirb.start } unless defined? Wirb
 ConsoleConfig::Helpers.extend_console('bond') { Bond.start } unless defined? Bond
+
+# TODO: Investigate https://github.com/jberkel/interactive_editor
+# Enable `vim` inside a pry session
+# ConsoleConfig::Helpers.extend_console('interactive_editor')
 
 class Object
 

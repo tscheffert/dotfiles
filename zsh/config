@@ -115,4 +115,12 @@ setopt NO_HIST_BEEP
 # From the brew zsh caveats, enables access to the online help
 unalias run-help
 autoload run-help
-HELPDIR=/usr/local/share/zsh/help
+
+if [[ "$platform" == "osx" ]]; then
+  HELPDIR=/usr/local/share/zsh/help
+elif [[ "$platform" == "windows" ]]; then
+  # This is from the git-sdk-64 install, version will change with zsh version changes
+  HELPDIR=/usr/share/zsh/5.4.2/help
+else
+  echo "No HELPDIR for Linux yet"
+fi

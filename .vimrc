@@ -216,6 +216,7 @@ Plug 'jszakmeister/vim-togglecursor'
 " https://github.com/thoughtbot/vim-rspec " Sweet rspec integration
 " Plug 'yegappan/mru' " :MRU Most Recently Used files
 " Plug 'dougnukem/vim-swap-lines' " Swap two lines
+" TODO: Investigate this https://github.com/LucHermitte/lh-vim-lib
 
 
 " No longer using:
@@ -371,6 +372,9 @@ augroup VisualEffects
   au!
   " Remove any trailing whitespace that is in the file
   autocmd BufRead,BufWrite * if ! &bin | silent! %s/\s\+$//ge | endif
+
+  " TODO: Figure out how to replace mixed spaces and tabs with only spaces,
+  " we've already got Airline warning us about it
 
   " Save when losing focus
   " NOTE: This doesn't work as well as it should. It's a cool idea though.

@@ -7,11 +7,11 @@ echo " -- Setting up vim config --"
 # copied from .bash_profile
 # use: if [[ $platform == 'windows']]; then
 platform='unknown'
-if [[ "$OSTYPE" == "msys" ]]; then
+if [[ "$OSTYPE" =~ "msys" ]]; then
   platform='windows'
-elif [[ "$OSTYPE" == "cygwin" ]]; then
+elif [[ "$OSTYPE" =~ "cygwin" ]]; then
   platform='windows'
-elif [[ "$OSTYPE" == "win32" ]]; then
+elif [[ "$OSTYPE" =~ "win32" ]]; then
   platform='windows'
 fi
 

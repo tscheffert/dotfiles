@@ -185,6 +185,7 @@ Plug 'haya14busa/incsearch.vim' " Show all matches as typed, auto nohl
 
 " Better Text Objects
 Plug 'wellle/targets.vim'
+Plug 'kana/vim-textobj-line'
 
 " Better Markdown
 Plug 'shime/vim-livedown', { 'for': ['markdown'] }

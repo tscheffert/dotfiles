@@ -1,0 +1,50 @@
+#!/usr/bin/env zsh
+# vi: ft=zsh
+
+function knife_edit_node() {
+  local node_name="$1"
+  if [[ -z "$node_name" ]]; then
+    echo 1>&2 "No node name passed"
+    local failed=true
+  fi
+
+  local target_server="$2"
+  if [[ -z "$target_server" ]]; then
+    echo 1>&2 "No target server specified"
+    local failed=true
+  fi
+
+  case "$target_server" in
+    sandbox)
+      if [[ -z "$CHEF_KNIFE_SANDBOX_CONFIG" ]]; then
+        echo 1>&2 "Must export \$CHEF_KNIFE_SANDBOX_CONFIG"
+        local failed=true
+      else
+        local knife_config="$CHEF_KNIFE_SANDBOX_CONFIG"
+      fi
+      ;;
+    live)
+      if [[ -z "$CHEF_KNIFE_LIVE_CONFIG" ]]; then
+        echo 1>&2 "Must export \$CHEF_KNIFE_LIVE_CONFIG"
+        local failed=true
+      else
+        local knife_config="$CHEF_KNIFE_LIVE_CONFIG"
+      fi
+      ;;
+    *)
+      echo 1>&2 "Target server must be one of sandbox|live"
+      local failed=true
+      ;;
+  esac
+
+  if [[ $failed ]]; then
+    echo 1>&2 "\nUsage:"
+    echo 1>&2 "  knife_edit_node {node_name} {target_server}"
+    echo 1>&2 "  - node_name: The node name that you wish to edit, like tliint1-pltweb01 or qa1-commonapi1"
+    echo 1>&2 "  - target_server: The server to node on, one of sandbox|live"
+    return 1
+  fi
+
+  knife node edit "$node_name" --config "$knife_config"
+}
+

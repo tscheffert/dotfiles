@@ -7,11 +7,6 @@
 # Terminal code info/examples here:
 # http://wiki.bash-hackers.org/scripting/terminalcodes
 
-# Enable `vim` inside a pry session
-# require 'rubygems'
-# require 'interactive_editor'
-
-# return 0
 require 'irb/ext/save-history'
 require 'logger'
 require '~/console_config.rb'
@@ -40,15 +35,9 @@ IRB.on_load do
   ConsoleConfig::ReplaceActiveRecordLoggers.perform
 end
 
-IRB.conf[:AUTO_INDENT] = true
 IRB.conf[:USE_READLINE] = true
-
-# Set up History
 IRB.conf[:EVAL_HISTORY] = 1000
 IRB.conf[:SAVE_HISTORY] = 1000
-require 'date'
-# IRB.conf[:HISTORY_FILE] = "~/#{DateTime.now.rfc3339(3)}-irb_history.log"
-IRB.conf[:HISTORY_FILE] = "~/.irb_history"
 
   # BLACK:     "\e[30m",
 ANSI = {
@@ -76,16 +65,16 @@ def colorize(str, color, trailing = '')
 end
 
 # Build a simple colourful IRB prompt
-# IRB.conf[:PROMPT][:SIMPLE_COLOR] =
-#   {
-#     PROMPT_I:    colorize('>>', :BLUE,   ' '),
-#     PROMPT_N:    colorize('>>', :GREEN,  ' '),
-#     PROMPT_C:    colorize('?>', :RED,    ' '),
-#     PROMPT_S:    colorize('?>', :YELLOW, ' '),
-#     RETURN:      colorize('=>', :GREEN,  "%s\n"),
-#     AUTO_INDENT: true
-#   }
-# IRB.conf[:PROMPT_MODE] = :SIMPLE_COLOR
+IRB.conf[:PROMPT][:SIMPLE_COLOR] =
+  {
+    PROMPT_I:    colorize('>>', :BLUE,   ' '),
+    PROMPT_N:    colorize('>>', :GREEN,  ' '),
+    PROMPT_C:    colorize('?>', :RED,    ' '),
+    PROMPT_S:    colorize('?>', :YELLOW, ' '),
+    RETURN:      colorize('=>', :GREEN,  "%s\n"),
+    AUTO_INDENT: true
+  }
+IRB.conf[:PROMPT_MODE] = :SIMPLE_COLOR
 
 ConsoleConfig::Debundler.debundle!
 

@@ -18,6 +18,7 @@
 
 [alias]
   lg = log -20 --pretty=format:'%Cred%h%Creset - %s %Cgreen(%cr %an)%Creset%C(yellow)%d%Creset' --abbrev-commit --date=relative
+  lgr = log --graph --decorate --pretty=oneline --abbrev-commit
 
 [branch]
   autoSetupMerge = true

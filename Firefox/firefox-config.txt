@@ -18,23 +18,87 @@ browser.tabs.animate: false # Supposed to make it faster?
 # Create a new integer value
 nglayout.initialpaint.delay: 100 # Don't wait as long before starting rendering
 
+ # Don't let websites control our right-click context menu
+dom.event.contextmenu.enable: false
 
-# Source: https://heptagrama.com/best-firefox-configuration.htm
-dom.event.contextmenu.enable: false # Don't let websites control our right-click context menu
-extensions.pocket.enabled: false # We don't want that shit!
+# Disable silly builtin extensions
+app.shield.optoutstudies.enabled: false
+extensions.pocket.enabled: false
+extensions.screenshots.disabled: true
+extensions.shield-recipe-client.enabled: false
 
 # Source: https://wiki.archlinux.org/index.php/Firefox/Tweaks#Turn_off_sponsored_content_and_tiles
 browser.newtabpage.directory.source: blank # Prevent new tab page chatter
 browser.newtabpage.directory.ping: blank   # More chatter prevention
 
 # Source: http://tuxdiary.com/2014/02/27/firefox-memory-tweaks/
-#   NOTE: This breaks slack video integration, which is super annoying
 media.autoplay.enabled: false # Don't autoplay media
 
 # With Firefox 52 it blocked non-electrolysis enabled addons by default, I was able to load them with
 extensions.e10sBlocksEnabling: false
 
+extensions.legacy.enabled;true
 
+# I _think_ i added these for privacy:
+dom.max_script_run_time: 0
+app.update.auto: false
+app.update.enabled: false
+browser.safebrowsing.malware.enabled;false
+browser.safebrowsing.phishing.enabled;false
+camera.control.face_detection.enabled;false
+experiments.activeExperiment;false
+geo.enabled;false
+geo.wifi.uri;""
+media.eme.chromium-api.enabled;false
+media.eme.enabled;false
+media.gmp-.enabled;false
+media.navigator.enabled;false
+media.peerconnection.enabled;false
+network.http.speculative-parallel-limit;0
+network.predictor.cleaned-up;true
+network.predictor.enabled;false
+network.prefetch-next;false
+
+# Privacy
+dom.battery.enabled: false
+dom.event.clipboardevents.enabled: false
+dom.push.connection.enabled: false
+dom.push.enabled: false
+dom.webnotifications.enabled: false
+dom.webnotifications.serviceworker.enabled: false
+beacon.enabled: false
+device.sensors.enabled;false
+network.IDN_show_punycode;true
+network.dns.disablePrefetch;true
+privacy.resistFingerprinting;true
+privacy.trackingprotection.enabled;true
+
+social.directories;""
+social.remote-install.enabled;false
+social.share.activationPanelEnabled;false
+social.shareDirectory;""
+social.toast-notifications.enabled;false
+stagefright.disabled;false
+
+
+# Random
+browser.bookmarks.restore_default_bookmarks;false
+browser.bookmarks.showMobileBookmarks;false
+browser.display.background_color;#F6F6F6
+extensions.e10sBlockedByAddons;false
+extensions.e10s.rollout.hasAddon;true
+extensions.e10sMultiBlockedByAddons;true
+
+
+
+# ?????
+browser.newtabpage.enhanced;true
+browser.customizemode.tip0.shown;true
+browser.search.widget.inNavBar;false
+browser.tabs.remote.autostart.2;true
+
+
+# listed about:config preferences via about:support
 # "Important Modified Preferences" from 'about:config', most from addons:
 accessibility.force_disabled	1
 accessibility.typeaheadfind.flashBar	0

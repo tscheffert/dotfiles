@@ -36,8 +36,14 @@ IRB.on_load do
 end
 
 IRB.conf[:USE_READLINE] = true
+
+# Set up History
 IRB.conf[:EVAL_HISTORY] = 1000
 IRB.conf[:SAVE_HISTORY] = 1000
+# TODO: Should we DateTime.now history files? Maybe load the last few into history as well then?
+# require 'date'
+# IRB.conf[:HISTORY_FILE] = "~/#{DateTime.now.rfc3339(3)}-irb_history.log"
+IRB.conf[:HISTORY_FILE] = "~/.irb_history"
 
   # BLACK:     "\e[30m",
 ANSI = {

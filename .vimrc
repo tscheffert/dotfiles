@@ -1241,9 +1241,6 @@ nnoremap <silent> ]E :llast<CR>zv
 " Plugin: vim-ruby
 " -----
 
-" Set do...end blocks to align the end with the do
-let g:ruby_indent_block_type = 'do'
-
 
 " -----
 " Plugin: vim-rails

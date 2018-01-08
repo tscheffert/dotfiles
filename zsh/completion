@@ -12,7 +12,9 @@ if [[ "$platform" == "osx" ]]; then
   fpath=(/usr/local/share/zsh-completions $fpath)
 elif [[ "$platform" == "windows" ]]; then
   # TODO: Get zsh-completions for Windows
-  # zstyle ':completion:*:*:git:*' source '/c/git-sdk-64/mingw64/share/git/completion/git-completion.zsh'
+
+  # If I don't want that git-completion I can just set the completer to "file"
+  zstyle ':completion:*:*:git:*' source '/c/git-sdk-64/usr/share/git/completion/git-completion.zsh'
 else
   echo "No zsh-completions for Linux yet"
 fi

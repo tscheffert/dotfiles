@@ -1,0 +1,28 @@
+#!/usr/bin/env zsh
+# vi: ft=zsh
+
+# Grants ownership on folders to current user, using `csudo.cmd` which comes with ConEmu
+function fix_windows_permissions() {
+  local target="$1"
+  if [[ -z "$target" ]]; then
+    echo 1>&2  "Must specify a target to fix"
+    return 1
+  fi
+
+  if [[ -f "$target" ]]; then
+    if [[ -n "$USERDOMAIN" ]]; then
+      csudo.cmd icacls "$target" //grant "$USERDOMAIN\\$USERNAME:F"
+    else
+      csudo.cmd icacls "$target" //grant "$COMPUTERNAME\\$USERNAME:F"
+    fi
+  elif [[ -d "$target" ]]; then
+    if [[ -n "$USERDOMAIN" ]]; then
+      csudo.cmd icacls "$target" //t //grant "$USERDOMAIN\\$USERNAME:F"
+    else
+      csudo.cmd icacls "$target" //t //grant "$COMPUTERNAME\\$USERNAME:F"
+    fi
+  else
+    echo 1>&2  "Not a valid file or directory: $target"
+    return 1
+  fi
+}

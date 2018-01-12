@@ -65,3 +65,34 @@ function Get-ADUserMemberOf {
 
     Get-ADUser $User -Server $Server -Properties MemberOf | Select -ExpandProperty memberof
 }
+
+# From kitchen-hyperv
+function Get-VmIP($vm) {
+    start-sleep -seconds 10
+    $vm.networkadapters.ipaddresses |
+        Where-Object {
+        $_ -match '^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$'
+    } |
+        Select-Object -First 1
+}
+
+# From kitchen-hyperv
+function Get-VmDetail {
+    [cmdletbinding()]
+    param($name)
+
+    Get-VM -Name $name |
+        ForEach-Object {
+        $vm = $_
+        do {
+            Start-Sleep -Seconds 1
+        }
+        while (-not (Get-VmIP $vm))
+
+        [pscustomobject]@{
+            Name = $vm.name
+            Id = $vm.ID
+            IpAddress = (Get-VmIP $vm)
+        }
+    }
+}

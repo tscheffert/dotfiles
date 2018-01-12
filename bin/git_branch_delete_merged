@@ -1,0 +1,99 @@
+#!/usr/bin/env ruby
+# vim: ft=ruby
+
+# Delete branchs which have already been merged into origin/HEAD
+#   Source: http://stevenharman.net/git-clean-delete-already-merged-branches
+#   Another Source: with a ton of info:
+#     http://stackoverflow.com/questions/13064613/how-to-prune-local-tracking-branches-that-do-not-exist-on-remote-anymore
+
+
+# Snazzy alternative way to delete branches, though probably outdated:
+#   git branch -r | awk '{print $1}' | egrep -v -f /dev/fd/0 <(git branch -vv | grep origin) | awk '{print $1}' | xargs git branch -d
+
+module Helpers
+  def self.out(cmd:)
+    `#{cmd}`
+  end
+
+  def self.out!(cmd:)
+    cmd_out = out(cmd: cmd)
+
+    if $? != 0
+      raise "!!! Command '#{cmd}' failed with out: #{cmd_out}"
+    end
+
+    cmd_out
+  end
+
+  def self.git_trimmed_origin_head
+    symbolic_ref_out = out!(cmd: 'git symbolic-ref refs/remotes/origin/HEAD')
+
+    symbolic_ref_out.strip.sub(%r{refs/remotes/origin/}, '')
+  end
+end
+
+module GitBranchDeleteMerged
+  PROTECTED_BRANCH_MATCHERS = ['master\z', 'develop\z', 'HEAD', '->']
+
+  def self.parsed_options(args:)
+    opts = {
+      delete_remote: false,
+      dry_run: false
+    }
+
+    while args.length > 0
+      arg = args.shift
+      case arg
+      when "--remote"
+        opts[:delete_remote] = true
+      when "--dry"
+        opts[:dry_run] = true
+      else
+        raise "Invalid argument #{arg}"
+      end
+    end
+
+    opts
+  end
+
+  def self.perform(options:)
+    branches_stdout =
+      if options[:delete_remote]
+        # '--remotes' lists only "remote-tracking branches", '--all' doesn't work because
+        #   it includes local branches which are unpushed, even if they're unmerged
+        Helpers.out!(cmd: "git branch --remotes --merged #{Helpers.git_trimmed_origin_head}")
+      else
+        # TODO: Figure out how to reject local branches which are simply "unpushed", not "merged"
+        Helpers.out!(cmd: "git branch --merged #{Helpers.git_trimmed_origin_head}")
+      end
+
+    array_of_branches = branches_stdout
+      .split("\n")
+      .map(&:strip)
+      .reject { |b| b.match(/#{PROTECTED_BRANCH_MATCHERS.join('|')}/) }
+
+    if options[:delete_remote]
+      array_of_branches = array_of_branches.map { |b| b.sub('origin/', '') }
+    end
+
+    array_of_branches.each do |branch|
+      if options[:delete_remote]
+        puts "-- Deleting branch on origin: #{branch}"
+        Helpers.out!(cmd: "git push origin --delete #{branch}") unless options[:dry_run]
+      else
+        puts "-- TODO: Delete branch locally #{branch}"
+        # git branch --delete "$branch"
+        # git branch --delete --remotes "$branch"
+      end
+    end
+
+    puts "Pruning with 'git remote prune origin'"
+    prune_out = Helpers.out!(cmd: 'git remote prune origin')
+    if prune_out != nil && !prune_out.strip.empty?
+      puts prune_out
+    end
+  end
+end
+
+opts = GitBranchDeleteMerged.parsed_options(args: ARGV)
+GitBranchDeleteMerged.perform(options: opts)

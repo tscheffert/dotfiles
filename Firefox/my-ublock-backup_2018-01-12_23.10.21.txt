@@ -1,0 +1,94 @@
+{
+  "timeStamp": 1515798621800,
+  "version": "1.14.22",
+  "userSettings": {
+    "advancedUserEnabled": false,
+    "alwaysDetachLogger": false,
+    "autoUpdate": true,
+    "cloudStorageEnabled": false,
+    "collapseBlocked": true,
+    "colorBlindFriendly": false,
+    "contextMenuEnabled": true,
+    "dynamicFilteringEnabled": false,
+    "externalLists": [],
+    "firewallPaneMinimized": true,
+    "hyperlinkAuditingDisabled": true,
+    "ignoreGenericCosmeticFilters": false,
+    "largeMediaSize": 50,
+    "parseAllABPHideFilters": true,
+    "prefetchingDisabled": true,
+    "requestLogMaxEntries": 1000,
+    "showIconBadge": true,
+    "tooltipsDisabled": false,
+    "webrtcIPAddressHidden": false
+  },
+  "selectedFilterLists": [
+    "user-filters",
+    "assets.json",
+    "public_suffix_list.dat",
+    "ublock-resources",
+    "ublock-filters",
+    "ublock-badware",
+    "ublock-privacy",
+    "ublock-abuse",
+    "ublock-unbreak",
+    "easylist",
+    "easyprivacy",
+    "malware-0",
+    "malware-1",
+    "plowe-0"
+  ],
+  "hiddenSettingsString": "assetFetchTimeout 30\nautoUpdateAssetFetchPeriod 120\nautoUpdatePeriod 7\nignoreRedirectFilters false\nignoreScriptInjectFilters false\nmanualUpdateAssetFetchPeriod 2000\npopupFontSize unset\nsuspendTabsUntilReady false\nuserResourcesLocation unset",
+  "netWhitelist": "about-scheme\napp.highground.com\nbehind-the-scene\nchrome-extension-scheme\nchrome-scheme\nmoz-extension-scheme\nn23.ultipro.com\nopera-scheme\nsouthparkphone.gg\nthelightforge.com\nvivaldi-scheme",
+  "dynamicFilteringString": "behind-the-scene * 3p-frame noop\nbehind-the-scene * 3p noop",
+  "urlFilteringString": "",
+  "hostnameSwitchesString": "",
+  "userFilters": "! Story: release\nwww11.v1host.com##tr[id*=_AttributeDefinitionParentStory]\n\n! Story: Portfolio Item\nwww11.v1host.com##tr[id*=_AttributeDefinitionSuperStory]\n\n! Story: Actors\nwww11.v1host.com##tr[id*=_AttributeDefinitionCustomActors2Story]\n\n! Story: Pre-Conditions\nwww11.v1host.com##tr[id*=_AttributeDefinitionCustomPreConditions2Story]\n\n! Story: Post-Conditions\nwww11.v1host.com##tr[id*=_AttributeDefinitionCustomPostConditions2Story]\n\n! Story: Normal Course\nwww11.v1host.com##tr[id*=_AttributeDefinitionCustomNormalCourse2Story]\n\n! Story: Alternative Course\nwww11.v1host.com##tr[id*=_AttributeDefinitionCustomAlternativeCourse2Story]\n\n! Story: Exceptions\nwww11.v1host.com##tr[id*=_AttributeDefinitionCustomExceptions2Story]\n\n! Story: Includes\nwww11.v1host.com##tr[id*=_AttributeDefinitionCustomIncludes2Story]\n\n! Story: Frequency of Use\nwww11.v1host.com##tr[id*=_AttributeDefinitionCustomFrequencyofUseStory]\n\n! Story: Business Rules\nwww11.v1host.com##tr[id*=_AttributeDefinitionCustomBusinessRulesStory]\n\n! Story: Special Requirements\nwww11.v1host.com##tr[id*=_AttributeDefinitionCustomSpecialRequirementsStory]\n\n! Story: Assumptions\nwww11.v1host.com##tr[id*=_AttributeDefinitionCustomAssumptionsStory]\n\n! Story: Notes/Issues\nwww11.v1host.com##tr[id*=_AttributeDefinitionCustomNotesIssuesStory]\n\n! Story: Acceptance Criteria\nwww11.v1host.com##tr[id*=_AttributeDefinitionCustomAcceptanceCriteriaStory]\n\n! Story: Use Case Graphic\nwww11.v1host.com##tr[id*=_AttributeDefinitionCustomUseCaseGraphicStory]\n\n! Story: Dev Type\nwww11.v1host.com##tr[id*=_AttributeDefinitionCustomDevTypeStory]\n\n! Story: FixVersion\nwww11.v1host.com##tr[id*=_AttributeDefinitionCustomFixVersion2Story]\n\n! Story: Jira KEY\nwww11.v1host.com##tr[id*=_AttributeDefinitionCustomJiraKEYStory]\n\n! Story: Class of Service\nwww11.v1host.com##tr[id*=_AttributeDefinitionClassOfServiceStory]\n\n! Story: Type\nwww11.v1host.com##tr[id*=_AttributeDefinitionCategoryStory]\n\n! Story: Tags\nwww11.v1host.com##tr[id*=_AttributeDefinitionTaggedWithStory]\n\n! Story: \"Last Affected Pipeline Runs\"\nwww11.v1host.com##tr[id*=_AttributeDefinitionCompletedInBuildRunsStory]\n\n! Request: Tags\nwww11.v1host.com##tr[id*=_AttributeDefinitionTaggedWithRequest]\n\n! 11/9/2017, 2:45:50 PM https://about.gitlab.com/2016/12/08/git-tips-and-tricks/\nabout.gitlab.com##.active.js-sticky-banner.sticky-banner\n",
+  "filterLists": {
+    "assets/user/filters.txt": {
+      "off": false
+    },
+    "assets.json": {
+      "off": false
+    },
+    "assets/thirdparties/publicsuffix.org/list/effective_tld_names.dat": {
+      "off": false
+    },
+    "assets/ublock/resources.txt": {
+      "off": false
+    },
+    "assets/ublock/filters.txt": {
+      "off": false
+    },
+    "assets/ublock/badware.txt": {
+      "off": false
+    },
+    "assets/ublock/privacy.txt": {
+      "off": false
+    },
+    "ublock-abuse": {
+      "off": false
+    },
+    "assets/ublock/unbreak.txt": {
+      "off": false
+    },
+    "assets/thirdparties/easylist-downloads.adblockplus.org/easylist.txt": {
+      "off": false
+    },
+    "assets/thirdparties/easylist-downloads.adblockplus.org/easyprivacy.txt": {
+      "off": false
+    },
+    "assets/thirdparties/www.malwaredomainlist.com/hostslist/hosts.txt": {
+      "off": false
+    },
+    "assets/thirdparties/mirror1.malwaredomains.com/files/justdomains": {
+      "off": false
+    },
+    "assets/thirdparties/pgl.yoyo.org/as/serverlist": {
+      "off": false
+    },
+    "assets/ublock/experimental.txt": {
+      "off": true
+    }
+  }
+}

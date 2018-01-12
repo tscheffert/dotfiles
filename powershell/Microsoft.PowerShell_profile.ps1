@@ -47,3 +47,10 @@ function Get-PSVersion
 {
   Write-Host $PSVersionTable.PSVersion
 }
+
+function Get-HostName($address)
+{
+  $result = [System.Net.Dns]::GetHostByAddress($address)
+
+  $result.HostName
+}

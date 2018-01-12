@@ -54,3 +54,14 @@ function Get-HostName($address)
 
   $result.HostName
 }
+
+function Get-ADUserMemberOf {
+    [CmdletBinding()]
+    Param(
+        [Parameter(Mandatory=$True)]
+        [string]$User,
+        [string]$Server="hq.echogl.net"
+    )
+
+    Get-ADUser $User -Server $Server -Properties MemberOf | Select -ExpandProperty memberof
+}

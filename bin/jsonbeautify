@@ -1,0 +1,49 @@
+#!/usr/bin/env ruby
+# vim: ft=ruby
+
+require 'json'
+
+if ARGV.size.empty?
+  warn 'Please provide a JSON file'
+  exit 1
+end
+
+if ARGV.size > 2
+  warn 'Unknown argument specified, only expecting one JSON file'
+  exit 1
+end
+
+file_name = ARGV.shift
+
+unless File.exist?(file_name)
+  warn "#{file_name}: no such file"
+  exit 1
+end
+
+begin
+  file_contents = JSON.parse(File.read(file_name))
+  puts '++Syntax good'
+
+  pretty_contents = JSON.pretty_generate(file_contents)
+  universal_pretty_contents = pretty_contents
+    .encode(clrf_newline: true)
+    .encode(universal_newline: true)
+
+  # Append the preferred "newline at end of file"
+  universal_pretty_contents << "\n"
+
+  # File Mode:
+  #   w+: truncate existing file
+  #   b: Suppresses EOL <-> CRLF conversion on Windows. And sets external encoding
+  #      to ASCII-8BIT, which is why we specify UTF-8 encoding
+  File.open(file_name, 'w+b', encoding: Encoding::UTF_8) do |file|
+    file.write(universal_pretty_contents)
+  end
+  puts '++Beautified'
+rescue JSON::ParserError => e
+  warn "--Syntax error: #{e}"
+  exit 1
+rescue => e
+  warn "--Unknown error: #{e}"
+  exit 1
+end

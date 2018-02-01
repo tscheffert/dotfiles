@@ -21,8 +21,8 @@ end
 
 file_name = ARGV.shift
 
-unless File.exist?(path)
-  warn "#{path}: no such file"
+unless File.exist?(file_name)
+  warn "#{file_name}: no such file"
   exit 1
 end
 

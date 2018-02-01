@@ -70,7 +70,7 @@ function git_branch {
 
     local left_parens="$parens_color("
     local right_parens="$parens_color)"
-    echo "$left_parens$prompt_color$branch$right_parens"
+    echo "$left_parens$prompt_color${branch//[^a-zA-Z0-9_\/-]/*}$right_parens"
   fi
 }
 

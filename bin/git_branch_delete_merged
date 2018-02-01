@@ -25,6 +25,12 @@ module Helpers
     cmd_out
   end
 
+  def self.split_lines(stdout:)
+    stdout
+      .split("\n")
+      .map(&:strip)
+  end
+
   def self.git_trimmed_origin_head
     symbolic_ref_out = out!(cmd: 'git symbolic-ref refs/remotes/origin/HEAD')
 
@@ -67,16 +73,16 @@ module GitBranchDeleteMerged
         Helpers.out!(cmd: "git branch --merged #{Helpers.git_trimmed_origin_head}")
       end
 
-    array_of_branches = branches_stdout
-      .split("\n")
-      .map(&:strip)
+    array_of_branches = Helpers.split_lines(stdout: branches_stdout)
+
+    branches_to_delete = array_of_branches
       .reject { |b| b.match(/#{PROTECTED_BRANCH_MATCHERS.join('|')}/) }
 
     if options[:delete_remote]
-      array_of_branches = array_of_branches.map { |b| b.sub('origin/', '') }
+      branches_to_delete = branches_to_delete.map { |b| b.sub('origin/', '') }
     end
 
-    array_of_branches.each do |branch|
+    branches_to_delete.each do |branch|
       if options[:delete_remote]
         puts "-- Deleting branch on origin: #{branch}"
         Helpers.out!(cmd: "git push origin --delete #{branch}") unless options[:dry_run]

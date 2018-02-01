@@ -12,7 +12,9 @@
   # Start less with '--no-init' which will stop it from clearing the screen and
   #   make the git commands work
   pager = less -X
-  excludesfile = /Users/trentscheffert/.gitignore
+  # Use "global" .gitignore and .gitattributes
+  excludesFile = $HOME/.gitignore
+  attributesFile = $HOME/.gitattributes
   # Activate filesystem cache, making Git faster, after a "warm-up", Windows only
   fscache = true
 

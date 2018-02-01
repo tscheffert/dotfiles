@@ -94,9 +94,11 @@ module GitBranchDeleteMerged
     end
 
     puts "Pruning with 'git remote prune origin'"
-    prune_out = Helpers.out!(cmd: 'git remote prune origin')
-    if prune_out != nil && !prune_out.strip.empty?
-      puts prune_out
+    unless options[:dry_run]
+      prune_out = Helpers.out!(cmd: 'git remote prune origin')
+      if prune_out != nil && !prune_out.strip.empty?
+        puts prune_out
+      end
     end
   end
 end

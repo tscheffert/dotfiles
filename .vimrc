@@ -1722,23 +1722,24 @@ let g:gundo_right=1
 " JsBeautify Key Maps
 " -----
 
-" JsBeautify
-map <c-e><c-f> :call JsBeautify()<cr>
-" or
-autocmd FileType javascript noremap <buffer> <c-e><c-f> :call JsBeautify()<cr>
-" for html
-autocmd FileType html noremap <buffer> <c-e><c-f> :call HtmlBeautify()<cr>
-" for css or scss
-autocmd FileType css noremap <buffer> <c-e><c-f> :call CSSBeautify()<cr>
-" for less
-autocmd FileType less noremap <buffer> <c-e><c-f> :call CSSBeautify()<cr>
-" do it by range in visual mode
-autocmd FileType javascript vnoremap <buffer> <c-e><c-f> :call RangeJsBeautify()<cr>
-autocmd FileType html vnoremap <buffer> <c-e><c-f> :call RangeHtmlBeautify()<cr>
-autocmd FileType css vnoremap <buffer> <c-e><c-f> :call RangeCSSBeautify()<cr>
+augroup JsBeautifyKeyMaps
+  au!
 
-" for json!
-autocmd FileType json noremap <buffer> <c-e><c-f> :%!python -m json.tool<cr>
+  " JsBeautify for Javascript
+  autocmd FileType javascript noremap <buffer> <c-e><c-f> :call JsBeautify()<cr>
+  autocmd FileType javascript vnoremap <buffer> <c-e><c-f> :call RangeJsBeautify()<cr>
+  " for html
+  autocmd FileType html noremap <buffer> <c-e><c-f> :call HtmlBeautify()<cr>
+  autocmd FileType html vnoremap <buffer> <c-e><c-f> :call RangeHtmlBeautify()<cr>
+  " for css or scss
+  autocmd FileType css noremap <buffer> <c-e><c-f> :call CSSBeautify()<cr>
+  autocmd FileType css vnoremap <buffer> <c-e><c-f> :call RangeCSSBeautify()<cr>
+  " for less
+  autocmd FileType less noremap <buffer> <c-e><c-f> :call CSSBeautify()<cr>
+
+  " for json!
+  autocmd FileType json noremap <buffer> <c-e><c-f> :%!python -m json.tool<cr>
+augroup END
 
 " TODO: Make this work for Windows
 " autocmd FileType json noremap <buffer> <c-e><c-f> :call RubyJsonBeautify<cr>

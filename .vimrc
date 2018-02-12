@@ -1705,6 +1705,18 @@ imap <c-a> <c-O>^
 
 
 " -----
+" Buffer Key Maps
+" -----
+
+augroup BufferLocalKeyMaps
+  au!
+
+  " q to exit the Cmdwin, behaving like other "temporary windows"
+  autocmd CmdwinEnter * nnoremap <silent> <buffer> q :quit<CR>
+augroup END
+
+
+" -----
 " Gundo Key Maps
 " -----
 

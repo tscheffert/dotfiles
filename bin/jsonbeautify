@@ -3,7 +3,7 @@
 
 require 'json'
 
-if ARGV.size.empty?
+if ARGV.empty?
   warn 'Please provide a JSON file'
   exit 1
 end

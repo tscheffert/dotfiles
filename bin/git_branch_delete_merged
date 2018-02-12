@@ -63,6 +63,10 @@ module GitBranchDeleteMerged
   end
 
   def self.perform(options:)
+    # Alternative strategies for "determine merged branches" include:
+    #   `git cherry #{upstream} #{head}` for (better than git-diff) commitwise-diff
+    #   `git diff origin/master...HEAD` for filewise-diff
+
     branches_stdout =
       if options[:delete_remote]
         # '--remotes' lists only "remote-tracking branches", '--all' doesn't work because
@@ -87,14 +91,15 @@ module GitBranchDeleteMerged
         puts "-- Deleting branch on origin: #{branch}"
         Helpers.out!(cmd: "git push origin --delete #{branch}") unless options[:dry_run]
       else
-        puts "-- TODO: Delete branch locally #{branch}"
-        # git branch --delete "$branch"
+        puts "-- Deleting branch locally: #{branch}"
+        Helpers.out!(cmd: "git branch --delete #{branch}") unless options[:dry_run]
         # git branch --delete --remotes "$branch"
       end
     end
 
     puts "Pruning with 'git remote prune origin'"
     unless options[:dry_run]
+      # Equivalent to: rm .git/refs/remotes/origin/$branch right?
       prune_out = Helpers.out!(cmd: 'git remote prune origin')
       if prune_out != nil && !prune_out.strip.empty?
         puts prune_out

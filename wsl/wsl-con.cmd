@@ -1,8 +1,10 @@
 @echo off
 
-rem This sample file demonstrates ability to use 256 colors
-rem in Windows subsystem for Linus started in ConEmu tab.
-rem TAGS: ConEmu, cygwin/msys connector, wslbridge.
+rem Based this off of the wsl-con.cmd in the ConEmu install and the ConEmu
+rem documentation: ttps://conemu.github.io/en/BashOnWindows.html#true-color-example
+
+rem I have no idea why this needs to be in a batch cmd file to work, starting
+rem conemu-cyg-64.exe directly didn't result in a working 256 colors for some reason.
 
 ConEmuC -osverinfo > nul
 if errorlevel 2560 (
@@ -17,26 +19,23 @@ if not exist "%windir%\system32\bash.exe" (
   call cecho "https://conemu.github.io/en/BashOnWindows.html#TLDR"
   exit /b 100
 )
+pushd .
+chdir "%ConEmuBaseDirShort%\wsl"
 
 setlocal
 
-if exist "%~dp0wslbridge-backend" goto wsl_ready
+if exist "%CD%\wslbridge-backend" goto wsl_ready
 
 call cecho /yellow "wslbridge is not installed! download latest ConEmu distro"
 goto err
 
 :wsl_ready
-echo 1: "%~1"
-if "%~1" == "-run" goto do_run
-ConEmuC -c "-new_console:d:%~dp0" "%~0" -new_console:c:h9999:C:"%LOCALAPPDATA%\lxss\bash.ico" -run
-goto :EOF
-
-:do_run
-cd /d "%~dp0"
-set "PATH=%~dp0;%PATH%"
+cd /d "%CD%"
+set "PATH=%CD%;%PATH%"
 call SetEscChar
 echo %ESC%[9999H
-"%~dp0..\conemu-cyg-64.exe" --wsl -t ./wsl-boot.sh
+popd
+"%ConEmuBaseDirShort%\conemu-cyg-64.exe" --wsl -t bash --login -i
 goto :EOF
 
 :err
@@ -44,4 +43,3 @@ call cecho "wslbridge-backend was not installed properly"
 timeout 10
 exit /b 1
 goto :EOF
-

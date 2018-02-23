@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <key name="Software">
 	<key name="ConEmu">
-		<key name=".Vanilla" modified="2018-02-23 11:20:14" build="180206">
+		<key name=".Vanilla" modified="2018-02-23 17:42:31" build="180206">
 			<value name="StartType" type="hex" data="02"/>
 			<value name="CmdLine" type="string" data=""/>
 			<value name="StartTasksFile" type="string" data=""/>
@@ -87,10 +87,10 @@
 			<value name="StoreTaskbarCommands" type="hex" data="00"/>
 			<value name="SaveCmdHistory" type="hex" data="01"/>
 			<value name="CmdLineHistory" type="multi">
+				<line data="far"/>
 				<line data='""'/>
 				<line data="{Git Bash}"/>
 				<line data="{Chocolatey (Admin)}"/>
-				<line data="{Git Bash CurD} '!ConEmuWorkDir!'"/>
 			</value>
 			<value name="SingleInstance" type="hex" data="01"/>
 			<value name="ShowHelpTooltips" type="hex" data="01"/>
@@ -574,8 +574,8 @@
 				<value name="Multi.GroupInputKey" type="dword" data="00125d47"/>
 				<value name="CloseToRightKey" type="dword" data="00000000"/>
 			</key>
-			<key name="Tasks" modified="2018-02-23 11:27:07" build="180206">
-				<value name="Count" type="long" data="11"/>
+			<key name="Tasks" modified="2018-02-23 17:42:31" build="180206">
+				<value name="Count" type="long" data="9"/>
 				<key name="Task1" modified="2018-01-12 17:28:45" build="170910">
 					<value name="Name" type="string" data="{cmd}"/>
 					<value name="Flags" type="dword" data="00000000"/>
@@ -612,16 +612,16 @@
 					<value name="Active" type="long" data="0"/>
 					<value name="Count" type="long" data="1"/>
 				</key>
-				<key name="Task5" modified="2018-01-12 17:28:45" build="170910">
-					<value name="Name" type="string" data="{WSL}"/>
+				<key name="Task5" modified="2018-02-23 17:42:02" build="180206">
+					<value name="Name" type="string" data="{WSL::24Bit}"/>
 					<value name="Flags" type="dword" data="00000000"/>
 					<value name="Hotkey" type="dword" data="00000000"/>
-					<value name="GuiArgs" type="string" data=""/>
-					<value name="Cmd1" type="string" data="C:\Windows\System32\bash.exe"/>
+					<value name="GuiArgs" type="string" data='-icon "%USERPROFILE%\AppData\Local\lxss\bash.ico"'/>
+					<value name="Cmd1" type="string" data='"%USERPROFILE%\.dotfiles\wsl\wsl-con.cmd"'/>
 					<value name="Active" type="long" data="0"/>
 					<value name="Count" type="long" data="1"/>
 				</key>
-				<key name="Task6" modified="2018-01-12 17:28:45" build="170910">
+				<key name="Task6" modified="2018-02-23 17:42:31" build="180206">
 					<value name="Name" type="string" data="{Git Bash}"/>
 					<value name="Flags" type="dword" data="00000000"/>
 					<value name="Hotkey" type="dword" data="00000000"/>
@@ -631,7 +631,7 @@
 					<value name="Active" type="long" data="0"/>
 					<value name="Count" type="long" data="1"/>
 				</key>
-				<key name="Task7" modified="2018-01-12 17:28:45" build="170910">
+				<key name="Task7" modified="2018-02-23 17:42:31" build="180206">
 					<value name="Name" type="string" data="{Git Bash CurD}"/>
 					<value name="Flags" type="dword" data="00000000"/>
 					<value name="Hotkey" type="dword" data="00000000"/>
@@ -641,7 +641,7 @@
 					<value name="Count" type="long" data="1"/>
 					<value name="Cmd2" type="string" data='"%windir%\syswow64\cmd.exe" /k ver &amp; echo This is 32 bit cmd.exe -new_console:s50V'/>
 				</key>
-				<key name="Task8" modified="2018-01-12 17:28:45" build="170910">
+				<key name="Task8" modified="2018-02-23 17:42:31" build="180206">
 					<value name="Name" type="string" data="{Chocolatey (Admin)}"/>
 					<value name="Flags" type="dword" data="00000000"/>
 					<value name="Hotkey" type="dword" data="00000000"/>
@@ -650,7 +650,7 @@
 					<value name="Active" type="long" data="0"/>
 					<value name="Count" type="long" data="1"/>
 				</key>
-				<key name="Task9" modified="2018-01-12 17:28:45" build="170910">
+				<key name="Task9" modified="2018-02-23 17:42:31" build="180206">
 					<value name="Name" type="string" data="{Show ANSI colors}"/>
 					<value name="Flags" type="dword" data="00000000"/>
 					<value name="Hotkey" type="dword" data="00000000"/>
@@ -659,25 +659,6 @@
 					<value name="Active" type="long" data="0"/>
 					<value name="Count" type="long" data="1"/>
 					<value name="Cmd2" type="string" data='"%windir%\syswow64\cmd.exe" /k ver &amp; echo This is 32 bit cmd.exe -new_console:s50V'/>
-				</key>
-				<key name="Task10" modified="2018-02-23 11:27:07" build="180206">
-					<value name="Name" type="string" data="{WSL::Bash}"/>
-					<value name="Flags" type="dword" data="00000000"/>
-					<value name="Hotkey" type="dword" data="00000000"/>
-					<value name="GuiArgs" type="string" data='/dir %CD% /icon "%USERPROFILE%\AppData\Local\lxss\bash.ico"'/>
-					<value name="Cmd1" type="string" data='set "PATH=%ConEmuBaseDirShort%\wsl;%PATH%" &amp; %ConEmuBaseDirShort%\conemu-cyg-64.exe --wsl -cur_console:pnm:/mnt -t bash -l'/>
-					<value name="Cmd2" type="string" data='"%windir%\syswow64\cmd.exe" /k ver &amp; echo This is 32 bit cmd.exe -new_console:s50V'/>
-					<value name="Active" type="long" data="0"/>
-					<value name="Count" type="long" data="1"/>
-				</key>
-				<key name="Task11" modified="2018-02-23 16:08:08" build="180206">
-					<value name="Name" type="string" data="{WSL::24Bit}"/>
-					<value name="Flags" type="dword" data="00000000"/>
-					<value name="Hotkey" type="dword" data="00000000"/>
-					<value name="GuiArgs" type="string" data='-icon "%USERPROFILE%\AppData\Local\lxss\bash.ico"'/>
-					<value name="Cmd1" type="string" data='"%USERPROFILE%\.dotfiles\wsl\wsl-con.cmd"'/>
-					<value name="Active" type="long" data="0"/>
-					<value name="Count" type="long" data="1"/>
 				</key>
 			</key>
 			<key name="Apps" modified="2018-01-12 17:28:45" build="170910">

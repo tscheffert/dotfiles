@@ -33,6 +33,8 @@
 
 [diff]
   algorithm = histogram
+  # Try to align hunks with blank lines
+  compactionHeuristic = true
 
 [fetch]
   # Delete stale branches after each fetch

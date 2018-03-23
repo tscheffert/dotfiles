@@ -238,6 +238,13 @@ alias ggno='git grep --name-only'
 # Git grep for files that contain string and open them in vim
 alias ggo='git_grep_open'
 
+# "Git Pickaxe"
+alias g-pa='git-pickaxe'
+
+function git-pickaxe {
+  # info: http://www.philandstuff.com/2014/02/09/git-pickaxe.html
+  git log -p -S "$@" .
+}
 
 # -- Ruby Aliases --
 # Run Rubocop gem

@@ -129,6 +129,18 @@ module ConsoleConfig
       warn "Debundling failed with error: #{e}"
     end
 
+    # Comes with <3> from https://github.com/grosser/dotfiles/blob/f3536508e3fd448e5cd80f96afcf4c7589b5df85/dotirbrc#L1-L10
+    def self.require_without_bundler(gem, file)
+      # require files from gems that are not in the bundle
+      return require(file) unless defined?(::Bundler)
+      if gem_path = Dir.glob("{#{Gem.path.join(',')}}/gems/#{gem}*").first
+        $LOAD_PATH << "#{gem_path}/lib"
+        require file
+      else
+        raise LoadError, "Gem #{gem} not found via require_without_bundler"
+      end
+    end
+
   end
 
 end

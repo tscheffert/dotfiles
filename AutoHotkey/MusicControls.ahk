@@ -9,12 +9,17 @@ SendMode, Input
 ; Detect Spotify even if it's minimized
 DetectHiddenWindows, On
 
+; NOTE: As of Spotify 1.0.75.483.g7ff4a0dc, released around 2018-03-09,
+;   `ahk_class SpotifyMainWindow` doesn't work so I had to replace it temporarily
+;   with `ahk_exe Spotify.exe`
+;   Reported here: https://community.spotify.com/t5/Ongoing-Issues/Windows-Desktop-app-now-uses-default-chrome-class-name/idi-p/4409722
 
 ; ctrl + shift + p = play/pause in Spotify
 $^+p::
 If (!Active2Flag) ; If the flag is not active do this
 {
-    IfWinExist ahk_class SpotifyMainWindow
+    ; IfWinExist ahk_class SpotifyMainWindow
+    IfWinExist ahk_exe Spotify.exe
     {
         ; Play/Pause via clicking with the SendControl is busted
         ; spotify = ahk_class SpotifyMainWindow
@@ -60,7 +65,8 @@ return
 $^+]::
 If (!Active2Flag) ; If the flag is not active do this
 {
-    IfWinExist ahk_class SpotifyMainWindow
+    ; IfWinExist ahk_class SpotifyMainWindow
+    IfWinExist ahk_exe Spotify.exe
     {
         ControlSend, ahk_parent, ^{Right}
         Tooltip, Spotify Next Song
@@ -85,7 +91,8 @@ return
 $^+[::
 If (!Active2Flag) ; If the flag is not active do this
 {
-    IfWinExist ahk_class SpotifyMainWindow
+    ; IfWinExist ahk_class ahk_class SpotifyMainWindow
+    IfWinExist ahk_exe Spotify.exe
     {
         ControlSend, ahk_parent, ^{Left}
         Tooltip, Spotify Previous Song

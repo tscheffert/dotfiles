@@ -14,6 +14,9 @@ DetectHiddenWindows, On
 ;   with `ahk_exe Spotify.exe`
 ;   Reported here: https://community.spotify.com/t5/Ongoing-Issues/Windows-Desktop-app-now-uses-default-chrome-class-name/idi-p/4409722
 
+; INFO: This post described the PostMessage solution:
+;   https://autohotkey.com/boards/viewtopic.php?t=31259&p=145789
+
 ; ctrl + shift + p = play/pause in Spotify
 $^+p::
 If (!Active2Flag) ; If the flag is not active do this
@@ -39,8 +42,15 @@ If (!Active2Flag) ; If the flag is not active do this
         ; WinMinimize, ahk_exe spotify.exe
         ; WinActivate, wintit
 
-        ; System wide Play/Pause seems to work but it activates foobar2000 too
-        Send {Media_Play_Pause}
+        ; Syntax:
+        ;   PostMessage, Msg, wParam,  lParam, Control, WinTitle
+        ;
+        ;   Send the WM_APPCOMMAND message, 0x319. Details about that message: https://msdn.microsoft.com/en-us/library/windows/desktop/ms646275(v=vs.85).aspx
+        ;   APPCOMMAND_MEDIA_PLAY_PAUSE = 0xE0000
+        ;   APPCOMMAND_MEDIA_PLAY_PAUSE = 14 = 0xE0000 somehow
+        ;   APPCOMMAND_MEDIA_NEXTTRACK = 11 = 0xB0000 somehow
+        ;   APPCOMMAND_MEDIA_PREVIOUSTRACK = 12 = 0xC0000 somehow
+        PostMessage, 0x319, , 0xE0000, , ahk_exe Spotify.exe
 
         ; Doesn't work with latest spotify update
         ; ControlSend, ahk_parent, {Space}, ahk_class SpotifyMainWindow ; Pause/Unpause
@@ -69,7 +79,10 @@ If (!Active2Flag) ; If the flag is not active do this
     IfWinExist ahk_exe Spotify.exe
     {
         ; ControlSend, ahk_parent, ^{Right}, ahk_class SpotifyMainWindow
-        ControlSend, ahk_parent, ^{Right}
+        ; ControlSend, ahk_parent, ^{Right}
+
+        PostMessage, 0x319, , 0xB0000, , ahk_exe Spotify.exe ; Next track
+
         Tooltip, Spotify Next Song
     }
     else
@@ -96,7 +109,10 @@ If (!Active2Flag) ; If the flag is not active do this
     IfWinExist ahk_exe Spotify.exe
     {
         ; ControlSend, ahk_parent, ^{Left}, ahk_class SpotifyMainWindow
-        ControlSend, ahk_parent, ^{Left}
+        ; ControlSend, ahk_parent, ^{Left}
+
+        PostMessage, 0x319, , 0xC0000, , ahk_exe Spotify.exe ; Previous track
+
         Tooltip, Spotify Previous Song
     }
     else

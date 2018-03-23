@@ -34,14 +34,18 @@ append_to_path 'C:\dev\github\elasticdog\transcrypt'
 
 alias 'csudo'='csudo.cmd'
 
+# TODO: This works with `open .` but not `open /path/to/place` :*(
+alias 'open'='start'
+
 # TODO: Maybe set up in function files like I have other stuff?
-function explorer() {
-  local destination = "$@"
-  if [[ $@ == '' ]]; then
-    destination="./"
-  fi
-  explorer.exe "$(to_windows_path $destination)"
-}
+# TODO: Get this working
+# function explorer() {
+#   local destination = "$@"
+#   if [[ $@ == '' ]]; then
+#     destination="./"
+#   fi
+#   explorer.exe "$(to_windows_path $destination)"
+# }
 
 # -- PowerShell Aliases/Functions --
 function ps-lint() {

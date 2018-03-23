@@ -68,6 +68,7 @@ If (!Active2Flag) ; If the flag is not active do this
     ; IfWinExist ahk_class SpotifyMainWindow
     IfWinExist ahk_exe Spotify.exe
     {
+        ; ControlSend, ahk_parent, ^{Right}, ahk_class SpotifyMainWindow
         ControlSend, ahk_parent, ^{Right}
         Tooltip, Spotify Next Song
     }
@@ -94,6 +95,7 @@ If (!Active2Flag) ; If the flag is not active do this
     ; IfWinExist ahk_class ahk_class SpotifyMainWindow
     IfWinExist ahk_exe Spotify.exe
     {
+        ; ControlSend, ahk_parent, ^{Left}, ahk_class SpotifyMainWindow
         ControlSend, ahk_parent, ^{Left}
         Tooltip, Spotify Previous Song
     }

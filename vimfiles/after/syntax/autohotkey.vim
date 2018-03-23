@@ -1,0 +1,1 @@
+syn keyword autohotkeyMatchClass ahk_exe

@@ -521,6 +521,10 @@ augroup ApiBlueprintFiles
   autocmd Filetype apiblueprint setlocal tabstop=4
 augroup END
 
+augroup AutoHotkeyFiles
+  au!
+  autocmd Filetype autohotkey setlocal commentstring=;\ %s
+augroup END
 
 " -----
 " Typing Behaviors

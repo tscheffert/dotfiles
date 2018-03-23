@@ -9,6 +9,8 @@
   editor = vim
   encoding = utf-8
   autocrlf = false
+  # TODO: Figure out how to get rid of ^M in the diffs
+  # whitespace = trailing-space, space-before-tab, -cr-at-eol
   # Start less with '--no-init' which will stop it from clearing the screen and
   #   make the git commands work
   pager = less -X
@@ -35,6 +37,8 @@
   algorithm = histogram
   # Try to align hunks with blank lines
   compactionHeuristic = true
+  # Highlight whitespace errors
+  wsErrorHighlight = all
 
 [fetch]
   # Delete stale branches after each fetch

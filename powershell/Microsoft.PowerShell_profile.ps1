@@ -96,3 +96,33 @@ function Get-VmDetail {
         }
     }
 }
+
+# https://stackoverflow.com/a/37015895
+# TODO: Function to find computers across a domain and then services on them
+# function Find-Service
+# {
+#   # TODO: Figure out why it's tabbing like this!!!
+#   }
+
+# TODO: Get this working
+# function get-chefstacktrace($vm_name)
+# {
+#   $machine = "TODO: paramiterize this"
+#   Import-Module -Name Hyper-V
+#   $machineCred = new-object -typename System.Management.Automation.PSCredential -argumentlist "Administrator", (ConvertTo-SecureString "TODO: paramiterize this" -AsPlainText -Force)
+
+#   $machine_computer_name = "WIN-VQTTLU5I930"
+
+#   $currentDirectory = ($pwd).path
+
+#   $remote_session = New-PSSession -VMName $vm_name -Credential (Get-Credential)
+#   $stacktrace_path = "C:\Users\Administrator\AppData\Local\Temp\kitchen\cache\chef-stacktrace.out"
+
+#   $destination = ".\temp-stack-trace.txt"
+
+#   Copy-Item -FromSession $remote_session -Path $stacktrace_path -Destination $destination
+
+#   Get-Content $destination
+
+#   Remove-PSSession $remote_session
+# }

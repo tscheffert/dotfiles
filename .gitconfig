@@ -53,6 +53,12 @@
   #   branch exists. Simple double checks that the branch exists on remote first.
   default = current
 
+[rebase]
+  # Automatically create a temporary stash entry before the operation begins, and
+  #   apply it after the operation ends.
+  # NOTE: Does not apply to the rebase operation performed by `git pull` when `pull.rebase` is true
+  autoStash = true
+
 [status]
   showUntrackedFiles = all
 

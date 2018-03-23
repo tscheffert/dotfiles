@@ -600,7 +600,7 @@ Style/FormatString:
     - percent
 
 Style/FrozenStringLiteralComment:
-  EnforcedStyle: when_needed
+  EnforcedStyle: never
   SupportedStyles:
     # `when_needed` will add the frozen string literal comment to files that call
     # `freeze` or `<<` on a string literal. It will only add the comment to files

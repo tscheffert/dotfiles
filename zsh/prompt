@@ -60,6 +60,8 @@ function git_branch {
         else
           # We have not pushed, check if we've diverged from master
 
+          # TODO: Determine some way to show that we haven't pushed
+
           if [[ -n $(git log master..$branch 2> /dev/null) ]]; then
             # We've diverged from master
             prompt_color="%{$fg[blue]%}"
@@ -67,6 +69,8 @@ function git_branch {
         fi
       fi
     fi
+
+    # TODO: Determine some way to show that we're rebasing
 
     local left_parens="$parens_color("
     local right_parens="$parens_color)"

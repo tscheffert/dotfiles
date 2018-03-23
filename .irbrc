@@ -38,6 +38,7 @@ end
 IRB.conf[:USE_READLINE] = true
 
 # Set up History
+require 'irb/ext/save-history'
 IRB.conf[:EVAL_HISTORY] = 1000
 IRB.conf[:SAVE_HISTORY] = 1000
 # TODO: Should we DateTime.now history files? Maybe load the last few into history as well then?

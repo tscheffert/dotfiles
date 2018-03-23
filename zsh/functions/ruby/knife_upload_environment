@@ -51,8 +51,10 @@ function knife_upload_environment() {
   if [[ $failed ]]; then
     echo 1>&2 "\nUsage:"
     echo 1>&2 "  knife_upload_environment {environment_name} {target_server}"
-    echo 1>&2 "  - environment_name: The server name to ssh into, like mbr01 or sci04"
+    echo 1>&2 "  - environment_name: The environment to upload, like development_tliint1 or development_atlas1_platform"
     echo 1>&2 "  - target_server: The server to upload the environment to, one of sandbox|live"
+    echo 1>&2 ""
+    echo 1>&2 "  NOTE: The uploaded environment will only last until the next time the Jenkins environment upload job runs"
     return 1
   fi
 

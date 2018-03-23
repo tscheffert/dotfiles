@@ -286,6 +286,9 @@ alias ce='chef exec'
 # Chef Exec rake tasks
 alias cer='chef exec rake'
 
+# Run chef-repo specs in parallel
+alias ce-spec='chef exec parallel_rspec cookbooks/*/spec/'
+
 # Chef gem
 alias cg='chef gem'
 

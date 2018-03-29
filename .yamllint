@@ -1,39 +1,59 @@
 # vi: ft=yaml
 ---
+# Version: 1.11.0
 
 rules:
   braces:
     min-spaces-inside: 1
     max-spaces-inside: 1
+    min-spaces-inside-empty: -1
+    max-spaces-inside-empty: -1
   brackets:
     min-spaces-inside: 0
     max-spaces-inside: 0
+    min-spaces-inside-empty: -1
+    max-spaces-inside-empty: -1
   colons: disable
-  commas: disable
+  commas:  # disable
+    max-spaces-before: 0
+    min-spaces-after: 1
+    max-spaces-after: 1
   comments:
     level: warning
-    require-starting-space: yes
+    require-starting-space: true
     min-spaces-from-content: 1
-  comments-indentation: disable
-  document-end: disable
+  comments-indentation: enable # disable
+  document-end: # disable
+    level: warning
+    present: false
   document-start:
     level: warning
-    present: yes
+    present: true
   empty-lines:
     max: 2
     max-start: 0
     max-end: 0
+  empty-values:
+    forbid-in-block-mappings: true
+    forbid-in-flow-mappings: true
   hyphens:
     max-spaces-after: 1
   indentation:
     spaces: consistent
-    indent-sequences: yes
-    check-multi-line-strings: no
+    indent-sequences: true
+    check-multi-line-strings: false
   key-duplicates: enable
+  key-ordering: disable
   line-length:
     max: 150
-    allow-non-breakable-words: yes
+    allow-non-breakable-words: true
+    allow-non-breakable-inline-mappings: true
   new-line-at-end-of-file: enable
   new-lines:
     type: unix
+  octal-values:
+    forbid-implicit-octal: true
+    forbid-explicit-octal: false
   trailing-spaces: enable
+  truthy:
+    level: warning

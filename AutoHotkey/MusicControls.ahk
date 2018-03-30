@@ -58,7 +58,7 @@ If (!Active2Flag) ; If the flag is not active do this
     ; IfWinExist ahk_class SpotifyMainWindow
     IfWinExist ahk_exe Spotify.exe
     {
-        PostMessage, 0x319, , 0xB0000, , ahk_exe Spotify.exe ; Next track
+        PostMessage, 0x319,, 0xB0000,, ahk_exe Spotify.exe ; Next track
 
         Tooltip, Spotify Next Song
     }
@@ -85,7 +85,7 @@ If (!Active2Flag) ; If the flag is not active do this
     ; IfWinExist ahk_class ahk_class SpotifyMainWindow
     IfWinExist ahk_exe Spotify.exe
     {
-        PostMessage, 0x319, , 0xC0000, , ahk_exe Spotify.exe ; Previous track
+        PostMessage, 0x319,, 0xC0000,, ahk_exe Spotify.exe ; Previous track
 
         Tooltip, Spotify Previous Song
     }

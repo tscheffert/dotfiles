@@ -38,6 +38,10 @@ if [[ $platform == 'osx' ]]; then
   . ~/.zsh/osx
 elif [[ $platform == 'windows' ]]; then
   . ~/.zsh/windows
+elif [[ $platform == 'linux' ]]; then
+  if [[ "$(uname -a)" =~ 'Microsoft' ]]; then
+    . ~/.zsh/wsl-ubuntu
+  fi
 fi
 
 # Use .zshrc.local for settings specific to one system
@@ -53,6 +57,8 @@ fi
 # Set up zsh syntax highlighting, only on osx for now
 if [[ "$platform" == 'osx' ]]; then
   source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+elif [["$platform" == 'linux' ]]; then
+  source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 fi
 
 # --- Paths ---

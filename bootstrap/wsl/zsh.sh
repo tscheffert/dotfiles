@@ -7,7 +7,7 @@ ensure_latest_zsh() {
 
   echo ""
   echo " -- Ensuring Zsh is installed and up to date --"
-  if [[ "$(apt list zsh --installed)" =~ '[installed]' ]]; then
+  if [[ ! "$(apt list zsh --installed)" =~ '[installed]' ]]; then
     echo "You don't have Zsh installed, installing..."
     sudo apt-get install zsh
   elif [[ "$(apt list --upgradeable zsh)" =~ 'zsh' ]]; then
@@ -33,7 +33,7 @@ ensure_latest_zsh() {
 
   echo ""
   echo " -- Ensuring you have an updated zsh-syntax-highlighting installed --"
-  if [[ "$(apt list --installed zsh-syntax-highlighting)" =~ '[installed]' ]]; then
+  if [[ ! "$(apt list --installed zsh-syntax-highlighting)" =~ '[installed]' ]]; then
     echo "You don't have zsh-syntax-highlighting installed, installing..."
     sudo apt-get install zsh-syntax-highlighting
   elif [[ "$(apt list --upgradeable zsh-syntax-highlighting)" =~ 'zsh-syntax-highlighting' ]]; then

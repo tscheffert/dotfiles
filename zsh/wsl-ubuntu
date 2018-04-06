@@ -1,0 +1,15 @@
+#!/usr/bin/env zsh
+# vi: ft=zsh
+
+# --- Path ---
+
+
+# -- Prepend --
+
+
+# -- Append --
+
+
+# --- Aliases ---
+
+alias 'update-wsl'='sudo apt-get update && sudo apt-get upgrade'

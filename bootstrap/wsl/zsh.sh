@@ -21,10 +21,10 @@ ensure_latest_zsh() {
   echo " -- Ensuring Zsh is installed and up to date --"
   if [[ ! "$(apt list zsh --installed)" =~ '[installed]' ]]; then
     echo "You don't have Zsh installed, installing..."
-    sudo apt-get install zsh
+    sudo apt-get install zsh --assume-yes
   elif [[ "$(apt list --upgradeable zsh)" =~ 'zsh' ]]; then
     echo "Your installed Zsh is outdated, upgrading..."
-    sudo apt-get upgrade zsh
+    sudo apt-get upgrade zsh --assume-yes
   else
     echo "You already have the latest Zsh!"
   fi
@@ -47,10 +47,10 @@ ensure_latest_zsh() {
   echo " -- Ensuring you have an updated zsh-syntax-highlighting installed --"
   if [[ ! "$(apt list --installed zsh-syntax-highlighting)" =~ '[installed]' ]]; then
     echo "You don't have zsh-syntax-highlighting installed, installing..."
-    sudo apt-get install zsh-syntax-highlighting
+    sudo apt-get install zsh-syntax-highlighting --assume-yes
   elif [[ "$(apt list --upgradeable zsh-syntax-highlighting)" =~ 'zsh-syntax-highlighting' ]]; then
     echo "Your installed zsh-syntax-highlighting is outdated, upgrading..."
-    sudo apt-get upgrade zsh-syntax-highlighting
+    sudo apt-get upgrade zsh-syntax-highlighting --assume-yes
   else
     echo "You already have the latest zsh-syntax-highlighting!"
   fi
@@ -59,10 +59,10 @@ ensure_latest_zsh() {
   if [[ ! "$(apt list --installed zsh-completions)" =~ '[installed]' ]]; then
     echo "You don't have zsh-completions installed, installing..."
     add_opensuse_zshcompletions_to_apt
-    sudo apt-get install zsh-completions
+    sudo apt-get install zsh-completions --assume-yes
   elif [[ "$(apt list --upgradeable zsh-completions)" =~ 'zsh-completions' ]]; then
     echo "Your installed zsh-completions is outdated, upgrading..."
-    sudo apt-get upgrade zsh-completions
+    sudo apt-get upgrade zsh-completions --assume-yes
   else
     echo "You already have the latest zsh-completions!"
   fi

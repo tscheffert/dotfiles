@@ -15,8 +15,7 @@ echo " -- Installing apps --"
 # TODO: Upgrade?
 if ! test_exists tmux; then
   echo "installing tmux:"
-  # TODO
-  sudo apt-get install tmux
+  sudo apt-get install tmux --assume-yes
   # brew install tmux
 else
   echo "has tmux, check"
@@ -30,7 +29,7 @@ fi
 # Ensure rbenv
 # TODO: Upgrade?
 if ! test_exists rbenv; then
-  sudo apt-get install rbenv
+  sudo apt-get install rbenv --assume-yes
   echo "Run bootstrap/rben-plugins.sh to install rbenv plugins"
 else
   echo "has rbenv, check"
@@ -39,7 +38,7 @@ fi
 # Ensure ruby-build
 # TODO: Upgrade?
 if ! test_exists ruby-build; then
-  sudo apt-get install ruby-build
+  sudo apt-get install ruby-build --assume-yes
 fi
 
 # Set up the default-gems

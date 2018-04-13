@@ -99,9 +99,10 @@ function check_exit_code() {
 function name() {
   # Only show name if it's different than my usual
   local name=""
-  # TODO: Figure out how to make this comparison case-insensitive, such that
-  #       'tscheffe' and 'TScheffe' match
-  if [[ ! $(whoami) =~ "TScheffe" ]]; then
+  local local_name="$(whoami)"
+
+  # Convert name to lowercase, so that TScheffert works too
+  if [[ ! "${(L)local_name}" =~ "tscheffe" ]]; then
     name="%n"
   fi
 

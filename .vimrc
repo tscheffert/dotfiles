@@ -5,6 +5,21 @@
 " Clear all autocommands
 autocmd!
 
+" Detect OS
+let g:uname = substitute(system('uname -a'), '\n', '', '')
+
+if has("mac")
+  let g:os = 'mac'
+elseif has("win32")
+  let g:os = 'windows'
+elseif g:uname =~ "Linux" && g:uname =~ "Microsoft"
+  let g:os = 'wsl'
+elseif g:uname =~ "Linux"
+  let g:os = 'linux'
+else
+  echo "Couldn't detect OS from uname: " . g:uname . ", shits gonna break"
+endif
+
 let s:use_ctrlp = 1
 let s:use_unite = 0
 let s:use_delimitmate = 1
@@ -736,7 +751,7 @@ set list
 
 " Session Detection fun
 function! InWindowsSession()
-  return has('win32')
+  return g:os == 'windows'
 endfunction
 
 function! InConEmuSession()
@@ -1506,12 +1521,12 @@ let mapleader = ","
 
 " Takes a dictionary to map commands across multiple platforms
 " Example:
-"   call NormalMap({'win32': '<A-[>', 'mac': '<D-[>', 'perform': ':wincmd W'})
+"   call NormalMap({'windows': '<A-[>', 'mac': '<D-[>', 'wsl': '<A-[>', 'perform': ':wincmd W'})
 function! NormalMap(keymap)
   " Check for keys that are hard to map generically and fail the mapping
   let invalid = 0
-  for k in [a:keymap['win32'], a:keymap['mac']]
-    if k =~ '|'|| k =~ "'" || k =~ '"'
+  for k in [a:keymap['windows'], a:keymap['mac'], a:keymap['wsl']]
+    if k =~ '|' || k =~ "'" || k =~ '"'
       echo 'Unsupported key: ' . k . ' in: ' . string(a:keymap)
       let invalid=1
     endif
@@ -1521,12 +1536,17 @@ function! NormalMap(keymap)
   endif
 
   " Use execute to evaluate a string as vimscript which allows us to build up the mapping per platform
-  if has("mac")
+  if g:os == 'mac'
     execute 'nnoremap <silent> ' . a:keymap['mac'] . ' ' . a:keymap['perform']
-  elseif has("win32")
-    execute 'nnoremap <silent> ' . a:keymap['win32'] . ' ' . a:keymap['perform']
+  elseif g:os == 'windows'
+    execute 'nnoremap <silent> ' . a:keymap['windows'] . ' ' . a:keymap['perform']
+  elseif g:os == 'wsl'
+    execute 'nnoremap <silent> ' . a:keymap['wsl'] . ' ' . a:keymap['perform']
+  elseif g:os == 'linux'
+    echo "Couldn't map" . string(a:keymap) . " because we're not set up for generic Linux yet"
+    return 1
   else
-    echo "Couldn't map" . string(a:keymap) . " because we don't have 'win32' or 'mac'"
+    echo "Couldn't map" . string(a:keymap) . " because we're on an unknown platform"
     return 1
   endif
 endfunction
@@ -1540,8 +1560,8 @@ endfunction
 " TODO: Maybe not working on windows
 nnoremap <silent><C-j> m`:silent +g/\m^\s*$/d<CR>``:noh<CR>
 nnoremap <silent><C-k> m`:silent -g/\m^\s*$/d<CR>``:noh<CR>
-call NormalMap({'win32': '<A-j>', 'mac': '∆', 'perform': ':set paste<CR>m`o<Esc>``:set nopaste<CR>j'})
-call NormalMap({'win32': '<A-k>', 'mac': '˚', 'perform': ':set paste<CR>m`O<Esc>``:set nopaste<CR>k'})
+call NormalMap({'windows': '<A-j>', 'mac': '∆', 'wsl': '<A-j>', 'perform': ':set paste<CR>m`o<Esc>``:set nopaste<CR>j'})
+call NormalMap({'windows': '<A-k>', 'mac': '˚', 'wsl': '<A-k>', 'perform': ':set paste<CR>m`O<Esc>``:set nopaste<CR>k'})
 
 " cd to the directory containing the file in th buffer
 nnoremap <Leader>cd :lcd %:h
@@ -1601,10 +1621,10 @@ nnoremap <silent> <Bar> :vsplit<CR>
 nnoremap <silent> _ :split<CR>
 
 " Cycle forwards through windows
-call NormalMap({'win32': '<A-]>', 'mac': '<D-]>', 'perform': ':wincmd w<CR>'})
+call NormalMap({'windows': '<A-]>', 'mac': '<D-]>', 'wsl': '<A-]>', 'perform': ':wincmd w<CR>'})
 
 " " Cycle backwards through windows
-call NormalMap({'win32': '<A-[>', 'mac': '<D-[>', 'perform': ':wincmd W<CR>'})
+call NormalMap({'windows': '<A-[>', 'mac': '<D-[>', 'wsl': '<A-[>', 'perform': ':wincmd W<CR>'})
 
 " Set the buffer to <Scratch>
 " TODO: Consider calling this by default when we just open vim with no file specified

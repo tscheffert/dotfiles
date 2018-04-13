@@ -17,8 +17,12 @@ elif [[ "$OSTYPE" == "win32" ]]; then
   # I'm not sure this can happen.
   platform='windows'
 elif [[ "$OSTYPE" == "linux-gnu" ]]; then
-  # Linux
-  platform='linux'
+  if [[ "$(uname -a)" =~ 'Microsoft' ]]; then
+    platform='wsl'
+  else
+    # Linux
+    platform='linux'
+  fi
 elif [[ "$OSTYPE" == "freebsd"* ]]; then
   # Linux
   platform='linux'
@@ -38,10 +42,8 @@ if [[ $platform == 'osx' ]]; then
   . ~/.zsh/osx
 elif [[ $platform == 'windows' ]]; then
   . ~/.zsh/windows
-elif [[ $platform == 'linux' ]]; then
-  if [[ "$(uname -a)" =~ 'Microsoft' ]]; then
-    . ~/.zsh/wsl-ubuntu
-  fi
+elif [[ $platform == 'wsl' ]]; then
+  . ~/.zsh/wsl-ubuntu
 fi
 
 # Use .zshrc.local for settings specific to one system
@@ -57,7 +59,7 @@ fi
 # Set up zsh syntax highlighting, only on osx for now
 if [[ "$platform" == 'osx' ]]; then
   source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-elif [["$platform" == 'linux' ]]; then
+elif [[ "$platform" == 'linux' || "$platform" == 'wsl' ]]; then
   source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 fi
 

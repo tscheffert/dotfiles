@@ -480,7 +480,7 @@ augroup YAMLFiles
   au!
 
   " Prefer CRLF line endings
-  " autocmd Filetype yaml setlocal fileformat=unix
+  autocmd Filetype yaml setlocal fileformat=unix
 augroup END
 
 augroup VimFiles
@@ -493,6 +493,9 @@ augroup VimFiles
   autocmd Filetype vim setlocal formatoptions-=o
   "   Don't continue comments after pressing <Enter> in insert either
   autocmd Filetype vim setlocal formatoptions-=r
+
+  " Prefer CRLF line endings
+  autocmd Filetype vim setlocal fileformat=unix
 
   " Override default vim filetype syntax
   autocmd Filetype vim call VimSyntax()
@@ -540,6 +543,14 @@ augroup AutoHotkeyFiles
   au!
   autocmd Filetype autohotkey setlocal commentstring=;\ %s
 augroup END
+
+augroup BashFiles
+  au!
+
+  " Prefer CRLF line endings
+  autocmd Filetype sh setlocal fileformat=unix
+augroup END
+
 
 " -----
 " Typing Behaviors

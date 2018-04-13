@@ -113,7 +113,10 @@ setopt NO_HIST_BEEP
 
 # --- Help ---
 # From the brew zsh caveats, enables access to the online help
-unalias run-help
+#   And, only unalias if needed, from https://launchpadlibrarian.net/20218765/patch_etc_zsh_zshrc
+if [[ -e $(alias run-help ) ]] then
+  unalias run-help
+fi
 autoload run-help
 
 if [[ "$platform" == "osx" ]]; then

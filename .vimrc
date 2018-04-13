@@ -1340,9 +1340,45 @@ let g:vim_search_pulse_mode = 'pattern'
 " Don't create mappings on |n| and |N|, we'll do it ourselves
 let g:vim_search_pulse_disable_auto_mappings = 1
 
-let g:vim_search_pulse_color_list = ["#F92672", "#A6E22E", "#AE81FF"]
+" TODO: Get these for console too
+if has('gui_running')
+  " Colors matching monokai
+  " let g:vim_search_pulse_color_list = ["#F92672", "#A6E22E", "#AE81FF"]
+
+  " Nova colors:
+  " let g:terminal_color_0 = "#3C4C55"
+  " let g:terminal_color_1 = "#DF8C8C"
+  " let g:terminal_color_2 = "#A8CE93"
+  " let g:terminal_color_3 = "#DADA93"
+  " let g:terminal_color_4 = "#83AFE5"
+  " let g:terminal_color_5 = "#9A93E1"
+  " let g:terminal_color_6 = "#7FC1CA"
+  " let g:terminal_color_7 = "#C5D4DD"
+  " let g:terminal_color_8 = "#899BA6"
+  " let g:terminal_color_9 = "#F2C38F"
+  " let g:terminal_color_10 = "#A8CE93"
+  " let g:terminal_color_11 = "#DADA93"
+  " let g:terminal_color_12 = "#83AFE5"
+  " let g:terminal_color_13 = "#D18EC2"
+  " let g:terminal_color_14 = "#7FC1CA"
+  " let g:terminal_color_15 = "#E6EEF3"
+
+  " Colors matching nova
+  let g:vim_search_pulse_color_list = ["#C5D4DD", "#7FC1CA", "#83AFE5", "#9A93E1", "#D18EC2"]
+elseif InConEmuSession()
+  " Approximate nova colors From: http://www.calmar.ws/vim/256-xterm-24bit-rgb-color-chart.html
+  " 225 is white/grey/pink, 44 is teal, 75 is blue, 171 is purple, 219 is red
+  let g:vim_search_pulse_color_list = [225, 44, 75, 171, 219]
+else
+  " TODO: Validate that these work for "generic console"
+  " Approximate nova colors From: http://www.calmar.ws/vim/256-xterm-24bit-rgb-color-chart.html
+  " 225 is white/grey/pink, 44 is teal, 75 is blue, 171 is purple, 219 is red
+  let g:vim_search_pulse_color_list = [225, 44, 75, 171, 219]
+endif
+
 let g:vim_search_pulse_duration = 400
 
+" Configure vim-search-pulse to work with incsearch.vim
 augroup SearchPulseOnEnter
   au!
 

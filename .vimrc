@@ -200,6 +200,7 @@ Plug 'haya14busa/incsearch.vim' " Show all matches as typed, auto nohl
 
 " Better Text Objects
 Plug 'wellle/targets.vim'
+Plug 'kana/vim-textobj-user'
 Plug 'kana/vim-textobj-line'
 
 " Better Markdown

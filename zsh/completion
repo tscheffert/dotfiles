@@ -7,14 +7,17 @@
 # Info on how to write completions
 # https://github.com/zsh-users/zsh-completions/blob/master/zsh-completions-howto.org
 
-if [[ "$platform" == "osx" ]]; then
+if [[ "$platform" == 'osx' ]]; then
   # Enable zsh-completions from brew
   fpath=(/usr/local/share/zsh-completions $fpath)
-elif [[ "$platform" == "windows" ]]; then
+elif [[ "$platform" == 'windows' ]]; then
   # TODO: Get zsh-completions for Windows
 
   # If I don't want that git-completion I can just set the completer to "file"
   zstyle ':completion:*:*:git:*' source '/c/git-sdk-64/usr/share/git/completion/git-completion.zsh'
+elif [[ "$platform" == 'wsl' ]]; then
+  # Enable zsh-completions installed via bootstrap/wsl/zsh.sh script
+  fpath=(/usr/share/zsh/sit-functions $fpath)
 else
   echo "No zsh-completions for Linux yet"
 fi
@@ -22,10 +25,12 @@ fi
 # Enable custom completions for my functions
 fpath=(~/.zsh/functions/completions/ $fpath)
 
-if [[ "$platform" == "osx" ]]; then
+if [[ "$platform" == 'osx' ]]; then
   zstyle :compinstall filename '/Users/trentscheffert/.zshrc'
-elif [[ "$platform" == "windows" ]]; then
+elif [[ "$platform" == 'windows' ]]; then
   zstyle :compinstall filename '/Users/tscheffert/.zshrc'
+elif [[ "$platform" == 'wsl' ]]; then
+  zstyle :compinstall filename '/home/tscheffert/.zshrc'
 else
   echo "No compinstall path for Linux yet"
 fi

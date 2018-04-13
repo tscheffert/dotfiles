@@ -41,7 +41,7 @@ ensure_latest_zsh() {
 
   echo ""
   echo " -- Ensuring Zsh is set as the preferred shell --"
-  chsh -s "$zsh_path"
+  sudo chsh -s "$zsh_path"
 
   echo ""
   echo " -- Ensuring you have an updated zsh-syntax-highlighting installed --"
@@ -55,6 +55,7 @@ ensure_latest_zsh() {
     echo "You already have the latest zsh-syntax-highlighting!"
   fi
 
+  echo ""
   echo " -- Ensuring you have an updated zsh-completions --"
   if [[ ! "$(apt list --installed zsh-completions 2>&1)" =~ '[installed]' ]]; then
     echo "You don't have zsh-completions installed, installing..."

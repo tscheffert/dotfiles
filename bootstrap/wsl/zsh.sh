@@ -1,5 +1,17 @@
 #!/usr/env/bin bash
 
+add_opensuse_zshcompletions_to_apt() {
+  local release=$(lsb_release -a 2>1 | ruby -ne '$_.match(/^Release:\s+?(?<version>[0-9]{2}\.[0-9]{2})$/) { |m| print m["version"] }')
+
+  if [[ "$release" != "16.04" ]]; then
+    echo "Unsupported WSL/Ubuntu release: $release"
+    exit 1
+  fi
+
+  sudo sh -c "echo 'deb http://download.opensuse.org/repositories/shells:/zsh-users:/zsh-completions/xUbuntu_16.04/ /' > /etc/apt/sources.list.d/shells:zsh-users:zsh-completions.list"
+  sudo apt-get update
+}
+
 ensure_latest_zsh() {
   echo ""
   echo " -- Updating apt-get package info from sources --"
@@ -41,6 +53,18 @@ ensure_latest_zsh() {
     sudo apt-get upgrade zsh-syntax-highlighting
   else
     echo "You already have the latest zsh-syntax-highlighting!"
+  fi
+
+  echo " -- Ensuring you have an updated zsh-completions --"
+  if [[ ! "$(apt list --installed zsh-completions)" =~ '[installed]' ]]; then
+    echo "You don't have zsh-completions installed, installing..."
+    add_opensuse_zshcompletions_to_apt
+    sudo apt-get install zsh-completions
+  elif [[ "$(apt list --upgradeable zsh-completions)" =~ 'zsh-completions' ]]; then
+    echo "Your installed zsh-completions is outdated, upgrading..."
+    sudo apt-get upgrade zsh-completions
+  else
+    echo "You already have the latest zsh-completions!"
   fi
 }
 

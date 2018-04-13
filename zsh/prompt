@@ -15,6 +15,8 @@ function prompt_char {
   local color_three="%{$fg[green]%}"
   if [[ $platform == 'windows' ]]; then
     local char=">"
+  elif [[ "$platform" = 'wsl' ]]; then
+    local char=">"
   else
     local char="❯"
   fi
@@ -28,7 +30,12 @@ function git_branch {
   # If trimming is needed pipe to: tr -d '[[:space:]]'
   local branch="$(git symbolic-ref --quiet --short HEAD 2>/dev/null)"
   if [[ -n "$branch" ]]; then
-    local parens_color="$FG[000]"
+    if [[ "$platform" = 'wsl' ]]; then
+      local parens_color="%{$fg[white]%}"
+    else
+      # This seems to work on everything but the WSL unbuntu :shrug:
+      local parens_color="$FG[000]"
+    fi
     # Default to everything is fine
     local prompt_color="%{$fg[green]%}"
 
@@ -72,8 +79,8 @@ function git_branch {
 
     # TODO: Determine some way to show that we're rebasing
 
-    local left_parens="$parens_color("
-    local right_parens="$parens_color)"
+    local left_parens="$parens_color(%{$reset_color%}"
+    local right_parens="$parens_color)%{$reset_color%}"
     echo "$left_parens$prompt_color${branch//[^a-zA-Z0-9_\/-]/*}$right_parens"
   fi
 }

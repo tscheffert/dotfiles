@@ -124,6 +124,12 @@ if [[ "$platform" == "osx" ]]; then
 elif [[ "$platform" == "windows" ]]; then
   # This is from the git-sdk-64 install, version will change with zsh version changes
   HELPDIR=/usr/share/zsh/5.4.2/help
+elif [[ $platform == 'linux' ]]; then
+  if [[ "$(uname -a)" =~ 'Microsoft' ]]; then
+    HELPDIR=/usr/share/zsh/help
+  else
+    echo "No HELPDIR for non-WSL Linux yet"
+  fi
 else
-  echo "No HELPDIR for Linux yet"
+  echo "No HELPDIR for unknown platforms"
 fi

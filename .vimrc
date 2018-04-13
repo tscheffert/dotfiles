@@ -247,6 +247,9 @@ call plug#end()
 " Forget being compatible with good ol' vi
 set nocompatible
 
+" Turn on syntax!
+syntax on
+
 " Restore cursor position from last time you editted the file
 " TODO: See if we can return the window to the same height too
 augroup line_return

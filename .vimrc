@@ -1622,6 +1622,9 @@ nnoremap <Leader>cd :lcd %:h
 " (yet) exist
 nnoremap <Leader>md :!mkdir -p %:p:h
 
+" Copy last : command to clipboard
+nnoremap <Leader>y: :let @+=@:<CR>
+
 " Yank all
 nnoremap <Leader>a :%y+<CR>
 

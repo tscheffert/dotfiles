@@ -1,4 +1,5 @@
 # TODO: Investigate https://github.com/janlelis/irbtools more
+# TODO:             https://github.com/chef/chef/blob/master/lib/chef/shell.rb
 
 module ConsoleConfig
 

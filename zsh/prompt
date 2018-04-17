@@ -27,18 +27,30 @@ function prompt_char {
 }
 
 function git_branch {
+
+  # Check if we're in a git repo
+  local git_repo="$(git rev-parse --git-dir 2>/dev/null)"
+
+  if [[ -z "$git_repo" ]]; then
+    echo ""
+    return -1
+  fi
+
+  if [[ "$platform" = 'wsl' ]]; then
+    local parens_color="%{$fg[white]%}"
+  else
+    # This seems to work on everything but the WSL unbuntu :shrug:
+    local parens_color="$FG[000]"
+  fi
+  local left_parens="$parens_color(%{$reset_color%}"
+  local right_parens="$parens_color)%{$reset_color%}"
+
+  # Default to everything is fine
+  local prompt_color="%{$fg[green]%}"
+
   # If trimming is needed pipe to: tr -d '[[:space:]]'
   local branch="$(git symbolic-ref --quiet --short HEAD 2>/dev/null)"
   if [[ -n "$branch" ]]; then
-    if [[ "$platform" = 'wsl' ]]; then
-      local parens_color="%{$fg[white]%}"
-    else
-      # This seems to work on everything but the WSL unbuntu :shrug:
-      local parens_color="$FG[000]"
-    fi
-    # Default to everything is fine
-    local prompt_color="%{$fg[green]%}"
-
     if [[ "$branch" == 'master' ]]; then
       # Our branch is master, set branch color this way
       if [[ -n $(git status --porcelain 2> /dev/null) ]]; then
@@ -78,10 +90,10 @@ function git_branch {
     fi
 
     # TODO: Determine some way to show that we're rebasing
-
-    local left_parens="$parens_color(%{$reset_color%}"
-    local right_parens="$parens_color)%{$reset_color%}"
-    echo "$left_parens$prompt_color${branch//[^a-zA-Z0-9_\/-]/*}$right_parens"
+    echo "$left_parens$prompt_color${branch//[^a-zA-Z0-9_\/-]/*}%{$reset_color%}$right_parens"
+  else
+    # HEAD is not a symbolic ref, meaning we're detached or something
+    echo "$left_parens$prompt_color???%{$reset_color%}$right_parens"
   fi
 }
 

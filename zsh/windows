@@ -47,6 +47,8 @@ alias 'open'='start'
 #   explorer.exe "$(to_windows_path $destination)"
 # }
 
+alias 'powershell_split'='ConEmu64 -run powershell -new_console:asV'
+
 # -- PowerShell Aliases/Functions --
 function ps-lint() {
   # Invoke the PSScriptAnalyzer, which is installed via PowerShell Gallery

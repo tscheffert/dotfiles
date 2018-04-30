@@ -5,11 +5,17 @@
 
 
 # -- Prepend --
+prepend_to_path "$HOME/.rbenv/bin"
 
 
 # -- Append --
 
 
 # --- Aliases ---
-
 alias 'update-wsl'='sudo apt-get update && sudo apt-get upgrade'
+
+
+# --- Ruby ---
+if which rbenv > /dev/null ; then
+  eval "$(rbenv init - zsh)"
+fi

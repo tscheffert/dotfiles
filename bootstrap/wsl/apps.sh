@@ -26,28 +26,8 @@ if [[ ! -d $HOME/.tmux/plugins/tpm ]]; then
   git clone https://github.com/tmux-plugins/tpm $HOME/.tmux/plugins/tpm
 fi
 
-# Ensure rbenv
-# TODO: Upgrade?
-if ! test_exists rbenv; then
-  sudo apt-get install rbenv --assume-yes
-  echo "Run bootstrap/rben-plugins.sh to install rbenv plugins"
-else
-  echo "has rbenv, check"
-fi
-
-# Ensure ruby-build
-# TODO: Upgrade?
-if ! test_exists ruby-build; then
-  sudo apt-get install ruby-build --assume-yes
-fi
-
 # Set up the default-gems
 # TODO: Upgrade?
-if test_exists rbenv; then
-  ln -sf $HOME/.dotfiles/rbenv/default-gems /usr/local/var/rbenv/default-gems
-  echo "set up rbenv default-gems"
-fi
-
 # Ensure fuzzy finder
 # TODO: Upgrade?
 if ! test_exists fzf; then

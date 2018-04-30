@@ -83,6 +83,12 @@ cd ~/.dotfiles
 bash ./bootstrap/wsl/apps.sh
 ```
 
+### Install rbenv and ruby-build
+```bash
+cd ~/.dotfiles
+bash ./bootstrap/wsl/ruby.sh
+```
+
 ### Install Vim
 ```bash
 cd ~/.dotfiles

@@ -1,0 +1,89 @@
+#!/usr/bin/env ruby
+# vim: ft=ruby
+
+require 'bigdecimal'
+require 'active_support/duration'
+
+# ffmpeg="/c/tools/ffmpeg-3.2.4-win64-static/bin/ffmpeg.exe"
+# video="$1"
+
+ffmpeg ="C://tools/ffmpeg-3.2.4-win64-static/bin/ffmpeg.exe"
+
+
+video_filename = ARGV[0]
+
+if video_filename == nil
+  raise "Must provide video filename"
+end
+
+unless File.exists?(ffmpeg)
+  raise "Can't find ffmpeg at #{ffmpeg}"
+end
+
+unless File.exist?(video_filename)
+  raise "Invalid video file: #{video_filename}"
+end
+
+# Capture cutpoints
+black_duration = '0.75' # minimum detected black duration expressed in seconds
+picture_black_ratio_th = '0.85' # Ratio for considering a picture black, black_pixels divided by non_black_pixels
+pixel_black_th = '0.15' # Maximum pixel luminance value for which a pixel is considered "black"
+ffmpeg_stdout = `"#{ffmpeg}" -i "#{video_filename}" -vf blackdetect=black_min_duration=#{black_duration}:picture_black_ratio_th=#{picture_black_ratio_th}:pixel_black_th=#{pixel_black_th} -an -f null - 2>&1 | tee detect_black_log.txt`
+status = $?
+unless status.exitstatus == 0
+  puts "Shit broke:"
+  puts ffmpeg_stdout
+  raise "Failed with status: #{status}"
+end
+
+# puts "STDOUT FROM 'detect_black':"
+# puts ffmpeg_stdout
+
+video_basename = File.basename(video_filename, ".*")
+video_extension = File.extname(video_filename)
+video_dir = File.dirname(video_filename)
+output = "#{video_basename}_%03d#{File}"
+output_file = File.join(video_dir, "#{video_basename}_%03d#{video_extension}")
+puts output_file
+logfile = "#{video_basename}_ffmpeg.log"
+
+# cutpoints_filename = "detect_black_log.txt"
+# lines = File.open(cutpoints_filename) { |f| f.read }
+lines = ffmpeg_stdout.encode(universal_newline: true).lines
+
+MATCHER = %r{^\[blackdetect @ \w+?\] black_start:(?<black_start>.+?) black_end:(?<black_end>.+?) black_duration:(?<black_duration>.+?)$}
+
+matches = lines.map do |line|
+  match = MATCHER.match(line)
+
+  if match.nil?
+    next
+  end
+
+  puts "Matched: #{line}"
+  {
+    black_start: BigDecimal.new(match[:black_start]),
+    black_end: BigDecimal.new(match[:black_end]),
+    black_duration: BigDecimal.new(match[:black_duration])
+  }
+end.compact
+
+puts "Found #{matches.length} matches"
+
+# matches.each do |match|
+#   puts match[:black_start].to_f
+# end
+
+cuts = matches.map do |match|
+  cut_seconds = match[:black_start] + match[:black_duration]/2
+  puts format("cut_seconds: %f", cut_seconds.to_f)
+  cut_time = Time.at(match[:black_start] + match[:black_duration]/2)
+  cut_time_formatted = cut_time.utc.strftime("%H:%M:%S.%L")
+  puts format("Regular: %s Formatted: %s", cut_time, cut_time_formatted)
+
+  cut_time_formatted
+end
+
+puts cuts.join(',')
+
+`#{ffmpeg} -i "#{video_filename}" -f segment -reset_timestamps 1 -segment_times #{cuts.join(',')} -c copy -map 0 "#{output_file}"`

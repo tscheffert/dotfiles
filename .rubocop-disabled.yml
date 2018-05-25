@@ -1,5 +1,10 @@
 ---
 
+Layout/MultilineAssignmentLayout:
+  Description: 'Check for a newline after the assignment operator in multi-line assignments.'
+  StyleGuide: '#indent-conditional-assignment'
+  Enabled: false
+
 Style/Copyright:
   Description: 'Include a copyright notice in each file before any code.'
   Enabled: false
@@ -52,11 +57,6 @@ Style/MissingElse:
 Style/MethodCallWithArgsParentheses:
   Description: 'Use parentheses for method calls with arguments.'
   StyleGuide: '#method-invocation-parens'
-  Enabled: false
-
-Style/MultilineAssignmentLayout:
-  Description: 'Check for a newline after the assignment operator in multi-line assignments.'
-  StyleGuide: '#indent-conditional-assignment'
   Enabled: false
 
 # Enabled by default, but we shouldn't enforce names; leave it up to the user

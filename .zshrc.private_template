@@ -1,6 +1,7 @@
 #!/usr/bin/env zsh
 # vi: ft=zsh
 
+# -- OSX --
 # Github API Key!
 export HOMEBREW_GITHUB_API_TOKEN=
 
@@ -24,6 +25,24 @@ export ZK_HOSTS=
 # AWS ec2 instance CNAME
 export APPENDED_AWS_CNAME=
 
-# Chef knife configs
+# -- Windows --
 export CHEF_KNIFE_LIVE_CONFIG=
 export CHEF_KNIFE_SANDBOX_CONFIG=
+
+export DEV_WINRM_USER=
+export DEV_WINRM_PASSWORD=
+
+export QA_WINRM_USER=
+export QA_WINRM_PASSWORD=
+
+export PROD_WINRM_USER=
+export PROD_WINRM_PASSWORD=
+
+export DEV_RABBITMQ_ADMIN_USER=
+export DEV_RABBITMQ_ADMIN_PASSWORD=
+
+export QA_RABBITMQ_ADMIN_USER=
+export QA_RABBITMQ_ADMIN_PASSWORD=
+
+export PRD_RABBITMQ_ADMIN_USER=
+export PRD_RABBITMQ_ADMIN_PASSWORD=

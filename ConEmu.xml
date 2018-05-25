@@ -379,7 +379,7 @@
 			<value name="Update.DownloadPath" type="string" data="%TEMP%\ConEmu"/>
 			<value name="Update.LeavePackages" type="hex" data="00"/>
 			<value name="Update.PostUpdateCmd" type="string" data="echo Last successful update&gt;ConEmuUpdate.info &amp;&amp; date /t&gt;&gt;ConEmuUpdate.info &amp;&amp; time /t&gt;&gt;ConEmuUpdate.info"/>
-			<key name="HotKeys" modified="2018-04-17 13:02:25" build="180411">
+			<key name="HotKeys" modified="2018-05-01 15:42:01" build="180429">
 				<value name="KeyMacroVersion" type="hex" data="02"/>
 				<value name="Multi.Modifier" type="dword" data="0000005b"/>
 				<value name="Multi.ArrowsModifier" type="dword" data="0000005b"/>
@@ -420,7 +420,7 @@
 				<value name="Multi.Scroll" type="dword" data="00000000"/>
 				<value name="Multi.GroupInput" type="dword" data="00005d47"/>
 				<value name="Multi.Detach" type="dword" data="00000000"/>
-				<value name="Multi.Close" type="dword" data="00001157"/>
+				<value name="Multi.Close" type="dword" data="00121157"/>
 				<value name="CloseTabKey" type="dword" data="00125b2e"/>
 				<value name="CloseGroupKey" type="dword" data="00000000"/>
 				<value name="CloseGroupPrcKey" type="dword" data="00000000"/>
@@ -574,6 +574,7 @@
 				<value name="Multi.GroupInputKey" type="dword" data="00125d47"/>
 				<value name="CloseToRightKey" type="dword" data="00000000"/>
 				<value name="Multi.NewWndConfirm" type="dword" data="00000000"/>
+				<value name="CheckUpdates" type="dword" data="00105b55"/>
 			</key>
 			<key name="Tasks" modified="2018-02-23 17:42:31" build="180206">
 				<value name="Count" type="long" data="9"/>

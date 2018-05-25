@@ -2,7 +2,7 @@
 # This started as the default configuration and then I have modified it to suit
 # my preferences.
 
-# Version: 0.50.0
+# Version: 0.51.0
 
 inherit_from:
   - .rubocop-enabled.yml
@@ -537,6 +537,13 @@ Layout/SpaceInsideStringInterpolation:
     - space
     - no_space
 
+Layout/Tab:
+  # By default, the indentation width from Layout/IndentationWidth is used
+  # But it can be overridden by setting this parameter
+  # It is used during auto-correction to determine how many spaces should
+  # replace each tab.
+  IndentationWidth: ~
+
 Layout/TrailingBlankLines:
   EnforcedStyle: final_newline
   SupportedStyles:
@@ -642,6 +649,10 @@ Naming/PredicateName:
   # should still be accepted
   NameWhitelist:
     - is_a?
+  # Method definition macros for dynamically generated methods.
+  MethodDefinitionMacros:
+    - define_method
+    - define_singleton_method
   # Exclude Rspec specs because there is a strong convention to write spec
   # helpers in the form of `have_something` or `be_something`.
   Exclude:
@@ -890,17 +901,6 @@ Style/EmptyMethod:
   SupportedStyles:
     - compact
     - expanded
-
-# Checks whether the source file has a utf-8 encoding comment or not
-# AutoCorrectEncodingComment must match the regex
-# /#.*coding\s?[:=]\s?(?:UTF|utf)-8/
-Style/Encoding:
-  EnforcedStyle: never
-  SupportedStyles:
-    - when_needed
-    - always
-    - never
-  AutoCorrectEncodingComment: '# encoding: utf-8'
 
 # Checks use of for or each in multiline loops.
 Style/For:
@@ -1666,6 +1666,12 @@ Rails/UniqBeforePluck:
     - aggressive   # Enforce in all cases, may generate false positives
   AutoCorrect: false
 
+Rails/UnknownEnv:
+  Environments:
+    - development
+    - test
+    - production
+
 Rails/SkipsModelValidations:
   Blacklist:
     - decrement!
@@ -1685,4 +1691,7 @@ Rails/Validation:
     - app/models/**/*.rb
 
 Bundler/OrderedGems:
+  TreatCommentsAsGroupSeparators: true
+
+Gemspec/OrderedDependencies:
   TreatCommentsAsGroupSeparators: true

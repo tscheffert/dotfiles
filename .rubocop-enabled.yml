@@ -545,11 +545,20 @@ Style/CommentAnnotation:
   StyleGuide: '#annotate-keywords'
   Enabled: true
 
+Style/CommentedKeyword:
+  Description: 'Do not place comments on the same line as certain keywords.'
+  Enabled: true
+
 Style/ConditionalAssignment:
   Description: >-
                  Use the return value of `if` and `case` statements for
                  assignment to a variable and variable comparison instead
                  of assigning that variable inside of each branch.
+  Enabled: true
+
+Style/DateTime:
+  Description: 'Use Date or Time over DateTime.'
+  StyleGuide: '#date--time'
   Enabled: true
 
 Style/DefWithParentheses:
@@ -1011,6 +1020,11 @@ Style/StabbyLambdaParentheses:
   StyleGuide: '#stabby-lambda-with-args'
   Enabled: true
 
+Style/StderrPuts:
+  Description: 'Use `warn` instead of `$stderr.puts`.'
+  StyleGuide: '#warn'
+  Enabled: true
+
 Style/StringLiterals:
   Description: 'Checks if uses of quotes match the configured preference.'
   StyleGuide: '#consistent-string-literals'
@@ -1046,6 +1060,10 @@ Style/SymbolProc:
 
 Style/TernaryParentheses:
   Description: 'Checks for use of parentheses around ternary conditions.'
+  Enabled: true
+
+Style/MixinUsage:
+  Description: 'Checks that `include`, `extend` and `prepend` exists at the top level.'
   Enabled: true
 
 Style/TrailingCommaInArguments:
@@ -1314,13 +1332,7 @@ Lint/InterpolationCheck:
   Description: 'Raise warning for interpolation in single q strs'
   Enabled: true
 
-Lint/InvalidCharacterLiteral:
-  Description: >-
-                 Checks for invalid character literals with a non-escaped
-                 whitespace character.
-  Enabled: true
-
-Lint/LiteralInCondition:
+Lint/LiteralAsCondition:
   Description: 'Checks of literals used in conditions.'
   Enabled: true
 
@@ -1379,6 +1391,16 @@ Lint/RandOne:
 
 Lint/RedundantWithIndex:
   Description: 'Checks for redundant `with_index`.'
+  Enabled: true
+
+Lint/RedundantWithObject:
+  Description: 'Checks for redundant `with_object`.'
+  Enabled: true
+
+Lint/RegexpAsCondition:
+  Description: >-
+                 Do not use regexp literal as a condition.
+                 The regexp literal matches `$_` implicitly.
   Enabled: true
 
 Lint/RequireParentheses:
@@ -1444,6 +1466,10 @@ Lint/UnneededDisable:
                  Checks for rubocop:disable comments that can be removed.
                  Note: this cop is not disabled when disabling all cops.
                  It must be explicitly disabled.
+  Enabled: true
+
+Lint/UnneededRequireStatement:
+  Description: 'Checks for unnecessary `require` statement.'
   Enabled: true
 
 Lint/UnneededSplatExpansion:
@@ -1871,8 +1897,15 @@ Bundler/InsecureProtocolSource:
 
 Bundler/OrderedGems:
   Description: >-
-                  Gems within groups in the Gemfile should be alphabetically sorted.
+                 Gems within groups in the Gemfile should be alphabetically sorted.
   Enabled: true
   Include:
     - '**/Gemfile'
     - '**/gems.rb'
+
+Gemspec/OrderedDependencies:
+  Description: >-
+                 Dependencies in the gemspec should be alphabetically sorted.
+  Enabled: true
+  Include:
+    - '**/*.gemspec'

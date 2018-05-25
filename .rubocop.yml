@@ -988,7 +988,7 @@ Style/MultilineMemoization:
     - braces
 
 Style/NegatedIf:
-  AutoCorrect: False
+  AutoCorrect: false
   EnforcedStyle: both
   SupportedStyles:
     # both: prefix and postfix negated `if` should both use `unless`
@@ -1019,16 +1019,6 @@ Style/NonNilCheck:
   # With `IncludeSemanticChanges` set to `false`, this cop does not report
   # offenses for `!x.nil?` and does no changes that might change behavior.
   IncludeSemanticChanges: true
-
-Style/NumericPredicate:
-  EnforcedStyle: predicate
-  SupportedStyles:
-    - predicate
-    - comparison
-  # Exclude RSpec specs because assertions like `expect(1).to be > 0` cause
-  # false positives.
-  Exclude:
-    - 'spec/**/*'
 
 Style/NumericLiterals:
   MinDigits: 9

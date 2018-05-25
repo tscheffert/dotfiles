@@ -514,7 +514,7 @@ Layout/SpaceInsideBlockBraces:
   SpaceBeforeBlockParameters: true
 
 Layout/SpaceInsideHashLiteralBraces:
-  EnforcedStyle: compact
+  EnforcedStyle: space
   SupportedStyles:
     - space
     - no_space

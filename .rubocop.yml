@@ -2,7 +2,7 @@
 # This started as the default configuration and then I have modified it to suit
 # my preferences.
 
-# Version: 0.51.0
+# Version: 0.52.1
 
 inherit_from:
   - .rubocop-enabled.yml
@@ -63,8 +63,8 @@ AllCops:
     - 'db/schema.rb'
   # Default formatter will be used if no `-f/--format` option is given.
   DefaultFormatter: progress
-  # Cop names are not displayed in offense messages by default. Change behavior
-  # by overriding DisplayCopNames, or by giving the `-D/--display-cop-names`
+  # Cop names are displayed in offense messages by default. Change behavior
+  # by overriding DisplayCopNames, or by giving the `--no-display-cop-names`
   # option.
   DisplayCopNames: true
   # Style guide URLs are not displayed in offense messages by default. Change
@@ -495,6 +495,7 @@ Layout/SpaceBeforeBlockBraces:
   SupportedStyles:
     - space
     - no_space
+  EnforcedStyleForEmptyBraces: space
   SupportedStylesForEmptyBraces:
     - space
     - no_space
@@ -505,6 +506,19 @@ Layout/SpaceBeforeFirstArg:
   # things with the previous or next line, not counting empty lines or comment
   # lines.
   AllowForAlignment: true
+
+Layout/SpaceInsideArrayLiteralBrackets:
+  EnforcedStyle: no_space
+  SupportedStyles:
+    - space
+    - no_space
+    # 'compact' normally requires a space inside the brackets, with the exception
+    # that successive left brackets or right brackets are collapsed together
+    - compact
+  EnforcedStyleForEmptyBrackets: no_space
+  SupportedStylesForEmptyBrackets:
+    - space
+    - no_space
 
 Layout/SpaceInsideBlockBraces:
   EnforcedStyle: space
@@ -531,6 +545,12 @@ Layout/SpaceInsideHashLiteralBraces:
     - space
     - no_space
 
+Layout/SpaceInsideReferenceBrackets:
+  EnforcedStyle: no_space
+  SupportedStyles:
+    - space
+    - no_space
+
 Layout/SpaceInsideStringInterpolation:
   EnforcedStyle: no_space
   SupportedStyles:
@@ -543,6 +563,21 @@ Layout/Tab:
   # It is used during auto-correction to determine how many spaces should
   # replace each tab.
   IndentationWidth: ~
+
+Layout/ClassStructure:
+  Categories:
+    module_inclusion:
+      - include
+      - prepend
+      - extend
+  ExpectedOrder:
+    - module_inclusion
+    - constants
+    - public_class_methods
+    - initializer
+    - public_methods
+    - protected_methods
+    - private_methods
 
 Layout/TrailingBlankLines:
   EnforcedStyle: final_newline
@@ -688,6 +723,8 @@ Style/AndOr:
     - always
     - conditionals
 
+Style/AsciiComments:
+  AllowedChars: []
 
 # Checks if usage of `%()` or `%Q()` matches configuration.
 Style/BarePercentLiterals:
@@ -926,6 +963,7 @@ Style/FormatStringToken:
     - annotated
     # Prefer simple looking "template" style tokens like `%{name}`, `%{age}`
     - template
+    - unannotated
 
 Style/FrozenStringLiteralComment:
   EnforcedStyle: never
@@ -968,11 +1006,7 @@ Style/HashSyntax:
   # Do not suggest { a?: 1 } over { :a? => 1 } in ruby19 style
   PreferHashRocketsForNonAlnumEndingSymbols: false
 
-Style/IfUnlessModifier:
-  MaxLineLength: 80
-
 Style/InverseMethods:
-  Enabled: true
   # `InverseMethods` are methods that can be inverted by a not (`not` or `!`)
   # The relationship of inverse methods only needs to be defined in one direction.
   # Keys and values both need to be defined as symbols.
@@ -1162,6 +1196,14 @@ Style/RaiseArgs:
     - exploded # raise Exception, msg
   AutoCorrect: false
 
+Style/RescueStandardError:
+  EnforcedStyle: explicit
+  # implicit: Do not include the error class, `rescue`
+  # explicit: Require an error class `rescue StandardError`
+  SupportedStyles:
+    - implicit
+    - explicit
+
 Style/RedundantReturn:
   # When `true` allows code like `return x, y`.
   AllowMultipleReturnValues: true
@@ -1342,9 +1384,6 @@ Style/TrivialAccessors:
     - to_s
     - to_sym
 
-Style/WhileUntilModifier:
-  MaxLineLength: 80
-
 # `WordArray` enforces how array literals of word-like strings should be expressed.
 Style/WordArray:
   EnforcedStyle: percent
@@ -1486,12 +1525,26 @@ Lint/InheritException:
     - runtime_error
     - standard_error
 
+Lint/MissingCopEnableDirective:
+  # Maximum number of consecutive lines the cop can be disabled for.
+  # 0 allows only single-line disables
+  # 1 would mean the maximum allowed is the following:
+  #   # rubocop:disable SomeCop
+  #   a = 1
+  #   # rubocop:enable SomeCop
+  # .inf for any size
+  MaximumRangeSize: .inf
+
 Lint/SafeNavigationChain:
   Whitelist:
     - present?
     - blank?
     - presence
     - try
+
+# Checks for shadowed arguments
+Lint/ShadowedArgument:
+  IgnoreImplicitReferences: false
 
 # TODO: Fix later or raise issue about missing SupportedStyles after 0.32.1
 # Unused block params auto-correct from { |x, y| puts x } to { |x, _y| puts x } and
@@ -1558,6 +1611,10 @@ Rails/ActionFilter:
   Include:
     - app/controllers/**/*.rb
 
+Rails/CreateTableWithTimestamps:
+  Include:
+    - db/migrate/*.rb
+
 Rails/Date:
   # The value `strict` disallows usage of `Date.today`, `Date.current`,
   # `Date#to_time` etc.
@@ -1609,6 +1666,14 @@ Rails/HasManyOrHasOneDependent:
   Include:
     - app/models/**/*.rb
 
+Rails/InverseOf:
+  Include:
+    - app/models/**/*.rb
+
+Rails/LexicallyScopedActionFilter:
+  Include:
+    - app/controllers/**/*.rb
+
 Rails/NotNullColumn:
   Include:
     - db/migrate/*.rb
@@ -1633,7 +1698,7 @@ Rails/ReversibleMigration:
 
 Rails/SafeNavigation:
   # This will convert usages of `try` to use safe navigation as well as `try!`.
-  # `try` and `try!` work slighly differently. `try!` and safe navigation will
+  # `try` and `try!` work slightly differently. `try!` and safe navigation will
   # both raise a `NoMethodError` if the receiver of the method call does not
   # implement the intended method. `try` will not raise an exception for this.
   ConvertTry: false

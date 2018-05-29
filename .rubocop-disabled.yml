@@ -1,5 +1,10 @@
 ---
 
+Layout/ClassStructure:
+  Description: 'Enforces a configured order of definitions within a class body.'
+  StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#consistent-classes'
+  Enabled: false
+
 Layout/MultilineAssignmentLayout:
   Description: 'Check for a newline after the assignment operator in multi-line assignments.'
   StyleGuide: '#indent-conditional-assignment'
@@ -62,6 +67,11 @@ Style/MethodCallWithArgsParentheses:
 # Enabled by default, but we shouldn't enforce names; leave it up to the user
 Style/SingleLineBlockParams:
   Description: 'Enforces the names of some block params.'
+  Enabled: false
+
+Style/StringHashKeys:
+  Description: 'Prefer symbols instead of strings as hash keys.'
+  StyleGuide: '#symbols-as-keys'
   Enabled: false
 
 # Enabled by default, but it messes with stuff

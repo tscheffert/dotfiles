@@ -1,0 +1,58 @@
+#!/usr/bin/env ruby
+# vim: ft=ruby
+
+require 'active_support/core_ext/object/blank'
+require 'open3'
+
+module Webm2Gif
+
+  def self.perform(args:)
+    unless which('ffmpeg')
+      warn 'ffmpeg installation required'
+      exit 1
+    end
+
+    source_filename = ARGV[0]
+    if source_filename.nil? || source_filename.strip.empty?
+      warn 'Must specify a source file'
+      exit 1
+    end
+
+    source_ext = File.extname(source_filename)
+    if source_ext != '.webm'
+      warn 'Source file must be a webm file'
+      exit 1
+    end
+
+    unless File.exist?(source_filename)
+      warn "Source file #{source_filename} doesn't exist!"
+      exit 1
+    end
+
+    source_basename = File.basename(source_filename, '.webm')
+    output_filename = "#{source_basename}.gif"
+
+    if File.exist?(output_filename)
+      warn "Output file #{output_filename} already exists"
+      exit 1
+    end
+
+    puts "Converting #{source_filename} to #{output_filename}"
+    stdout, stderr, status = Open3.capture3("ffmpeg -i #{source_filename} #{output_filename}")
+    puts "STDOUT: #{stdout}" if stdout.present? && !status.success?
+    puts "STDERR: #{stderr}" if stderr.present? && !status.success?
+    puts "Success: #{status.success?}"
+
+    exit status.exitstatus
+  end
+
+  private
+
+  def self.which(cmd)
+    _stdout_stderr, status = Open3.capture2e("which #{cmd}")
+    status.success?
+  end
+
+end
+
+Webm2Gif.perform(args: ARGV)

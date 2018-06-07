@@ -1028,14 +1028,6 @@ Performance/StartWith:
   AutoCorrect: false
   Enabled: true
 
-Performance/StringReplacement:
-  Description: >-
-                  Use `tr` instead of `gsub` when you are replacing the same
-                  number of characters. Use `delete` instead of `gsub` when
-                  you are deleting characters.
-  Reference: 'https://github.com/JuanitoFatas/fast-ruby#stringgsub-vs-stringtr-code'
-  Enabled: true
-
 Performance/TimesMap:
   Description: 'Checks for .times.map calls.'
   AutoCorrect: false

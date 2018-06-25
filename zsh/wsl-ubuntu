@@ -3,6 +3,15 @@
 
 # --- Path ---
 
+function remove_from_path {
+  # Delete path by parts so we can never accidentally remove sub paths
+  PATH=${PATH//":$1:"/":"} # delete any instances in the middle
+  PATH=${PATH/#"$1:"/} # delete any instance at the beginning
+  PATH=${PATH/%":$1"/} # delete any instance in the at the end
+}
+
+# -- Remove --
+remove_from_path "/mnt/c/opscode/chefdk/bin"
 
 # -- Prepend --
 prepend_to_path "$HOME/.rbenv/bin"

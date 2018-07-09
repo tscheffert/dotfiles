@@ -26,7 +26,7 @@ begin
 
   pretty_contents = JSON.pretty_generate(file_contents)
   universal_pretty_contents = pretty_contents
-    .encode(clrf_newline: true)
+    .encode(crlf_newline: true)
     .encode(universal_newline: true)
 
   # Append the preferred "newline at end of file"

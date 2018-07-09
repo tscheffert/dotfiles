@@ -2,7 +2,7 @@
 # This started as the default configuration and then I have modified it to suit
 # my preferences.
 
-# Version: 0.54.0
+# Version: 0.55.0
 
 inherit_from:
   - .rubocop-enabled.yml
@@ -610,6 +610,12 @@ Layout/SpaceInsideHashLiteralBraces:
     - space
     - no_space
 
+Layout/SpaceInsideParens:
+  EnforcedStyle: no_space
+  SupportedStyles:
+    - space
+    - no_space
+
 Layout/SpaceInsideReferenceBrackets:
   EnforcedStyle: no_space
   SupportedStyles:
@@ -653,6 +659,9 @@ Layout/TrailingBlankLines:
   SupportedStyles:
     - final_newline
     - final_blank_line
+
+Layout/TrailingWhitespace:
+  AllowInHeredoc: false
 
 
 #################### Naming ###########################
@@ -723,8 +732,7 @@ Naming/FileName:
 
 Naming/HeredocDelimiterNaming:
   Blacklist:
-    - END
-    - !ruby/regexp '/EO[A-Z]{1}/'
+    - !ruby/regexp '/(^|\s)(EO[A-Z]{1}|END)(\s|$)/'
 
 Naming/HeredocDelimiterCase:
   EnforcedStyle: uppercase
@@ -780,6 +788,10 @@ Naming/UncommunicativeMethodParamName:
     - io
     - id
     - to
+    - by
+    - 'on'
+    - in
+    - at
   # Blacklisted names that will register an offense
   ForbiddenNames: []
 
@@ -1132,6 +1144,9 @@ Style/LambdaCall:
 
 Style/MethodCallWithArgsParentheses:
   IgnoreMacros: true
+  IgnoredMethods: []
+
+Style/MethodCallWithoutArgsParentheses:
   IgnoredMethods: []
 
 Style/MethodDefParentheses:

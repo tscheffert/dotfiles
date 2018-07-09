@@ -2,7 +2,7 @@
 # This started as the default configuration and then I have modified it to suit
 # my preferences.
 
-# Version: 0.52.1
+# Version: 0.53.0
 
 inherit_from:
   - .rubocop-enabled.yml
@@ -12,8 +12,11 @@ inherit_from:
 AllCops:
   # Include common Ruby source files.
   Include:
+    - '**/*.arb'
+    - '**/*.axlsx'
     - '**/*.builder'
     - '**/*.fcgi'
+    - '**/*.gemfile'
     - '**/*.gemspec'
     - '**/*.god'
     - '**/*.jb'
@@ -60,6 +63,7 @@ AllCops:
   Exclude:
     - 'node_modules/**/*'
     - 'vendor/**/*'
+    - '.git/**/*'
     - 'db/schema.rb'
   # Default formatter will be used if no `-f/--format` option is given.
   DefaultFormatter: progress
@@ -119,7 +123,14 @@ AllCops:
   # Else if .ruby-version exists and it contains an MRI version it is used.
   # Otherwise we fallback to the oldest officially supported Ruby version (2.0).
   TargetRubyVersion: 2.3
-  TargetRailsVersion: 5.0
+  # What version of Rails is the inspected code using?  If a value is specified
+  # for TargetRailsVersion then it is used.  Acceptable values are specificed
+  # as a float (i.e. 5.1); the patch version of Rails should not be included.
+  # If TargetRailsVersion is not set, RuboCop will parse the Gemfile.lock or
+  # gems.locked file to find the version of Rails that has been bound to the
+  # application.  If neither of those files exist, RuboCop will use Rails 5.0
+  # as the default.
+  TargetRailsVersion: ~
 
 
 #################### Layout ###########################
@@ -228,6 +239,19 @@ Layout/AlignParameters:
   # But it can be overridden by setting this parameter
   IndentationWidth: ~
 
+# Checks whether the end keywords are aligned properly for `do` `end` blocks.
+Layout/BlockAlignment:
+  # The value `start_of_block` means that the `end` should be aligned with line
+  # where the `do` keyword appears.
+  # The value `start_of_line` means it should be aligned with the whole
+  # expression's starting line.
+  # The value `either` means both are allowed.
+  EnforcedStyleAlignWith: start_of_block
+  SupportedStylesAlignWith:
+    - either
+    - start_of_block
+    - start_of_line
+
 # Indentation of `when`.
 Layout/CaseIndentation:
   EnforcedStyle: case
@@ -240,12 +264,28 @@ Layout/CaseIndentation:
   # This only matters if `IndentOneStep` is `true`
   IndentationWidth: ~
 
+Layout/DefEndAlignment:
+  # The value `def` means that `end` should be aligned with the def keyword.
+  # The value `start_of_line` means that `end` should be aligned with method
+  # calls like `private`, `public`, etc, if present in front of the `def`
+  # keyword on the same line.
+  EnforcedStyleAlignWith: start_of_line
+  SupportedStylesAlignWith:
+    - start_of_line
+    - def
+  AutoCorrect: false
+  Severity: warning
+
 # Multi-line method chaining should be done with leading dots.
 Layout/DotPosition:
   EnforcedStyle: leading
   SupportedStyles:
     - leading
     - trailing
+
+Layout/EmptyComment:
+  AllowBorderComment: true
+  AllowMarginComment: true
 
 # Use empty lines between defs.
 Layout/EmptyLineBetweenDefs:
@@ -268,6 +308,8 @@ Layout/EmptyLinesAroundClassBody:
     - empty_lines_except_namespace
     - empty_lines_special
     - no_empty_lines
+    - beginning_only
+    - ending_only
 
 Layout/EmptyLinesAroundModuleBody:
   EnforcedStyle: empty_lines_special
@@ -276,6 +318,23 @@ Layout/EmptyLinesAroundModuleBody:
     - empty_lines_except_namespace
     - empty_lines_special
     - no_empty_lines
+
+# Align ends correctly.
+Layout/EndAlignment:
+  # The value `keyword` means that `end` should be aligned with the matching
+  # keyword (`if`, `while`, etc.).
+  # The value `variable` means that in assignments, `end` should be aligned
+  # with the start of the variable on the left hand side of `=`. In all other
+  # situations, `end` should still be aligned with the keyword.
+  # The value `start_of_line` means that `end` should be aligned with the start
+  # of the line which the matching keyword appears on.
+  EnforcedStyleAlignWith: keyword
+  SupportedStylesAlignWith:
+    - keyword
+    - variable
+    - start_of_line
+  AutoCorrect: false
+  Severity: warning
 
 Layout/EndOfLine:
   # The `native` style means that CR+LF (Carriage Return + Line Feed) is
@@ -550,6 +609,10 @@ Layout/SpaceInsideReferenceBrackets:
   SupportedStyles:
     - space
     - no_space
+  EnforcedStyleForEmptyBrackets: no_space
+  SupportedStylesForEmptyBrackets:
+    - space
+    - no_space
 
 Layout/SpaceInsideStringInterpolation:
   EnforcedStyle: no_space
@@ -692,6 +755,26 @@ Naming/PredicateName:
   # helpers in the form of `have_something` or `be_something`.
   Exclude:
     - 'spec/**/*'
+
+Naming/UncommunicativeBlockParamName:
+  # Parameter names may be equal to or greater than this value
+  MinNameLength: 1
+  AllowNamesEndingInNumbers: true
+  # Whitelisted names that will not register an offense
+  AllowedNames: []
+  # Blacklisted names that will register an offense
+  ForbiddenNames: []
+
+Naming/UncommunicativeMethodParamName:
+  # Parameter names may be equal to or greater than this value
+  MinNameLength: 3
+  AllowNamesEndingInNumbers: true
+  # Whitelisted names that will not register an offense
+  AllowedNames:
+    - io
+    - id
+  # Blacklisted names that will register an offense
+  ForbiddenNames: []
 
 Naming/VariableName:
   EnforcedStyle: snake_case
@@ -943,8 +1026,8 @@ Style/EmptyMethod:
 Style/For:
   EnforcedStyle: each
   SupportedStyles:
-    - for
     - each
+    - for
 
 # Enforce the method used for string formatting.
 Style/FormatString:
@@ -1050,6 +1133,16 @@ Style/MethodDefParentheses:
     - require_parentheses
     - require_no_parentheses
     - require_no_parentheses_except_multiline
+
+Style/MissingElse:
+  EnforcedStyle: case
+  SupportedStyles:
+    # if - warn when an if expression is missing an else branch
+    # case - warn when a case expression is missing an else branch
+    # both - warn when an if or case expression is missing an else branch
+    - if
+    - case
+    - both
 
 # Checks the grouping of mixins (`include`, `extend`, `prepend`) in `class` and
 # `module` bodies.
@@ -1237,6 +1330,11 @@ Style/SafeNavigation:
   # Safe navigation may cause a statement to start returning `nil` in addition
   # to whatever it used to return.
   ConvertCodeThatCanStartToReturnNil: false
+  Whitelist:
+    - present?
+    - blank?
+    - presence
+    - try
 
 Style/Semicolon:
   # Allow `;` to separate several expressions on the same line.
@@ -1331,11 +1429,22 @@ Style/TrailingCommaInArguments:
     - consistent_comma
     - no_comma
 
-Style/TrailingCommaInLiteral:
-  # If `comma`, the cop requires a comma after the last item in an array or
-  # hash, but only when each item is on its own line.
+Style/TrailingCommaInArrayLiteral:
+  # If `comma`, the cop requires a comma after the last item in an array,
+  # but only when each item is on its own line.
   # If `consistent_comma`, the cop requires a comma after the last item of all
-  # non-empty array and hash literals.
+  # non-empty array literals.
+  EnforcedStyleForMultiline: no_comma
+  SupportedStylesForMultiline:
+    - comma
+    - consistent_comma
+    - no_comma
+
+Style/TrailingCommaInHashLiteral:
+  # If `comma`, the cop requires a comma after the last item in a hash,
+  # but only when each item is on its own line.
+  # If `consistent_comma`, the cop requires a comma after the last item of all
+  # non-empty hash literals.
   EnforcedStyleForMultiline: no_comma
   SupportedStylesForMultiline:
     - comma
@@ -1471,51 +1580,8 @@ Metrics/PerceivedComplexity:
 Lint/AssignmentInCondition:
   AllowSafeAssignment: true
 
-# checks whether the end keywords are aligned properly for `do` `end` blocks.
-Lint/BlockAlignment:
-  # The value `start_of_block` means that the `end` should be aligned with line
-  # where the `do` keyword appears.
-  # The value `start_of_line` means it should be aligned with the whole
-  # expression's starting line.
-  # The value `either` means both are allowed.
-  EnforcedStyleAlignWith: start_of_block
-  SupportedStylesAlignWith:
-    - either
-    - start_of_block
-    - start_of_line
-  # Conflicts with Style/IndentationWidth, don't autocorrect
-  AutoCorrect: false
-
 Lint/Debugger:
   # Autocorrect doesn't remove a preceding `require 'pry';`, only warn
-  AutoCorrect: false
-
-Lint/DefEndAlignment:
-  # The value `def` means that `end` should be aligned with the def keyword.
-  # The value `start_of_line` means that `end` should be aligned with method
-  # calls like `private`, `public`, etc, if present in front of the `def`
-  # keyword on the same line.
-  EnforcedStyleAlignWith: start_of_line
-  SupportedStylesAlignWith:
-    - start_of_line
-    - def
-  AutoCorrect: false
-
-# Align ends correctly.
-Lint/EndAlignment:
-  # The value `keyword` means that `end` should be aligned with the matching
-  # keyword (if, while, etc.).
-  # The value `variable` means that in assignments, `end` should be aligned
-  # with the start of the variable on the left hand side of `=`. In all other
-  # situations, `end` should still be aligned with the keyword.
-  # The value `start_of_line` means that `end` should be aligned with the start
-  # of the line which the matching keyword appears on.
-  EnforcedStyleAlignWith: keyword
-  SupportedStylesAlignWith:
-    - keyword
-    - variable
-    - start_of_line
-  # Sometimes conflicts with Style/IndentAssignment, don't autocorrect
   AutoCorrect: false
 
 Lint/InheritException:
@@ -1560,6 +1626,10 @@ Lint/UnusedMethodArgument:
   AllowUnusedKeywordArguments: false
   IgnoreEmptyMethods: true
   AutoCorrect: false
+
+Lint/Void:
+  CheckForMethodsWithNoSideEffects: false
+
 
 # TODO: Also raise issue about Lint/UnusedAssignment not auto-correcting and
 # not having config, after 0.32.1. Actual it would be for cop/mixin/unused_argument.rb

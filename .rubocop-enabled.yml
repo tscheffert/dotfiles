@@ -7,6 +7,7 @@ Bundler/DuplicatedGem:
   Description: 'Checks for duplicate gem entries in Gemfile.'
   Enabled: true
   Include:
+    - '**./*.gemfile'
     - '**/Gemfile'
     - '**/gems.rb'
 
@@ -17,6 +18,7 @@ Bundler/InsecureProtocolSource:
                  'https://rubygems.org' if possible, or 'http://rubygems.org' if not.
   Enabled: true
   Include:
+    - '**./*.gemfile'
     - '**/Gemfile'
     - '**/gems.rb'
 
@@ -25,6 +27,7 @@ Bundler/OrderedGems:
                  Gems within groups in the Gemfile should be alphabetically sorted.
   Enabled: true
   Include:
+    - '**./*.gemfile'
     - '**/Gemfile'
     - '**/gems.rb'
 
@@ -78,6 +81,10 @@ Layout/AlignParameters:
   StyleGuide: '#no-double-indent'
   Enabled: true
 
+Layout/BlockAlignment:
+  Description: 'Align block ends correctly.'
+  Enabled: true
+
 Layout/BlockEndNewline:
   Description: 'Put end statement of multiline block on its own line.'
   Enabled: true
@@ -95,6 +102,17 @@ Layout/CommentIndentation:
   Description: 'Indentation of comments.'
   Enabled: true
 
+Layout/ConditionPosition:
+  Description: >-
+                  Checks for condition placed in a confusing position relative to
+                  the keyword.
+  StyleGuide: '#same-line-condition'
+  Enabled: true
+
+Layout/DefEndAlignment:
+  Description: 'Align ends corresponding to defs correctly.'
+  Enabled: true
+
 Layout/DotPosition:
   Description: 'Checks the position of the dot in multi-line method calls.'
   StyleGuide: '#consistent-multi-line-chains'
@@ -102,6 +120,10 @@ Layout/DotPosition:
 
 Layout/ElseAlignment:
   Description: 'Align elses and elsifs correctly.'
+  Enabled: true
+
+Layout/EmptyComment:
+  Description: 'Checks empty comment.'
   Enabled: true
 
 Layout/EmptyLineAfterMagicComment:
@@ -156,6 +178,10 @@ Layout/EmptyLinesAroundMethodBody:
 Layout/EmptyLinesAroundModuleBody:
   Description: "Keeps track of empty lines around module bodies."
   StyleGuide: '#empty-lines-around-bodies'
+  Enabled: true
+
+Layout/EndAlignment:
+  Description: 'Align ends correctly.'
   Enabled: true
 
 Layout/EndOfLine:
@@ -456,8 +482,8 @@ Lint/AssignmentInCondition:
   StyleGuide: '#safe-assignment-in-condition'
   Enabled: true
 
-Lint/BlockAlignment:
-  Description: 'Align block ends correctly.'
+Lint/BigDecimalNew:
+  Description: '`BigDecimal.new()` is deprecated. Use `BigDecimal()` instead.'
   Enabled: true
 
 Lint/BooleanSymbol:
@@ -468,19 +494,8 @@ Lint/CircularArgumentReference:
   Description: "Default values in optional keyword arguments and optional ordinal arguments should not refer back to the name of the argument."
   Enabled: true
 
-Lint/ConditionPosition:
-  Description: >-
-                 Checks for condition placed in a confusing position relative to
-                 the keyword.
-  StyleGuide: '#same-line-condition'
-  Enabled: true
-
 Lint/Debugger:
   Description: 'Check for debugger calls.'
-  Enabled: true
-
-Lint/DefEndAlignment:
-  Description: 'Align ends corresponding to defs correctly.'
   Enabled: true
 
 Lint/DeprecatedClassMethods:
@@ -522,10 +537,6 @@ Lint/EmptyInterpolation:
 
 Lint/EmptyWhen:
   Description: 'Checks for `when` branches with empty bodies.'
-  Enabled: true
-
-Lint/EndAlignment:
-  Description: 'Align ends correctly.'
   Enabled: true
 
 Lint/EndInMethod:
@@ -606,6 +617,10 @@ Lint/NextWithoutAccumulator:
 
 Lint/NonLocalExitFromIterator:
   Description: 'Do not use return in iterator to cause non-local exit.'
+  Enabled: true
+
+Lint/OrderedMagicComments:
+  Description: 'Checks the proper ordering of magic comments and whether a magic comment is not placed before a shebang.'
   Enabled: true
 
 Lint/ParenthesesAsGroupedExpression:
@@ -706,11 +721,16 @@ Lint/UnifiedInteger:
   Description: 'Use Integer instead of Fixnum or Bignum'
   Enabled: true
 
-Lint/UnneededDisable:
+Lint/UnneededCopDisableDirective:
   Description: >-
-                 Checks for rubocop:disable comments that can be removed.
-                 Note: this cop is not disabled when disabling all cops.
-                 It must be explicitly disabled.
+                  Checks for rubocop:disable comments that can be removed.
+                  Note: this cop is not disabled when disabling all cops.
+                  It must be explicitly disabled.
+  Enabled: true
+
+Lint/UnneededCopEnableDirective:
+  Description: Checks for rubocop:enable comments that can be removed.
+
   Enabled: true
 
 Lint/UnneededRequireStatement:
@@ -867,6 +887,11 @@ Naming/HeredocDelimiterNaming:
   StyleGuide: '#heredoc-delimiters'
   Enabled: true
 
+Naming/MemoizedInstanceVariableName:
+  Description: >-
+                  Memoized method name should match memo instance variable name.
+  Enabled: true
+
 Naming/MethodName:
   Description: 'Use the configured style when naming methods.'
   StyleGuide: '#snake-case-symbols-methods-vars'
@@ -875,6 +900,18 @@ Naming/MethodName:
 Naming/PredicateName:
   Description: 'Check the names of predicate methods.'
   StyleGuide: '#bool-methods-qmark'
+  Enabled: true
+
+Naming/UncommunicativeBlockParamName:
+  Description: >-
+                  Checks for block parameter names that contain capital letters,
+                  end in numbers, or do not meet a minimal length.
+  Enabled: true
+
+Naming/UncommunicativeMethodParamName:
+  Description: >-
+                  Checks for method parameter names that contain capital letters,
+                  end in numbers, or do not meet a minimal length.
   Enabled: true
 
 Naming/VariableName:
@@ -951,19 +988,6 @@ Performance/FlatMap:
                   or `Enumberable#collect..Array#flatten(1)`
   Reference: 'https://github.com/JuanitoFatas/fast-ruby#enumerablemaparrayflatten-vs-enumerableflat_map-code'
   Enabled: true
-  EnabledForFlattenWithoutParams: false
-  # If enabled, this cop will warn about usages of
-  # `flatten` being called without any parameters.
-  # This can be dangerous since `flat_map` will only flatten 1 level, and
-  # `flatten` without any parameters can flatten multiple levels.
-
-Performance/HashEachMethods:
-  Description: >-
-                 Use `Hash#each_key` and `Hash#each_value` instead of
-                 `Hash#keys.each` and `Hash#values.each`.
-  StyleGuide: '#hash-each'
-  Enabled: true
-  AutoCorrect: false
 
 Performance/LstripRstrip:
   Description: 'Use `strip` instead of `lstrip.rstrip`.'
@@ -1051,6 +1075,13 @@ Rails:
 
 Rails/ActionFilter:
   Description: 'Enforces consistent use of action filter methods.'
+  Enabled: true
+
+Rails/ActiveRecordAliases:
+  Description: >-
+                  Avoid Active Record aliases:
+                  Use `update` instead of `update_attributes`.
+                  Use `update!` instead of `update_attributes!`.
   Enabled: true
 
 Rails/ActiveSupportAliases:
@@ -1253,6 +1284,10 @@ Security/MarshalLoad:
   Reference: 'http://ruby-doc.org/core-2.3.3/Marshal.html#module-Marshal-label-Security+considerations'
   Enabled: true
 
+Security/Open:
+  Description: 'The use of Kernel#open represents a serious security risk.'
+  Enabled: true
+
 Security/YAMLLoad:
   Description: >-
                  Prefer usage of `YAML.safe_load` over `YAML.load` due to potential
@@ -1435,6 +1470,11 @@ Style/EmptyLambdaParameter:
   Description: 'Omit parens for empty lambda parameters.'
   Enabled: true
 
+# Disabled by default
+Style/EmptyLineAfterGuardClause:
+  Description: 'Add empty line after guard clause.'
+  Enabled: true
+
 Style/EmptyLiteral:
   Description: 'Prefer literals to Array.new/Hash.new/String.new.'
   StyleGuide: '#literal-array-hash'
@@ -1462,6 +1502,10 @@ Style/EvalWithLocation:
 Style/EvenOdd:
   Description: 'Favor the use of Integer#even? && Integer#odd?'
   StyleGuide: '#predicate-methods'
+  Enabled: true
+
+Style/ExpandPathArguments:
+  Description: "Use `expand_path(__dir__)` instead of `expand_path('..', __FILE__)`."
   Enabled: true
 
 Style/FlipFlop:
@@ -1583,6 +1627,16 @@ Style/MethodDefParentheses:
 Style/MethodMissing:
   Description: 'Avoid using `method_missing`.'
   StyleGuide: '#no-method-missing'
+  Enabled: true
+
+# Disabled by default
+Style/MissingElse:
+  Description: >-
+                Require if/case expressions to have an else branches.
+                If enabled, it is recommended that
+                Style/UnlessElse and Style/EmptyElse be enabled.
+                This will conflict with Style/EmptyElse if
+                Style/EmptyElse is configured to style "both"
   Enabled: true
 
 Style/MinMax:
@@ -1927,8 +1981,16 @@ Style/TernaryParentheses:
   Description: 'Checks for use of parentheses around ternary conditions.'
   Enabled: true
 
+Style/TrailingBodyOnClass:
+  Description: 'Class body goes below class statement.'
+  Enabled: true
+
 Style/TrailingBodyOnMethodDefinition:
   Description: 'Method body goes below definition.'
+  Enabled: true
+
+Style/TrailingBodyOnModule:
+  Description: 'Module body goes below module statement.'
   Enabled: true
 
 Style/TrailingCommaInArguments:
@@ -1936,9 +1998,13 @@ Style/TrailingCommaInArguments:
   StyleGuide: '#no-trailing-params-comma'
   Enabled: true
 
-Style/TrailingCommaInLiteral:
-  Description: 'Checks for trailing comma in array and hash literals.'
+Style/TrailingCommaInArrayLiteral:
+  Description: 'Checks for trailing comma in array literals.'
   StyleGuide: '#no-trailing-array-commas'
+  Enabled: true
+
+Style/TrailingCommaInHashLiteral:
+  Description: 'Checks for trailing comma in hash literals.'
   Enabled: true
 
 Style/TrailingMethodEndStatement:

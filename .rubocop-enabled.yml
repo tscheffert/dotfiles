@@ -1163,6 +1163,10 @@ Rails/HasManyOrHasOneDependent:
   StyleGuide: 'https://github.com/bbatsov/rails-style-guide#has_many-has_one-dependent-option'
   Enabled: true
 
+Rails/HttpStatus:
+  Description: 'Enforces use of symbolic or numeric value to define HTTP status.'
+  Enabled: true
+
 Rails/InverseOf:
   Description: 'Checks for associations where the inverse cannot be determined automatically.'
   Enabled: true
@@ -2034,6 +2038,12 @@ Style/UnneededInterpolation:
 Style/UnneededPercentQ:
   Description: 'Checks for %q/%Q when single quotes or double quotes would do.'
   StyleGuide: '#percent-q'
+  Enabled: true
+
+Style/UnpackFirst:
+  Description: >-
+                  Checks for accessing the first element of `String#unpack`
+                  instead of using `unpack1`
   Enabled: true
 
 Style/VariableInterpolation:

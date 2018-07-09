@@ -26,14 +26,21 @@ def textmate_var(var, snip):
 	return
 endglobal
 
-
-snippet % "<% ${0} %>"
-`!p textmate_var('TM_RAILS_TEMPLATE_START_RUBY_INLINE', snip)`${0}`!p textmate_var('TM_RAILS_TEMPLATE_END_RUBY_INLINE', snip)`
+snippet % "erb ruby block" sm
+<% ${1:ruby_code} %>
 endsnippet
 
-snippet = "<%= ${0} %>"
-`!p textmate_var('TM_RAILS_TEMPLATE_START_RUBY_EXPR', snip)`${0}`!p textmate_var('TM_RAILS_TEMPLATE_END_RUBY_EXPR', snip)`
+snippet = "erb value block"
+<%= ${1:ruby_value} %>
 endsnippet
+
+# snippet % "<% ${0} %>"
+# `!p textmate_var('TM_RAILS_TEMPLATE_START_RUBY_INLINE', snip)`${0}`!p textmate_var('TM_RAILS_TEMPLATE_END_RUBY_INLINE', snip)`
+# endsnippet
+
+# snippet = "<%= ${0} %>"
+# `!p textmate_var('TM_RAILS_TEMPLATE_START_RUBY_EXPR', snip)`${0}`!p textmate_var('TM_RAILS_TEMPLATE_END_RUBY_EXPR', snip)`
+# endsnippet
 
 ###########################################################################
 #            GENERATED FROM get_tm_snippets.py + REGEX REPLACE            #

@@ -2,7 +2,7 @@
 # This started as the default configuration and then I have modified it to suit
 # my preferences.
 
-# Version: 0.57.0
+# Version: 0.58.0
 
 inherit_from:
   - .rubocop-enabled.yml
@@ -134,7 +134,7 @@ AllCops:
   # followed by the Gemfile.lock or gems.locked file. (Although the Ruby version
   # is specified in the Gemfile or gems.rb file, RuboCop reads the final value
   # from the lock file.) If the Ruby version is still unresolved, RuboCop will
-  # use the oldest officially supported Ruby version (currently Ruby 2.1).
+  # use the oldest officially supported Ruby version (currently Ruby 2.2).
   TargetRubyVersion: 2.3
   # What version of Rails is the inspected code using?  If a value is specified
   # for TargetRailsVersion then it is used.  Acceptable values are specificed
@@ -750,6 +750,13 @@ Naming/HeredocDelimiterCase:
     - lowercase
     - uppercase
 
+Naming/MemoizedInstanceVariableName:
+  EnforcedStyleForLeadingUnderscores: disallowed
+  SupportedStylesForLeadingUnderscores:
+    - disallowed
+    - required
+    - optional
+
 Naming/MethodName:
   EnforcedStyle: snake_case
   SupportedStyles:
@@ -1144,6 +1151,12 @@ Style/InverseMethods:
   InverseBlocks:
     :select: :reject
     :select!: :reject!
+
+Style/IpAddresses:
+  # Allow strings to be whitelisted
+  Whitelist:
+    - "::"
+    # :: is a valid IPv6 address, but could potentially be legitimately in code
 
 Style/Lambda:
   EnforcedStyle: literal
@@ -1567,7 +1580,13 @@ Metrics/AbcSize:
 Metrics/BlockLength:
   CountComments: false  # count full line comments?
   Max: 25
-  ExcludedMethods: ['describe', 'context', 'handle', 'create']
+  ExcludedMethods:
+    # By default, exclude the `#refine` method, as it tends to have larger
+    # associated blocks.
+    - refine
+    # Exclude rspec DSL
+    - describe
+    - context
 
 Metrics/BlockNesting:
   CountBlocks: false

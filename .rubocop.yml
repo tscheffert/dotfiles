@@ -2,7 +2,7 @@
 # This started as the default configuration and then I have modified it to suit
 # my preferences.
 
-# Version: 0.55.0
+# Version: 0.56.0
 
 inherit_from:
   - .rubocop-enabled.yml
@@ -10,8 +10,15 @@ inherit_from:
 
 # Common configuration.
 AllCops:
+  RubyInterpreters:
+    - ruby
+    - macruby
+    - rake
+    - jruby
+    - rbx
   # Include common Ruby source files.
   Include:
+    - '**/*.rb'
     - '**/*.arb'
     - '**/*.axlsx'
     - '**/*.builder'
@@ -361,11 +368,14 @@ Layout/ExtraSpacing:
   ForceEqualSignAlignment: false
 
 Layout/FirstParameterIndentation:
-  EnforcedStyle: consistent
+  EnforcedStyle: consistent_relative_to_receiver
   SupportedStyles:
     # The first parameter should always be indented one step more than the
     # preceding line.
     - consistent
+    # The first parameter should always be indented one level relative to the
+    # parent that is receiving the parameter
+    - consistent_relative_to_receiver
     # The first parameter should normally be indented one step more than the
     # preceding line, but if it's a parameter for a method call that is itself
     # a parameter in a method call, then the inner parameter should be indented
@@ -1274,6 +1284,7 @@ Style/OptionHash:
 # Allow safe assignment in conditions.
 Style/ParenthesesAroundCondition:
   AllowSafeAssignment: true
+  AllowInMultilineConditions: false
 
 Style/PercentLiteralDelimiters:
   # Specify the default preferred delimiter for all types with the 'default' key
@@ -1357,6 +1368,7 @@ Style/SafeNavigation:
     - blank?
     - presence
     - try
+    - try!
 
 Style/Semicolon:
   # Allow `;` to separate several expressions on the same line.
@@ -1629,6 +1641,15 @@ Lint/SafeNavigationChain:
     - blank?
     - presence
     - try
+    - try!
+
+Lint/SafeNavigationConsistency:
+  Whitelist:
+    - present?
+    - blank?
+    - presence
+    - try
+    - try!
 
 # Checks for shadowed arguments
 Lint/ShadowedArgument:
@@ -1702,6 +1723,18 @@ Rails/ActionFilter:
     - filter
   Include:
     - app/controllers/**/*.rb
+
+Rails/AssertNot:
+  Include:
+    - '**/test/**/*'
+
+Rails/Blank:
+  # Convert usages of `nil? || empty?` to `blank?`
+  NilOrEmpty: true
+  # Convert usages of `!present?` to `blank?`
+  NotPresent: true
+  # Convert usages of `unless present?` to `if blank?`
+  UnlessPresent: true
 
 Rails/CreateTableWithTimestamps:
   Include:
@@ -1780,6 +1813,14 @@ Rails/Output:
   Include:
     - app/**/*.rb
 
+Rails/Present:
+  # Convert usages of `!nil? && !empty?` to `present?`
+  NotNilAndNotEmpty: true
+  # Convert usages of `!blank?` to `present?`
+  NotBlank: true
+  # Convert usages of `unless blank?` to `if present?`
+  UnlessBlank: true
+
 Rails/ReadWriteAttribute:
   Include:
     - app/models/**/*.rb
@@ -1789,6 +1830,10 @@ Rails/RequestReferer:
   SupportedStyles:
     - referer
     - referrer
+
+Rails/RefuteMethods:
+  Include:
+    - '**/test/**/*'
 
 Rails/ReversibleMigration:
   Include:

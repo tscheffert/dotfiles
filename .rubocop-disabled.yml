@@ -2,7 +2,7 @@
 
 Layout/ClassStructure:
   Description: 'Enforces a configured order of definitions within a class body.'
-  StyleGuide: 'https://github.com/bbatsov/ruby-style-guide#consistent-classes'
+  StyleGuide: 'https://github.com/rubocop-hq/ruby-style-guide#consistent-classes'
   Enabled: false
 
 Layout/MultilineAssignmentLayout:
@@ -101,7 +101,7 @@ Rails/HttpPositionalArguments:
 # Enabled by default, but super chatty and it's not useful with activesupport
 Rails/TimeZone:
   Description: 'Checks the correct usage of time zone aware methods.'
-  StyleGuide: 'https://github.com/bbatsov/rails-style-guide#time'
+  StyleGuide: 'https://github.com/rubocop-hq/rails-style-guide#time'
   Reference: 'http://danilenko.org/2012/7/6/rails_timezones'
   Enabled: false
 

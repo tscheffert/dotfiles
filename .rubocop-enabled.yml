@@ -94,6 +94,10 @@ Layout/CaseIndentation:
   StyleGuide: '#indent-when-to-case'
   Enabled: true
 
+Layout/ClosingHeredocIndentation:
+  Description: 'Checks the indenation of here document closings.'
+  Enabled: true
+
 Layout/ClosingParenthesisIndentation:
   Description: 'Checks the indentation of hanging closing parentheses.'
   Enabled: true
@@ -268,6 +272,10 @@ Layout/IndentationWidth:
 Layout/InitialIndentation:
   Description: >-
     Checks the indentation of the first non-blank non-comment line in a file.
+  Enabled: true
+
+Layout/LeadingBlankLines:
+  Description: Check for unnecessary blank lines at the beginning of a file.
   Enabled: true
 
 Layout/LeadingCommentSpace:
@@ -719,10 +727,6 @@ Lint/ShadowingOuterLocalVariable:
                  for block arguments or block local variables.
   Enabled: true
 
-Lint/SplatKeywordArguments:
-  Description: 'Checks for use of splat keyword arguments as a single Hash.'
-  Enabled: true
-
 Lint/StringConversionInInterpolation:
   Description: 'Checks for Object#to_s usage in string interpolation.'
   StyleGuide: '#no-to-s'
@@ -1138,6 +1142,10 @@ Rails/Blank:
   Description: 'Enforces use of `blank?`.'
   Enabled: true
 
+Rails/BulkChangeTable:
+  Description: 'Check whether alter queries are combinable.'
+  Enabled: true
+
 Rails/CreateTableWithTimestamps:
   Description: >-
                   Checks the migration for which timestamps are not included
@@ -1156,7 +1164,7 @@ Rails/DelegateAllowBlank:
 
 Rails/DynamicFindBy:
   Description: 'Use `find_by` instead of dynamic `find_by_*`.'
-  StyleGuide: 'https://github.com/bbatsov/rails-style-guide#find_by'
+  StyleGuide: 'https://github.com/rubocop-hq/rails-style-guide#find_by'
   Enabled: true
 
 Rails/EnumUniqueness:
@@ -1174,22 +1182,22 @@ Rails/FilePath:
 
 Rails/FindBy:
   Description: 'Prefer find_by over where.first.'
-  StyleGuide: 'https://github.com/bbatsov/rails-style-guide#find_by'
+  StyleGuide: 'https://github.com/rubocop-hq/rails-style-guide#find_by'
   Enabled: true
 
 Rails/FindEach:
   Description: 'Prefer all.find_each over all.find.'
-  StyleGuide: 'https://github.com/bbatsov/rails-style-guide#find-each'
+  StyleGuide: 'https://github.com/rubocop-hq/rails-style-guide#find-each'
   Enabled: true
 
 Rails/HasAndBelongsToMany:
   Description: 'Prefer has_many :through to has_and_belongs_to_many.'
-  StyleGuide: 'https://github.com/bbatsov/rails-style-guide#has-many-through'
+  StyleGuide: 'https://github.com/rubocop-hq/rails-style-guide#has-many-through'
   Enabled: true
 
 Rails/HasManyOrHasOneDependent:
   Description: 'Define the dependent option to the has_many and has_one associations.'
-  StyleGuide: 'https://github.com/bbatsov/rails-style-guide#has_many-has_one-dependent-option'
+  StyleGuide: 'https://github.com/rubocop-hq/rails-style-guide#has_many-has_one-dependent-option'
   Enabled: true
 
 Rails/HttpStatus:
@@ -1202,7 +1210,7 @@ Rails/InverseOf:
 
 Rails/LexicallyScopedActionFilter:
   Description: "Checks that methods specified in the filter's `only` or `except` options are explicitly defined in the controller."
-  StyleGuide: 'https://github.com/bbatsov/rails-style-guide#lexically-scoped-action-filter'
+  StyleGuide: 'https://github.com/rubocop-hq/rails-style-guide#lexically-scoped-action-filter'
   Enabled: true
 
 Rails/NotNullColumn:
@@ -1233,7 +1241,7 @@ Rails/ReadWriteAttribute:
   Description: >-
                  Checks for read_attribute(:attr) and
                  write_attribute(:attr, val).
-  StyleGuide: 'https://github.com/bbatsov/rails-style-guide#read-attribute'
+  StyleGuide: 'https://github.com/rubocop-hq/rails-style-guide#read-attribute'
   Enabled: true
 
 Rails/RedundantReceiverInWithOptions:
@@ -1254,7 +1262,7 @@ Rails/RequestReferer:
 
 Rails/ReversibleMigration:
   Description: 'Checks whether the change method of the migration file is reversible.'
-  StyleGuide: 'https://github.com/bbatsov/rails-style-guide#reversible-migration'
+  StyleGuide: 'https://github.com/rubocop-hq/rails-style-guide#reversible-migration'
   Reference: 'http://api.rubyonrails.org/classes/ActiveRecord/Migration/CommandRecorder.html'
   Enabled: true
 
@@ -1265,7 +1273,7 @@ Rails/SafeNavigation:
 # Disabled by default but I think it's a great idea
 Rails/SaveBang:
   Description: 'Identifies possible cases where Active Record save! or related should be used.'
-  StyleGuide: 'https://github.com/bbatsov/rails-style-guide#save-bang'
+  StyleGuide: 'https://github.com/rubocop-hq/rails-style-guide#save-bang'
   Enabled: true
 
 Rails/ScopeArgs:
@@ -1328,6 +1336,10 @@ Security/YAMLLoad:
 
 
 #################### Style ###############################
+
+Style/AccessModifierDeclarations:
+  Description: 'Checks style of how access modifiers are used.'
+  Enabled: true
 
 Style/Alias:
   Description: 'Use alias instead of alias_method.'
@@ -2058,6 +2070,10 @@ Style/UnlessElse:
 
 Style/UnneededCapitalW:
   Description: 'Checks for %W when interpolation is not needed.'
+  Enabled: true
+
+Style/UnneededCondition:
+  Description: 'Checks for unnecessary conditional expressions.'
   Enabled: true
 
 Style/UnneededInterpolation:

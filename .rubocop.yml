@@ -2,7 +2,7 @@
 # This started as the default configuration and then I have modified it to suit
 # my preferences.
 
-# Version: 0.56.0
+# Version: 0.57.0
 
 inherit_from:
   - .rubocop-enabled.yml
@@ -84,7 +84,7 @@ AllCops:
   DisplayStyleGuide: false
   # When specifying style guide URLs, any paths and/or fragments will be
   # evaluated relative to the base URL.
-  StyleGuideBaseURL: https://github.com/bbatsov/ruby-style-guide
+  StyleGuideBaseURL: https://github.com/rubocop-hq/ruby-style-guide
   # Extra details are not displayed in offense messages by default. Change
   # behavior by overriding ExtraDetails, or by giving the
   # `-E/--extra-details` option.
@@ -821,6 +821,12 @@ Naming/VariableNumber:
 
 #################### Style ###########################
 
+Style/AccessModifierDeclarations:
+  EnforcedStyle: group
+  SupportedStyles:
+    - inline
+    - group
+
 Style/Alias:
   EnforcedStyle: prefer_alias_method
   SupportedStyles:
@@ -1432,7 +1438,7 @@ Style/StringMethods:
 
 Style/SymbolArray:
   EnforcedStyle: percent
-  MinSize: 0
+  MinSize: 2
   SupportedStyles:
     - percent
     - brackets
@@ -1538,7 +1544,7 @@ Style/WordArray:
   # The `MinSize` option causes the `WordArray` rule to be ignored for arrays
   # smaller than a certain size.  The rule is only applied to arrays
   # whose element count is greater than or equal to `MinSize`.
-  MinSize: 0
+  MinSize: 2
   # The regular expression `WordRegex` decides what is considered a word.
   WordRegex: !ruby/regexp '/\A[\p{Word}\n\t]+\z/'
 
@@ -1736,6 +1742,14 @@ Rails/Blank:
   # Convert usages of `unless present?` to `if blank?`
   UnlessPresent: true
 
+Rails/BulkChangeTable:
+  Database: null
+  SupportedDatabases:
+    - mysql
+    - postgresql
+  Include:
+    - db/migrate/*.rb
+
 Rails/CreateTableWithTimestamps:
   Include:
     - db/migrate/*.rb
@@ -1772,6 +1786,12 @@ Rails/Exit:
 Rails/EnumUniqueness:
   Include:
     - app/models/**/*.rb
+
+Rails/FilePath:
+  EnforcedStyle: arguments
+  SupportedStyles:
+    - slashes
+    - arguments
 
 Rails/FindBy:
   Include:

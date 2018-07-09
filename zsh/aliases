@@ -127,6 +127,11 @@ alias gcam='git commit --amend'
 # Git commit ammend, with edit (the message)
 alias gcae='git commit --amend'
 
+# Git Cherry Picking
+alias gcp='git cherry-pick'
+alias gcpc='git cherry-pick --continue'
+alias gcpa='git cherry-pick --abort'
+
 alias gd='git diff --color-words'
 
 alias gds='git diff --staged --color-words'
@@ -208,6 +213,9 @@ alias gbrp='git reflog | sed -n "s/.*checkout: moving from .* to \(.*\)/\1/p" | 
 
 # Git show
 alias gsh='git show'
+
+# Git show files
+alias gshf='git show --name-only'
 
 # Stash all tracked, unstaged files
 alias gst='git stash'

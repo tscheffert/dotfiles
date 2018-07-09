@@ -4,6 +4,10 @@
 require 'active_support/core_ext/object/blank'
 require 'open3'
 
+# Sources:
+#   https://askubuntu.com/questions/506670/how-to-do-i-convert-an-webm-video-to-a-animated-gif-on-the-command-line
+#   https://superuser.com/questions/556029/how-do-i-convert-a-video-to-gif-using-ffmpeg-with-reasonable-quality/556031
+#   http://blog.pkh.me/p/21-high-quality-gif-with-ffmpeg.html
 module Webm2Gif
 
   def self.perform(args:)

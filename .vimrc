@@ -518,6 +518,11 @@ augroup END
 
 function! RubySyntax()
   hi! def link rubyCapitalizedMethod rubyConstant
+
+  " Differ integers and booleans from strings
+  hi! def link rubyBoolean Function
+  hi! def link rubyInteger Function
+
   " hi def link rubyCapitalizedMethod Function
 endfunction
 

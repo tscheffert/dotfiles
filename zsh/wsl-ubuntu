@@ -29,3 +29,7 @@ alias 'update-wsl'='sudo apt-get update && sudo apt-get upgrade'
 if which rbenv > /dev/null ; then
   eval "$(rbenv init - zsh)"
 fi
+
+# --- Other ---
+eval $(dircolors .dir_colors_solarized)
+# eval $(dircolors .dir_colors)

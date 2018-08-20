@@ -46,5 +46,28 @@ else
   echo "has rust, check"
 fi
 
+# Ensure python
+if ! test_exists python; then
+  # TODO: Look into https://github.com/pyenv/pyenv
+  sudo apt-get install python --assume-yes
+fi
+
+# Ensure pip, which doesn't come with python for some reason?!?
+if ! test_exists pip; then
+  sudo apt-get install python-pip python-setuptools --assume-yes
+
+  # Pip versions are busted
+  # https://github.com/pypa/pip/issues/5240#issuecomment-381673100
+  pip install --upgrade pip==9.0.3
+fi
+
+# Ensure python dependencies are installed
+if test_exists pip; then
+  pip install -r requirements.txt
+  pip2 install -r requirements2.txt
+  # pip3 install -r requirements3.txt
+fi
+
+
 echo " -- Finished installing apps --"
 

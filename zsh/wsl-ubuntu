@@ -15,6 +15,7 @@ remove_from_path "/mnt/c/opscode/chefdk/bin"
 
 # -- Prepend --
 prepend_to_path "$HOME/.rbenv/bin"
+prepend_to_path "$HOME/local_bin"
 
 
 # -- Append --

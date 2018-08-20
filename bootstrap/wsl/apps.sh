@@ -38,4 +38,13 @@ else
   echo "has fzf, check"
 fi
 
+ # Ensure rust
+if ! test_exists cargo; then
+  echo " -- Installing Rust --"
+  curl https://sh.rustup.rs -sSf | sh -s -- --no-modify-path
+else
+  echo "has rust, check"
+fi
+
 echo " -- Finished installing apps --"
+

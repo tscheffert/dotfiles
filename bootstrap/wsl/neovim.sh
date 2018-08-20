@@ -76,3 +76,8 @@ function link_neovim_config {
   ln -sf "$HOME/.dotfiles/.config/nvim/init.vim" "$HOME/.config/nvim/init.vim"
 }
 link_neovim_config
+
+echo ""
+echo " -- NOTE: --"
+echo "To get the neovim clipboard working, download a https://github.com/equalsraf/win32yank release and link it with the following:"
+echo "  sudo ln -s /mnt/d/Neovim/bin/win32yank.exe /usr/bin/win32yank"

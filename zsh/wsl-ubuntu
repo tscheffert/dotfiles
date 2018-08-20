@@ -30,6 +30,13 @@ if which rbenv > /dev/null ; then
   eval "$(rbenv init - zsh)"
 fi
 
+
+# --- Rust ---
+if [[ -e "$HOME/.cargo/env" ]]; then
+  source $HOME/.cargo/env
+fi
+
+
 # --- Other ---
 eval $(dircolors .dir_colors_solarized)
 # eval $(dircolors .dir_colors)

@@ -902,7 +902,9 @@ else
     " Fix <BS> in ConEmu terminals per http://conemu.github.io/en/VimXterm.html#vim-bs-issue
     inoremap <Char-0x07F> <BS>
   endif
-  set term=xterm
+  if !has('nvim')
+    set term=xterm
+  endif
   set t_Co=256
   let &t_AB="\e[48;5;%dm"
   let &t_AF="\e[38;5;%dm"
@@ -950,10 +952,14 @@ if has('mouse')
   if has('mouse_sgr') || v:version > 703 ||
         \ v:version == 703 && has('patch632')
     " Ideal mouse setting, backwards compatible with xterm and xterm2
-    set ttymouse=sgr
+    if !has('nvim')
+      set ttymouse=sgr
+    endif
   else
     " Fallback
-    set ttymouse=xterm2
+    if !has('nvim')
+      set ttymouse=xterm2
+    endif
   endif
 endif
 

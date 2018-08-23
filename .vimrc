@@ -601,6 +601,13 @@ augroup BashFiles
   autocmd Filetype sh setlocal fileformat=unix
 augroup END
 
+augroup MarkdownFiles
+  au!
+
+  " Prefer CRLF line endings
+  autocmd Filetype markdown setlocal fileformat=unix
+augroup END
+
 
 " -----
 " Typing Behaviors

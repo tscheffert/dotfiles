@@ -59,3 +59,12 @@ function ps-beautify() {
   # Invoke the beautify function defined in my PowerShell profile
   powershell -Command "Edit-BeautifyFile $1"
 }
+
+
+# --- Exports ---
+
+# Uncomment these when trying to install native extensions for ruby gems that fail
+# export tmp="$(cygpath -m "/tmp")"
+# export TMP="$(cygpath -m "$TMP")"
+# export TEMP="$(cygpath -m "$TEMP")"
+# export TMPDIR="$(cygpath -m "$TMPDIR")"

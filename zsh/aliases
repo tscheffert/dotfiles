@@ -256,10 +256,10 @@ function git-pickaxe {
 
 # -- Ruby Aliases --
 # Run Rubocop gem
-alias rbc='rubocop'
+alias rbc='rubocop --config ~/.rubocop.yml'
 
 # Run Rubocop gem and auto-correct detected violations when available
-alias rbca='rubocop --auto-correct'
+alias rbca='rubocop --config ~/.rubocop.yml --auto-correct'
 
 # Run Rubocop with a local .rubocop_todo.yml set to inherit from home directory config
 alias rtd='rubocop --config .rubocop_todo.yml'

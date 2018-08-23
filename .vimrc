@@ -131,9 +131,15 @@ Plug 'tbastos/vim-lua', { 'for': ['lua'] }
 Plug 'mxw/vim-jsx',                              { 'for': ['javascript', 'js'] }
 Plug 'othree/yajs.vim',                          { 'for': ['javascript', 'js'] }
 Plug 'mtscout6/vim-cjsx',                        { 'for': ['javascript', 'js'] }
-Plug 'jason0x43/vim-js-indent',                  { 'for': ['javascript', 'js'] }
+Plug 'jason0x43/vim-js-indent',                  { 'for': ['javascript', 'js', 'typescript', 'tsx'] }
 Plug 'pangloss/vim-javascript',                  { 'for': ['javascript', 'js'] }
 Plug 'othree/javascript-libraries-syntax.vim',   { 'for': ['javascript', 'js'] }
+
+
+" Typescript from: https://github.com/Quramy/tsuquyomi#relevant-plugins
+Plug 'Quramy/vim-js-pretty-template',            { 'for': ['javascript', 'js', 'typescript', 'tsx'] }
+Plug 'leafgarland/typescript-vim',               { 'for': ['javascript', 'js', 'typescript', 'tsx'] }
+
 " Can't connect to repo. No longer public?
 " Plug 'git@github.com:othree/es.next.syntax.vim', { 'for': ['javascript', 'js'] }
 Plug 'othree/html5.vim',                         { 'for': ['html'] }

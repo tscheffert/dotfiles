@@ -348,3 +348,6 @@ alias f='findn'
 
 # open-repo is a python script that opens a git repo in the browser on github
 alias or='open-repo'
+
+alias find-kitchen="find ./ -type d -name '.kitchen'"
+alias find-and-remove-kitchen="find ./ -type d -name '.kitchen' | xargs rm -rv {}"

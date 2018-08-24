@@ -128,21 +128,22 @@ function comp_name() {
   echo "$color$name"
 }
 
+# Check if we're in a git repo, if we are then only show that; otherwise show the
+# current working directory
 function path() {
   local color="%{$fg[yellow]%}"
-  # %~ expands to the current working directory but if it starts with $HOME
-  #   then replace that with a '~'
-  # local dir="%~"
-  local dir="$(pwd)"
-  # Trim $dir if it's too long
-  # TODO: Figure out how to do this generically, other prompts somewhere must do it
-  if [[ "$dir" =~ "slalom-configuration-management/" ]]; then
-    dir="../${dir#/c/dev/gitlab/slalom-configuration-management/}"
-  elif [[ "$dir" =~ "/home/tscheffert/dev/Gitlab/scm/" ]]; then
-    dir="../${dir#/home/tscheffert/dev/Gitlab/scm/}"
-  elif [[ "$dir" =~ "scm/" ]]; then
-    dir="../${dir#/c/dev/gitlab/scm/}"
+
+  local git_repo="$(git rev-parse --show-toplevel 2> /dev/null)"
+
+  if [[ -n "$git_repo" ]]; then
+    # Expand variable with `:t` for behavior like `basename`. Run `man zshexpn` for more info
+    local dir="../${git_repo:t}"
+  else
+    # %~ is a prompt expansion sequence which expands to the current working
+    # directory but replaces $HOME with a ~ if it exists in the path
+    local dir="%~"
   fi
+
   local left_bracket="["
   local right_bracket="]"
   echo "$color$left_bracket$dir$right_bracket"

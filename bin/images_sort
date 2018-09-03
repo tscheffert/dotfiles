@@ -5,17 +5,20 @@ require 'dimensions'
 require 'bigdecimal'
 require 'fileutils'
 
+test_run = ARGV[0] == '--test'
+
 MIN_RATIO = BigDecimal.new('1.77')
 MAX_RATIO = BigDecimal.new('1.78')
 
 IMAGE_EXTENSIONS = ['.png', '.jpg', '.jpeg']
 
-NOT_SQUARE_DIR = 'not_square'
-FileUtils.mkdir_p(NOT_SQUARE_DIR)
+unless test_run
+  NOT_SQUARE_DIR = 'not_square'
+  FileUtils.mkdir_p(NOT_SQUARE_DIR)
+end
 
 files = Dir.entries('.').select { |f| File.file?(f) && IMAGE_EXTENSIONS.include?(File.extname(f)) }
 # files -= [File.basename(__FILE__)]
-
 
 square, not_square = files.partition do |img|
   begin
@@ -30,7 +33,27 @@ square, not_square = files.partition do |img|
   end
 end
 
-puts "Moving not_square files:"
-puts not_square.to_s
+if test_run
+  unless square.empty?
+    puts "Square:"
+    square.each do |img|
+      puts "  #{img}"
+    end
+  end
 
-FileUtils.mv(not_square, NOT_SQUARE_DIR)
+  unless square.empty? || not_square.empty?
+    puts "\n---------\n\n"
+  end
+
+  unless not_square.empty?
+    puts "Not Square:"
+    not_square.each do |img|
+      puts "  #{img}"
+    end
+  end
+else
+  puts "Moving not_square files:"
+  puts not_square.to_s
+
+  FileUtils.mv(not_square, NOT_SQUARE_DIR)
+end

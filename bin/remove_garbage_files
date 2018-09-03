@@ -1,0 +1,23 @@
+#!/usr/bin/env ruby
+# vim: ft=ruby
+
+# Remove garbage files that are sometimes included in torrents
+
+require 'fileutils'
+
+GARBAGE_FILES = ['RARBG.COM_XXX_BANNER.jpg', 'RARBG.txt', 'RARBG.com.txt','file_id.diz', '.BridgeSort']
+
+GARBAGE_EXTENSIONS = ['.nfo', '.BridgeSort']
+
+garbage_files = Dir.glob('**/*').select { |f| File.file?(f) }.select do |file|
+  GARBAGE_FILES.include?(File.basename(file)) || GARBAGE_EXTENSIONS.include?(File.extname(file))
+end
+
+puts "Found garbage files to remove:"
+puts garbage_files.to_s
+
+begin
+  FileUtils.rm(garbage_files)
+rescue => e
+  "Failed to remove garbage files with #{e}"
+end

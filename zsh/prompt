@@ -133,11 +133,23 @@ function comp_name() {
 function path() {
   local color="%{$fg[yellow]%}"
 
+  # TODO: Only shell out for git rev-parse once, like here: https://github.com/git/git/blob/041fe8fc83770f95b09db4aa9d9b3783789eab08/contrib/completion/git-prompt.sh#L364
+  #   But use a zsh array to capture results
   local git_repo="$(git rev-parse --show-toplevel 2> /dev/null)"
 
   if [[ -n "$git_repo" ]]; then
     # Expand variable with `:t` for behavior like `basename`. Run `man zshexpn` for more info
-    local dir="../${git_repo:t}"
+    local git_root="../${git_repo:t}"
+
+    # Get the path of the sub dir, relative to the top level dir; then expand the parameter
+    # to remove a trailing forward slash
+    local sub_dir="${$(git rev-parse --show-prefix)%/}"
+
+    if [[ -n "$sub_dir" ]]; then
+      local dir="$git_root/$sub_dir"
+    else
+      local dir="$git_root"
+    fi
   else
     # %~ is a prompt expansion sequence which expands to the current working
     # directory but replaces $HOME with a ~ if it exists in the path

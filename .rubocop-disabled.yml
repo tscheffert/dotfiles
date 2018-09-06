@@ -63,6 +63,15 @@ Style/MethodCallWithArgsParentheses:
   StyleGuide: '#method-invocation-parens'
   Enabled: false
 
+# Enabled by default, but it's confusing and the autocorrect is surprising. This
+# also makes the "is it null" concern implicit, when it should be explicit
+Style/SafeNavigation:
+  Description: >-
+                  This cop transforms usages of a method call safeguarded by
+                  a check for the existance of the object to
+                  safe navigation (`&.`).
+  Enabled: false
+
 # Enabled by default, but we shouldn't enforce names; leave it up to the user
 Style/SingleLineBlockParams:
   Description: 'Enforces the names of some block params.'

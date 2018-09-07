@@ -134,6 +134,9 @@ alias gcpa='git cherry-pick --abort'
 
 alias gd='git diff --color-words'
 
+# Git diff files
+alias gdf='git diff --name-only'
+
 alias gds='git diff --staged --color-words'
 
 # Git diff (with) origin HEAD

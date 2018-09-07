@@ -19,3 +19,10 @@ I've manually changed, or removed, the following files:
 
 
 NOTE: I should potentially do something about `/etc/inputrc`
+
+
+## Install man
+
+```bash
+pacman -S man
+```

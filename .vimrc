@@ -1058,13 +1058,6 @@ let g:jsx_no_default_key_mappings = 1
 " Let JSX run in normal JS files
 let g:jsx_ext_required = 0
 
-" Set the easy motion leader key to be - so it's activated with -
-map - <Plug>(easymotion-prefix)
-
-" Using easy motion show all the places where two characters appear, both fwds
-" and bwds
-map <SPACE> <Plug>(easymotion-s2)
-
 
 " ----- My Plugin: blocked
 augroup blocked
@@ -1949,9 +1942,21 @@ augroup END
 " -----
 " EasyMotion Key Maps
 " -----
+
+" Disable default mappings
+let g:EasyMotion_do_mapping = 0
+
+" Set the easy motion leader key to be - so it's activated with -
+noremap - <Plug>(easymotion-prefix)
+
+" Match and Jump two characters, both forwards and backwards
+nmap <Space> <Plug>(easymotion-s2)
+
+" Repeat the last motion
+nmap <Leader><Space> <Plug>(easymotion-repeat)
+
 "  From: http://www.robati.com/vim/2014/11/03/vimrc.html
 " " EasyMotion
-" let g:EasyMotion_do_mapping = 0       " Disable default mappings
 " nmap s <Plug>(easymotion-bd-w)
 " nmap t <Plug>(easymotion-t2)
 " map  / <Plug>(easymotion-sn)

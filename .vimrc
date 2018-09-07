@@ -16,6 +16,8 @@ elseif g:uname =~ "Linux" && g:uname =~ "Microsoft"
   let g:os = 'wsl'
 elseif g:uname =~ "Linux"
   let g:os = 'linux'
+elseif g:uname =~ "MINGW64"
+  let g:os = 'windows'
 else
   echo "Couldn't detect OS from uname: " . g:uname . ", shits gonna break"
 endif

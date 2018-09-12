@@ -1,0 +1,33 @@
+#!/usr/bin/env ruby
+# vim: ft=ruby
+
+require 'active_support/core_ext/object/blank'
+
+module GitDeleteRemoteTrackingBranches
+  def self.perform(remote:, branches_file:)
+    raise unless File.exist?(branches_file)
+
+    puts "-- Deleting remote-tracking branches from #{remote}/#{branches_file}"
+    File.open(branches_file, 'r') do |file|
+      file.each_line do |branch|
+        branch = branch.strip
+        next if branch.blank?
+
+        puts "\n"
+        puts "Attempting to delete branch: remotes/#{remote}/#{branch}"
+
+        `git branch -d -r #{remote}/#{branch}`
+
+        if $?.exitstatus == 0
+          puts "++ Deleted successfully"
+        else
+          warn '!! Failed to delete '
+        end
+        puts "\n"
+      end
+    end
+
+  end
+end
+
+GitDeleteRemoteTrackingBranches.perform(remote: ARGV[0], branches_file: ARGV[1])

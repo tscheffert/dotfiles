@@ -609,6 +609,15 @@ augroup BashFiles
   autocmd Filetype sh setlocal fileformat=unix
 augroup END
 
+augroup EchoFiles
+  au!
+
+  " Set the filetype for encrypted vault files to JSON for syntax and linting
+  autocmd BufNewFile,BufRead development.key setlocal filetype=json
+  autocmd BufNewFile,BufRead qa.key setlocal filetype=json
+  autocmd BufNewFile,BufRead production.key setlocal filetype=json
+augroup END
+
 augroup MarkdownFiles
   au!
 

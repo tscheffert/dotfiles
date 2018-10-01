@@ -5,6 +5,9 @@ if ! gem list rubocop -i &> /dev/null; then
     gem install rubocop --no-document
 fi
 
+echo "AutoCop is temporarily disabled"
+exit 0
+
 function untracked-files() {
   # List of files that are currently "untracked"
 

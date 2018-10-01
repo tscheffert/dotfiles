@@ -43,6 +43,7 @@
   compactionHeuristic = true
   # Highlight whitespace errors
   wsErrorHighlight = all
+  renameLimit = 3000
 
 [fetch]
   # Delete stale branches after each fetch

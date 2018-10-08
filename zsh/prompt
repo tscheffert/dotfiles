@@ -5,8 +5,15 @@
 # More prompt expansion info at http://zsh.sourceforge.net/Doc/Release/Prompt-Expansion.html
 
 # Fills the color array so that we can do the '%{fg[red]%}'
+# Colors: https://github.com/zsh-users/zsh/blob/master/Functions/Misc/colors
 autoload -U colors && colors
 spectrum # Load spectrum function to enable $FG[010] stuff
+
+# Git Status from color:
+# - Green is default/good-to-go/unknown
+# - Blue is known behind, like unpushed changed
+# - Red is local changes
+# - Magenta is "detached HEAD" state
 
 # Different char for each version control
 function prompt_char {
@@ -92,8 +99,20 @@ function git_branch {
     # TODO: Determine some way to show that we're rebasing
     echo "$left_parens$prompt_color${branch//[^a-zA-Z0-9_\/-]/*}%{$reset_color%}$right_parens"
   else
-    # HEAD is not a symbolic ref, meaning we're detached or something
-    echo "$left_parens$prompt_color???%{$reset_color%}$right_parens"
+    # TODO: What happens when we're rebasing?
+    # Get the git name for given revision, which defaults to tag
+    local detached_head="$(git name-rev --name-only HEAD 2>/dev/null)"
+    if [[ -n "$detached_head" ]]; then
+      # Strip leading 'tags'
+      detached_head="${detached_head#tags/}"
+
+      # Detached HEAD state is magenta
+      prompt_color="%{$fg[magenta]%}"
+      echo "$left_parens$prompt_color${detached_head//[^a-zA-Z0-9_\/-]/*}%{$reset_color%}$right_parens"
+    else
+      # HEAD is not a symbolic ref, and we don't know how to describe/name it
+      echo "$left_parens$prompt_color???%{$reset_color%}$right_parens"
+    fi
   fi
 }
 

@@ -1,0 +1,105 @@
+#!/usr/bin/env ruby
+# vi: ft=ruby
+
+require 'active_support'
+require 'active_support/core_ext/object/blank'
+require 'active_support/core_ext/hash/slice'
+require 'optparse'
+
+require File.join(__dir__, '..', 'ruby', 'lib', 'shelper')
+
+module ExtractGitHistorySubset
+
+  # Takes in two files, one with each line a "shared file"  and one with each line
+  # a "unique file". These lines should be in the standard '.gitignore' format. Then
+  # Run GitRocketFilter, keeping only the files specified in those arguments.
+  def self.perform(argv:)
+    options = parse_args_from(argv: argv)
+
+    patterns_to_keep = load_patterns_from(
+      shared_patterns_file: options[:shared_patterns_file],
+      unique_patterns_file: options[:unique_patterns_file])
+
+    filter_git_history(branch: options[:target_branch], patterns_to_keep: patterns_to_keep)
+  end
+
+  # TODO: This is crazy, extract into a helper file with a better interface
+  def self.parse_args_from(argv:)
+    options = {}
+
+    parser = OptionParser.new do |opts|
+      opts.banner = 'Usage: extract_git_history_subset --shared-patterns <file> --unique-patterns <file> --target-branch <branch>'
+
+      opts.on(:REQUIRED, '--shared-patterns file', String, 'File with list of shared patterns') do |file|
+        options[:shared_patterns_file] = file
+      end
+
+      opts.on(:REQUIRED, '--unique-patterns file', String, 'File with list of unique patterns') do |file|
+        options[:unique_patterns_file] = file
+      end
+
+      opts.on(:REQUIRED, '--target-branch branch', String, 'Branch name to put rewritten history on') do |branch|
+        options[:target_branch] = branch
+      end
+    end
+
+    parser.parse!(argv)
+
+    required_args = {
+      shared_patterns_file: "--shared-patterns",
+      unique_patterns_file: "--unique-patterns",
+      target_branch:        "--target-branch"
+    }
+    missing_args = required_args.select { |k,v| options[k].blank? }
+    if missing_args.present?
+      raise OptionParser::MissingArgument.new(missing_args.values.join(", "))
+    end
+
+    # OptionParser doesn't support "additional validation", so do that here
+    raise "Cannot find file for shared-patterns: #{options[:shared_patterns_file]}" unless File.exist?(options[:shared_patterns_file])
+    raise "Cannot find file for unique-patterns: #{options[:unique_patterns_file]}" unless File.exist?(options[:unique_patterns_file])
+
+    # parser.parse! is destructive, if any arguments are left they're invalid
+    raise "Invalid arguments: #{argv}" if argv.present?
+
+    options
+  rescue OptionParser::InvalidOption, OptionParser::MissingArgument => e
+    warn e.to_s
+    warn parser
+    exit 1
+  end
+  private_class_method :parse_args_from
+
+
+  def self.load_patterns_from(shared_patterns_file:, unique_patterns_file:)
+    shared_patterns = File.readlines(shared_patterns_file).map(&:strip).compact
+    unique_patterns = File.readlines(unique_patterns_file).map(&:strip).compact
+
+    patterns_to_keep = shared_patterns + unique_patterns
+
+    raise "Something may have gone wrong, less than three patterns found" if patterns_to_keep.length < 2
+
+    patterns_to_keep
+  end
+  private_class_method :load_patterns_from
+
+  def self.filter_git_history(branch:, patterns_to_keep:)
+    command = [
+     'C:/tools/GitRocketFilter/git-rocket-filter.exe',
+     '--branch', branch
+    ]
+
+    patterns_to_keep.each do |pattern|
+      command << '--keep'
+      command << pattern
+    end
+
+    Shelper.out! \
+      command: command,
+      options: {}
+  end
+  private_class_method :filter_git_history
+
+end
+
+ExtractGitHistorySubset.perform(argv: ARGV)

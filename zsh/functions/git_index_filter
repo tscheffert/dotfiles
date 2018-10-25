@@ -1,0 +1,31 @@
+#!/usr/bin/env zsh
+# vi: ft=zsh
+
+# NOTE: This is a WIP and it's not currently working
+# Source: https://kevinlocke.name/bits/2016/07/19/faster-git-filter-branch-for-file-filtering/
+function git_index_filter() {
+  local source_file="${1:?Must specify source file}"
+  local destination_folder="${2:?Must specify destination folder}"
+
+  git filter-branch --prune-empty \
+    --index-filter '
+      git ls-files -s | \
+      sed "s#\t.cookstyle.yml#\tatlas-root/.cookstyle.yml#p" | \
+      GIT_INDEX_FILE=$GIT_INDEX_FILE.new git update-index --index-info && \
+      if test -f "$GIT_INDEX_FILE.new" ; then \
+          mv "$GIT_INDEX_FILE.new" "$GIT_INDEX_FILE" ; \
+      else \
+          rm "$GIT_INDEX_FILE" ; \
+      fi' \
+  HEAD -- ./.cookstyle.yml
+
+
+  # git filter-branch \
+  #   --prune-empty \
+  #   --index-filter \
+  #     'git ls-files -s | \
+  #     sed "s-\t-&<subdir path>/-" | \
+  #     GIT_INDEX_FILE=$GIT_INDEX_FILE.new git update-index --index-info && \
+  #     mv $GIT_INDEX_FILE.new $GIT_INDEX_FILE' \
+  #     HEAD
+}

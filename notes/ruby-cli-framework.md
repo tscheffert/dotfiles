@@ -6,3 +6,5 @@
 [](https://github.com/chef/mixlib-log)
 [](https://github.com/chef/mixlib-shellout)
 [](https://github.com/piotrmurach/tty)
+
+https://github.com/skorks/escort#required-arguments

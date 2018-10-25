@@ -1,3 +1,10 @@
+## Windows Ruby
+
+Working shell on our windows servers:
+```powershell
+& "C:\opscode\chef\embedded\bin\pry.bat"
+```
+
 ## Changes to files
 
 ### Remove lines matching regex from files
@@ -45,6 +52,21 @@ $ git clean -x -d
 $ git gc --aggressive
 ```
 
+### Set Git author information
+
+Make sure config is correct:
+```bash
+git config --global user.name "John Doe"
+git config --global user.email "john@doe.org"
+```
+
+Rebase and reset:
+```bash
+git rebase -i origin/develop
+# Set each command to edit and run this:
+git commit --amend --reset-author --no-edit && git rebase --continue
+```
+
 
 ## Other?
 
@@ -52,4 +74,29 @@ $ git gc --aggressive
 
 ```bash
 awk -F':' '{ print $1 }' /etc/passwd
+```
+
+### List of all files that have been moved in a git repo
+
+```bash
+find -name .git -prune -o -exec git log --pretty=tformat:'' --numstat --follow {} ';' | grep '=>'
+```
+
+### List of all the usernames for environments in Chef vault
+```
+ag -i "\"username\"" data_bags/chef_vault/production.key | awk '{$1=$1;print}' | sed 's#.\{1,3\}: "username": ##g' | sort | uniq | clip.exe
+```
+
+## Problem?
+
+### No origin/HEAD?
+
+Problem:
+```
+fatal: ref refs/remotes/origin/HEAD is not a symbolic ref
+```
+
+Solution:
+```
+git remote set-head origin master
 ```

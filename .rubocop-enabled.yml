@@ -1740,18 +1740,6 @@ Style/MutableConstant:
   Description: 'Do not assign mutable objects to constants.'
   Enabled: true
 
-Style/NegatedIf:
-  Description: >-
-                 Favor unless over if for negative conditions
-                 (or control flow or).
-  StyleGuide: '#unless-for-negatives'
-  Enabled: true
-
-Style/NegatedWhile:
-  Description: 'Favor until over while for negative conditions.'
-  StyleGuide: '#until-for-negatives'
-  Enabled: true
-
 Style/NestedModifier:
   Description: 'Avoid using nested modifiers.'
   StyleGuide: '#no-nested-modifiers'

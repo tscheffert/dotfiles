@@ -63,6 +63,20 @@ Style/MethodCallWithArgsParentheses:
   StyleGuide: '#method-invocation-parens'
   Enabled: false
 
+# Enabled by default, but this rubyism is just mental overhead and confuses non-rubyists
+Style/NegatedIf:
+  Description: >-
+                 Favor unless over if for negative conditions
+                 (or control flow or).
+  StyleGuide: '#unless-for-negatives'
+  Enabled: false
+
+# Enabled by default, but this rubyism is just mental overhead and confuses non-rubyists
+Style/NegatedWhile:
+  Description: 'Favor until over while for negative conditions.'
+  StyleGuide: '#until-for-negatives'
+  Enabled: false
+
 # Enabled by default, but it's confusing and the autocorrect is surprising. This
 # also makes the "is it null" concern implicit, when it should be explicit
 Style/SafeNavigation:

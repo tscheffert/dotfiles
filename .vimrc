@@ -364,6 +364,9 @@ noremap <left> :bp<return>
 noremap <C-Tab> :bn<return>
 noremap <C-S-Tab> :bp<return>
 
+" When switching buffers, jump to the first open window that contains the buffer,
+" and include tabs in the search.
+set switchbuf=useopen,usetab
 
 
 " -----

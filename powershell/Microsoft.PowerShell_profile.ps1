@@ -97,6 +97,12 @@ function Get-VmDetail {
     }
 }
 
+# Chocolatey profile
+$ChocolateyProfile = "$env:ChocolateyInstall\helpers\chocolateyProfile.psm1"
+if (Test-Path($ChocolateyProfile)) {
+  Import-Module "$ChocolateyProfile"
+}
+
 # https://stackoverflow.com/a/37015895
 # TODO: Function to find computers across a domain and then services on them
 # function Find-Service

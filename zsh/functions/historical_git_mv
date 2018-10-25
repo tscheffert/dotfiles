@@ -3,12 +3,15 @@
 
 # With <3 from http://stackoverflow.com/a/15135004/2675529, for use with
 # https://saintgimp.org/2013/01/22/merging-two-git-repositories-into-one-repository-without-losing-file-history/
+# NOTE: This only works within one repo, doesn't move files from one repo to another
 function historical_git_mv() {
   function usage() {
     echo 1>&2
     echo 1>&2 "Usage:"
-    echo 1>&2 "  historical_git_mv DESTINATION SOURCE # For a file"
-    echo 1>&2 "  historical_git_mv DESTINATION dir1 dir2 dir3 ... # For one or more directories"
+    echo 1>&2 "  # For a file, where DESTINATION is a directory"
+    echo 1>&2 "    historical_git_mv DESTINATION SOURCE"
+    echo 1>&2 "  # For one or more directories, where DESTINATION is a directory"
+    echo 1>&2 "    historical_git_mv DESTINATION dir1 dir2 dir3 ..."
   }
 
   local failure
@@ -34,15 +37,27 @@ function historical_git_mv() {
     local destination="$1"
     shift 1
 
+    echo "Moving directories to $destination/"
+
     # TODO: Test again now that the $destination isn't hardcoded
+    # NOTE: This nests $dir under $destionation, it doesn't "rename"
+    local dir
     for dir in "$@"; do
-      git filter-branch --tree-filter --force --prune-empty \
-        "if [ -d $dir ]; then mkdir -p $destination && mv $dir/ $destination/; fi" \
+        # "if [[ -d $dir ]]; then mkdir -p $destination && mv $dir/ $destination/; fi" \
+      git filter-branch \
+        --force \
+        --prune-empty \
+        --tree-filter \
+        "if [[ -d $dir ]]; then mv $dir/ $destination/; fi" \
         HEAD
     done
   elif [[ -f "$source" ]]; then
-    git filter-branch --tree-filter \
-      "if [ -f $source ]; then mkdir -p $destination && mv $source $destination; fi" \
+    echo "Moving file $source to $destination/"
+
+    git filter-branch \
+      --tree-filter \
+      "if [[ -f $source ]]; then mkdir -p $destination && mv $source $destination/; fi" \
+      --prune-empty \
       HEAD
   fi
 }

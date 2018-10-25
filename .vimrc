@@ -1836,6 +1836,9 @@ vnoremap <silent> x "_x
 " TODO: Fix this
 " vnoremap <silent> p "_xp
 
+" Ex mode is horrible but repeating the last macro ran isn't
+nnoremap Q @@
+
 " -----
 " Insert Mode Key Maps
 " -----

@@ -168,6 +168,9 @@ alias gcob='git checkout -b'
 
 alias gcooh='git checkout $(git_trimmed_origin_head)'
 
+alias gcoo='git checkout --ours'
+alias gcot='git checkout --theirs'
+
 alias glg='git_pretty_log'
 
 # Show the diffs for recent commits with git log

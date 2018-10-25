@@ -27,7 +27,7 @@ append_to_path 'C:\tools\xmllint'
 append_to_path '$ConEmuBaseDir'
 
 # Git repo encryption utility
-append_to_path 'C:\dev\github\elasticdog\transcrypt'
+append_to_path 'C:\Projects\github\elasticdog\transcrypt'
 
 
 # --- Aliases ---

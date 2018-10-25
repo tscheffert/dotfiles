@@ -1933,7 +1933,11 @@ let g:UltiSnipsEditSplit="vertical"
 " When you specifiy only one directory then UltiSnips will not search
 " the runtimepath, which is faster. It will search for Snipmate snippets on
 " the runtimepath though.
-let g:UltiSnipsSnippetDirectories=[$HOME.'/.vim/UltiSnips']
+if has('win32')
+  let g:UltiSnipsSnippetDirectories=[$HOME.'/vimfiles/UltiSnips']
+else
+  let g:UltiSnipsSnippetDirectories=[$HOME.'/.vim/UltiSnips']
+endif
 
 " Don't load snipmate snippets.
 let g:UltiSnipsEnableSnipMate=0

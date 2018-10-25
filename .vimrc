@@ -188,11 +188,12 @@ Plug 'tpope/vim-endwise',       { 'for': ['ruby'] } " Add matching 'end's for bl
 Plug 'tpope/vim-projectionist', { 'for': ['ruby'] } " Project management for navigation n such
 
 " Git!
-Plug 'airblade/vim-gitgutter' " Shows git changes in the sign column
-Plug 'tpope/vim-git'          " Git runtime files
-Plug 'tpope/vim-fugitive'     " Awesome git wrapper
-Plug 'tpope/vim-rhubarb'      " Github specific features building on fugitive
-Plug 'gregsexton/gitv'        " Enable :gitv! version viewing
+Plug 'airblade/vim-gitgutter'        " Shows git changes in the sign column
+Plug 'tpope/vim-git'                 " Git runtime files
+Plug 'tpope/vim-fugitive'            " Awesome git wrapper
+Plug 'shumphrey/fugitive-gitlab.vim' " Gitlab features for fugitive
+Plug 'tpope/vim-rhubarb'             " Github specific features building on fugitive
+Plug 'gregsexton/gitv'               " Enable :gitv! version viewing
 
 " Syntax
 Plug 'scrooloose/syntastic' " Easy syntax messages
@@ -1402,6 +1403,11 @@ let g:surround_no_insert_mappings = 1
 "       \         "type": "test"
 "       \     }
 "       \ }
+
+" -----
+" Plugin: vim-fugitive && fugitive-gitlab.vim
+" -----
+let g:fugitive_gitlab_domains = ['http://git.echo.com']
 
 
 " -----

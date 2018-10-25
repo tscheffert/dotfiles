@@ -36,7 +36,7 @@ function Edit-BeautifyFile ($file)
 
   # For whatever reason, I can't just import from the absolute path
   $currentDirectory = ($pwd).path
-  Set-Location "C:\dev\powershell-scripts\PowerShell-Beautifier\src\"
+  Set-Location "C:\Projects\powershell-scripts\PowerShell-Beautifier\src\"
   Import-Module '.\DTW.PS.Beautifier.psd1'
   Set-Location $currentDirectory
 

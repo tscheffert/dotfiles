@@ -35,7 +35,7 @@ set "PATH=%CD%;%PATH%"
 call SetEscChar
 echo %ESC%[9999H
 popd
-"%ConEmuBaseDirShort%\conemu-cyg-64.exe" --wsl -t bash --login -i
+"%ConEmuBaseDirShort%\conemu-cyg-64.exe" --wsl -C~ -t bash --login -i
 goto :EOF
 
 :err

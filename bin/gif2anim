@@ -34,8 +34,8 @@
 #      -b framename   basename for the individual frames
 #      -o file.anim   output to this .anim file (- for stdout)
 #
-# NOTE: This script reqires both the ImageMagick 'convert' program and
-# 'identify' programs to extract the images and information needed.
+# NOTE: This script reqires the ImageMagick 'magick' program to extract the images
+# and information needed, using 'convert' and 'identify'.
 #
 ####
 #
@@ -105,8 +105,7 @@ fi
 cmd_found() {
   case "`type $1 2>&1`" in *'not found'*) return 1 ;; esac; return 0
 }
-cmd_found convert  || Usage "No IM convert command found -- ABORTING"
-cmd_found identify || Usage "No IM identify command found -- ABORTING"
+cmd_found magick  || Usage "No IM magick command found -- ABORTING"
 
 # output animation details to stdout
 if [ "X$animfile" = "X-" ]; then
@@ -145,8 +144,8 @@ for i in "$@" ; do
 
   # Generate Animation file...
   date=`date +'%Y-%m-%d %R:%S'`
-  convert "$i" $coalesce -verbose info:- |
-    $awk ' #  Parse IM "identify" output, for almost direct use by "convert"
+  magick convert "$i" $coalesce -verbose info:- |
+    $awk ' #  Parse IM "magick identify" output, for almost direct use by "magick convert"
       BEGIN { print "#";
               print "# Animation Sequence File \"'"$i"'\"";
               print "# using a BASENAME of     \"'"$name"'\"";
@@ -200,7 +199,7 @@ for i in "$@" ; do
 
   # split up GIF animation (reseting animation meta-data)
   if [ "$frames" ]; then
-    convert "$i" $coalesce \
+    magick convert "$i" $coalesce \
             +repage -set delay 0 -set dispose none -loop 0 \
             -scene $init +adjoin  "${name}_${fmt}.${sfx}"
 

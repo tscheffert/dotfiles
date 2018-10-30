@@ -106,7 +106,7 @@ for i in "$@" ; do
        s/BASENAME/'"$bname"'/;
        /^$/d;
        ' "$name.$suffix" | \
-  convert `cat` "$ORIGDIR/$bname$sfx" 2>&1
+  magick convert `cat` "$ORIGDIR/$bname$sfx" 2>&1
       #|| echo "anim2gif: Convert returned failed error status $?"
       #|| rm -f $ORIGDIR/$bname$sfx
   [ "$debug" ] && set -

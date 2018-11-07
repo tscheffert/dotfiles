@@ -54,6 +54,7 @@ Plug 'vim-scripts/moria', { 'on': 'LoadColors' }
 Plug 'vim-scripts/Color-Sampler-Pack', { 'on': 'LoadColors' }
 Plug 'altercation/vim-colors-solarized', { 'on': 'LoadColors' }
 Plug 'tomasr/molokai', { 'on': 'LoadColors' }
+Plug 'mhartington/oceanic-next' " , { 'on': 'LoadColors' }
 
 Plug 'trevordmiller/nova-vim'
 if has('gui_running')
@@ -865,7 +866,14 @@ endfunction
 if has('gui_running')
   set background=dark
 
-  if HasColorscheme('nova')
+  if HasColorscheme('OceanicNext')
+    colorscheme OceanicNext
+    let g:airline_theme='oceanicnext'
+    " Default: ctermbg=4 guifg=#556873 guibg=#3C4C55
+    " Reset ColorColumn and then set it via my preferences
+    " highlight ColorColumn NONE
+    " highlight ColorColumn guifg=#C5D4DD guibg=#556873
+  elseif HasColorscheme('nova')
     colorscheme nova
     let g:airline_theme='nova'
     " Default: ctermbg=4 guifg=#556873 guibg=#3C4C55

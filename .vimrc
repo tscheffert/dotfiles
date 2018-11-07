@@ -905,7 +905,12 @@ else
   if InConEmuSession()
     " Fix <BS> in ConEmu terminals per http://conemu.github.io/en/VimXterm.html#vim-bs-issue
     inoremap <Char-0x07F> <BS>
+
+    " Fix arrows/backspace in ConEmu
+    let &t_AB="\e[48;5;%dm"
+    let &t_AF="\e[38;5;%dm"
   endif
+
   if !has('nvim')
     set term=xterm
   endif
@@ -916,8 +921,6 @@ else
     set t_Co=256
   endif
 
-  let &t_AB="\e[48;5;%dm"
-  let &t_AF="\e[38;5;%dm"
   set background=dark
   if HasColorscheme('jellybeans')
     colorscheme jellybeans

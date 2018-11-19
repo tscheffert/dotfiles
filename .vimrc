@@ -1,4 +1,4 @@
-"----
+" -----
 " Startup
 " -----
 
@@ -338,6 +338,7 @@ set ambiwidth=double
 
 " Improve smoothness and swiftness of redrawing, because we use modern terminals
 set ttyfast
+
 
 " -----
 " Window/Buffers/Tabs
@@ -745,7 +746,6 @@ set clipboard=unnamed
 set completeopt=menuone,preview
 
 
-
 " -----
 " Movement
 " -----
@@ -1007,6 +1007,7 @@ vmap aa VGo1G
 
 " Visual block beyond the characters in the line, ie virtually
 set virtualedit=block
+
 
 " -----
 " Custom Functions
@@ -1362,6 +1363,7 @@ nnoremap <silent> ]E :llast<CR>zv
 " let g:syntastic_lua_checkers = ["luac", "luacheck"]
 " let g:syntastic_lua_luacheck_args = "--no-unused-args"
 
+
 " -----
 " Plugin: vim-ruby
 " -----
@@ -1409,6 +1411,7 @@ let g:surround_indent = 1
 "   needed
 let g:surround_no_insert_mappings = 1
 
+
 " -----
 " Plugin: vim-projectionist
 " -----
@@ -1423,6 +1426,7 @@ let g:surround_no_insert_mappings = 1
 "       \         "type": "test"
 "       \     }
 "       \ }
+
 
 " -----
 " Plugin: vim-fugitive && fugitive-gitlab.vim
@@ -1637,6 +1641,7 @@ endif
 " Default: "\" ' `"
 let delimitMate_quotes = "\" '"
 
+
 " -----
 " Plugin: vim-togglecursor
 " -----
@@ -1808,6 +1813,7 @@ nnoremap <Leader>j :call JoinSpaceless()<CR>
 " Duplicate current line below then comment out current line
 nnoremap <silent> <Leader>cc Ypk:Commentary<CR>
 
+
 " -----
 " Macro Key Maps
 " -----
@@ -1834,6 +1840,7 @@ endfunction
 nnoremap <Leader>sg :echo "Syntax Group:" SyntaxItem(1)<CR>
 nnoremap <Leader>sh :echo "Syntax Group(trans=0):" SyntaxItem(0)<CR>
 nnoremap <Leader>ss :call SyntaxStack()<CR>
+
 
 " -----
 " Nop Key maps
@@ -1864,6 +1871,7 @@ vnoremap <silent> x "_x
 
 " Ex mode is horrible but repeating the last macro ran isn't
 nnoremap Q @@
+
 
 " -----
 " Insert Mode Key Maps
@@ -1945,6 +1953,7 @@ augroup END
 " function! RubyJsonBeautifyRange() range
 "   call RubyJsonBeautify(a:firstline, a:lastline)
 " endfunction
+
 
 " -----
 " UltiSnips Key Maps and Settings

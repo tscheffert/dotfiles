@@ -83,9 +83,37 @@ find -name .git -prune -o -exec git log --pretty=tformat:'' --numstat --follow {
 ```
 
 ### List of all the usernames for environments in Chef vault
+
 ```
 ag -i "\"username\"" data_bags/chef_vault/production.key | awk '{$1=$1;print}' | sed 's#.\{1,3\}: "username": ##g' | sort | uniq | clip.exe
 ```
+
+### Windows Symlinks
+
+Source: <https://docs.microsoft.com/en-us/windows-server/administration/windows-commands/mklink>
+
+Use `/d` for directories, files are default.
+
+```
+mklink [/d] <Destination> <Source>
+```
+
+Example:
+
+```
+mklink /d C:\tools\thing\current C:\tools\thing\v123
+```
+
+Preface with `cmd /c` to use from bash/zsh.
+
+Full example:
+
+```
+$ cmd /c 'mklink /d C:\tools\ruby\ridk\current C:\tools\ruby\ridk\Ruby25-x64'
+symbolic link created for C:\tools\ruby\ridk\current <<===>> C:\tools\ruby\ridk\Ruby25-x64
+```
+
+
 
 ## Problem?
 

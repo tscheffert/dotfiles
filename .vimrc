@@ -847,7 +847,23 @@ set encoding=utf-8
 "   |<C-k> -,| for the trail digraph
 "   |<C-k> sB| for the nbsp digraph
 "   |<C-k> <<| for the precedes digraph
-set listchars=tab:▸-,trail:.,extends:>,nbsp:▪,precedes:«
+" Other options:
+" - This fancy tab char which doesn't always work - 'tab:▸-'
+" - Fancy end of line "carriage return symbol" - 'eol:↲'
+" - Fancy arrow for tab - 'tab:▸\'
+" - Fancy end of line thing - 'eol:¬'
+set listchars=tab:>-,trail:.,extends:»,precedes:«,nbsp:▪
+
+" From: https://www.reddit.com/r/vim/comments/4hoa6e/what_do_you_use_for_your_listchars/
+" set showbreak=↪\
+" set listchars=tab:→\ ,eol:↲,nbsp:␣,trail:•,extends:⟩,precedes:⟨
+" set listchars=tab:▶\ ,eol:★
+" set listchars+=trail:◥
+" set listchars+=extends:❯
+" set listchars+=precedes:❮
+" set listchars=tab:→\ ,trail:·,eol:¬,extends:…,precedes:…
+
+
 " Actually display them, call :set list! to toggle
 set list
 

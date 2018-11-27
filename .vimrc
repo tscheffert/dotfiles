@@ -910,8 +910,8 @@ if has('gui_running')
   if has('win32')
     " Set vim to be maximized on opening
     au GUIEnter * simalt ~x
-    " Set the default font to Consolas (Which is what Visual Studio uses)
-    set guifont=Consolas:h12:cANSI
+    " Set the default font to Input, which i've custom downloaded, with Consolas Fallback
+    set guifont=Input:h12,Consolas:h12:cANSI
   else
     " Set the default font to Source Code Pro (with escaped spaces) which I
     " use everywhere!

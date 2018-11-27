@@ -4,13 +4,14 @@ test_exists() {
   type $1 >/dev/null 2>&1
 }
 
-if test_exists zsh; then
-  exec zsh
-  # I don't think we'll ever get here given the `exec zsh`, but if we do
-  exit 0
-else
-  echo "Couldn't find zsh, loading bash profile"
-fi
+# I should just _not_ do this, we can start Zsh directly if necessary
+# if test_exists zsh; then
+#   exec zsh
+#   # I don't think we'll ever get here given the `exec zsh`, but if we do
+#   exit 0
+# else
+#   echo "Couldn't find zsh, loading bash profile"
+# fi
 
 
 # --- Platform ---

@@ -38,10 +38,22 @@ if has('win32')
   " let $TEMP=temp_dir
 
   " Use bash, probably from mingw64, as the shell
-  set shell=bash
-  set shellcmdflag=-c
-  set shellxquote=\"
-  set shellslash
+  " set shell=bash
+  " set shellcmdflag=-c
+  " set shellxquote=\"
+  " set shellslash
+
+  " TODO: Figure out how to determine between "started from gvim& in a MINGW session"
+  "       and "started from Right Click -> Edit in Vim"
+  " https://github.com/agkozak/dotfiles/blob/master/.vimrc#L272
+  set shell=cmd
+  set shellquote=
+  set shellxquote=(
+  set shellcmdflag=/c
+  set shellredir=>%s\ 2>&1
+  set shellpipe=>
+  set noshellslash
+
   call plug#begin('~/vimfiles/bundle/')
 else
   call plug#begin(expand('~/.vim/bundle/'))
@@ -1252,17 +1264,26 @@ if s:use_ctrlp
   if executable('ag')
     set grepprg=ag\ --nogroup\ --nocolor\ --hidden
 
-    if !InWindowsSession()
-      " In Windows, the shell commands have a high overhead. Elsewhere, super fast
-      let g:ctrlp_use_caching = 0
-    endif
     if InWindowsSession()
-      " Per ':help win32-quotes', quotes in command line arguments need to be escaped on windows
-      let g:ctrlp_user_command ='ag %s --files-with-matches --hidden --nocolor -g \"\" --ignore \"Alfred/*\"'
+      if &shell ==# "cmd"
+        " Only need to escape the quotes when using
+        let g:ctrlp_user_command = 'ag %s --files-with-matches --hidden --nocolor -g "" --ignore "Alfred/*"'
+      elseif &shell ==# "bash"
+        " Per ':help win32-quotes', quotes in command line arguments need to be escaped on windows. But only when using bash as the shell it seems.
+        let g:ctrlp_user_command ='ag %s --files-with-matches --hidden --nocolor -g \"\" --ignore \"Alfred/*\"'
+      else
+        echom "Unknown shell, not setting ctrlp_user_command"
+      end
     else
+      " In Windows, the shell commands have a high overhead. Elsewhere, it's fast so turn it off
+      let g:ctrlp_use_caching = 0
+
       let g:ctrlp_user_command = 'ag %s --files-with-matches --hidden --nocolor -g "" --ignore "Alfred/*"'
     endif
   else
+    " TODO: Set grepprg here?
+    " set grepprg=ag\ --nogroup\ --nocolor\ --hidden
+
     let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . -co --exclude-standard', 'find %s -type f']
     let g:ctrlp_prompt_mappings = {
       \ 'AcceptSelection("e")': ['<space>', '<cr>', '<2-LeftMouse>'],

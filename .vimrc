@@ -1728,6 +1728,9 @@ nnoremap <Leader>y: :let @+=@:<CR>
 " Yank all
 nnoremap <Leader>a :%y+<CR>
 
+" Paste all
+nnoremap <Leader>p ggVGp
+
 " Quickly edit/reload the vimrc file
 nnoremap <silent> <Leader>ve :e $MYVIMRC<CR>
 nnoremap <silent> <Leader>vs :so $MYVIMRC<CR>

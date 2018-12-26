@@ -34,6 +34,12 @@ browser.newtabpage.directory.ping: blank   # More chatter prevention
 # Source: http://tuxdiary.com/2014/02/27/firefox-memory-tweaks/
 media.autoplay.enabled: false # Don't autoplay media
 
+# Source: https://www.reddit.com/r/github/comments/9ugnwp/github_no_longer_works_with_firefox_58/e95i3nw/
+general.useragent.override: 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:59.0) Gecko/20100101 Firefox/59.0'
+
+# Note: Setting the general useragent didn't work for github, had to set the specific one
+general.useragent.override.github.com: 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:59.0) Gecko/20100101 Firefox/59.0'
+
 # With Firefox 52 it blocked non-electrolysis enabled addons by default, I was able to load them with
 extensions.e10sBlocksEnabling: false
 

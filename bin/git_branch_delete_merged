@@ -126,6 +126,8 @@ module GitBranchDeleteMerged
     # Alternative strategies for "determine merged branches" include:
     #   `git cherry #{upstream} #{head}` for (better than git-diff) commitwise-diff
     #   `git diff origin/master...HEAD` for filewise-diff
+    #   `git branch -vv | git branch -vv | grep 'origin/.*: gone]' | awk '{print $1}'`
+    #      source: https://github.com/denysdovhan/dotfiles/blob/master/bin/git-cleanup#L24
 
     branches_stdout =
       if options[:delete_remote]
@@ -137,9 +139,21 @@ module GitBranchDeleteMerged
         Helpers.out!(cmd: "git branch --merged #{Helpers.git_trimmed_origin_head}")
       end
 
+    origin_deleted_out =
+      Helpers.out!(cmd: "git branch -vv | grep 'origin/.*: gone]' | awk '{ print $1}'")
+    branches_where_origin_deleted =
+      Helpers.split_lines(stdout: origin_deleted_out)
+
     array_of_branches = Helpers.split_lines(stdout: branches_stdout)
 
-    branches_to_delete = array_of_branches
+    potential_branches =
+      if options[:delete_remote]
+        array_of_branches
+      else
+        (array_of_branches + branches_where_origin_deleted)
+      end
+
+    branches_to_delete = potential_branches
       .reject { |b| b.match(/#{PROTECTED_BRANCH_MATCHERS.join('|')}/) }
 
     if options[:delete_remote]

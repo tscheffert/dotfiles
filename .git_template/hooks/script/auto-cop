@@ -1,8 +1,13 @@
 #!/bin/bash
 
-# Ensure we have rubocop installed
+# Ensure we have rubocop installed with the right version
 if ! gem list rubocop -i &> /dev/null; then
-    gem install rubocop --no-document
+  # TODO: Consider running this check every time
+  target_version=$(grep '# Version:' ~/.dotfiles/.rubocop.yml | awk '{ print $3}')
+
+  echo "Rubocop not found!"
+  echo "Based on ~/.dotfiles/.rubocop.yml, installing version: $target_version"
+  gem install rubocop -v "$target_version" --no-document
 fi
 
 echo "AutoCop is temporarily disabled"

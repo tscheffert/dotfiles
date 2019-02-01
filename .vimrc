@@ -22,42 +22,83 @@ else
   echo "Couldn't detect OS from uname: " . g:uname . ", shits gonna break"
 endif
 
+" Session Detection fun
+function! InWindowsSession()
+  " TODO: Do we need "has('win32')" at all?
+  return g:os == 'windows'
+endfunction
+
+function! InConEmuSession()
+  return InWindowsSession() && !has('gui_running') && !empty($ConEmuBuild)
+endfunction
+
+function! InTmuxSession()
+  return $TMUX != ''
+endfunction
+
+function! InItermSession()
+  " This would work with other programs, Apple_Terminal for one
+  return $TERM_PROGRAM =~ "iTerm"
+endfunction
+
+" Plugin Alternatives Switches
 let s:use_ctrlp = 1
 let s:use_unite = 0
 let s:use_delimitmate = 1
 let s:use_auto_pairs = 0
 
-" Start vim-plug
-if has('win32')
+" Set up shell based on OS
+if has('win32') " Using InWindowsSession() here breaks syntastic
   " " Use cmd as the shell
   " set shell=cmd
   " set shellcmdflag=/c
-  " let temp_dir=$HOME."/.vim-tmp"
-  " let $TMPDIR=temp_dir
-  " let $TMP=temp_dir
-  " let $TEMP=temp_dir
+  let temp_dir=$HOME."/.vim-tmp"
+  let $TMPDIR=temp_dir
+  let $TMP=temp_dir
+  let $TEMP=temp_dir
+
+  " TODO: Fix this for the `Right Click -> Edit with Vim` workflow
+  " It works when launching via gvim& from the commandline, but not with the registry hook
 
   " Use bash, probably from mingw64, as the shell
-  " set shell=bash
-  " set shellcmdflag=-c
-  " set shellxquote=\"
-  " set shellslash
+  set shell=bash
+  set shellcmdflag=-c
+  set shellxquote=\"
+  set shellslash
 
   " TODO: Figure out how to determine between "started from gvim& in a MINGW session"
   "       and "started from Right Click -> Edit in Vim"
-  " https://github.com/agkozak/dotfiles/blob/master/.vimrc#L272
-  set shell=cmd
-  set shellquote=
-  set shellxquote=(
-  set shellcmdflag=/c
-  set shellredir=>%s\ 2>&1
-  set shellpipe=>
-  set noshellslash
 
+  " https://github.com/agkozak/dotfiles/blob/master/.vimrc#L272
+  " This shell set causes nerdtree to have issues
+  " set shell=cmd
+  " set shellquote=
+  " set shellxquote=(
+  " set shellcmdflag=/c
+  " set shellredir=>%s\ 2>&1
+  " set shellpipe=>
+  " set noshellslash
+else
+  echo "Not windows, default shell"
+endif
+
+" Start vim-plug
+if InWindowsSession()
+  " TODO: Something like this: https://github.com/agkozak/dotfiles/blob/master/.vimrc#L312
   call plug#begin('~/vimfiles/bundle/')
 else
   call plug#begin(expand('~/.vim/bundle/'))
 endif
+
+" Conditional Activation Function
+" Usage:
+"   Basic: Plug 'author/thing', Cond(has('depedency'))
+"   With Options: Plug 'author/thing', Cond(has('dependency'), { 'on': 'Thing' })
+
+function! Cond(cond, ...)
+  let opts = get(a:000, 0, {})
+  return a:cond ? opts : extend(opts, { 'on': [], 'for': [] })
+endfunction
 
 " Colors
 Plug 'vim-scripts/ScrollColors', { 'on': 'LoadColors' }
@@ -122,7 +163,9 @@ endif
 Plug 'sjl/gundo.vim'
 
 " Snippets
-Plug 'SirVer/ultisnips'
+if !InConEmuSession() " TODO: Get this working with ConEmu vim
+  Plug 'SirVer/ultisnips', Cond(has('python'))
+end
 
 " Language specific
 Plug 'elzr/vim-json'
@@ -867,24 +910,6 @@ set listchars=tab:>-,trail:.,extends:»,precedes:«,nbsp:▪
 " Actually display them, call :set list! to toggle
 set list
 
-" Session Detection fun
-function! InWindowsSession()
-  return g:os == 'windows'
-endfunction
-
-function! InConEmuSession()
-  return InWindowsSession() && !has('gui_running') && !empty($CONEMUBUILD)
-endfunction
-
-function! InTmuxSession()
-  return $TMUX != ''
-endfunction
-
-function! InItermSession()
-  " This would work with other programs, Apple_Terminal for one
-  return $TERM_PROGRAM =~ "iTerm"
-endfunction
-
 " Colors and Term stuff!
 function! HasColorscheme(name)
   let pat = 'colors/'.a:name.'.vim'
@@ -923,7 +948,7 @@ if has('gui_running')
   :set guioptions-=L " Remove the left-hand scroll bar...bar[]
 
   " Windows Specific stuff
-  if has('win32')
+  if InWindowsSession()
     " Set vim to be maximized on opening
     au GUIEnter * simalt ~x
     " Set the default font to Input, which i've custom downloaded, with Consolas Fallback
@@ -1288,7 +1313,7 @@ if s:use_ctrlp
         " Per ':help win32-quotes', quotes in command line arguments need to be escaped on windows. But only when using bash as the shell it seems.
         let g:ctrlp_user_command ='ag %s --files-with-matches --hidden --nocolor -g \"\" --ignore \"Alfred/*\"'
       else
-        echom "Unknown shell, not setting ctrlp_user_command"
+        echom "Unknown shell: " . &shell . ", not setting ctrlp_user_command"
       end
     else
       " In Windows, the shell commands have a high overhead. Elsewhere, it's fast so turn it off
@@ -2011,7 +2036,7 @@ let g:UltiSnipsEditSplit="vertical"
 " When you specifiy only one directory then UltiSnips will not search
 " the runtimepath, which is faster. It will search for Snipmate snippets on
 " the runtimepath though.
-if has('win32')
+if InWindowsSession()
   let g:UltiSnipsSnippetDirectories=[$HOME.'/vimfiles/UltiSnips']
 else
   let g:UltiSnipsSnippetDirectories=[$HOME.'/.vim/UltiSnips']

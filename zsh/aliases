@@ -339,6 +339,12 @@ alias ...='cd ../..'     # Go up two directories
 alias ....='cd ../../..' # Go up three directories
 alias -- -='cd -'        # Go back
 
+# Make directory and CD into it
+function mcd() {
+  local directory="${1:?Must pass a directory to mkdir & cd}"
+  mkdir -p "$directory" && cd "$directory"
+}
+
 # Provide a config file to yamllint
 alias yamllint='yamllint -c $HOME/.yamllint'
 

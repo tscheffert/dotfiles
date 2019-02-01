@@ -1,0 +1,28 @@
+NEW:
+
+>-cur_console:t:"chef-repo" -cur_console:d:C:\Projects\gitlab\scm\chef-repo set CHERE_INVOKING=1 & set "PATH=C:\git-sdk-64\usr\bin;%PATH%" & set MSYSTEM=MINGW64 & "%ConEmuBaseDirShort%\conemu-msys2-64.exe zsh --login -i"
+
+-cur_console:t:"chef-developers" -cur_console:d:C:\Projects\gitlab\chef-developers set CHERE_INVOKING=1 & set "PATH=C:\git-sdk-64\usr\bin;%PATH%" & set MSYSTEM=MINGW64 & "%ConEmuBaseDirShort%\conemu-msys2-64.exe zsh --login -i"
+
+-cur_console:t:"infra-deploy" -cur_console:d:C:\Projects\gitlab\scm\infrastructure-deploy set CHERE_INVOKING=1 & set "PATH=C:\git-sdk-64\usr\bin;%PATH%" & set MSYSTEM=MINGW64 & "%ConEmuBaseDirShort%\conemu-msys2-64.exe zsh --login -i"
+
+-cur_console:t:"devtools" -cur_console:d:C:\Projects\gitlab\devops\devtools set CHERE_INVOKING=1 & set "PATH=C:\git-sdk-64\usr\bin;%PATH%" & set MSYSTEM=MINGW64 & "%ConEmuBaseDirShort%\conemu-msys2-64.exe zsh --login -i"
+
+-cur_console:t:"operations-center" -cur_console:d:C:\Projects\gitlab\devops\operations-center set CHERE_INVOKING=1 & set "PATH=C:\git-sdk-64\usr\bin;%PATH%" & set MSYSTEM=MINGW64 & "%ConEmuBaseDirShort%\conemu-msys2-64.exe zsh --login -i"
+
+-cur_console:t:"dotfiles" -cur_console:d:C:\Users\tscheffert\.dotfiles set CHERE_INVOKING=1 & set "PATH=C:\git-sdk-64\usr\bin;%PATH%" & set MSYSTEM=MINGW64 & "%ConEmuBaseDirShort%\conemu-msys2-64.exe zsh --login -i"
+
+
+OLD:
+
+>-cur_console:t:"chef-repo" -cur_console:d:C:\Projects\gitlab\scm\chef-repo set MSYSTEM=MINGW64 & "C:\git-sdk-64\usr\bin\zsh.exe --login -i"
+
+-cur_console:t:"chef-developers" -cur_console:d:C:\Projects\gitlab\chef-developers set MSYSTEM=MINGW64 & "C:\git-sdk-64\usr\bin\zsh.exe --login -i"
+
+-cur_console:t:"infra-deploy" -cur_console:d:C:\Projects\gitlab\scm\infrastructure-deploy set MSYSTEM=MINGW64 & "C:\git-sdk-64\usr\bin\zsh.exe --login -i"
+
+-cur_console:t:"devtools" -cur_console:d:C:\Projects\gitlab\devops\devtools set MSYSTEM=MINGW64 & "C:\git-sdk-64\usr\bin\zsh.exe --login -i"
+
+-cur_console:t:"operations-center" -cur_console:d:C:\Projects\gitlab\devops\operations-center set MSYSTEM=MINGW64 & "C:\git-sdk-64\usr\bin\zsh.exe --login -i"
+
+-cur_console:t:"dotfiles" -cur_console:d:C:\Users\tscheffert\.dotfiles set MSYSTEM=MINGW64 & "C:\git-sdk-64\usr\bin\zsh.exe --login -i"

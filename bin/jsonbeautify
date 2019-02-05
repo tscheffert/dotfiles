@@ -2,48 +2,135 @@
 # vim: ft=ruby
 
 require 'json'
+require 'active_support'
+require 'active_support/core_ext/object/blank'
+require 'paint'
+require File.join(__dir__, '..', 'ruby', 'lib', 'option_helper')
 
-if ARGV.empty?
-  warn 'Please provide a JSON file'
-  exit 1
-end
+module JsonBeautify
 
-if ARGV.size > 2
-  warn 'Unknown argument specified, only expecting one JSON file'
-  exit 1
-end
+  def self.perform(args:)
+    file_name, sort = parse_and_validate_new!(args: args)
 
-file_name = ARGV.shift
+    begin
+      file_contents = JSON.parse(File.read(file_name))
+      puts '++Syntax good'
 
-unless File.exist?(file_name)
-  warn "#{file_name}: no such file"
-  exit 1
-end
+      contents = if sort
+                   sort_hash_by_keys(file_contents)
+                 else
+                   file_contents
+                 end
+      puts '++Sorted' if sort
 
-begin
-  file_contents = JSON.parse(File.read(file_name))
-  puts '++Syntax good'
+      pretty_contents = JSON.pretty_generate(contents)
+      universal_pretty_contents = pretty_contents
+        .encode(crlf_newline: true)
+        .encode(universal_newline: true)
 
-  pretty_contents = JSON.pretty_generate(file_contents)
-  universal_pretty_contents = pretty_contents
-    .encode(crlf_newline: true)
-    .encode(universal_newline: true)
+      # Append the preferred "newline at end of file"
+      universal_pretty_contents << "\n"
 
-  # Append the preferred "newline at end of file"
-  universal_pretty_contents << "\n"
-
-  # File Mode:
-  #   w+: truncate existing file
-  #   b: Suppresses EOL <-> CRLF conversion on Windows. And sets external encoding
-  #      to ASCII-8BIT, which is why we specify UTF-8 encoding
-  File.open(file_name, 'w+b', encoding: Encoding::UTF_8) do |file|
-    file.write(universal_pretty_contents)
+      # File Mode:
+      #   w+: truncate existing file
+      #   b: Suppresses EOL <-> CRLF conversion on Windows. And sets external encoding
+      #      to ASCII-8BIT, which is why we specify UTF-8 encoding
+      File.open(file_name, 'w+b', encoding: Encoding::UTF_8) do |file|
+        file.write(universal_pretty_contents)
+      end
+      puts '++Beautified'
+    rescue JSON::ParserError => e
+      warn "--Syntax error: #{e}"
+      exit 1
+    rescue StandardError => e
+      warn "--Unknown error: #{e}"
+      warn "--Backtrace: #{e.backtrace.join("\n")}"
+      exit 1
+    end
   end
-  puts '++Beautified'
-rescue JSON::ParserError => e
-  warn "--Syntax error: #{e}"
-  exit 1
-rescue => e
-  warn "--Unknown error: #{e}"
-  exit 1
+
+  def self.parse_and_validate_new!(args:)
+    helper = OptionHelper.new(
+               script_name: 'jsonbeautify')
+
+    helper.add_option(
+      command_line_name: '--json-file',
+      variable_key:      :json_file,
+      description:       'Path to json file to be beautified',
+      option_type:       String,
+      required:          true)
+
+    helper.add_option(
+      command_line_name: '--sort',
+      variable_key:      :sort,
+      description:       'Should the file be sorted?',
+      option_type:       Bool,
+      required:          false)
+
+    results = helper.parse!(argv: args)
+
+    return results[:json_file], results[:sort] || false
+  end
+
+  def self.parse_and_validate_old!(args:)
+    file_name = args[0]
+
+    if file_name.blank?
+      warn Paint['Please provide a JSON file to beautify', :red]
+      exit 1
+    end
+
+    unless File.exist?(file_name)
+      warn Paint["#{file_name}: no such file", :red]
+      exit 1
+    end
+
+    sort = false
+    sort_flag = args[1]
+
+    if sort_flag.present?
+      if sort_flag == '--sort'
+        sort = true
+      else
+        warn 'Unknown argument specified, only expecting one JSON file and optional --sort'
+        exit 1
+      end
+    end
+
+    if args.size > 2
+      warn 'Unknown argument specified, only expecting one JSON file and optional --sort'
+      exit 1
+    end
+
+    return file_name, sort
+  end
+
+  def self.sort_hash_by_keys(hsh)
+    hsh.keys
+      .sort_by(&:to_s)
+      .each_with_object({}) do |key, seed|
+        seed[key] = if hsh[key].is_a?(Hash)
+                      sort_hash_by_keys(hsh[key])
+                    elsif hsh[key].is_a?(Array)
+                      sort_array_of_hashes(hsh[key])
+                    else
+                      hsh[key]
+                    end
+
+        seed
+      end
+  end
+
+  def self.sort_array_of_hashes(ary)
+    # Only sort arrays where all the elements are hashes, and only sort the elements
+    return ary unless ary.all? { |e| e.is_a?(Hash) }
+
+    # Sort all the elements of those child hashes
+    ary.map do |hsh|
+      sort_hash_by_keys(hsh)
+    end
+  end
+
 end
+
+JsonBeautify.perform(args: ARGV)

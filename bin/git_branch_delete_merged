@@ -155,11 +155,13 @@ module GitBranchDeleteMerged
 
     branches_to_delete = potential_branches
       .reject { |b| b.match(/#{PROTECTED_BRANCH_MATCHERS.join('|')}/) }
+      .uniq
 
     if options[:delete_remote]
       branches_to_delete = branches_to_delete.map { |b| b.sub('origin/', '') }
     end
 
+    # TODO: Capture stderr and stdout then output it
     branches_to_delete.each do |branch|
       if options[:delete_remote]
         puts "-- Deleting branch on origin: #{branch}"

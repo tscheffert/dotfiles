@@ -268,6 +268,8 @@ Plug 'haya14busa/incsearch.vim' " Show all matches as typed, auto nohl
 Plug 'wellle/targets.vim'
 Plug 'kana/vim-textobj-user'
 Plug 'kana/vim-textobj-line'
+Plug 'andymass/vim-matchup'
+Plug 'terryma/vim-expand-region'
 
 " Better Markdown
 Plug 'shime/vim-livedown', { 'for': ['markdown'] }

@@ -173,3 +173,12 @@ Get-ChildItem -Filter "*consul_1_2_2*" -Path "C:\chef\cache\remote_file" | Remov
 ```
 gs | awk '{ print $2 }' | xargs --max-args=1 -I _ powershell -Command "Edit-BeautifyFile -Path _"
 ```
+
+
+# Searching
+
+## Grep recursively
+
+```
+ls * -r | select-string -Pattern "Thing-I-Want-To-Find"
+```

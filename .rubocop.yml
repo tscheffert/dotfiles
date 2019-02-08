@@ -2,6 +2,9 @@
 # This started as the default configuration and then I have modified it to suit
 # my preferences.
 
+# Manually applied patch:
+#   https://github.com/rubocop-hq/rubocop/commit/6d5f8e2196af9bba9a9c2fd76e090c1381b84486#diff-c6ab710d2b83641af7ff8e92c1ef2136
+
 # Version: 0.58.0
 
 inherit_from:
@@ -315,7 +318,7 @@ Layout/EmptyLinesAroundBlockBody:
     - no_empty_lines
 
 Layout/EmptyLinesAroundClassBody:
-  EnforcedStyle: empty_lines_special
+  EnforcedStyle: empty_lines_except_namespace
   SupportedStyles:
     - empty_lines
     - empty_lines_except_namespace
@@ -325,7 +328,7 @@ Layout/EmptyLinesAroundClassBody:
     - ending_only
 
 Layout/EmptyLinesAroundModuleBody:
-  EnforcedStyle: empty_lines_special
+  EnforcedStyle: empty_lines_except_namespace
   SupportedStyles:
     - empty_lines
     - empty_lines_except_namespace

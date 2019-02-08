@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <key name="Software">
 	<key name="ConEmu">
-		<key name=".Vanilla" modified="2018-10-05 12:18:17" build="180626">
+		<key name=".Vanilla" modified="2019-01-29 15:05:50" build="190108">
 			<value name="StartType" type="hex" data="02"/>
 			<value name="CmdLine" type="string" data=""/>
 			<value name="StartTasksFile" type="string" data=""/>
-			<value name="StartTasksName" type="string" data="{Git bash}"/>
+			<value name="StartTasksName" type="string" data="{Zsh::Projects}"/>
 			<value name="StartFarFolders" type="hex" data="00"/>
 			<value name="StartFarEditors" type="hex" data="00"/>
 			<value name="ColorTable00" type="dword" data="00222827"/>
@@ -50,8 +50,8 @@
 			<value name="ExtendFontNormalIdx" type="hex" data="01"/>
 			<value name="ExtendFontBoldIdx" type="hex" data="0C"/>
 			<value name="ExtendFontItalicIdx" type="hex" data="0D"/>
-			<value name="CursorTypeActive" type="dword" data="000233c1"/>
-			<value name="CursorTypeInactive" type="dword" data="00823283"/>
+			<value name="CursorTypeActive" type="dword" data="00023341"/>
+			<value name="CursorTypeInactive" type="dword" data="00823281"/>
 			<value name="ClipboardDetectLineEnd" type="hex" data="01"/>
 			<value name="ClipboardBashMargin" type="hex" data="01"/>
 			<value name="ClipboardTrimTrailing" type="hex" data="02"/>
@@ -79,7 +79,7 @@
 			<value name="ProcessAnsi" type="hex" data="01"/>
 			<value name="AnsiLog" type="hex" data="01"/>
 			<value name="AnsiLogPath" type="string" data="%userprofile%\ConEmu-Logs\"/>
-			<value name="ProcessNewConArg" type="hex" data="00"/>
+			<value name="ProcessNewConArg" type="hex" data="01"/>
 			<value name="ProcessCmdStart" type="hex" data="01"/>
 			<value name="ConsoleExceptionHandler" type="hex" data="00"/>
 			<value name="UseClink" type="hex" data="01"/>
@@ -118,10 +118,10 @@
 			<value name="Multi.SplitWidth" type="hex" data="04"/>
 			<value name="Multi.SplitHeight" type="hex" data="04"/>
 			<value name="KeyboardHooks" type="hex" data="01"/>
-			<value name="FontName" type="string" data="Source Code Pro"/>
+			<value name="FontName" type="string" data="Input"/>
 			<value name="FontName2" type="string" data="Consolas"/>
 			<value name="FontAutoSize" type="hex" data="00"/>
-			<value name="FontSize" type="ulong" data="16"/>
+			<value name="FontSize" type="ulong" data="14"/>
 			<value name="FontSizeX" type="ulong" data="0"/>
 			<value name="FontUseDpi" type="hex" data="01"/>
 			<value name="FontUseUnits" type="hex" data="01"/>
@@ -131,7 +131,7 @@
 			<value name="Anti-aliasing" type="ulong" data="6"/>
 			<value name="FontBold" type="hex" data="00"/>
 			<value name="FontItalic" type="hex" data="00"/>
-			<value name="Monospace" type="hex" data="00"/>
+			<value name="Monospace" type="hex" data="01"/>
 			<value name="BackGround Image show" type="hex" data="00"/>
 			<value name="BackGround Image" type="string" data="c:\back.bmp"/>
 			<value name="bgImageDarker" type="hex" data="FF"/>
@@ -140,7 +140,7 @@
 			<value name="bgPluginAllowed" type="hex" data="00"/>
 			<value name="AlphaValue" type="hex" data="FF"/>
 			<value name="AlphaValueSeparate" type="hex" data="01"/>
-			<value name="AlphaValueInactive" type="hex" data="E9"/>
+			<value name="AlphaValueInactive" type="hex" data="F6"/>
 			<value name="UserScreenTransparent" type="hex" data="00"/>
 			<value name="ColorKeyTransparent" type="hex" data="00"/>
 			<value name="ColorKeyValue" type="dword" data="00010101"/>
@@ -305,7 +305,7 @@
 			<value name="TabFontHeight" type="long" data="18"/>
 			<value name="SaveAllEditors" type="string" data=""/>
 			<value name="ToolbarAddSpace" type="long" data="0"/>
-			<value name="TabConsole" type="string" data="&lt;%c&gt; %s"/>
+			<value name="TabConsole" type="string" data="%s"/>
 			<value name="TabModifiedSuffix" type="string" data="[*]"/>
 			<value name="TabSkipWords" type="string" data="Administrator:|"/>
 			<value name="TabPanels" type="string" data="&lt;%c&gt; %s"/>
@@ -580,8 +580,8 @@
 				<value name="Multi.NewWndConfirm" type="dword" data="00000000"/>
 				<value name="CheckUpdates" type="dword" data="00105b55"/>
 			</key>
-			<key name="Tasks" modified="2018-10-05 12:49:45" build="180626">
-				<value name="Count" type="long" data="14"/>
+			<key name="Tasks" modified="2018-11-07 12:18:56" build="180626">
+				<value name="Count" type="long" data="16"/>
 				<key name="Task1" modified="2018-10-05 12:14:16" build="180626">
 					<value name="Name" type="string" data="{cmd}"/>
 					<value name="Flags" type="dword" data="00000004"/>
@@ -656,36 +656,37 @@
 					<value name="Active" type="long" data="0"/>
 					<value name="Count" type="long" data="1"/>
 				</key>
-				<key name="Task9" modified="2018-10-05 12:49:45" build="180626">
+				<key name="Task9" modified="2019-01-25 15:21:55" build="190108">
 					<value name="Name" type="string" data="{Zsh::All}"/>
 					<value name="Flags" type="dword" data="00000000"/>
 					<value name="Hotkey" type="dword" data="00000000"/>
 					<value name="GuiArgs" type="string" data=""/>
-					<value name="Cmd1" type="string" data='&gt;-cur_console:d:C:\Projects\gitlab\scm\chef-repo set MSYSTEM=MINGW64 &amp; "C:\git-sdk-64\usr\bin\zsh.exe --login -i"'/>
+					<value name="Cmd1" type="string" data='&gt;-cur_console:t:"chef-repo" -cur_console:d:C:\Projects\gitlab\scm\chef-repo set CHERE_INVOKING=1 &amp; set "PATH=C:\git-sdk-64\usr\bin;%PATH%" &amp; set MSYSTEM=MINGW64 &amp; "%ConEmuBaseDirShort%\conemu-msys2-64.exe zsh --login -i"'/>
 					<value name="Active" type="long" data="1"/>
-					<value name="Count" type="long" data="5"/>
-					<value name="Cmd2" type="string" data='-cur_console:s50V -cur_console:d:C:\Projects\gitlab\chef-developers set MSYSTEM=MINGW64 &amp; "C:\git-sdk-64\usr\bin\zsh.exe --login -i"'/>
-					<value name="Cmd3" type="string" data='-cur_console:d:C:\Projects\gitlab\scm\infrastructure-deploy set MSYSTEM=MINGW64 &amp; "C:\git-sdk-64\usr\bin\zsh.exe --login -i"'/>
-					<value name="Cmd4" type="string" data='-cur_console:d:C:\Projects\gitlab\devops\devtools set MSYSTEM=MINGW64 &amp; "C:\git-sdk-64\usr\bin\zsh.exe --login -i"'/>
-					<value name="Cmd5" type="string" data='-cur_console:d:C:\Users\tscheffert\.dotfiles set MSYSTEM=MINGW64 &amp; "C:\git-sdk-64\usr\bin\zsh.exe --login -i"'/>
+					<value name="Count" type="long" data="6"/>
+					<value name="Cmd2" type="string" data='-cur_console:t:"chef-developers" -cur_console:d:C:\Projects\gitlab\chef-developers set CHERE_INVOKING=1 &amp; set "PATH=C:\git-sdk-64\usr\bin;%PATH%" &amp; set MSYSTEM=MINGW64 &amp; "%ConEmuBaseDirShort%\conemu-msys2-64.exe zsh --login -i"'/>
+					<value name="Cmd3" type="string" data='-cur_console:t:"infra-deploy" -cur_console:d:C:\Projects\gitlab\scm\infrastructure-deploy set CHERE_INVOKING=1 &amp; set "PATH=C:\git-sdk-64\usr\bin;%PATH%" &amp; set MSYSTEM=MINGW64 &amp; "%ConEmuBaseDirShort%\conemu-msys2-64.exe zsh --login -i"'/>
+					<value name="Cmd4" type="string" data='-cur_console:t:"devtools" -cur_console:d:C:\Projects\gitlab\devops\devtools set CHERE_INVOKING=1 &amp; set "PATH=C:\git-sdk-64\usr\bin;%PATH%" &amp; set MSYSTEM=MINGW64 &amp; "%ConEmuBaseDirShort%\conemu-msys2-64.exe zsh --login -i"'/>
+					<value name="Cmd5" type="string" data='-cur_console:t:"operations-center" -cur_console:d:C:\Projects\gitlab\devops\operations-center set CHERE_INVOKING=1 &amp; set "PATH=C:\git-sdk-64\usr\bin;%PATH%" &amp; set MSYSTEM=MINGW64 &amp; "%ConEmuBaseDirShort%\conemu-msys2-64.exe zsh --login -i"'/>
+					<value name="Cmd6" type="string" data='-cur_console:t:"dotfiles" -cur_console:d:C:\Users\tscheffert\.dotfiles set CHERE_INVOKING=1 &amp; set "PATH=C:\git-sdk-64\usr\bin;%PATH%" &amp; set MSYSTEM=MINGW64 &amp; "%ConEmuBaseDirShort%\conemu-msys2-64.exe zsh --login -i"'/>
 				</key>
-				<key name="Task10" modified="2018-10-05 12:49:45" build="180626">
-					<value name="Name" type="string" data="{Git Bash}"/>
+				<key name="Task10" modified="2019-02-04 12:00:27" build="190108">
+					<value name="Name" type="string" data="{Zsh::Projects}"/>
 					<value name="Flags" type="dword" data="00000000"/>
 					<value name="Hotkey" type="dword" data="00000000"/>
 					<value name="GuiArgs" type="string" data='/dir "C:\Projects"'/>
 					<value name="Active" type="long" data="0"/>
 					<value name="Count" type="long" data="1"/>
-					<value name="Cmd1" type="string" data='set MSYSTEM=MINGW64 &amp; "C:\git-sdk-64\usr\bin\zsh.exe --login -i"'/>
+					<value name="Cmd1" type="string" data='-cur_console:t:"zsh" set CHERE_INVOKING=1 &amp; set "PATH=C:\git-sdk-64\usr\bin;%PATH%" &amp; set MSYSTEM=MINGW64 &amp; "%ConEmuBaseDirShort%\conemu-msys2-64.exe zsh --login -i"'/>
 				</key>
-				<key name="Task11" modified="2018-10-05 12:49:45" build="180626">
-					<value name="Name" type="string" data="{Git Bash CurD}"/>
+				<key name="Task11" modified="2019-02-08 15:28:04" build="190108">
+					<value name="Name" type="string" data="{Zsh::CurD}"/>
 					<value name="Flags" type="dword" data="00000000"/>
 					<value name="Hotkey" type="dword" data="00000000"/>
 					<value name="GuiArgs" type="string" data=""/>
 					<value name="Active" type="long" data="0"/>
 					<value name="Count" type="long" data="1"/>
-					<value name="Cmd1" type="string" data='set MSYSTEM=MINGW64 &amp; "C:\git-sdk-64\usr\bin\zsh.exe --login -i"'/>
+					<value name="Cmd1" type="string" data='-cur_console:t:"zsh" set CHERE_INVOKING=1 &amp; set "PATH=C:\git-sdk-64\usr\bin;%PATH%" &amp; set MSYSTEM=MINGW64 &amp; "%ConEmuBaseDirShort%\conemu-msys2-64.exe zsh --login -i"'/>
 				</key>
 				<key name="Task12" modified="2018-10-05 12:49:45" build="180626">
 					<value name="Name" type="string" data="{Show ANSI colors}"/>
@@ -715,6 +716,24 @@
 					<value name="Cmd1" type="string" data='&gt; "%windir%\system32\cmd.exe" /k ""%ConEmuBaseDir%\CmdInit.cmd" &amp; echo This is Native cmd.exe"'/>
 					<value name="Cmd2" type="string" data='"%windir%\syswow64\cmd.exe" /k ""%ConEmuBaseDir%\CmdInit.cmd" &amp; echo This is 32 bit cmd.exe -new_console:s50V"'/>
 				</key>
+				<key name="Task15" modified="2018-10-25 17:48:18" build="180626">
+					<value name="Name" type="string" data="{WSL::wsltty}"/>
+					<value name="Flags" type="dword" data="00000000"/>
+					<value name="Hotkey" type="dword" data="00000000"/>
+					<value name="GuiArgs" type="string" data=""/>
+					<value name="Active" type="long" data="0"/>
+					<value name="Count" type="long" data="1"/>
+					<value name="Cmd1" type="string" data='"%LOCALAPPDATA%\wsltty\bin\mintty.exe" --wsl -o Locale=C -o Charset=UTF-8 -i "%LOCALAPPDATA%\lxss\bash.ico" /bin/wslbridge -C~ -t zsh --login -i'/>
+				</key>
+				<key name="Task16" modified="2018-10-25 17:56:31" build="180626">
+					<value name="Name" type="string" data="{WSL::bash}"/>
+					<value name="Flags" type="dword" data="00000000"/>
+					<value name="Hotkey" type="dword" data="00000000"/>
+					<value name="GuiArgs" type="string" data='-icon "%LOCALAPPDATA%\lxss\bash.ico"'/>
+					<value name="Active" type="long" data="0"/>
+					<value name="Count" type="long" data="1"/>
+					<value name="Cmd1" type="string" data="%windir%\system32\bash.exe -cur_console:p"/>
+				</key>
 			</key>
 			<key name="Apps" modified="2018-01-12 17:28:45" build="170910">
 				<value name="Count" type="long" data="0"/>
@@ -731,6 +750,7 @@
 			<value name="DownShowExOnTopMessage" type="hex" data="00"/>
 			<value name="EnvironmentSet" type="multi">
 				<line data="set PATH=%ConEmuBaseDir%\Scripts;%PATH%"/>
+				<line data="chcp 65001"/>
 			</value>
 			<value name="CTS.ResetOnRelease" type="hex" data="00"/>
 			<value name="CTS.EraseBeforeReset" type="hex" data="01"/>
@@ -741,9 +761,9 @@
 			<value name="Update.InetTool" type="hex" data="00"/>
 			<value name="Update.InetToolCmd" type="string" data=""/>
 			<value name="VividColors" type="hex" data="01"/>
-			<value name="AnsiExecution" type="hex" data="01"/>
+			<value name="AnsiExecution" type="hex" data="00"/>
 			<value name="AnsiAllowedCommands" type="multi">
-				<line data="cmd -cur_console:R /cGitShowBranch.cmd"/>
+				<line data="*"/>
 			</value>
 			<value name="KillSshAgent" type="hex" data="01"/>
 			<value name="JumpListAutoUpdate" type="hex" data="01"/>
@@ -757,6 +777,7 @@
 			<value name="StatusBar.Hide.WMode" type="hex" data="01"/>
 			<value name="Language" type="string" data="en"/>
 			<value name="RestoreInactive" type="hex" data="00"/>
+			<value name="AutoTrimSingleLine" type="hex" data="00"/>
 		</key>
 	</key>
 </key>

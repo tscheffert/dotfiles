@@ -596,6 +596,12 @@ function! RubySyntax()
   hi! def link rubyInteger Function
 
   " hi def link rubyCapitalizedMethod Function
+
+  " hi! def link rubyInterpolation Identifier
+
+  " Extend OceanicNext colorscheme
+  hi! def link rubyCurlyBlockDelimiter Conditional
+  hi! def link rubyBlockParameterList Conditional
 endfunction
 
 augroup YAMLFiles
@@ -929,6 +935,11 @@ if has('gui_running')
     " Reset ColorColumn and then set it via my preferences
     " highlight ColorColumn NONE
     " highlight ColorColumn guifg=#C5D4DD guibg=#556873
+
+    " Change rubyInterpolation to base05
+    " Change rubySymbol to base0C
+    " Change Symbol to base09
+    " Change Identifier to base09
   elseif HasColorscheme('nova')
     colorscheme nova
     let g:airline_theme='nova'

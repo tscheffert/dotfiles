@@ -4,6 +4,10 @@
 # $Shell.WindowTitle="Trent's Powershell"
 # new-item alias:np -value C:WindowsSystem32notepad.exe
 
+# TODO: Figure out how to import this
+# PS C:\Program Files\Microsoft System Center 2012 R2\Virtual Machine Manager\bin\psModules\virtualmachinemanager> Import-Module .\virtualmachinemanager.psd1
+
+
 ### Functions
 # Behave like 'which' from bash/zsh
 function which ($cmd) { (Get-Command $cmd).Definition }

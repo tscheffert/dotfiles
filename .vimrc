@@ -132,6 +132,7 @@ Plug 'vim-scripts/BufOnly.vim'
 " Searching for stuff
 if s:use_ctrlp
   Plug 'ctrlpvim/ctrlp.vim'
+  Plug 'FelikZ/ctrlp-py-matcher' " ~22x faster matching
 endif
 
 if s:use_unite
@@ -1277,6 +1278,8 @@ hi clear CursorLine
 " -----
 
 if s:use_ctrlp
+  let g:ctrlp_match_func = { 'match': 'pymatcher#PyMatch' }
+
   " Ignore stuff
   let g:ctrlp_custom_ignore = {
         \ 'dir': '\v[\/](\.git|\.hg|\.svn|_site|vimfiles|tmp|bundle)$',

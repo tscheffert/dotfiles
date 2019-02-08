@@ -5,6 +5,15 @@ Working shell on our windows servers:
 & "C:\opscode\chef\embedded\bin\pry.bat"
 ```
 
+## Git Tip & Tricks
+
+### Rebase without messing up dates
+
+```
+git rebase --committer-date-is-author-date
+```
+
+
 ## Changes to files
 
 ### Remove lines matching regex from files
@@ -67,6 +76,98 @@ git rebase -i origin/develop
 git commit --amend --reset-author --no-edit && git rebase --continue
 ```
 
+### Clean up Chef Server Logs
+
+```
+cd /var/log/opscode
+sudo find ./opscode-expander -name '*.[us]' | sudo xargs rm
+sudo find ./oc_bifrost -name 'requests.log*[0-9]' | sudo xargs rm
+sudo find ./opscode-erchef -name 'requests.log*[0-9]' | sudo xargs rm
+sudo find ./opscode-reporting -name 'reporting.log*[0-9]' | sudo xargs rm
+sudo find ./opscode-solr4 -name '*.s' | sudo xargs rm
+```
+
+### Finding lost git commits
+
+Source: <https://confluence.atlassian.com/bbkb/how-to-restore-a-deleted-branch-765757540.html>
+
+Generate a list of commits that are present but unreachable:
+
+```
+git fsck --full --no-reflogs --unreachable --lost-found | grep commit | cut -d\  -f3 | xargs -n 1 git log -n 1 --pretty=oneline > .git/lost-found.txt
+```
+
+View commit chains from "lost" items:
+
+```
+git log -n 5 --name-only --oneline <commit>
+```
+
+View contents of chains:
+
+```
+git log -n 5 -p <commit>
+```
+
+Clean up lost and found when you're done:
+
+```
+rm .git/lost-found.txt
+git gc
+```
+
+If you really want to get rid of _everything_:
+
+```
+git reflog expire --expire-unreachable=now --all
+git gc --prune=now
+```
+
+
+## Finding things
+
+### Running a command on all directories in a path
+
+Note: Running `find` with `-print0` and `xargs` with `-0` handles filenames with
+spaces, or (god forbid) newlines, correctly.
+
+
+```
+find . -maxdepth 1 -type d -print0 | xargs -0 --max-args=1 ls
+```
+
+```
+find . -maxdepth 1 -type d ! -path . -execdir 'echo {}' +
+```
+
+```
+find . -maxdepth 1 -type d -print0 | xargs -0 --max-args=1 --verbose -I _ cd _ && pwd && cd -
+```
+
+
+### List all directories except the "dot" current directory
+
+Note: You can use `!` to negate expressions from the find arguments, we exclude
+items that match `-path .` here.
+
+```
+find . ! -path . -type d
+```
+
+
+## Vim
+[Source](https://vi.stackexchange.com/a/16657/9963)
+
+Capture scriptnames output
+```
+vim -c ':set t_ti= t_te= nomore' -c 'scriptnames' -c 'q!'
+```
+
+or:
+```
+vim -c "redir! > vimout | scriptnames | redir END | q"
+```
+
 
 ## Other?
 
@@ -113,6 +214,28 @@ $ cmd /c 'mklink /d C:\tools\ruby\ridk\current C:\tools\ruby\ridk\Ruby25-x64'
 symbolic link created for C:\tools\ruby\ridk\current <<===>> C:\tools\ruby\ridk\Ruby25-x64
 ```
 
+## Ruby
+
+### Split tabular input into one word per line
+
+This:
+```
+aes-128-cbc       aes-128-ecb       aes-192-cbc       aes-192-ecb
+aes-256-cbc       aes-256-ecb       aria-128-cbc      aria-128-cfb
+```
+
+Into:
+```
+aes-128-cbc
+aes-128-ecb
+aes-192-cbc
+aes-192-ecb
+...
+```
+
+```bash
+echo "stuff" | ruby -e "STDIN.each_line.to_a.flat_map(&:split).map(&:strip).each(&method(:puts))"
+```
 
 
 ## Problem?

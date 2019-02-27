@@ -49,6 +49,20 @@ export RUBY_HEAP_SLOTS_INCREMENT=1000000
 export RUBY_HEAP_SLOTS_GROWTH_FACTOR=1
 export RUBY_HEAP_FREE_MIN=500000
 
+# Set the default external encoding to utf-8, always
+if [[ -n "$RUBYOPT" ]]; then
+  # Extend existing RUBYOPT, which is a space separated of commandline flags
+  if [[ "$RUBYOPT" =~ "-E*" ]]; then
+    # Seems we've already set the -E flag, no changes
+    export RUBYOPT="$RUBYOPT"
+  else
+    export RUBYOPT="$RUBYOPT -Eutf-8"
+  fi
+else
+  export RUBYOPT='-Eutf-8'
+fi
+
+
 export INPUTRC=~/.inputrc
 
 # --- PATH ---

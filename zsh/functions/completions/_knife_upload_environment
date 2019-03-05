@@ -1,0 +1,10 @@
+#compdef knife_upload_environment
+# vi: ft=zsh
+
+function _knife_upload_environment() {
+  _arguments \
+    "1:environment file:_files -f -W $PWD/environments/" \
+    "2:chef server:(live sandbox)"
+}
+
+_knife_upload_environment "$@"

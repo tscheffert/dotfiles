@@ -1,0 +1,13 @@
+#compdef knife_upload_cookbook
+# vi: ft=zsh
+
+function _knife_upload_cookbook() {
+  # _files: Autocomplete files
+    # -/ Only directories
+    # -W Specify paths to match filenames but not insert in the result
+  _arguments \
+    "1:cookbook dir:_files -/ -W $PWD/cookbooks/" \
+    "2:chef server:(sandbox live)"
+}
+
+_knife_upload_cookbook "$@"

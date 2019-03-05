@@ -1,7 +1,7 @@
 #!/usr/bin/env zsh
 # vi: ft=zsh
 
-function knife_upload_environment() {
+function knife_download_environment() {
   local environment_name="$1"
   if [[ -z "$environment_name" ]]; then
     echo 1>&2 "No environment name passed"
@@ -19,9 +19,10 @@ function knife_upload_environment() {
     local failed=true
   fi
 
-  local target_environment_file="./environments/$environment_name"
+  # We're not downloading a local file, but it is worthwhile for verifying that the environment exists
+  local target_environment_file="./environments/$environment_name.json"
   if [[ ! -f "$target_environment_file" ]]; then
-    echo 1>&2 "Target environment file at $target_environment_file doesn't exist"
+    echo 1>&2 "Target environment $environment_name doesn't exist, no local file"
     local failed=true
   fi
 
@@ -50,14 +51,11 @@ function knife_upload_environment() {
 
   if [[ $failed ]]; then
     echo 1>&2 "\nUsage:"
-    echo 1>&2 "  knife_upload_environment {environment_name} {target_server}"
-    echo 1>&2 "  - environment_name: The environment to upload, like development_tliint1.json or development_atlas1_platform.json"
-    echo 1>&2 "  - target_server: The server to upload the environment to, one of sandbox|live"
-    echo 1>&2 ""
-    echo 1>&2 "  NOTE: The uploaded environment will only last until the next time the Jenkins environment upload job runs"
+    echo 1>&2 "  knife_download_environment {environment_name} {target_server}"
+    echo 1>&2 "  - environment_name: The environment to download, like development_tliint1 or development_atlas1_platform"
+    echo 1>&2 "  - target_server: The server to download the environment on, one of sandbox|live"
     return 1
   fi
 
- knife upload "environments/$environment_name" --config "$knife_config"
+  knife download "environments/${environment_name}.json" --config "$knife_config"
 }
-

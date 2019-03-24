@@ -133,7 +133,7 @@ function name() {
   local local_name="$(whoami)"
 
   # Convert name to lowercase, so that TScheffert works too
-  if [[ ! "${(L)local_name}" =~ "tscheffe" ]]; then
+  if [[ ! "${(L)local_name}" =~ "tscheffe|trent" ]]; then
     name="%n"
   fi
 

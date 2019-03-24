@@ -5,35 +5,79 @@ require 'dimensions'
 require 'bigdecimal'
 require 'fileutils'
 
-test_run = ARGV[0] == '--test'
-
+TOO_SMALL_DIR = 'too_small'
+NOT_SQUARE_DIR = 'not_square'
+MIN_WIDTH = 2560
+MIN_HEIGHT = 1440
 MIN_RATIO = BigDecimal.new('1.77')
 MAX_RATIO = BigDecimal.new('1.78')
 
 IMAGE_EXTENSIONS = ['.png', '.jpg', '.jpeg']
 
+if ARGV[0] == '--help'
+  puts <<~HELPDOC
+    USAGE:
+        images_sort
+            Moves images that are less than #{MIN_WIDTH}x#{MIN_HEIGHT} to '#{TOO_SMALL_DIR}' directory
+            Moves images that aren't perfectly 16:9 square to '#{NOT_SQUARE_DIR}' directory
+        images_sort --test
+            Reports which images will move but doesn't move them
+        images_sort --help
+            Prints this message
+  HELPDOC
+  exit 0
+end
+
+test_run = ARGV[0] == '--test'
+
 unless test_run
-  NOT_SQUARE_DIR = 'not_square'
+  FileUtils.mkdir_p(TOO_SMALL_DIR)
   FileUtils.mkdir_p(NOT_SQUARE_DIR)
 end
 
 files = Dir.entries('.').select { |f| File.file?(f) && IMAGE_EXTENSIONS.include?(File.extname(f)) }
 # files -= [File.basename(__FILE__)]
 
-square, not_square = files.partition do |img|
+
+# Grab images that are too small first
+not_too_small, too_small = files.partition do |img|
+  begin
+    width, height = Dimensions.dimensions(img)
+
+    height >= MIN_HEIGHT && width >= MIN_WIDTH
+  rescue => e
+    puts "File #{img} failed with error #{e}, cannot test size"
+
+    true
+  end
+end
+
+# Then test remaining for ratio
+square, not_square = not_too_small.partition do |img|
   begin
     width, height = Dimensions.dimensions(img)
     ratio = BigDecimal.new(width) / BigDecimal.new(height)
 
     MIN_RATIO < ratio && ratio < MAX_RATIO
   rescue => e
-    puts "File #{img} failed with error #{e}"
+    puts "File #{img} failed with error #{e}, cannot test ratio"
 
     true
   end
 end
 
 if test_run
+  unless too_small.empty?
+    puts "Too Small:"
+    too_small.each do |img|
+      puts "  #{img}"
+    end
+  end
+
+  unless square.empty? && not_square.empty?
+    puts "\n---------\n\n"
+  end
+
   unless square.empty?
     puts "Square:"
     square.each do |img|
@@ -52,8 +96,14 @@ if test_run
     end
   end
 else
+  puts "Moving too_small files:"
+  too_small.each(&method(:puts))
+  FileUtils.mv(too_small, TOO_SMALL_DIR)
+
+  puts "\n"
+
   puts "Moving not_square files:"
-  puts not_square.to_s
+  not_square.each(&method(:puts))
 
   FileUtils.mv(not_square, NOT_SQUARE_DIR)
 end

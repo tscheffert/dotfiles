@@ -2,99 +2,102 @@
 # vim: ft=ruby
 
 require File.join(__dir__, '..', 'ruby', 'lib', 'images_helper')
-include ImagesHelper::Constants
 
-if ARGV[0] == '--help'
-  command_name = File.basename(__FILE__)
-  puts <<~HELPDOC
-    USAGE:
-        #{command_name}
-            Moves images that are less than #{MIN_WIDTH}x#{MIN_HEIGHT} to '#{TOO_SMALL_DIR}' directory
-            Moves images that aren't perfectly 16:9 square to '#{NOT_SQUARE_DIR}' directory
-        #{command_name} --test
-            Reports which images will move but doesn't move them
-        #{command_name} --help
-            Prints this message
-  HELPDOC
-  exit 0
-end
+module ImagesSort
 
-test_run = ARGV[0] == '--test'
+  include ImagesHelper::Constants
 
-unless test_run
-  FileUtils.mkdir_p(TOO_SMALL_DIR)
-  FileUtils.mkdir_p(NOT_SQUARE_DIR)
-end
+  def self.perform(args:)
+    if args[0] == '--help'
+      command_name = File.basename(__FILE__)
+      puts <<~HELPDOC
+        USAGE:
+            #{command_name}
+                Moves images that are less than #{MIN_WIDTH}x#{MIN_HEIGHT} to '#{TOO_SMALL_DIR}' directory
+                Moves images that aren't perfectly 16:9 square to '#{NOT_SQUARE_DIR}' directory
+            #{command_name} --test
+                Reports which images will move but doesn't move them
+            #{command_name} --help
+                Prints this message
+      HELPDOC
+      exit 0
+    end
 
-files = Dir.entries('.').select { |f| File.file?(f) && IMAGE_EXTENSIONS.include?(File.extname(f)) }
-# files -= [File.basename(__FILE__)]
+    test_run = args[0] == '--test'
 
+    unless test_run
+      FileUtils.mkdir_p(TOO_SMALL_DIR)
+      FileUtils.mkdir_p(NOT_SQUARE_DIR)
+    end
 
-# Grab images that are too small first
-not_too_small, too_small = files.partition do |img|
-  begin
-    width, height = Dimensions.dimensions(img)
+    images = ImagesHelper.all_images_in_dir('.')
 
-    height >= MIN_HEIGHT && width >= MIN_WIDTH
-  rescue => e
-    puts "File #{img} failed with error #{e}, cannot test size"
+    # Grab images that are too small first
+    not_too_small, too_small = images.partition do |img|
+      begin
+        width, height = Dimensions.dimensions(img)
 
-    true
-  end
-end
+        height >= MIN_HEIGHT && width >= MIN_WIDTH
+      rescue StandardError => e
+        puts "File #{img} failed with error #{e}, cannot test size"
 
-# Then test remaining for ratio
-square, not_square = not_too_small.partition do |img|
-  begin
-    width, height = Dimensions.dimensions(img)
-    ratio = BigDecimal.new(width) / BigDecimal.new(height)
+        true
+      end
+    end
 
-    MIN_RATIO < ratio && ratio < MAX_RATIO
-  rescue => e
-    puts "File #{img} failed with error #{e}, cannot test ratio"
+    # Then test remaining for ratio
+    square, not_square = not_too_small.partition do |img|
+      begin
+        width, height = Dimensions.dimensions(img)
+        ratio = BigDecimal(width) / BigDecimal(height)
 
-    true
-  end
-end
+        MIN_RATIO < ratio && ratio < MAX_RATIO
+      rescue StandardError => e
+        puts "File #{img} failed with error #{e}, cannot test ratio"
 
-if test_run
-  unless too_small.empty?
-    puts "Too Small:"
-    too_small.each do |img|
-      puts "  #{img}"
+        true
+      end
+    end
+
+    if test_run
+      unless too_small.empty?
+        puts 'Too Small:'
+        too_small.each do |img|
+          puts "  #{img}"
+        end
+      end
+
+      puts "\n---------\n\n" unless square.empty? && not_square.empty?
+
+      unless square.empty?
+        puts 'Square:'
+        square.each do |img|
+          puts "  #{img}"
+        end
+      end
+
+      puts "\n---------\n\n" unless square.empty? || not_square.empty?
+
+      unless not_square.empty?
+        puts 'Not Square:'
+        not_square.each do |img|
+          puts "  #{img}"
+        end
+      end
+    else
+      puts 'Moving too_small files:'
+      too_small.each(&method(:puts))
+      FileUtils.mv(too_small, TOO_SMALL_DIR)
+
+      puts "\n"
+
+      puts 'Moving not_square files:'
+      not_square.each(&method(:puts))
+
+      FileUtils.mv(not_square, NOT_SQUARE_DIR)
     end
   end
 
-  unless square.empty? && not_square.empty?
-    puts "\n---------\n\n"
-  end
-
-  unless square.empty?
-    puts "Square:"
-    square.each do |img|
-      puts "  #{img}"
-    end
-  end
-
-  unless square.empty? || not_square.empty?
-    puts "\n---------\n\n"
-  end
-
-  unless not_square.empty?
-    puts "Not Square:"
-    not_square.each do |img|
-      puts "  #{img}"
-    end
-  end
-else
-  puts "Moving too_small files:"
-  too_small.each(&method(:puts))
-  FileUtils.mv(too_small, TOO_SMALL_DIR)
-
-  puts "\n"
-
-  puts "Moving not_square files:"
-  not_square.each(&method(:puts))
-
-  FileUtils.mv(not_square, NOT_SQUARE_DIR)
 end
+
+ImagesSort.perform(args: ARGV)

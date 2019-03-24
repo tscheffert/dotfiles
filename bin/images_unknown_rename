@@ -4,32 +4,28 @@
 require 'securerandom'
 
 require File.join(__dir__, '..', 'ruby', 'lib', 'images_helper')
-include ImagesHelper::Constants
 
-def safe_rename(old, new)
-  FileUtils.mv(old, new)
-rescue => e
-  puts "File #{old} -> #{new} failed with error #{e}"
-end
+# TODO: Implement an undo by writing the output to a file and then loading the file
+module ImagesUnknownRename
 
-def all_images_in_dir(dir)
-  Dir.entries(dir).select { |f| File.file?(f) && IMAGE_EXTENSIONS.include?(File.extname(f)) }
-end
+  include ImagesHelper::Constants
 
-def rename_images_in_current_dir
-  files = all_images_in_dir('.')
+  def self.perform
+    files = ImagesHelper.all_images_in_dir('.')
 
-  puts "\nRenaming #{files.length} files\n"
-  files.sort.each do |img|
-    ext = File.extname(img)
-    uuid = SecureRandom.uuid
-    uuid[0..1] = 'zz'
+    puts "\nRenaming #{files.length} files\n"
+    files.sort.each do |img|
+      ext = File.extname(img)
+      uuid = SecureRandom.uuid
+      uuid[0..1] = 'zz'
 
-    new_name = uuid + ext
-    puts "#{img} -> #{new_name}"
+      new_name = uuid + ext
+      puts "#{img} -> #{new_name}"
 
-    safe_rename(img, new_name)
+      ImagesHelper.safe_rename(img, new_name)
+    end
   end
+
 end
 
-rename_images_in_current_dir
+ImagesUnknownRename.perform

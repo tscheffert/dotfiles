@@ -9,6 +9,19 @@ require 'active_support/duration'
 
 ffmpeg ="C://tools/ffmpeg-3.2.4-win64-static/bin/ffmpeg.exe"
 
+if ARGV[0] == '--help'
+  puts <<~HELPDOC
+    USAGE:
+        cut_black <video_file_path> [black_duration]
+            Description: Cuts video at 'video_file_path' at each segment with a
+                         length of at least 'black_duration' seconds
+            video_file_path: Path to video to cut
+            black_duration: Duration of black screen, in seconds, to mark transitions
+        cut_black --help
+            Prints this message
+  HELPDOC
+  exit 0
+end
 
 video_filename = ARGV[0]
 
@@ -24,8 +37,13 @@ unless File.exist?(video_filename)
   raise "Invalid video file: #{video_filename}"
 end
 
+# minimum detected black duration expressed in seconds
+black_duration = ARGV[1]
+if black_duration.blank?
+  black_duration = '0.75'
+end
+
 # Capture cutpoints
-black_duration = '0.75' # minimum detected black duration expressed in seconds
 picture_black_ratio_th = '0.85' # Ratio for considering a picture black, black_pixels divided by non_black_pixels
 pixel_black_th = '0.15' # Maximum pixel luminance value for which a pixel is considered "black"
 ffmpeg_stdout = `"#{ffmpeg}" -i "#{video_filename}" -vf blackdetect=black_min_duration=#{black_duration}:picture_black_ratio_th=#{picture_black_ratio_th}:pixel_black_th=#{pixel_black_th} -an -f null - 2>&1 | tee detect_black_log.txt`

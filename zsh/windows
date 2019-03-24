@@ -32,10 +32,12 @@ append_to_path 'C:\Projects\github\elasticdog\transcrypt'
 
 # --- Aliases ---
 
-alias 'csudo'='csudo.cmd'
+alias irb='winpty "$(which irb).cmd"'
+
+alias csudo='csudo.cmd'
 
 # TODO: This works with `open .` but not `open /path/to/place` :*(
-alias 'open'='start'
+alias open='start'
 
 # TODO: Maybe set up in function files like I have other stuff?
 # TODO: Get this working

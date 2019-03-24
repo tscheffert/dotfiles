@@ -1,18 +1,9 @@
 #!/usr/bin/env ruby
 # vim: ft=ruby
 
-require 'dimensions'
-require 'bigdecimal'
-require 'fileutils'
+require File.join(__dir__, '..', 'ruby', 'lib', 'images_helper')
+include ImagesHelper::Constants
 
-MIN_RATIO = BigDecimal.new('1.77')
-MAX_RATIO = BigDecimal.new('1.78')
-
-IMAGE_EXTENSIONS = ['.png', '.jpg', '.jpeg']
-
-LANDSCAPE_DIR = 'landscape'
-PORTRAIT_DIR = 'portrait'
-BAD_DIR = 'bad'
 FileUtils.mkdir_p(LANDSCAPE_DIR)
 FileUtils.mkdir_p(PORTRAIT_DIR)
 FileUtils.mkdir_p(BAD_DIR)

@@ -10,14 +10,15 @@ require 'active_support/duration'
 ffmpeg ="C://tools/ffmpeg-3.2.4-win64-static/bin/ffmpeg.exe"
 
 if ARGV[0] == '--help'
+  command_name = File.basename(__FILE__)
   puts <<~HELPDOC
     USAGE:
-        cut_black <video_file_path> [black_duration]
+        #{command_name} <video_file_path> [black_duration]
             Description: Cuts video at 'video_file_path' at each segment with a
                          length of at least 'black_duration' seconds
             video_file_path: Path to video to cut
             black_duration: Duration of black screen, in seconds, to mark transitions
-        cut_black --help
+        #{command_name} --help
             Prints this message
   HELPDOC
   exit 0

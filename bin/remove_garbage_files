@@ -5,7 +5,7 @@
 
 require 'fileutils'
 
-GARBAGE_FILES = ['RARBG.COM_XXX_BANNER.jpg', 'RARBG.txt', 'RARBG.com.txt','file_id.diz', '.BridgeSort']
+GARBAGE_FILES = ['RARBG.COM_XXX_BANNER.jpg', 'RARBG.txt', 'RARBG.com.txt', 'file_id.diz', '.BridgeSort']
 
 GARBAGE_EXTENSIONS = ['.nfo', '.BridgeSort']
 

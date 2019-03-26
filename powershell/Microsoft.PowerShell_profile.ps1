@@ -49,10 +49,10 @@ function Edit-BeautifyFile ($file)
 
 function Get-PSVersion
 {
-  Write-Host $PSVersionTable.PSVersion
+  Write-Output $PSVersionTable.PSVersion
 }
 
-function Get-HostName($address)
+function Get-HostName ($address)
 {
   $result = [System.Net.Dns]::GetHostByAddress($address)
 
@@ -60,50 +60,50 @@ function Get-HostName($address)
 }
 
 function Get-ADUserMemberOf {
-    [CmdletBinding()]
-    Param(
-        [Parameter(Mandatory=$True)]
-        [string]$User,
-        [string]$Server="hq.echogl.net"
-    )
+  [CmdletBinding()]
+  param(
+    [Parameter(Mandatory = $True)]
+    [string]$User,
+    [string]$Server = "hq.echogl.net"
+  )
 
-    Get-ADUser $User -Server $Server -Properties MemberOf | Select -ExpandProperty memberof
+  Get-ADUser $User -Server $Server -Properties MemberOf | Select-Object -ExpandProperty memberof
 }
 
 # From kitchen-hyperv
-function Get-VmIP($vm) {
-    start-sleep -seconds 10
-    $vm.networkadapters.ipaddresses |
-        Where-Object {
-        $_ -match '^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$'
-    } |
-        Select-Object -First 1
+function Get-VmIP ($vm) {
+  Start-Sleep -Seconds 10
+  $vm.networkadapters.ipaddresses |
+  Where-Object {
+    $_ -match '^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$'
+  } |
+  Select-Object -First 1
 }
 
 # From kitchen-hyperv
 function Get-VmDetail {
-    [cmdletbinding()]
-    param($name)
+  [CmdletBinding()]
+  param($name)
 
-    Get-VM -Name $name |
-        ForEach-Object {
-        $vm = $_
-        do {
-            Start-Sleep -Seconds 1
-        }
-        while (-not (Get-VmIP $vm))
-
-        [pscustomobject]@{
-            Name = $vm.name
-            Id = $vm.ID
-            IpAddress = (Get-VmIP $vm)
-        }
+  Get-VM -Name $name |
+  ForEach-Object {
+    $vm = $_
+    do {
+      Start-Sleep -Seconds 1
     }
+    while (-not (Get-VmIP $vm))
+
+    [pscustomobject]@{
+      Name = $vm.Name
+      Id = $vm.Id
+      IpAddress = (Get-VmIP $vm)
+    }
+  }
 }
 
 # Chocolatey profile
 $ChocolateyProfile = "$env:ChocolateyInstall\helpers\chocolateyProfile.psm1"
-if (Test-Path($ChocolateyProfile)) {
+if (Test-Path ($ChocolateyProfile)) {
   Import-Module "$ChocolateyProfile"
 }
 

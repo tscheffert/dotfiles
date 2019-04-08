@@ -1843,6 +1843,9 @@ endfunction
 " Fix ^M line endings
 nnoremap <silent> <Leader>le :s%/\r/\r/g<CR>
 
+" Change all tab characters to two spaces
+nnoremap <silent> <Leader>ts :%s/\t/  /g<CR>
+
 " Insert a single character and go back to command mode
 noremap S i<Space><Esc>r
 

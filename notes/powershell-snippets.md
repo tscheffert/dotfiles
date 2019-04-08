@@ -1,4 +1,48 @@
-# Blade name from virtual machine
+# Powershell Tips and Tricks
+
+## Get Powershell Version
+
+```powershell
+$PSVersionTable.PSVersion
+```
+
+## Modules
+
+### Check for specific Modules
+
+```powershell
+Get-Module -Name <name>
+```
+
+### List all available Modules
+
+Just Modules:
+
+```powershell
+Get-Module -ListAvailable
+```
+
+With Files too:
+
+```powershell
+Get-Module -ListAvailable -All
+```
+
+Just Module Names:
+
+```powershell
+Get-Module | Get-Member -MemberType Property | Format-Table Name
+```
+
+Get modules installed on a remote computer:
+
+```powershell
+$s = New-PSSession -ComputerName <computer_name>
+
+Get-Module -PSSession $s -ListAvailable
+```
+
+## Blade name from virtual machine
 
 Get list of
 
@@ -6,7 +50,7 @@ Get list of
 (get-item "HKLM:\SOFTWARE\Microsoft\Virtual Machine\Guest\Parameters").GetValue("HostName")
 ```
 
-# List Event Logs and Sources
+## List Event Logs and Sources
 
 Source of all events from all logs based on events currently in the viewer:
 
@@ -24,22 +68,22 @@ Get-EventLog -LogName Application | Select-Object Source -Unique
 (Get-ChildItem HKLM:\SYSTEM\CurrentControlSet\Services\EventLog\Application).pschildname
 ```
 
-# Check if Log exists
+## Check if Log exists
 
-Ref: http://msdn.microsoft.com/en-us/library/system.diagnostics.eventlog.exists(v=vs.110).aspx
+Ref: <http://msdn.microsoft.com/en-us/library/system.diagnostics.eventlog.exists(v=vs.110).aspx>
 
 ```powershell
 [System.Diagnostics.EventLog]::Exists('Application');
 ```
 
-# Check if Source exists
-Ref: http://msdn.microsoft.com/en-us/library/system.diagnostics.eventlog.sourceexists(v=vs.110).aspx
+## Check if Source exists
+Ref: <http://msdn.microsoft.com/en-us/library/system.diagnostics.eventlog.sourceexists(v=vs.110).aspx>
 
 ```powershell
 [System.Diagnostics.EventLog]::SourceExists("YourLogSource");
 ```
 
-# PSSession
+## PSSession
 
 ```powershell
 $qa_creds = Get-Credential tscheffert@qa.echogl.net
@@ -50,24 +94,28 @@ Enter-PSSession $qa3_pltwrk01
 Get-PSSession | Remove-PSSession
 ```
 
-# ForEach-Object
+## ForEach-Object
+
 ```
 Get-Service Echo.XP.Carrier* | select -ExpandProperty DisplayName | foreach-object { sc.exe delete $_ }
 ```
 
-# URL ACLs
+## URL ACLs
 
-## List the URL ACLS
+### List the URL ACLS
+
 <https://docs.microsoft.com/en-us/windows/desktop/http/show-urlacl>
 
 ```
 netsh http show urlacl
 ```
 
-## Add to url acl
+### Add to url acl
+
 <https://docs.microsoft.com/en-us/windows/desktop/http/add-urlacl>
 
 Right:
+
 ```
 PS C:\Windows\system32> netsh http add urlacl url=http://qa2-pltwrk01.qa.echogl.net:6021/ user=QA\svcXpCustWork listen=yes
 
@@ -75,6 +123,7 @@ URL reservation successfully added
 ```
 
 Wrong:
+
 ```
 PS C:\Windows\system32> netsh http add urlacl url=http://qa2-pltwrk01.qa.echogl.net:6021 user=QA\svcXpCustWork listen=yes
 
@@ -82,10 +131,9 @@ Url reservation add failed, Error: 87
 The parameter is incorrect.
 ```
 
+## Port Bindings
 
-# Port Bindings
-
-## List Port Bindings in cmd
+### List Port Bindings in cmd
 
 *NOTE:* This command requires a session running as administrator
 
@@ -93,10 +141,11 @@ The parameter is incorrect.
 netstat -a -b -o
 ```
 
-Options
+Options:
+
 - `a` displays all connections and listening ports
 - `b` displays the executable involved in creating each connection or port, this
-can be slow. Use `-n` to only display numerical info and speed it up.
+  can be slow. Use `-n` to only display numerical info and speed it up.
 - `o` displays the owning process ID associated with each connection
 
 To find a process and get more details:
@@ -111,20 +160,17 @@ To kill a process if necessary:
 taskkill /PID <pid> [/F]
 ```
 
-## GUI Options
+### GUI Options
 
-### Resource Monitor
+#### Resource Monitor
 
 Open 'Resource Monitor' and go to the network tab, open the "Listening Ports" flyout.
 
-### Sysinternals - TCPView
+#### Sysinternals - TCPView
 
 Open 'TCPView' from a sysinternals portable install
 
-
-
-
-## Windows Event Viewer
+### Windows Event Viewer
 
 `Eventvwr [<computer name>][/v:] [/l:<log file>][/c:] [/f:<filter>][/?]`
 
@@ -147,16 +193,15 @@ enclosed in double quotes.  If the query itself contains double quotes, then you
 double quotes in the query to single quotes.  For example. the XML query, specified as `/f: "<QueryList><Query Id="0" Path="SystemA"><Select Path="SystemB">*[System[(Level=2)]</Select></Query></QueryList>"`
 /? — Shows this usage message
 
+## NSSM
 
-# NSSM
-
-## List Services
+### List Services
 
 ```
 Get-WmiObject win32_service | ?{$_.PathName -like '*nssm*'} | select Name, DisplayName, State, PathName
 ```
 
-# Find Files:
+## Find Files:
 
 ```
 Get-ChildItem -Path "Z:" -Recurse | Where-Object { !$PsIsContainer -and [System.IO.Path]::GetFileNameWithoutExtension($_.Name) -eq "hosts" }
@@ -166,18 +211,17 @@ Get-ChildItem -Path "Z:" -Recurse | Where-Object { !$PsIsContainer -and [System.
 Get-ChildItem -Filter "*consul_1_2_2*" -Path "C:\chef\cache\remote_file" | Remove-Item
 ```
 
-# Beautify and Lint
+## Beautify and Lint
 
-## Beautify files from git status
+### Beautify files from git status
 
 ```
 gs | awk '{ print $2 }' | xargs --max-args=1 -I _ powershell -Command "Edit-BeautifyFile -Path _"
 ```
 
+## Searching
 
-# Searching
-
-## Grep recursively
+### Grep recursively
 
 ```
 ls * -r | select-string -Pattern "Thing-I-Want-To-Find"

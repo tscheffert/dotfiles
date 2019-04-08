@@ -1,5 +1,7 @@
 # Overview
 
+Man Page: <https://www.lcdf.org/gifsicle/man.html>
+
 ## Gifsicle History:
 
 ```
@@ -51,4 +53,15 @@ or comma-separated red, green and blue values (each between 0 and 255).
 
 ```
 gifsicle --transparent
+```
+
+### Crop
+
+
+> --crop x1,y1-x2,y2
+> Crop the following input frames to a smaller rectangular area. The top-left corner of this rectangle is (x1,y1); you can give either the lower-right corner, (x2,y2), or the width and height of the rectangle. In the x1,y1+widthxheight form, width and height can be zero or negative. A zero dimension means the cropping area goes to the edge of the image; a negative dimension brings the cropping area that many pixels back from the image edge. For example, --crop 2,2+-2x-2 will shave 2 pixels off each side of the input image. Cropping takes place before any rotation, flipping, resizing, or positioning.
+
+```
+
+gifsicle --crop x1,y1+widthxheight input.gif > output.gif
 ```

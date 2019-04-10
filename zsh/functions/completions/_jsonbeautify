@@ -1,0 +1,11 @@
+#compdef jsonbeautify
+# vi: ft=zsh
+
+# Details: https://github.com/zsh-users/zsh-completions/blob/master/zsh-completions-howto.org#writing-completion-functions-using-_arguments
+function _jsonbeautify() {
+  _arguments \
+    "--json-file[Which file to beautify]:filename:_files" \
+    "--sort[Do you want to sort the file?]"
+}
+
+_jsonbeautify "$@"

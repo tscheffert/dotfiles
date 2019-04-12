@@ -3,7 +3,7 @@
 
 require File.join(__dir__, '..', 'ruby', 'lib', 'images_helper')
 
-module ImagesSort
+module SortImagesBySizeAndRatio
 
   include ImagesHelper::Constants
 
@@ -100,4 +100,4 @@ module ImagesSort
 
 end
 
-ImagesSort.perform(args: ARGV)
+SortImagesBySizeAndRatio.perform(args: ARGV)

@@ -1,0 +1,53 @@
+#!/usr/bin/env ruby
+# vim: ft=ruby
+
+require File.join(__dir__, '..', 'ruby', 'lib', 'images_helper')
+
+module AutoSortImagesByPrefix
+
+  include ImagesHelper::Constants
+
+  def self.perform(args:)
+    if args[0] == '--help'
+      command_name = File.basename(__FILE__)
+      puts <<~HELPDOC
+        USAGE:
+            #{command_name}
+                Automatically sorts images into folders based on _magic_
+            #{command_name} --test
+                Reports which images will move but doesn't move them
+            #{command_name} --help
+                Prints this message
+      HELPDOC
+      exit 0
+    end
+
+    test_run = args[0] == '--test'
+
+    images = ImagesHelper.all_images_in_dir('.')
+
+    sorted_images = images.group_by do |image|
+      image_name = File.basename(image, '.*')
+
+      # digits_suffix_matcher = /(?<group_by>.+)_\d{2,3}/
+      before_first_underscore_matcher = /\A(?<group_by>\d+)_/
+
+      matcher_to_use = before_first_underscore_matcher
+      group_by = image_name.match(matcher_to_use) { |match| match[:group_by] }
+      raise "Unable to find group_by for #{image}" if group_by.blank?
+
+      group_by
+    end
+
+    sorted_images.each do |group, grouped_images|
+      puts "Moving #{grouped_images.length} images to '#{group}' folder"
+
+      FileUtils.mkdir_p(group) unless test_run
+
+      FileUtils.mv(grouped_images, group) unless test_run
+    end
+  end
+
+end
+
+AutoSortImagesByPrefix.perform(args: ARGV)

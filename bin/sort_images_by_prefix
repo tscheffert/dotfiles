@@ -1,0 +1,37 @@
+#!/usr/bin/env ruby
+# vim: ft=ruby
+
+require File.join(__dir__, '..', 'ruby', 'lib', 'images_helper')
+
+module SortImagesByPrefix
+
+  include ImagesHelper::Constants
+
+  def self.perform(args:)
+    images = ImagesHelper.all_images_in_dir('.')
+
+    prefix = args[0]
+
+    if !prefix
+      warn 'Must provide a prefix'
+      exit 1
+    end
+
+    puts "Moving images with prefix '#{prefix}'"
+
+    matching_images = images.select { |image| image.start_with?(prefix) }
+
+    if matching_images.present?
+      puts "Moving #{matching_images.length} matched files"
+
+      FileUtils.mkdir_p(prefix)
+      FileUtils.mv(matching_images, prefix)
+    else
+      warn "Could not find any images with prefix '#{prefix}'"
+      exit 1
+    end
+  end
+
+end
+
+SortImagesByPrefix.perform(args: ARGV)

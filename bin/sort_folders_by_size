@@ -1,0 +1,59 @@
+#!/usr/bin/env ruby
+# vim: ft=ruby
+
+require File.join(__dir__, '..', 'ruby', 'lib', 'images_helper')
+
+module SortFoldersBySize
+
+  include ImagesHelper::Constants
+
+  def self.perform(args:)
+    if args[0] == '--help'
+      command_name = File.basename(__FILE__)
+      puts <<~HELPDOC
+        USAGE:
+            #{command_name}
+                Moves folders with no images greater than #{MIN_WIDTH}x#{MIN_HEIGHT} to '#{TOO_SMALL_DIR}' directory
+            #{command_name} --test
+                Reports which folders will move but doesn't move them
+            #{command_name} --help
+                Prints this message
+      HELPDOC
+      exit 0
+    end
+
+    # TODO: Implement --test
+
+    dirs = Dir.entries('.').select { |entry| File.directory?(entry) } - IGNORED_DIRS
+
+    hydrated_dirs = dirs.map do |dir|
+      dir_entries = Dir.glob(File.join(dir, '*'))
+      images = dir_entries.select do |f|
+        File.file?(f) && IMAGE_EXTENSIONS.include?(File.extname(f))
+      end
+
+      image_sizes = images.map { |image| Dimensions.dimensions(image) }.sort.uniq
+
+      {
+        name:   dir,
+        images: images,
+        sizes:  image_sizes
+      }
+    end
+
+    dirs_okay, dirs_too_small = hydrated_dirs.partition { |hdir| hdir[:sizes].any? { |size| size.first >= MIN_WIDTH } }
+
+    FileUtils.mkdir_p(TOO_SMALL_DIR) if dirs_too_small.present?
+
+    dirs_too_small.each do |hdir|
+      puts "Moving #{hdir[:name]}"
+      FileUtils.mv(hdir[:name], TOO_SMALL_DIR)
+    end
+
+    puts "dirs_okay: #{dirs_okay.length}"
+    puts "dirs_too_small: #{dirs_too_small.length}"
+  end
+
+end
+
+SortFoldersBySize.perform(args: ARGV)

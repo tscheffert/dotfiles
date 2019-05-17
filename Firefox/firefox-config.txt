@@ -7,7 +7,6 @@ privacy.trackingprotection.enabled: true # Firefox built-in tracking protection,
 http.networking.pipelining: true # Send more than one HTTP request at once to servers
 network.http.proxy.pipelining: true # Send more than one HTTP request while on a proxy too
 
-
 # Source: http://techdows.com/2016/08/firefox-48-e10s-enabled-or-disabled-if-disabled-enable.html
 browser.tabs.remote.autostart: true # required for Electrolysis
 create browser.tabs.remote.force-enable: true # Forces on Electrolysis regardless of addon compatability
@@ -95,7 +94,9 @@ extensions.e10sBlockedByAddons;false
 extensions.e10s.rollout.hasAddon;true
 extensions.e10sMultiBlockedByAddons;true
 
-
+# ADDON APOCALYPSE
+xpinstall.signatures.required;false # Don't require signatures...
+devtools.chrome.enabled;true  # Command line in browser console
 
 # ?????
 browser.newtabpage.enhanced;true
@@ -103,6 +104,17 @@ browser.customizemode.tip0.shown;true
 browser.search.widget.inNavBar;false
 browser.tabs.remote.autostart.2;true
 
+# Don't check that firefox is the default browser
+browser.shell.checkDefaultBrowser; false
+
+# Double down on disabling updater
+app.update.mode; 0
+app.update.service.enabled; false
+
+# Turn off datareporting
+datareporting.healthreport.uploadEnabled; false
+datareporting.healthreport.service.enabled; false
+datareporting.policy.dataSubmissionEnabled; false
 
 # listed about:config preferences via about:support
 # "Important Modified Preferences" from 'about:config', most from addons:

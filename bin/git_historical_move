@@ -1,0 +1,90 @@
+#!/usr/bin/env ruby
+# vim: ft=ruby
+
+require 'active_support'
+require 'active_support/core_ext/object/blank'
+
+require 'paint'
+
+require File.join(__dir__, '..', 'ruby', 'lib', 'option_helper')
+require File.join(__dir__, '..', 'ruby', 'lib', 'shelper')
+
+# With <3 from http://stackoverflow.com/a/15135004/2675529, for use with
+# https://saintgimp.org/2013/01/22/merging-two-git-repositories-into-one-repository-without-losing-file-history/
+# NOTE: This only works within one repo, doesn't move files from one repo to another
+
+
+#     Usage:
+#         For a file, where DESTINATION is a directory
+#         git_historical_move DESTINATION SOURCE
+#         For one or more directories, where DESTINATION is a directory
+#         git_historical_move DESTINATION dir1 dir2 dir3 ...
+
+module GitHistoricalMove
+  def self.perform(args:)
+    old_file, new_file = parse_and_validate!(args: args)
+
+    puts "Moving #{old_file} to #{new_file}"
+
+    run_git_filter_to_move(old_file: old_file, new_file: new_file)
+  end
+
+  def self.run_git_filter_to_move(old_file:, new_file:)
+    new_file_dir = File.dirname(new_file)
+
+    filter = <<~FILTERDOC
+      if [[ -f #{old_file} ]]; then mkdir -p #{new_file_dir}; mv #{old_file} #{new_file}; fi
+    FILTERDOC
+
+    command = [
+     'git', 'filter-branch',
+     '--force',
+     '--prune-empty',
+     '--tree-filter',
+     filter
+    ]
+
+    out = Shelper.out! \
+      command: command,
+      options: {}
+
+    puts "STDOUT:\n #{out.stdout}"
+    puts "STDERR:\n #{out.stderr}" if out.stderr.present?
+  end
+
+  def self.parse_and_validate!(args:)
+    helper = OptionHelper.new(
+               script_name: 'historical_git_move')
+
+    helper.add_option(
+      command_line_name: '--old-file',
+      variable_key:      :old_file,
+      description:       'Path to the previous file location',
+      option_type:       String,
+      required:          true)
+
+    helper.add_option(
+      command_line_name: '--new-file',
+      variable_key:      :new_file,
+      description:       'Path to the new file location',
+      option_type:       String,
+      required:          true)
+
+    results = helper.parse!(argv: args)
+
+    validate_file!(file: results[:old_file])
+    # new_file doesn't exist yet, can't validate presence
+
+    return results[:old_file], results[:new_file]
+  end
+
+  def self.validate_file!(file:)
+    if !File.exist?(file)
+      warn Paint["#{file}: no such file", :red]
+      exit 1
+    end
+  end
+
+end
+
+GitHistoricalMove.perform(args: ARGV)

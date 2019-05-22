@@ -6,6 +6,50 @@
 $PSVersionTable.PSVersion
 ```
 
+## Get Windows Versions
+
+Marketed builds like "1803" or "1809", same as `winver`:
+
+```powershell
+(Get-ItemProperty "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion").ReleaseId
+```
+
+Actual system information version:
+
+```
+[System.Environment]::OSVersion.Version
+```
+
+## Working with objects
+
+### Expand all the properties of an object
+
+```powershell
+... | Format-List *
+```
+
+### Filter by properties
+
+If `status` is the property you want to filter by:
+
+```powershell
+... | Where {$_.status –eq 'running'} | ...
+```
+
+## Services
+
+### Stop services only if they're running
+
+```powershell
+Get-Service chef-client | Where {$_.status –eq 'running'} | stop-service
+```
+
+### Set the startup type of a service to disabled
+
+```
+Set-Service -Name "chef-client" -StartupType Disabled
+```
+
 ## Modules
 
 ### Check for specific Modules

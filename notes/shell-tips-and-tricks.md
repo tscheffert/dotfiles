@@ -183,6 +183,12 @@ vim -c "redir! > vimout | scriptnames | redir END | q"
 while sleep 5; do clear; <command>; done
 ```
 
+### Run a command in a range
+
+```
+END=9; for ((i=1;i<=END;i++)); do knife cookbook delete role_common_app "123.456.$i" -y --config ~/.chef/sandbox/knife-dev.rb; done
+```
+
 ### Create a new sudo user
 
 ```bash

@@ -8,6 +8,9 @@
 # Clearly we want vim...
 prepend_to_path 'C:\Program Files\Vim\vim80'
 
+# Put the Ruby OneClick Installer install at the front, the ruby shipped with
+# gitsdk has issues with newlines in irb and pry
+prepend_to_path 'C:\tools\ruby\ridk\current\bin'
 
 # -- Append --
 
@@ -32,7 +35,7 @@ append_to_path 'C:\Projects\github\elasticdog\transcrypt'
 
 # --- Aliases ---
 
-alias irb='winpty "$(which irb).cmd"'
+alias irb-windows='winpty "C:\tools\ruby\ridk\current\bin\irb.cmd"'
 
 alias csudo='csudo.cmd'
 
@@ -87,3 +90,6 @@ function ps-beautify() {
 # export TMP="$(cygpath -m "$TMP")"
 # export TEMP="$(cygpath -m "$TEMP")"
 # export TMPDIR="$(cygpath -m "$TMPDIR")"
+
+# Set TERM, for compatability with stuff
+export TERM='xterm-256color'

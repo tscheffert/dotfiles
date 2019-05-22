@@ -4,8 +4,12 @@
 # Source: http://michaelheap.com/pimp-your-zsh/
 # More prompt expansion info at http://zsh.sourceforge.net/Doc/Release/Prompt-Expansion.html
 
+# Look at:
+# https://github.com/agkozak/polyglot
+# https://github.com/agkozak/agkozak-zsh-prompt
+
 # Fills the color array so that we can do the '%{fg[red]%}'
-# Colors: https://github.com/zsh-users/zsh/blob/master/Functions/Misc/colors
+# Source: https://github.com/zsh-users/zsh/blob/master/Functions/Misc/colors
 autoload -U colors && colors
 spectrum # Load spectrum function to enable $FG[010] stuff
 
@@ -43,12 +47,12 @@ function git_branch {
     return -1
   fi
 
-  if [[ "$platform" = 'wsl' ]]; then
+  # if [[ "$platform" = 'wsl' ]]; then
     local parens_color="%{$fg[white]%}"
-  else
-    # This seems to work on everything but the WSL unbuntu :shrug:
-    local parens_color="$FG[000]"
-  fi
+  # else
+  #   # This seems to work on everything but the WSL unbuntu :shrug:
+  #   local parens_color="$FG[000]"
+  # fi
   local left_parens="$parens_color(%{$reset_color%}"
   local right_parens="$parens_color)%{$reset_color%}"
 
@@ -108,6 +112,9 @@ function git_branch {
 
       # Detached HEAD state is magenta
       prompt_color="%{$fg[magenta]%}"
+
+      # TODO: We're running into issues here where it somehow defaults to "undefined"
+
       echo "$left_parens$prompt_color${detached_head//[^a-zA-Z0-9_\/-]/*}%{$reset_color%}$right_parens"
     else
       # HEAD is not a symbolic ref, and we don't know how to describe/name it

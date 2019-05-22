@@ -53,13 +53,30 @@ alias 'powershell_split'='ConEmu64 -run powershell -new_console:asV'
 
 # -- PowerShell Aliases/Functions --
 function ps-lint() {
+  local ps_file="${1:?You must specify a file to lint}"
+
+  if [[ ! -f "$ps_file" ]]; then
+    echo 1>&2 "Target file $ps_file doesn't exist"
+    return 1
+  fi
+
   # Invoke the PSScriptAnalyzer, which is installed via PowerShell Gallery
-  powershell -Command "Invoke-ScriptAnalyzer -Path $1"
+  powershell -Command "Invoke-ScriptAnalyzer -Path $ps_file"
 }
 
 function ps-beautify() {
+  local ps_file="${1:?You must specify a file to beautify}"
+
+  if [[ ! -f "$ps_file" ]]; then
+    echo 1>&2 "Target file $ps_file doesn't exist"
+    return 1
+  fi
+
   # Invoke the beautify function defined in my PowerShell profile
-  powershell -Command "Edit-BeautifyFile $1"
+  powershell -Command "Edit-BeautifyFile $ps_file"
+
+  # The beautify file leaves it with CRLF line endings
+  dos2unix "$ps_file"
 }
 
 

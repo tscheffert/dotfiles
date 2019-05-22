@@ -5,12 +5,14 @@
 
 # -- Prepend --
 
-# Clearly we want vim...
-prepend_to_path 'C:\Program Files\Vim\vim80'
+# Use the vim installed with pacman, but use our own gui
+alias 'gvim'="/c/Program\ Files/Vim/vim80/gvim" # TODO: Figure out how to set this up by PC
 
 # Put the Ruby OneClick Installer install at the front, the ruby shipped with
 # gitsdk has issues with newlines in irb and pry
 prepend_to_path 'C:\tools\ruby\ridk\current\bin'
+
+prepend_to_path 'C:\tools\packer\current'
 
 # -- Append --
 
@@ -31,6 +33,9 @@ append_to_path '$ConEmuBaseDir'
 
 # Git repo encryption utility
 append_to_path 'C:\Projects\github\elasticdog\transcrypt'
+
+# Enable porcelain like git filter-branch to work
+append_to_path 'C:\git-sdk-64\mingw64\libexec\git-core'
 
 
 # --- Aliases ---

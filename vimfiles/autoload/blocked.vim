@@ -2,6 +2,9 @@
 "   Modified to let you RubyJoinBlock from anywhere in the block, rather than only on the 'do'
 " Also code from vim-blockle
 
+" This was somewhat implemented in a Visual Studio Code plugin here:
+" https://github.com/elliotlarson/vscode-ruby-around-the-block
+
 " ----- Exposed
 
 " Verbatim from splitjoin

@@ -45,7 +45,6 @@ alias grep='grep -i'
 
 # refresh shell
 alias reload='exec zsh -l'
-
 alias reloadcomp='rm ~/.zcompdump; compinit'
 
 # Use a theme with tldr (for the npm installed tldr)
@@ -144,7 +143,7 @@ alias gdf='git diff --name-only'
 alias gds='git diff --staged --color-words'
 
 # Git diff (with) origin HEAD
-alias gdom='git diff origin/$(git_trimmed_origin_head)..'
+alias gdom='git diff --color-words origin/$(git_trimmed_origin_head)..'
 
 # Git diff _files_ against origin/HEAD
 alias gdfom='git diff origin/$(git_trimmed_origin_head)..HEAD --name-only'
@@ -266,10 +265,10 @@ function git-pickaxe {
 
 # -- Ruby Aliases --
 # Run Rubocop gem
-alias rbc='rubocop --config ~/.rubocop.yml'
+alias rbc='rubocop --config ~/.rubocop.yml --color'
 
 # Run Rubocop gem and auto-correct detected violations when available
-alias rbca='rubocop --config ~/.rubocop.yml --auto-correct'
+alias rbca='rubocop --config ~/.rubocop.yml --auto-correct --color'
 
 # Run Rubocop with a local .rubocop_todo.yml set to inherit from home directory config
 alias rtd='rubocop --config .rubocop_todo.yml'

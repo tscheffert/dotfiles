@@ -41,6 +41,7 @@ autoload -Uz compinit && compinit
 #   On the first run use the fast ones, if completion is called a second time then
 #   use the slow ones. Alternate back and forth on subsequent invocations.
 #   See 'Control Functions' in 'COMPLETION SYSTEM CONFIGURATION' (in zshall) for more details
+# TODO: Try to make completion case-insensitive
 zstyle -e ':completion:*' completer '
 if [[ $_last_completion_try != "$HISTNO$BUFFER$CURSOR" ]]; then
   _last_completion_try="$HISTNO$BUFFER$CURSOR"
@@ -49,6 +50,12 @@ else
   _last_completion_try=null
   reply=(_ignored _correct _approximate)
 fi'
+
+# Get kubectl completion going
+if which kubectl > /dev/null; then
+  # Source: https://kubernetes.io/docs/tasks/tools/install-kubectl/#enabling-shell-autocompletion
+  source <(kubectl completion zsh)
+fi
 
 # TODO: http://zsh.sourceforge.net/Guide/zshguide06.html#l144
 

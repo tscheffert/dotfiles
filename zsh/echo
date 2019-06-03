@@ -1,0 +1,39 @@
+#!/usr/bin/env zsh
+# vi: ft=zsh
+
+# Config for working at Echo
+
+# --- Path ---
+
+# --- Aliases ---
+
+# --- Exports ---
+
+# Set up KUBECONFIG for multiple kubectl config files by extending existing KUBECONFIG,
+# which is a list of kubectl config files
+
+function append_to_kubeconfig {
+  local server=${1:?Must pass server to append}
+
+  if [[ ! -f "$server" ]]; then
+    echo 1>&2 "Kubectl config file '$server' doesn't exist"
+    return 1
+  fi
+
+  if [[ -n "$KUBECONFIG" ]]; then
+    if [[ "$KUBECONFIG" =~ "$server" ]]; then
+      export KUBECONFIG="$KUBECONFIG"
+    else
+      # Semi-colon separated on windows, colon everywhere else
+      if [[ "$platform" == 'windows' ]]; then
+        export KUBECONFIG="$KUBECONFIG;$server"
+      else
+        export KUBECONFIG="$KUBECONFIG:$server"
+      fi
+    fi
+  else
+    export KUBECONFIG="$server"
+  fi
+}
+
+append_to_kubeconfig "$HOME/.kube/config-dev-k8smaster1"

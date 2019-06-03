@@ -1,6 +1,9 @@
 #!/usr/bin/env zsh
 # vi: ft=zsh
 
+# Import Echo specific configs
+. ~/.zsh/echo
+
 # -- OSX --
 # Github API Key!
 export HOMEBREW_GITHUB_API_TOKEN=

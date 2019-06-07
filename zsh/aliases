@@ -230,24 +230,24 @@ alias gshf='git show --name-only'
 alias gst='git stash'
 
 # Stash with a message, includes untracked and ignored files
-alias gssa='git stash push --include-untracked'
+alias gstsa='git stash push --include-untracked'
 
 # Git stash push with patch
-alias gssap='git stash push --patch --include-untracked'
+alias gstsap='git stash push --patch --include-untracked'
 
 # List all stashed files
-alias gsl='git stash list'
+alias gstl='git stash list'
 
 # Pop the last changes off the stash
-alias gsp='git stash pop'
+alias gstp='git stash pop'
 
 # Show a stashed item
 #   '-p' makes it more like 'git show'
 #   use with 'stash@{n}' to reference a particular stash item
-alias gssh='git stash show -p'
+alias gstsh='git stash show -p'
 
 # Drop a stash item, latest by default and specify with 'stash@{n}'
-alias gsd='git stash drop'
+alias gstd='git stash drop'
 
 # Git Grep for a list of files that contain the string
 alias ggno='git grep --name-only'

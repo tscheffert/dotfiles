@@ -14,6 +14,8 @@ prepend_to_path 'C:\tools\ruby\ridk\current\bin'
 
 prepend_to_path 'C:\tools\packer\current'
 
+prepend_to_path 'C:\tools\kubeval\current'
+
 # -- Append --
 
 # We want IIS Express!

@@ -19,7 +19,7 @@ elseif g:uname =~ "Linux"
 elseif g:uname =~ "MINGW64"
   let g:os = 'windows'
 else
-  echo "Couldn't detect OS from uname: " . g:uname . ", shits gonna break"
+  " echo "Couldn't detect OS from uname: " . g:uname . ", shits gonna break"
 endif
 
 " Session Detection fun
@@ -79,7 +79,7 @@ if has('win32') " Using InWindowsSession() here breaks syntastic
   " set shellpipe=>
   " set noshellslash
 else
-  echo "Not windows, default shell"
+  " echo "Not windows, default shell"
 endif
 
 " Start vim-plug
@@ -289,7 +289,7 @@ Plug 'fatih/vim-go', { 'for': ['go'] }
 Plug 'kylef/apiblueprint.vim'
 
 " Mimic macvim cursor toggling
-Plug 'jszakmeister/vim-togglecursor'
+" Plug 'jszakmeister/vim-togglecursor'
 
 " Remember where the cursor has been
 " TODO: Does this work? How do I make use of it again?
@@ -987,7 +987,7 @@ else
   if InConEmuSession()
     " Fix <BS> in ConEmu terminals per http://conemu.github.io/en/VimXterm.html#vim-bs-issue
     inoremap <Char-0x07F> <BS>
-
+    nnoremap <Char-0x07F> <BS>
     " Fix arrows/backspace in ConEmu
     let &t_AB="\e[48;5;%dm"
     let &t_AF="\e[38;5;%dm"
@@ -1004,6 +1004,48 @@ else
   endif
 
   set background=dark
+
+  " set termencoding=utf8
+
+  " 0 is blinking block
+  " 2 is solid block
+  " 3 is blinking underline
+  " 4 is solid underline
+  " 5 is blinking line
+  " 6 is solid line
+
+  " From: https://conemu.github.io/en/AnsiEscapeCodes.html
+  " 0 - ConEmu's default
+  " 1 - blinking block
+  " 2 - steady block
+  " 3 - blinking underline
+  " 4 - steady underline
+  " 5 - blinking bar
+  " 6 - steady bar
+
+  " Replace Mode
+  " let &t_SR="[5 q"
+  " let &t_SR = "\<Esc>[5 q"
+  " let &t_SR = "\e[5 q"
+
+  " Normal Mode
+  " let &t_EI="[1 q"
+  " let &t_EI = "\<Esc>[1 q"
+  " let &t_EI = "\e[1 q"
+
+  " Insert Mode
+  " let &t_SI="[5 q"
+  " let &t_SI = "\<Esc>[5 q"
+  " let &t_SI = "\e[5 q"
+
+  " Put terminal in "termcap" mode??
+  " let &t_ti="[1 q"
+  " let &t_ti="\e[1 q"
+
+  " Out of "termcap" mode???
+  " let &t_te="[0 q"
+  " let &t_te="\e[0 q"
+
   if HasColorscheme('jellybeans')
     colorscheme jellybeans
     let g:airline_theme='jellybeans'
@@ -1336,7 +1378,7 @@ if s:use_ctrlp
         " Per ':help win32-quotes', quotes in command line arguments need to be escaped on windows. But only when using bash as the shell it seems.
         let g:ctrlp_user_command ='ag %s --files-with-matches --hidden --nocolor -g \"\" --ignore \"Alfred/*\"'
       else
-        echom "Unknown shell: " . &shell . ", not setting ctrlp_user_command"
+        " echom "Unknown shell: " . &shell . ", not setting ctrlp_user_command"
       end
     else
       " In Windows, the shell commands have a high overhead. Elsewhere, it's fast so turn it off
@@ -1553,16 +1595,18 @@ if has('gui_running')
 
   " Colors matching nova
   let g:vim_search_pulse_color_list = ["#C5D4DD", "#7FC1CA", "#83AFE5", "#9A93E1", "#D18EC2"]
-elseif InConEmuSession()
-  " Approximate nova colors From: http://www.calmar.ws/vim/256-xterm-24bit-rgb-color-chart.html
-  " 225 is white/grey/pink, 44 is teal, 75 is blue, 171 is purple, 219 is red
-  let g:vim_search_pulse_color_list = [225, 44, 75, 171, 219]
-else
-  " TODO: Validate that these work for "generic console"
-  " Approximate nova colors From: http://www.calmar.ws/vim/256-xterm-24bit-rgb-color-chart.html
-  " 225 is white/grey/pink, 44 is teal, 75 is blue, 171 is purple, 219 is red
-  let g:vim_search_pulse_color_list = [225, 44, 75, 171, 219]
 endif
+" elseif InConEmuSession()
+"   " Approximate nova colors From: http://www.calmar.ws/vim/256-xterm-24bit-rgb-color-chart.html
+"   " 225 is white/grey/pink, 44 is teal, 75 is blue, 171 is purple, 219 is red
+"   let g:vim_search_pulse_color_list = [225, 44, 75, 171, 219]
+" else
+"   " TODO: Validate that these work for "generic console"
+"   " I don't think it does!
+"   " Approximate nova colors From: http://www.calmar.ws/vim/256-xterm-24bit-rgb-color-chart.html
+"   " 225 is white/grey/pink, 44 is teal, 75 is blue, 171 is purple, 219 is red
+"   let g:vim_search_pulse_color_list = [225, 44, 75, 171, 219]
+" endif
 
 let g:vim_search_pulse_duration = 400
 

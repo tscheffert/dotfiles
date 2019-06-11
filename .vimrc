@@ -1354,18 +1354,19 @@ if s:use_ctrlp
   let g:ctrlp_follow_symlinks = 0
 
   " Where to do ctrlp caching
-  let g:ctrlp_cache_dir = $HOME.'/vimfiles/tmp/ctrlp/cache'
+  let g:ctrlp_cache_dir = $TMPDIR.'/ctrlp/cache'
 
   " Always jump to open buffers
-  let g:ctrlp_switch_buffer = 'ETVH'
+  let g:ctrlp_switch_buffer = 'etvh'
 
   " Working directory as such:
-  "   1. Try find a vcs (.git, .gh, .svn) root to use
-  "   2. Is the working directory of the owning shell an ancestor of the
-  "       current file? Use that.
-  "   3. Use directory of the current file
-  let g:ctrlp_working_path_mode = 'ra'
+  "   1. Is the working directory of the owning shell an ancestor of the current
+  "       file? Use that. Usually we open gvim/vim where we want the root
+  "   2. Use directory of the current file
+  let g:ctrlp_working_path_mode = 'a'
 
+  " Ctrl-Shift-P => Open CtrlP in MRU Mode
+  nnoremap <silent> <C-m> :CtrlPMRU<CR>
 
   if executable('ag')
     set grepprg=ag\ --nogroup\ --nocolor\ --hidden
@@ -1373,10 +1374,10 @@ if s:use_ctrlp
     if InWindowsSession()
       if &shell ==# "cmd"
         " Only need to escape the quotes when using
-        let g:ctrlp_user_command = 'ag %s --files-with-matches --hidden --nocolor -g "" --ignore "Alfred/*"'
+        let g:ctrlp_user_command = 'ag %s --files-with-matches --hidden --nocolor -g "" --ignore "Alfred/*|\\.git/"'
       elseif &shell ==# "bash"
         " Per ':help win32-quotes', quotes in command line arguments need to be escaped on windows. But only when using bash as the shell it seems.
-        let g:ctrlp_user_command ='ag %s --files-with-matches --hidden --nocolor -g \"\" --ignore \"Alfred/*\"'
+        let g:ctrlp_user_command ='ag %s --files-with-matches --hidden --nocolor -g \"\" --ignore \"Alfred/*|\\.git/*\"'
       else
         " echom "Unknown shell: " . &shell . ", not setting ctrlp_user_command"
       end
@@ -1384,7 +1385,7 @@ if s:use_ctrlp
       " In Windows, the shell commands have a high overhead. Elsewhere, it's fast so turn it off
       let g:ctrlp_use_caching = 0
 
-      let g:ctrlp_user_command = 'ag %s --files-with-matches --hidden --nocolor -g "" --ignore "Alfred/*"'
+      let g:ctrlp_user_command = 'ag %s --files-with-matches --hidden --nocolor -g "" --ignore "Alfred/*|\\.git/*"'
     endif
   else
     " TODO: Set grepprg here?

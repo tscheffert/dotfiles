@@ -695,6 +695,13 @@ augroup MarkdownFiles
   autocmd Filetype markdown setlocal fileformat=unix
 augroup END
 
+augroup PowershellFiles
+  au!
+
+  " Prefer CRLF line endings
+  autocmd Filetype ps1 setlocal fileformat=unix
+augroup END
+
 
 " -----
 " Typing Behaviors

@@ -24,12 +24,10 @@ function append_to_kubeconfig {
     if [[ "$KUBECONFIG" =~ "$server" ]]; then
       export KUBECONFIG="$KUBECONFIG"
     else
-      # Semi-colon separated on windows, colon everywhere else
-      if [[ "$platform" == 'windows' ]]; then
-        export KUBECONFIG="$KUBECONFIG;$server"
-      else
-        export KUBECONFIG="$KUBECONFIG:$server"
-      fi
+      # Supposedly semi-colon separated on windows, colon everywhere else but I
+      # only got it working with a colon in my zsh on windows shell. Maybe I will
+      # need a semi-colon for Powershell?
+      export KUBECONFIG="$KUBECONFIG:$server"
     fi
   else
     export KUBECONFIG="$server"
@@ -37,3 +35,4 @@ function append_to_kubeconfig {
 }
 
 append_to_kubeconfig "$HOME/.kube/config-dev-k8smaster1"
+append_to_kubeconfig "$HOME/.kube/config-qa-k8smaster1"

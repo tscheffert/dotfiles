@@ -245,11 +245,14 @@ Plug 'tpope/vim-endwise',       { 'for': ['ruby'] } " Add matching 'end's for bl
 Plug 'tpope/vim-projectionist', { 'for': ['ruby'] } " Project management for navigation n such
 
 " Git!
-Plug 'airblade/vim-gitgutter'        " Shows git changes in the sign column
+" TODO: This still doesn't work when openned via right click, edit with vim
+" Plug 'airblade/vim-gitgutter'        " Shows git changes in the sign column
 Plug 'tpope/vim-git'                 " Git runtime files
 Plug 'tpope/vim-fugitive'            " Awesome git wrapper
 Plug 'shumphrey/fugitive-gitlab.vim' " Gitlab features for fugitive
 Plug 'tpope/vim-rhubarb'             " Github specific features building on fugitive
+
+" TODO: Look at https://github.com/junegunn/gv.vim
 Plug 'gregsexton/gitv'               " Enable :gitv! version viewing
 
 " Syntax
@@ -269,7 +272,7 @@ Plug 'wellle/targets.vim'
 Plug 'kana/vim-textobj-user'
 Plug 'kana/vim-textobj-line'
 Plug 'andymass/vim-matchup'
-Plug 'terryma/vim-expand-region'
+" Plug 'terryma/vim-expand-region' # messes with my _ binding for horizontal splits
 
 " Better Markdown
 Plug 'shime/vim-livedown', { 'for': ['markdown'] }
@@ -290,6 +293,13 @@ Plug 'kylef/apiblueprint.vim'
 
 " Mimic macvim cursor toggling
 " Plug 'jszakmeister/vim-togglecursor'
+
+" Pretty parantheses!
+" Plug 'junegunn/rainbow_parentheses.vim'
+
+" Extends `"` and `@` in normal mode and <Ctrl-R> in insert mode to show the contents of the registers
+" TODO: Do I like this? Seems invasive and affects standard vim commands
+" Plug 'junegunn/vim-peekaboo'
 
 " Remember where the cursor has been
 " TODO: Does this work? How do I make use of it again?
@@ -1853,6 +1863,7 @@ nnoremap <Leader>cd :lcd %:h
 nnoremap <Leader>md :!mkdir -p %:p:h
 
 " Copy last : command to clipboard
+" See: |:help quote_:|
 nnoremap <Leader>y: :let @+=@:<CR>
 
 " Yank all

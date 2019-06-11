@@ -1949,6 +1949,33 @@ nnoremap <Leader>j :call JoinSpaceless()<CR>
 " Duplicate current line below then comment out current line
 nnoremap <silent> <Leader>cc Ypk:Commentary<CR>
 
+" -----
+" Line Width Stuff
+" -----
+
+" Source: https://vi.stackexchange.com/a/659/9963
+" :au BufWinEnter * let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)
+
+" https://www.vim.org/scripts/script.php?script_id=3238
+
+" Source: https://vi.stackexchange.com/a/11610/9963
+" function! ParagraphToEightyChars()
+"   while (len(getline(".")) > 80)
+"     normal! 0
+"     " Find the first white-space character before the 81st character.
+"     call search('\(\%81v.*\)\@<!\s\(.*\s.\{-}\%81v\)\@!', 'c', line('.'))
+"     " Replace it with a new line.
+"     exe "normal! r\<CR>"
+"     " If the next line has words, join it to avoid weird paragraph breaks.
+"     if (getline(line('.')+1) =~ '\w')
+"       normal! J
+"     endif
+"   endwhile
+"   " Trim any accidental trailing whitespace
+"   :s/\s\+$//e
+" endfunction
+" nnoremap <silent><A-J> :call ParagraphToEightyChars()<CR>
+
 
 " -----
 " Macro Key Maps

@@ -1373,7 +1373,7 @@ if s:use_ctrlp
   "   1. Is the working directory of the owning shell an ancestor of the current
   "       file? Use that. Usually we open gvim/vim where we want the root
   "   2. Use directory of the current file
-  let g:ctrlp_working_path_mode = 'a'
+  let g:ctrlp_working_path_mode = 'ac'
 
   " Ctrl-Shift-P => Open CtrlP in MRU Mode
   nnoremap <silent> <C-m> :CtrlPMRU<CR>
@@ -1384,10 +1384,10 @@ if s:use_ctrlp
     if InWindowsSession()
       if &shell ==# "cmd"
         " Only need to escape the quotes when using
-        let g:ctrlp_user_command = 'ag %s --files-with-matches --hidden --nocolor -g "" --ignore "Alfred/*|\\.git/"'
+        let g:ctrlp_user_command = 'ag %s --files-with-matches --hidden --nocolor -g "" --ignore "Alfred/*"'
       elseif &shell ==# "bash"
         " Per ':help win32-quotes', quotes in command line arguments need to be escaped on windows. But only when using bash as the shell it seems.
-        let g:ctrlp_user_command ='ag %s --files-with-matches --hidden --nocolor -g \"\" --ignore \"Alfred/*|\\.git/*\"'
+        let g:ctrlp_user_command = 'ag %s --files-with-matches --hidden --nocolor -g \"\" --ignore \"Alfred/\*\"'
       else
         " echom "Unknown shell: " . &shell . ", not setting ctrlp_user_command"
       end
@@ -1395,7 +1395,7 @@ if s:use_ctrlp
       " In Windows, the shell commands have a high overhead. Elsewhere, it's fast so turn it off
       let g:ctrlp_use_caching = 0
 
-      let g:ctrlp_user_command = 'ag %s --files-with-matches --hidden --nocolor -g "" --ignore "Alfred/*|\\.git/*"'
+      let g:ctrlp_user_command = 'ag %s --files-with-matches --hidden --nocolor -g "" --ignore "Alfred/*"'
     endif
   else
     " TODO: Set grepprg here?

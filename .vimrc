@@ -82,13 +82,18 @@ else
   " echo "Not windows, default shell"
 endif
 
-" Start vim-plug
+" Set up vim_path, which is where we host files
+" Source: https://github.com/poxar/vimfiles/blob/abdb40ee482f63e3f665c0d7db2e738ad42c51f5/vimrc#L10-16
 if InWindowsSession()
-  " TODO: Something like this: https://github.com/agkozak/dotfiles/blob/master/.vimrc#L312
-  call plug#begin('~/vimfiles/bundle/')
+  let g:vim_path = "~/vimfiles"
 else
-  call plug#begin(expand('~/.vim/bundle/'))
+  let g:vim_path = "~/.vim"
 endif
+
+
+" Start vim-plug
+" TODO: Something like this: https://github.com/agkozak/dotfiles/blob/master/.vimrc#L312
+call plug#begin(expand(g:vim_path) . '/bundle/')
 
 " Conditional Activation Function
 " Usage:
@@ -717,12 +722,6 @@ augroup END
 " Typing Behaviors
 " -----
 
-" Use english for spellchecking, but don't spellcheck by default
-if version >= 700
-  set spl=en spell
-  set nospell
-endif
-
 " Enable enhanced command-line completion. Presumes you have compiled
 " with +wildmenu.  See :help 'wildmenu'
 "set wildmenu
@@ -935,6 +934,23 @@ set listchars=tab:>-,trail:.,extends:»,precedes:«,nbsp:▪
 
 " Actually display them, call :set list! to toggle
 set list
+
+" Use english for spellchecking, but don't spellcheck by default. Set spelling after
+" setting encoding or the files will be loaded twice.
+if version >= 700
+  set spelllang=en_us
+  set nospell
+  " But in case we _do_ use spelling, here is my spellfile
+  execute 'set spellfile=' . g:vim_path . '/spell/' . 'code.utf-8.add'
+
+  " Vim requires a binary index of the additional spelling words, create it if it
+  " doesn't exist already. Adding new words rebuilds it automatically.
+  for f in glob('~/vimfiles/spell/*.add', 1, 1)
+    if !filereadable(f . '.spl')
+      silent! execute "mkspell!" f
+    endif
+  endfor
+endif
 
 " Colors and Term stuff!
 function! HasColorscheme(name)

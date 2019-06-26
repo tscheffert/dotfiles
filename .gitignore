@@ -25,6 +25,9 @@ vimfiles/autoload/plug.vim
 # Ignore the generated backup Stuff
 vimfiles/tmp/
 
+# Binary index of additional spelling words, rebuilt on-demand
+vimfiles/spell/*.spl
+
 # Ignore local and private configs
 .zshrc.private
 .zshrc.local

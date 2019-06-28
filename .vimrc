@@ -610,13 +610,12 @@ function! RubySyntax()
   hi! def link rubyBoolean Function
   hi! def link rubyInteger Function
 
-  " hi def link rubyCapitalizedMethod Function
-
-  " hi! def link rubyInterpolation Identifier
-
   " Extend OceanicNext colorscheme
   hi! def link rubyCurlyBlockDelimiter Conditional
   hi! def link rubyBlockParameterList Conditional
+
+  " Make OceanicNext interpolation text white
+  hi! def link rubyInterpolation rubyMethodBlock
 endfunction
 
 augroup YAMLFiles

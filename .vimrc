@@ -1385,10 +1385,9 @@ if s:use_ctrlp
   let g:ctrlp_switch_buffer = 'etvh'
 
   " Working directory as such:
-  "   1. Is the working directory of the owning shell an ancestor of the current
-  "       file? Use that. Usually we open gvim/vim where we want the root
-  "   2. Use directory of the current file
-  let g:ctrlp_working_path_mode = 'ac'
+  "   Is the working directory of the owning shell an ancestor of the current
+  "   file? Use that. Usually we open gvim/vim where we want the root
+  let g:ctrlp_working_path_mode = 'a'
 
   " Ctrl-Shift-P => Open CtrlP in MRU Mode
   nnoremap <silent> <C-m> :CtrlPMRU<CR>

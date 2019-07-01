@@ -1247,6 +1247,15 @@ augroup blocked
 augroup END
 
 
+" ----- My Plugin: rubyhash
+
+augroup rubyhash
+  autocmd!
+  autocmd FileType ruby nnoremap <silent> <buffer> <Leader>rhsy :call rubyhash#ToSymbolKeysLinewise()<CR>
+  autocmd FileType ruby nnoremap <silent> <buffer> <Leader>rhst :call rubyhash#ToStringKeysLinewise()<CR>
+augroup END
+
+
 " -----
 " Plugin: NERDTree
 " -----

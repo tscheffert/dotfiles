@@ -49,6 +49,10 @@ class OptionHelper
   end
 
   def add_option(command_line_name:, variable_key:, description:, option_type:, required:)
+    if option_type == Bool && required
+      raise "Bool options cannot be required, they must be optional"
+    end
+
     option_struct =
       Option.new(
         command_line_name: command_line_name,
@@ -63,6 +67,7 @@ class OptionHelper
   def parse!(argv:)
     results = {}
     required_args = {}
+    flag_args = []
 
     parser = OptionParser.new do |opts|
       opts.banner = render_banner
@@ -76,7 +81,7 @@ class OptionHelper
               results[option.variable_key] = true
             end
 
-          # TODO: Figure out some way to coerce the results to "false" instead of nil if it doesn't get set
+          flag_args << option.variable_key
         elsif option.required
           opts.on(
             :REQUIRED,
@@ -105,6 +110,14 @@ class OptionHelper
       missing_args = required_args.select { |k, _v| results[k].blank? }
       if missing_args.present?
         raise OptionParser::MissingArgument.new(missing_args.values.join(', '))
+      end
+    end
+
+    # Coerce flag args to false instead of nil if they're not present
+    if flag_args.present?
+      missing_flag_args = flag_args.select { |flag| results[flag].blank? }
+      flag_args.each do |flag|
+        results[flag] = false
       end
     end
 

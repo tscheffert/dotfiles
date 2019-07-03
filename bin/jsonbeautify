@@ -50,8 +50,7 @@ module JsonBeautify
   end
 
   def self.parse_and_validate_new!(args:)
-    helper = OptionHelper.new(
-               script_name: 'jsonbeautify')
+    helper = OptionHelper.new(script_name: 'jsonbeautify')
 
     helper.add_option(
       command_line_name: '--json-file',
@@ -69,7 +68,7 @@ module JsonBeautify
 
     results = helper.parse!(argv: args)
 
-    return results[:json_file], results[:sort] || false
+    return results[:json_file], results[:sort]
   end
 
   def self.parse_and_validate_old!(args:)

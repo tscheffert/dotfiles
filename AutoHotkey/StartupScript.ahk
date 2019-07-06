@@ -6,11 +6,7 @@
 ;       Can be done with the registry by adding a string value to HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Run with the location of this file.
 ; Running 'Startup.reg' should work as well
 
-; TODO: Use a "UserProfile" variable like this (these lines don't actually work)
-; EnvGet, UserProfile, USERPROFILE
-; #include %UserProfile%\AutoHotkey\PhotoshopHotkeys.ahk
-
-; #include C:\Users\tscheffert\AutoHotkey\ProgramLauncher.ahk
-#include C:\Users\tscheffert\AutoHotkey\MusicControls.ahk
-#include C:\Users\tscheffert\AutoHotkey\OutlookHotkeys.ahk
-#include C:\Users\tscheffert\AutoHotkey\PhotoshopHotkeys.ahk
+; #include C:\Users\%A_UserName%\AutoHotkey\PhotoshopHotkeys.ahk
+#include C:\Users\%A_UserName%\AutoHotkey\MusicControls.ahk
+#include C:\Users\%A_UserName%\AutoHotkey\OutlookHotkeys.ahk
+#include C:\Users\%A_UserName%\AutoHotkey\PhotoshopHotkeys.ahk

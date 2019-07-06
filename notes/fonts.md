@@ -62,7 +62,7 @@ function url() { "\b(([\w-]+://?|www[.])[^\s()]+(?:\([\w\d]+\)|([^[:punct:]\s]|/
     - Mono
     - Medium instead of Bold
     - Source Code Pro Style
-    - 'i' and 'l' Consolas Style
+    - 'i' and 'l' Consolas Style, second to last radio button
     - Non decorative 'a' and 'g'
     - Fancy '{'
     - Slashed Zero

@@ -51,7 +51,7 @@ function git_branch {
     local parens_color="%{$fg[white]%}"
   # else
   #   # This seems to work on everything but the WSL unbuntu :shrug:
-  #   local parens_color="$FG[000]"
+    # local parens_color="$FG[000]" This doesn't work on 'ConEmu Zsh with connector'
   # fi
   local left_parens="$parens_color(%{$reset_color%}"
   local right_parens="$parens_color)%{$reset_color%}"

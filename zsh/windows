@@ -16,6 +16,9 @@ prepend_to_path 'C:\tools\packer\current'
 
 prepend_to_path 'C:\tools\kubeval\current'
 
+# ADB and fastboot
+prepend_to_path 'C:\tools\android-platform-tools\current'
+
 # -- Append --
 
 # We want IIS Express!

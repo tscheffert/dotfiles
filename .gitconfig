@@ -23,10 +23,13 @@
 [alias]
   lg = log -20 --pretty=format:'%Cred%h%Creset - %s %Cgreen(%cr %an)%Creset%C(yellow)%d%Creset' --abbrev-commit --date=relative
   lgr = log --graph --decorate --pretty=oneline --abbrev-commit
+  # TODO: Play with this too
+  wdiff = diff --word-diff=color --unified=1
   # TODO: Play with this
   # From: https://about.gitlab.com/2016/12/08/git-tips-and-tricks/
   # mr = !sh -c 'git fetch $1 merge-requests/$2/head:mr-$1-$2 && git checkout mr-$1-$2' -
   # all = "!f() { for i in `ls`; do if [ -d $i/.git ]; then echo \"$i\n--------------------------\"; git -C $i $1; echo; fi; done; }; f" # perform an action on all git repositories in the current directory (for example git all pull)
+
 
 [branch]
   autoSetupMerge = true

@@ -53,6 +53,11 @@ if has('win32') " Using InWindowsSession() here breaks syntastic
   " set shell=cmd
   " set shellcmdflag=/c
   let temp_dir=$HOME."/.vim-tmp"
+  " Create the temp_dir if it doesn't exist
+  if !isdirectory(expand(temp_dir))
+    call mkdir(expand(temp_dir), "p")
+  endif
+
   let $TMPDIR=temp_dir
   let $TMP=temp_dir
   let $TEMP=temp_dir

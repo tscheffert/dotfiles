@@ -1,0 +1,21 @@
+#!/usr/bin/env ruby
+# vim: ft=ruby
+
+# Remove garbage files that are sometimes included in torrents
+
+require 'fileutils'
+
+garbage_files = Dir.glob('**/*').select { |f| File.file?(f) }.select do |file|
+  file.end_with?('.1.jpeg')
+end
+
+puts "Found garbage files to remove:"
+puts garbage_files.to_s
+
+GARBAGE_FILES_DIR = 'remove_me'
+begin
+  FileUtils.mkdir(GARBAGE_FILES_DIR)
+  FileUtils.mv(garbage_files, GARBAGE_FILES_DIR)
+rescue => e
+  "Failed to move garbage files with error: #{e}"
+end

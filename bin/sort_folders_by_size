@@ -22,12 +22,12 @@ module SortFoldersBySize
       exit 0
     end
 
-    # TODO: Implement --test
+    test_run = args[0] == '--test'
 
     dirs = Dir.entries('.').select { |entry| File.directory?(entry) } - IGNORED_DIRS
 
     hydrated_dirs = dirs.map do |dir|
-      dir_entries = Dir.glob(File.join(dir, '*'))
+      dir_entries = Dir.glob(File.join(ImagesHelper.safe_path_for_glob(dir), '*'))
       images = dir_entries.select do |f|
         File.file?(f) && IMAGE_EXTENSIONS.include?(File.extname(f))
       end
@@ -41,13 +41,15 @@ module SortFoldersBySize
       }
     end
 
-    dirs_okay, dirs_too_small = hydrated_dirs.partition { |hdir| hdir[:sizes].any? { |size| size.first >= MIN_WIDTH } }
+    dirs_okay, dirs_too_small = hydrated_dirs.partition do |hdir|
+      hdir[:sizes].any? { |size| size[0] >= MIN_WIDTH && size[1] >= MIN_HEIGHT }
+    end
 
-    FileUtils.mkdir_p(TOO_SMALL_DIR) if dirs_too_small.present?
+    FileUtils.mkdir_p(TOO_SMALL_DIR) if dirs_too_small.present? && !test_run
 
     dirs_too_small.each do |hdir|
       puts "Moving #{hdir[:name]}"
-      FileUtils.mv(hdir[:name], TOO_SMALL_DIR)
+      FileUtils.mv(hdir[:name], TOO_SMALL_DIR) unless test_run
     end
 
     puts "dirs_okay: #{dirs_okay.length}"

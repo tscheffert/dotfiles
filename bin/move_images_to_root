@@ -1,0 +1,152 @@
+#!/usr/bin/env ruby
+# vim: ft=ruby
+
+require File.join(__dir__, '..', 'ruby', 'lib', 'images_helper')
+
+module MoveImagesToRoot
+
+  include ImagesHelper::Constants
+
+  def self.perform(args:)
+    if args[0] == '--help'
+      command_name = File.basename(__FILE__)
+      puts <<~HELPDOC
+        USAGE:
+            #{command_name}
+                Moves images from subdirectories into the root directory
+            #{command_name} --rename
+                Moves images from subdirectories into the root directory with renaming
+            #{command_name} --test
+                Reports which images will move (and rename) but doesn't move them
+            #{command_name} --help
+                Prints this message
+      HELPDOC
+      exit 0
+    end
+
+    rename_run = args.include?('--rename')
+    test_run = args.include?('--test')
+
+    puts "Mode: rename, images will be renamed as they're moved" if rename_run
+
+    puts 'Mode: test, not acutally doing any moving (or renaming)' if test_run
+
+    dirs = Dir.entries('.').select { |entry| File.directory?(entry) } - IGNORED_DIRS
+
+    hydrated_dirs = dirs.map do |dir|
+      dir_entries = Dir.glob(File.join(dir, '*'))
+      images = dir_entries.select do |f|
+        File.file?(f) && IMAGE_EXTENSIONS.include?(File.extname(f))
+      end
+
+      {
+        path:   dir,
+        images: images
+      }
+    end
+
+    dirs_with_images, _dirs_without_images = hydrated_dirs.partition do |dir|
+      dir[:images].present?
+    end
+
+    sorted_dirs_with_images = dirs_with_images.sort_by do |dir|
+      numeric, *extra = dir[:path].match(/\d+/, &:to_a)
+
+      raise "Found multiple digits somehow in dir: #{dir[:path]}" if extra.present?
+
+      if numeric.present?
+        numeric.to_i
+      else
+        dir[:path]
+      end
+    end
+
+    puts 'Original Dir Order: '
+    puts '  ' + dirs_with_images.map { |dir| dir[:path] }.join(', ')
+    puts 'Sorted Dir Order: '
+    puts '  ' + sorted_dirs_with_images.map { |dir| dir[:path] }.join(', ')
+
+    if rename_run
+      move_with_rename(dirs_with_images: sorted_dirs_with_images, test_run: test_run)
+    else
+      move_without_rename(dirs_with_images: sorted_dirs_with_images, test_run: test_run)
+    end
+
+    remove_empty_dirs(dirs_with_images: sorted_dirs_with_images, test_run: test_run)
+  end
+
+  def self.move_with_rename(dirs_with_images:, test_run:)
+    root_dir = Dir.pwd
+
+    images_to_move = dirs_with_images.flat_map { |dir| dir[:images] }
+
+    digits_for_rename = images_to_move.length.digits.length
+    puts "Renaming with #{digits_for_rename} digits"
+
+    ready_for_move_images = images_to_move.map.with_index do |image, index|
+      extname = File.extname(image)
+      new_name = (index + 1).to_s.rjust(digits_for_rename, '0')
+
+      {
+        from: image,
+        to:   File.join(root_dir, new_name + extname)
+      }
+    end
+
+    existing_images, safe_to_move_images = ready_for_move_images.partition do |image|
+      File.exist?(image[:to])
+    end
+
+    if existing_images.present?
+      puts "Found #{existing_images.length} images that already exist, not moving"
+      puts "Found #{safe_to_move_images.length} images that are safe to move"
+    end
+
+    safe_to_move_images.each do |image|
+      puts "Moving: #{image[:from]} -> #{image[:to]}"
+      ImagesHelper.safe_rename(image[:from], image[:to]) unless test_run
+    end
+  end
+  private_class_method :move_with_rename
+
+  def self.move_without_rename(dirs_with_images:, test_run:)
+    root_dir = Dir.pwd
+
+    dirs_with_images.each do |dir|
+      puts "Moving #{dir[:images].length} images to root from #{dir[:path]}"
+      existing_images, safe_to_move_images = dir[:images].partition do |image|
+        File.exist?(File.join(root_dir, File.basename(image)))
+      end
+
+      if existing_images.present?
+        puts "Found #{existing_images.length} images that already exist, not moving"
+        puts "Found #{safe_to_move_images.length} images that are safe to move"
+      end
+      FileUtils.mv(safe_to_move_images, root_dir) unless test_run
+    end
+  end
+  private_class_method :move_without_rename
+
+  def self.remove_empty_dirs(dirs_with_images:, test_run:)
+    dirs_with_images.each do |dir|
+      puts "Removing sub directory: #{dir[:path]}"
+      begin
+        if Dir.empty?(dir[:path])
+          FileUtils.rmdir(dir[:path]) unless test_run
+        else
+          warn "Dir: #{dir[:path]} not empty, not removing" unless test_run
+        end
+      rescue StandardError => e
+        warn '>>>>>>>>>>'
+        warn "Dir: #{dir[:path]} failed to remove with error:"
+        warn "#{e.class}: #{e.message}"
+        warn e.backtrace.join("\n")
+        warn '<<<<<<<<<<'
+      end
+    end
+  end
+  private_class_method :remove_empty_dirs
+
+end
+
+MoveImagesToRoot.perform(args: ARGV)

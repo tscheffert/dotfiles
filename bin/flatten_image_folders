@@ -1,0 +1,84 @@
+#!/usr/bin/env ruby
+# vim: ft=ruby
+
+require File.join(__dir__, '..', 'ruby', 'lib', 'images_helper')
+
+module FlattenImageFolders
+
+  include ImagesHelper::Constants
+
+  # Note: Currently this only moves folders that contain only images into the
+  # FLAT_DIRS_DIR. It's doesn't do any further flattening though it could in
+  # the future.
+  def self.perform(args:)
+    if args[0] == '--help'
+      command_name = File.basename(__FILE__)
+      puts <<~HELPDOC
+        USAGE:
+            #{command_name}
+                Moves nested image folders into subdirectories of the root
+            #{command_name} --test
+                Reports which folders will move but doesn't move them
+            #{command_name} --help
+                Prints this message
+      HELPDOC
+      exit 0
+    end
+
+    test_run = args[0] == '--test'
+
+    dirs = Dir.entries('.').select { |entry| File.directory?(entry) } - IGNORED_DIRS
+
+    hydrated_dirs = dirs.map do |dir|
+      dir_entries = Dir.glob(File.join(ImagesHelper.safe_path_for_glob(dir), '*'))
+
+      images = dir_entries.select do |f|
+        File.file?(f) && IMAGE_EXTENSIONS.include?(File.extname(f))
+      end
+
+      subdirs = dir_entries.select do |d|
+        File.directory?(d)
+      end
+
+      {
+        path:    dir,
+        images:  images,
+        subdirs: subdirs
+      }
+    end
+
+    dirs_with_images = hydrated_dirs.select do |dir|
+      dir[:images].present?
+    end
+    puts "dirs_with_images: #{dirs_with_images.length}"
+
+    dirs_with_subdirs = hydrated_dirs.select do |dir|
+      dir[:subdirs].present?
+    end
+    puts "dirs_with_subdirs: #{dirs_with_subdirs.length}"
+
+    dirs_with_images_and_subdirs = hydrated_dirs.select do |dir|
+      dir[:images].present? && dir[:subdirs].present?
+    end
+
+    if dirs_with_images_and_subdirs.present?
+      warn 'Found dirs with images and subdirs:'
+      dirs_with_images_and_subdirs.each do |dir|
+        warn '  ' + dir[:path]
+      end
+      warn 'Aborting!'
+      exit 1
+    end
+
+    FileUtils.mkdir(FLAT_DIRS_DIR) unless test_run
+
+    puts "Moving #{dirs_with_images.length} dirs to #{FLAT_DIRS_DIR}:"
+    dirs_with_images.each do |dir|
+      puts "  Moving #{dir[:path]} to #{FLAT_DIRS_DIR}"
+      FileUtils.mv(dir[:path], FLAT_DIRS_DIR) unless test_run
+    end
+  end
+
+end
+
+FlattenImageFolders.perform(args: ARGV)

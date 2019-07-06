@@ -1,0 +1,39 @@
+#!/usr/bin/env ruby
+# vim: ft=ruby
+
+require 'fileutils'
+
+module StripPrefixFromDirs
+
+  def self.perform(argv:)
+    prefix = argv[0]
+
+    if prefix.nil? || prefix.strip.empty?
+      warn 'Must supply a prefix to strip'
+      exit 1
+    end
+
+    puts "Stripping with prefix: '#{prefix}'"
+
+    current_directory = File.absolute_path('.')
+
+    puts "Matching entries in directory: #{current_directory}"
+
+    # Dir.glob has interesting behavior with `[` characters where it behaves like a
+    # regex, but we want literal match behavior. Just use Dir::entries and then filter
+    to_rename = Dir.entries(current_directory)
+      .select { |dir| Dir.exist?(dir) }
+      .select { |dir| dir.start_with?(prefix) }
+
+    puts 'Renaming:'
+    to_rename.each do |source|
+      dest = source.sub(prefix, '')
+
+      puts "#{source} => #{dest}"
+      FileUtils.mv(source, dest)
+    end
+  end
+
+end
+
+StripPrefixFromDirs.perform(argv: ARGV)

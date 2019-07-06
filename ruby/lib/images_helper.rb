@@ -14,7 +14,7 @@ module ImagesHelper
     TOO_SMALL_DIR = '_too_small'.freeze
     LANDSCAPE_DIR = '_landscape'.freeze
     PORTRAIT_DIR = '_portrait'.freeze
-    FLAT_DIRS_DIR = '_flat_dirs'.freeze
+    ALREADY_FLAT_DIRS_DIR = '_already_flat_dirs'.freeze
 
     IGNORED_DIRS = [
       BAD_DIR,
@@ -42,7 +42,17 @@ module ImagesHelper
   def self.safe_rename(old, new)
     FileUtils.mv(old, new)
   rescue => e
-    puts "File #{old} -> #{new} failed with error #{e}"
+    warn "File #{old} -> #{new} failed with error #{e}"
+  end
+
+  def self.safe_remove_dir(dir)
+    if Dir.empty?(dir)
+      FileUtils.rmdir(dir)
+    else
+      warn "Dir #{dir} not empty, not removing"
+    end
+  rescue => e
+    warn "Dir #{dir} removal failed with error #{e}"
   end
 
   # Escape the meta chars that Dir::glob uses

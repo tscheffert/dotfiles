@@ -7,9 +7,16 @@ module FlattenImageFolders
 
   include ImagesHelper::Constants
 
+  MAX_HYDRATE_DEPTH = 3
+
   # Note: Currently this only moves folders that contain only images into the
-  # FLAT_DIRS_DIR. It's doesn't do any further flattening though it could in
+  # ALREADY_FLAT_DIRS_DIR. It's doesn't do any further flattening though it could in
   # the future.
+
+  # Notes:
+  #   - It doesn't tolerate anything other than images and directories
+  #   - It only hydrates to a depth of 3
+  #   - It only flattens at a depth of 1
   def self.perform(args:)
     if args[0] == '--help'
       command_name = File.basename(__FILE__)
@@ -30,54 +37,133 @@ module FlattenImageFolders
     dirs = Dir.entries('.').select { |entry| File.directory?(entry) } - IGNORED_DIRS
 
     hydrated_dirs = dirs.map do |dir|
-      dir_entries = Dir.glob(File.join(ImagesHelper.safe_path_for_glob(dir), '*'))
-
-      images = dir_entries.select do |f|
-        File.file?(f) && IMAGE_EXTENSIONS.include?(File.extname(f))
-      end
-
-      subdirs = dir_entries.select do |d|
-        File.directory?(d)
-      end
-
-      {
-        path:    dir,
-        images:  images,
-        subdirs: subdirs
-      }
+      hydrate_dir(dir: dir, depth: 0)
     end
 
-    dirs_with_images = hydrated_dirs.select do |dir|
-      dir[:images].present?
-    end
-    puts "dirs_with_images: #{dirs_with_images.length}"
+    sorted_dirs = sort_hydrated_dirs(dirs: hydrated_dirs)
+    puts "Dirs that are empty: #{sorted_dirs[:without_both].length}"
+    puts "Dirs with only images: #{sorted_dirs[:only_images].length}"
+    puts "Dirs with only subdirs: #{sorted_dirs[:only_subdirs].length}"
 
-    dirs_with_subdirs = hydrated_dirs.select do |dir|
-      dir[:subdirs].present?
-    end
-    puts "dirs_with_subdirs: #{dirs_with_subdirs.length}"
-
-    dirs_with_images_and_subdirs = hydrated_dirs.select do |dir|
-      dir[:images].present? && dir[:subdirs].present?
-    end
-
-    if dirs_with_images_and_subdirs.present?
+    # Something is wrong if there are images _AND_ subdirs, we don't know what to do
+    if sorted_dirs[:with_both].present?
       warn 'Found dirs with images and subdirs:'
-      dirs_with_images_and_subdirs.each do |dir|
+      sorted_dirs[:with_both].each do |dir|
         warn '  ' + dir[:path]
       end
       warn 'Aborting!'
       exit 1
     end
 
-    FileUtils.mkdir(FLAT_DIRS_DIR) unless test_run
+    if sorted_dirs[:only_images].present?
+      FileUtils.mkdir_p(ALREADY_FLAT_DIRS_DIR) unless test_run
+    end
 
-    puts "Moving #{dirs_with_images.length} dirs to #{FLAT_DIRS_DIR}:"
-    dirs_with_images.each do |dir|
-      puts "  Moving #{dir[:path]} to #{FLAT_DIRS_DIR}"
-      FileUtils.mv(dir[:path], FLAT_DIRS_DIR) unless test_run
+    puts "Moving #{sorted_dirs[:only_images].length} dirs to #{ALREADY_FLAT_DIRS_DIR}:"
+    sorted_dirs[:only_images].each do |dir|
+      puts "  Moving #{dir[:path]} to #{ALREADY_FLAT_DIRS_DIR}"
+      ImagesHelper.safe_rename(dir[:path], ALREADY_FLAT_DIRS_DIR) unless test_run
+    end
+
+    sorted_only_subdirs = sorted_dirs[:only_subdirs].map do |dir|
+      {
+        path:    dir[:path],
+        images:  dir[:images],
+        subdirs: sort_hydrated_dirs(dirs: dir[:subdirs])
+      }
+    end
+
+    root_dir = Dir.pwd
+
+    sorted_only_subdirs.each do |sorted_subdir_dirs|
+      sorted_subdir_dirs[:subdirs][:only_images].each do |nested_image_dir|
+        puts "Moving to root nested image only dir: #{nested_image_dir[:path]}"
+        ImagesHelper.safe_rename(nested_image_dir[:path], root_dir) unless test_run
+      end
+
+      sorted_subdir_dirs[:subdirs][:without_both].each do |nested_empty_dir|
+        puts "Removing nested empty dir: #{nested_empty_dir[:path]}"
+        ImagesHelper.safe_remove_dir(nested_empty_dir[:path]) unless test_run
+      end
+    end
+
+    was_empty_dirs = sorted_dirs[:without_both].select { |dir| Dir.empty?(dir[:path]) }
+    was_empty_dirs.each do |dir|
+      puts "Was empty, removing: #{dir[:path]}"
+      ImagesHelper.safe_remove_dir(dir[:path]) unless test_run
+    end
+
+    now_empty_dirs = sorted_only_subdirs.select { |dir| Dir.empty?(dir[:path]) }
+    now_empty_dirs.each do |dir|
+      puts "Now empty, removing: #{dir[:path]}"
+      ImagesHelper.safe_remove_dir(dir[:path]) unless test_run
     end
   end
+
+  def self.sort_hydrated_dirs(dirs:)
+    dirs_with_images_and_subdirs, remaining = dirs.partition do |dir|
+      dir[:images].present? && dir[:subdirs].present?
+    end
+
+    dirs_without_images_or_subdirs, remaining = remaining.partition do |dir|
+      dir[:images].blank? && dir[:subdirs].blank?
+    end
+
+    dirs_with_images, remaining = remaining.partition do |dir|
+      dir[:images].present?
+    end
+
+    dirs_with_subdirs, remaining = remaining.partition do |dir|
+      dir[:subdirs].present?
+    end
+
+    if remaining.present?
+      warn 'Something is wrong with the hydration pipeline, dirs remaining'
+      remaining.each do |dir|
+        warn '  ' + dir[:path]
+      end
+      warn 'Aborting!'
+      exit 1
+    end
+
+    {
+      with_both:    dirs_with_images_and_subdirs,
+      without_both: dirs_without_images_or_subdirs,
+      only_images:  dirs_with_images,
+      only_subdirs: dirs_with_subdirs
+    }
+  end
+  private_class_method :sort_hydrated_dirs
+
+  def self.hydrate_dir(dir:, depth:)
+    depth += 1
+
+    dir_entries = Dir.glob(File.join(ImagesHelper.safe_path_for_glob(dir), '*'))
+
+    images = dir_entries.select do |f|
+      File.file?(f) && IMAGE_EXTENSIONS.include?(File.extname(f))
+    end
+
+    subdirs = dir_entries.select do |d|
+      File.directory?(d)
+    end
+
+    hydrated_subdirs =
+      if depth > MAX_HYDRATE_DEPTH
+        subdirs # Too deep, paths only
+      else
+        subdirs.map do |subdir|
+          hydrate_dir(dir: subdir, depth: depth)
+        end
+      end
+
+    {
+      path:    dir,
+      images:  images,
+      subdirs: hydrated_subdirs
+    }
+  end
+  private_class_method :hydrate_dir
 
 end
 

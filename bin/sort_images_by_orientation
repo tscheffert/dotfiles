@@ -7,12 +7,18 @@ module SortImagesByOrientation
 
   include ImagesHelper::Constants
 
-  def self.perform
-    FileUtils.mkdir_p(LANDSCAPE_DIR)
-    FileUtils.mkdir_p(PORTRAIT_DIR)
-    FileUtils.mkdir_p(BAD_DIR)
+  def self.perform(args:)
+    working_dir = args[0]
+    if working_dir.blank? || !Dir.exist?(working_dir)
+      puts "Working Dir: '#{working_dir}' not found, defaulting to current working directory"
+      working_dir = Dir.pwd
+    end
 
-    images = ImagesHelper.all_images_in_dir('.')
+    landscape_dir = File.join(working_dir, LANDSCAPE_DIR)
+    FileUtils.mkdir_p(landscape_dir)
+    portrait_dir = File.join(working_dir, PORTRAIT_DIR)
+    FileUtils.mkdir_p(portrait_dir)
+    images = ImagesHelper.all_images_in_dir(working_dir)
 
     landscape, portrait = images.partition do |img|
       begin
@@ -29,7 +35,7 @@ module SortImagesByOrientation
     puts 'Moving landscape files:'
     puts landscape.to_s
     begin
-      FileUtils.mv(landscape, LANDSCAPE_DIR)
+      FileUtils.mv(landscape, landscape_dir)
     rescue StandardError => e
       puts "Failed to move landscape files with error #{e}"
     end
@@ -38,7 +44,7 @@ module SortImagesByOrientation
     puts portrait.to_s
 
     begin
-      FileUtils.mv(portrait, PORTRAIT_DIR)
+      FileUtils.mv(portrait, portrait_dir)
     rescue StandardError => e
       puts "Failed to move portrait files with error #{e}"
     end
@@ -46,4 +52,7 @@ module SortImagesByOrientation
 
 end
 
-SortImagesByOrientation.perform
+# Run this script directly only when it hasn't been loaded by another
+if File.basename($PROGRAM_NAME) == File.basename(__FILE__)
+  SortImagesByOrientation.perform(args: ARGV)
+end

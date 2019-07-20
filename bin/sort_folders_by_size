@@ -24,7 +24,7 @@ module SortFoldersBySize
 
     test_run = args[0] == '--test'
 
-    dirs = Dir.entries('.').select { |entry| File.directory?(entry) } - IGNORED_DIRS
+    dirs = ImagesHelper.all_dirs_in(dir: Dir.pwd)
 
     hydrated_dirs = dirs.map do |dir|
       dir_entries = Dir.glob(File.join(ImagesHelper.safe_path_for_glob(dir), '*'))

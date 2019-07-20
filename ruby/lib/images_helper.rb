@@ -9,19 +9,24 @@ module ImagesHelper
 
     IMAGE_EXTENSIONS = ['.png', '.PNG', '.jpg', '.JPG', '.jpeg', '.JPEG'].freeze
 
-    BAD_DIR = '_bad'.freeze
-    NOT_SQUARE_DIR = '_not_square'.freeze
-    TOO_SMALL_DIR = '_too_small'.freeze
-    LANDSCAPE_DIR = '_landscape'.freeze
-    PORTRAIT_DIR = '_portrait'.freeze
     ALREADY_FLAT_DIRS_DIR = '_already_flat_dirs'.freeze
+    BAD_DIR = '_bad'.freeze
+    GOOD_DIR = '_good'.freeze
+    LANDSCAPE_DIR = '_landscape'.freeze
+    NOT_SQUARE_DIR = '_not_square'.freeze
+    PORTRAIT_DIR = '_portrait'.freeze
+    SORTED_DIR = '_sorted'.freeze
+    TOO_SMALL_DIR = '_too_small'.freeze
 
     IGNORED_DIRS = [
+      ALREADY_FLAT_DIRS_DIR,
       BAD_DIR,
-      NOT_SQUARE_DIR,
-      TOO_SMALL_DIR,
+      GOOD_DIR,
       LANDSCAPE_DIR,
+      NOT_SQUARE_DIR,
       PORTRAIT_DIR,
+      SORTED_DIR,
+      TOO_SMALL_DIR,
       '.',
       '..'
     ].freeze
@@ -37,6 +42,10 @@ module ImagesHelper
     Dir.entries(dir).select do |f|
       File.file?(f) && Constants::IMAGE_EXTENSIONS.include?(File.extname(f))
     end
+  end
+
+  def self.all_dirs_in(dir:)
+    Dir.entries(dir).select { |entry| File.directory?(entry) } - Constants::IGNORED_DIRS
   end
 
   def self.safe_rename(old, new)

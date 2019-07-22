@@ -1,5 +1,12 @@
 #!/bin/bash
 
+# Noel Rappin says this:
+
+# bundle exec rubocop --force exclusion \
+#   `git ls-tree -r HEAD --name-only`
+
+# TODO: Also this https://medium.com/devnetwork/running-rubocop-only-on-modified-files-a21aed86e06d
+
 # Ensure we have rubocop installed with the right version
 if ! gem list rubocop -i &> /dev/null; then
   # TODO: Consider running this check every time

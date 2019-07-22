@@ -19,6 +19,10 @@ prepend_to_path 'C:\tools\kubeval\current'
 # ADB and fastboot
 prepend_to_path 'C:\tools\android-platform-tools\current'
 
+prepend_to_path 'C:\tools\kube-score\current'
+
+prepend_to_path 'C:\tools\sops\current'
+
 # -- Append --
 
 # We want IIS Express!

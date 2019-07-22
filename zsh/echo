@@ -9,6 +9,8 @@
 
 # --- Exports ---
 
+export DEVTOOLS_LOGGER_FORMAT=clean
+
 # Set up KUBECONFIG for multiple kubectl config files by extending existing KUBECONFIG,
 # which is a list of kubectl config files
 
@@ -34,5 +36,5 @@ function append_to_kubeconfig {
   fi
 }
 
-append_to_kubeconfig "$HOME/.kube/config-dev-k8smaster1"
-append_to_kubeconfig "$HOME/.kube/config-qa-k8smaster1"
+# append_to_kubeconfig "$HOME/.kube/config-dev-k8smaster1"
+# append_to_kubeconfig "$HOME/.kube/config-qa-k8smaster1"

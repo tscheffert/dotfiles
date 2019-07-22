@@ -30,7 +30,7 @@ function _setup_history() {
   fi
 
   local date=$(date +%Y-%m-%d) # yyyy-mm-dd format
-  local file="$directory.zsh_history-$date"
+  local file="$directory.zsh-$date.history"
 
   # Set history file to something different every day
   HISTFILE="$file"

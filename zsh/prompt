@@ -1,7 +1,9 @@
 #!/usr/bin/env zsh
 # vi: ft=zsh
 
-# Source: http://michaelheap.com/pimp-your-zsh/
+# Source:
+# - http://michaelheap.com/pimp-your-zsh/
+# - pipes: https://github.com/specious/bender
 # More prompt expansion info at http://zsh.sourceforge.net/Doc/Release/Prompt-Expansion.html
 
 # Look at:
@@ -194,12 +196,29 @@ function reset_colors() {
 
 function line_number() {
   local color="%{$fg[magenta]%}"
-  local ln="%!"
-  echo "$color$ln"
+  local ln="{ %! }"
+  echo "$color$ln$(reset_colors)"
+}
+
+function first_line_pipe() {
+  local pipe_color="%{$fg[blue]%}"
+
+  # This looks wonky in Vim because I have double width for utf8 chars, but it
+  # looks good in the actual prompt
+
+  echo "${pipe_color}┌─────$(reset_colors)"
+}
+
+function second_line_pipe() {
+  local pipe_color="%{$fg[blue]%}"
+
+  # Again, looks wonky in vim but not in the actual prompt
+  echo "${pipe_color}└──$(reset_colors)"
 }
 
 function precmd() {
   local exit_code=$?
-  PROMPT="$(line_number) $(check_exit_code $exit_code)$(name)$(path)$(git_branch) $(prompt_char)$(reset_colors) "
+  local new_line=$'\n'
+  PROMPT="$(first_line_pipe) $(line_number) $(check_exit_code $exit_code)$(name)$(path)$(git_branch)${new_line}$(second_line_pipe)$(prompt_char)$(reset_colors) "
   # RPROMPT="$(git_branch)$(reset_colors)"
 }

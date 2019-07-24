@@ -4,7 +4,7 @@
 
 rules:
   braces:
-    min-spaces-inside: 1
+    min-spaces-inside: 0 # Most helm defaults are '{}' instead of '{ }'
     max-spaces-inside: 1
     min-spaces-inside-empty: -1
     max-spaces-inside-empty: -1
@@ -22,7 +22,8 @@ rules:
     level: warning
     require-starting-space: true
     min-spaces-from-content: 1
-  comments-indentation: enable # disable
+  # Most fetched helm charts have commented out values, with commetns, which isn't detected by this
+  comments-indentation: disable
   document-end: # disable
     level: warning
     present: false

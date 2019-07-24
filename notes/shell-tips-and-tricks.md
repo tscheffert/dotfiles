@@ -240,6 +240,12 @@ $ cmd /c 'mklink /d C:\tools\ruby\ridk\current C:\tools\ruby\ridk\Ruby25-x64'
 symbolic link created for C:\tools\ruby\ridk\current <<===>> C:\tools\ruby\ridk\Ruby25-x64
 ```
 
+### Browse to another person's harddrive in explorer
+
+```
+\\tscheffert-p510\c$\kitchen-vms
+```
+
 ## Ruby
 
 ### Split tabular input into one word per line

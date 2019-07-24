@@ -8,7 +8,54 @@
 # PS C:\Program Files\Microsoft System Center 2012 R2\Virtual Machine Manager\bin\psModules\virtualmachinemanager> Import-Module .\virtualmachinemanager.psd1
 
 
-### Functions
+# --- Modules ---
+Import-Module -Name "C:\Program Files\Microsoft System Center 2012 R2\Virtual Machine Manager\bin\psModules\virtualmachinemanager\virtualmachinemanager.psd1"
+
+# --- Path ---
+
+function Prepend-ToPath {
+  [CmdletBinding()]
+  param(
+    [Parameter(Mandatory = $true)]
+    [string]$Directory
+  )
+
+  if (Test-Path ($Directory)) {
+    $original_path = $env:Path
+
+    if ($original_path -match $Directory) {
+      Write-Output "Not prepending '$Directory' to path, already present"
+    } else {
+      $env:Path = $Directory + ";" + $original_path
+    }
+  } else {
+    Write-Error "Not prepending '$Directory' to path, cannot find it"
+  }
+}
+
+Prepend-ToPath -Directory "C:/tools/ruby/ridk/current/bin"
+
+function Append-ToPath {
+  [CmdletBinding()]
+  param(
+    [Parameter(Mandatory = $true)]
+    [string]$Directory
+  )
+
+  if (Test-Path ($Directory)) {
+    $original_path = $env:Path
+
+    if ($original_path -match $Directory) {
+      Write-Output "Not appending '$Directory' to path, already present"
+    } else {
+      $env:Path = $original_path + ";" + $Directory
+    }
+  } else {
+    Write-Error "Not appending '$Directory' to path, cannot find it"
+  }
+}
+
+
 # Behave like 'which' from bash/zsh
 function which ($cmd) { (Get-Command $cmd).Definition }
 
@@ -100,6 +147,8 @@ function Get-VmDetail {
     }
   }
 }
+
+# --- Other ---
 
 # Chocolatey profile
 $ChocolateyProfile = "$env:ChocolateyInstall\helpers\chocolateyProfile.psm1"

@@ -61,6 +61,7 @@ module Shelper
   private_class_method :shell_out
 
   def self.shell_out!(command:, options:)
+    # TODO: This should throw up if stderr has output and stdout doesn't
     cmd = shell_out(command: command, options: options)
     cmd.error!
     cmd

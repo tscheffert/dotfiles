@@ -1,0 +1,69 @@
+#!/usr/bin/env ruby
+# vim: ft=ruby
+
+require 'json'
+require 'active_support'
+require 'active_support/core_ext/object/blank'
+require 'paint'
+require File.join(__dir__, '..', 'ruby', 'lib', 'option_helper')
+require File.join(__dir__, '..', 'ruby', 'lib', 'shelper')
+
+module ExampleScript
+
+  IGNORED_DIRS = ['.', '..'].freeze
+
+  def self.perform(args:)
+    #if args[0] == '--help'
+    #  command_name = File.basename(__FILE__)
+    #  puts <<~HELPDOC
+    #    USAGE:
+    #        #{command_name}
+    #            Explain what <TEMPLATE_SCRIPT> does
+    #        #{command_name} --test
+    #            What happens if we want to dry run
+    #        #{command_name} --help
+    #            Prints this message
+    #  HELPDOC
+    #  exit 0
+    #end
+
+    #test_run = args[0] == '--test'
+
+    #dirs = Dir.entries('.').select { |entry| File.directory?(entry) } - IGNORED_DIRS
+
+    example_string, example_flag = parse_and_validate!(args: args)
+  end
+
+  def self.parse_and_validate!(args:)
+    helper = OptionHelper.new(script_name: '<TEMPLATE_SCRIPT>')
+
+    helper.add_option(
+      command_line_name: '--example-string',
+      variable_key:      :example_string,
+      description:       'Example mandatory string variable',
+      option_type:       String,
+      required:          true)
+
+    helper.add_option(
+      command_line_name: '--example-flag',
+      variable_key:      :example_flag,
+      description:       'Example flag option',
+      option_type:       Bool,
+      required:          false)
+
+    helper.add_option(
+      command_line_name: '--test',
+      variable_key:      :test,
+      description:       'Is this a dry run?',
+      option_type:       Bool,
+      required:          false)
+
+    results = helper.parse!(argv: args)
+
+    return results[:example_string], results[:example_flag]
+  end
+
+
+end
+
+ExampleScript.perform(args: ARGV)

@@ -10,6 +10,7 @@
 # Snazzy alternative way to delete branches, though probably outdated:
 #   git branch -r | awk '{print $1}' | egrep -v -f /dev/fd/0 <(git branch -vv | grep origin) | awk '{print $1}' | xargs git branch -d
 
+# TODO: Check out this gem: https://github.com/ruby-git/ruby-git
 
 # TODO: Local `run-duration` branch created, tracking origin/run-duration, when I pull
 #   down master and the origin/run-duration branch has been deleted then local run-duration
@@ -68,6 +69,61 @@
 #   remotes/origin/filter-construction
 #   remotes/origin/master
 #   remotes/origin/validators
+
+
+
+
+# TODO: Just ran into this error, should have better error handling
+# 4 -128- [../chef-repo-atlas](develop) >>> gbd-m
+#   error: The branch 'generator-update' is not fully merged.
+# If you are sure you want to delete it, run 'git branch -D generator-update'.
+# C:/Users/tscheffert/.dotfiles/bin/git_branch_delete_merged:82:in `out!': !!! Command 'git branch --delete generator-update' failed with out:  (RuntimeError)
+#         from C:/Users/tscheffert/.dotfiles/bin/git_branch_delete_merged:171:in `block in perform'
+#         from C:/Users/tscheffert/.dotfiles/bin/git_branch_delete_merged:165:in `each'
+#         from C:/Users/tscheffert/.dotfiles/bin/git_branch_delete_merged:165:in `perform'
+#         from C:/Users/tscheffert/.dotfiles/bin/git_branch_delete_merged:188:in `<main>'
+# -- Deleting branch locally: generator-update
+# 5 -1- [../chef-repo-atlas](develop) >>> gb
+#   * develop
+#     generator-update
+# 6 [../chef-repo-atlas](develop) >>> gbfd generator-update
+# Deleted branch generator-update (was 67744ea).
+
+# error: The branch 'fixes-galore' is not fully merged.
+# If you are sure you want to delete it, run 'git branch -D fixes-galore'.
+# C:/Users/tscheffert/.dotfiles/bin/git_branch_delete_merged:101:in `out!': !!! Command 'git branch --delete fixes-galore' failed with out:  (RuntimeError)
+#         from C:/Users/tscheffert/.dotfiles/bin/git_branch_delete_merged:190:in `block in perform'
+#         from C:/Users/tscheffert/.dotfiles/bin/git_branch_delete_merged:184:in `each'
+#         from C:/Users/tscheffert/.dotfiles/bin/git_branch_delete_merged:184:in `perform'
+#         from C:/Users/tscheffert/.dotfiles/bin/git_branch_delete_merged:207:in `<main>'
+# -- Deleting branch locally: fixes-galore
+# 6 -1- [../generator](master) >>> gb
+#     fixes-galore
+#   * master
+# 7 [../generator](master) >>> gbfd fixes-galore
+# Deleted branch fixes-galore (was 037c694).
+
+
+# TODO: Doesn't work with multiple remotes
+# >>> gbd-m --remote
+# error: unable to delete 'tlrg/ETA-MultiTargetFrontENd': remote ref does not exist
+# error: failed to push some refs to 'git@git.echo.com:slalom-configuration-management/infrastructure-deploy.git'
+# C:/Users/tscheffert/.dotfiles/bin/git_branch_delete_merged:116:in `out!': !!! Command 'git push origin --delete tlrg/ETA-MultiTargetFrontENd' failed with out:  (RuntimeError)
+#         from C:/Users/tscheffert/.dotfiles/bin/git_branch_delete_merged:202:in `block in perform'
+#         from C:/Users/tscheffert/.dotfiles/bin/git_branch_delete_merged:199:in `each'
+#         from C:/Users/tscheffert/.dotfiles/bin/git_branch_delete_merged:199:in `perform'
+#         from C:/Users/tscheffert/.dotfiles/bin/git_branch_delete_merged:222:in `<main>'
+# -- Deleting branch on origin: tlrg/ETA-MultiTargetFrontENd
+# 45 -1- [../infrastructure-deploy](master) >>> gb
+#     beautify-testing
+#   * master
+#     tlrg-envs-prodlike
+#     tlrg-tlrg-boxes
+#     utility-scripts
+# 46 [../infrastructure-deploy](master) >>> git remote
+# origin
+# tlrg
+
 
 
 module Helpers

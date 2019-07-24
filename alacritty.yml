@@ -1,3 +1,4 @@
+---
 # Configuration for Alacritty, the GPU enhanced terminal emulator.
 
 # Any items in the `env` entry below will be added as
@@ -49,7 +50,7 @@ window:
   # Values for `decorations` (macOS only):
   #     - transparent: Title bar, transparent background and title bar buttons
   #     - buttonless: Title bar, transparent background, but no title bar buttons
-  decorations: none
+  decorations: full
 
   # Startup Mode (changes require restart)
   #
@@ -174,7 +175,7 @@ draw_bold_text_with_bright_colors: true
 colors:
   # Default colors
   primary:
-    background: '0x000000'
+    background: '0x272822'
     foreground: '0xeaeaea'
 
     # Bright and dim foreground colors
@@ -202,26 +203,27 @@ colors:
   #  text: '0xeaeaea'
   #  background: '0x404040'
 
+  # Peppermint colors:
   # Normal colors
   normal:
-    black:   '0x000000'
-    red:     '0xd54e53'
-    green:   '0xb9ca4a'
-    yellow:  '0xe6c547'
-    blue:    '0x7aa6da'
-    magenta: '0xc397d8'
-    cyan:    '0x70c0ba'
-    white:   '0xeaeaea'
+    black:   '0x4c4c4c'
+    red:     '0xff6685'
+    green:   '0xa6eba6'
+    yellow:  '0xffdc72'
+    blue:    '0x5dc6f5'
+    magenta: '0xff8fff'
+    cyan:    '0x86d1d7'
+    white:   '0xdbdbdb'
 
   # Bright colors
   bright:
-    black:   '0x666666'
-    red:     '0xff3334'
-    green:   '0x9ec400'
-    yellow:  '0xe7c547'
-    blue:    '0x7aa6da'
-    magenta: '0xb77ee0'
-    cyan:    '0x54ced6'
+    black:   '0x737373'
+    red:     '0xffa8ba'
+    green:   '0xc5ebc5'
+    yellow:  '0xf9f9a5'
+    blue:    '0x8ddbff'
+    magenta: '0xffabff'
+    cyan:    '0xb0f0f0'
     white:   '0xffffff'
 
   # Dim colors
@@ -348,7 +350,7 @@ cursor:
   #   - ▇ Block
   #   - _ Underline
   #   - | Beam
-  style: Block
+  style: Beam
 
   # If this is `true`, the cursor will be rendered as a hollow box when the
   # window is not focused.
@@ -366,16 +368,17 @@ live_config_reload: true
 #   - (macOS) /bin/bash --login
 #   - (Linux) user login shell
 #   - (Windows) powershell
-#shell:
-#  program: /bin/bash
-#  args:
-#    - --login
+shell:
+  # program: "C:/git-sdk-64/usr/bin/zsh.exe"
+  program: "C:/Windows/System32/wsl.exe"
+  # args:
+  #   - "--login -i"
 
 # Startup directory
-#
+
 # Directory the shell is started in. If this is unset, or `None`, the working
 # directory of the parent process will be used.
-working_directory: None
+# working_directory: C:/Projects
 
 # Windows 10 ConPTY backend (Windows only)
 #
@@ -386,7 +389,7 @@ working_directory: None
 #
 # Alacritty will fall back to the WinPTY automatically if the ConPTY
 # backend cannot be initialized.
-enable_experimental_conpty_backend: false
+enable_experimental_conpty_backend: true
 
 # Send ESC (\x1b) before characters when alt is pressed.
 alt_send_esc: true

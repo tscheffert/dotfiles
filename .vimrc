@@ -1054,16 +1054,19 @@ else
   " 6 - steady bar
 
   " Replace Mode
+  let &t_SR=""
   " let &t_SR="[5 q"
   " let &t_SR = "\<Esc>[5 q"
   " let &t_SR = "\e[5 q"
 
   " Normal Mode
+  let &t_EI=""
   " let &t_EI="[1 q"
   " let &t_EI = "\<Esc>[1 q"
   " let &t_EI = "\e[1 q"
 
   " Insert Mode
+  let &t_SI=""
   " let &t_SI="[5 q"
   " let &t_SI = "\<Esc>[5 q"
   " let &t_SI = "\e[5 q"

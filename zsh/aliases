@@ -184,7 +184,8 @@ alias glf='git log --stat --oneline origin/$(git_trimmed_origin_head)..HEAD'
 
 alias gr='git rebase'
 
-alias grc='git rebase --continue'
+# Continue, with no edits
+alias grc='GIT_EDITOR=true git rebase --continue'
 
 alias gra='git rebase --abort'
 

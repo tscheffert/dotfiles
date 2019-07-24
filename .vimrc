@@ -286,7 +286,9 @@ Plug 'andymass/vim-matchup'
 
 " Better Markdown
 Plug 'shime/vim-livedown', { 'for': ['markdown'] }
-Plug 'tpope/vim-markdown', { 'for': ['markdown'] }
+" Plug 'tpope/vim-markdown', { 'for': ['markdown'] }
+Plug 'gabrielelana/vim-markdown', { 'for': ['markdown'] }
+" Also this: https://github.com/plasticboy/vim-markdown
 
 " Allow . to repeat things more often. Enables plugins (like gitgutter) and I can
 "   map it myself
@@ -1723,9 +1725,48 @@ let g:livedown_port = 3030
 " -----
 " Plugin: vim-markdown
 " -----
+" Note: These are for tpope/vim-markdown
 " Enable syntax highlighting for fenced code blocks
-let g:markdown_fenced_languages = ['html', 'python', 'bash=sh', 'shell=sh', 'css', 'sass', 'less',
-      \ 'zsh=sh', 'ruby', 'erb=eruby', 'javascript', 'js=javascript', 'json=javascript']
+" let g:markdown_fenced_languages = ['html', 'python', 'bash=sh', 'shell=sh', 'css', 'sass', 'less',
+"       \ 'zsh=sh', 'ruby', 'erb=eruby', 'javascript', 'js=javascript', 'json=javascript']
+
+" Note: These are for gabrielelana/vim-markdown
+
+" Disable default mappings (enabled by default with: 1)
+let g:markdown_enable_mappings = 0
+
+" Disable support for Jekyll files (enabled by default with: 1)
+let g:markdown_include_jekyll_support = 0
+
+" Disable the fold expression markdown#FoldLevelOfLine to fold markdown files. This
+" is disabled by default because it's a huge performance hit even when folding is
+" disabled with the nofoldenable option (disabled by default with: 0)
+let g:markdown_enable_folding = 0
+
+" Disable insert mode mappings (enabled by default with: 1)
+let g:markdown_enable_insert_mode_mappings = 0
+
+" Disable insert mode leader mappings (disabled by default with: 0)
+let g:markdown_enable_insert_mode_leader_mappings = 0
+
+" Enable spell checking (enabled by default with: 1)
+let g:markdown_enable_spell_checking = 1
+
+" Disable abbreviations for punctuation and emoticons (enabled by default with: 1)
+let g:markdown_enable_input_abbreviations = 0
+
+" Enable conceal for italic, bold, inline-code and link text (disabled by default with: 0)
+let g:markdown_enable_conceal = 0
+
+" vim-markdown screws up my formatting options
+augroup FixMarkdownFormatOptions
+  au!
+
+  " We don't want to continue comments when pressing o/O
+  autocmd Filetype markdown setlocal formatoptions-=o
+  " Don't continue comments after pressing <Enter> in insert either
+  autocmd Filetype markdown setlocal formatoptions-=r
+augroup END
 
 
 " -----

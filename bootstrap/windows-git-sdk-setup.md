@@ -125,6 +125,18 @@ pacman -S man
 pacman -S task
 ```
 
+### Install colordiff
+
+Package description:
+
+> Diff wrapper with pretty syntax highlighting
+
+To install:
+
+```bash
+pacman -S colordiff
+```
+
 ## Pacman Frequent Tasks
 
 Helpful: <https://wiki.archlinux.org/index.php/Pacman/Rosetta>

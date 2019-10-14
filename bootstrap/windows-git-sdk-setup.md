@@ -111,6 +111,47 @@ I've manually changed, or removed, the following files:
 
 NOTE: I should potentially do something about `/etc/inputrc`
 
+### Issue with installing `charlock_holmes`
+
+If i starts with an error like this:
+
+```
+ERROR:  Error installing charlock_holmes:
+        ERROR: Failed to build gem native extension
+
+...
+
+To see why this extension failed to compile, please check the mkmf.log which can be found here:
+
+  C:/tools/ruby/ridk/Ruby25-x64/lib/ruby/gems/2.5.0/extensions/x64-mingw32/2.5.0/charlock_holmes-0.7.6/mkmf.log
+
+extconf failed, exit code 1
+
+...
+```
+
+Then install the gem dependencies like this:
+
+```
+ridk.cmd exec pacman -S mingw-w64-x86_64-icu icu-devel icu
+```
+
+Ensure the temp path is set up correctly:
+
+```
+# These should be in dotfiles
+export tmp="$(cygpath -m "/tmp")"
+export TMP="$(cygpath -m "$TMP")"
+export TEMP="$(cygpath -m "$TEMP")"
+export TMPDIR="$(cygpath -m "$TMPDIR")"
+```
+
+Then install the gem like this:
+
+```
+gem install charlock_holmes -- --with-icui18nlib=icuin --with-icudatalib=icudt
+```
+
 ## Install utilities with Pacman
 
 ### Install man

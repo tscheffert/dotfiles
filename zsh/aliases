@@ -332,6 +332,10 @@ function knife-sandbox {
   knife $@ --config "$sandbox_config"
 }
 
+# -- Kubernetes Aliases
+
+alias k='kubectl' # Shorthand for 'kubectl'
+
 
 # -- Other Aliases
 alias ..='cd ..'         # Go up one directory

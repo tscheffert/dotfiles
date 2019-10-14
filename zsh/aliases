@@ -174,7 +174,11 @@ alias gcooh='git checkout $(git_trimmed_origin_head)'
 alias gcoo='git checkout --ours'
 alias gcot='git checkout --theirs'
 
+# Pretty log the last 'n' (default 20) commits
 alias glg='git_pretty_log'
+
+# Pretty log but only show all commits on the branch
+alias glgb='git_pretty_log_branch'
 
 # Show the diffs for recent commits with git log
 alias glp='git log -p'

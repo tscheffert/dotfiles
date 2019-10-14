@@ -1,0 +1,30 @@
+#!/usr/bin/env zsh
+# vi: ft=zsh
+
+# Output a pretty, oneline, columnized, git log for all the commits in the current
+# Note: Only works when you're on an actual branch, no detached HEAD states.
+function git_pretty_log_branch() {
+  local log_count=${1:-20}
+  local line_wrap='%w(87,0,6)'
+
+  local red_short_hash='%Cred%h%Creset'
+
+  local truncation_amount=51
+  local truncated_message="%<($truncation_amount,trunc)%s"
+
+  local truncate_date='%<(10,trunc)'
+  local blue_date="%Cblue$truncate_date%cr%Creset"
+
+  local truncate_name='%<(12,trunc)'
+  local green_name="%Cgreen$truncate_name%an%Creset"
+
+  local format_string="$line_wrap$red_short_hash - $truncated_message $blue_date $green_name"
+
+  local branched_from="$(git_branched_from)"
+
+  local current_branch="$(git rev-parse --abbrev-ref HEAD)"
+
+  echo "Commits from $branched_from to $current_branch:"
+
+  git log -$log_count --pretty=format:$format_string --abbrev-commit --date=relative "$branched_from"..HEAD
+}

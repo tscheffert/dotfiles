@@ -1,0 +1,24 @@
+#!/usr/bin/env zsh
+# vi: ft=zsh
+
+# Output the branch that you branched from
+function git_branched_from() {
+  # Source: https://stackoverflow.com/a/55238339/2675529
+  # selects only commits with a branch or tag
+  # removes current head (and branch)
+  # selects only the closest decoration
+  # filters out everything but decorations
+  # picks only the first decoration
+  # strips "origin/" from the decoration
+  # git log --decorate --simplify-by-decoration --oneline \
+  #       | grep -v "(HEAD" \
+  #       | head -n1 \
+  #       | sed 's/.* (\(.*\)) .*/\1/' \
+  #       | sed 's/\(.*\), .*/\1/' \
+  #       | sed 's/origin\///'
+
+  # Source: https://stackoverflow.com/a/26597219/2675529
+  local current_branch="$(git rev-parse --abbrev-ref HEAD)"
+  git show-branch | awk -F'[]^~[]' '/\*/ && !/'"$current_branch"'/ {print $2;exit}'
+}
+

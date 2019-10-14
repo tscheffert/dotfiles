@@ -60,3 +60,9 @@ let g:mucomplete#enable_auto_at_startup = 1
 ## Zsh Prompt
 
 Review this further: <https://github.com/sindresorhus/pure/blob/master/pure.zsh>
+
+## TODO
+
+### Vim
+
+- Function to "unsmarten" quotes, probably by straight replacing them

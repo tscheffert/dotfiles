@@ -37,4 +37,6 @@ function append_to_kubeconfig {
 }
 
 # append_to_kubeconfig "$HOME/.kube/config-dev-k8smaster1"
-# append_to_kubeconfig "$HOME/.kube/config-qa-k8smaster1"
+# append_to_kubeconfig "$HOME/.kube/config-qa1-k8smaster1"
+# append_to_kubeconfig "$HOME/.kube/config-prd-k8smaster1"
+# append_to_kubeconfig "$HOME/.kube/config-tk-k8smaster1"

@@ -112,6 +112,24 @@ $0
 endsnippet
 
 
+# -- Interactor Snippets
+
+snippet "def self." "def self.foo do; end; private_class_method :foo" sm
+def self.${1:method_name}
+  $0
+end
+private_class_method :$1
+endsnippet
+
+
+# -- Devtools Snippets
+
+# Dry RB Struct types snippet
+snippet attribute "attribute Name, Type" sm
+attribute :${1:attribute_name}, Devtools::StructTypes::Strict::${2:String}$0
+endsnippet
+
+
 # -- Spec Snippets
 snippet subj "subject(:perform) { }" sm
 subject(:${1:perform}) { ${2:do_it} }$0

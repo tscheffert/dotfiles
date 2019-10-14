@@ -264,6 +264,17 @@ function git-pickaxe {
   git log -p -S "$@" .
 }
 
+# Git rebase remove
+function grr {
+  if [[ -d ".git/rebase-apply" ]]; then
+    rm -rf ".git/rebase-apply"
+    echo "Removed .git/rebase-apply"
+  else
+    echo "No .git/rebase-apply found, not removing"
+  fi
+}
+
+
 # -- Ruby Aliases --
 # Run Rubocop gem
 alias rbc='rubocop --config ~/.rubocop.yml --color'

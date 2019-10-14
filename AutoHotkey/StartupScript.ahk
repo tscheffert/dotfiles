@@ -13,3 +13,4 @@
 #include %A_AppData%\..\..\AutoHotkey\MusicControls.ahk
 #include %A_AppData%\..\..\AutoHotkey\OutlookHotkeys.ahk
 #include %A_AppData%\..\..\AutoHotkey\PhotoshopHotkeys.ahk
+#include %A_AppData%\..\..\AutoHotkey\GenericHotkeys.ahk

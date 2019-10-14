@@ -28,6 +28,16 @@ Lint/UselessAccessModifier:
   ContextCreatingMethods: []
   MethodCreatingMethods: []
 
+# Enabled by default but there isn't a great consistent style that works, because
+# we want to balance the lack-of-indentation and lack-of-namespace-spam from compact
+# references but that causes errors if the intermediary constants aren't defined yet
+# which causes subtle bugs. Disabled until there is a style that supports a mix
+# or Ruby changes and the missing intermediary constant gets automatically defined.
+Style/ClassAndModuleChildren:
+  Description: 'Checks style of children classes and modules.'
+  StyleGuide: '#namespace-definition'
+  Enabled: false
+
 Style/Copyright:
   Description: 'Include a copyright notice in each file before any code.'
   Enabled: false

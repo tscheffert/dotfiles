@@ -1408,11 +1408,6 @@ Style/CharacterLiteral:
   StyleGuide: '#no-character-literals'
   Enabled: true
 
-Style/ClassAndModuleChildren:
-  Description: 'Checks style of children classes and modules.'
-  StyleGuide: '#namespace-definition'
-  Enabled: true
-
 Style/ClassCheck:
   Description: 'Enforces consistent use of `Object#is_a?` or `Object#kind_of?`.'
   Enabled: true

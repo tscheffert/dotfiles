@@ -6,7 +6,7 @@ function nuget_add_external() {
   local package="${1:?You must specify a package to add}"
 
   local escaped_source="\\\\devops.echo.com\\g\$\\NuGet\\External"
-  C:/tools/nuget/nuget.exe add "$package"  -source "$escaped_source"
+  C:/tools/nuget/current/nuget.exe add "$package"  -source "$escaped_source"
 }
 
 nuget_add_external "$@"

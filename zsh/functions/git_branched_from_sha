@@ -1,0 +1,35 @@
+#!/usr/bin/env zsh
+# vi: ft=zsh
+
+# Interesting solutions that I didn't end up using exactly:
+# - https://stackoverflow.com/a/2707110/2675529
+# - https://stackoverflow.com/a/3162929/2675529
+# - https://stackoverflow.com/a/55238339/2675529
+# - https://stackoverflow.com/a/28612460/2675529
+
+# Answer closest to what I implemented:
+# - https://stackoverflow.com/a/45032911/2675529
+
+# Output the sha of the commit you branched from
+function git_branched_from_sha() {
+  local current_branch="$(git rev-parse --abbrev-ref HEAD)"
+
+  # Get the number of commits on current branch by going down the list of commits
+  # and eliminating commits only reachable on current branch
+  local distance_from_head=0
+  local branches_containing_commit=""
+
+  function more_than_one_branch_containing() {
+    local ref="${1:?Must Specify a ref to check}"
+
+    git branch --contains "$ref" | grep --quiet --invert-match --fixed-strings "$current_branch"
+  }
+
+  while ! more_than_one_branch_containing "HEAD~$distance_from_head"; do
+    distance_from_head=$(($distance_from_head+1))
+  done
+
+  git rev-parse "$current_branch~$distance_from_head"
+}
+
+git_branched_from_sha

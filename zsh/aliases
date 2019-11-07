@@ -197,7 +197,11 @@ alias grsk='git rebase --skip'
 
 alias grom='git rebase origin/$(git_trimmed_origin_head)'
 
+alias grbf='git rebase "$(git_branched_from_sha)"'
+
 alias griom='git rebase -i origin/$(git_trimmed_origin_head)'
+
+alias gribf='git rebase -i "$(git_branched_from_sha)"'
 
 # Git reset to head
 alias grs='git reset HEAD'

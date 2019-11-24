@@ -7,44 +7,62 @@ module SortImagesFromInfo
 
   include ImagesHelper::Constants
 
+  RJUST_LENGTH = 3
+  EXT_TO_MATCH = '.png'
+
   def self.perform(args:)
     images = ImagesHelper.all_images_in_dir('.')
 
     info_path = args[0]
 
     if !info_path || !File.exist?(info_path)
-      warn 'Must profile info file path'
+      warn 'Must provide info file path'
       exit 1
     end
 
+    test_run = args[1] == '--test'
+
     info_lines = File.readlines(info_path).map(&:chomp)
 
-    image_matcher = /\AImage (?<new_name>\d{1,3}): (?<old_name>[\(\)\ \.\_a-z0-9]*)\.jpg/
+    # image_matcher = /\AImage (?<new_name>\d{1,3}): (?<old_name>[\(\)\ \.\_A-Za-z0-9：]*)\.png/
+    image_matcher = /\AImage (?<new_name>\d{1,3}): (?<old_name>[\(\)\ \.\_A-Za-z0-9：]*)\.(?<ext>#{IMAGE_EXTENSIONS_REGEX_OR_MATCHER})/
+
+    puts "Using #{RJUST_LENGTH} for minimum width"
 
     images_to_move = info_lines.each_with_object([]) do |line, memo|
       image = {}
       line.match(image_matcher) do |match|
-        image[:old_name] = match[:old_name] + '.jpg'
-        image[:new_name] = match[:new_name] + '.jpg'
+        image_ext = '.' + match[:ext]
+        image[:old_name] = match[:old_name] + image_ext
+        image[:new_name] = match[:new_name].rjust(RJUST_LENGTH, '0') + image_ext
+        image[:new_name_tmp] = File.basename(image[:new_name], image_ext) + '-temp' + File.extname(image[:new_name])
       end
 
-      memo << image if image[:old_name]
+      memo << image if image[:old_name].present?
     end
 
     puts "Found #{images_to_move.length} images to move"
 
     rjust_length = images_to_move.length.to_s.length
-    puts "Minimum length set to #{rjust_length}"
 
+    # Move to temp
     images_to_move.each do |image|
       next unless File.exist?(image[:old_name])
 
-      rjust_new_name = image[:new_name].rjust(rjust_length, '0')
+      next if image[:old_name] == image[:new_name_tmp]
 
-      next if image[:old_name] == rjust_new_name
+      puts "Moving #{image[:old_name]} to #{image[:new_name_tmp]}"
+      FileUtils.mv(image[:old_name], image[:new_name_tmp]) unless test_run
+    end
 
-      puts "Moving #{image[:old_name]} to #{rjust_new_name}"
-      FileUtils.mv(image[:old_name], rjust_new_name)
+    # Move temp to new name
+    images_to_move.each do |image|
+      next unless File.exist?(image[:new_name_tmp])
+
+      next if image[:new_name_tmp] == image[:new_name]
+
+      puts "Moving #{image[:new_name_tmp]} to #{image[:new_name]}"
+      FileUtils.mv(image[:new_name_tmp], image[:new_name]) unless test_run
     end
   end
 

@@ -8,6 +8,7 @@ module ImagesHelper
   module Constants
 
     IMAGE_EXTENSIONS = ['.png', '.PNG', '.jpg', '.JPG', '.jpeg', '.JPEG'].freeze
+    IMAGE_EXTENSIONS_REGEX_OR_MATCHER = IMAGE_EXTENSIONS.map { |s| s.sub(/\A\./,'') }.join('|').freeze
 
     ALREADY_FLAT_DIRS_DIR = '_already_flat_dirs'.freeze
     BAD_DIR = '_bad'.freeze

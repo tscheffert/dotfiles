@@ -45,7 +45,7 @@ module CutBlack
     pixel_black_th = '0.15'
 
     ffmpeg_stdout = `"#{FFMPEG_EXE}" -i "#{video_filename}" -vf blackdetect=black_min_duration=#{black_duration}:picture_black_ratio_th=#{picture_black_ratio_th}:pixel_black_th=#{pixel_black_th} -an -f null - 2>&1 | tee detect_black_log.txt`
-    status = $CHILD_STATUS
+    status = $?
     unless status.exitstatus.zero?
       puts 'Shit broke:'
       puts ffmpeg_stdout

@@ -21,6 +21,7 @@ vimfiles/bundle/
 
 # Ignore plug.vim which curl down to install for vim-plug
 vimfiles/autoload/plug.vim
+vimfiles/autoload/plug.vim.old
 
 # Ignore the generated backup Stuff
 vimfiles/tmp/

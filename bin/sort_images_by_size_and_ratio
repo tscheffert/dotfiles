@@ -25,11 +25,6 @@ module SortImagesBySizeAndRatio
 
     test_run = args[0] == '--test'
 
-    unless test_run
-      FileUtils.mkdir_p(TOO_SMALL_DIR)
-      FileUtils.mkdir_p(NOT_SQUARE_DIR)
-    end
-
     images = ImagesHelper.all_images_in_dir('.')
 
     # Grab images that are too small first
@@ -59,6 +54,8 @@ module SortImagesBySizeAndRatio
       end
     end
 
+
+
     if test_run
       unless too_small.empty?
         puts 'Too Small:'
@@ -85,16 +82,22 @@ module SortImagesBySizeAndRatio
         end
       end
     else
-      puts 'Moving too_small files:'
-      too_small.each(&method(:puts))
-      FileUtils.mv(too_small, TOO_SMALL_DIR)
+      if too_small.present?
+        puts 'Moving too_small files:'
+        too_small.each(&method(:puts))
+        FileUtils.mkdir_p(TOO_SMALL_DIR)
+        FileUtils.mv(too_small, TOO_SMALL_DIR)
 
-      puts "\n"
+        puts "\n"
+      end
 
-      puts 'Moving not_square files:'
-      not_square.each(&method(:puts))
+      if not_square.present?
+        puts 'Moving not_square files:'
+        not_square.each(&method(:puts))
 
-      FileUtils.mv(not_square, NOT_SQUARE_DIR)
+        FileUtils.mkdir_p(NOT_SQUARE_DIR)
+        FileUtils.mv(not_square, NOT_SQUARE_DIR)
+      end
     end
   end
 

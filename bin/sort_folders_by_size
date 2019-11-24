@@ -42,7 +42,8 @@ module SortFoldersBySize
     end
 
     dirs_okay, dirs_too_small = hydrated_dirs.partition do |hdir|
-      hdir[:sizes].any? { |size| size[0] >= MIN_WIDTH && size[1] >= MIN_HEIGHT }
+      hdir[:images].blank? \
+        || hdir[:sizes].any? { |size| size[0] >= MIN_WIDTH && size[1] >= MIN_HEIGHT }
     end
 
     FileUtils.mkdir_p(TOO_SMALL_DIR) if dirs_too_small.present? && !test_run

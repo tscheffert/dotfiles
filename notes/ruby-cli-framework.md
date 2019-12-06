@@ -10,6 +10,10 @@
 - <https://github.com/piotrmurach/tty>
 - [Optimist, formerly trollop](https://github.com/ManageIQ/optimist)
 
+## Read Up On These
+
+- <https://github.com/leejarvis/slop>
+
 # Style
 
 ## Usage Banner

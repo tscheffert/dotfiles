@@ -103,6 +103,7 @@
     - <C:\Users\tscheffert\AppData\Roaming\Wox\Settings>
 - Other
   - Font
+  - Slack Emoji: <https://gist.github.com/lmarkus/8722f56baf8c47045621>
 
 ## Use This
 

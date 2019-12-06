@@ -177,6 +177,18 @@ vim -c "redir! > vimout | scriptnames | redir END | q"
 
 ## Other?
 
+### Check whether a given executable exists
+
+```bash
+test_exists() {
+  type $1 >/dev/null 2>&1
+}
+
+if ! test_exists expect; then
+  echo "I expect you've done fucked up now"
+fi
+```
+
 ### Run a command in a loop every few seconds
 
 ```
@@ -244,6 +256,12 @@ symbolic link created for C:\tools\ruby\ridk\current <<===>> C:\tools\ruby\ridk\
 
 ```
 \\tscheffert-p510\c$\kitchen-vms
+```
+
+###
+
+```
+sudo strace -f -p 22279 -e trace=file
 ```
 
 ## Ruby

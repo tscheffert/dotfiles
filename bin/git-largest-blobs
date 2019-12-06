@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+# vim: ft=sh
+
+# Lists the largest blobs in your git repo
+# Source: https://stackoverflow.com/a/42544963/2675529
+
+git rev-list --objects --all \
+  | git cat-file --batch-check='%(objecttype) %(objectname) %(objectsize) %(rest)' \
+  | sed -n 's/^blob //p' \
+  | sort --numeric-sort --key=2 \
+  | cut -c 1-12,41- \
+  | tail -30 \
+  | sed '1!G;h;$!d' \
+  | $(command -v gnumfmt || echo numfmt) --field=2 --to=iec-i --suffix=B --padding=7 --round=nearest

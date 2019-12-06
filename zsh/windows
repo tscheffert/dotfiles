@@ -46,6 +46,11 @@ append_to_path 'C:\Projects\github\elasticdog\transcrypt'
 # Enable porcelain like git filter-branch to work
 append_to_path 'C:\git-sdk-64\mingw64\libexec\git-core'
 
+# Helm CLI
+append_to_path 'C:\tools\helm\current'
+
+# Temporarily add helm2 binary to ease migration
+append_to_path 'C:\tools\helm\2.16.1'
 
 # --- Aliases ---
 

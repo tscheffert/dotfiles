@@ -1,0 +1,29 @@
+#!/usr/bin/env zsh
+# vi: ft=zsh
+
+
+# Links a directory
+function link_from_to() {
+  if ! [[ "$OSTYPE" == "cygwin" || "$OSTYPE" == "win32" || "$OSTYPE" == "msys" ]] ; then
+    echo 1>&2 "This script currently works on Windows only!"
+    return 1
+  fi
+
+  local from_dir="${1:?You must specify a directory for linking from}"
+  local to_dir="${2:?You must specify a directory for linking to}"
+
+  if [[ ! -d "$from_dir" ]]; then
+    echo 1>&2 "Directory to link from does not exist: '$from_dir'"
+    return 1
+  fi
+
+  # Works better with absolute paths
+  from_dir="$(realpath $from_dir)"
+  to_dir="$(realpath $to_dir)"
+
+  echo "From $from_dir to: $to_dir"
+  # Must transform from `/c/tools/...` to `C:\tools\...`
+  cmd /c "mklink /d $(cygpath --windows $to_dir) $(cygpath --windows $from_dir)"
+}
+
+link_from_to "$@"

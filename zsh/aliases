@@ -397,4 +397,4 @@ alias bfg='java -jar C:/tools/bfg/current/bfg.jar'
 # Curl without progress reports and accepting an HTTP request type
 # Usage:
 #   csr GET "http://elasticsearch.echo.com"
-alias csr='curl --silent --request'
+alias csr='curl --silent --show-error --request'

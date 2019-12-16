@@ -113,10 +113,10 @@ class OptionHelper
       end
     end
 
-    # Coerce flag args to false instead of nil if they're not present
+    # Coerce flag args to false from nil if they havent' been provided
     if flag_args.present?
       missing_flag_args = flag_args.select { |flag| results[flag].blank? }
-      flag_args.each do |flag|
+      missing_flag_args.each do |flag|
         results[flag] = false
       end
     end

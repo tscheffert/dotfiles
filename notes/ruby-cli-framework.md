@@ -13,6 +13,19 @@
 ## Read Up On These
 
 - <https://github.com/leejarvis/slop>
+- <https://github.com/ahoward/main>
+- <http://whatisthor.com/>
+- <https://github.com/svenfuchs/cl>
+- <https://github.com/gettalong/cmdparse>
+- <https://github.com/davetron5000/methadone>
+- <http://davetron5000.github.io/gli/>
+- <https://github.com/jeg2/highline>
+- <https://github.com/manageiq/optimist>
+- <https://github.com/thoughtbot/terrapin>
+- <https://github.com/chef/mixlib-cli>
+- <https://github.com/commander-rb/commander>
+- <https://github.com/ddfreyne/cri>
+- <https://github.com/mdub/clamp>
 
 # Style
 

@@ -5,10 +5,11 @@ require 'bigdecimal'
 require 'fileutils'
 
 module ImagesHelper
+
   module Constants
 
     IMAGE_EXTENSIONS = ['.png', '.PNG', '.jpg', '.JPG', '.jpeg', '.JPEG'].freeze
-    IMAGE_EXTENSIONS_REGEX_OR_MATCHER = IMAGE_EXTENSIONS.map { |s| s.sub(/\A\./,'') }.join('|').freeze
+    IMAGE_EXTENSIONS_REGEX_OR_MATCHER = IMAGE_EXTENSIONS.map { |s| s.sub(/\A\./, '') }.join('|').freeze
 
     ALREADY_FLAT_DIRS_DIR = '_already_flat_dirs'.freeze
     BAD_DIR = '_bad'.freeze
@@ -51,7 +52,7 @@ module ImagesHelper
 
   def self.safe_rename(old, new)
     FileUtils.mv(old, new)
-  rescue => e
+  rescue StandardError => e
     warn "File #{old} -> #{new} failed with error #{e}"
   end
 
@@ -61,7 +62,7 @@ module ImagesHelper
     else
       warn "Dir #{dir} not empty, not removing"
     end
-  rescue => e
+  rescue StandardError => e
     warn "Dir #{dir} removal failed with error #{e}"
   end
 

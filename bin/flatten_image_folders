@@ -26,13 +26,17 @@ module FlattenImageFolders
                 Moves nested image folders into subdirectories of the root
             #{command_name} --test
                 Reports which folders will move but doesn't move them
+            #{command_name} --move-already-flat
+                Moves folders that are already flat into #{ALREADY_FLAT_DIRS_DIR}
             #{command_name} --help
                 Prints this message
       HELPDOC
       exit 0
     end
 
-    test_run = args[0] == '--test'
+    test_run = args.include?('--test')
+
+    move_already_flat = args.include?('--move-already-flat')
 
     dirs = Dir.entries('.').select { |entry| File.directory?(entry) } - IGNORED_DIRS
 
@@ -55,14 +59,16 @@ module FlattenImageFolders
       exit 1
     end
 
-    if sorted_dirs[:only_images].present?
-      FileUtils.mkdir_p(ALREADY_FLAT_DIRS_DIR) unless test_run
-    end
+    if move_already_flat
+      if sorted_dirs[:only_images].present?
+        FileUtils.mkdir_p(ALREADY_FLAT_DIRS_DIR) unless test_run
+      end
 
-    puts "Moving #{sorted_dirs[:only_images].length} dirs to #{ALREADY_FLAT_DIRS_DIR}:"
-    sorted_dirs[:only_images].each do |dir|
-      puts "  Moving #{dir[:path]} to #{ALREADY_FLAT_DIRS_DIR}"
-      ImagesHelper.safe_rename(dir[:path], ALREADY_FLAT_DIRS_DIR) unless test_run
+      puts "Moving #{sorted_dirs[:only_images].length} dirs to #{ALREADY_FLAT_DIRS_DIR}:"
+      sorted_dirs[:only_images].each do |dir|
+        puts "  Moving #{dir[:path]} to #{ALREADY_FLAT_DIRS_DIR}"
+        ImagesHelper.safe_rename(dir[:path], ALREADY_FLAT_DIRS_DIR) unless test_run
+      end
     end
 
     sorted_only_subdirs = sorted_dirs[:only_subdirs].map do |dir|

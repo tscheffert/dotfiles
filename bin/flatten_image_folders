@@ -28,6 +28,8 @@ module FlattenImageFolders
                 Reports which folders will move but doesn't move them
             #{command_name} --move-already-flat
                 Moves folders that are already flat into #{ALREADY_FLAT_DIRS_DIR}
+            #{command_name} --debug
+                Prints more information, to help debugging
             #{command_name} --help
                 Prints this message
       HELPDOC
@@ -38,6 +40,8 @@ module FlattenImageFolders
 
     move_already_flat = args.include?('--move-already-flat')
 
+    @@debug = args.include?('--debug')
+
     dirs = Dir.entries('.').select { |entry| File.directory?(entry) } - IGNORED_DIRS
 
     hydrated_dirs = dirs.map do |dir|
@@ -46,6 +50,7 @@ module FlattenImageFolders
 
     sorted_dirs = sort_hydrated_dirs(dirs: hydrated_dirs)
     puts "Dirs that are empty: #{sorted_dirs[:without_both].length}"
+    puts "Dirs that are already sorted: #{sorted_dirs[:already_sorted].length}"
     puts "Dirs with only images: #{sorted_dirs[:only_images].length}"
     puts "Dirs with only subdirs: #{sorted_dirs[:only_subdirs].length}"
 
@@ -107,20 +112,40 @@ module FlattenImageFolders
   end
 
   def self.sort_hydrated_dirs(dirs:)
-    dirs_with_images_and_subdirs, remaining = dirs.partition do |dir|
-      dir[:images].present? && dir[:subdirs].present?
+    dirs_already_sorted, remaining = dirs.partition do |dir|
+      sort = ImagesHelper.already_sorted_dir?(dir[:path])
+
+      puts "Sorting dir: #{dir[:path]} was already sorted" if sort && @@debug
+
+      sort
+    end
+
+    dirs_with_images_and_subdirs, remaining = remaining.partition do |dir|
+      sort = dir[:images].present? && dir[:subdirs].present?
+
+      puts "Sorting dir: #{dir[:path]} has images and subdirs" if sort && @@debug
+
+      sort
     end
 
     dirs_without_images_or_subdirs, remaining = remaining.partition do |dir|
-      dir[:images].blank? && dir[:subdirs].blank?
+      sort = dir[:images].blank? && dir[:subdirs].blank?
     end
 
     dirs_with_images, remaining = remaining.partition do |dir|
-      dir[:images].present?
+      sort = dir[:images].present?
+
+      puts "Sorting dir: #{dir[:path]} has only images" if sort && @@debug
+
+      sort
     end
 
     dirs_with_subdirs, remaining = remaining.partition do |dir|
-      dir[:subdirs].present?
+      sort = dir[:subdirs].present?
+
+      puts "Sorting dir: #{dir[:path]} has only subdirs" if sort && @@debug
+
+      sort
     end
 
     if remaining.present?
@@ -133,10 +158,11 @@ module FlattenImageFolders
     end
 
     {
-      with_both:    dirs_with_images_and_subdirs,
-      without_both: dirs_without_images_or_subdirs,
-      only_images:  dirs_with_images,
-      only_subdirs: dirs_with_subdirs
+      with_both:      dirs_with_images_and_subdirs,
+      without_both:   dirs_without_images_or_subdirs,
+      already_sorted: dirs_already_sorted,
+      only_images:    dirs_with_images,
+      only_subdirs:   dirs_with_subdirs
     }
   end
   private_class_method :sort_hydrated_dirs

@@ -40,6 +40,13 @@ module ImagesHelper
 
   end
 
+  def self.already_sorted_dir?(dir)
+    subdirs = Dir.entries(dir)
+
+    subdirs.any? { |subdir| subdir.end_with?(Constants::LANDSCAPE_DIR) } \
+      || subdirs.any? { |subdir| subdir.end_with?(Constants::PORTRAIT_DIR) }
+  end
+
   def self.all_images_in_dir(dir)
     Dir.entries(dir).select do |f|
       File.file?(f) && Constants::IMAGE_EXTENSIONS.include?(File.extname(f))

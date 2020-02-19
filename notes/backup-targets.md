@@ -14,19 +14,22 @@
 - ZSH: `C:/Users/tscheffert/.zsh_history`
 - ConEmu Logging: `C:/Users/tscheffert/ConEmu-Logs`
 - ssh config: `C:/Users/tscheffert/.ssh`
-  - svn
-    - This is too large, maybe just the `svn/devops` folder? Only the Trunk branches
-      instead of branches and tags maybe?
+- svn
+  - This is too large, maybe just the `svn/devops` folder? Only the Trunk branches
+    instead of branches and tags maybe?
 - Notes/Documents
   - `C:/Projects/docs`
   - `C:/Projects/notes`
   - `C:/Projects/powershell-scripts`
   - `C:/Projects/registry-changes`
   - `C:/Projects/scripts`
-- Gimp config
-- 1Password vault
+- Gimp config: `C:/Users/tscheffert/AppData/Roaming/GIMP/2.10` # TODO: Will this dir change after an upgrade?
 - Typora Config: `C:/Users/tscheffert/AppData/Roaming/Typora/conf`
 - WOX Config: `C:/Users/tscheffert/AppData/Roaming/Wox/Settings`
+
+## Git Directories for now
+
+- devtools:
 
 ## Directories after git-clean
 
@@ -63,16 +66,19 @@
   - Profile: `C:/Users/tscheffert/AppData/Roaming/Mozilla/Firefox/Profiles/46ojgpuh.default`
   - Plugins
     - Session Manager Session: `C:/Users/tscheffert/firefox-sessions`
+      - Only the settings and recently touched sessions
     - Session Manager Config: Export via gui
-    - Tab Groups Config: Export via gui
-    - Tab Groups Session: Export via gui
+    - Tab Groups Config: Export via gui to `C:\Users\tscheffert\firefox-tab-groups\`
+    - Tab Groups Session: Export via gui to `C:\Users\tscheffert\firefox-tab-groups\`
     - Reddit Enhancement Suite: Export via gui
     - Tab Mix Plus Config: Export via options
     - Tampermonkey Scripts: Export Zip through `Utilities` tab
-    - uBlock Origin Config: Export by clicking `Back up to file` in the Addon GUI
+    - uBlock Origin Config: Export by clicking `Back up to file` in the Settings tab GUI
+    - uBlock Origin Static Filters: Export by cling `Back up to file` in the Filters tab of the GUI
 
 ## Other
 
+- 1Password vault
 - Font
 - TMUX??
 - PSQL

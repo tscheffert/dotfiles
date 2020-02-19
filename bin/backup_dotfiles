@@ -1,0 +1,87 @@
+#!/usr/bin/env ruby
+# vim: ft=ruby
+
+require 'json'
+require 'active_support'
+require 'active_support/core_ext/object/blank'
+require 'paint'
+require File.join(__dir__, '..', 'ruby', 'lib', 'option_helper')
+require File.join(__dir__, '..', 'ruby', 'lib', 'shelper')
+require File.join(__dir__, '..', 'ruby', 'lib', 'backup_targets')
+
+module BackupDotfiles
+
+  def self.perform(args:)
+    username, output_directory = parse_and_validate!(args: args)
+
+    targets = BackupTargets.create_from(username: username)
+
+    # targets.each do |target|
+    backup(target: targets.first, output_directory: output_directory)
+    # end
+  end
+
+  private
+
+  def self.backup(target:, output_directory:)
+    if target.strategy == :archive_directory
+      output_file = File.join(output_directory, "#{target.name}.7z")
+      fail_if_file_exists!(target: target, file: output_file)
+
+      command = ['7z', 'a', output_file, target.path]
+
+      out = Shelper.out! \
+              command: command,
+              options: {}
+
+      if out.stdout.present?
+        puts '>>>>>>>>>>>>>>>>>STDOUT>>>>>>>>>>>>>>>>>'
+        puts out.stdout
+        puts '<<<<<<<<<<<<<<<<<STDOUT<<<<<<<<<<<<<<<<<'
+      end
+      if out.stderr.present?
+        puts '>>>>>>>>>>>>>>>>>STDERR>>>>>>>>>>>>>>>>>'
+        puts out.stderr
+        puts '<<<<<<<<<<<<<<<<<STDERR<<<<<<<<<<<<<<<<<'
+      end
+
+      puts "Backed up #{target.path} to #{output_file}"
+    end
+    puts 'Will archive dir' if target.strategy == :archive_file
+  end
+  private_class_method :backup
+
+  def self.fail_if_file_exists!(target:, file:)
+    if File.exist?(file)
+      warn "Output from backing up '#{target.path}' to '#{file}' already exists!"
+      exit 1
+    end
+  end
+  private_class_method :fail_if_file_exists!
+
+  def self.parse_and_validate!(args:)
+    helper = OptionHelper.new(script_name: 'backup_dotfiles')
+
+    helper.add_option(
+      command_line_name: '--username',
+      variable_key:      :username,
+      description:       'Username',
+      option_type:       String,
+      required:          true)
+
+    helper.add_option(
+      command_line_name: '--output-directory',
+      variable_key:      :output_directory,
+      description:       'Directory to output backup to',
+      option_type:       String,
+      required:          true)
+
+    results = helper.parse!(argv: args)
+
+    return results[:username], results[:output_directory]
+  end
+  private_class_method :parse_and_validate!
+
+end
+
+BackupDotfiles.perform(args: ARGV)

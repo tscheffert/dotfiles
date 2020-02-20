@@ -48,6 +48,8 @@ module Shelper
   private_class_method :clean_array
 
   def self.shell_out(command:, options:)
+    # TODO: Fail with an error message if the executable we're trying to use is not available
+
     options = options.dup
     env_key = options.has_key?(:env) ? :env : :environment
     options[env_key] = {

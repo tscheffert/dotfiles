@@ -16,18 +16,19 @@ module BackupDotfiles
 
     targets = BackupTargets.create_from(username: username)
 
-    # targets.each do |target|
-    backup(target: targets.first, output_directory: output_directory)
-    # end
+    targets.each do |target|
+      backup(target: target, output_directory: output_directory)
+    end
   end
 
   private
 
   def self.backup(target:, output_directory:)
-    if target.strategy == :archive_directory
+    # if target.strategy == :archive_directory
       output_file = File.join(output_directory, "#{target.name}.7z")
       fail_if_file_exists!(target: target, file: output_file)
 
+      # TODO: Documentation about other flags. Maybe `-r`, maybe others
       command = ['7z', 'a', output_file, target.path]
 
       out = Shelper.out! \
@@ -46,8 +47,8 @@ module BackupDotfiles
       end
 
       puts "Backed up #{target.path} to #{output_file}"
-    end
-    puts 'Will archive dir' if target.strategy == :archive_file
+    # end
+    # puts 'Will archive dir' if target.strategy == :archive_file
   end
   private_class_method :backup
 

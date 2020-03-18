@@ -159,6 +159,28 @@ items that match `-path .` here.
 find . ! -path . -type d
 ```
 
+### Deleting folders matching a path
+
+```
+# Run the command to doublecheck output
+find . -wholename '*/bin/Debug/*' -type d
+
+# Run it again to delete
+find . -wholename '*/bin/Debug/*' -type d | xargs rm -r
+```
+
+### Cleaning build artifacts from visual studio projects
+
+```
+find . -wholename '**/bin/Debug' -type d | xargs rm -r
+find . -wholename '**/bin/Debug' -type d -exec rm -r "{}" +
+```
+
+### Delete folders that contain subfolders
+
+```
+```
+
 ## Vim
 
 [Source](https://vi.stackexchange.com/a/16657/9963)

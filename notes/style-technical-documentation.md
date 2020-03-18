@@ -152,7 +152,7 @@ $ /org/jdk1.5.0*/bin/java \
 
 Documentation uses US English
 
-### Documetnation formatting standards
+### Documentation formatting standards
 
 #### Use angle brackets for placeholders
 

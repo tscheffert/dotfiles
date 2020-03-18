@@ -78,6 +78,7 @@
 
 ## Other
 
+- WSL dotfiles and WSL config
 - 1Password vault
 - Font
 - TMUX??

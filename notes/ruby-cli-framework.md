@@ -9,6 +9,8 @@
 - <https://github.com/chef/mixlib-shellout>
 - <https://github.com/piotrmurach/tty>
 - [Optimist, formerly trollop](https://github.com/ManageIQ/optimist)
+- <https://github.com/slackhq/magic-cli>
+- <https://slackengineering/the-joy-of-internal-tools-4a1bb5fe905b>
 
 ## Read Up On These
 
@@ -23,11 +25,30 @@
 - <https://github.com/manageiq/optimist>
 - <https://github.com/thoughtbot/terrapin>
 - <https://github.com/chef/mixlib-cli>
-- <https://github.com/commander-rb/commander>
-- <https://github.com/ddfreyne/cri>
+
+
+
+### Close, Good example
+
 - <https://github.com/mdub/clamp>
+  - Similar command modeling, slightly different syntax
+- <https://github.com/commander-rb/commander>
+  - Some of the variants are SUPER close, but there is a LOT going on here.
+- Soooo close: <https://dry-rb.org/gems/dry-cli/0.6/>
+  - Probably copy a bunch of implementation from this if it's stand alone
+  - The "registry" concept is great
+  - Do like options, don't like arguments
+
+### Not Quite
+
+- <https://github.com/ddfreyne/cri>
+  - Too much, too opinionated. Not pluggable
 
 # Style
+
+## Slack `magic-cli` forks:
+
+<https://github.com/slackhq/magic-cli/compare/master...yothinko:master>
 
 ## Usage Banner
 

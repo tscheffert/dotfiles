@@ -144,6 +144,21 @@ Get-PSSession | Remove-PSSession
 Get-Service Echo.XP.Carrier* | select -ExpandProperty DisplayName | foreach-object { sc.exe delete $_ }
 ```
 
+## Environment Variables
+
+```powershell
+# Modify system path to persist across sessions
+$newPath = [Environment]::GetEnvironmentVariable("PATH",[EnvironmentVariableTarget]::Machine) + ";$env:ProgramFiles\docker"
+$splitPath = $newPath -split ';'
+# TODO: Is there a way to unique without sorting?
+$cleanedPath = $splitPath | Sort-Object -Unique
+$newPath = $cleanedPath -join ';'
+[Environment]::SetEnvironmentVariable("PATH", $newPath, [EnvironmentVariableTarget]::Machine)
+
+# Set path for current session
+$env:path = $newPath
+```
+
 ## URL ACLs
 
 ### List the URL ACLS

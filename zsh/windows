@@ -73,6 +73,8 @@ alias open='start'
 
 alias 'powershell_split'='ConEmu64 -run powershell -new_console:asV'
 
+# TODO: Powershell split for kubernetes exec
+
 # -- PowerShell Aliases/Functions --
 function ps-lint() {
   local ps_file="${1:?You must specify a file to lint}"

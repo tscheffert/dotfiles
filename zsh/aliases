@@ -255,6 +255,10 @@ alias gstp='git stash pop'
 #   use with 'stash@{n}' to reference a particular stash item
 alias gstsh='git stash show -p'
 
+# TODO: add aliases for 'git stash show untracked', 'git stash show files', and 'git stash show untracked files'
+# https://stackoverflow.com/questions/12681529/in-git-is-there-a-way-to-show-untracked-stashed-files-without-applying-the-stas
+
+
 # Drop a stash item, latest by default and specify with 'stash@{n}'
 alias gstd='git stash drop'
 

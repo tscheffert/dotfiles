@@ -1,0 +1,113 @@
+#!/usr/bin/env ruby
+# vim: ft=ruby
+
+require 'json'
+require 'active_support'
+require 'active_support/core_ext/object/blank'
+require 'paint'
+require 'charlock_holmes'
+require File.join(__dir__, '..', 'ruby', 'lib', 'option_helper')
+require File.join(__dir__, '..', 'ruby', 'lib', 'shelper')
+
+module StripLinesInFile
+
+  IGNORED_DIRS = ['.', '..'].freeze
+
+  def self.perform(args:)
+    input_file, output_file, test_run = parse_and_validate!(args: args)
+
+    strip_stream(
+      input_file:  input_file,
+      output_file: output_file,
+      test_run:    test_run)
+  end
+
+  def self.strip_stream(input_file:, output_file:, test_run:)
+    # File Mode:
+    #   w+: truncate existing file
+    #   b: Suppresses EOL <-> CRLF conversion on Windows. And sets external encoding
+    #      to ASCII-8BIT, which is why we specify UTF-8 encoding
+    File.open(output_file, 'w+b', encoding: Encoding::UTF_8) do |f|
+    # File.open(output_file, 'w+b') do |f|
+      count=0
+      initial_detection = 'unknown'
+      File.foreach(input_file, mode: 'rb', encoding: Encoding::UTF_16LE) do |line|
+        detection = CharlockHolmes::EncodingDetector.detect(line)
+        if count == 0
+          initial_detection = detection[:encoding]
+        end
+
+#         puts line.length
+#         puts "Detected: #{detection}"
+
+        utf8_encoded_line = CharlockHolmes::Converter.convert(
+          line,
+          'UTF-16LE',
+          'UTF-8')
+
+        pretty_line = utf8_encoded_line
+          .strip
+          .chomp
+          # .encode(crlf_newline: true)
+          # .encode(universal_newline: true)
+
+        #   # .encode(
+        #   #   'UTF-8', 'binary', invalid: :replace, undef: :replace, replace: '')
+        #   # .force_encoding('UTF-8')
+        #   # .strip
+        #   # .chomp
+        #   # .encode(crlf_newline: true)
+        #   # .encode(universal_newline: true)
+        if pretty_line.present?
+          # puts "Encoding: #{pretty_line.encoding}, Line: #{pretty_line}"
+          f.puts(pretty_line)
+        end
+
+        # count = count + 1
+        # exit 0 if count >=10
+      end
+    end
+  rescue ArgumentError => e
+    puts e
+
+  end
+  private_class_method :strip_stream
+
+  def self.parse_and_validate!(args:)
+    helper = OptionHelper.new(script_name: 'strip_lines_in_file')
+
+    helper.add_option(
+      command_line_name: '--input-file',
+      variable_key:      :input_file,
+      description:       'File to strip the lines from',
+      option_type:       String,
+      required:          true)
+
+    helper.add_option(
+      command_line_name: '--output-file',
+      variable_key:      :output_file,
+      description:       'File to store output in ',
+      option_type:       String,
+      required:          true)
+
+    helper.add_option(
+      command_line_name: '--test',
+      variable_key:      :test,
+      description:       'Is this a dry run?',
+      option_type:       Bool,
+      required:          false)
+
+    results = helper.parse!(argv: args)
+
+    unless File.exist?(results[:input_file])
+      warn Paint["#{file_name}: no such file", :red]
+      exit 1
+    end
+
+    return results[:input_file], results[:output_file], results[:test]
+  end
+
+
+end
+
+StripLinesInFile.perform(args: ARGV)

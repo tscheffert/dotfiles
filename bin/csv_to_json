@@ -1,0 +1,31 @@
+#!/usr/bin/env ruby
+# vim: ft=ruby
+
+require 'json'
+require 'csv'
+require 'active_support'
+require 'active_support/core_ext/object/blank'
+
+module CSVToJSON
+  def self.perform(args:)
+    csv_file = args[0]
+
+    raise "Must pass a file to convert" if csv_file.blank?
+    raise "File to convert '#{csv_file}' is not a csv file" if !csv_file.end_with?(".csv")
+    raise "File to convert '#{csv_file}' does not exist" if !File.exist?(csv_file)
+
+    puts "good to go"
+
+    output_file_basename = File.basename(csv_file, '.csv')
+    output_file = output_file_basename + ".json"
+
+    extracted_data   = CSV.table(csv_file)
+    transformed_data = extracted_data.map { |row| row.to_hash }
+    json_contents = JSON.pretty_generate(transformed_data)
+    File.write(output_file, json_contents)
+
+    puts "Transformed to json at '#{output_file}'"
+  end
+end
+
+CSVToJSON.perform(args: ARGV)

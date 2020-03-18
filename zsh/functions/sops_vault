@@ -1,0 +1,30 @@
+#!/usr/bin/env zsh
+# vi: ft=zsh
+
+function sops_vault() {
+  local vault_name="$1"
+  if [[ -z "$vault_name" ]]; then
+    echo 1>&2 "No vault name passed"
+    local failed=true
+  fi
+
+  if [[ ! -d "./data_bags/chef_vault/" ]]; then
+    echo 1>&2 "Working directory must be at the root of the chef-repo"
+    local failed=true
+  fi
+
+  local target_vault_file="./data_bags/chef_vault/$vault_name.key"
+  if [[ ! -f "$target_vault_file" ]]; then
+    echo 1>&2 "Target vault file $target_vault_file doesn't exist"
+    local failed=true
+  fi
+
+  if [[ $failed ]]; then
+    echo 1>&2 "\nUsage:"
+    echo 1>&2 "  sops_vault {vault_name}"
+    echo 1>&2 "  - vault_name: The vault name that you wish to edit, like development, qa, or production"
+    return 1
+  fi
+
+  sops --input-type json --output-type json "$target_vault_file"
+}

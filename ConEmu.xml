@@ -656,16 +656,18 @@
 					<value name="Active" type="long" data="0"/>
 					<value name="Count" type="long" data="1"/>
 				</key>
-				<key name="Task9" modified="2019-11-24 16:29:07" build="191012">
+				<key name="Task9" modified="2020-01-16 13:47:50" build="191012">
 					<value name="Name" type="string" data="{Zsh::All}"/>
 					<value name="Flags" type="dword" data="00000000"/>
 					<value name="Hotkey" type="dword" data="00000000"/>
 					<value name="GuiArgs" type="string" data=""/>
-					<value name="Cmd1" type="string" data='&gt;-cur_console:t:"k8s-yaml" -cur_console:d:C:\Projects\azure-repos\devcenter\k8s-yaml set CHERE_INVOKING=1 &amp; set "PATH=C:\git-sdk-64\usr\bin;%PATH%" &amp; set MSYSTEM=MINGW64 &amp; "%ConEmuBaseDirShort%\conemu-msys2-64.exe zsh --login -i"'/>
-					<value name="Active" type="long" data="1"/>
-					<value name="Count" type="long" data="3"/>
-					<value name="Cmd2" type="string" data='-cur_console:t:"devtools" -cur_console:d:C:\Projects\gitlab\devops\devtools set CHERE_INVOKING=1 &amp; set "PATH=C:\git-sdk-64\usr\bin;%PATH%" &amp; set MSYSTEM=MINGW64 &amp; "%ConEmuBaseDirShort%\conemu-msys2-64.exe zsh --login -i"'/>
-					<value name="Cmd3" type="string" data='-cur_console:t:"dotfiles" -cur_console:d:%userprofile%\.dotfiles set CHERE_INVOKING=1 &amp; set "PATH=C:\git-sdk-64\usr\bin;%PATH%" &amp; set MSYSTEM=MINGW64 &amp; "%ConEmuBaseDirShort%\conemu-msys2-64.exe zsh --login -i"'/>
+					<value name="Cmd1" type="string" data='&gt;-cur_console:t:"k8s manifests" -cur_console:d:C:\Projects\azure-repos\devops\kubernetes-manifests set CHERE_INVOKING=1 &amp; set "PATH=C:\git-sdk-64\usr\bin;%PATH%" &amp; set MSYSTEM=MINGW64 &amp; "%ConEmuBaseDirShort%\conemu-msys2-64.exe zsh --login -i"'/>
+					<value name="Active" type="long" data="2"/>
+					<value name="Count" type="long" data="5"/>
+					<value name="Cmd2" type="string" data='&gt;-cur_console:t:"k8s-yaml" -cur_console:d:C:\Projects\azure-repos\devcenter\k8s-yaml set CHERE_INVOKING=1 &amp; set "PATH=C:\git-sdk-64\usr\bin;%PATH%" &amp; set MSYSTEM=MINGW64 &amp; "%ConEmuBaseDirShort%\conemu-msys2-64.exe zsh --login -i"'/>
+					<value name="Cmd3" type="string" data='-cur_console:t:"devtools" -cur_console:d:C:\Projects\gitlab\devops\devtools set CHERE_INVOKING=1 &amp; set "PATH=C:\git-sdk-64\usr\bin;%PATH%" &amp; set MSYSTEM=MINGW64 &amp; "%ConEmuBaseDirShort%\conemu-msys2-64.exe zsh --login -i"'/>
+					<value name="Cmd4" type="string" data='-cur_console:t:"dotfiles" -cur_console:d:%userprofile%\.dotfiles set CHERE_INVOKING=1 &amp; set "PATH=C:\git-sdk-64\usr\bin;%PATH%" &amp; set MSYSTEM=MINGW64 &amp; "%ConEmuBaseDirShort%\conemu-msys2-64.exe zsh --login -i"'/>
+					<value name="Cmd5" type="string" data='-cur_console:t:"notes" -cur_console:d:C:\Projects\notes set CHERE_INVOKING=1 &amp; set "PATH=C:\git-sdk-64\usr\bin;%PATH%" &amp; set MSYSTEM=MINGW64 &amp; "%ConEmuBaseDirShort%\conemu-msys2-64.exe zsh --login -i"'/>
 				</key>
 				<key name="Task10" modified="2019-08-06 13:45:46" build="190526">
 					<value name="Name" type="string" data="{Zsh::Projects}"/>

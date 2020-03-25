@@ -29,6 +29,7 @@ mklink %userprofile%\.yamllint %userprofile%\.dotfiles\.yamllint
 mklink %userprofile%\.zshrc %userprofile%\.dotfiles\.zshrc
 mklink %userprofile%\.zshrc.private %userprofile%\.dotfiles\.zshrc.private
 mklink %userprofile%\console_config.rb %userprofile%\.dotfiles\console_config.rb
+mkdir %APPDATA%\alacritty
 mklink %userprofile%\AppData\Roaming\alacritty\alacritty.yml %userprofile%\.dotfiles\alacritty.yml
 
 mkdir %userprofile%\Documents\WindowsPowerShell

@@ -1,4 +1,4 @@
-#!/usr/env/bin bash
+#!/usr/bin/env bash
 
 echo ""
 echo " -- Setting up vim config --"
@@ -30,6 +30,6 @@ else
 fi
 
 echo "Running vim-plug Install"
-vim +PlugUpgrade +PlugInstall +qall
+# vim +PlugUpgrade +PlugInstall +qall
 
 echo " -- Finished vim config --"

@@ -43,3 +43,6 @@
 *.svg binary
 #*.svg text
 *.eps binary
+
+# Diff registry files as text
+*.reg text

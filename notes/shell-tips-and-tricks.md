@@ -311,6 +311,24 @@ aes-192-ecb
 echo "stuff" | ruby -e "STDIN.each_line.to_a.flat_map(&:split).map(&:strip).each(&method(:puts))"
 ```
 
+
+## WGET
+
+```
+#!/usr/bin/env bash
+
+
+# Steps:
+# Go to browser, login, go to "root" index page
+# Open inspector with F12, go to the network inspector and enable it
+# ctl+f5 to force refresh the page, find the Index.html ntework request, right click and 'Copy as curl (bash)'
+# Paste in vim download.sh file
+# Search replace -H for --header and -D for --post-data
+
+
+wget --header 'Connection: keep-alive' --header 'Pragma: no-cache' --header 'Cache-Control: no-cache' --header 'DNT: 1' --header 'Upgrade-Insecure-Requests: 1' --header 'User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.122 Safari/537.36' --header 'Sec-Fetch-Dest: document' --header 'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9' --header 'Sec-Fetch-Site: same-origin' --header 'Sec-Fetch-Mode: navigate' --header 'Sec-Fetch-User: ?1' --header 'Referer: https://EXAMPLE.com/Members/Login' --header 'Accept-Language: en-US,en;q=0.9' --header 'Cookie: __RequestVerificationToken=stuff; .ASPXAUTH=thing' --mirror --convert-links --page-requisites --no-parent -P ./test-output-dir/ 'https://EXAMPLE.com/Members/Index'
+```
+
 ## Problem?
 
 ### No origin/HEAD?

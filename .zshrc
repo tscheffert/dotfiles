@@ -1,4 +1,4 @@
-#!/usr/bin/env zsh
+
 # vi: ft=zsh
 
 # --- Platform ---
@@ -43,7 +43,8 @@ if [[ $platform == 'osx' ]]; then
 elif [[ $platform == 'windows' ]]; then
   . ~/.zsh/windows
 elif [[ $platform == 'wsl' ]]; then
-  . ~/.zsh/wsl-ubuntu
+  # . ~/.zsh/wsl-ubuntu
+  . ~/.zsh/wsl-centos
 fi
 
 # Use .zshrc.local for settings specific to one system

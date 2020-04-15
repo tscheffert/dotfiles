@@ -1,0 +1,35 @@
+#!/usr/bin/env zsh
+# vi: ft=zsh
+
+# --- Path ---
+
+function remove_from_path {
+  # Delete path by parts so we can never accidentally remove sub paths
+  PATH=${PATH//":$1:"/":"} # delete any instances in the middle
+  PATH=${PATH/#"$1:"/} # delete any instance at the beginning
+  PATH=${PATH/%":$1"/} # delete any instance in the at the end
+}
+
+# -- Remove --
+remove_from_path "/mnt/c/opscode/chefdk/bin"
+
+# -- Prepend --
+prepend_to_path "$HOME/.rbenv/bin"
+#prepend_to_path "$HOME/local_bin"
+
+
+# -- Append --
+
+
+# --- Aliases ---
+
+# --- Ruby ---
+if which rbenv > /dev/null ; then
+  eval "$(rbenv init - zsh)"
+fi
+
+
+
+# --- Other ---
+eval $(dircolors /root/.dotfiles/.dir_colors_solarized)
+# eval $(dircolors .dir_colors)

@@ -16,3 +16,20 @@
 - Figure out if we want TMUX stuff, in the `bootstrap/macos/apps.sh` file
 - Determine how we'll sync up ruby between the shell, the os, and macvim. Optionally with `rbenv`
   - Currently the system default is 2.6.3, and macvim has it's own "keg only" 2.7 version
+- Investigate these cask apps:
+  ```
+  arq
+  cloudup
+  hazel
+  mailbox
+  qlcolorcode
+  qlmarkdown
+  qlprettypatch
+  qlstephen
+  quicklook-json
+  screenflick
+  seil
+  shiori
+  tower
+  transmit
+  ```

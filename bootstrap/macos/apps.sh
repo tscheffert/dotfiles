@@ -34,4 +34,7 @@ else
   echo "has fzf, check"
 fi
 
+# Install the packages in ~/Brewfile (can take awhile)
+brew bundle install
+
 echo " -- Finished installing apps --"

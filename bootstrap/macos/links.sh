@@ -46,6 +46,7 @@ link_file .rubocop.yml
 link_file .vimrc
 link_file .yamllint
 link_file .zshrc
+link_file Brewfile
 link_file console_config.rb
 
 # Symlink Optional files

@@ -53,3 +53,7 @@ link_file_with_directory() {
   fi
   ln -sf "$HOME/.dotfiles/$dir/$file" "$HOME/$dir/$file"
 }
+
+test_exists() {
+  type $1 >/dev/null 2>&1
+}

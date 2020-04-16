@@ -2,6 +2,13 @@
 " Startup
 " -----
 
+
+" TODO: Currently getting this error when running without plugins
+" Error detected while processing /Users/tscheffert/.vimrc:
+" line 1088:
+" E185: Cannot find color scheme 'inkpot'
+" Press ENTER or type command to continue
+
 " Clear all autocommands
 autocmd!
 
@@ -111,13 +118,14 @@ function! Cond(cond, ...)
 endfunction
 
 " Colors
-Plug 'vim-scripts/ScrollColors', { 'on': 'LoadColors' }
-Plug 'twerth/ir_black', { 'on': 'LoadColors' }
-Plug 'vim-scripts/moria', { 'on': 'LoadColors' }
-Plug 'vim-scripts/Color-Sampler-Pack', { 'on': 'LoadColors' }
-Plug 'altercation/vim-colors-solarized', { 'on': 'LoadColors' }
-Plug 'tomasr/molokai', { 'on': 'LoadColors' }
+" Plug 'vim-scripts/ScrollColors', { 'on': 'LoadColors' }
+" Plug 'twerth/ir_black', { 'on': 'LoadColors' }
+" Plug 'vim-scripts/moria', { 'on': 'LoadColors' }
+" Plug 'vim-scripts/Color-Sampler-Pack', { 'on': 'LoadColors' }
+" Plug 'altercation/vim-colors-solarized', { 'on': 'LoadColors' }
+" Plug 'tomasr/molokai', { 'on': 'LoadColors' }
 Plug 'mhartington/oceanic-next' " , { 'on': 'LoadColors' }
+Plug 'ciaranm/inkpot', { 'on': 'LoadColors' }
 
 Plug 'trevordmiller/nova-vim'
 if has('gui_running')
@@ -991,7 +999,7 @@ if has('gui_running')
     colorscheme PaperColor
     let g:airline_theme='PaperColorRecharged'
   else
-    colorscheme inkpot
+    colorscheme elflord
     let g:airline_theme='luna'
   endif
   " Remove the gui from GVim
@@ -1434,6 +1442,7 @@ if s:use_ctrlp
     " TODO: Set grepprg here?
     " set grepprg=ag\ --nogroup\ --nocolor\ --hidden
 
+    " TODO: Get this ignoring the Alfred files
     let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . -co --exclude-standard', 'find %s -type f']
     let g:ctrlp_prompt_mappings = {
       \ 'AcceptSelection("e")': ['<space>', '<cr>', '<2-LeftMouse>'],

@@ -1,43 +1,34 @@
-dotfiles
-========
+# dotfiles
 
-TScheffe's take on .dotfiles
+tscheffert's take on .dotfiles
 
 ## Installation ###
+
 *Note, this is for me to remember as much as for others to follow!*
 
 ### To Start ####
-````shell
+
+```bash
 cd ~
 
+# Note: Must be in a ~/.dotfiles, required for some scripts (unfortunately)
 git clone https://github.com/tscheffe/dotfiles.git .dotfiles
 ```
 
-### For OSX ####
-```shell
-bash bootstrap/osx_bootstrap.sh
+### For macOS (formerly OSX) ####
+
+```bash
+bash bootstrap/bootstrap_macos.sh
 ```
 
-### For Windows ####
-```shell
+### For Vanilla Windows ####
+
+```bash
 bootstrap/bootstrap.bat
-
-git submodule update --recursive --init
 ```
-
-#### Potential Line Ending Issues ####
-Run:
-
-```shell
-(git rm --cached -r . && git reset --hard &&  git pull origin master)
-
-(git submodule update --init)
-
-git submodule foreach "(git rm --cached -r . && git reset --hard && git pull origin master)"
-```
-
 
 ### Install Python dependencies
-```shell
+
+```bash
 pip install -r requirements.txt
 ```

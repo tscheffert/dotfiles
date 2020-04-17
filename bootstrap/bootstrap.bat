@@ -19,6 +19,8 @@ mklink %userprofile%\.inputrc %userprofile%\.dotfiles\.inputrc
 mklink %userprofile%\.irbrc %userprofile%\.dotfiles\.irbrc
 mklink %userprofile%\.jscs.json %userprofile%\.dotfiles\.jscs.json
 mklink %userprofile%\.jshintrc %userprofile%\.dotfiles\.jshintrc
+mklink %userprofile%\.mdlrc %userprofile%\.dotfiles\.mdlrc
+mklink %userprofile%\.mdl.style %userprofile%\.dotfiles\.mdl.style
 mklink %userprofile%\.pryrc %userprofile%\.dotfiles\.pryrc
 mklink %userprofile%\.rubocop-disabled.yml %userprofile%\.dotfiles\.rubocop-disabled.yml
 mklink %userprofile%\.rubocop-enabled.yml %userprofile%\.dotfiles\.rubocop-enabled.yml

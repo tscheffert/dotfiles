@@ -1,0 +1,7 @@
+# vim: ft=ruby
+
+# RC for Markdownlint
+# Documentation:
+#   https://github.com/markdownlint/markdownlint/blob/master/docs/configuration.md
+
+style File.join(__dir__, '.mdl.style')

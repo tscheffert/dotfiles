@@ -1,0 +1,40 @@
+# vim: ft=ruby
+
+# version: 0.5.0
+
+# Style documentation:
+#   https://github.com/markdownlint/markdownlint/blob/master/docs/creating_styles.md
+
+# Rules documentation:
+#   https://github.com/markdownlint/markdownlint/blob/master/docs/RULES.md
+
+# Include all rules by default, we'll exclude or configure them as necessary.
+all
+
+# Atx is the prefixed hash header style, prefer that
+rule 'MD003', style: :atx
+
+# Line Length - Up the default of 80 to 120.
+# Lines in markdown can be as long as they want and it won't affect the rendered
+# output. It usually looks okay no matter the length as long as soft wrapping is
+# enabled, but it does look better with hard wraps. Forcing hard wraps too soon
+# is super tedious though, so we're being super lenient.
+#
+# Most code blocks and tables are just copy pastes, we don't want to run it on those
+# ever. Leave it up to the code author to determine if the code needs to wrap or not.
+rule 'MD013', line_length: 120, tables: false, code_blocks: false
+
+# Trailing punctuation in header - Don't alert on `?` like the default, allow headers to be questions
+rule 'MD026', punctuation: ".,;:!"
+
+# Multiple consecutive blank lines - This is annoying because we often want to separate sections with double blank lines. I wish this was configurable.
+exclude_rule 'MD012'
+
+# Dollar sign before commands without output - Avoiding dollar signs is a good idea in general, I agree with the intent behind the rule. However, we're specifically prefixing dollars signs to denote commandline snippets specfically. This would be a good "warning" but not failure.
+excluce_rule 'MD014'
+
+# No space inside hashes on closed ATX style - we're not using closed atx
+exclude_rule 'MD020'
+
+# Multiple spaces inside hashes on closed atx style - again, we're not using closed atx'
+exclude_rule 'MD021'

@@ -1,0 +1,40 @@
+#!/usr/bin/env ruby
+# vim: ft=ruby
+
+require 'fileutils'
+
+module StripPrefixFromDirs
+
+  def self.perform(argv:)
+    file = argv[0]
+
+    if file.nil?
+      warn 'Must specify a file to prefix'
+      exit 1
+    end
+
+    if !File.exist?(file)
+      warn "Provided file #{file} does not exist"
+    end
+
+    puts "Prefixing file: '#{file}'"
+
+    sanitized_name = sanitize_file_name(file: file)
+
+    file_mtime = File.mtime(file).strftime('%Y-%m-%d')
+    prefixed_file_name = [file_mtime, file].join('_')
+
+    puts "Renaming '#{file}' => '#{prefixed_file_name}'"
+    FileUtils.mv(file, prefixed_file_name)
+  end
+
+  def self.sanitize_file_name(file:)
+    # replace space with hyphen
+    # lowercase everything
+
+  end
+  private_class_method :sanitize_file_name
+
+end
+
+StripPrefixFromDirs.perform(argv: ARGV)

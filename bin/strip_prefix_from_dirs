@@ -27,7 +27,7 @@ module StripPrefixFromDirs
 
     puts 'Renaming:'
     to_rename.each do |source|
-      dest = source.sub(prefix, '')
+      dest = source.sub(prefix, '').strip
 
       puts "#{source} => #{dest}"
       FileUtils.mv(source, dest)

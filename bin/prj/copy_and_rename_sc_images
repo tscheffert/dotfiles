@@ -1,0 +1,147 @@
+#!/usr/bin/env ruby
+# vim: ft=ruby
+
+require File.absolute_path(File.join(__dir__, '..', '..', 'ruby', 'lib', 'images_helper'))
+STDOUT.sync = true
+
+module CopyAndRenameImages
+
+  class Image < Dry::Struct::Value
+
+    attribute :full_file_path, ImagesHelper::ImageStructTypes::Strict::String
+    attribute :full_image_file_name, ImagesHelper::ImageStructTypes::Strict::String
+    attribute :new_image_file_name, ImagesHelper::ImageStructTypes::Strict::String
+    attribute :destination_folder_name, ImagesHelper::ImageStructTypes::Strict::String
+
+  end
+
+  include ImagesHelper::Constants
+
+  def self.perform(args:)
+    if args[0] == '--help'
+      command_name = File.basename(__FILE__)
+      puts <<~HELPDOC
+        USAGE:
+            #{command_name}
+                Copies images into a set directory structure and renames them
+            #{command_name} --test
+                Reports which images will get copied and renamed without doing it
+            #{command_name} --help
+                Prints this message
+      HELPDOC
+      exit 0
+    end
+
+    @test_run = args.include?('--test')
+
+    members_images, content_images = find_all_images_in_subdirectories
+    filtered_members_images, filtered_content_images =
+      filter_unwanted_images(
+        members_images: members_images,
+        content_images: content_images)
+
+    members_image_structs, content_image_structs =
+      hydrate_image_structs(
+        members_images: filtered_members_images,
+        content_images: filtered_content_images)
+    puts "Found #{members_image_structs.length} Members images" if @test_run
+    puts "Found #{content_image_structs.length} Content images" if @test_run
+
+    joined_image_groups =
+      group_images_by_directory(
+        members_image_structs: members_image_structs,
+        content_image_structs: content_image_structs)
+    puts "Found #{joined_image_groups.length} groups of images" if @test_run
+
+    copy_and_rename(image_groups: joined_image_groups)
+  end
+
+  # IMAGE_GLOB = File.join('**', 'Image@folder=affairs&name=Amber - Sharon and Shana dlg.jpg').freeze
+  MEMBERS_IMAGE_GLOB = File.join('**', 'Members', '**', 'Image@folder=*.jpg').freeze
+  CONTENT_IMAGE_GLOB = File.join('**', 'Content', '**', '*.jpg').freeze
+
+  def self.find_all_images_in_subdirectories
+    members_images = Dir.glob(MEMBERS_IMAGE_GLOB)
+    puts "Members glob returned #{members_images.length} results" if @test_run
+    content_images = Dir.glob(CONTENT_IMAGE_GLOB)
+    puts "Content glob returned #{content_images.length} results" if @test_run
+
+    return members_images, content_images
+  end
+  private_class_method :find_all_images_in_subdirectories
+
+  def self.filter_unwanted_images(members_images:, content_images:)
+    puts "Content images before filtering: #{content_images.length}" if @test_run
+    # Nothing for now
+    # full_size_images = image_paths.reject { |img| img.include?('150x150.jpg') }
+    filtered_content = content_images.reject { |img| img.include?('thb ') }
+
+    puts "Content images after filtering: #{filtered_content.length}" if @test_run
+
+    return members_images, filtered_content
+  end
+  private_class_method :filter_unwanted_images
+
+  IMAGE_MATCHER = %r{
+    \A
+    Image@folder=
+    (?<dir_name>\w+?)
+    &name=
+    (?<image_name>[a-zA-Z0-9\'\ \-\_\&]+?.jpg)
+    \z
+    }x
+
+  def self.hydrate_image_structs(members_images:, content_images:)
+    members_structs = members_images.map do |img|
+      image_file_name = File.basename(img)
+      image_match = image_file_name.match(IMAGE_MATCHER)
+      raise "Unexpected match failure for #{image_file_name}" if image_match.blank?
+
+      Image.new(
+        full_file_path:          img,
+        full_image_file_name:    image_file_name,
+        new_image_file_name:     image_match[:image_name],
+        destination_folder_name: image_match[:dir_name])
+    end
+
+    content_structs = content_images.map do |img|
+      image_file_name = File.basename(img)
+
+      Image.new(
+        full_file_path:          img,
+        full_image_file_name:    image_file_name,
+        new_image_file_name:     image_file_name,
+        destination_folder_name: File.basename(File.dirname(img)))
+    end
+
+    return members_structs, content_structs
+  end
+  private_class_method :hydrate_image_structs
+
+  def self.group_images_by_directory(members_image_structs:, content_image_structs:)
+    members_image_structs.concat(content_image_structs).group_by(&:destination_folder_name)
+  end
+  private_class_method :group_images_by_directory
+
+  def self.copy_and_rename(image_groups:)
+    image_groups.each do |dir, images|
+      prefixed_dir = File.join('sorted', dir)
+      puts '>>>>>>>>>>'
+      puts "Creating directory #{prefixed_dir}"
+      FileUtils.mkdir_p(prefixed_dir) if !@test_run
+      puts "Moving #{images.length} to that directory"
+      if !@test_run
+        images.each do |img|
+          new_path = File.join(prefixed_dir, img.new_image_file_name)
+          original_path = File.join(Dir.pwd, img.full_file_path)
+          FileUtils.cp(original_path, new_path)
+        end
+      end
+      puts '<<<<<<<<<<'
+    end
+  end
+  private_class_method :copy_and_rename
+
+end
+
+CopyAndRenameImages.perform(args: ARGV)

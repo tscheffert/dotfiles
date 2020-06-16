@@ -1,0 +1,154 @@
+#!/usr/bin/env ruby
+# vim: ft=ruby
+
+require File.absolute_path(File.join(__dir__, '..', '..', 'ruby', 'lib', 'images_helper'))
+STDOUT.sync = true
+
+module CopyAndRenameImages
+
+  class Image < Dry::Struct::Value
+
+    attribute :full_file_path, ImagesHelper::ImageStructTypes::Strict::String
+    attribute :full_image_file_name, ImagesHelper::ImageStructTypes::Strict::String
+    attribute :new_image_file_name, ImagesHelper::ImageStructTypes::Strict::String
+    attribute :destination_folder_name, ImagesHelper::ImageStructTypes::Strict::String
+
+  end
+
+  include ImagesHelper::Constants
+
+  def self.perform(args:)
+    if args[0] == '--help'
+      command_name = File.basename(__FILE__)
+      puts <<~HELPDOC
+        USAGE:
+            #{command_name}
+                Copies images into a set directory structure and renames them
+            #{command_name} --test
+                Reports which images will get copied and renamed without doing it
+            #{command_name} --help
+                Prints this message
+      HELPDOC
+      exit 0
+    end
+
+    rename_run = args.include?('--rename')
+    @test_run = args.include?('--test')
+
+    images = find_all_images_in_subdirectories
+    filtered_images = filter_unwanted_images(image_paths: images)
+
+    image_structs = hydrate_image_structs(image_paths: filtered_images)
+    puts "Found #{image_structs.length} images" if @test_run
+
+    image_groups = group_images_by_directory(image_structs: image_structs)
+    puts "Found #{image_groups.length} groups of images" if @test_run
+
+    copy_and_rename(image_groups: image_groups)
+  end
+
+  # IMAGE_GLOB = File.join('**', 'JB-Julia-*-*.jpg@response-content-disposition*').freeze
+  IMAGE_GLOB = File.join('**', 'JB-Julia-*.jpg').freeze
+
+  def self.find_all_images_in_subdirectories
+    globbed_images = Dir.glob(IMAGE_GLOB)
+
+    if @test_run
+      absolutely_globbed_images = globbed_images.map { |img| File.absolute_path(img) }
+      existing, not_existing = absolutely_globbed_images.partition { |img| File.exist?(img) }
+
+      puts "Found #{existing.length} images that exist"
+      puts "Found #{not_existing.length} images that DO NOT exist"
+
+      if !not_existing.empty?
+        raw_string = not_existing.first
+
+        puts 'Testing raw string:'
+        puts raw_string
+        puts
+
+        if File.exist?(raw_string)
+          puts 'raw string does exist'
+        else
+          puts 'raw string does NOT exist'
+        end
+
+        require 'shellwords'
+        escaped_string = Shellwords.shellescape(raw_string)
+
+        puts 'Testing escaped string:'
+        puts escaped_string
+        puts
+
+        if File.exist?(escaped_string)
+          puts 'escaped string does exist'
+        else
+          puts 'escaped string does NOT exist'
+        end
+      end
+    end
+
+    globbed_images
+  end
+  private_class_method :find_all_images_in_subdirectories
+
+  def self.filter_unwanted_images(image_paths:)
+    full_size_images = image_paths.reject { |img| img.include?('150x150.jpg') }
+
+    full_size_images
+  end
+  private_class_method :filter_unwanted_images
+
+  IMAGE_MATCHER = %r{
+    \A
+    (?<image_name>
+      (?<dir_name>
+        JB-Julia-[A-Za-z0-9]{3,4}  # Usually 001-064 but sometimes MDR or 003a
+      )
+      -[a-z0-9]{1,5}               # Numbers like 10, numbers with variants like 10a, other shit like 10exp
+      (?:-[0-9]{1,2})*?            # Optional third hyphenated segment, which sometimes repeats
+      .jpg
+    )
+    }x
+
+  def self.hydrate_image_structs(image_paths:)
+    image_paths.map do |img|
+      image_file_name = File.basename(img)
+      image_match = image_file_name.match(IMAGE_MATCHER)
+      raise "Unexpected match failure for #{image_file_name}" if image_match.blank?
+
+      Image.new(
+        full_file_path:          img,
+        full_image_file_name:    image_file_name,
+        new_image_file_name:     image_match[:image_name],
+        destination_folder_name: image_match[:dir_name])
+    end
+  end
+  private_class_method :hydrate_image_structs
+
+  def self.group_images_by_directory(image_structs:)
+    image_structs.group_by(&:destination_folder_name)
+  end
+  private_class_method :group_images_by_directory
+
+  def self.copy_and_rename(image_groups:)
+    image_groups.each do |dir, images|
+      puts '>>>>>>>>>>'
+      puts "Creating directory #{dir}"
+      FileUtils.mkdir_p(dir) if !@test_run
+      puts "Moving #{images.length} to that directory"
+      if !@test_run
+        images.each do |img|
+          new_path = File.join(dir, img.new_image_file_name)
+          original_path = File.join(Dir.pwd, img.full_file_path)
+          FileUtils.cp(original_path, new_path)
+        end
+      end
+      puts '<<<<<<<<<<'
+    end
+  end
+  private_class_method :copy_and_rename
+
+end
+
+CopyAndRenameImages.perform(args: ARGV)

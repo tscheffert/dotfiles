@@ -1,0 +1,72 @@
+#!/usr/bin/env ruby
+# vim: ft=ruby
+
+require 'tty-command'
+require 'open3'
+require 'pathname'
+require 'fileutils'
+
+require File.join(__dir__, '..', 'ruby', 'lib', 'images_helper')
+
+module ConvertPpmToPng
+
+  SOURCE_DIR = '_source'.freeze
+
+  def self.perform(args:)
+    if args[0] == '--help'
+      command_name = File.basename(__FILE__)
+      puts <<~HELPDOC
+        USAGE:
+            #{command_name}
+                Converts ppm images into png images using imagemagick
+            #{command_name} --test
+                Reports which images will be converted but doesn't convert them
+            #{command_name} --help
+                Prints this message
+      HELPDOC
+      exit 0
+    end
+
+    test_run = args[0] == '--test'
+
+    magick_exe = magick_exe_path
+
+    if magick_exe.blank?
+      warn 'Imagemagick installation required. Unable to find in path or Program Files'
+      exit 1
+    end
+
+    ppm_images = Dir.entries('.').select do |f|
+      File.file?(f) && File.extname(f) == '.ppm'
+    end
+    FileUtils.mkdir_p(SOURCE_DIR)
+
+    ppm_images.each do |input_img|
+      output_img = File.basename(input_img, '.ppm') + '.png'
+      puts "Converting #{input_img} to #{output_img}"
+
+      if !test_run
+        cmd = TTY::Command.new
+        stdout, stderr = cmd.run("magick convert \"#{input_img}\" \"#{output_img}\"")
+
+        puts "STDOUT: #{stdout}" if stdout.present?
+        puts "STDERR: #{stderr}" if stderr.present?
+
+        FileUtils.mv(input_img, SOURCE_DIR) if File.exist?(output_img)
+      end
+    end
+  end
+
+  private
+
+  PROGRAM_FILES = 'C:\\Program Files\\'.freeze
+
+  def self.magick_exe_path
+    # Is it in the path?
+    stdout, _stderr, status = Open3.capture3('which magick')
+    stdout.strip if status.success?
+  end
+
+end
+
+ConvertPpmToPng.perform(args: ARGV)

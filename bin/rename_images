@@ -23,6 +23,7 @@ module RenameImages
       puts "Already named #{already_named.length} images, renaming to avoid clashes"
     end
 
+    no_clash_already_named = []
     already_named.sort.each do |img|
       no_clash_name = format(
         '_%<basename>s-%<random_suffix>s%<ext_name>s',
@@ -30,11 +31,13 @@ module RenameImages
         random_suffix: SecureRandom.uuid,
         ext_name:      File.extname(img))
       ImagesHelper.safe_rename(img, no_clash_name)
-      new << no_clash_name
+      no_clash_already_named << no_clash_name
     end
 
-    puts "\nRenaming #{new.length} files\n"
-    new.sort.each_with_index do |img, i|
+    ready_for_rename = no_clash_already_named.sort + new.sort
+    puts "\nRenaming #{ready_for_rename.length} files\n"
+
+    ready_for_rename.sort.each_with_index do |img, i|
       new_name = format(
         '%<name_prefix>s-%<sequence>02d%<ext_name>s',
         name_prefix: name_prefix,

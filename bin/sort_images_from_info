@@ -24,18 +24,16 @@ module SortImagesFromInfo
 
     info_lines = File.readlines(info_path).map(&:chomp)
 
-    # image_matcher = /\AImage (?<new_name>\d{1,3}): (?<old_name>[\(\)\ \.\_A-Za-z0-9：]*)\.png/
-    image_matcher = /\AImage (?<new_name>\d{1,3}): (?<old_name>[\(\)\ \.\_A-Za-z0-9：]*)\.(?<ext>#{IMAGE_EXTENSIONS_REGEX_OR_MATCHER})/
+    image_matcher = /\AImage (?<new_name>\d{1,3}): (?<old_name>[\(\)\ \.\_A-Za-z0-9：]*)(?<ext>\.(#{IMAGE_EXTENSIONS_REGEX_OR_MATCHER}))/
 
     puts "Using #{RJUST_LENGTH} for minimum width"
 
     images_to_move = info_lines.each_with_object([]) do |line, memo|
       image = {}
       line.match(image_matcher) do |match|
-        image_ext = '.' + match[:ext]
-        image[:old_name] = match[:old_name] + image_ext
-        image[:new_name] = match[:new_name].rjust(RJUST_LENGTH, '0') + image_ext
-        image[:new_name_tmp] = File.basename(image[:new_name], image_ext) + '-temp' + File.extname(image[:new_name])
+        image[:old_name] = match[:old_name] + match[:ext]
+        image[:new_name] = match[:new_name].rjust(RJUST_LENGTH, '0') + match[:ext]
+        image[:new_name_tmp] = File.basename(image[:new_name], match[:ext]) + '-temp' + File.extname(image[:new_name])
       end
 
       memo << image if image[:old_name].present?

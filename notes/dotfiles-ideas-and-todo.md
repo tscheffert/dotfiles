@@ -66,3 +66,10 @@ Review this further: <https://github.com/sindresorhus/pure/blob/master/pure.zsh>
 ### Vim
 
 - Function to "unsmarten" quotes, probably by straight replacing them
+
+### Bin
+
+- `cut_black` improvements
+  - Use FFPRobe to make sure everything is okay with the header
+  - Use FFMPEG to check for errors:
+  - `ffmpeg -v error -i $FILENAME -f null -`

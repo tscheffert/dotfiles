@@ -45,6 +45,15 @@ brew "watch"
 brew "python3"
 brew "lua"
 
+# Need an up to date bash to use Divy's `mapfile` inclusive scripts
+brew "bash"
+
+# Builds ruby versions for rbenv
+brew "ruby-build"
+
+# Lets me run and install multiple versions of ruby
+brew "rbenv"
+
 # Install other useful binaries
 # `ag`, way better than grep
 brew "the_silver_searcher"
@@ -73,6 +82,16 @@ brew "tree"
 # Network Map Hacker Tool - Homepage: http://nmap.org
 brew "nmap"
 
+# GPG, encryption utility that is used with `sops`
+brew "gpg"
+
+# "Secret Operations", utility for using `gpg` to encrypt secret files
+brew "sops"
+
+# Utility for parsing, sorting, modifying json files
+brew "jq"
+
+
 # Things I haven't installed but could
 # brew "pigz" # Parallelized Implementation of gzip - Homepage: http://www.zlib.net/pigz/
 # brew "pv" # Pipe View Utility - Homepage: http://www.ivarch.com/programs/pv.shtml
@@ -88,14 +107,41 @@ cask "gimp"                     # Open Source image manipulation software
 # cask "google-chrome"            # Web browser
 cask "hammerspoon"              # Windowing and system automation utility
 cask "iterm2"                   # Improved terminal application
-# cask "karabiner"                # Keymapping for everything macOS
 # cask "noti"                     # Menu bar buddy that replays messages from my phone
 # cask "sdformatter"              # Graphical tool for formatting SD cards
-cask "slack"                    # Chat client for work
 # cask "the-unarchiver"           # Automatically unzip archived files
-# cask "visual-studio-code"       # Text Editor similar to atom
+
+# Simple non-vim editor
+cask "visual-studio-code"
 
 # Fun
 cask "spotify"                  # Music streaming client
 cask "steam"
 cask "vlc"                      # Video player of champions
+
+# Chat client for work
+cask "slack"
+
+# Video meeting client for work
+cask "zoomus" # Note that the 'zoom' package is something else
+
+# Markdown editor I use everywhere
+cask "typora"
+
+# Chat client for work and friends
+cask "discord"
+
+# Yet Another Chat App, by Microsoft
+cask "microsoft-teams"
+
+# Key Codes utility which shows the keys being pressed
+cask "key-codes"
+
+# Karabiner Elements: Keymapping for everything macOS. I use it to make cmd+tab to F19 for Hammerspoon.
+cask "karabiner-elements"
+
+# Email client used for work!
+cask "microsoft-outlook"
+
+# Open Source, Cross Platform, Password Manager
+cask "keepassxc"

@@ -7,6 +7,9 @@
 
 # TODO: Also this https://medium.com/devnetwork/running-rubocop-only-on-modified-files-a21aed86e06d
 
+echo "AutoCop is temporarily disabled"
+exit 0
+
 # Ensure we have rubocop installed with the right version
 if ! gem list rubocop -i &> /dev/null; then
   # TODO: Consider running this check every time
@@ -16,9 +19,6 @@ if ! gem list rubocop -i &> /dev/null; then
   echo "Based on ~/.dotfiles/.rubocop.yml, installing version: $target_version"
   gem install rubocop -v "$target_version" --no-document
 fi
-
-echo "AutoCop is temporarily disabled"
-exit 0
 
 function untracked-files() {
   # List of files that are currently "untracked"

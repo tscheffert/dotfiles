@@ -8,6 +8,8 @@ require File.join(__dir__, 'platform')
 
 # Based on Chef::Mixin::ShellOut, with significant modification:
 #   https://github.com/chef/chef/blob/7d8660c67f2a48bc5623a258bdfa58b0a5ad6180/lib/chef/mixin/shell_out.rb
+
+# Returns one of these: https://github.com/chef/mixlib-shellout/blob/master/lib/mixlib/shellout.rb
 module Shelper
 
   DEFAULT_LOCALE = 'en_US.UTF-8'.freeze

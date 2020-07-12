@@ -20,6 +20,8 @@ module ImagesHelper
 
     IMAGE_EXTENSIONS = ['.png', '.PNG', '.jpg', '.JPG', '.jpeg', '.JPEG'].freeze
 
+    JPEG_IMAGE_EXTENSIONS = ['.jpg', '.JPG', '.jpeg', '.JPEG'].freeze
+
     # Used like this:
     # image_matcher = /\AImage (?<new_name>\d{1,3}): (?<old_name>[\(\)\ \.\_A-Za-z0-9：]*)\.(?<ext>#{IMAGE_EXTENSIONS_REGEX_OR_MATCHER})/
     IMAGE_EXTENSIONS_REGEX_OR_MATCHER = IMAGE_EXTENSIONS.map { |s| s.sub(/\A\./, '') }.join('|').freeze
@@ -71,6 +73,15 @@ module ImagesHelper
     @_images_from[dir] ||=
       Dir.entries(dir).select do |f|
         File.file?(f) && Constants::IMAGE_EXTENSIONS.include?(File.extname(f))
+      end
+  end
+
+  def self.all_jpeg_images_in_dir(dir)
+    # Memoized by Dir so that it doesn't re-run each time it's called
+    @_images_from ||= {}
+    @_images_from[dir] ||=
+      Dir.entries(dir).select do |f|
+        File.file?(f) && Constants::JPEG_IMAGE_EXTENSIONS.include?(File.extname(f))
       end
   end
 

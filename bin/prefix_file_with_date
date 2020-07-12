@@ -1,6 +1,20 @@
 #!/usr/bin/env ruby
 # vim: ft=ruby
 
+# Bugs:
+
+# >>> prefix_file_with_date work-notes/scheduling.md
+# C:/tools/ruby/Ruby26-x64/lib/ruby/2.6.0/fileutils.rb:529:in `rename': No such file or directory @ rb_file_s_rename - (work-notes/scheduling.md, 2020-06-23_work-notes/scheduling.md) (Errno::ENOENT)
+#         from C:/tools/ruby/Ruby26-x64/lib/ruby/2.6.0/fileutils.rb:529:in `block in mv'
+#         from C:/tools/ruby/Ruby26-x64/lib/ruby/2.6.0/fileutils.rb:1557:in `block in fu_each_src_dest'
+#         from C:/tools/ruby/Ruby26-x64/lib/ruby/2.6.0/fileutils.rb:1573:in `fu_each_src_dest0'
+#         from C:/tools/ruby/Ruby26-x64/lib/ruby/2.6.0/fileutils.rb:1555:in `fu_each_src_dest'
+#         from C:/tools/ruby/Ruby26-x64/lib/ruby/2.6.0/fileutils.rb:520:in `mv'
+#         from C:/Users/Trent/.dotfiles/bin/prefix_file_with_date:28:in `perform'
+#         from C:/Users/Trent/.dotfiles/bin/prefix_file_with_date:40:in `<main>'
+# Prefixing file: 'work-notes/scheduling.md'
+# Renaming 'work-notes/scheduling.md' => '2020-06-23_work-notes/scheduling.md'
+
 require 'fileutils'
 
 module StripPrefixFromDirs

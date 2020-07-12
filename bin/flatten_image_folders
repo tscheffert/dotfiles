@@ -1,6 +1,7 @@
 #!/usr/bin/env ruby
 # vim: ft=ruby
 
+require 'pathname'
 require File.join(__dir__, '..', 'ruby', 'lib', 'images_helper')
 
 module FlattenImageFolders
@@ -88,8 +89,20 @@ module FlattenImageFolders
 
     sorted_only_subdirs.each do |sorted_subdir_dirs|
       sorted_subdir_dirs[:subdirs][:only_images].each do |nested_image_dir|
-        puts "Moving to root nested image only dir: #{nested_image_dir[:path]}"
-        ImagesHelper.safe_rename(nested_image_dir[:path], root_dir) unless test_run
+        # TODO Probably not the correct place to do this but it works
+
+        subdir = File.basename(nested_image_dir[:path])
+        if bad_subdir_name(name: subdir)
+          dest_dir = Pathname.new(nested_image_dir[:path]).parent.to_s
+          puts "Flattening dir with bad subdirectory name: '#{subdir}' to '#{dest_dir}'"
+          ImagesHelper.safe_rename(nested_image_dir[:images], dest_dir) unless test_run
+          puts "Removing badsubdir: '#{nested_image_dir[:path]}'"
+          ImagesHelper.safe_remove_dir(nested_image_dir[:path]) unless test_run
+        else
+          puts "Moving to root nested image only dir: #{nested_image_dir[:path]}"
+          ImagesHelper.safe_rename(nested_image_dir[:path], root_dir) unless test_run
+        end
+
       end
 
       sorted_subdir_dirs[:subdirs][:without_both].each do |nested_empty_dir|
@@ -196,6 +209,10 @@ module FlattenImageFolders
     }
   end
   private_class_method :hydrate_dir
+
+  def self.bad_subdir_name(name:)
+    name.match?(/\A[a-z0-9]{3,10}_[a-z0-9]{10}\z/)
+  end
 
 end
 

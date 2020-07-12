@@ -1,0 +1,39 @@
+#!/usr/bin/env ruby
+# vim: ft=ruby
+
+require 'fileutils'
+
+module StripSuffixFromDirs
+
+  def self.perform(argv:)
+    suffix = argv[0]
+
+    if suffix.nil? || suffix.strip.empty?
+      warn 'Must supply a suffix to strip'
+      exit 1
+    end
+
+    puts "Stripping with suffix: '#{suffix}'"
+
+    current_directory = File.absolute_path('.')
+
+    puts "Matching entries in directory: #{current_directory}"
+
+    # Dir.glob has interesting behavior with `[` characters where it behaves like a
+    # regex, but we want literal match behavior. Just use Dir::entries and then filter
+    to_rename = Dir.entries(current_directory)
+      .select { |dir| Dir.exist?(dir) }
+      .select { |dir| dir.end_with?(suffix) }
+
+    puts 'Renaming:'
+    to_rename.each do |source|
+      dest = source.sub(suffix, '').strip
+
+      puts "#{source} => #{dest}"
+      FileUtils.mv(source, dest)
+    end
+  end
+
+end
+
+StripSuffixFromDirs.perform(argv: ARGV)

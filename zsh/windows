@@ -23,6 +23,15 @@ prepend_to_path 'C:\tools\kube-score\current'
 
 prepend_to_path 'C:\tools\sops\current'
 
+# Tool used for optimizing PNG images
+prepend_to_path 'C:\tools\optipng\current'
+
+# Imagemagick!
+prepend_to_path 'C:\Program Files\ImageMagick-7.0.10-Q16'
+
+# Compiled mozjpeg static exes
+prepend_to_path 'C:\tools\mozjpeg\current-static'
+
 # -- Append --
 
 # We want IIS Express!

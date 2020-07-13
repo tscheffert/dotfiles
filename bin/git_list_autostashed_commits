@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+# vim: ft=sh
+
+# Source: https://stackoverflow.com/questions/37845799/how-do-you-get-a-lost-autostash-commit-from-git-rebase-autostash
+
+function git_list_autostashed_commits() {
+  local dangling_commits=$(git fsck --no-reflog | grep '^dangling commit' | cut -f3 -d' ')
+
+  # Cannot quote dangling_commits or it doesn't work for whatever reason
+  git log --pretty='%cr: %h %s' $dangling_commits | grep ': autostash$'
+}
+
+git_list_autostashed_commits "$@"

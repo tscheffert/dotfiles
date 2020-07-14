@@ -89,3 +89,4 @@
   - Only configure using powershell?
   - Registry entries only with regedit file?
   - Is there a "backup settings" option?
+- Outlook rules and emails

@@ -38,6 +38,11 @@ Duh
 
 ### Compact Dark Style
 
+
+### Backup history
+
+### Backup bookmarks
+
 ## Maybe?
 
 ### Reddit Enhancement Suite

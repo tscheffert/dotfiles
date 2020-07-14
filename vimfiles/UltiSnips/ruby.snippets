@@ -52,6 +52,21 @@ describe `!p snip.rv = camelize(t[1])` do
 end
 endsnippet
 
+# TODO: Get the `interactor_name` camelizing the file name automatically
+snippet /int(eractor)?/ "Interactor Module" m
+require
+
+module Devtools::${1:parent_module}
+	module ${2:interactor_name}
+		def self.perform
+			$0
+		end
+
+	end
+end
+
+endsnippet
+
 
 snippet specc "spec file template" sm
 require 'spec_helper'

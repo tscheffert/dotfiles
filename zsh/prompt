@@ -200,6 +200,22 @@ function line_number() {
   echo "$color$ln$(reset_colors)"
 }
 
+function k8s_context() {
+  local current_dir="$PWD"
+  # if we're in k8s-yaml, show it
+  if [[ "$current_dir" == *"k8s-yaml"* ]]; then
+    local color="%{$fg[blue]%}"
+    local context="$(kubectl config current-context)"
+    if [[ -n "$context" ]]; then
+      echo "<$color$context$(reset_colors)>"
+    else
+      echo ""
+    fi
+  else
+    echo ""
+  fi
+}
+
 function first_line_pipe() {
   local pipe_color="%{$fg[blue]%}"
 
@@ -219,6 +235,6 @@ function second_line_pipe() {
 function precmd() {
   local exit_code=$?
   local new_line=$'\n'
-  PROMPT="$(first_line_pipe) $(line_number) $(check_exit_code $exit_code)$(name)$(path)$(git_branch)${new_line}$(second_line_pipe)$(prompt_char)$(reset_colors) "
+  PROMPT="$(first_line_pipe) $(line_number) $(check_exit_code $exit_code)$(name)$(path)$(git_branch)$(k8s_context)${new_line}$(second_line_pipe)$(prompt_char)$(reset_colors) "
   # RPROMPT="$(git_branch)$(reset_colors)"
 }

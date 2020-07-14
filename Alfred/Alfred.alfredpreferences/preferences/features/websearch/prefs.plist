@@ -22,7 +22,7 @@
 		<key>2151513C-50B1-4356-A298-09E7BCDE8244</key>
 		<dict>
 			<key>enabled</key>
-			<true/>
+			<false/>
 			<key>keyword</key>
 			<string>circle</string>
 			<key>text</key>
@@ -35,7 +35,7 @@
 		<key>326B05C5-03B8-4782-B265-101582B44A63</key>
 		<dict>
 			<key>enabled</key>
-			<true/>
+			<false/>
 			<key>keyword</key>
 			<string>sidekiq-stg</string>
 			<key>text</key>
@@ -74,7 +74,7 @@
 		<key>5418D49F-60D5-4C95-BE2F-623D080C3EFC</key>
 		<dict>
 			<key>enabled</key>
-			<true/>
+			<false/>
 			<key>keyword</key>
 			<string>kafka</string>
 			<key>text</key>
@@ -87,7 +87,7 @@
 		<key>6D621856-F15A-4FBB-841E-07EEED9EF085</key>
 		<dict>
 			<key>enabled</key>
-			<true/>
+			<false/>
 			<key>keyword</key>
 			<string>sidekiq</string>
 			<key>text</key>
@@ -113,7 +113,7 @@
 		<key>8DF5D5CA-3EE9-47BD-8258-CA2A9485D881</key>
 		<dict>
 			<key>enabled</key>
-			<true/>
+			<false/>
 			<key>keyword</key>
 			<string>github</string>
 			<key>text</key>
@@ -126,7 +126,7 @@
 		<key>CAB2BF10-0767-4435-9468-8712683DBA31</key>
 		<dict>
 			<key>enabled</key>
-			<true/>
+			<false/>
 			<key>keyword</key>
 			<string>kafka-stg</string>
 			<key>text</key>
@@ -139,7 +139,7 @@
 		<key>D37DD5EE-E471-4ED9-8DD3-D50A1AB3EDC4</key>
 		<dict>
 			<key>enabled</key>
-			<true/>
+			<false/>
 			<key>keyword</key>
 			<string>consul</string>
 			<key>text</key>
@@ -165,7 +165,7 @@
 		<key>F1AF147A-951B-4EFC-BE94-F2BEC19FB1FE</key>
 		<dict>
 			<key>enabled</key>
-			<true/>
+			<false/>
 			<key>keyword</key>
 			<string>consul-stg</string>
 			<key>text</key>

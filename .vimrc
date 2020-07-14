@@ -1020,8 +1020,9 @@ if has('gui_running')
     " set guifont=Source\ Code\ Pro\ for\ Powerline:h12
     " set guifont=Source\ Code\ Pro:h12 " Not using the powerline symbols for now
 
-    set macligatures
-    set guifont=Operator\ Mono\ Book:h13
+    " TODO: Better font
+    " set macligatures
+    " set guifont=Operator\ Mono\ Book:h13
   endif
 else
   if InConEmuSession()
@@ -1932,8 +1933,12 @@ endfunction
 " TODO: Maybe not working on windows
 nnoremap <silent><C-j> m`:silent +g/\m^\s*$/d<CR>``:noh<CR>
 nnoremap <silent><C-k> m`:silent -g/\m^\s*$/d<CR>``:noh<CR>
-call NormalMap({'windows': '<A-j>', 'mac': '∆', 'wsl': '<A-j>', 'perform': ':set paste<CR>m`o<Esc>``:set nopaste<CR>j'})
-call NormalMap({'windows': '<A-k>', 'mac': '˚', 'wsl': '<A-k>', 'perform': ':set paste<CR>m`O<Esc>``:set nopaste<CR>k'})
+" call NormalMap({'windows': '<A-j>', 'mac': '∆', 'wsl': '<A-j>', 'perform': ':set paste<CR>m`o<Esc>``:set nopaste<CR>j'})
+call NormalMap({'windows': '<A-j>', 'mac': '<D-j>', 'wsl': '<A-j>', 'perform': ':set paste<CR>m`o<Esc>``:set nopaste<CR>j'})
+" call NormalMap({'windows': '<A-k>', 'mac': '˚', 'wsl': '<A-k>', 'perform': ':set paste<CR>m`O<Esc>``:set nopaste<CR>k'})
+call NormalMap({'windows': '<A-k>', 'mac': '<D-k>', 'wsl': '<A-k>', 'perform': ':set paste<CR>m`O<Esc>``:set nopaste<CR>k'})
+
+
 
 " cd to the directory containing the file in th buffer
 nnoremap <Leader>cd :lcd %:h
@@ -1992,7 +1997,7 @@ nnoremap <silent> <Leader>ts :%s/\t/  /g<CR>
 
 " Fix smart quotes like this '“'
 
-nnoremap <silent> <Leader>fsq :%s/\(“\|”\|“\)/"/g<CR>
+nnoremap <silent> <Leader>fsq :%s/\(“\|”\|“\|“\|”\)/"/g<CR>
 
 " Insert a single character and go back to command mode
 noremap S i<Space><Esc>r
@@ -2106,6 +2111,9 @@ nnoremap <Leader>ss :call SyntaxStack()<CR>
 " -----
 " I keep pressing shift-k accidentally and it runs shell commands, ignore it instead
 nnoremap <s-k> <Nop>
+
+" cmd+p on MacVim opens the print preview thing which is annoying
+nnoremap <D-p> <Nop>
 
 
 " -----

@@ -71,6 +71,19 @@
 			<key>utf8</key>
 			<true/>
 		</dict>
+		<key>4D5CE735-0741-40FE-A22A-659816DD7C39</key>
+		<dict>
+			<key>enabled</key>
+			<true/>
+			<key>keyword</key>
+			<string>man</string>
+			<key>text</key>
+			<string>Mankier Man Pages</string>
+			<key>url</key>
+			<string>https://www.mankier.com/?q={query}</string>
+			<key>utf8</key>
+			<true/>
+		</dict>
 		<key>5418D49F-60D5-4C95-BE2F-623D080C3EFC</key>
 		<dict>
 			<key>enabled</key>

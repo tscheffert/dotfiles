@@ -44,7 +44,7 @@
         }
       },
       "zsh-completions": {
-        "version": "0.31.0",
+        "version": "0.32.0",
         "bottle": false
       },
       "coreutils": {
@@ -266,64 +266,64 @@
         }
       },
       "git": {
-        "version": "2.26.2_1",
+        "version": "2.27.0",
         "bottle": {
           "cellar": "/usr/local/Cellar",
           "prefix": "/usr/local",
           "files": {
             "catalina": {
-              "url": "https://homebrew.bintray.com/bottles/git-2.26.2_1.catalina.bottle.tar.gz",
-              "sha256": "8796a6c37723ae33d22fe5bfc249b9135b309c87ec2b41e6025d726df1a2dee6"
+              "url": "https://homebrew.bintray.com/bottles/git-2.27.0.catalina.bottle.1.tar.gz",
+              "sha256": "731a77dd23d63ca8a0a5ba5c990218e37f1c8d9313fa1f9e58771cf5abd97bef"
             },
             "mojave": {
-              "url": "https://homebrew.bintray.com/bottles/git-2.26.2_1.mojave.bottle.tar.gz",
-              "sha256": "592f95984655ada33979a863f5d12e07fca9a67b7c6e7eab9f17b597f9cd9fc9"
+              "url": "https://homebrew.bintray.com/bottles/git-2.27.0.mojave.bottle.1.tar.gz",
+              "sha256": "a752212149e96e67fd8c42e1d68d7612de94bc67f06ffdc13ed7236aa33debf4"
             },
             "high_sierra": {
-              "url": "https://homebrew.bintray.com/bottles/git-2.26.2_1.high_sierra.bottle.tar.gz",
-              "sha256": "4d765a420dec19d5261e12b336b6912e9e5fb571ffb5bc4b5d7eae7f7766347d"
+              "url": "https://homebrew.bintray.com/bottles/git-2.27.0.high_sierra.bottle.1.tar.gz",
+              "sha256": "c9b1c7d3686fac0f7006b13b1afd46e38f2d6c73dd72049d9e8fc49b1bb34599"
             }
           }
         }
       },
       "imagemagick": {
-        "version": "7.0.10-13",
+        "version": "7.0.10-23",
         "bottle": {
           "cellar": "/usr/local/Cellar",
           "prefix": "/usr/local",
           "files": {
             "catalina": {
-              "url": "https://homebrew.bintray.com/bottles/imagemagick-7.0.10-13.catalina.bottle.tar.gz",
-              "sha256": "b10e8afca599ac07fecb3ff139d31937230a24461aed96df06da092cdf32e792"
+              "url": "https://homebrew.bintray.com/bottles/imagemagick-7.0.10-23.catalina.bottle.tar.gz",
+              "sha256": "bf19ce6c826be9ab5a42d4e02b74d2f6cd8f5d9402276dae5428ac3c1dc08c6d"
             },
             "mojave": {
-              "url": "https://homebrew.bintray.com/bottles/imagemagick-7.0.10-13.mojave.bottle.tar.gz",
-              "sha256": "a2285a4ebf17b064722af82aa7563a26806c799a436454e87bd32f7156a11aba"
+              "url": "https://homebrew.bintray.com/bottles/imagemagick-7.0.10-23.mojave.bottle.tar.gz",
+              "sha256": "d2acf6bbf71aa2128b30feb968f19b96e9b0878700bebe15c2cbe2523a76f631"
             },
             "high_sierra": {
-              "url": "https://homebrew.bintray.com/bottles/imagemagick-7.0.10-13.high_sierra.bottle.tar.gz",
-              "sha256": "ee94f9ed87751d73f9f9d58528ae22e13fb53a22adfe432fa65a3bfddff140ad"
+              "url": "https://homebrew.bintray.com/bottles/imagemagick-7.0.10-23.high_sierra.bottle.tar.gz",
+              "sha256": "9ce075b1ff714f828747d6b564d95c85d269795b75bbcd6129bd3628ea596b60"
             }
           }
         }
       },
       "node": {
-        "version": "14.2.0",
+        "version": "14.5.0",
         "bottle": {
           "cellar": ":any",
           "prefix": "/usr/local",
           "files": {
             "catalina": {
-              "url": "https://homebrew.bintray.com/bottles/node-14.2.0.catalina.bottle.tar.gz",
-              "sha256": "5f4cd0d4487f026110ca8e80e39e920c8de9abd9de2590bcbf4460ae1a8ad872"
+              "url": "https://homebrew.bintray.com/bottles/node-14.5.0.catalina.bottle.tar.gz",
+              "sha256": "91096144949902e76d46a3c0cfa26f5f55665da838f77ac96c58c416940d28d0"
             },
             "mojave": {
-              "url": "https://homebrew.bintray.com/bottles/node-14.2.0.mojave.bottle.tar.gz",
-              "sha256": "7024e321dc5e6ca079ad80f44eb4115e729d9809a87360fe6c727a62ba7c4491"
+              "url": "https://homebrew.bintray.com/bottles/node-14.5.0.mojave.bottle.tar.gz",
+              "sha256": "3f29cb2043ac857f2339ed390d54ea6124ff7be1c6fbb5a2a40a43261775247e"
             },
             "high_sierra": {
-              "url": "https://homebrew.bintray.com/bottles/node-14.2.0.high_sierra.bottle.tar.gz",
-              "sha256": "4a3fb0e0f8db6ca628011d50c0f63daef7a5b99a82a3a9860df6274d37348423"
+              "url": "https://homebrew.bintray.com/bottles/node-14.5.0.high_sierra.bottle.tar.gz",
+              "sha256": "6d4ea6d0ed5ea232ca3614f187c106a813c07eee44f68fba884fcf4edc8b01b6"
             }
           }
         }
@@ -541,6 +541,27 @@
             }
           }
         }
+      },
+      "wget": {
+        "version": "1.20.3_2",
+        "bottle": {
+          "cellar": "/usr/local/Cellar",
+          "prefix": "/usr/local",
+          "files": {
+            "catalina": {
+              "url": "https://homebrew.bintray.com/bottles/wget-1.20.3_2.catalina.bottle.tar.gz",
+              "sha256": "ef65c759c5097a36323fa9c77756468649e8d1980a3a4e05695c05e39568967c"
+            },
+            "mojave": {
+              "url": "https://homebrew.bintray.com/bottles/wget-1.20.3_2.mojave.bottle.tar.gz",
+              "sha256": "28f4090610946a4eb207df102d841de23ced0d06ba31cb79e040d883906dcd4f"
+            },
+            "high_sierra": {
+              "url": "https://homebrew.bintray.com/bottles/wget-1.20.3_2.high_sierra.bottle.tar.gz",
+              "sha256": "91dd0caca9bd3f38c439d5a7b6f68440c4274945615fae035ff0a369264b8a2f"
+            }
+          }
+        }
       }
     },
     "cask": {
@@ -698,9 +719,18 @@
         }
       },
       "keepassxc": {
-        "version": "2.5.4",
+        "version": "2.6.0",
         "options": {
           "full_name": "keepassxc",
+          "args": {
+            "appdir": "/Applications"
+          }
+        }
+      },
+      "microsoft-excel": {
+        "version": "16.38.20061401",
+        "options": {
+          "full_name": "microsoft-excel",
           "args": {
             "appdir": "/Applications"
           }
@@ -711,11 +741,11 @@
   "system": {
     "macos": {
       "catalina": {
-        "HOMEBREW_VERSION": "2.2.17-53-g67d1bc6",
+        "HOMEBREW_VERSION": "2.4.5-66-ge9932a6",
         "HOMEBREW_PREFIX": "/usr/local",
-        "Homebrew/homebrew-core": "96372720d2a9cf35fb798df94b9b02452a7a2dcc",
+        "Homebrew/homebrew-core": "b908a85ee9ec819b3aaad2add3ff179846b92f7c",
         "CLT": "1103.0.32.62",
-        "Xcode": "11.4.1",
+        "Xcode": "11.5",
         "macOS": "10.15.5"
       }
     }

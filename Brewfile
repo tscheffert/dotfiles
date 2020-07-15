@@ -91,6 +91,9 @@ brew "sops"
 # Utility for parsing, sorting, modifying json files
 brew "jq"
 
+# Download utility
+brew "wget"
+
 
 # Things I haven't installed but could
 # brew "pigz" # Parallelized Implementation of gzip - Homepage: http://www.zlib.net/pigz/
@@ -142,6 +145,9 @@ cask "karabiner-elements"
 
 # Email client used for work!
 cask "microsoft-outlook"
+
+# Spreadsheet client used for work! (duh)
+cask "microsoft-excel"
 
 # Open Source, Cross Platform, Password Manager
 cask "keepassxc"

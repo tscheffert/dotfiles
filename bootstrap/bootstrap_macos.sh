@@ -1,4 +1,4 @@
-#!/usr/env/bin bash
+#!/usr/bin/env bash
 
 # This is the script to run for bootstrapping macOS machines
 

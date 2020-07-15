@@ -1,4 +1,4 @@
-#!/usr/env/bin bash
+#!/usr/bin/env bash
 
 test_exists() {
   type $1 >/dev/null 2>&1

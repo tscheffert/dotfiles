@@ -1,4 +1,4 @@
-#! /usr/env/bin bash
+#! /usr/bin/env bash
 #
 # Programatically set up osx hotkeys. These are the same as in
 #   SystemPreferences -> Keyboard -> Shortcuts

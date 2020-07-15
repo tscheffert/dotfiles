@@ -1,4 +1,4 @@
-#!/usr/env/bin bash
+#!/usr/bin/env bash
 
 add_opensuse_zshcompletions_to_apt() {
   local release=$(lsb_release -a 2>1 | ruby -ne '$_.match(/^Release:\s+?(?<version>[0-9]{2}\.[0-9]{2})$/) { |m| print m["version"] }')

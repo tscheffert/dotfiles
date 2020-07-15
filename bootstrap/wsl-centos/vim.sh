@@ -1,4 +1,4 @@
-#!/usr/env/bin bash
+#!/usr/bin/env bash
 
 echo ""
 echo " -- Setting up vim config --"

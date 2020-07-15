@@ -1,4 +1,4 @@
-#!/usr/env/bin bash
+#!/usr/bin/env bash
 
 repo_root="$(git rev-parse --show-toplevel)"
 source "$repo_root/bootstrap/bootstrap_functions.sh"

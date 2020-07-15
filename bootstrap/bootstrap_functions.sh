@@ -1,4 +1,4 @@
-#!/usr/env/bin bash
+#!/usr/bin/env bash
 
 # TODO: '~/.dotfiles' is hard coded as the folder every, use the "git root folder" instead
 

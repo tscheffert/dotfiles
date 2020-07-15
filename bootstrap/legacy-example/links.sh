@@ -1,4 +1,4 @@
-#!/usr/env/bin bash
+#!/usr/bin/env bash
 
 # Symlinks:
 # +-- ln(1) link, ln -- make links

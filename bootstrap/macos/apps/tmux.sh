@@ -1,4 +1,4 @@
-#!/usr/env/bin bash
+#!/usr/bin/env bash
 
 # Script must be sourced by the bootstrap/macos/apps.sh script to include dependencies
 

@@ -1,4 +1,4 @@
-#!/usr/env/bin bash
+#!/usr/bin/env bash
 
 ensure_latest_zsh() {
   local list_zsh=$(brew list zsh)

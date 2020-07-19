@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <key name="Software">
 	<key name="ConEmu">
-		<key name=".Vanilla" modified="2019-11-24 16:27:05" build="191012">
+		<key name=".Vanilla" modified="2020-07-19 16:04:09" build="200713">
 			<value name="StartType" type="hex" data="02"/>
 			<value name="CmdLine" type="string" data=""/>
 			<value name="StartTasksFile" type="string" data=""/>
@@ -580,8 +580,8 @@
 				<value name="Multi.NewWndConfirm" type="dword" data="00000000"/>
 				<value name="CheckUpdates" type="dword" data="00105b55"/>
 			</key>
-			<key name="Tasks" modified="2019-11-24 16:27:05" build="191012">
-				<value name="Count" type="long" data="21"/>
+			<key name="Tasks" modified="2020-06-26 13:51:53" build="191012">
+				<value name="Count" type="long" data="22"/>
 				<key name="Task1" modified="2018-10-05 12:14:16" build="180626">
 					<value name="Name" type="string" data="{cmd}"/>
 					<value name="Flags" type="dword" data="00000004"/>
@@ -591,9 +591,9 @@
 					<value name="Active" type="long" data="0"/>
 					<value name="Count" type="long" data="1"/>
 				</key>
-				<key name="Task2" modified="2019-08-15 14:02:03" build="190526">
+				<key name="Task2" modified="2020-03-29 00:01:09" build="191012">
 					<value name="Name" type="string" data="{cmd (Admin)}"/>
-					<value name="Flags" type="dword" data="00000004"/>
+					<value name="Flags" type="dword" data="00000000"/>
 					<value name="Hotkey" type="dword" data="00000000"/>
 					<value name="GuiArgs" type="string" data=""/>
 					<value name="Cmd1" type="string" data="cmd.exe -new_console:a"/>
@@ -778,6 +778,15 @@
 					<value name="Count" type="long" data="1"/>
 					<value name="Cmd1" type="string" data='&gt;-cur_console:t:"dotfiles" -cur_console:d:%userprofile%/.dotfiles set CHERE_INVOKING=1 &amp; set "PATH=C:\git-sdk-64\usr\bin;%PATH%" &amp; set MSYSTEM=MINGW64 &amp; "%ConEmuBaseDirShort%\conemu-msys2-64.exe zsh --login -i"'/>
 				</key>
+				<key name="Task22" modified="2020-06-26 13:51:53" build="191012">
+					<value name="Name" type="string" data="{Zsh::notes}"/>
+					<value name="Flags" type="dword" data="00000000"/>
+					<value name="Hotkey" type="dword" data="00000000"/>
+					<value name="GuiArgs" type="string" data=""/>
+					<value name="Active" type="long" data="1"/>
+					<value name="Count" type="long" data="1"/>
+					<value name="Cmd1" type="string" data='&gt;-cur_console:t:"notes" -cur_console:d:%userprofile%/prj/notes set CHERE_INVOKING=1 &amp; set "PATH=C:\git-sdk-64\usr\bin;%PATH%" &amp; set MSYSTEM=MINGW64 &amp; "%ConEmuBaseDirShort%\conemu-msys2-64.exe zsh --login -i"'/>
+				</key>
 			</key>
 			<key name="Apps" modified="2018-01-12 17:28:45" build="170910">
 				<value name="Count" type="long" data="0"/>
@@ -789,7 +798,7 @@
 			<value name="DefaultTerminalDebugLog" type="hex" data="00"/>
 			<value name="ProcessCtrlZ" type="hex" data="00"/>
 			<value name="SuppressBells" type="hex" data="01"/>
-			<value name="LastMonitor" type="string" data="0,0,1920,1040"/>
+			<value name="LastMonitor" type="string" data="0,0,2560,1400"/>
 			<value name="Restore2ActiveMon" type="hex" data="00"/>
 			<value name="DownShowExOnTopMessage" type="hex" data="00"/>
 			<value name="EnvironmentSet" type="multi">

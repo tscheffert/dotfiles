@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+optimize_pngs_in_folder() {
+  optipng -strip all -fix *.png
+}
+
+optimize_pngs_in_folder "$@"

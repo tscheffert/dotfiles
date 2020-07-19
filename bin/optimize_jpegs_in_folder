@@ -1,0 +1,177 @@
+#!/usr/bin/env ruby
+# vim: ft=ruby
+
+require 'tty-command'
+require 'open3'
+require 'pathname'
+require 'fileutils'
+
+require File.join(__dir__, '..', 'ruby', 'lib', 'images_helper')
+
+# Test cases
+# - (Base case) Run in dir we want to optimize, without parameter, it optimizes that dir
+# - With passed directory that exists, it optimizes that dir
+# - With passed directory that does not exist it errors out
+# - With more than one argument (excluding --test), it fails and prints help
+
+# Parameter Test Cases
+# - no parameters - Optimizes current directory
+# - one parameter, --test - Shows what it would optimize in current directory
+# - any paramters, invalid dir - Fails complaining about invalid directory
+# - one parameter, dir
+# - more than one parameter, with test - Shows what it would optimize in passed directory
+# - more than one parameter, excluding test - Fails, explaining more than one argument passed
+
+# TODO: enable running both lossy and lossless
+
+module OptimizeJpegsInFolder
+
+  SOURCE_DIR = '_source'.freeze
+
+  OPTIMIZED_SUFFIX_LOSSLESS = '-optimized-lossless'.freeze
+  OPTIMIZED_SUFFIX_LOSSY = '-optimized-lossy'.freeze
+
+  def self.perform(args:)
+    print_help_and_exit!(exit_status: 0) if args.include?('--help')
+
+    @test_run = args.include?('--test')
+    @lossless_run = args.include?('--lossless')
+    @lossy_run = args.include?('--lossy')
+
+    unknown_args = args.reject { |a| ['--test', '--lossy', '--lossless'].include?(a) }
+
+    if unknown_args.length > 1
+      warn "More than one unknown arguments detected (excluding valid flags), invalid usage!\n"
+      print_help_and_exit!(exit_status: 1)
+    end
+    dir_to_optimize = if unknown_args.present?
+                        unknown_args.first
+                      else
+                        Dir.pwd
+                      end
+
+    ensure_directory_exists!(dir: dir_to_optimize)
+    ensure_tools_exist!
+
+    FileUtils.mkdir_p(SOURCE_DIR) if !@test_run
+
+    jpeg_images = ImagesHelper.all_jpeg_images_in_dir(dir_to_optimize)
+
+    jpeg_images.each do |input_img|
+      if @lossless_run && @lossy_run
+        warn 'Both --lossless and --lossy specified, unsupported flags.'
+        print_help_and_exit!(exit_status: 1)
+      elsif @lossless_run
+        optimize_lossless(image: input_img)
+      elsif @lossy_run
+        optimize_lossy(image: input_img)
+      else
+        warn 'Neither --lossless or --lossy specified, one of those is required.'
+        print_help_and_exit!(exit_status: 1)
+      end
+    end
+  end
+
+  private
+
+  def self.optimize_lossless(image:)
+    output_img = File.basename(image, '.*') + OPTIMIZED_SUFFIX_LOSSLESS + File.extname(image)
+
+    puts "Lossless Optimizing #{image} to #{output_img}"
+
+    if File.exist?(output_img)
+      puts "Removing existing optimized image: '#{output_img}'"
+      FileUtils.rm(output_img)
+    end
+
+    return if @test_run
+
+    cmd = TTY::Command.new
+    stdout, stderr = cmd.run("jpegtran -copy none -optimize -perfect -outfile \"#{output_img}\" \"#{image}\"")
+
+    puts "STDOUT: #{stdout}" if stdout.present?
+    puts "STDERR: #{stderr}" if stderr.present?
+
+    FileUtils.mv(image, SOURCE_DIR) if File.exist?(output_img)
+  end
+  private_class_method :optimize_lossless
+
+  def self.optimize_lossy(image:)
+    output_img = File.basename(image, '.*') + OPTIMIZED_SUFFIX_LOSSY + File.extname(image)
+
+    puts "Lossy Optimizing #{image} to #{output_img}"
+
+    if File.exist?(output_img)
+      puts "Removing existing optimized image: '#{output_img}'"
+      FileUtils.rm(output_img)
+    end
+
+    return if @test_run
+
+    cmd = TTY::Command.new
+    stdout, stderr = cmd.run("cjpeg -optimize -quality 75 -outfile \"#{output_img}\" \"#{image}\"")
+
+    puts "STDOUT: #{stdout}" if stdout.present?
+    puts "STDERR: #{stderr}" if stderr.present?
+
+    FileUtils.mv(image, SOURCE_DIR) if File.exist?(output_img)
+  end
+  private_class_method :optimize_lossy
+
+  def self.print_help_and_exit!(exit_status:)
+    command_name = File.basename(__FILE__)
+    doc = <<~HELPDOC
+      USAGE:
+          #{command_name}
+              Optimizes JPEG files found in current directory
+          #{command_name} --lossy
+              Optimizes JPEG files with cjpeg for lossy optimization
+          #{command_name} --lossless
+              Optimizes JPEG files with jpegtran for lossless optimization
+          #{command_name} <directory>
+              Optimizes JPEG files found in the directory '<directory>'
+          #{command_name} --test
+              Reports which images will be converted but doesn't convert them
+          #{command_name} --help
+              Prints this message
+    HELPDOC
+
+    if exit_status.positive?
+      warn doc
+    else
+      puts doc
+    end
+    exit exit_status
+  end
+
+  def self.ensure_directory_exists!(dir:)
+    return if Dir.exist?(dir)
+
+    warn "Directory '#{dir}' does not exist.\n"
+
+    print_help_and_exit!(exit_status: 1)
+  end
+  private_class_method :ensure_directory_exists!
+
+  def self.ensure_tools_exist!
+    stdout, stderr, status = Open3.capture3('which jpegtran')
+    if !status.success?
+      warn 'jpegtran (from mozjpeg) installation required. Unable to find in path via "which jpegtran"'
+      warn "stdout from which: #{stdout}" if stdout.present?
+      warn "stderr from which: #{stderr}" if stderr.present?
+      exit 1
+    end
+
+    stdout, stderr, status = Open3.capture3('which cjpeg')
+    if !status.success?
+      warn 'cjpeg (from mozjpeg) installation required. Unable to find in path via "which cjpeg"'
+      warn "stdout from which: #{stdout}" if stdout.present?
+      warn "stderr from which: #{stderr}" if stderr.present?
+      exit 1
+    end
+  end
+  private_class_method :ensure_tools_exist!
+
+end
+
+OptimizeJpegsInFolder.perform(args: ARGV)

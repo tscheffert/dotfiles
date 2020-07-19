@@ -3,7 +3,6 @@
 
 require 'tty-command'
 require 'optimist'
-require 'open3'
 require 'pathname'
 require 'fileutils'
 
@@ -24,7 +23,6 @@ require File.join(__dir__, '..', 'ruby', 'lib', 'images_helper')
 # - more than one parameter, excluding test - Fails, explaining more than one argument passed
 
 # TODO: enable running both lossy and lossless
-# TODO: use tty-command instead of open3
 
 module OptimizeJpegsInFolder
 
@@ -129,19 +127,21 @@ module OptimizeJpegsInFolder
   private_class_method :optimize_lossy
 
   def self.ensure_tools_exist!
-    stdout, stderr, status = Open3.capture3('which jpegtran')
-    if !status.success?
+    result = TTY::Command.new(printer: :null).run!('which jpegtran')
+    if !result.success?
       warn 'jpegtran (from mozjpeg) installation required. Unable to find in path via "which jpegtran"'
-      warn "stdout from which: #{stdout}" if stdout.present?
-      warn "stderr from which: #{stderr}" if stderr.present?
+      warn "which exited with code #{result.exit_status}"
+      warn "stdout:\n #{result.stdout}" if result.stdout.present?
+      warn "stderr:\n #{result.stderr}" if result.stderr.present?
       exit 1
     end
 
-    stdout, stderr, status = Open3.capture3('which cjpeg')
-    if !status.success?
+    result = TTY::Command.new(printer: :null).run!('which cjpeg')
+    if !result.success?
       warn 'cjpeg (from mozjpeg) installation required. Unable to find in path via "which cjpeg"'
-      warn "stdout from which: #{stdout}" if stdout.present?
-      warn "stderr from which: #{stderr}" if stderr.present?
+      warn "which exited with code #{result.exit_status}"
+      warn "stdout:\n #{result.stdout}" if result.stdout.present?
+      warn "stderr:\n #{result.stderr}" if result.stderr.present?
       exit 1
     end
   end

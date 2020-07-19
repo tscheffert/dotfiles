@@ -2,6 +2,7 @@
 # vim: ft=ruby
 
 require 'tty-command'
+require 'optimist'
 require 'open3'
 require 'pathname'
 require 'fileutils'
@@ -23,6 +24,7 @@ require File.join(__dir__, '..', 'ruby', 'lib', 'images_helper')
 # - more than one parameter, excluding test - Fails, explaining more than one argument passed
 
 # TODO: enable running both lossy and lossless
+# TODO: use tty-command instead of open3
 
 module OptimizeJpegsInFolder
 
@@ -32,42 +34,50 @@ module OptimizeJpegsInFolder
   OPTIMIZED_SUFFIX_LOSSY = '-optimized-lossy'.freeze
 
   def self.perform(args:)
-    print_help_and_exit!(exit_status: 0) if args.include?('--help')
+    options = Optimist::options(args) do
+      banner <<~BANNERDOC
+      Optimizes JPEG files, either lossless or lossy, in a given folder
 
-    @test_run = args.include?('--test')
-    @lossless_run = args.include?('--lossless')
-    @lossy_run = args.include?('--lossy')
+      Usage:
+        #{File.basename(__FILE__)} [options]
 
-    unknown_args = args.reject { |a| ['--test', '--lossy', '--lossless'].include?(a) }
+      where [options] are:
+      BANNERDOC
 
-    if unknown_args.length > 1
-      warn "More than one unknown arguments detected (excluding valid flags), invalid usage!\n"
-      print_help_and_exit!(exit_status: 1)
+      opt :test, 'Run in test mode, reporting which images will be converted without doing it', short: :none
+      opt :lossless, 'Optimizes JPEG files with jpegtran for lossless optimization', short: :none
+      opt :lossy, 'Optimizes JPEG files with cjpeg for lossy optimization', short: :none
+      opt :directory, 'Which directory to parse', short: :none, default: Dir.pwd
     end
-    dir_to_optimize = if unknown_args.present?
-                        unknown_args.first
-                      else
-                        Dir.pwd
-                      end
 
-    ensure_directory_exists!(dir: dir_to_optimize)
+    if !Dir.exist?(options[:directory])
+      Optimist::die(:directory, "'#{options[:directory]}' does not exist")
+    end
+
+    if options[:lossless] && options[:lossy]
+      Optimist::die('Both --lossless or --lossy specified, this is not supported yet')
+    end
+
+    if !options[:lossless] && !options[:lossy]
+      Optimist::die('Neither --lossless or --lossy specified, one of those is required')
+    end
+
+    @test_run = options[:test]
+
     ensure_tools_exist!
 
     FileUtils.mkdir_p(SOURCE_DIR) if !@test_run
 
-    jpeg_images = ImagesHelper.all_jpeg_images_in_dir(dir_to_optimize)
+    jpeg_images = ImagesHelper.all_jpeg_images_in_dir(options[:directory])
 
     jpeg_images.each do |input_img|
-      if @lossless_run && @lossy_run
-        warn 'Both --lossless and --lossy specified, unsupported flags.'
-        print_help_and_exit!(exit_status: 1)
-      elsif @lossless_run
+      if options[:lossless]
         optimize_lossless(image: input_img)
-      elsif @lossy_run
+      elsif options[:lossy]
         optimize_lossy(image: input_img)
       else
         warn 'Neither --lossless or --lossy specified, one of those is required.'
-        print_help_and_exit!(exit_status: 1)
+        Optimize::educate
       end
     end
   end
@@ -117,41 +127,6 @@ module OptimizeJpegsInFolder
     FileUtils.mv(image, SOURCE_DIR) if File.exist?(output_img)
   end
   private_class_method :optimize_lossy
-
-  def self.print_help_and_exit!(exit_status:)
-    command_name = File.basename(__FILE__)
-    doc = <<~HELPDOC
-      USAGE:
-          #{command_name}
-              Optimizes JPEG files found in current directory
-          #{command_name} --lossy
-              Optimizes JPEG files with cjpeg for lossy optimization
-          #{command_name} --lossless
-              Optimizes JPEG files with jpegtran for lossless optimization
-          #{command_name} <directory>
-              Optimizes JPEG files found in the directory '<directory>'
-          #{command_name} --test
-              Reports which images will be converted but doesn't convert them
-          #{command_name} --help
-              Prints this message
-    HELPDOC
-
-    if exit_status.positive?
-      warn doc
-    else
-      puts doc
-    end
-    exit exit_status
-  end
-
-  def self.ensure_directory_exists!(dir:)
-    return if Dir.exist?(dir)
-
-    warn "Directory '#{dir}' does not exist.\n"
-
-    print_help_and_exit!(exit_status: 1)
-  end
-  private_class_method :ensure_directory_exists!
 
   def self.ensure_tools_exist!
     stdout, stderr, status = Open3.capture3('which jpegtran')

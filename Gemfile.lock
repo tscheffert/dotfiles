@@ -80,7 +80,7 @@ PLATFORMS
   x64-mingw32
 
 DEPENDENCIES
-  activesupport
+  activesupport (~> 5.2)
   dimensions
   dry-struct
   dry-types

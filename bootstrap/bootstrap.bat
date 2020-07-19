@@ -1,5 +1,8 @@
-mklink /j %userprofile%\bin %userprofile%\.dotfiles\bin
+REM Make sure to check that these are actual links, not just folders that were created by something else
+mklink /j %userprofile%\.vim %userprofile%\.dotfiles\vimfiles
 mklink /j %userprofile%\vimfiles %userprofile%\.dotfiles\vimfiles
+
+mklink /j %userprofile%\bin %userprofile%\.dotfiles\bin
 mklink /j %userprofile%\.git_template %userprofile%\.dotfiles\.git_template
 mklink /j %userprofile%\.prompts %userprofile%\.dotfiles\prompts
 mklink /j %userprofile%\.zsh %userprofile%\.dotfiles\zsh

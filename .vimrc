@@ -381,27 +381,33 @@ set undolevels=1000
 " Number of lines to save for undo
 set undoreload=10000
 
-" Save undo's after file closes
-"set undofile
 " Set where to save undo histories
 " Fancy undo file location. The trailing '//' makes a unique path by using the
 " full path of the original file.
-set undodir=~/vimfiles/tmp/undo//
-set backupdir=~/vimfiles/tmp/backup// " Backups
-set directory=~/vimfiles/tmp/swap//   " Swap Files
-set backup                        " Enable backups
-set noswapfile                    " No More Collisions!
+let g:tmp_root = $HOME . "/.vim/tmp"
+" Set Undo files directory, Backups, and Swap files directory
+let &undodir=g:tmp_root . '/undo//'
+let &backupdir=g:tmp_root . '/backup//'
+let &directory=g:tmp_root . '/swap//'
 
-" Make those folders automatically if they don't already exist.
+" Make those folders automatically if they don't already exist. Will fail if ~/.vim or ~/.vim/tmp do not exist
+if !isdirectory(expand(g:tmp_root))
+  call mkdir(expand(g:tmp_root))
+endif
 if !isdirectory(expand(&undodir))
-  call mkdir(expand(&undodir), "p")
+  call mkdir(expand(&undodir))
 endif
 if !isdirectory(expand(&backupdir))
-  call mkdir(expand(&backupdir), "p")
+  call mkdir(expand(&backupdir))
 endif
 if !isdirectory(expand(&directory))
-  call mkdir(expand(&directory), "p")
+  call mkdir(expand(&directory))
 endif
+
+" Enable backups
+set backup
+" No More Collisions!
+set noswapfile
 
 " Show filename in titlebar of window
 set title
@@ -959,7 +965,7 @@ if version >= 700
 
   " Vim requires a binary index of the additional spelling words, create it if it
   " doesn't exist already. Adding new words rebuilds it automatically.
-  for f in glob('~/vimfiles/spell/*.add', 1, 1)
+  for f in glob('~/.vim/spell/*.add', 1, 1)
     if !filereadable(f . '.spl')
       silent! execute "mkspell!" f
     endif
@@ -1397,7 +1403,7 @@ if s:use_ctrlp
 
   " Ignore stuff
   let g:ctrlp_custom_ignore = {
-        \ 'dir': '\v[\/](\.git|\.hg|\.svn|_site|vimfiles|tmp|bundle)$',
+        \ 'dir': '\v[\/](\.git|\.hg|\.svn|_site|vimfiles|.vim|tmp|bundle)$',
         \ }
 
   " Don't ignore hidden files

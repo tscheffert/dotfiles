@@ -73,3 +73,14 @@ Review this further: <https://github.com/sindresorhus/pure/blob/master/pure.zsh>
   - Use FFPRobe to make sure everything is okay with the header
   - Use FFMPEG to check for errors:
   - `ffmpeg -v error -i $FILENAME -f null -`
+
+## Zsh
+
+- Change `zsh/windows` to be unique per PC, I don't have the same utilities installed on every PC in the same way
+
+## PowerShell
+
+- Get Custom hotkeys like ctrl+u clearing line
+- Make profile PSReadline aware
+  - Are we using it? (Yes I think so?)
+  - Set the history file path somewhere better

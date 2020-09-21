@@ -203,9 +203,11 @@ function line_number() {
 function k8s_context() {
   local current_dir="$PWD"
 
-
   if ! type kubectl >/dev/null 2>&1; then
     # if we don't have kubectl installed, don't show it
+    echo ""
+  elif ! kubectl config current-context >/dev/null 2>&1 ]; then
+    # If we don't have kubectl configured, don't show it
     echo ""
   elif [[ "$current_dir" == *"k8s-yaml"* ]]; then
     # if we're in k8s-yaml, show it

@@ -154,3 +154,5 @@ cask "keepassxc"
 
 # Install Docker Desktop
 cask "docker"
+
+cask "league-of-legends" # Install league of legends launcher

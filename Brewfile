@@ -151,3 +151,6 @@ cask "microsoft-excel"
 
 # Open Source, Cross Platform, Password Manager
 cask "keepassxc"
+
+# Install Docker Desktop
+cask "docker"

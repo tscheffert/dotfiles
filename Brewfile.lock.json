@@ -735,6 +735,15 @@
             "appdir": "/Applications"
           }
         }
+      },
+      "docker": {
+        "version": "2.3.0.3,45519",
+        "options": {
+          "full_name": "docker",
+          "args": {
+            "appdir": "/Applications"
+          }
+        }
       }
     }
   },

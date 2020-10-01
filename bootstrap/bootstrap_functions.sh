@@ -22,9 +22,13 @@ link_directory() {
 
   if [[ -d $from ]]; then
     if [[ -h "$to" ]]; then
-      echo "Directory '${to}' already exists, skipping link"
+      echo "Directory '$to' already exists as a link, skipping link"
+    elif [[ -d "$to" ]]; then
+      echo 1>&2 "Directory '$to' exists but is not a link"
+      echo 1>&2 "Aborting due to unexpected state!"
+      exit 1
     else
-      echo "Linking directory ${from} to ${to}"
+      echo "Linking directory $from to $to"
       ln -sf "$from" "$to"
     fi
   fi

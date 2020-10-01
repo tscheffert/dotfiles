@@ -13,7 +13,7 @@ fi
 
 # Symlink directories
 link_directory "$HOME/.dotfiles/.git_template" "$HOME/.git_template"
-link_directory "$HOME/.dotfiles/Alfred" "$HOME/Alfred"
+link_directory "$HOME/.dotfiles/Alfred/Alfred.alfredpreferences" "$HOME/Library/Application Support/Alfred/Alfred.alfredpreferences"
 link_directory "$HOME/.dotfiles/bin" "$HOME/bin"
 link_directory "$HOME/.dotfiles/iTerm" "$HOME/iTerm"
 link_directory "$HOME/.dotfiles/vimfiles" "$HOME/.vim"
@@ -31,7 +31,7 @@ link_file .dir_colors
 link_file .gemrc
 link_file .gitconfig
 link_file .gitignore
-# link_file .inputrc
+link_file .inputrc
 link_file .irbrc
 # link_file .jscs.json
 # link_file .jshintrc

@@ -30,6 +30,8 @@ hs.hotkey.bind({"cmd"}, "Q", function()
   hs.alert.show("⌘ + Q Disabled")
 end)
 
+local logger = hs.logger.new('dotfiles','debug')
+
 
 -- [[
 --    Options
@@ -200,14 +202,56 @@ function reverse(tbl)
 end
 
 -- Window Hints like slate
---   I used Karabiner to change cmd+tab to emmit F19
+--   Karabiner used to change cmd+tab to emmit F19
 hs.hotkey.bind({""}, "F19", function ()
+  -- [[
+  -- TODO: Fix this
   -- TODO: The most recently used window appears to be the "bottom" one usually,
   --   but with vim the active window is the "top" one. Is this behavior consistent
   --   the default "windows"? Can we swap the order of the vim ones?
   -- TODO: Reversing them doesn't work with more than two windows :'(
-  local windows = hs.window.orderedWindows()
-  hs.hints.windowHints(reverse(windows), nil, true)
+  -- Issues with order:
+  --   visible windows:
+  --     Vim
+  --       focused: top window cyles through all of them, current window is always the middle
+  --       unfocused: same behavior
+  --       focused2: Tried it again. Now the most-recent is always bottom. middle and top cycle.
+  --       unfocused2: same behavior
+  --     Firefox
+  --       focused: (correct) top window is always most-recent, middle window is always second most-recent
+  --       unfocused:
+  --   Firefox puts the most-recent window at the top of the hint order, if it's focused.
+  -- --      When it becomes unfocused, it mixes up the order somehow
+  -- ]]
+
+  local all_windows = hs.window.allWindows()
+  -- logger.d("Length of all_windows is " .. #all_windows)
+  -- logger.d("all windows: " .. hs.inspect.inspect(all_windows))
+  local minimized_windows = hs.window.minimizedWindows()
+  -- logger.d("Length of minimized_windows is " .. #minimized_windows)
+  -- logger.d("minimized windows: " .. hs.inspect.inspect(minimized_windows))
+
+  -- Show all windows except for those that are minimized.
+  --   If we use 'visibleWindows' or 'orderedWindows' it doesn't show the Hammerspoon console for some reason.
+  local hintable_windows = {}
+  local minimized_window_ids = hs.fnutils.imap(minimized_windows, function(window)
+    return window:id()
+  end)
+  logger.d("Minimized window ids: " .. hs.inspect.inspect(minimized_window_ids))
+  for k,v in pairs ( all_windows ) do
+    if not hs.fnutils.contains(minimized_window_ids, v:id()) then
+      table.insert( hintable_windows, v )
+    end
+  end
+  -- logger.d("Length of hintable_windows is " .. #hintable_windows)
+
+  hs.hints.windowHints(hintable_windows, nil, true)
+end)
+
+-- Window hints including minimized
+--   Note: Uses Karabiner to change cmd+shift+tab to emmit F20
+hs.hotkey.bind({""}, "F20", function ()
+  hs.hints.windowHints(hs.window.allWindows(), nil, true)
 end)
 
 

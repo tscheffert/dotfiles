@@ -1373,11 +1373,23 @@ endif
 
 " Set up status line
 let g:airline#extensions#tabline#left_alt_sep = '|'
-let g:airline_section_y=' [%n] '
+" List the buffer number between filemode and position, but I'm not sure if that's useful
+" let g:airline_section_y=' [%n] '
 let g:airline_section_z='%3p%% : %3l/%-3L :%4c '
+" Get rid of b and y sections
+" Left:
+"   A: Mode + flags like crypt/spell/paste
+"   B: Disabled - VCS Info
+"   C: FIlename + read-only flag
+" Right:
+"   X: Filetype
+"   Y: Disabled: file encoding[fileformat] (utf-8[unix])
+"   Z: Current position in the file
+"   Error: from syntastic, shows error info
+"   Warning: from syntastic, shows warning info
 let g:airline#extensions#default#layout = [
       \ [ 'a', 'c' ],
-      \ [ 'x', 'y', 'z', 'error', 'warning' ]
+      \ [ 'x', 'z', 'error', 'warning' ]
       \ ]
 
 " Disable paste detection

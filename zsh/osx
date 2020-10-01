@@ -64,6 +64,10 @@ alias finder-show-hidden-files='defaults write com.apple.finder AppleShowAllFile
 alias finder-hide-hidden-files='defaults write com.apple.finder AppleShowAllFiles NO; \
   killall Finder /System/Library/CoreServices/Finder.app'
 
+# Reload karabiner after config updates
+# Source: https://karabiner-elements.pqrs.org/docs/manual/misc/configuration-file-path/
+alias restart-karabiner='launchctl kickstart -k gui/`id -u`/org.pqrs.karabiner.karabiner_console_user_server'
+
 
 # --- Ruby ---
 # Rbenv was installed with homebrew, the paths will be osx specific

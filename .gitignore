@@ -41,6 +41,9 @@ Alfred/Alfred.alfredpreferences/preferences/local/
 
 !./bin/
 
+.config/karabiner/
+!.config/karabiner/karabiner.json
+
 # ----- Default...? -----
 .DS_Store
 ._*

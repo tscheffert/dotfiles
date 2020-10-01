@@ -18,6 +18,7 @@ link_directory "$HOME/.dotfiles/bin" "$HOME/bin"
 link_directory "$HOME/.dotfiles/iTerm" "$HOME/iTerm"
 link_directory "$HOME/.dotfiles/vimfiles" "$HOME/.vim"
 link_directory "$HOME/.dotfiles/zsh" "$HOME/.zsh"
+link_directory "$HOME/.dotfiles/.config/karabiner" "$HOME/.config/karabiner"
 
 # Symlink files
 link_file .agignore
@@ -57,10 +58,6 @@ link_optional_file .zshrc.private
 link_file_with_directory .hammerspoon init.lua
 link_file_with_directory .hammerspoon/icons caffeinate-on.png
 link_file_with_directory .hammerspoon/icons caffeinate-off.png
-
-# Link karabainer-elements config
-mkdir -p "$HOME/.config/karabiner"
-ln -sf "$HOME/.dotfiles/karabiner.json" "$HOME/.config/karabiner/karabiner.json"
 
 echo "Dotfiles have been symlinked to $HOME."
 

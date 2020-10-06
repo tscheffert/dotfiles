@@ -395,9 +395,6 @@ alias or='open-repo'
 alias find-kitchen="find ./ -type d -name '.kitchen'"
 alias find-and-remove-kitchen="find ./ -type d -name '.kitchen' | xargs rm -rv {}"
 
-# BFG Git Repo Cleaner usage
-alias bfg='java -jar C:/tools/bfg/current/bfg.jar'
-
 # Curl without progress reports and accepting an HTTP request type
 # Usage:
 #   csr GET "http://elasticsearch.echo.com"

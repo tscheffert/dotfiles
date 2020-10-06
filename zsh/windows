@@ -82,6 +82,10 @@ alias open='start'
 
 alias 'powershell_split'='ConEmu64 -run powershell -new_console:asV'
 
+# BFG Git Repo Cleaner usage
+alias bfg='java -jar C:/tools/bfg/current/bfg.jar'
+
+
 # TODO: Powershell split for kubernetes exec
 
 # -- PowerShell Aliases/Functions --

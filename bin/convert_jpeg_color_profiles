@@ -49,7 +49,7 @@ module ConvertJpegColorProfiles
       if image_needs_color_profile_conversion(image: input_image)
         convert(image: input_image)
       else
-        puts "Not converting '#{input_image}', no color profile found"
+        puts "Not converting '#{input_image}', no color profile found or already sRGB"
       end
     end
   end
@@ -62,8 +62,10 @@ module ConvertJpegColorProfiles
 
     if result.stdout.strip == 'Adobe RGB (1998)'
       return true
+    elsif result.stdout.strip.include?('sRGB')
+      return false
     elsif result.stdout.present?
-      warn 'Unexpected color profile found, test if converting to icc sRGB works'
+      warn "Unexpected color profile found, '#{result.stdout.strip}'. test if converting to icc sRGB works"
       exit 1
     elsif !result.success?
       warn 'Unexpected failure checking for color profile'

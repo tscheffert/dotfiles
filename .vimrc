@@ -1070,6 +1070,8 @@ else
   " 5 - blinking bar
   " 6 - steady bar
 
+  " TODO: Try this: https://github.com/microsoft/terminal/issues/68#issuecomment-621891237
+
   " Replace Mode
   let &t_SR=""
   " let &t_SR="[5 q"
@@ -1095,6 +1097,10 @@ else
   " Out of "termcap" mode???
   " let &t_te="[0 q"
   " let &t_te="\e[0 q"
+
+  " TODO: Is this necessary??
+
+  autocmd VimLeave * silent execute '!echo -ne " \e[5 q"' | redraw!
 
   if HasColorscheme('jellybeans')
     colorscheme jellybeans

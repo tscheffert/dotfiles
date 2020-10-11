@@ -15,6 +15,7 @@ Image Packs are:
 
 Individual Images are:
 
+- Color Profile Fixed
 - Deduped
 - Sorted by orientation into folders
 - processed into candidate images
@@ -89,6 +90,10 @@ Image sets are then renamed in a fashion such that the sets remain tied together
 ### Flattening
 
 Run `flatten_image_folders` on at the root of the model name.
+
+### Color Profile Fixing
+
+Run `fix_color_profile` in the folder with images we want to fix
 
 ### Dedupe
 

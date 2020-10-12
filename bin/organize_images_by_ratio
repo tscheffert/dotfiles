@@ -1,0 +1,97 @@
+#!/usr/bin/env ruby
+# vim: ft=ruby
+
+require File.join(__dir__, '..', 'ruby', 'lib', 'images_helper')
+
+module OrganizeImagesByRatio
+
+  include ImagesHelper::Constants
+
+  def self.perform(args:)
+    options = parse_and_validate!(args: args)
+
+    images = ImagesHelper.all_images_in_dir(options[:directory])
+
+    proportionate, disproportionate = partition_by_ratio(images: images)
+
+    move_images_by_ratio!(proportionate_images: proportionate, disproportionate_images: disproportionate)
+  end
+
+  private
+
+  def self.parse_and_validate!(args:)
+    options = Optimist.options(args) do
+      banner <<~BANNERDOC
+        Move images that the with the correct 16:9 ratio to the `#{PROPORTIONATE_DIR}' directory and with the incorrect ratio to the '#{DISPROPORTIONATE_DIR}' directory
+          Usage:
+            #{File.basename(__FILE__)} [options]
+      BANNERDOC
+
+      opt :test, "Reports which images will move to where but doesn't move them", short: :none
+      opt :directory, 'Which directory to organize images in', short: :none, default: Dir.pwd
+    end
+
+    @test_run = options[:test]
+
+    if !Dir.exist?(options[:directory])
+      Optimist.die(:directory, "'#{options[:directory]}' does not exist")
+    end
+
+    options
+  end
+  private_class_method :parse_and_validate!
+
+  def self.partition_by_ratio(images:)
+    images.partition do |img|
+      begin
+        width, height = Dimensions.dimensions(img)
+        ratio = BigDecimal(width) / BigDecimal(height)
+
+        MIN_RATIO < ratio && ratio < MAX_RATIO
+      rescue StandardError => e
+        warn "File #{img} failed with error #{e}, cannot test ratio"
+
+        exit 1
+      end
+    end
+  end
+  private_class_method :partition_by_ratio
+
+  def self.move_images_by_ratio!(proportionate_images:, disproportionate_images:)
+    if proportionate_images.present?
+      puts 'Proportionate:'
+      proportionate_images.each do |img|
+        puts "  #{img}"
+      end
+
+      if !@test_run
+        puts "Moving proportionate images to '#{PROPORTIONATE_DIR}'"
+        FileUtils.mkdir_p(PROPORTIONATE_DIR)
+        FileUtils.mv(proportionate_images, PROPORTIONATE_DIR)
+      end
+    else
+      puts 'No proportionate images'
+    end
+
+    puts "\n---------\n\n"
+
+    if disproportionate_images.present?
+      puts 'Disproportionate:'
+      disproportionate_images.each do |img|
+        puts "  #{img}"
+      end
+
+      if !@test_run
+        puts "Moving disproportionate images to '#{DISPROPORTIONATE_DIR}'"
+        FileUtils.mkdir_p(DISPROPORTIONATE_DIR)
+        FileUtils.mv(disproportionate_images, DISPROPORTIONATE_DIR)
+      end
+    else
+      puts 'No disproportionate images'
+    end
+  end
+  private_class_method :move_images_by_ratio!
+
+end
+
+OrganizeImagesByRatio.perform(args: ARGV)

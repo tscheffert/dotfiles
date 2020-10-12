@@ -2,9 +2,14 @@ require 'active_support/core_ext/object/blank'
 require 'dimensions'
 require 'dry-types'
 require 'dry-struct'
+require 'optimist'
+require 'tty-command'
 
 require 'bigdecimal'
 require 'fileutils'
+require 'pathname'
+
+STDOUT.sync = true
 
 # Snippets:
 # images.each(&method(:puts))
@@ -32,10 +37,12 @@ module ImagesHelper
     BAD_DIR = '_bad'.freeze
     CROPPED_DIR = '_cropped'.freeze
     CROPPED_AND_SCALED_DIR = '_cropped-scaled'.freeze
+    DISPROPORTIONATE_DIR = '_disproportionate'.freeze
     GOOD_DIR = '_good'.freeze
     LANDSCAPE_DIR = '_landscape'.freeze
     NOT_SQUARE_DIR = '_not_square'.freeze
     PORTRAIT_DIR = '_portrait'.freeze
+    PROPORTIONATE_DIR = '_proportionate'.freeze
     SORTED_DIR = '_sorted'.freeze
     SOURCE_DIR = '_source'.freeze
     TOO_SMALL_DIR = '_too_small'.freeze
@@ -53,7 +60,7 @@ module ImagesHelper
       '..'
     ].freeze
 
-    MIN_WIDTH = 2495
+    MIN_WIDTH = 2560
     MIN_HEIGHT = 1440
     MIN_RATIO = BigDecimal('1.77')
     MAX_RATIO = BigDecimal('1.78')

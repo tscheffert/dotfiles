@@ -44,6 +44,8 @@ Alfred/Alfred.alfredpreferences/preferences/local/
 .config/karabiner/
 !.config/karabiner/karabiner.json
 
+fonts/Input-Font/
+
 # ----- Default...? -----
 .DS_Store
 ._*

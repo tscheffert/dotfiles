@@ -21,7 +21,9 @@ Other:
 B8
 CDO0
 Single Quote, Double Quote, Backtick
+```
 \' \" \`
+```
 
 ```
 function url() { "\b(([\w-]+://?|www[.])[^\s()]+(?:\([\w\d]+\)|([^[:punct:]\s]|/)))" }
@@ -58,16 +60,23 @@ function url() { "\b(([\w-]+://?|www[.])[^\s()]+(?:\([\w\d]+\)|([^[:punct:]\s]|/
     - Regular bold is too squished
   - Awesome
   - Can configure to look like Source Code Pro, but it _seems_ slightly better
-  - Found to be best with:
-    - Mono
-    - Medium instead of Bold
-    - Source Code Pro Style
-    - 'i' and 'l' Consolas Style, second to last radio button
-    - Non decorative 'a' and 'g'
-    - Fancy '{'
-    - Slashed Zero
-    - Centered asterisk
   - Requires slightly higher font size than Source Code Pro or Consolas
+  - Found to be best with:
+    - Styles:
+      - custom four-style family
+      - Regular: Input Mono Light
+      - Italic Input Mono Light Italic
+      - Bold Input Mono Medium
+      - Bold Italic Input Mono Medium Italic
+    - Character Defaults:
+      - non-decorative 'a'
+      - non-decorative 'g'
+      - 'i' without any serif on the bottom (second from left)
+      - 'l' with left facing serif at the top and right facing at the bottom (rightmost)
+      - Slashed '0'
+      - Centered asterisk (right radio button)
+      - Fancy '{'
+    - Default "Built-in Line Spacing" of 1.2x
 - Iosevka <https://github.com/be5invis/Iosevka>
 - LispM-Font - <https://github.com/unjordy/LispM-Font>
 - Luculent: <http://eastfarthing.com/luculent/>
@@ -101,7 +110,7 @@ function url() { "\b(([\w-]+://?|www[.])[^\s()]+(?:\([\w\d]+\)|([^[:punct:]\s]|/
 - Tektite - https://www.chiark.greenend.org.uk/%7Esgtatham/fonts/
 
 # Tools:
-http://app.programmingfonts.org/#hack
-http://webagility.com/posts/finding-the-best-programming-font
-https://s9w.github.io/font_compare/
-https://www.fontsquirrel.com/tools/webfont-generator
+<http://app.programmingfonts.org/#hack>
+<http://webagility.com/posts/finding-the-best-programming-font>
+<https://s9w.github.io/font_compare/>
+<https://www.fontsquirrel.com/tools/webfont-generator>

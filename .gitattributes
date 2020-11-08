@@ -46,3 +46,29 @@
 
 # Diff registry files as text
 *.reg text
+
+
+# Diffs
+#   Details on setting up diffs:
+#   https://git-scm.com/docs/gitattributes#_generating_diff_text
+# Built In Diffs:
+*.css diff=css
+*.cs diff=csharp
+*.ex diff=elixir
+*.exs diff=elixir
+*.go diff=golang
+*.html diff=html
+*.md diff=markdown
+*.py diff=python
+*.rb diff=ruby
+*.rs diff=rust
+
+# Specific End of Lines
+# Force batch scripts to always use CRLF line endings so that if a repo is accessed
+# in Windows via a file share from Linux, the scripts will work.
+*.{cmd,[cC][mM][dD]} text eol=crlf
+*.{bat,[bB][aA][tT]} text eol=crlf
+
+# Force bash scripts to always use LF line endings so that if a repo is accessed
+# in Unix via a file share from Windows, the scripts will work.
+*.sh text eol=lf

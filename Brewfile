@@ -94,6 +94,9 @@ brew "jq"
 # Download utility
 brew "wget"
 
+# Tool for repo cleaning
+brew "bfg"
+
 
 # Things I haven't installed but could
 # brew "pigz" # Parallelized Implementation of gzip - Homepage: http://www.zlib.net/pigz/
@@ -149,10 +152,11 @@ cask "microsoft-outlook"
 # Spreadsheet client used for work! (duh)
 cask "microsoft-excel"
 
+# Documents client used for work! (duh)
+cask "microsoft-word"
+
 # Open Source, Cross Platform, Password Manager
 cask "keepassxc"
 
 # Install Docker Desktop
 cask "docker"
-
-cask "league-of-legends" # Install league of legends launcher

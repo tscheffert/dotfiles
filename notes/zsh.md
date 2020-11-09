@@ -72,3 +72,20 @@ over shorter patterns.
 A good rule of thumb is that any completion style pattern that needs to include
 more than one wildcard (`*`) and that does not end in a tag name, should include
 all six colons (`:`), possibly surrounding additional wildcards.
+
+## Completions
+
+Documentation:
+
+- <http://zsh.sourceforge.net/Doc/Release/Completion-System.html>
+- <https://github.com/zsh-users/zsh-completions/blob/master/zsh-completions-howto.org>
+- <http://zsh.surceforge.net/Guide/zshguide06.html#l144>
+
+Good examples of it in practice:
+
+- <https://arcanis.me/en/2014/07/17/writting-own-completions-p1>
+- <https://raw.githubusercontent.com/arcan1s/netctl-gui/master/sources/gui/zsh-completions>
+- <https://blog.kloetzl.info/how-to-write-a-zsh-completion/>
+- <https://github.com/vapniks/zsh-completions/blob/master/src/_rubocop>
+
+

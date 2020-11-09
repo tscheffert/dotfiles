@@ -38,6 +38,39 @@ _mingw64_.
 gdfom | xargs ag --files-with-matches 'artifact_deploy_service' | awk '{print $1}' | xargs gvim
 ```
 
+
+### Get the root of the repo from a bash script
+
+Do this:
+
+```
+repo_root="$(git -C "$(dirname "$(realpath "${BASH_SOURCE[0]}")")" rev-parse --show-toplevel)"
+```
+
+Explanation:
+
+The output of this file:
+
+```
+bash_file_path="${BASH_SOURCE[0]}"
+echo "Bash file path: $bash_file_path"
+real_bash_file_path="$(realpath "$bash_file_path")"
+echo "Real bash file path: $real_bash_file_path"
+real_path_dirname="$(dirname "$real_bash_file_path")"
+echo "Real path dirname: $real_path_dirname"
+
+git -C "$real_path_dirname" rev-parse --show-toplevel
+```
+
+Looks like this:
+
+```
+Bash file path: test.sh
+Real bash file path: /Users/tscheffert/dev/azure-devops/devops/artifactory-cloud/test.sh
+Real path dirname: /Users/tscheffert/dev/azure-devops/devops/artifactory-cloud
+/Users/tscheffert/dev/azure-devops/devops/artifactory-cloud
+```
+
 ## Maintenance
 
 ### Clean up Git repos
@@ -280,11 +313,24 @@ symbolic link created for C:\tools\ruby\ridk\current <<===>> C:\tools\ruby\ridk\
 \\tscheffert-p510\c$\kitchen-vms
 ```
 
-###
+### strace something?
 
 ```
 sudo strace -f -p 22279 -e trace=file
 ```
+
+### Remove a specific folder from the path
+
+```
+export PATH="${PATH%?(:)/directory/to/remove}"
+```
+
+Because `${string%substring}` will remove the shortest match of `$substring` from the back of `$string` via parameter expansion.
+
+`?(:)` will match zero or one instances of `:`, which means it will still delete the path if it's at the start of the path.
+
+- Parameter Expansion: <https://www.gnu.org/software/bash/manual/html_node/Shell-Parameter-Expansion.html>
+- Pattern Matching: <https://www.gnu.org/software/bash/manual/html_node/Pattern-Matching.html#Pattern-Matching>
 
 ## Ruby
 

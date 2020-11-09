@@ -1,4 +1,9 @@
-# Dotfiles Reviews
+# dotfiles Ideas and TODO
+
+## TO Review
+
+- <https://github.com/habamax/.vim>
+  - Lots of crazy vim stuff
 
 ## <https://github.com/tmc/dotfiles/blob/master/.vimrc>
 
@@ -57,11 +62,28 @@ let g:mucomplete#delayed_completion = 1
 let g:mucomplete#enable_auto_at_startup = 1
 ```
 
+## TODO Vim
+- Better f, with jumping to next following `f{character}` - <https://github.com/rhysd/clever-f.vim>
+- Switch to [vim-polyglot](https://github.com/sheerun/vim-polyglot) instead of the litany of stuff I have already
+- Better notes strategy
+  - Prefix markdown files with header from file name?
+  - [vim-notes plugin investigation](https://github.com/will-ockmore/vim-notes)
+- Show bars at indent levels <https://github.com/Yggdroot/indentLine>
+- Fancy popup for keys being shown <https://github.com/liuchengxu/vim-which-key>
+- Compare with vim-sensible: <https://github.com/liuchengxu/vim-better-default>
+- Popup thing? <https://github.com/liuchengxu/vim-clap>
+- Replacement for NerdTree? <https://github.com/lambdalisue/fern.vim>
+
+
 ## Zsh Prompt
 
 Review this further: <https://github.com/sindresorhus/pure/blob/master/pure.zsh>
 
 ## TODO
+
+### Firefox
+
+- Get that shit IaC
 
 ### Vim
 
@@ -73,12 +95,15 @@ Review this further: <https://github.com/sindresorhus/pure/blob/master/pure.zsh>
   - Use FFPRobe to make sure everything is okay with the header
   - Use FFMPEG to check for errors:
   - `ffmpeg -v error -i $FILENAME -f null -`
+- Get the bootstrapping links to enumerate files in `.dotfiles/bin` and link them file by file into `~/bin` rather than just linking the whole directory.
+  - Allows linking from other places to there.
+  - Would have to link the subfolders to `~/bin` though, which seems okay
 
-## Zsh
+### Zsh
 
 - Change `zsh/windows` to be unique per PC, I don't have the same utilities installed on every PC in the same way
 
-## PowerShell
+### PowerShell
 
 - Get Custom hotkeys like ctrl+u clearing line
 - Make profile PSReadline aware

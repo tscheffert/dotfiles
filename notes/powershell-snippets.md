@@ -20,6 +20,12 @@ Actual system information version:
 [System.Environment]::OSVersion.Version
 ```
 
+## Increase the width of the buffer
+
+```
+[console]::bufferwidth = 32766
+```
+
 ## Working with objects
 
 ### Expand all the properties of an object

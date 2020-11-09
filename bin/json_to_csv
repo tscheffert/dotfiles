@@ -1,0 +1,37 @@
+#!/usr/bin/env ruby
+# vim: ft=ruby
+
+require 'json'
+require 'csv'
+require 'active_support'
+require 'active_support/core_ext/object/blank'
+
+require File.absolute_path(File.join(__dir__, '..', 'ruby', 'lib', 'json_helper'))
+
+# TODO: See https://github.com/korczis/json2csv as an example
+module CSVToJSON
+  def self.perform(args:)
+    json_file = args[0]
+
+    JSONHelper.validate!(json_file: json_file, argument_name: 'json_file')
+    puts "Valid JSON file: '#{json_file}'"
+
+    output_file_basename = File.basename(json_file, '.json')
+    output_file = output_file_basename + ".csv"
+
+    parsed_json = JSONHelper.safe_parse!(json_file: json_file)
+    # TODO: Either validate that it's an array of hashes or transform it into one.
+
+    csv_contents = CSV.generate(encoding: 'UTF-8', headers: true, write_headers: true) do |csv|
+      csv << parsed_json.first.keys
+      parsed_json.each { |hsh| csv << hsh.values }
+    end
+
+    File.write(output_file, csv_contents)
+
+    puts "Transformed to csv at '#{output_file}'"
+  end
+
+end
+
+CSVToJSON.perform(args: ARGV)

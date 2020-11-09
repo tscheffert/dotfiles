@@ -1603,8 +1603,9 @@ Metrics/ClassLength:
 Metrics/CyclomaticComplexity:
   Max: 10
 
+# Make line length super long, but still run it
 Metrics/LineLength:
-  Max: 95
+  Max: 150
   # To make it possible to copy or click on URIs in the code, we allow lines
   # containing a URI to be longer than Max.
   AllowHeredoc: true
@@ -1620,13 +1621,15 @@ Metrics/LineLength:
   # any regular expression listed in this option will be ignored by LineLength.
   IgnoredPatterns: ['postgresql://.*?']
 
+# Super long but run it. Better to be explicit, clear, and favoring the _right_ abstraction thant optimize for vertical line length.
 Metrics/MethodLength:
   CountComments: false  # count full line comments?
-  Max: 20
+  Max: 50
 
+# Make this shit _super_ long, but still run it. Lots of the stuff we do, is just super repetitive and long. Better to be explicit and WET, than to optimize for ModuleLength.
 Metrics/ModuleLength:
   CountComments: false  # count full line comments?
-  Max: 100
+  Max: 500
 
 Metrics/ParameterLists:
   Max: 5

@@ -158,6 +158,8 @@ alias gfpu='git push --force-with-lease'
 
 alias gpu='git push'
 
+alias gpuod='git push origin --delete'
+
 alias gco='git checkout'
 
 # Transparently treat 'master' as origin/HEAD

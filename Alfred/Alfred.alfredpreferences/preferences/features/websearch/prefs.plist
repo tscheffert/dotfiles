@@ -67,7 +67,7 @@
 			<key>text</key>
 			<string>Ruby Docs for '{query}'</string>
 			<key>url</key>
-			<string>http://ruby-doc.org/core-2.1.2/{query}.html</string>
+			<string>http://ruby-doc.org/core-2.7.1/{query}.html</string>
 			<key>utf8</key>
 			<true/>
 		</dict>
@@ -119,7 +119,7 @@
 			<key>text</key>
 			<string>Search Ruby Doc for '{query}'</string>
 			<key>url</key>
-			<string>http://ruby-doc.com/search.html?q={query}+2.1.2&amp;sa=Search</string>
+			<string>http://ruby-doc.com/search.html?q={query}+2.7.1&amp;sa=Search</string>
 			<key>utf8</key>
 			<true/>
 		</dict>
@@ -171,7 +171,7 @@
 			<key>text</key>
 			<string>Ruby Docs Std-lib Filter for '{query}'</string>
 			<key>url</key>
-			<string>http://ruby-doc.org/stdlib-2.1.2/libdoc/{query}/rdoc/index.html</string>
+			<string>http://ruby-doc.org/stdlib-2.7.1/libdoc/{query}/rdoc/index.html</string>
 			<key>utf8</key>
 			<true/>
 		</dict>

@@ -187,7 +187,7 @@ Plug 'sjl/gundo.vim'
 
 " Snippets
 if !InConEmuSession() " TODO: Get this working with ConEmu vim
-  Plug 'SirVer/ultisnips', Cond(has('python'))
+  Plug 'SirVer/ultisnips', Cond(has('python3'))
 end
 
 " Language specific

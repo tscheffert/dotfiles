@@ -35,6 +35,10 @@ function! InWindowsSession()
   return g:os == 'windows'
 endfunction
 
+function! InMacbookSession()
+  return g:os == 'mac'
+endfunction
+
 function! InConEmuSession()
   return InWindowsSession() && !has('gui_running') && !empty($ConEmuBuild)
 endfunction
@@ -1019,7 +1023,9 @@ if has('gui_running')
     " Set vim to be maximized on opening
     au GUIEnter * simalt ~x
     " Set the default font to Input, which i've custom downloaded, with Consolas Fallback
-    set guifont=Input:h12,Consolas:h12:cANSI
+    set guifont=Input:h14,Consolas:h12:cANSI
+  elseif InMacbookSession()
+    set guifont=Input:h14,Menlo:h12
   else
     " Set the default font to Source Code Pro (with escaped spaces) which I
     " use everywhere!

@@ -262,9 +262,11 @@ Plug 'tpope/vim-surround'
 " Ruby stuff
 Plug 'vim-ruby/vim-ruby'                            " Ruby support stuff
 Plug 'tpope/vim-rails',         { 'for': ['ruby'] } " Fancy pr
-Plug 'tpope/vim-bundler',       { 'for': ['ruby'] } " Works with vim-rails and vim-rake for bundler goodness
+" Plug 'tpope/vim-bundler',       { 'for': ['ruby'] } " Works with vim-rails and vim-rake for bundler goodness
+
+
 Plug 'tpope/vim-endwise',       { 'for': ['ruby'] } " Add matching 'end's for blocks
-Plug 'tpope/vim-projectionist', { 'for': ['ruby'] } " Project management for navigation n such
+" Plug 'tpope/vim-projectionist', { 'for': ['ruby'] } " Project management for navigation n such
 
 " Git!
 " TODO: This still doesn't work when openned via right click, edit with vim
@@ -296,6 +298,9 @@ Plug 'kana/vim-textobj-line'
 Plug 'andymass/vim-matchup'
 " Plug 'terryma/vim-expand-region' # messes with my _ binding for horizontal splits
 
+" Lets us use 'ir' for _inner_ ruby block text object and 'ar' for _all_ of a ruby block text object
+Plug 'nelstrom/vim-textobj-rubyblock', { 'for': ['ruby'] }
+
 " Better Markdown
 Plug 'shime/vim-livedown', { 'for': ['markdown'] }
 " Plug 'tpope/vim-markdown', { 'for': ['markdown'] }
@@ -304,7 +309,7 @@ Plug 'gabrielelana/vim-markdown', { 'for': ['markdown'] }
 
 " Allow . to repeat things more often. Enables plugins (like gitgutter) and I can
 "   map it myself
-Plug 'tpope/vim-repeat' " Wrap stuff for . command
+Plug 'tpope/vim-repeat'
 
 " Rename a buffer and on disk
 Plug 'danro/rename.vim'
@@ -1233,6 +1238,10 @@ function! s:FilterLines(cmd, filter)
   0
 endfunction
 command! -nargs=? ScriptNames call s:FilterLines('scriptnames', <q-args>)
+
+" TODO: See if we can simplify
+" With Vim 8 we can do this:
+" :enew|pu=execute('scriptnames')
 
 " TODO: See if this is better than existing Filter_lines
 " The following is a more generic function allowing you to view any ex command in a scratch buffer:

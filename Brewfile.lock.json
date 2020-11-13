@@ -791,6 +791,15 @@
             "appdir": "/Applications"
           }
         }
+      },
+      "google-backup-and-sync": {
+        "version": "latest",
+        "options": {
+          "full_name": "google-backup-and-sync",
+          "args": {
+            "appdir": "/Applications"
+          }
+        }
       }
     }
   },

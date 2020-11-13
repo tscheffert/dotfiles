@@ -160,3 +160,6 @@ cask "keepassxc"
 
 # Install Docker Desktop
 cask "docker"
+
+# Google Drive
+cask "google-backup-and-sync"

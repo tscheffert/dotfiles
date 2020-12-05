@@ -48,3 +48,9 @@ bundle install
 Homepage: <https://github.com/piotrmurach/tty-markdown-cli>
 
 Provides `tty-markdown <MARKDOWN FILE>` which outputs a beautiful terminal representation of your markdown. Great for previewing markdown files.
+
+#### `gemdiff`
+
+Homepage: <https://github.com/teeparham/gemdiff>
+
+Provides `gemdiff update <gem>` which will bundle update a gem and automatically commit it.

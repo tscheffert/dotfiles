@@ -32,3 +32,19 @@ bootstrap/bootstrap.bat
 ```bash
 pip install -r requirements.txt
 ```
+
+### Install Ruby dependencies
+
+```bash
+bundle install
+```
+
+## Included Utilities
+
+### Ruby
+
+#### TTY Markdown CLI
+
+Homepage: <https://github.com/piotrmurach/tty-markdown-cli>
+
+Provides `tty-markdown <MARKDOWN FILE>` which outputs a beautiful terminal representation of your markdown. Great for previewing markdown files.

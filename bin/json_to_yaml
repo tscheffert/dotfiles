@@ -2,14 +2,14 @@
 # vim: ft=ruby
 
 require 'json'
-require 'csv'
+require 'YAML'
 require 'active_support'
 require 'active_support/core_ext/object/blank'
 
 require File.absolute_path(File.join(__dir__, '..', 'ruby', 'lib', 'json_helper'))
 
 # TODO: See https://github.com/korczis/json2csv as an example
-module CSVToJSON
+module JSONToYAML
 
   def self.perform(args:)
     json_file = args[0]
@@ -17,21 +17,17 @@ module CSVToJSON
     JSONHelper.validate!(json_file: json_file, argument_name: 'json_file')
     puts "Valid JSON file: '#{json_file}'"
 
-    output_file = json_file.gsub(/\.json\z/, '.csv')
+    output_file = json_file.gsub(/\.json\z/, '.yml')
 
     parsed_json = JSONHelper.safe_parse!(json_file: json_file)
-    # TODO: Either validate that it's an array of hashes or transform it into one.
 
-    csv_contents = CSV.generate(encoding: 'UTF-8', headers: true, write_headers: true) do |csv|
-      csv << parsed_json.first.keys
-      parsed_json.each { |hsh| csv << hsh.values }
+    File.open(output_file, 'w+') do |f|
+      f.write(YAML.dump(parsed_json))
     end
 
-    File.write(output_file, csv_contents)
-
-    puts "Transformed to csv at '#{output_file}'"
+    puts "Transformed to yaml at '#{output_file}'"
   end
 
 end
 
-CSVToJSON.perform(args: ARGV)
+JSONToYAML.perform(args: ARGV)

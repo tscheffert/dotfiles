@@ -49,3 +49,23 @@ Convert ruby string hashes to json:
 %s/\s\+=>/: /g
 ```
 
+
+## Windowing
+
+### Switching buffers between two windows
+
+Source: <http://vimcasts.org/episodes/working-with-windows/>
+
+```
+ctrl-w w cycle between the open windows
+ctrl-w h focus the window to the left
+ctrl-w j focus the window to the down
+ctrl-w k focus the window to the up
+ctrl-w l focus the window to the right
+ctrl-w r rotate all windows
+ctrl-w x exchange current window with its neighbour
+ctrl-w H move current window to far left
+ctrl-w J move current window to bottom
+ctrl-w K move current window to top
+ctrl-w L move current window to far right
+```

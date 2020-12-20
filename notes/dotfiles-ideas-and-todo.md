@@ -88,6 +88,8 @@ Review this further: <https://github.com/sindresorhus/pure/blob/master/pure.zsh>
 ### Vim
 
 - Function to "unsmarten" quotes, probably by straight replacing them
+- Get the UltiSnips Ruby snippet for `def self.` to ignore parameters
+- Consider using this: <https://github.com/sheerun/vim-polyglot>
 
 ### Bin
 
@@ -99,6 +101,9 @@ Review this further: <https://github.com/sindresorhus/pure/blob/master/pure.zsh>
   - Allows linking from other places to there.
   - Would have to link the subfolders to `~/bin` though, which seems okay
 
+- Replace `which` usage in ruby scripts with: <https://github.com/piotrmurach/tty-which>
+  - I'm pretty sure they're using `tty-command` to run `which` anyways...
+
 ### Zsh
 
 - Change `zsh/windows` to be unique per PC, I don't have the same utilities installed on every PC in the same way
@@ -109,3 +114,7 @@ Review this further: <https://github.com/sindresorhus/pure/blob/master/pure.zsh>
 - Make profile PSReadline aware
   - Are we using it? (Yes I think so?)
   - Set the history file path somewhere better
+
+### Tools
+
+- Start using `git-lint`: <https://www.alchemists.io/projects/git-lint/>

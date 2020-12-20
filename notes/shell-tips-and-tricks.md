@@ -244,6 +244,18 @@ if ! test_exists expect; then
 fi
 ```
 
+### Only do something if a command fails, with silenced output
+
+Redirects are hard.
+
+Redirect info: <https://mywiki.wooledge.org/BashFAQ/055>
+
+```bash
+if !my_command --arg thing >/dev/null 2>&1; then
+  echo "my_command failed"
+fi
+```
+
 ### Run a command in a loop every few seconds
 
 ```
@@ -331,6 +343,18 @@ Because `${string%substring}` will remove the shortest match of `$substring` fro
 
 - Parameter Expansion: <https://www.gnu.org/software/bash/manual/html_node/Shell-Parameter-Expansion.html>
 - Pattern Matching: <https://www.gnu.org/software/bash/manual/html_node/Pattern-Matching.html#Pattern-Matching>
+
+## Print the current date
+
+```
+date +"%Y-%m-%d_%H-%M-%S%Z"
+```
+
+## Print the current date in rfc3339
+
+```
+date --rfc3339=seconds
+```
 
 ## Ruby
 

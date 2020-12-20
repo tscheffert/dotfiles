@@ -14,6 +14,8 @@
 
 ## Read Up On These
 
+- <https://github.com/piotrmurach/tty-runner>
+- <https://github.com/piotrmurach/tty-option>
 - <https://github.com/leejarvis/slop>
 - <https://github.com/ahoward/main>
 - <http://whatisthor.com/>
@@ -38,6 +40,7 @@
   - Probably copy a bunch of implementation from this if it's stand alone
   - The "registry" concept is great
   - Do like options, don't like arguments
+- <https://github.com/leejarvis/slop>
 
 ### Not Quite
 

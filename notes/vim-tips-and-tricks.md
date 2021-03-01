@@ -24,8 +24,6 @@ see `:help feature-list` and `:help has()` for more info
 has('feature')
 ```
 
-
-
 ## Search and Replace
 
 Helpful: <http://vimregex.com/>
@@ -49,6 +47,13 @@ Convert ruby string hashes to json:
 %s/\s\+=>/: /g
 ```
 
+Replace two newlines with one newline:
+
+```
+%s/\(\n\)\n/\1/g
+```
+
+Note that the replacement is a backreference because you can't enter a literal newline there for whatever reason.
 
 ## Windowing
 

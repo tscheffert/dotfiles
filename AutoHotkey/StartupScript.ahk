@@ -9,8 +9,8 @@
 ; Using %A_AppData% instead of %A_UserName% because that returns TScheffert but
 ; my directory is tscheffert
 
-; #include C:\Users\%A_UserName%\AutoHotkey\PhotoshopHotkeys.ahk
 #include %A_AppData%\..\..\AutoHotkey\MusicControls.ahk
-#include %A_AppData%\..\..\AutoHotkey\OutlookHotkeys.ahk
-#include %A_AppData%\..\..\AutoHotkey\PhotoshopHotkeys.ahk
+; #include %A_AppData%\..\..\AutoHotkey\OutlookHotkeys.ahk
+; #include C:\Users\%A_UserName%\AutoHotkey\PhotoshopHotkeys.ahk
 #include %A_AppData%\..\..\AutoHotkey\GenericHotkeys.ahk
+#include %A_AppData%\..\..\AutoHotkey\PathOfExile.ahk

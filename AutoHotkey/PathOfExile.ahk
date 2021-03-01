@@ -1,0 +1,16 @@
+; Ctrl+Shift+m: Start all the Path of Exile Apps I use
+$^+m::
+If (!AlreadyStartedFlag)
+{
+  AlreadyStartedFlag := 1
+
+  ; Lutbot, for ` disconnect, F10 for settings
+  Run, "C:\Users\Trent\POE-Apps\LutBot\macro.ahk"
+
+  ; Exilence Next - Tracking net worth over time
+  Run, "C:\Users\Trent\AppData\Local\Programs\exilence-next-app\Exilence Next.exe", "C:\Users\Trent\AppData\Local\Programs\exilence-next-app"
+
+  ; POE Overlay - Trades companion app, community edition
+  Run, "C:\Program Files\poe-overlay\poe-overlay.exe", "C:\Program Files\poe-overlay"
+}
+return

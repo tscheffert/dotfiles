@@ -21,7 +21,7 @@ module StripPrefixFromDirs
 
     # Dir.glob has interesting behavior with `[` characters where it behaves like a
     # regex, but we want literal match behavior. Just use Dir::entries and then filter
-    to_rename = Dir.entries(current_directory)
+    to_rename = Dir.entries(current_directory, encoding: 'UTF-8')
       .select { |dir| Dir.exist?(dir) }
       .select { |dir| dir.start_with?(prefix) }
 

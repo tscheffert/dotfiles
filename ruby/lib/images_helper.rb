@@ -68,7 +68,7 @@ module ImagesHelper
   end
 
   def self.already_sorted_dir?(dir)
-    subdirs = Dir.entries(dir)
+    subdirs = Dir.entries(dir, encoding: 'UTF-8')
 
     subdirs.any? { |subdir| subdir.end_with?(Constants::LANDSCAPE_DIR) } \
       || subdirs.any? { |subdir| subdir.end_with?(Constants::PORTRAIT_DIR) }
@@ -78,7 +78,7 @@ module ImagesHelper
     # Memoized by Dir so that it doesn't re-run each time it's called
     @_images_from ||= {}
     @_images_from[dir] ||=
-      Dir.entries(dir).select do |f|
+      Dir.entries(dir, encoding: 'UTF-8').select do |f|
         File.file?(f) && Constants::IMAGE_EXTENSIONS.include?(File.extname(f))
       end
   end
@@ -87,7 +87,7 @@ module ImagesHelper
     # Memoized by Dir so that it doesn't re-run each time it's called
     @_images_from ||= {}
     @_images_from[dir] ||=
-      Dir.entries(dir).select do |f|
+      Dir.entries(dir, encoding: 'UTF-8').select do |f|
         File.file?(f) && Constants::JPEG_IMAGE_EXTENSIONS.include?(File.extname(f))
       end
   end
@@ -133,7 +133,7 @@ module ImagesHelper
   end
 
   def self.all_dirs_in(dir:)
-    Dir.entries(dir).select { |entry| File.directory?(entry) } - Constants::IGNORED_DIRS
+    Dir.entries(dir, encoding: 'UTF-8').select { |entry| File.directory?(entry) } - Constants::IGNORED_DIRS
   end
 
   def self.safe_rename(old, new)

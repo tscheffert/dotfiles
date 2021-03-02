@@ -78,3 +78,21 @@ else
   return false
 end
 ```
+
+## Directories
+
+Get the list of all the contents of a directory. Without the `'.'`, `'..'`, and "unix-style hidden files" (aka dot prefixed). In `UTF-8`.
+
+```
+contents = Dir.glob('*', base: File.absolute_path(path_to_dir))
+# => Returns paths without the base prefixed
+```
+
+Alternative:
+```
+contents = Pathname.new(path_to_dir).glob('*')
+# => Returns full paths to the contents, as Pathname objects
+```
+
+If you're going to use `Dir.entries`, make sure to specify the `encoding: 'UTF-8'` option
+

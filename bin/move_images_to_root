@@ -31,7 +31,7 @@ module MoveImagesToRoot
 
     puts 'Mode: test, not acutally doing any moving (or renaming)' if test_run
 
-    dirs = Dir.entries('.').select { |entry| File.directory?(entry) } - IGNORED_DIRS
+    dirs = Dir.entries('.', encoding: 'UTF-8').select { |entry| File.directory?(entry) } - IGNORED_DIRS
 
     hydrated_dirs = dirs.map do |dir|
       dir_entries = Dir.glob(File.join(dir, '*'))

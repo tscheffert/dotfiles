@@ -13,7 +13,7 @@ module ExampleScript
   IGNORED_DIRS = ['.', '..'].freeze
 
   def self.perform(args:)
-    #dirs = Dir.entries('.').select { |entry| File.directory?(entry) } - IGNORED_DIRS
+    #dirs = Dir.entries('.', encoding: 'UTF-8').select { |entry| File.directory?(entry) } - IGNORED_DIRS
 
     example_string, example_flag = parse_and_validate!(args: args)
   end

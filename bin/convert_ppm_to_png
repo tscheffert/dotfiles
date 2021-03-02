@@ -36,7 +36,7 @@ module ConvertPpmToPng
       exit 1
     end
 
-    ppm_images = Dir.entries('.').select do |f|
+    ppm_images = Dir.entries('.', encoding: 'UTF-8').select do |f|
       File.file?(f) && File.extname(f) == '.ppm'
     end
     FileUtils.mkdir_p(SOURCE_DIR)

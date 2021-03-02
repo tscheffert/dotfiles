@@ -50,15 +50,7 @@ module MoveImagesToRoot
     end
 
     sorted_dirs_with_images = dirs_with_images.sort_by do |dir|
-      numeric, *extra = dir[:path].match(/\d+/, &:to_a)
-
-      raise "Found multiple digits somehow in dir: #{dir[:path]}" if extra.present?
-
-      if numeric.present?
-        numeric.to_i
-      else
-        dir[:path]
-      end
+      item_to_sort_by(dir: dir)
     end
 
     puts 'Original Dir Order: '
@@ -73,6 +65,24 @@ module MoveImagesToRoot
     end
 
     remove_empty_dirs(dirs_with_images: sorted_dirs_with_images, test_run: test_run)
+  end
+
+  def self.item_to_sort_by(dir:)
+    numeric, *extra = dir[:path].match(/\d+/, &:to_a)
+
+    if extra.present?
+      warn "Found multiple digits somehow in dir: #{dir[:path]}"
+      exit 1
+    end
+
+    if numeric.present?
+      numeric.to_i
+    else
+      dir[:path]
+    end
+  rescue => e
+    warn "Failed to get an item to sort by:\n#{e}"
+    exit 1
   end
 
   def self.move_with_rename(dirs_with_images:, test_run:)

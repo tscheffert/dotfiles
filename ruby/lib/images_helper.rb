@@ -152,6 +152,12 @@ module ImagesHelper
     warn "Dir #{dir} removal failed with error #{e}"
   end
 
+  def self.safe_remove_dir_with_contents(dir)
+    FileUtils.rm_rf(dir)
+  rescue StandardError => e
+    warn "Dir #{dir} removal failed with error #{e}"
+  end
+
   # Escape the meta chars that Dir::glob uses
   def self.safe_path_for_glob(path)
     # Backslash only for escaping, switch it to forward slashes

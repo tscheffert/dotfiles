@@ -2038,6 +2038,10 @@ nnoremap <silent> <Leader>ts :%s/\t/  /g<CR>
 
 nnoremap <silent> <Leader>fsq :%s/\(“\|”\|“\|“\|”\)/"/g<CR>
 
+" Fix smart hyphens
+nnoremap <silent> <Leader>fs- :%s/–/-/g<CR>
+
+
 " Insert a single character and go back to command mode
 noremap S i<Space><Esc>r
 

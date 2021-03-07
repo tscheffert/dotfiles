@@ -1,7 +1,9 @@
-# macos Boostrapping Notes
+# macOS Bootstrapping Notes
 
 ## Steps
 
+- Install Xcode Commandline Tools
+  - `sudo xcode-select --install`
 - Install any system updates from Apple -> System Preferences -> Software Update
 - Install homebrew from brew.sh
   - Double check it worked with `brew doctor`
@@ -10,10 +12,23 @@
 - Clone dotfiles:
   - `cd ~; git clone https://github.com/tscheffert/dotfiles.git .dotfiles`
 - Run `bash bootstrap/bootstrap_macos.sh` to get most things set up
+- Ruby
+  - Install appropriate ruby version
+    - `rbenv install 2.7.1` or whatever relevant version
+  - Set the default ruby version to the one you installed
+    - `rbenv global 2.7.1`
+- Set up iTerm2
 - Set up Alfred
 - Set up HammerSpoon
 - Set up Karabiner Elements
 - Install Greenshot from Mac App Store
+
+## Work Setup
+
+- Start Outlook and login
+- Start Teams and login
+- Install Horizon client
+  - `brew install --cask vmware-horizon-client`
 
 ## TODO
 
@@ -54,9 +69,10 @@
 ## Settings
 
 - On battery icon, enable show percentage
+- On menu bar, open display preferences and turn off the show menu bar icon
+- On menu bar, open keyboard preferences and turn off the show menu bar icon
 - In trackpad, disable natural scrolling
 - In keyboard, use function keys as function keys
-- In menubar, disable showing displays when available
 - Disable the cmd+space shortcut for spotlight
 
 ## Things to check
@@ -75,13 +91,13 @@ Ignore insecure directories and continue [y] or abort compinit [n]? y%
 
 Solution:
 
+Run the fix script:
+
 ```
-dir=/usr/local/share/
-sudo chown -R $(whoami):staff $dir
-sudo chmod -R 755 "$dir"
+bash bootstrap/fixes/fix_insecure_compaudit.sh
 ```
 
-Double check it worked by running `compaudit` to see a list of dirs it still things are insecure.
+Double check it worked by running `compaudit` to see a list of dirs it still thinks are insecure.
 
 ## Parallels Set Up
 

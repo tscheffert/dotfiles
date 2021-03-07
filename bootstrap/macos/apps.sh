@@ -30,6 +30,8 @@ fi
 if ! test_exists fzf; then
   echo 'installing fzf'
   brew install fzf
+  # TODO: Maybe run this?
+  # /usr/local/opt/fzf/install
 else
   echo "has fzf, check"
 fi

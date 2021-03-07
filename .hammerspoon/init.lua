@@ -1,4 +1,10 @@
 -- [[
+-- TODO: Check if hotkeys are able to be bound by hammerspoon and warn if they're not: https://www.hammerspoon.org/docs/hs.hotkey.html#assignable
+-- TODO: Investigate: https://github.com/miromannino/miro-windows-manager, seems pretty legit
+-- TODO: Investigate this too https://www.hammerspoon.org/Spoons/PushToTalk.html
+-- ]]
+
+-- [[
 --    Other stuff
 -- ]]
 
@@ -271,12 +277,24 @@ hs.hotkey.bind({"ctrl", "shift"}, "[", function()
 end)
 
 
+
+-- [[
+--    Teams Hotkeys
+--    TODO: Get this working!
+-- ]]
+hs.hotkey.bind({"ctrl", "shift"}, "M", function()
+  -- Send CMD + Shift + M to teams
+  hs.alert.show("Muting not yet implemented")
+end)
+
+
 -- [[
 --    Caffeine/Caffeinate/Amphetamine/KeepingYouAwake Replacement
 --    TODO:
 --      - Try to get SVG/path icons rather than files
 --      - Support a right click menu with "Turn On for Duration"
 --      - Support toggling it off at a certain battery percentage
+--      - 2020-09-30 - It doesn't appear right away when starting hammerspon, gotta click the bar first
 --    Icons from Gloria Kang: https://dribbble.com/shots/2049777-Retina-Caffeine-Menubar-Icons
 --    Features to replace: http://semaja2.net/projects/insomniaxinfo/
 -- ]]

@@ -1,4 +1,3 @@
-
 # Ruby Snippets
 
 ## General
@@ -96,3 +95,40 @@ contents = Pathname.new(path_to_dir).glob('*')
 
 If you're going to use `Dir.entries`, make sure to specify the `encoding: 'UTF-8'` option
 
+
+## Literal Dictionaries
+
+Load a dictionary, filter by word length, then use it to generate
+
+```ruby
+MINIMUM_WORD_LENGTH = 4
+MAXIMUM_WORD_LENGTH = 6
+
+def self.dictionary
+  @_dictionary ||= begin
+    words = File.readlines("/usr/share/dict/words", chomp: true).map { |w| w.strip.downcase }.uniq
+    puts "Loaded #{words.length} words from /usr/share/dict/words"
+
+    reduced_words = words.select do |word|
+      word.length >= MINIMUM_WORD_LENGTH &&
+        word.length <= MAXIMUM_WORD_LENGTH
+    end
+    puts "Reduced to #{reduced_words.length} are between min and max"
+
+    reduced_words.group_by { |word| word[0] }
+  end
+end
+private_class_method :dictionary
+
+# Use whatever mnemonic you want to generate for a passphrase
+mnemonic = 'word'
+phrase = []
+mnemonic.each_char do |character|
+  possible_words = dictionary[character].length
+  index = SecureRandom.random_number(possible_words)
+  word = dictionary[character][index]
+
+  phrase << word
+end
+passphrase = phrase.join('-') + '1'
+```

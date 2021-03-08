@@ -50,3 +50,19 @@ elasticdump \
   --output=http://staging.es.com:9200/my_index \
   --type=data
 ```
+
+## readability-cli
+
+Docs:
+<https://gitlab.com/gardenappl/readability-cli>
+
+Install:
+```
+npm install -g readability-cli
+```
+
+Usage:
+```
+readable index.html
+readable https://www.nytimes.com/2020/01/18/technology/clearview-privacy-facial-recognition.html
+```

@@ -16,7 +16,7 @@ manpath=('/usr/local/opt/findutils/libexec/gnuman' $manpath)
 manpath=('/usr/local/opt/gnu-tar/libexec/gnuman' $manpath)
 
 
-# -- Prepend --
+# --- Prepend ---
 
 # For homebrewed 'coreutils'
 prepend_to_path '/usr/local/opt/coreutils/libexec/gnubin'
@@ -40,19 +40,12 @@ export VISUAL='mvim -f'
 # Install to global /Applications, not user local ~/Applications
 export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 
+# Set the required env variable for postgres
+export PGDATA='/usr/local/var/postgres'
+export PGGHOST=localhost
 
-# --- Go ---
-# Add GOROOT-based install location to path
-# append_to_path '/usr/local/opt/go/libexec/bin'
-
-# This is where of the depedencies and such
-if [[ ! -d ~/go ]]; then
-  mkdir ~/go
-fi
-export GOPATH="$HOME/go"
-
-# Add golang tooling that I download to the path
-append_to_path "$GOPATH/bin"
+# Android from `brew install android-sdk`
+export ANDROID_HOME='/usr/local/opt/android-sdk'
 
 
 # --- Aliases ---
@@ -67,6 +60,11 @@ alias finder-hide-hidden-files='defaults write com.apple.finder AppleShowAllFile
 # Reload karabiner after config updates
 # Source: https://karabiner-elements.pqrs.org/docs/manual/misc/configuration-file-path/
 alias restart-karabiner='launchctl kickstart -k gui/`id -u`/org.pqrs.karabiner.karabiner_console_user_server'
+
+
+# --- Functions ---
+fpath=(~/.zsh/functions/macos $fpath)
+autoload -U ~/.zsh/functions/macos/*(.:t)
 
 
 # --- Ruby ---
@@ -88,22 +86,14 @@ fi
 # nvm installed with homebrew too
 # Set up NVM
 # TODO: Resolve the "scalar parameter CONSTANT_VALUE created globally in function" warning
-export NVM_DIR=~/.nvm
-function init_nvm() {
-  source $(brew --prefix nvm)/nvm.sh
-}
+# Only run if nvm installed
+if [[ -d "~/.nvm"  ]]; then
+  export NVM_DIR=~/.nvm
 
-
-# --- Postgres ---
-
-# Set the required env variable for postgres
-export PGDATA='/usr/local/var/postgres'
-export PGGHOST=localhost
-
-# --- Android ---
-
-# Android from `brew install android-sdk`
-export ANDROID_HOME='/usr/local/opt/android-sdk'
+  function init_nvm() {
+    source $(brew --prefix nvm)/nvm.sh
+  }
+fi
 
 
 # --- Colorful LS ---
@@ -130,16 +120,18 @@ zstyle ':completion:*:default' list-colors "${(@s.:.)LS_COLORS}"
 # fi
 
 
-# --- Git Prompt, only on OSX ---
-#   Mingw, which I use, already has a nice prompt and it's colorful!
-# prompt=~/.prompts/.git-prompt.sh
-# if [ -f "${prompt}" ]; then
-#   # Enable the __git_ps1
-#   source $prompt
+# --- Go ---
+# Add GOROOT-based install location to path
+# append_to_path '/usr/local/opt/go/libexec/bin'
 
-#   # Set status line
-#   export PS1='[\W]$(__git_ps1 "(%s)")$ '
-# fi
+# This is where of the depedencies and such
+if [[ ! -d ~/go ]]; then
+  mkdir ~/go
+fi
+export GOPATH="$HOME/go"
+
+# Add golang tooling that I download to the path
+append_to_path "$GOPATH/bin"
 
 
 # --- Docker-Machine ---

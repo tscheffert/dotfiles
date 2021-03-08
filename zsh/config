@@ -94,6 +94,12 @@ setopt HIST_REDUCE_BLANKS
 # Don't beep if we reach the end of history
 setopt NO_HIST_BEEP
 
+# Prevent copy pasted code from ever executing without letting me review it
+# Source: https://github.com/ohmyzsh/ohmyzsh/blob/6fbad5bf72fad4ecf30ba4d4ffee62bac582f0ed/plugins/safe-paste/safe-paste.plugin.zsh#L13-L15
+set zle_bracketed_paste  # Explicitly restore this zsh default
+autoload -Uz bracketed-paste-magic
+zle -N bracketed-paste bracketed-paste-magic
+
 
 # Autoloaded functions from files are wrapped in functions rather than just
 #   containing the body of the function

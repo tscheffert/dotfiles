@@ -32,7 +32,8 @@ set convert-meta off
 # Insert text into editing buffer as a single string of characters, rather than
 # individually. Prevents characters from being interpreted as editing commands
 # Note: This prevents the ENTER key from putting in a new-line
-# set enable-bracketed-paste on
+#  new Note: What? I haven't seen evidence of this issue
+set enable-bracketed-paste on
 
 # Scroll horizontally on screen rather than wrapping when line is longer than screen width
 # set horizontal-scroll-mode on

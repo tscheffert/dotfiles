@@ -18,6 +18,7 @@ link_directory "$HOME/.dotfiles/bin" "$HOME/bin"
 link_directory "$HOME/.dotfiles/iTerm" "$HOME/iTerm"
 link_directory "$HOME/.dotfiles/vimfiles" "$HOME/.vim"
 link_directory "$HOME/.dotfiles/zsh" "$HOME/.zsh"
+mkdir -p "$HOME/.config"
 link_directory "$HOME/.dotfiles/.config/karabiner" "$HOME/.config/karabiner"
 
 # Symlink files

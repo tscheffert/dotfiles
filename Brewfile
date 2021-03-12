@@ -129,7 +129,7 @@ cask "vlc"                      # Video player of champions
 cask "slack"
 
 # Video meeting client for work
-cask "zoomus" # Note that the 'zoom' package is something else
+cask "zoom"
 
 # Markdown editor I use everywhere
 cask "typora"
@@ -163,3 +163,9 @@ cask "docker"
 
 # Google Drive
 cask "google-backup-and-sync"
+
+# Internet browser
+cask "firefox"
+
+# Dual-Pane File Explorer
+cask "marta"

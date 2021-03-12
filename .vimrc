@@ -2090,6 +2090,13 @@ endfunction
 " Join lines but always remove spaces
 nnoremap <Leader>j :call JoinSpaceless()<CR>
 
+" Opposite of <shift-J> is <shift-K>, join the line above to the current
+"   Normally <s-k> runs a program to lookup keyword under cursor, annoying
+"   Commands:
+"     :.move -2<CR>  -- Swap the current line with the line above it
+"     J              --  Run the normal <shift-J> logic
+nnoremap <s-K> :.move -2<CR>J
+
 " Duplicate current line below then comment out current line
 nnoremap <silent> <Leader>cc Ypk:Commentary<CR>
 
@@ -2152,8 +2159,6 @@ nnoremap <Leader>ss :call SyntaxStack()<CR>
 " -----
 " Nop Key maps
 " -----
-" I keep pressing shift-k accidentally and it runs shell commands, ignore it instead
-nnoremap <s-k> <Nop>
 
 " cmd+p on MacVim opens the print preview thing which is annoying
 nnoremap <D-p> <Nop>

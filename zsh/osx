@@ -63,8 +63,10 @@ alias restart-karabiner='launchctl kickstart -k gui/`id -u`/org.pqrs.karabiner.k
 
 
 # --- Functions ---
-fpath=(~/.zsh/functions/macos $fpath)
-autoload -U ~/.zsh/functions/macos/*(.:t)
+if [[ -d "~/.zsh/functions/macos" ]]; then
+  fpath=(~/.zsh/functions/macos $fpath)
+  autoload -U ~/.zsh/functions/macos/*(.:t)
+fi
 
 
 # --- Ruby ---

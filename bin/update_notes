@@ -1,0 +1,149 @@
+#!/usr/bin/env ruby
+# vim: ft=ruby
+
+require 'active_support/core_ext/object/blank'
+require 'tty-command'
+require 'pathname'
+require 'fileutils'
+require 'date'
+
+# https://git-scm.com/docs/git-status
+module UpdateNotes
+
+  def self.perform(args:)
+    STDOUT.sync = true
+
+    # git Status --porcelain forces all the files output to be relative to the repo root; we should run from the repo root.
+    cd_to_git_repo_root_or_fail
+
+    git_pull
+
+    oldest_mtime = get_oldest_status_file_mtime
+    git_commit_all_notes(previous_date: oldest_mtime)
+
+    git_push
+  end
+
+  private
+
+  def self.cd_to_git_repo_root_or_fail
+    command = 'git rev-parse --show-toplevel'
+    rev_parse_result = TTY::Command.new(printer: :null).run!(command)
+
+    if rev_parse_result.success?
+      repo_root = rev_parse_result.stdout.strip
+      puts "Changing working directory to git repo root: '#{repo_root}'"
+      Dir.chdir(repo_root)
+    elsif rev_parse_result.status == 128
+      # Output: 'fatal: not a git repository (or any of the parent directories): .git'
+      warn "git indicates you're not in a git repo. You must be in a git repo to run '#{File.basename(__FILE__)}'"
+      exit 128
+    else
+      warn "-- '#{command}' failed"
+      warn "STDOUT: #{rev_parse_result.stdout}" if rev_parse_result.stdout.present?
+      warn "STDERR: #{rev_parse_result.stderr}" if rev_parse_result.stderr.present?
+      exit 1
+    end
+  end
+  private_class_method :cd_to_git_repo_root_or_fail
+
+  def self.git_pull
+    # Note: This will prompt for password and accept it like the normal git process does
+    run_git_command_safely(command: 'git pull')
+  end
+  private_class_method :git_pull
+
+  # Based on: https://git-scm.com/docs/git-status#_porcelain_format_version_1
+  # '\R' is a linebreak
+  GIT_STATUS_MATCHER = /\A(?<status>[ MADRCU?]{2})\ (?<file_path>.+)\R/
+
+  def self.get_oldest_status_file_mtime
+    # Get a list of all files that are going to be added
+    status = run_git_command_safely(command: 'git status --porcelain=v1')
+    status_lines = status.lines
+
+    if status_lines.blank?
+      puts '-- No output from git status, no update necessary'
+      exit 0
+    end
+
+    # status_lines = status_lines.map(&:chomp).map do |status_line|
+    status_files = status_lines.map do |status_line|
+      match = status_line.match(GIT_STATUS_MATCHER)
+      raise "Not able to match '#{status_line}' with git status output matcher" if match.blank?
+
+      match[:file_path]
+    end
+
+    status_files.each do |status_file|
+      raise "File from git status does not exist: '#{status_file}'" if !File.exist?(status_file)
+    end
+    # Get oldest mtime for those files
+    files_with_mtimes = status_files.map do |status_file|
+      {
+        file:  status_file,
+        mtime: File.mtime(status_file)
+      }
+    end
+
+    oldest = files_with_mtimes.min_by { |fwmt| fwmt[:mtime] }
+    puts "++ Found file '#{oldest[:file]}' with oldest mtime '#{oldest[:mtime]}'"
+
+    oldest[:mtime].strftime('%Y-%m-%d')
+  end
+  private_class_method :get_oldest_status_file_mtime
+
+  def self.git_commit_all_notes(previous_date:)
+    run_git_command_safely(command: 'git add .')
+
+    tag = get_computer_tag
+    current_date = Time.now.strftime('%Y-%m-%d')
+    message = "#{tag}: #{previous_date} - #{current_date}"
+
+    puts "++ Got message: '#{message}' from tag and dates"
+
+    run_git_command_safely(command: "git commit -m '#{message}'")
+  end
+  private_class_method :git_commit_all_notes
+
+  def self.get_computer_tag
+    require 'socket'
+    hostname = Socket.gethostname
+
+    computer_tag =
+      case hostname
+      when 'Trents-MacBook-Pro.local'
+        'WorkMacbook'
+      else
+        warn 'Must check hostname for system and add to get_computer_tag method!'
+        exit 1
+      end
+
+    computer_tag
+  end
+  private_class_method :get_computer_tag
+
+  def self.git_push
+    # Note: This will prompt for password and accept it like the normal git process does
+    run_git_command_safely(command: 'git push')
+  end
+  private_class_method :git_push
+
+  def self.run_git_command_safely(command:)
+    command_result = TTY::Command.new(printer: :null).run!(command)
+    if command_result.success?
+      puts "++ '#{command}' was successful"
+    else
+      warn "-- '#{command}' failed"
+      warn "STDOUT: #{rev_parse_result.stdout}" if rev_parse_result.stdout.present?
+      warn "STDERR: #{command_result.stderr}" if command_result.stderr.present?
+      exit 1
+    end
+
+    command_result.stdout
+  end
+  private_class_method :run_git_command_safely
+
+end
+
+UpdateNotes.perform(args: ARGV)

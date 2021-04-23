@@ -13,6 +13,8 @@ module UpdateNotes
   def self.perform(args:)
     STDOUT.sync = true
 
+    @verbose = args.include?('--verbose') || args.include?('--debug')
+
     # git Status --porcelain forces all the files output to be relative to the repo root; we should run from the repo root.
     cd_to_git_repo_root_or_fail
 
@@ -102,7 +104,8 @@ module UpdateNotes
 
     puts "++ Got message: '#{message}' from tag and dates"
 
-    run_git_command_safely(command: "git commit -m '#{message}'")
+    # Must use escaped double quotes for windows to be happy
+    run_git_command_safely(command: "git commit -m \"#{message}\"")
   end
   private_class_method :git_commit_all_notes
 
@@ -114,7 +117,10 @@ module UpdateNotes
       case hostname
       when 'Trents-MacBook-Pro.local'
         'WorkMacbook'
+      when 'Lady-Rosalie'
+        'PersonalDesktop'
       else
+        warn "Unexpected hostname: '#{hostname}'"
         warn 'Must check hostname for system and add to get_computer_tag method!'
         exit 1
       end
@@ -130,12 +136,18 @@ module UpdateNotes
   private_class_method :git_push
 
   def self.run_git_command_safely(command:)
-    command_result = TTY::Command.new(printer: :null).run!(command)
+    if @verbose
+      puts "Running command:"
+      puts command
+      command_result = TTY::Command.new(printer: :pretty).run!(command)
+    else
+      command_result = TTY::Command.new(printer: :null).run!(command)
+    end
     if command_result.success?
       puts "++ '#{command}' was successful"
     else
       warn "-- '#{command}' failed"
-      warn "STDOUT: #{rev_parse_result.stdout}" if rev_parse_result.stdout.present?
+      warn "STDOUT: #{command_result.stdout}" if command_result.stdout.present?
       warn "STDERR: #{command_result.stderr}" if command_result.stderr.present?
       exit 1
     end

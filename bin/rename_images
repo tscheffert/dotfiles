@@ -38,11 +38,18 @@ module RenameImages
     puts "\nRenaming #{ready_for_rename.length} files\n"
 
     ready_for_rename.sort.each_with_index do |img, i|
-      new_name = format(
-        '%<name_prefix>s-%<sequence>02d%<ext_name>s',
-        name_prefix: name_prefix,
-        sequence:    i + 1,
-        ext_name:    File.extname(img))
+      if name_prefix.blank?
+        new_name = format(
+          '%<sequence>02d%<ext_name>s',
+          sequence:    i + 1,
+          ext_name:    File.extname(img))
+      else
+        new_name = format(
+          '%<name_prefix>s-%<sequence>02d%<ext_name>s',
+          name_prefix: name_prefix,
+          sequence:    i + 1,
+          ext_name:    File.extname(img))
+      end
 
       ImagesHelper.safe_rename(img, new_name)
       puts "#{img} -> #{new_name}"

@@ -2038,6 +2038,8 @@ nnoremap <silent> <Leader>ts :%s/\t/  /g<CR>
 
 " Fix smart quotes like this '“'
 
+" TODO: Can I combine both smart quoting commands?
+nnoremap <silent> <Leader>fss :%s/\(’\)/'/g<CR>
 nnoremap <silent> <Leader>fsq :%s/\(“\|”\|“\|“\|”\)/"/g<CR>
 
 " Fix smart hyphens

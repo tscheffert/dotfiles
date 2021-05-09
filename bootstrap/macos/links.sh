@@ -43,6 +43,7 @@ link_file .psqlrc
 link_file .rubocop-disabled.yml
 link_file .rubocop-enabled.yml
 link_file .rubocop.yml
+link_file .tool-versions
 # link_file .slate
 # link_file .tmux.conf
 link_file .vimrc

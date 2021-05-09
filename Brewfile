@@ -6,6 +6,9 @@
 # Install apps to /Applications by the default is /Users/$user/Applications
 cask_args appdir: "/Applications"
 
+# Like `nvm` or `rbenv` but for everything
+brew "asdf"
+
 # The best shell around
 brew "zsh"
 
@@ -65,7 +68,7 @@ brew "git"
 brew "imagemagick"
 
 # I use node and npm for a few different CLI utilities
-brew "node"
+# brew "node"
 
 # 7zip Executable on Linux/Osx
 brew "p7zip"

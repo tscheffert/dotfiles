@@ -97,6 +97,11 @@ if [[ -d "~/.nvm"  ]]; then
   }
 fi
 
+# Source asdf if it's installed
+if brew list asdf >/dev/null 2>&1; then
+  source $(brew --prefix asdf)/asdf.sh
+fi
+
 
 # --- Colorful LS ---
 # Good examples:

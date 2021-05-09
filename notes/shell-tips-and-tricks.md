@@ -16,6 +16,13 @@ Working shell on our windows servers:
 git rebase --committer-date-is-author-date
 ```
 
+### Get the pretty git tag/commit for versioning
+
+```
+git describe --tags --match "v*" --always --long HEAD
+git describe --always --long --tags HEAD
+```
+
 ## Changes to files
 
 ### Remove lines matching regex from files
@@ -36,8 +43,14 @@ _mingw64_.
 
 ```bash
 gdfom | xargs ag --files-with-matches 'artifact_deploy_service' | awk '{print $1}' | xargs gvim
+gdfom | xargs ag --files-with-matches '2021-03-26' | awk '{print $1}' | xargs gvim
 ```
 
+### Get the path to a bash script, regardless of where it's run
+
+```
+bash_file_path="$(realpath "${BASH_SOURCE[0]}")"
+```
 
 ### Get the root of the repo from a bash script
 
@@ -70,6 +83,7 @@ Real bash file path: /Users/tscheffert/dev/azure-devops/devops/artifactory-cloud
 Real path dirname: /Users/tscheffert/dev/azure-devops/devops/artifactory-cloud
 /Users/tscheffert/dev/azure-devops/devops/artifactory-cloud
 ```
+
 
 ## Maintenance
 
@@ -230,43 +244,15 @@ or:
 vim -c "redir! > vimout | scriptnames | redir END | q"
 ```
 
+## YQ
+
+Load an array of yaml objects, filter them, then output only a subset of keys:
+
+```
+yq eval '.[] | select(.server_role == "TLRG*") | {"server_role": .server_role, "depdendent_applications": .dependent_applications} | splitDoc' qa1-server-roles_overlay.yml
+```
+
 ## Other?
-
-### Check whether a given executable exists
-
-```bash
-test_exists() {
-  type $1 >/dev/null 2>&1
-}
-
-if ! test_exists expect; then
-  echo "I expect you've done fucked up now"
-fi
-```
-
-### Only do something if a command fails, with silenced output
-
-Redirects are hard.
-
-Redirect info: <https://mywiki.wooledge.org/BashFAQ/055>
-
-```bash
-if !my_command --arg thing >/dev/null 2>&1; then
-  echo "my_command failed"
-fi
-```
-
-### Run a command in a loop every few seconds
-
-```
-while sleep 5; do clear; <command>; done
-```
-
-### Run a command in a range
-
-```
-END=9; for ((i=1;i<=END;i++)); do knife cookbook delete role_common_app "123.456.$i" -y --config ~/.chef/sandbox/knife-dev.rb; done
-```
 
 ### Create a new sudo user
 

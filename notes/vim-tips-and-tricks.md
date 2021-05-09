@@ -74,3 +74,16 @@ ctrl-w J move current window to bottom
 ctrl-w K move current window to top
 ctrl-w L move current window to far right
 ```
+
+## UltiSnips
+
+### Python Interpolation
+
+Pass values between interpolation instances in a given script:
+
+```
+`!p snip.rv = camelize(snip.basename); cache = { "camelized_filename": snip.rv}`
+
+`!p snip.rv = cache["camelized_filename"]`.perform(args: ARGV)
+
+```

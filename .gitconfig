@@ -76,6 +76,7 @@
 
 [init]
   templatedir = ~/.git_template
+  defaultBranch = master
 
 [rerere]
   # Reuse recorded resolutions, meaning automatically reolve merge conflicts based on past resolutions

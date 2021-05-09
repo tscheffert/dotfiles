@@ -190,6 +190,8 @@ if !InConEmuSession() " TODO: Get this working with ConEmu vim
   Plug 'SirVer/ultisnips', Cond(has('python3'))
 end
 
+Plug 'ervandew/supertab'
+
 " Language specific
 Plug 'elzr/vim-json'
 Plug 'groenewege/vim-less'

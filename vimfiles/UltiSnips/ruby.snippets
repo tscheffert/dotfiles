@@ -176,4 +176,41 @@ snippet validatesp "validates :attribute, presence: true" sm
 validates :${1:attribute}, presence: true$0
 endsnippet
 
+# -- Bin Script Snippets
+
+snippet bin "Set up bin script file other way" bsm
+#!/usr/bin/env ruby
+# vim: ft=ruby
+
+require 'pathname'
+require 'fileutils'
+
+require File.join(__dir__, '..', 'ruby', 'lib', '${1:optimist_helper}')
+
+module ${2:`!p snip.rv = camelize(snip.basename)`}
+  def self.perform(args:)
+    $0
+  end
+end
+
+$2.perform(args: ARGV)
+endsnippet
+
+snippet bintwo "Set up bin script file" b
+#!/usr/bin/env ruby
+# vim: ft=ruby
+
+require 'pathname'
+require 'fileutils'
+
+require File.join(__dir__, '..', 'ruby', 'lib', 'optimist_helper')
+module `!p snip.rv = camelize(snip.basename); cache = { "camelized_filename": snip.rv}`
+  def self.perform(args:)
+    $0
+  end
+end
+
+`!p snip.rv = cache["camelized_filename"]`.perform(args: ARGV)
+endsnippet
+
 # vim: ts=2 sw=2 expandtab ft=snippets:

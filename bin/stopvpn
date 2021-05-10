@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+# vim: ft=bash
+
+# Initially copied with <3 from: https://github.com/divy4/ansible/blob/master/roles/development_echo_setup/files/stopvpn
+
+set -e
+
+PID_FILE='/var/run/openconnect.pid'
+
+function main {
+  if [[ "$OSTYPE" != "darwin"* ]]; then
+    echo "This script is only configured to run from macOS at the moment!"  1>&2
+    exit 1
+  fi
+
+  if [[ -f "$PID_FILE" ]]; then
+    sudo kill -15 "$(cat "$PID_FILE")"
+  else
+    echo 'No PID found!'
+    return 1
+  fi
+}
+
+main "$@"

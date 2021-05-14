@@ -6,7 +6,7 @@ class Bool; end
 
 module OptionStructTypes
 
-  include Dry::Types.module
+  include Dry.Types()
 
   # TODO: Further investigate coercion options
   VALID_OPTION_TYPES = [
@@ -19,7 +19,7 @@ module OptionStructTypes
 
 end
 
-class Option < Dry::Struct::Value
+class Option < Dry::Struct
 
   attribute :command_line_name, OptionStructTypes::Strict::String
   attribute :variable_key, OptionStructTypes::Strict::Symbol

@@ -1,4 +1,6 @@
-# Sources
+# Technical Documentation Styleguide
+
+<https://developers.google.com/tech-writing>
 
 ## GeoServer Style
 

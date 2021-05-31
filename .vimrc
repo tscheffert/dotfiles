@@ -313,9 +313,6 @@ Plug 'gabrielelana/vim-markdown', { 'for': ['markdown'] }
 "   map it myself
 Plug 'tpope/vim-repeat'
 
-" Rename a buffer and on disk
-Plug 'danro/rename.vim'
-
 " Go!
 Plug 'fatih/vim-go', { 'for': ['go'] }
 

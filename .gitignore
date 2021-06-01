@@ -46,6 +46,10 @@ Alfred/Alfred.alfredpreferences/preferences/local/
 
 fonts/Input-Font/
 
+# devtools executable and autocomplete helpers
+bin/devtools
+zsh/functions/completions/_devtools
+
 # ----- Default...? -----
 .DS_Store
 ._*

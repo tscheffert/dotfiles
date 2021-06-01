@@ -2101,6 +2101,9 @@ nnoremap <s-K> :.move -2<CR>J
 " Duplicate current line below then comment out current line
 nnoremap <silent> <Leader>cc Ypk:Commentary<CR>
 
+" Close help window
+nnoremap <silent> <Leader>hc :helpclose<CR>
+
 " -----
 " Line Width Stuff
 " -----

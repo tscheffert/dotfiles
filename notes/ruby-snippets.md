@@ -31,6 +31,27 @@ end
 
 ## Script Utilities
 
+Help, debug, and test parsing.
+
+```ruby
+if args.include?('--help')
+  command_name = File.basename(__FILE__)
+  puts <<~HELPDOC
+    USAGE:
+        #{command_name}
+            Do the command
+        #{command_name} --debug
+            Prints more information, to help debugging
+        #{command_name} --help
+            Prints this message
+  HELPDOC
+  exit 0
+end
+
+@@debug = args.include?('--debug')
+test_run = args.include?('--test')
+```
+
 ### Option Parsing with Optimist
 
 ```ruby

@@ -24,6 +24,14 @@ see `:help feature-list` and `:help has()` for more info
 has('feature')
 ```
 
+### Where was a given function defined?
+
+Source: https://vi.stackexchange.com/a/21296
+
+Run `:verbose function NameOfFunction` and it will tell you where it was defined.
+
+Run `:help :function-verbose` to get more info.
+
 ## Search and Replace
 
 Helpful: <http://vimregex.com/>
@@ -54,6 +62,14 @@ Replace two newlines with one newline:
 ```
 
 Note that the replacement is a backreference because you can't enter a literal newline there for whatever reason.
+
+### Removing lines matching a pattern
+
+<https://vim.fandom.com/wiki/Delete_all_lines_containing_a_pattern>
+
+```
+:g/pattern/d
+```
 
 ## Windowing
 

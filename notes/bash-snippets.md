@@ -1,5 +1,11 @@
 # Bash Snippets
 
+## Parameter Expansion
+
+```bash
+local container_name="${1:?Must provide an image to check}"
+```
+
 ## Stuff
 
 ### Debug some bash stuff
@@ -18,6 +24,11 @@ set +x
 
 ```bash
 echo "This is text from echo that is going to STDERR, not STDOUT!"  1>&2
+
+function warn {
+  local message="${1:?Must provide a message to warn}"
+  echo "$message" 1>&2
+}
 ```
 
 ### Check whether a given executable exists

@@ -1,0 +1,71 @@
+#!/usr/bin/env bash
+# vim: ft=bash
+
+# Background:
+#   https://superuser.com/a/1081501
+#   https://www.kittell.net/code/mac-osx-terminal-change-dns/
+
+set -e
+
+function warn {
+  local message="${1:?Must provide a message to warn}"
+  echo "$message" 1>&2
+}
+
+# Run `scutil --dns` before and afterwards to see results
+function macos_set_echo_dns {
+
+  # From:
+  #   networksetup -listallnetworkservices
+  local network_name="Wi-Fi"
+
+  local echo_dns_primary="172.16.1.54"
+  local echo_dns_secondary="172.16.1.57"
+  # local echo_search_domain="hq.echogl.net"
+  local home_dns="192.168.50.1"
+
+  local enable_echo_dns=false
+
+  case "$1" in
+    "on" | "ON")
+      enable_echo_dns=true
+      ;;
+    "off" | "OFF")
+      enable_echo_dns=false
+      ;;
+    *)
+      warn "Must provide ON or OFF parameter"
+      warn "USAGE: macos_set_echo_dns ( on | off ) "
+      exit 1
+      ;;
+    esac
+
+  if $enable_echo_dns; then
+    echo "Enabling the Echo DNS for the VPN"
+
+    echo "Setting \"$echo_dns_primary, $echo_dns_secondary, $home_dns\" as the DNS resolvers"
+
+    # TODO: This should just prepend, not set it statically. But how would turning it off work?
+    sudo networksetup -setdnsservers "$network_name" \
+      "$echo_dns_primary" \
+      "$echo_dns_secondary" \
+      "$home_dns"
+
+    # echo "Setting $echo_search_domain as the search domain"
+    # sudo networksetup -setsearchdomains "$network_name" "$echo_search_domain"
+  else
+    echo "Disabling the Echo DNS, after the VPN"
+
+    sudo networksetup -setdnsservers "$network_name" \
+      "$home_dns"
+
+    # sudo networksetup -setsearchdomains "$ActiveNetworkName" empty
+  fi
+
+
+
+  # # Reset DNS after changes
+  sudo killall -HUP mDNSResponder
+}
+
+macos_set_echo_dns "$@"

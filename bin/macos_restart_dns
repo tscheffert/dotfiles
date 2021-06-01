@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+# vim: ft=bash
+
+set -e
+
+function main {
+  # TODO: Double check this is necessary, correct, and in the right order
+  sudo dscacheutil -flushcache
+  sudo killall -HUP mDNSResponder
+  sudo killall -HUP mDNSResponderHelper
+}
+
+main "$@"
+

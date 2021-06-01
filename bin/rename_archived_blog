@@ -1,0 +1,90 @@
+#!/usr/bin/env ruby
+# vim: ft=ruby
+
+require 'pathname'
+require 'fileutils'
+require 'active_support/core_ext/object/blank'
+
+require File.join(__dir__, '..', 'ruby', 'lib', 'file_helper')
+
+# This script will take the path to an archived blog pdf and:
+#   - Apply renaming rules
+#     - All characters lower cased
+#     - All spaces replaced with hyphens
+#   - Prefix a "site tag"
+#     - Accept a tag as an arguement
+#     - Prefix it to the renamed blog title, joined with an underscore.
+
+# Example:
+#   rename_archived_blog path-to-archived-blog.pdf site-tag
+#   rename_archived_blog 'Getting Started with Architecture Decision Records.pdf' ardalis
+module RenameArchivedBlog
+
+  def self.perform(args:)
+    if args.include?('--help')
+      command_name = File.basename(__FILE__)
+      puts <<~HELPDOC
+        USAGE:
+            #{command_name} [blog_post_pdf_path] [site_tag]
+                Rename an archived blog post following my predetermined rules.
+            #{command_name} --debug
+                Prints more information, to help debugging
+            #{command_name} --help
+                Prints this message
+      HELPDOC
+      exit 0
+    end
+
+    @@debug = args.include?('--debug')
+    @@test_run = args.include?('--test')
+
+    positional_args = args.reject { |arg| ['--debug', '--test', '--help'].include?(arg) }
+
+    if positional_args.length > 2
+      warn "Somehow received more than two positional args! Run with '--help' to see usage instructions."
+      exit 1
+    end
+
+    blog_post_pdf_path, site_tag = positional_args
+
+    FileHelper.validate!(
+      file_path:     blog_post_pdf_path,
+      argument_name: 'blog_post_pdf_path')
+
+    if !File.extname(blog_post_pdf_path) == '.pdf'
+      warn "Validating 'blog_post_pdf_path': File '#{json_file}' is not a PDF file as expected. RUn with '--help' to see usage instructions."
+      exit 1
+    end
+
+    if site_tag.blank?
+      warn "Didn't receive the expected site_tag argument! Run with '--help' to see usage instructions."
+      exit 1
+    end
+
+    if @@debug
+      puts 'Got through front matter with:'
+      puts "blog_post_pdf_path: #{blog_post_pdf_path}"
+      puts "site_tag: #{site_tag}"
+    end
+
+    transformed_blog_title = blog_post_pdf_path
+      .downcase
+      .gsub(' ', '-')
+
+    transformed_site_tag = site_tag.downcase
+
+    if @@debug
+      puts "transformed_blog_title: #{transformed_blog_title}"
+      puts "transformed_site_tag: #{transformed_site_tag}"
+    end
+
+    new_name = [site_tag.downcase, transformed_blog_title].join('_')
+
+    FileUtils.mv(blog_post_pdf_path, new_name) if !@@test_run
+
+    puts "Renamed '#{blog_post_pdf_path}' to '#{new_name}'"
+  end
+
+end
+
+RenameArchivedBlog.perform(args: ARGV)

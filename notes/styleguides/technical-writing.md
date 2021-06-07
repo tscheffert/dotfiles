@@ -1,6 +1,10 @@
 # Technical Documentation Styleguide
 
 <https://developers.google.com/tech-writing>
+<https://help.dozuki.com/Tech_Writing>
+<https://docs-guide.readthedocs.io/en/latest/style/>
+<https://en.wikiversity.org/wiki/Technical_writing>
+<https://github.com/kylelobo/The-Documentation-Compendium/>
 
 ## GeoServer Style
 

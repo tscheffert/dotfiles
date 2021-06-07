@@ -100,6 +100,9 @@ brew "wget"
 # Tool for repo cleaning
 brew "bfg"
 
+# VMware vSphere CLI wrapper
+brew "govc"
+
 
 # Things I haven't installed but could
 # brew "pigz" # Parallelized Implementation of gzip - Homepage: http://www.zlib.net/pigz/

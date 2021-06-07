@@ -49,3 +49,21 @@ export QA_RABBITMQ_ADMIN_PASSWORD=
 
 export PRD_RABBITMQ_ADMIN_USER=
 export PRD_RABBITMQ_ADMIN_PASSWORD=
+
+
+# -- Artifactory --
+
+export ARTIFACTORY_USER=
+export ARTIFACTORY_PASSWORD=
+
+
+# -- GOVC --
+
+export GOVC_URL=
+export GOVC_USERNAME=
+export GOVC_PASSWORD=
+
+export GOVC_TLS_KNOWN_HOSTS=~/.govc/known_hosts
+
+# Ideally we use GOVC_TLS_KNOWN_HOSTS instead
+# export GOVC_INSECURE=true

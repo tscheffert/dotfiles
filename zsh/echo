@@ -40,3 +40,16 @@ function append_to_kubeconfig {
 # append_to_kubeconfig "$HOME/.kube/config-qa1-k8smaster1"
 # append_to_kubeconfig "$HOME/.kube/config-prd-k8smaster1"
 # append_to_kubeconfig "$HOME/.kube/config-tk-k8smaster1"
+
+if [[ ! -d ~/.govc ]]; then
+  echo "Must create ~/.govc directory and export known hosts"
+  echo "Like this:"
+  echo "$ mkdir ~/.govc && govc about.cert -k -thumbprint > ~/.govc/known_hosts "
+fi
+
+if [[ ! -f ~/.govc/known_hosts ]]; then
+  echo "Must export known hosts for GOVC"
+  echo "Like this:"
+  echo "$ govc about.cert -k -thumbprint > ~/.govc/known_hosts "
+fi
+

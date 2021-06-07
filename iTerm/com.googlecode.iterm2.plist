@@ -253,6 +253,17 @@
 	<real>1</real>
 	<key>GlobalKeyMap</key>
 	<dict>
+		<key>0x57-0x120000-0xd</key>
+		<dict>
+			<key>Action</key>
+			<integer>13</integer>
+			<key>Label</key>
+			<string></string>
+			<key>Text</key>
+			<string></string>
+			<key>Version</key>
+			<integer>1</integer>
+		</dict>
 		<key>0x74-0x40000</key>
 		<dict>
 			<key>Action</key>
@@ -278,6 +289,8 @@
 			<key>Text</key>
 			<string>Close
 Close</string>
+			<key>Version</key>
+			<integer>0</integer>
 		</dict>
 		<key>0xf700-0x300000</key>
 		<dict>
@@ -1229,7 +1242,7 @@ Close</string>
 	<key>ShowBookmarkName</key>
 	<false/>
 	<key>ShowFullScreenTabBar</key>
-	<false/>
+	<true/>
 	<key>ShowPaneTitles</key>
 	<false/>
 	<key>SmartPlacement</key>

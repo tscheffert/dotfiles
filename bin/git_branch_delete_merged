@@ -12,143 +12,6 @@
 
 # TODO: Check out this gem: https://github.com/ruby-git/ruby-git
 
-# TODO: Local `run-duration` branch created, tracking origin/run-duration, when I pull
-#   down master and the origin/run-duration branch has been deleted then local run-duration
-#   should get deleted, but it doesn't
-
-# NOTE: My origin/HEAD was pointing to master, but that isn't correct. Changed it to origin/develop
-#   and it _still_ didn't delete the branch. `git branch --merged origin/develop` doesn't show
-#   the branch. We might have to do the "check each commit in a branch and see if it's in master" approach
-
-# NOTE: I do get this, which interestingly makes the run-duration color blue in my prompt:
-  # 22 [/c/dev/gitlab/HealthInspector/health-inspector](master) >>> gco run-duration
-  # Switched to branch 'run-duration'
-  # Your branch is based on 'origin/run-duration', but the upstream is gone.
-  #   (use "git branch --unset-upstream" to fixup)
-
-# NOTE: From master:
-  # d501e9b - Merge branch 'run-duration' into 'develop'          4 days ago Daniel Ivy
-  # cfe59d0 - Adding run duration to detail page                  4 days ago Dan Ivy
-  # b117de3 - Merge branch 'backend-filters' into 'develop'       4 days ago Daniel Ivy
-
-  # From run-duration:
-  # 31 [/c/dev/gitlab/HealthInspector/health-inspector](run-duration) >>> glg
-  #  8b55a5b - Adding run duration to detail page                  4 days ago Dan Ivy
-  #        HEAD -> run-duration
-  #  b117de3 - Merge branch 'backend-filters' into 'develop'       4 days ago Daniel Ivy
-
-# Evidence:
-
-# 5 [/c/dev/gitlab/HealthInspector/health-inspector](run-duration) >>> gcoa
-# 6 [/c/dev/gitlab/HealthInspector/health-inspector](run-duration) >>> gcom
-# Switched to branch 'master'
-# Your branch is up to date with 'origin/master'.
-# 7 [/c/dev/gitlab/HealthInspector/health-inspector](master) >>> gp
-# From git.echo.com:HealthInspector/health-inspector
-#  - [deleted]         (none)     -> origin/dto-consistency
-#  - [deleted]         (none)     -> origin/react-bug-fix
-#  - [deleted]         (none)     -> origin/run-duration
-#  - [deleted]         (none)     -> origin/time-frame
-# remote: Counting objects: 70, done.
-# remote: Compressing objects: 100% (61/61), done.
-# remote: Total 70 (delta 29), reused 32 (delta 9)
-# Unpacking objects: 100% (70/70), done.
-#    b117de3..759d0da  develop             -> origin/develop
-#  * [new branch]      end-time-bug-fix    -> origin/end-time-bug-fix
-#  * [new branch]      filter-construction -> origin/filter-construction
-# Current branch master is up to date.
-# 8 [/c/dev/gitlab/HealthInspector/health-inspector](master) >>> gbd-m
-# Pruning with 'git remote prune origin'
-# 9 [/c/dev/gitlab/HealthInspector/health-inspector](master) >>> gba
-#   develop
-# * master
-#   run-duration
-#   remotes/origin/HEAD -> origin/master
-#   remotes/origin/develop
-#   remotes/origin/end-time-bug-fix
-#   remotes/origin/filter-construction
-#   remotes/origin/master
-#   remotes/origin/validators
-
-
-
-
-# TODO: Just ran into this error, should have better error handling
-# 4 -128- [../chef-repo-atlas](develop) >>> gbd-m
-#   error: The branch 'generator-update' is not fully merged.
-# If you are sure you want to delete it, run 'git branch -D generator-update'.
-# C:/Users/tscheffert/.dotfiles/bin/git_branch_delete_merged:82:in `out!': !!! Command 'git branch --delete generator-update' failed with out:  (RuntimeError)
-#         from C:/Users/tscheffert/.dotfiles/bin/git_branch_delete_merged:171:in `block in perform'
-#         from C:/Users/tscheffert/.dotfiles/bin/git_branch_delete_merged:165:in `each'
-#         from C:/Users/tscheffert/.dotfiles/bin/git_branch_delete_merged:165:in `perform'
-#         from C:/Users/tscheffert/.dotfiles/bin/git_branch_delete_merged:188:in `<main>'
-# -- Deleting branch locally: generator-update
-# 5 -1- [../chef-repo-atlas](develop) >>> gb
-#   * develop
-#     generator-update
-# 6 [../chef-repo-atlas](develop) >>> gbfd generator-update
-# Deleted branch generator-update (was 67744ea).
-
-# error: The branch 'fixes-galore' is not fully merged.
-# If you are sure you want to delete it, run 'git branch -D fixes-galore'.
-# C:/Users/tscheffert/.dotfiles/bin/git_branch_delete_merged:101:in `out!': !!! Command 'git branch --delete fixes-galore' failed with out:  (RuntimeError)
-#         from C:/Users/tscheffert/.dotfiles/bin/git_branch_delete_merged:190:in `block in perform'
-#         from C:/Users/tscheffert/.dotfiles/bin/git_branch_delete_merged:184:in `each'
-#         from C:/Users/tscheffert/.dotfiles/bin/git_branch_delete_merged:184:in `perform'
-#         from C:/Users/tscheffert/.dotfiles/bin/git_branch_delete_merged:207:in `<main>'
-# -- Deleting branch locally: fixes-galore
-# 6 -1- [../generator](master) >>> gb
-#     fixes-galore
-#   * master
-# 7 [../generator](master) >>> gbfd fixes-galore
-# Deleted branch fixes-galore (was 037c694).
-
-
-# TODO: Doesn't work with multiple remotes
-# >>> gbd-m --remote
-# error: unable to delete 'tlrg/ETA-MultiTargetFrontENd': remote ref does not exist
-# error: failed to push some refs to 'git@git.echo.com:slalom-configuration-management/infrastructure-deploy.git'
-# C:/Users/tscheffert/.dotfiles/bin/git_branch_delete_merged:116:in `out!': !!! Command 'git push origin --delete tlrg/ETA-MultiTargetFrontENd' failed with out:  (RuntimeError)
-#         from C:/Users/tscheffert/.dotfiles/bin/git_branch_delete_merged:202:in `block in perform'
-#         from C:/Users/tscheffert/.dotfiles/bin/git_branch_delete_merged:199:in `each'
-#         from C:/Users/tscheffert/.dotfiles/bin/git_branch_delete_merged:199:in `perform'
-#         from C:/Users/tscheffert/.dotfiles/bin/git_branch_delete_merged:222:in `<main>'
-# -- Deleting branch on origin: tlrg/ETA-MultiTargetFrontENd
-# 45 -1- [../infrastructure-deploy](master) >>> gb
-#     beautify-testing
-#   * master
-#     tlrg-envs-prodlike
-#     tlrg-tlrg-boxes
-#     utility-scripts
-# 46 [../infrastructure-deploy](master) >>> git remote
-# origin
-# tlrg
-
-# TODO: More issues
-# ┌───── { 60 } [../k8s-yaml](add-gitattributes-prod)
-# └──>>> gco dev1 && gp
-# Switched to branch 'dev1'
-# Your branch is up to date with 'origin/dev1'.
-# From vs-ssh.visualstudio.com:v3/echo-it/DevCenter/k8s-yaml
-#  - [deleted]         (none)     -> origin/add-gitattributes-dev1
-# remote: Azure Repos
-# remote: Found 1 objects to send. (3 ms)
-# Unpacking objects: 100% (1/1), done.
-#    93ef1ef..5a3e402  dev1       -> origin/dev1
-# First, rewinding head to replay your work on top of it...
-# Fast-forwarded dev1 to 5a3e402f4bf81006dcd8fe62ca939de6f7fabaab.
-# ┌───── { 61 } [../k8s-yaml](dev1)
-# └──>>> gbd-m
-# Pruning with 'git remote prune origin'
-# ┌───── { 62 } [../k8s-yaml](dev1)
-# └──>>> gb
-#     add-elastic-no-name-tool
-#     add-gitattributes-dev1
-#     add-gitattributes-prod
-#     add-gitattributes-qa1
-#   * dev1
-#     prod
-#     qa1
 
 module Helpers
   def self.out(cmd:)
@@ -179,7 +42,7 @@ module Helpers
 end
 
 module GitBranchDeleteMerged
-  PROTECTED_BRANCH_MATCHERS = ['master\z', 'develop\z', 'HEAD', 'dev1\z', 'qa1\z', 'prod', '->']
+  PROTECTED_BRANCH_MATCHERS = ['master\z', 'develop\z', 'HEAD', 'dev1\z', 'qa1\z', 'prod', '->', 'main\z']
 
   def self.parsed_options(args:)
     opts = {
@@ -233,9 +96,12 @@ module GitBranchDeleteMerged
         (array_of_branches + branches_where_origin_deleted)
       end
 
-    branches_to_delete = potential_branches
-      .reject { |b| b.match(/#{PROTECTED_BRANCH_MATCHERS.join('|')}/) }
-      .uniq
+    branches_to_ignore, branches_to_delete = potential_branches
+      .partition { |b| b.match(/#{PROTECTED_BRANCH_MATCHERS.join('|')}/) }
+
+    puts "Ignoring branches: #{branches_to_ignore}"
+
+    branches_to_delete = branches_to_delete.uniq
 
     if options[:delete_remote]
       branches_to_delete = branches_to_delete.map { |b| b.sub('origin/', '') }

@@ -2104,6 +2104,12 @@ nnoremap <silent> <Leader>cc Ypk:Commentary<CR>
 " Close help window
 nnoremap <silent> <Leader>hc :helpclose<CR>
 
+" Source: https://vim.fandom.com/wiki/Copy_filename_to_clipboard
+" Mnemonic: Yank (File) path
+nnoremap <silent> <Leader>yp :let @"=expand("%:p")<CR>
+" Mnemonic: yank File Name
+nnoremap <silent> <Leader>yn :let @"=expand("%")<CR>
+
 " -----
 " Line Width Stuff
 " -----

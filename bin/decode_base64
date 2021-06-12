@@ -1,0 +1,43 @@
+#!/usr/bin/env ruby
+# vim: ft=ruby
+
+require 'base64'
+
+require 'active_support'
+require 'active_support/core_ext/object/blank'
+
+# Alternative to:
+#     python -m base64 -d <<< "myencodedstring"
+#   which often fails with "binascii.Error: Incorrect padding"
+#   Ruby just ignores the non-alphanumeric characters unless you use the strict methods.
+#   Source:
+#     https://ruby-doc.org/stdlib-2.5.3/libdoc/base64/rdoc/Base64.html#method-i-decode64
+
+module DecodeBase64
+
+  def self.perform(args:)
+    args.delete('--debug')
+
+    @@debug = args.include?('--debug')
+
+    encoded = args[0]
+
+    if encoded.blank?
+      warn 'Must provide a string to decode!'
+      exit 1
+    end
+
+    encoded = encoded.strip
+
+    if @@debug
+      puts 'Decoding:'
+      puts "  input: #{encoded}"
+      puts '  output: ' + Base64.decode64(encoded)
+    else
+      puts Base64.decode64(encoded)
+    end
+  end
+
+end
+
+DecodeBase64.perform(args: ARGV)

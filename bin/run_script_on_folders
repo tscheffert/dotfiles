@@ -1,0 +1,71 @@
+#!/usr/bin/env ruby
+# vim: ft=ruby
+
+require File.join(__dir__, '..', 'ruby', 'lib', 'images_helper')
+require 'tty-command'
+
+# run_script_on_folders '/c/Users/Trent/.dotfiles/bin/convert_gif_to_png
+# C:\\Users\\Trent\\.dotfiles\\bin\\convert_gif_to_png
+
+module RunScriptOnFolders
+
+  include ImagesHelper::Constants
+
+  def self.perform(args:)
+    if args[0] == '--help'
+      command_name = File.basename(__FILE__)
+      puts <<~HELPDOC
+        USAGE:
+            #{command_name} <script>
+                Runs <script> on all the folders in the current directory
+
+                Example:
+                    run_script_on_folders '/c/Users/Trent/.dotfiles/bin/convert_gif_to_png
+            #{command_name} --test
+                Reports which folders will move but doesn't move them
+            #{command_name} --help
+                Prints this message
+      HELPDOC
+      exit 0
+    end
+
+    test_run = args.include?('--test')
+
+    command = args
+    command = command.reject { |a| a == '--test' || a == '--help' }
+
+    if command.length == 1
+      command = command.first
+    else
+      warn "Don't know how to parse multi-part commands yet"
+      exit 1
+    end
+
+    dirs = ImagesHelper.all_dirs_in(dir: Dir.pwd)
+
+    dirs.each do |dir|
+      dir = File.absolute_path(dir)
+      if Dir.exist?(dir)
+        puts "Running #{command} in '#{dir}'"
+      else
+        puts "For some reason, Directory '#{dir}' does not exist"
+      end
+      next if test_run
+
+      FileUtils.chdir(dir) do
+        command_result = TTY::Command.new(printer: :null).run!(command)
+        if command_result.success?
+          puts "++ '#{command}' was successful"
+        else
+          warn "-- '#{command}' failed"
+          warn "STDOUT: #{command_result.stdout}" if command_result.stdout.present?
+          warn "STDERR: #{command_result.stderr}" if command_result.stderr.present?
+          exit 1
+        end
+      end
+    end
+  end
+
+end
+
+RunScriptOnFolders.perform(args: ARGV)

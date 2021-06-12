@@ -84,6 +84,9 @@ Image sets are then renamed in a fashion such that the sets remain tied together
   - Prefix is either the image category or generated for unknown categories
 - Source images are named in the form of `<processed-image-name>_<adjective>-source`
   - For an example set, it could be `bella-01`, `bella-01_marked-source`, and `bella-01_disproportionate-source`
+  - Adjectives are always `meager` before `disproportionate` before `marked`
+    - Good: `bella-01_meager-marked-source`
+    - Bad: `bella-01_disproportionate-meager-source`
 
 ## Processes
 
@@ -149,92 +152,86 @@ Sorting by watermark means:
 
 ## Recommended process
 
-- Get candidate images
+- Dedupe
+- Sort by orientation (landscape or portrait)
+- Find candidate images
 - Fix color profiles
 - Run script to sort by ratio then by size giving us:
-- Now have:
-######################## TODO: continue here
-
+  ```
+  ample/
+  ├── sample-image1.png
+  ├── sample-image2.jpeg
+  └── ...
+  meager/
+  ├── sample-image3.png
+  ├── sample-image4.jpeg
+  └── ...
+  ```
+- Then scale:
+  ```
+  root/
+  ├── sample-image1.png
+  ├── sample-image2.jpeg
+  ├── sample-image3.png
+  ├── sample-image3-meager-source.png
+  ├── sample-image4.jpeg
+  ├── sample-image4-meager-source.jpeg
+  └── ...
+  ```
+- Then run script that sorts by ratio:
 ```
-proportionate/
-├── ample/
-│   ├── sample-image1.png
-│   ├── sample-image2.jpeg
-│   └── ...
-└── meager/
-     ├── sample-image1.png
-     ├── sample-image2.jpeg
-      └── ...
-
-disproportionate/
-├── ample/
-│   ├── sample-image1.png
-│   ├── sample-image2.jpeg
-│   └── ...
-└── meager/
-     ├── sample-image1.png
-     ├── sample-image2.jpeg
-     └── ...
+  proportionate/
+  ├── sample-image1.png
+  ├── sample-image3.png
+  ├── sample-image3-meager-source.png
+  └── ...
+  disproportionate/
+  ├── sample-image2.jpeg
+  ├── sample-image4.jpeg
+  ├── sample-image4-meager-source.jpeg
+  └── ...
 ```
-
-- Where:
-  - `proportionate/ample/` is good to go
-  - `proportionate/meager/` needs scaling
-  - `disproportionate/ample/` needs cropping
-  - `disproportionate/meager/` needs cropping and scaling
-- Do the cropping, which gives us:
-
-```
-proportionate/
-├── ample/
-│   ├── sample-image1.png
-│   ├── sample-image2.jpeg
-│   └── ...
-└── meager/
-     ├── sample-image1.png
-     ├── sample-image1-upscaled.png
-     ├── sample-image2.jpeg
-     ├── sample-image2-upscaled.png (upscaling converts to png)
-     └── ...
-
-disproportionate/
-├── ample/
-│   ├── sample-image1.png
-│   ├── sample-image2.jpeg
-│   └── ...
-└── meager/
-     ├── sample-image1.png
-     ├── sample-image2.jpeg
-     └── ...
-```
-
-- Do the scaling, which gives us:
+  - Where:
+    - `proportionate/` are good to go
+    - `disproportionate/` require cropping
+- Then crop disproportionate images:
+  ```
+  root/
+  ├── sample-image1.png
+  ├── sample-image2.jpeg
+  ├── sample-image2-disproportionate-source.jpeg
+  ├── sample-image3.png
+  ├── sample-image3-meager-source.png
+  ├── sample-image4.jpeg
+  ├── sample-image4-meager-disproportionate-source.jpeg
+  └── ...
+  ```
 - Manually sort each image set into "marked" or "unmarked", giving us:
-
 ```
-proportionate/
-├── ample/
-│   ├── sample-image1.png
-│   ├── sample-image2.jpeg
-│   └── ...
-└── meager/
-     ├── sample-image1.png
-     ├── sample-image2.jpeg
-     └── ...
-
-disproportionate/
-├── ample/
-│   ├── sample-image1.png
-│   ├── sample-image2.jpeg
-│   └── ...
-└── meager/
-     ├── sample-image1.png
-     ├── sample-image2.jpeg
-     └── ...
+  unmarked/
+  ├── sample-image1.png
+  ├── sample-image2.jpeg
+  ├── sample-image2-disproportionate-source.jpeg
+  marked/
+  ├── sample-image3.png
+  ├── sample-image3-meager-source.png
+  ├── sample-image4.jpeg
+  ├── sample-image4-meager-disproportionate-source.jpeg
+  └── ...
 ```
-
-- Do the shopping
-- Rename everything in
+- Do the shopping, giving us:
+```
+  root/
+  ├── sample-image1.png
+  ├── sample-image2.jpeg
+  ├── sample-image2-disproportionate-source.jpeg
+  ├── sample-image3.png
+  ├── sample-image3-meager-marked-source.png
+  ├── sample-image4.jpeg
+  ├── sample-image4-meager-disproportionate-marked-source.jpeg
+  └── ...
+```
+- Then do the renaming and moving to destination folders
 
 ## Questions
 

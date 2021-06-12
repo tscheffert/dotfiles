@@ -63,12 +63,17 @@ Replace two newlines with one newline:
 
 Note that the replacement is a backreference because you can't enter a literal newline there for whatever reason.
 
-### Removing lines matching a pattern
+### Find all lines matching a given pattern and delete them
 
 <https://vim.fandom.com/wiki/Delete_all_lines_containing_a_pattern>
 
 ```
 :g/pattern/d
+```
+
+Or use other symbols if the pattern contains `/` characters
+```
+:g#pattern#d
 ```
 
 ## Windowing

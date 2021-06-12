@@ -228,6 +228,12 @@ find . -wholename '**/bin/Debug' -type d -exec rm -r "{}" +
 ```
 ```
 
+### Find and delete all things matching a given name
+
+```
+find . -name '.DS_Store' -delete
+```
+
 ## Vim
 
 [Source](https://vi.stackexchange.com/a/16657/9963)
@@ -329,6 +335,18 @@ Because `${string%substring}` will remove the shortest match of `$substring` fro
 
 - Parameter Expansion: <https://www.gnu.org/software/bash/manual/html_node/Shell-Parameter-Expansion.html>
 - Pattern Matching: <https://www.gnu.org/software/bash/manual/html_node/Pattern-Matching.html#Pattern-Matching>
+
+### Rename hidden files
+
+```bash
+for name in .zsh_history*; do
+  trimmed_name=${name#.zsh_history} # remove suffix with parameter expansion
+  prefixed_name=".zsh$trimmed_name.history"
+
+  echo "Move $name to $prefixed_name"
+  mv "$name" "$prefixed_name"
+done
+```
 
 ## Print the current date
 

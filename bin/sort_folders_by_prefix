@@ -1,0 +1,104 @@
+#!/usr/bin/env ruby
+# vim: ft=ruby
+
+require File.join(__dir__, '..', 'ruby', 'lib', 'images_helper')
+# require 'tty-command'
+
+module SortFoldersByPrefix
+
+  include ImagesHelper::Constants
+
+  DIR_MATCHER = %r{
+    \A
+    (?<prefix_tag>.*?){0,1}
+    \ ?
+    (?<prefix>\[.+?\])
+    .*
+    \z
+    }x
+
+  def self.perform(args:)
+    if args[0] == '--help'
+      command_name = File.basename(__FILE__)
+      puts <<~HELPDOC
+        USAGE:
+            #{command_name}
+                Sort folders in current directory by their prefixes
+            #{command_name} --test
+                Reports which folders will move but doesn't move them
+            #{command_name} --debug
+                Reports a lot more information while sorting folders by prefixes
+            #{command_name} --help
+                Prints this message
+      HELPDOC
+      exit 0
+    end
+
+    @test_run = args.include?('--test')
+    @debug = args.include?('--debug')
+
+    dirs = ImagesHelper.all_dirs_in(dir: Dir.pwd)
+
+    dirs = filter_sorted_dirs(dirs: dirs)
+
+    dirs.each do |dir|
+      sort_dir(dir: dir)
+    end
+  end
+
+  def self.filter_sorted_dirs(dirs:)
+    # If we find any non directory entries, we'll assume we should sort it
+    to_sort_dirs, already_sorted_dirs = dirs.partition do |dir|
+      Dir.entries(dir, encoding: 'UTF-8').any? do |entry|
+        File.file?(File.join(dir, entry))
+      end
+    end
+
+    puts "Already sorted directories:\n  #{already_sorted_dirs.join("\n  ")}"
+
+    already_sorted_dirs.each do |dir|
+      puts "Check already sorted dir '#{dir}' for flattening" if dir.match?(DIR_MATCHER)
+    end
+
+    to_sort_dirs
+  end
+  private_class_method :filter_sorted_dirs
+
+  def self.sort_dir(dir:)
+    absolute_dir = File.absolute_path(dir)
+    basename_dir = File.basename(absolute_dir)
+    if Dir.exist?(absolute_dir)
+      puts "Found #{basename_dir}" if @debug
+    else
+      warn "For some reason, directory '#{basename_dir}' is reported as not existing"
+      return
+    end
+
+    dir_match = dir.match(DIR_MATCHER)
+
+    if dir_match.blank? || dir_match[:prefix].blank?
+      puts "Was not able to determine prefix for dir '#{basename_dir}'"
+      FileUtils.mkdir(UNSORTED_DIR_NAME) if !Dir.exist?(UNSORTED_DIR_NAME) && !@test_run
+      FileUtils.mv(dir, UNSORTED_DIR_NAME) if !@test_run
+      return
+    end
+
+    puts "Found prefix '#{dir_match[:prefix]}' for dir '#{basename_dir}'" if @debug
+
+    sorted_dir_name = dir_match[:prefix].delete_prefix('[').delete_suffix(']')
+
+    if Dir.exist?(sorted_dir_name)
+      puts "Sorted dir '#{sorted_dir_name}' already exists" if @debug
+    else
+      puts "Creating new sorted dir '#{sorted_dir_name}'" if @debug
+      FileUtils.mkdir(sorted_dir_name) if !@test_run
+    end
+
+    puts "Moving dir '#{basename_dir}' into '#{sorted_dir_name}'" if @debug
+    FileUtils.mv(dir, sorted_dir_name) if !@test_run
+  end
+  private_class_method :sort_dir
+
+end
+
+SortFoldersByPrefix.perform(args: ARGV)

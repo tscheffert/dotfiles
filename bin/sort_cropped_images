@@ -1,0 +1,96 @@
+#!/usr/bin/env ruby
+# vim: ft=ruby
+
+require File.join(__dir__, '..', 'ruby', 'lib', 'images_helper')
+
+# Group the images that start with the same things
+# Determine if the set was {cropped, cropped+scaled, scaled, nothing}
+# Move resulting images from set to done or source
+# Rename them at the same time such that the source and non-source suffix number
+module SortCroppedImages
+
+  include ImagesHelper::Constants
+
+  def self.perform(args:)
+    if args.include?('--help')
+      command_name = File.basename(__FILE__)
+      puts <<~HELPDOC
+        USAGE:
+            #{command_name}
+                Sorts and renames images that were cropped by Croppola
+            #{command_name} --test
+                Reports which images will move but doesn't move them
+            #{command_name} --help
+                Prints this message
+      HELPDOC
+      exit 0
+    end
+
+    test_run = args.include?('--test')
+
+    images = ImagesHelper.all_images_in_dir('.')
+
+
+    cropped_and_scaled_images, unscaled_remaining_images = images.partition do |img|
+      File.basename(img, '.*').match?(/Cropped(?:-topaz-\d)/)
+    end
+
+
+    cropped_images, unmodified_images = unscaled_remaining_images.partition do |img|
+      File.basename(img, '.*').match?(/ Cropped(?:\ \(\d\))?/)
+    end
+
+    result_images = cropped_images + cropped_and_scaled_images
+    puts "Result_images: #{result_images}"
+    source_images, _other_images = unmodified_images.partition do |img|
+      result_images.any? do |modified_img|
+        File.basename(modified_img, '.*').include?(File.basename(img, '.*'))
+      end
+    end
+
+    if cropped_images.length != source_images.length
+      raise "Cropped image count: #{cropped_images.length} does not match source image count: #{source_images.length}"
+    end
+
+    puts "Other Images: #{_other_images.length}"
+
+    if cropped_and_scaled_images.present?
+      cropped_and_scaled_dir = File.join(Dir.pwd, CROPPED_AND_SCALED_DIR)
+      FileUtils.mkdir_p(cropped_and_scaled_dir)
+
+      puts "Moving cropped and scaled images to #{cropped_and_scaled_dir}"
+      cropped_and_scaled_images.each do |img|
+        puts "  Cropped and Scaled Image: #{img}"
+      end
+
+      ImagesHelper.safe_rename(cropped_and_scaled_images, cropped_and_scaled_dir)
+    end
+
+    if cropped_images.present?
+      cropped_dir = File.join(Dir.pwd, CROPPED_DIR)
+      FileUtils.mkdir_p(cropped_dir)
+
+      puts "Moving cropped images to #{cropped_dir}"
+      cropped_images.each do |img|
+        puts "  Cropped Image: #{img}"
+      end
+
+      ImagesHelper.safe_rename(cropped_images, cropped_dir)
+    end
+
+    if source_images.present?
+      source_dir = File.join(Dir.pwd, SOURCE_DIR)
+      FileUtils.mkdir_p(source_dir)
+
+      puts "Moving source images to #{source_dir}"
+      source_images.each do |img|
+        puts "  Source Image: #{img}"
+      end
+
+      ImagesHelper.safe_rename(source_images, source_dir)
+    end
+  end
+
+end
+
+SortCroppedImages.perform(args: ARGV)

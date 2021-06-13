@@ -237,6 +237,7 @@ Open 'TCPView' from a sysinternals portable install
 
 ### Windows Event Viewer
 
+```
 `Eventvwr [<computer name>][/v:] [/l:<log file>][/c:] [/f:<filter>][/?]`
 
 `<computer name>` — Specifies the computer name of the machine to view events for. *If this is not*
@@ -257,6 +258,7 @@ XML query that starts with <QueryList>.  If the query contains a space, then the
 enclosed in double quotes.  If the query itself contains double quotes, then you must change the
 double quotes in the query to single quotes.  For example. the XML query, specified as `/f: "<QueryList><Query Id="0" Path="SystemA"><Select Path="SystemB">*[System[(Level=2)]</Select></Query></QueryList>"`
 /? — Shows this usage message
+```
 
 ## NSSM
 
@@ -290,4 +292,22 @@ gs | awk '{ print $2 }' | xargs --max-args=1 -I _ powershell -Command "Edit-Beau
 
 ```
 ls * -r | select-string -Pattern "Thing-I-Want-To-Find"
+```
+
+
+## Remove folders with long paths
+
+```
+function Get-Tree($Path,$Include='*') {
+  @(Get-Item $Path -Include $Include -Force) +
+    (Get-ChildItem $Path -Recurse -Include $Include -Force) |
+    sort pspath -Descending -unique
+}
+
+function Remove-Tree($Path,$Include='*') {
+  Get-Tree $Path $Include | Remove-Item -force -recurse
+}
+
+
+Remove-Tree "\\?\C:\x\_delete"
 ```

@@ -2,9 +2,70 @@
 
 ## Parameter Expansion
 
+### Validate Input
+
+Will check whether the `$1` is null or empty and fail with message if necessary.
+
 ```bash
 local container_name="${1:?Must provide an image to check}"
 ```
+
+### Get filenames and extensions
+
+```bash
+full_path="~/tscheffert/.dotfiles/thing.tar.gz"
+echo "Full Path: $full_path"
+
+base_filename=$(basename -- "$full_path")
+echo "Base Filename: $base_filename"
+
+naive_extension="${base_filename##*.}"
+echo "Naive Extension with double #: $naive_extension"
+
+clever_extension="${base_filename#*.}"
+echo "clever Extension with single #: $clever_extension"
+
+naive_filename="${base_filename%.*}"
+echo "Naive filename with single %: $naive_filename"
+
+clever_filename="${base_filename%%.*}"
+echo "clever filename with double %: $clever_filename"
+```
+
+Returns this:
+
+```
+Full Path: ~/tscheffert/.dotfiles/thing.tar.gz
+Base Filename: thing.tar.gz
+Naive Extension with double #: gz
+clever Extension with single #: tar.gz
+Naive filename with single %: thing.tar
+clever filename with double %: thing
+```
+
+
+## Sed
+
+### Find and replace all files in a folder
+
+```
+find . -type f -name "*.sh" -print0 | xargs -0 sed -i "s/foo/bar/g"
+```
+
+### Find and replace with regular expression capture groups
+
+
+Just the `sed` expression:
+```
+sed -e 's#${\([1-9]\)\?#${\1:?#'
+```
+
+Full Example:
+
+```
+find . -type f -name "*.sh" -print0 | xargs -0 sed -i '' -e 's#${\([1-9]\)\?#${\1:?#'
+```
+
 
 ## Stuff
 
@@ -120,4 +181,8 @@ function check_docker_image_existance {
   #
   #   docker image inspect "$image_name" >/dev/null 2>&1
 }
+```
+
+```
+ag '\$\{\d\?'
 ```

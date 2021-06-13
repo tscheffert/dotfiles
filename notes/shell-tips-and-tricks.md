@@ -348,13 +348,27 @@ for name in .zsh_history*; do
 done
 ```
 
-## Print the current date
+### Convert SVG files
+
+```
+# On Mac
+brew install librsvg
+
+# On Windows using Chocolaty
+choco install rsvg-convert
+
+# Do the convert
+#   Note: Add a background with: --background-color white
+rsvg-convert -w 1024 -h 1024 --output icons/shell-file.png icons/shell-file.svg
+```
+
+### Print the current date
 
 ```
 date +"%Y-%m-%d_%H-%M-%S%Z"
 ```
 
-## Print the current date in rfc3339
+### Print the current date in rfc3339
 
 ```
 date --rfc3339=seconds

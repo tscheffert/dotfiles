@@ -188,6 +188,19 @@
 			<key>utf8</key>
 			<true/>
 		</dict>
+		<key>FA24327D-E711-4E41-86AE-ABEF01B894DC</key>
+		<dict>
+			<key>enabled</key>
+			<true/>
+			<key>keyword</key>
+			<string>sc</string>
+			<key>text</key>
+			<string>Shellcheck: Lookup SC{query} on Shellcheck wiki</string>
+			<key>url</key>
+			<string>https://github.com/koalaman/shellcheck/wiki/SC{query}</string>
+			<key>utf8</key>
+			<true/>
+		</dict>
 	</dict>
 	<key>onlyShowEnabledInPrefs</key>
 	<true/>

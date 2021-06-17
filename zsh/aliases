@@ -401,3 +401,6 @@ alias find-and-remove-kitchen="find ./ -type d -name '.kitchen' | xargs rm -rv {
 # Usage:
 #   csr GET "http://elasticsearch.echo.com"
 alias csr='curl --silent --show-error --request'
+
+# Open Bash man page in Less, searching for the builtin provided as an argument
+function man-bash() { man bash | less -p "^       $1 "; }

@@ -1,11 +1,12 @@
 #!/bin/bash
 
-toplevel=$(git rev-parse --show-toplevel)
-
-git_dir=$(git rev-parse --git-dir)
+# Using an absolute path to the git dir means we can always access it and it's always the same spot
+#   --git-dir was returning the absolute path while rebasing and just `.git` normally. `--asbolute-git-dir` will always return the absolute path, consistency!
+absolute_git_dir=$(git rev-parse --absolute-git-dir)
 
 script_path='hooks/script/auto-cop'
+combined_script_path="$absolute_git_dir/$script_path"
 
-echo "Cleaning your commit with rubocop --auto-correct"
-
-exec "$toplevel/$git_dir/$script_path"
+echo "Cleaning your commit with 'rubocop --auto-correct'"
+echo "Running script: $combined_script_path"
+exec "$combined_script_path"

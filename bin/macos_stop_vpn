@@ -19,6 +19,12 @@ function main {
     echo 'No PID found!'
     return 1
   fi
+
+  local current_dir
+  current_dir="$(dirname "$(realpath "${BASH_SOURCE[0]}")")"
+
+  echo "Calling Echo DNS Disabling script"
+  exec "$current_dir/macos_set_echo_dns" "off"
 }
 
 main "$@"

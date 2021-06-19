@@ -26,11 +26,18 @@ prepend_to_path 'C:\tools\sops\current'
 # Tool used for optimizing PNG images
 prepend_to_path 'C:\tools\optipng\current'
 
+# Tool used for deduping
+prepend_to_path 'C:\tools\jdupes\current'
+
 # Imagemagick!
 prepend_to_path 'C:\Program Files\ImageMagick-7.0.10-Q16'
 
 # Compiled mozjpeg static exes
 prepend_to_path 'C:\tools\mozjpeg\current-static'
+
+# Hash tools
+prepend_to_path 'C:\tools\hashcat\current'
+prepend_to_path 'C:\tools\john-the-ripper\current\run'
 
 # -- Append --
 

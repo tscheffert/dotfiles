@@ -2104,11 +2104,22 @@ nnoremap <silent> <Leader>cc Ypk:Commentary<CR>
 " Close help window
 nnoremap <silent> <Leader>hc :helpclose<CR>
 
+" nnoremap <silent> <Leader>yp :let @"=expand("%:p")<CR>
+" nnoremap <silent> <Leader>yn :let @"=expand("%")<CR>
+
 " Source: https://vim.fandom.com/wiki/Copy_filename_to_clipboard
 " Mnemonic: Yank (File) path
-nnoremap <silent> <Leader>yp :let @"=expand("%:p")<CR>
+nnoremap <silent> <Leader>yp :let @*=expand("%:p")<CR>
 " Mnemonic: yank File Name
-nnoremap <silent> <Leader>yn :let @"=expand("%")<CR>
+nnoremap <silent> <Leader>yn :let @*=expand("%")<CR>
+" TODO: Why the `*` vs `"` register? Windows seemed to work with `"` but mac required `*`.
+
+" Issue:
+"   - Open vim in ~/prj/notes
+"   - Open with argument work-echo/emails/2021-06-13_usman-coaching-plan.md
+"   - ,yp gives: work-echo/emails/2021-06-13_usman-coaching-plan.md
+"   - ,yn gives: /Users/tscheffert/prj/notes/work-echo/emails/2021-06-13_usman-coaching-plan.md
+
 
 " -----
 " Line Width Stuff

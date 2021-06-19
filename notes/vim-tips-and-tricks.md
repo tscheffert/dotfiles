@@ -1,4 +1,10 @@
-# Keybindings
+# Vim Tips and Tricks
+
+## Resources
+
+- [Vim System Tools from LucHermitte](https://github.com/LucHermitte/vim-system-tools)
+- [lh-vim-lb by LucHermitte](https://github.com/LucHermitte/lh-vim-lib)
+
 
 ## Debugging
 

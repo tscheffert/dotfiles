@@ -12,5 +12,10 @@ If (!AlreadyStartedFlag)
 
   ; POE Overlay - Trades companion app, community edition
   Run, "C:\Program Files\poe-overlay\poe-overlay.exe", "C:\Program Files\poe-overlay"
+
+  Run, "C:\Users\Trent\AppData\Local\PoeLurker\PoeLurker.exe", "C:\Users\Trent\AppData\Local\PoeLurker\app-1.9.7"
+
+  ; POE Leveling Helper - Helping Leveling
+  ; Run, "C:\Users\Trent\POE-Apps\PoE-Leveling-Guide\current\LevelingGuide.ahk"
 }
 return

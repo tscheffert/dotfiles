@@ -6,6 +6,12 @@ Download from the [Releases page](https://github.com/git-for-windows/build-extra
 
 Double click and install to `C:/git-sdk-64`
 
+## Add `C:/git-sdk-64/usr/bin` to the PATH in the System Env Variables
+
+Put it towards the top.
+
+Otherwise vim and lots of other things will have issues.
+
 ## Install Zsh
 
 ```bash

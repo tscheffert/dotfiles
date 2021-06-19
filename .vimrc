@@ -58,8 +58,44 @@ let s:use_unite = 0
 let s:use_delimitmate = 1
 let s:use_auto_pairs = 0
 
+function! SetGitForWindowsSDKShell()
+  " TODO: Fix this for the `Right Click -> Edit with Vim` workflow
+  " It works when launching via gvim& from the commandline, but not with the registry hook
+  " TODO: Figure out how to determine between "started from gvim& in a MINGW session"
+  "       and "started from Right Click -> Edit in Vim"
+
+  " For Git for Windows SDK in ConEmu, get shell like this:
+  " cygpath --mixed $(which bash)
+  " set shell=C:/git-sdk-64/usr/bin/bash.exe
+
+  set shell=bash
+  set shellcmdflag=-c
+  set shellredir=>%s\ 2>&1
+  set shellpipe=2>&1\|\ tee
+  set shellquote=
+  set shellxquote=\"
+  " set shellxquote='"'
+  set shellslash
+endfunction
+
+function! SetCmdShell()
+  " https://github.com/agkozak/dotfiles/blob/master/.vimrc#L272
+  " This shell set causes nerdtree to have issues
+  " set shell=cmd
+  " set shellquote=
+  " set shellxquote=(
+  " set shellcmdflag=/c
+  " set shellredir=>%s\ 2>&1
+  " set shellpipe=>
+  " set noshellslash
+endfunction
+
+" TODO: Refactor shell setup like this:
+"   https://github.com/LucHermitte/vim-system-tools/blob/master/plugin/system_utils.vim
+"   https://github.com/LucHermitte/lh-vim-lib/blob/master/autoload/lh/os.vim
+
 " Set up shell based on OS
-if has('win32') " Using InWindowsSession() here breaks syntastic
+if has('win64') || has('win32') " Using InWindowsSession() here breaks syntastic
   " " Use cmd as the shell
   " set shell=cmd
   " set shellcmdflag=/c
@@ -73,27 +109,8 @@ if has('win32') " Using InWindowsSession() here breaks syntastic
   let $TMP=temp_dir
   let $TEMP=temp_dir
 
-  " TODO: Fix this for the `Right Click -> Edit with Vim` workflow
-  " It works when launching via gvim& from the commandline, but not with the registry hook
-
-  " Use bash, probably from mingw64, as the shell
-  set shell=bash
-  set shellcmdflag=-c
-  set shellxquote=\"
-  set shellslash
-
-  " TODO: Figure out how to determine between "started from gvim& in a MINGW session"
-  "       and "started from Right Click -> Edit in Vim"
-
-  " https://github.com/agkozak/dotfiles/blob/master/.vimrc#L272
-  " This shell set causes nerdtree to have issues
-  " set shell=cmd
-  " set shellquote=
-  " set shellxquote=(
-  " set shellcmdflag=/c
-  " set shellredir=>%s\ 2>&1
-  " set shellpipe=>
-  " set noshellslash
+  " Just assume running in a Git for Windows SDK session
+  call SetGitForWindowsSDKShell()
 else
   " echo "Not windows, default shell"
 endif

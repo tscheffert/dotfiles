@@ -54,6 +54,17 @@ module SortFoldersByPrefix
       end
     end
 
+    to_sort_dirs = to_sort_dirs.reject do |dir|
+      if dir.include?('Seiheki Chousadan')
+        puts "Dir: #{dir}"
+        puts "Length: #{File.absolute_path(dir).length}"
+      end
+      too_long = File.absolute_path(dir).length >= 255
+      warn "Directory Name too long for #{dir}" if too_long
+
+      too_long
+    end
+
     puts "Already sorted directories:\n  #{already_sorted_dirs.join("\n  ")}"
 
     already_sorted_dirs.each do |dir|
@@ -94,8 +105,12 @@ module SortFoldersByPrefix
       FileUtils.mkdir(sorted_dir_name) if !@test_run
     end
 
-    puts "Moving dir '#{basename_dir}' into '#{sorted_dir_name}'" if @debug
-    FileUtils.mv(dir, sorted_dir_name) if !@test_run
+    if absolute_dir.length + sorted_dir_name.length > 255
+      warn "Cannot rename '#{basename_dir}', sorted name is too long"
+    else
+      puts "Moving dir '#{basename_dir}' into '#{sorted_dir_name}'" if @debug
+      FileUtils.mv(dir, sorted_dir_name) if !@test_run
+    end
   end
   private_class_method :sort_dir
 

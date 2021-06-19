@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <key name="Software">
 	<key name="ConEmu">
-		<key name=".Vanilla" modified="2020-07-19 16:04:09" build="200713">
+		<key name=".Vanilla" modified="2021-06-19 14:37:11" build="210422">
 			<value name="StartType" type="hex" data="02"/>
 			<value name="CmdLine" type="string" data=""/>
 			<value name="StartTasksFile" type="string" data=""/>
-			<value name="StartTasksName" type="string" data="{Zsh::Projects}"/>
+			<value name="StartTasksName" type="string" data="{Zsh::notes}"/>
 			<value name="StartFarFolders" type="hex" data="00"/>
 			<value name="StartFarEditors" type="hex" data="00"/>
 			<value name="ColorTable00" type="dword" data="00222827"/>
@@ -87,6 +87,8 @@
 			<value name="StoreTaskbarCommands" type="hex" data="00"/>
 			<value name="SaveCmdHistory" type="hex" data="01"/>
 			<value name="CmdLineHistory" type="multi">
+				<line data="{Show ANSI colors}"/>
+				<line data='set CHERE_INVOKING=1 &amp; set "PATH=C:\git-sdk-64\usr\bin;%PATH%" &amp; set MSYSTEM=MINGW64 &amp; "%ConEmuBaseDirShort%\conemu-msys2-64.exe zsh --login -i" -cur_console:t:zsh'/>
 				<line data="{Git Bash CurD}"/>
 				<line data="{Zsh::chef-developers}"/>
 				<line data="{Zsh::chef-repo}"/>
@@ -383,7 +385,7 @@
 			<value name="Update.DownloadPath" type="string" data="%TEMP%\ConEmu"/>
 			<value name="Update.LeavePackages" type="hex" data="00"/>
 			<value name="Update.PostUpdateCmd" type="string" data="echo Last successful update&gt;ConEmuUpdate.info &amp;&amp; date /t&gt;&gt;ConEmuUpdate.info &amp;&amp; time /t&gt;&gt;ConEmuUpdate.info"/>
-			<key name="HotKeys" modified="2019-10-24 15:54:49" build="191012">
+			<key name="HotKeys" modified="2021-06-19 14:29:51" build="210422">
 				<value name="KeyMacroVersion" type="hex" data="02"/>
 				<value name="Multi.Modifier" type="dword" data="0000005b"/>
 				<value name="Multi.ArrowsModifier" type="dword" data="0000005b"/>
@@ -579,9 +581,11 @@
 				<value name="CloseToRightKey" type="dword" data="00000000"/>
 				<value name="Multi.NewWndConfirm" type="dword" data="00000000"/>
 				<value name="CheckUpdates" type="dword" data="00105b55"/>
+				<value name="Key.EditMenu" type="dword" data="00000000"/>
+				<value name="Key.EditMenu2" type="dword" data="00000000"/>
 			</key>
-			<key name="Tasks" modified="2020-06-26 13:51:53" build="191012">
-				<value name="Count" type="long" data="22"/>
+			<key name="Tasks" modified="2021-06-19 14:37:11" build="210422">
+				<value name="Count" type="long" data="9"/>
 				<key name="Task1" modified="2018-10-05 12:14:16" build="180626">
 					<value name="Name" type="string" data="{cmd}"/>
 					<value name="Flags" type="dword" data="00000004"/>
@@ -627,165 +631,43 @@
 					<value name="Active" type="long" data="0"/>
 					<value name="Count" type="long" data="1"/>
 				</key>
-				<key name="Task6" modified="2019-08-15 14:02:03" build="190526">
-					<value name="Name" type="string" data="{Connector::Zsh}"/>
-					<value name="Flags" type="dword" data="00000004"/>
-					<value name="Hotkey" type="dword" data="00000000"/>
-					<value name="GuiArgs" type="string" data=""/>
-					<value name="Cmd1" type="string" data='set CHERE_INVOKING=1 &amp; set "PATH=C:\git-sdk-64\usr\bin;%PATH%" &amp; set MSYSTEM=MINGW64 &amp; %ConEmuBaseDirShort%\conemu-msys2-64.exe zsh --login -i -new_console:p'/>
-					<value name="Cmd2" type="string" data='"%windir%\syswow64\cmd.exe" /k ver &amp; echo This is 32 bit cmd.exe -new_console:s50V'/>
-					<value name="Active" type="long" data="0"/>
-					<value name="Count" type="long" data="1"/>
-				</key>
-				<key name="Task7" modified="2018-10-05 12:14:16" build="180626">
-					<value name="Name" type="string" data="{WSL::24Bit}"/>
-					<value name="Flags" type="dword" data="00000000"/>
-					<value name="Hotkey" type="dword" data="00000000"/>
-					<value name="GuiArgs" type="string" data='-icon "%USERPROFILE%\AppData\Local\lxss\bash.ico"'/>
-					<value name="Cmd1" type="string" data='"%USERPROFILE%\.dotfiles\wsl\wsl-con.cmd"'/>
-					<value name="Active" type="long" data="0"/>
-					<value name="Count" type="long" data="1"/>
-					<value name="Cmd2" type="string" data='"%windir%\syswow64\cmd.exe" /k ver &amp; echo This is 32 bit cmd.exe -new_console:s50V'/>
-				</key>
-				<key name="Task8" modified="2019-08-15 14:02:03" build="190526">
-					<value name="Name" type="string" data="{WSL::bash}"/>
-					<value name="Flags" type="dword" data="00000004"/>
-					<value name="Hotkey" type="dword" data="00000000"/>
-					<value name="GuiArgs" type="string" data='-icon "%USERPROFILE%\AppData\Local\lxss\bash.ico"'/>
-					<value name="Cmd1" type="string" data='set "PATH=%ConEmuBaseDirShort%\wsl;%PATH%" &amp; %ConEmuBaseDirShort%\conemu-cyg-64.exe --wsl -cur_console:pm:/mnt -t zsh --login -i'/>
-					<value name="Active" type="long" data="0"/>
-					<value name="Count" type="long" data="1"/>
-				</key>
-				<key name="Task9" modified="2020-01-16 13:47:50" build="191012">
-					<value name="Name" type="string" data="{Zsh::All}"/>
-					<value name="Flags" type="dword" data="00000000"/>
-					<value name="Hotkey" type="dword" data="00000000"/>
-					<value name="GuiArgs" type="string" data=""/>
-					<value name="Cmd1" type="string" data='&gt;-cur_console:t:"k8s manifests" -cur_console:d:C:\Projects\azure-repos\devops\kubernetes-manifests set CHERE_INVOKING=1 &amp; set "PATH=C:\git-sdk-64\usr\bin;%PATH%" &amp; set MSYSTEM=MINGW64 &amp; "%ConEmuBaseDirShort%\conemu-msys2-64.exe zsh --login -i"'/>
-					<value name="Active" type="long" data="2"/>
-					<value name="Count" type="long" data="5"/>
-					<value name="Cmd2" type="string" data='&gt;-cur_console:t:"k8s-yaml" -cur_console:d:C:\Projects\azure-repos\devcenter\k8s-yaml set CHERE_INVOKING=1 &amp; set "PATH=C:\git-sdk-64\usr\bin;%PATH%" &amp; set MSYSTEM=MINGW64 &amp; "%ConEmuBaseDirShort%\conemu-msys2-64.exe zsh --login -i"'/>
-					<value name="Cmd3" type="string" data='-cur_console:t:"devtools" -cur_console:d:C:\Projects\gitlab\devops\devtools set CHERE_INVOKING=1 &amp; set "PATH=C:\git-sdk-64\usr\bin;%PATH%" &amp; set MSYSTEM=MINGW64 &amp; "%ConEmuBaseDirShort%\conemu-msys2-64.exe zsh --login -i"'/>
-					<value name="Cmd4" type="string" data='-cur_console:t:"dotfiles" -cur_console:d:%userprofile%\.dotfiles set CHERE_INVOKING=1 &amp; set "PATH=C:\git-sdk-64\usr\bin;%PATH%" &amp; set MSYSTEM=MINGW64 &amp; "%ConEmuBaseDirShort%\conemu-msys2-64.exe zsh --login -i"'/>
-					<value name="Cmd5" type="string" data='-cur_console:t:"notes" -cur_console:d:C:\Projects\notes set CHERE_INVOKING=1 &amp; set "PATH=C:\git-sdk-64\usr\bin;%PATH%" &amp; set MSYSTEM=MINGW64 &amp; "%ConEmuBaseDirShort%\conemu-msys2-64.exe zsh --login -i"'/>
-				</key>
-				<key name="Task10" modified="2019-08-06 13:45:46" build="190526">
-					<value name="Name" type="string" data="{Zsh::Projects}"/>
-					<value name="Flags" type="dword" data="00000001"/>
-					<value name="Hotkey" type="dword" data="00000000"/>
-					<value name="GuiArgs" type="string" data='/dir "C:\Projects"'/>
-					<value name="Active" type="long" data="0"/>
-					<value name="Count" type="long" data="1"/>
-					<value name="Cmd1" type="string" data='-cur_console:t:"zsh" set CHERE_INVOKING=1 &amp; set "PATH=C:\git-sdk-64\usr\bin;%PATH%" &amp; set MSYSTEM=MINGW64 &amp; "%ConEmuBaseDirShort%\conemu-msys2-64.exe zsh --login -i"'/>
-				</key>
-				<key name="Task11" modified="2019-08-15 14:02:03" build="190526">
+				<key name="Task6" modified="2021-06-19 14:44:12" build="210422">
 					<value name="Name" type="string" data="{Zsh::CurD}"/>
-					<value name="Flags" type="dword" data="00000004"/>
+					<value name="Flags" type="dword" data="00000005"/>
 					<value name="Hotkey" type="dword" data="00000000"/>
 					<value name="GuiArgs" type="string" data=""/>
+					<value name="Cmd1" type="string" data='-cur_console:t:"zsh" set CHERE_INVOKING=1 &amp; set "PATH=C:\git-sdk-64\usr\bin;%PATH%" &amp; set MSYSTEM=MINGW64 &amp; "%ConEmuBaseDirShort%\conemu-msys2-64.exe zsh --login -i"'/>
+					<value name="Cmd2" type="string" data='"%windir%\syswow64\cmd.exe" /k ver &amp; echo This is 32 bit cmd.exe -new_console:s50V'/>
 					<value name="Active" type="long" data="0"/>
 					<value name="Count" type="long" data="1"/>
-					<value name="Cmd1" type="string" data='-cur_console:t:"zsh" set CHERE_INVOKING=1 &amp; set "PATH=C:\git-sdk-64\usr\bin;%PATH%" &amp; set MSYSTEM=MINGW64 &amp; "%ConEmuBaseDirShort%\conemu-msys2-64.exe zsh --login -i"'/>
 				</key>
-				<key name="Task12" modified="2018-10-05 12:49:45" build="180626">
+				<key name="Task7" modified="2021-06-19 14:37:11" build="210422">
 					<value name="Name" type="string" data="{Show ANSI colors}"/>
 					<value name="Flags" type="dword" data="00000004"/>
 					<value name="Hotkey" type="dword" data="00000000"/>
 					<value name="GuiArgs" type="string" data=""/>
-					<value name="Active" type="long" data="0"/>
-					<value name="Count" type="long" data="1"/>
 					<value name="Cmd1" type="string" data='cmd /k type "%ConEmuBaseDir%\Addons\AnsiColors16t.ans" -cur_console:n'/>
-				</key>
-				<key name="Task13" modified="2018-10-05 12:49:45" build="180626">
-					<value name="Name" type="string" data="{Shells::cmd-32}"/>
-					<value name="Flags" type="dword" data="00000004"/>
-					<value name="Hotkey" type="dword" data="00000000"/>
-					<value name="GuiArgs" type="string" data=""/>
 					<value name="Active" type="long" data="0"/>
 					<value name="Count" type="long" data="1"/>
-					<value name="Cmd1" type="string" data='"%windir%\syswow64\cmd.exe" /k "%ConEmuBaseDir%\CmdInit.cmd"'/>
+					<value name="Cmd2" type="string" data='"%windir%\syswow64\cmd.exe" /k ver &amp; echo This is 32 bit cmd.exe -new_console:s50V'/>
 				</key>
-				<key name="Task14" modified="2018-10-05 12:49:45" build="180626">
-					<value name="Name" type="string" data="{Shells::cmd 64/32}"/>
-					<value name="Flags" type="dword" data="00000004"/>
-					<value name="Hotkey" type="dword" data="00000000"/>
-					<value name="GuiArgs" type="string" data=""/>
-					<value name="Active" type="long" data="1"/>
-					<value name="Count" type="long" data="2"/>
-					<value name="Cmd1" type="string" data='&gt; "%windir%\system32\cmd.exe" /k ""%ConEmuBaseDir%\CmdInit.cmd" &amp; echo This is Native cmd.exe"'/>
-					<value name="Cmd2" type="string" data='"%windir%\syswow64\cmd.exe" /k ""%ConEmuBaseDir%\CmdInit.cmd" &amp; echo This is 32 bit cmd.exe -new_console:s50V"'/>
-				</key>
-				<key name="Task15" modified="2019-08-15 14:02:03" build="190526">
-					<value name="Name" type="string" data="{WSL::wsltty}"/>
-					<value name="Flags" type="dword" data="00000004"/>
-					<value name="Hotkey" type="dword" data="00000000"/>
-					<value name="GuiArgs" type="string" data=""/>
-					<value name="Active" type="long" data="0"/>
-					<value name="Count" type="long" data="1"/>
-					<value name="Cmd1" type="string" data='"%LOCALAPPDATA%\wsltty\bin\mintty.exe" --wsl -o Locale=C -o Charset=UTF-8 -i "%LOCALAPPDATA%\lxss\bash.ico" /bin/wslbridge -C~ -t zsh --login -i'/>
-				</key>
-				<key name="Task16" modified="2019-08-15 14:02:03" build="190526">
-					<value name="Name" type="string" data="{WSL::bash}"/>
-					<value name="Flags" type="dword" data="00000004"/>
-					<value name="Hotkey" type="dword" data="00000000"/>
-					<value name="GuiArgs" type="string" data='-icon "%LOCALAPPDATA%\lxss\bash.ico"'/>
-					<value name="Active" type="long" data="0"/>
-					<value name="Count" type="long" data="1"/>
-					<value name="Cmd1" type="string" data="%windir%\system32\bash.exe -cur_console:p"/>
-				</key>
-				<key name="Task17" modified="2019-08-15 14:02:03" build="190526">
-					<value name="Name" type="string" data="{Zsh::NoConnector::Projects}"/>
-					<value name="Flags" type="dword" data="00000004"/>
-					<value name="Hotkey" type="dword" data="00000000"/>
-					<value name="GuiArgs" type="string" data=""/>
-					<value name="Active" type="long" data="0"/>
-					<value name="Count" type="long" data="1"/>
-					<value name="Cmd1" type="string" data='-cur_console:t:"zsh" set CHERE_INVOKING=1 &amp; set "PATH=C:\git-sdk-64\usr\bin;%PATH%" &amp; set MSYSTEM=MINGW64 &amp; C:\git-sdk-64\usr\bin\zsh.exe --login -i"'/>
-				</key>
-				<key name="Task18" modified="2019-08-06 13:45:11" build="190526">
-					<value name="Name" type="string" data="{Zsh::chef-repo}"/>
-					<value name="Flags" type="dword" data="00000000"/>
-					<value name="Hotkey" type="dword" data="00000000"/>
-					<value name="GuiArgs" type="string" data=""/>
-					<value name="Active" type="long" data="1"/>
-					<value name="Count" type="long" data="1"/>
-					<value name="Cmd1" type="string" data='&gt;-cur_console:t:"chef-repo" -cur_console:d:C:\Projects\gitlab\scm\chef-repo set CHERE_INVOKING=1 &amp; set "PATH=C:\git-sdk-64\usr\bin;%PATH%" &amp; set MSYSTEM=MINGW64 &amp; "%ConEmuBaseDirShort%\conemu-msys2-64.exe zsh --login -i"'/>
-				</key>
-				<key name="Task19" modified="2019-08-15 14:02:03" build="190526">
-					<value name="Name" type="string" data="{Zsh::chef-developers}"/>
-					<value name="Flags" type="dword" data="00000000"/>
-					<value name="Hotkey" type="dword" data="00000000"/>
-					<value name="GuiArgs" type="string" data=""/>
-					<value name="Active" type="long" data="1"/>
-					<value name="Count" type="long" data="1"/>
-					<value name="Cmd1" type="string" data='&gt;-cur_console:t:"chef-developers" -cur_console:d:C:\Projects\gitlab\chef-developers set CHERE_INVOKING=1 &amp; set "PATH=C:\git-sdk-64\usr\bin;%PATH%" &amp; set MSYSTEM=MINGW64 &amp; "%ConEmuBaseDirShort%\conemu-msys2-64.exe zsh --login -i"'/>
-				</key>
-				<key name="Task20" modified="2019-08-06 13:45:11" build="190526">
-					<value name="Name" type="string" data="{Zsh::infra-deploy}"/>
-					<value name="Flags" type="dword" data="00000000"/>
-					<value name="Hotkey" type="dword" data="00000000"/>
-					<value name="GuiArgs" type="string" data=""/>
-					<value name="Active" type="long" data="1"/>
-					<value name="Count" type="long" data="1"/>
-					<value name="Cmd1" type="string" data='&gt;-cur_console:t:"infra-deploy" -cur_console:d:C:\Projects\gitlab\scm\infrastructure-deploy set CHERE_INVOKING=1 &amp; set "PATH=C:\git-sdk-64\usr\bin;%PATH%" &amp; set MSYSTEM=MINGW64 &amp; "%ConEmuBaseDirShort%\conemu-msys2-64.exe zsh --login -i"'/>
-				</key>
-				<key name="Task21" modified="2019-11-24 16:28:38" build="191012">
+				<key name="Task8" modified="2021-06-19 14:37:11" build="210422">
 					<value name="Name" type="string" data="{Zsh::dotfiles}"/>
 					<value name="Flags" type="dword" data="00000000"/>
 					<value name="Hotkey" type="dword" data="00000000"/>
 					<value name="GuiArgs" type="string" data=""/>
+					<value name="Cmd1" type="string" data='&gt;-cur_console:t:"dotfiles" -cur_console:d:%userprofile%/.dotfiles set CHERE_INVOKING=1 &amp; set "PATH=C:\git-sdk-64\usr\bin;%PATH%" &amp; set MSYSTEM=MINGW64 &amp; "%ConEmuBaseDirShort%\conemu-msys2-64.exe zsh --login -i"'/>
 					<value name="Active" type="long" data="1"/>
 					<value name="Count" type="long" data="1"/>
-					<value name="Cmd1" type="string" data='&gt;-cur_console:t:"dotfiles" -cur_console:d:%userprofile%/.dotfiles set CHERE_INVOKING=1 &amp; set "PATH=C:\git-sdk-64\usr\bin;%PATH%" &amp; set MSYSTEM=MINGW64 &amp; "%ConEmuBaseDirShort%\conemu-msys2-64.exe zsh --login -i"'/>
 				</key>
-				<key name="Task22" modified="2020-06-26 13:51:53" build="191012">
+				<key name="Task9" modified="2021-06-19 14:44:12" build="210422">
 					<value name="Name" type="string" data="{Zsh::notes}"/>
 					<value name="Flags" type="dword" data="00000000"/>
 					<value name="Hotkey" type="dword" data="00000000"/>
 					<value name="GuiArgs" type="string" data=""/>
+					<value name="Cmd1" type="string" data='&gt;-cur_console:t:"notes" -cur_console:d:%userprofile%/prj/notes set CHERE_INVOKING=1 &amp; set "PATH=C:\git-sdk-64\usr\bin;%PATH%" &amp; set MSYSTEM=MINGW64 &amp; "%ConEmuBaseDirShort%\conemu-msys2-64.exe zsh --login -i"'/>
 					<value name="Active" type="long" data="1"/>
 					<value name="Count" type="long" data="1"/>
-					<value name="Cmd1" type="string" data='&gt;-cur_console:t:"notes" -cur_console:d:%userprofile%/prj/notes set CHERE_INVOKING=1 &amp; set "PATH=C:\git-sdk-64\usr\bin;%PATH%" &amp; set MSYSTEM=MINGW64 &amp; "%ConEmuBaseDirShort%\conemu-msys2-64.exe zsh --login -i"'/>
 				</key>
 			</key>
 			<key name="Apps" modified="2018-01-12 17:28:45" build="170910">
@@ -803,6 +685,7 @@
 			<value name="DownShowExOnTopMessage" type="hex" data="00"/>
 			<value name="EnvironmentSet" type="multi">
 				<line data="set PATH=%ConEmuBaseDir%\Scripts;%PATH%"/>
+				<line data="# Set codepage to UTF-8"/>
 				<line data="chcp 65001"/>
 			</value>
 			<value name="CTS.ResetOnRelease" type="hex" data="00"/>
@@ -834,6 +717,7 @@
 			<value name="AnsiLogCodes" type="hex" data="00"/>
 			<value name="AutoReloadEnvironment" type="hex" data="01"/>
 			<value name="StatusBar.Hide.InputGrouping" type="hex" data="00"/>
+			<value name="ResetTerminalConfirm" type="hex" data="01"/>
 		</key>
 	</key>
 </key>

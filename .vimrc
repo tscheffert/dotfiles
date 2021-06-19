@@ -163,8 +163,8 @@ if s:use_unite
 endif
 
 " File management
-Plug 'scrooloose/nerdtree'
-Plug 'Xuyuanp/nerdtree-git-plugin' " Show git marks in nerdtree
+Plug 'preservim/nerdtree'
+" Plug 'Xuyuanp/nerdtree-git-plugin' " Show git marks in nerdtree
 Plug 'low-ghost/nerdtree-fugitive' " Adds git menu to nerdtree
 Plug 'kopischke/vim-fetch' " Enable vim to open with line numbers appended
 
@@ -282,7 +282,7 @@ Plug 'tpope/vim-rhubarb'             " Github specific features building on fugi
 Plug 'gregsexton/gitv'               " Enable :gitv! version viewing
 
 " Syntax
-Plug 'scrooloose/syntastic' " Easy syntax messages
+Plug 'vim-syntastic/syntastic' " Easy syntax messages
 Plug 'dbakker/vim-lint'     " Linting for vim and vimL files.
 
 " Improved searches
@@ -1306,7 +1306,7 @@ augroup END
 " -----
 " Source: https://github.com/jistr/vim-nerdtree-tabs
 " Source: https://github.com/mhinz/vim-sayonara
-" Source: https://github.com/scrooloose/nerdtree
+" Source: https://github.com/preservevim/nerdtree
 
 " TODO: If I open vim with a directory argument I want the NERDTree root to be that directory
 " http://stackoverflow.com/questions/5817730/changing-root-in-nerdtree

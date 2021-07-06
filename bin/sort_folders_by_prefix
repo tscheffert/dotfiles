@@ -85,7 +85,9 @@ module SortFoldersByPrefix
 
     puts "Found prefix '#{dir_match[:prefix]}' for dir '#{basename_dir}'" if @debug
 
-    sorted_dir_name = dir_match[:prefix].delete_prefix('[').delete_suffix(']')
+    sorted_dir_name = dir_match[:prefix]
+      .delete_prefix('[').delete_suffix(']')
+      .strip
 
     if Dir.exist?(sorted_dir_name)
       puts "Sorted dir '#{sorted_dir_name}' already exists" if @debug

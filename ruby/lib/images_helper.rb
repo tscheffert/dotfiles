@@ -14,11 +14,12 @@ STDOUT.sync = true
 # Snippets:
 # images.each(&method(:puts))
 
-
 module ImagesHelper
 
   module ImageStructTypes
+
     include Dry::Types()
+
   end
 
   module Constants
@@ -129,7 +130,7 @@ module ImagesHelper
 
       memo << {
         original: original,
-        scaled: match.string
+        scaled:   match.string
       }
     end
   end

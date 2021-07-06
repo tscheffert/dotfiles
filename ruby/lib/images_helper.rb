@@ -136,7 +136,11 @@ module ImagesHelper
   end
 
   def self.all_dirs_in(dir:)
-    Dir.entries(dir, encoding: 'UTF-8').select { |entry| File.directory?(entry) } - Constants::IGNORED_DIRS
+    Dir.entries(dir, encoding: 'UTF-8').select do |entry|
+      warn "WARNING: Length of directory #{entry} is too long, cannot process it" if File.absolute_path(entry).length >= 255
+
+      File.directory?(entry)
+    end - Constants::IGNORED_DIRS
   end
 
   def self.safe_rename(old, new)

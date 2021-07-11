@@ -276,15 +276,42 @@ hs.hotkey.bind({"ctrl", "shift"}, "[", function()
   hs.spotify.previous()
 end)
 
-
-
 -- [[
---    Teams Hotkeys
---    TODO: Get this working!
+--    Ctrl + Shift + M: Toggle Muting for Teams
+--
+--    Teams hotkey is: CMD + Shift + M, to mute and unmute.
+--    It only works when the window for the call is open; doesn't work with the calendar window/chat window.
+--    This function will find the Teams App, find the windows, get the call one, and send it the keys
+--    Note: The Bundle ID is `com.microsoft.teams`
 -- ]]
 hs.hotkey.bind({"ctrl", "shift"}, "M", function()
-  -- Send CMD + Shift + M to teams
-  hs.alert.show("Muting not yet implemented")
+  -- Get teams app with the BundleID, which is always the same
+  local teams = hs.application.get("com.microsoft.teams")
+  if not teams then
+    hs.alert.show("Could not find teams app")
+    return
+  end
+
+  -- Get the specific window
+  local call_window = teams:findWindow('.+ | Microsoft Teams')
+  if call_window then
+    logger.d("Found Teams Meeting Window: " .. call_window:title())
+  else
+    hs.alert.show("Could not find open Teams meeting")
+    return
+  end
+
+  -- Focus the window so that the keys go to the right window of the application
+  if call_window:focus() then
+    logger.d("Successfully activated Teams call window")
+  else
+    hs.alert.show("Could not activate call_window")
+    return
+  end
+
+  -- Send the key events
+  -- Note: This works when I specify the fourth parameter as the application, otherwise this line must be duplicated and run twice.
+  hs.eventtap.keyStroke({'cmd', 'shift'}, 'm', 200000, teams)
 end)
 
 

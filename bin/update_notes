@@ -77,9 +77,20 @@ module UpdateNotes
       match[:file_path]
     end
 
-    status_files.each do |status_file|
-      raise "File from git status does not exist: '#{status_file}'" if !File.exist?(status_file)
+    # If we delete files, they won't exist so we can't get the mtime. Filter them out but log it when verbose.
+    status_files = status_files.select do |status_file|
+      exist = File.exist?(status_file)
+
+      puts "File from git status does not exist, probably deleted: '#{status_file}'" if !exist && @verbose
+
+      exist
     end
+
+    if status_files.empty?
+      puts '-- No viable files to mtime from status, they were all filtered by existence. If every file in status was deleted, just commit them manually.'
+      exit 0
+    end
+
     # Get oldest mtime for those files
     files_with_mtimes = status_files.map do |status_file|
       {
@@ -137,7 +148,7 @@ module UpdateNotes
 
   def self.run_git_command_safely(command:)
     if @verbose
-      puts "Running command:"
+      puts 'Running command:'
       puts command
       command_result = TTY::Command.new(printer: :pretty).run!(command)
     else

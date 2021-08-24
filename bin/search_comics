@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+# vim: ft=sh
+
+function search_comics {
+  local dirs_to_search=('_comics-deluged' '_Finished Deluge' '_comics-exh' '_comics-best')
+
+  local current_dir="$(basename $PWD)"
+  local expected_dir='Downloads'
+
+  if [[ "$current_dir" != "$expected_dir" ]]; then
+    echo "Only supports running from the expected directory: $expected_dir" 1>&2
+    exit 1
+  fi
+
+  for dir in "${dirs_to_search[@]}"; do
+    echo "Searching '$dir'"
+    pushd "$dir"
+    find . -type d -iname "*$@*"
+    popd
+  done
+}
+
+search_comics "$@"

@@ -60,11 +60,16 @@ options = Optimist.options(args) do
     Converts jpeg images to default ICC sRGB in a given folder
       Usage:
         #{File.basename(__FILE__)} [options]
-      where [options] are:
+      where [options] are:\n
   BANNERDOC
 
-  opt :test, 'Run in test mode, reporting which images will be converted without doing it', short: :none
-  opt :directory, 'Which directory to convert images in', short: :none, default: Dir.pwd
+  opt :test, 'Run in test mode, reporting which images will be converted without doing it',
+    short: :none,
+    type: :flag
+  opt :directory, 'Which directory to convert images in',
+    short: :none,
+    type: string,
+    default: Dir.pwd
 end
 
 if !Dir.exist?(options[:directory])
@@ -74,8 +79,9 @@ end
 @test_run = options[:test]
 
 ensure_tools_exist!
-
 ```
+
+TODO: Figure out how to monkey patch to disallow short options, so we don't have to specify `short: :none` on every option
 
 ### Command Running
 
@@ -152,4 +158,22 @@ mnemonic.each_char do |character|
   phrase << word
 end
 passphrase = phrase.join('-') + '1'
+```
+
+## Formatting
+
+### Output numbers with variable padding
+
+```
+digits_for_rename = total_number_of_thumbnails.digits.length
+output_format_string = "capture%<sequence>0#{digits_for_rename}d%<ext_name>s"
+
+(0..total_number_of_thumbnails).each do |i|
+  output = format(
+    output_format_string,
+    sequence:    i,
+    ext_name:    '.png')
+
+  puts output
+end
 ```

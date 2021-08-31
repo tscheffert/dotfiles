@@ -132,6 +132,13 @@ while sleep 5; do clear; <command>; done
 END=9; for ((i=1;i<=END;i++)); do knife cookbook delete role_common_app "123.456.$i" -y --config ~/.chef/sandbox/knife-dev.rb; done
 ```
 
+## Delete numbered folders in a range with find
+
+```
+for i in {1..9}; do echo "0$i"; find . -type d -name "0$i" -delete; done
+for i in {10..20}; do echo "$i"; find . -type d -name "$i" -delete; done
+```
+
 ### Timestamps
 References:
 

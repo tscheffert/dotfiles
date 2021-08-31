@@ -7,6 +7,13 @@ require 'tty-command'
 # run_script_on_folders '/c/Users/Trent/.dotfiles/bin/convert_gif_to_png
 # C:\\Users\\Trent\\.dotfiles\\bin\\convert_gif_to_png
 
+# If you get an error about `Errno::ENOEXEC`, it's probably cause you need to specify what command processes the script before running it.
+#   Example Error: C:/tools/ruby/Ruby26-x64/lib/ruby/gems/2.6.0/gems/tty-command-0.9.0/lib/tty/command/child_process.rb:70:in `spawn': Exec format error - C:/Users/Trent/.dotfiles/bin/move_images_to_root --rename (Errno::ENOEXEC)
+
+# TODO:
+#   - Automatically detect bash or ruby and prepend the script with that
+#   - Automatically "absolute path" an executable from my bin folder, should be able to run it like: `run_script_in_folders 'move_images_to_root --rename` and it behaves correctly
+
 module RunScriptOnFolders
 
   include ImagesHelper::Constants
@@ -20,7 +27,7 @@ module RunScriptOnFolders
                 Runs <script> on all the folders in the current directory
 
                 Example:
-                    run_script_on_folders '/c/Users/Trent/.dotfiles/bin/convert_gif_to_png
+                    run_script_on_folders 'ruby C:/Users/Trent/.dotfiles/bin/move_images_to_root --rename'
             #{command_name} --test
                 Reports which folders will move but doesn't move them
             #{command_name} --help

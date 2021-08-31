@@ -1,0 +1,118 @@
+#!/usr/bin/env ruby
+# vim: ft=ruby
+
+require File.join(__dir__, '..', 'ruby', 'lib', 'images_helper')
+require 'awesome_print'
+
+# Grab all the images in the folder
+# Sort into scaled or source by name
+# Pair source with scaled if possible
+# Two groups now, pairs of scaled + source and unpaired images
+# Move the source to source, leave the scaled, move the unpaired
+module SortImagesAfterScale
+
+  include ImagesHelper::Constants
+
+  def self.perform(args:)
+    if args[0] == '--help'
+      command_name = File.basename(__FILE__)
+      puts <<~HELPDOC
+        USAGE:
+            #{command_name}
+                Sorts images based on name. Leaving upscaled and putting others in '#{SOURCE_DIR}' directory.
+            #{command_name} --test
+                Reports which images will be sorted but doesn't sort them
+            #{command_name} --debug
+                Reports a lot more information while sorting images
+            #{command_name} --help
+                Prints this message
+      HELPDOC
+      exit 0
+    end
+
+    @test = args.include?('--test')
+    @debug = args.include?('--debug')
+
+    # Sort the images into scaled and source
+    scaled_images, source_images = sort_images(dir: '.')
+
+    if @debug
+      puts 'Scaled Images:'
+      ap scaled_images
+
+      puts 'Unscaled/Source Images:'
+      ap source_images
+    end
+
+    # Pair the images together
+    paired_images, unpaired_images = pair_images(source_images: source_images, scaled_images: scaled_images)
+
+    if @debug
+      puts 'Paired Images:'
+      ap paired_images
+
+      puts 'Unpaired Images:'
+      ap unpaired_images
+    end
+
+    move_images(paired_images: paired_images, unpaired_images: unpaired_images)
+  end
+
+  def self.sort_images(dir:)
+    images = ImagesHelper.all_images_in_dir(dir)
+    scaled_images, source_images = images.partition do |img|
+      File.basename(img, '.*').end_with?('-upscaled')
+    end
+
+    return scaled_images, source_images
+  end
+  private_class_method :sort_images
+
+  def self.pair_images(source_images:, scaled_images:)
+    paired_images = []
+    unpaired_images = []
+
+    source_images.each do |source_image|
+      source_basename = File.basename(source_image, '.*')
+
+      # TODO: Currently the scaled_images can get paired more than once
+      #       This would happen if we have a <name>, <name>-upscaled, and <name>-upscaled-cropped image set
+      scaled_image = scaled_images.select do |scaled_image|
+        File.basename(scaled_image, '.*').start_with?(source_basename)
+      end
+
+      if scaled_image.length > 1
+        raise "Something wrong with pairing logic, more than one scaled image matched the source image.\n  Source Image: #{source_basename}\n  scaled Images: #{scaled_image}"
+      elsif scaled_image.length == 1
+        paired_images << { source_image: source_image, scaled_image: scaled_image.first }
+      else
+        unpaired_images << source_image
+      end
+    end
+
+    return paired_images, unpaired_images
+  end
+  private_class_method :pair_images
+
+  def self.move_images(paired_images:, unpaired_images:)
+    source_images = paired_images.map { |pair| pair[:source_image] }
+
+    puts "Creating source dir: #{SOURCE_DIR}"
+    FileUtils.mkdir(SOURCE_DIR) if !Dir.exist?(SOURCE_DIR) && !@test
+
+    puts "Creating unpaired dir: #{UNPAIRED_DIR}"
+    FileUtils.mkdir(UNPAIRED_DIR) if !Dir.exist?(UNPAIRED_DIR) && !@test
+
+    puts 'Moving source images:'
+    ap source_images
+    FileUtils.mv(source_images, SOURCE_DIR) if !@test
+
+    puts 'Moving unpaired images:'
+    ap unpaired_images
+    FileUtils.mv(unpaired_images, UNPAIRED_DIR) if !@test
+  end
+  private_class_method :move_images
+
+end
+
+SortImagesAfterScale.perform(args: ARGV)

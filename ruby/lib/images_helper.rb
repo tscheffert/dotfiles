@@ -47,6 +47,7 @@ module ImagesHelper
     SORTED_DIR = '_sorted'.freeze
     SOURCE_DIR = '_source'.freeze
     TOO_SMALL_DIR = '_too_small'.freeze
+    UNPAIRED_DIR = '_unpaired'.freeze
     UNSORTED_DIR_NAME = '_unsorted'.freeze
 
     IGNORED_DIRS = [
@@ -58,6 +59,7 @@ module ImagesHelper
       PORTRAIT_DIR,
       SORTED_DIR,
       TOO_SMALL_DIR,
+      UNPAIRED_DIR,
       UNSORTED_DIR_NAME,
       '.',
       '..'

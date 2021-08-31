@@ -19,17 +19,16 @@ module RenameImages
     existing_regex = /\A#{name_prefix}-\d{2,3}\.[a-z]{3,4}\z/
     already_named, new = files.partition { |file_name| file_name.match(existing_regex) }
 
-    if !already_named.empty?
-      puts "Already named #{already_named.length} images, renaming to avoid clashes"
-    end
+    puts "Already named #{already_named.length} images, renaming to avoid clashes" if !already_named.empty?
 
     no_clash_already_named = []
     already_named.sort.each do |img|
-      no_clash_name = format(
-        '_%<basename>s-%<random_suffix>s%<ext_name>s',
-        basename:      File.basename(img, '.*'),
-        random_suffix: SecureRandom.uuid,
-        ext_name:      File.extname(img))
+      no_clash_name =
+        format(
+          '_%<basename>s-%<random_suffix>s%<ext_name>s',
+          basename:      File.basename(img, '.*'),
+          random_suffix: SecureRandom.uuid,
+          ext_name:      File.extname(img))
       ImagesHelper.safe_rename(img, no_clash_name)
       no_clash_already_named << no_clash_name
     end
@@ -37,19 +36,22 @@ module RenameImages
     ready_for_rename = no_clash_already_named.sort + new.sort
     puts "\nRenaming #{ready_for_rename.length} files\n"
 
+    sequence_length = ready_for_rename.length.digits.length
+
     ready_for_rename.sort.each_with_index do |img, i|
-      if name_prefix.blank?
-        new_name = format(
-          '%<sequence>02d%<ext_name>s',
-          sequence:    i + 1,
-          ext_name:    File.extname(img))
-      else
-        new_name = format(
-          '%<name_prefix>s-%<sequence>02d%<ext_name>s',
-          name_prefix: name_prefix,
-          sequence:    i + 1,
-          ext_name:    File.extname(img))
-      end
+      new_name =
+        if name_prefix.blank?
+          format(
+            "%<sequence>0#{sequence_length}d%<ext_name>s",
+            sequence: i + 1,
+            ext_name: File.extname(img))
+        else
+          format(
+            "%<name_prefix>s-%<sequence>0#{sequence_length}d%<ext_name>s",
+            name_prefix: name_prefix,
+            sequence:    i + 1,
+            ext_name:    File.extname(img))
+        end
 
       ImagesHelper.safe_rename(img, new_name)
       puts "#{img} -> #{new_name}"

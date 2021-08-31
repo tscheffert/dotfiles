@@ -1,0 +1,122 @@
+#!/usr/bin/env ruby
+# vim: ft=ruby
+
+require File.join(__dir__, '..', 'ruby', 'lib', 'images_helper')
+require 'awesome_print'
+
+# Grab all the images in the folder
+# Sort into cropped or source by name
+# Pair source with cropped if possible
+# Two groups now, pairs of cropped + source and unpaired images
+# Move the source to source, leave the cropped, move the unpaired
+#
+# NOTE: This script was pretty much copied and find-replaced from sort_images_after_scale
+module SortImagesAfterCrop
+
+  include ImagesHelper::Constants
+
+  CROPPOLA_CROPPED_MATCHER = /\A(?:.+?)(?:\ Cropped)(?:\ \(\d+\))?\z/
+
+  def self.perform(args:)
+    if args[0] == '--help'
+      command_name = File.basename(__FILE__)
+      puts <<~HELPDOC
+        USAGE:
+            #{command_name}
+                Sorts images based on name. Leaving upcropped and putting others in '#{SOURCE_DIR}' directory.
+            #{command_name} --test
+                Reports which images will be sorted but doesn't sort them
+            #{command_name} --debug
+                Reports a lot more information while sorting images
+            #{command_name} --help
+                Prints this message
+      HELPDOC
+      exit 0
+    end
+
+    @test = args.include?('--test')
+    @debug = args.include?('--debug')
+
+    # Sort the images into cropped and source
+    cropped_images, source_images = sort_images(dir: '.')
+
+    if @debug
+      puts 'cropped Images:'
+      ap cropped_images
+
+      puts 'Uncropped/Source Images:'
+      ap source_images
+    end
+
+    # Pair the images together
+    paired_images, unpaired_images = pair_images(source_images: source_images, cropped_images: cropped_images)
+
+    if @debug
+      puts 'Paired Images:'
+      ap paired_images
+
+      puts 'Unpaired Images:'
+      ap unpaired_images
+    end
+
+    move_images(paired_images: paired_images, unpaired_images: unpaired_images)
+  end
+
+  def self.sort_images(dir:)
+    images = ImagesHelper.all_images_in_dir(dir)
+    cropped_images, source_images = images.partition do |img|
+      File.basename(img, '.*').match(CROPPOLA_CROPPED_MATCHER)
+    end
+
+    return cropped_images, source_images
+  end
+  private_class_method :sort_images
+
+  def self.pair_images(source_images:, cropped_images:)
+    paired_images = []
+    unpaired_images = []
+
+    source_images.each do |source_image|
+      source_basename = File.basename(source_image, '.*')
+
+      # TODO: Currently the cropped_images can get paired more than once
+      #       This would happen if we have a <name>, <name>-upcropped, and <name>-upcropped-cropped image set
+      cropped_image = cropped_images.select do |cropped_image|
+        File.basename(cropped_image, '.*').start_with?(source_basename)
+      end
+
+      if cropped_image.length > 1
+        raise "Something wrong with pairing logic, more than one cropped image matched the source image.\n  Source Image: #{source_basename}\n  Cropped Images: #{cropped_image}"
+      elsif cropped_image.length == 1
+        paired_images << { source_image: source_image, cropped_image: cropped_image.first }
+      else
+        unpaired_images << source_image
+      end
+    end
+
+    return paired_images, unpaired_images
+  end
+  private_class_method :pair_images
+
+  def self.move_images(paired_images:, unpaired_images:)
+    source_images = paired_images.map { |pair| pair[:source_image] }
+
+    puts "Creating source dir: #{SOURCE_DIR}"
+    FileUtils.mkdir(SOURCE_DIR) if !Dir.exist?(SOURCE_DIR) && !@test
+
+    puts "Creating unpaired dir: #{UNPAIRED_DIR}"
+    FileUtils.mkdir(UNPAIRED_DIR) if !Dir.exist?(UNPAIRED_DIR) && !@test
+
+    puts 'Moving source images:'
+    ap source_images
+    FileUtils.mv(source_images, SOURCE_DIR) if !@test
+
+    puts 'Moving unpaired images:'
+    ap unpaired_images
+    FileUtils.mv(unpaired_images, UNPAIRED_DIR) if !@test
+  end
+  private_class_method :move_images
+
+end
+
+SortImagesAfterCrop.perform(args: ARGV)

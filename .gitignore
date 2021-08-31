@@ -9,6 +9,9 @@
 components/*/*/tags
 components/*/tags
 
+# RSpec status file
+.rspec_status
+
 # vim-projectionist project configs
 .projections.json
 

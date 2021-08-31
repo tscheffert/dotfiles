@@ -1,0 +1,55 @@
+#!/usr/bin/env ruby
+# vim: ft=ruby
+
+require 'pathname'
+require 'fileutils'
+require 'bigdecimal'
+
+require 'tty-command'
+require 'optimist'
+require 'active_support/duration'
+
+module ExampleOptimistScript
+
+  def self.perform(args:)
+    options = parse_and_validate!(args: args)
+
+    @test_run = options[:test]
+
+    video = options[:video]
+
+    # ensure_tools_exist!
+  end
+
+  private
+
+  def self.parse_and_validate!(args:)
+    options = Optimist.options(args) do
+      banner <<~BANNERDOC
+        Generates a composite montage image for a given video
+          Usage:
+            #{File.basename(__FILE__)} [options]
+          where [options] are:
+      BANNERDOC
+
+      opt :video, 'Which video to generate thumbnails',
+        short:    :none,
+        required: true,
+        type:     :string
+      opt :no_cleanup, "Don't cleanup intermediary files, the individual screenshots",
+        short: :none,
+        type:  :flag
+      opt :test, 'Run in test mode, reporting which images will be converted without doing it',
+        short: :none,
+        type:  :flag
+    end
+
+    # if !Dir.exist?(options[:directory])
+    #   Optimist.die(:directory, "'#{options[:directory]}' does not exist")
+    # end
+  end
+  private_class_method :parse_and_validate!
+
+end
+
+ExampleOptimistScript.perform(args: ARGV) unless defined?(RSpec)

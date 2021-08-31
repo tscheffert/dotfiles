@@ -1,0 +1,117 @@
+#!/usr/bin/env ruby
+# vim: ft=ruby
+
+require 'pathname'
+require 'fileutils'
+require 'bigdecimal'
+
+require 'tty-command'
+require 'tty-which'
+require 'optimist'
+require 'active_support/duration'
+
+# TODO: Trap and handle CTRL+C when running
+
+module GenerateVideoThumbnails
+
+  def self.perform(args:)
+    options = parse_and_validate!(args: args)
+
+    @test_run = options[:test]
+
+    video = options[:video]
+    no_cleanup = options[:no_cleanup]
+
+    ensure_tools_exist!
+
+    generate_thumbnails_naive_but_fast(video: video)
+
+    generate_montage(video: video, no_cleanup: no_cleanup)
+  end
+
+  private
+
+  def self.parse_and_validate!(args:)
+    options = Optimist.options(args) do
+      banner <<~BANNERDOC
+        Generates a composite montage image for a given video
+          Usage:
+            #{File.basename(__FILE__)} [options]
+          where [options] are:
+      BANNERDOC
+
+      opt :video, 'Which video to generate thumbnails',
+        short:    :none,
+        required: true,
+        type:     :string
+      opt :no_cleanup, "Don't cleanup intermediary files, the individual screenshots",
+        short: :none,
+        type:  :flag
+      opt :test, 'Run in test mode, reporting which images will be converted without doing it',
+        short: :none,
+        type:  :flag
+    end
+
+    Optimist.die(:video, "'#{options[:video]}' does not exist") if !File.exist?(options[:video])
+
+    options
+  end
+  private_class_method :parse_and_validate!
+
+  def self.ensure_tools_exist!
+    # puts TTY::Which.which('ffmpeg')
+    # puts TTY::Which.which('magick')
+    # puts TTY::Which.which('ffprobe')
+  end
+  private_class_method :ensure_tools_exist!
+
+  def self.generate_thumbnails_naive_but_fast(video:)
+    # TODO: Do this better
+    return if @test_run
+
+    # Source: https://superuser.com/a/945604
+    duration = `ffprobe -v error -show_entries format=duration -of default=noprint_wrappers=1:nokey=1 "#{video}"`
+
+    # Convert to float and then round down to int
+    duration = duration.to_f.floor
+
+    # One thumbnail at the start then one roughly every sixty seconds, till the end
+    interval = 60
+    total_number_of_thumbnails = (duration / interval) + 1
+
+    digits_for_rename = total_number_of_thumbnails.digits.length
+    output_ext = '.jpg' # Must format the output_ext avoid weird escaping
+    output_format_string = "capture%<sequence>0#{digits_for_rename}d%<output_ext>s"
+
+    # Start at 0 to take one at the start
+    (0..total_number_of_thumbnails).each do |i|
+      # This will "spread the timestamps out" which accounts for the rounding
+      timestamp = Integer(i * duration / total_number_of_thumbnails)
+
+      output =
+        format(
+          output_format_string,
+          sequence:   i,
+          output_ext: output_ext)
+      `ffmpeg -ss #{timestamp}s -i "#{video}" -vf select="eq(pict_type\\,I)" -vframes 1 #{output}`
+    end
+  end
+
+  def self.generate_montage(video:, no_cleanup:)
+    name = File.basename(video)
+    name = name.gsub(' - ', '_')
+    name = name.gsub(' & ', '-')
+    name = name.gsub(' ', '-')
+    name = name.gsub('\'', '')
+    name = name.gsub('\!', '')
+    name = name.gsub('!', '')
+    name = name.gsub('&', '')
+
+    `magick montage -title "#{video}" -geometry +10+10 -tile 4x capture*.jpg #{name}.jpg`
+
+    `rm capture*.jpg` unless no_cleanup
+  end
+
+end
+
+GenerateVideoThumbnails.perform(args: ARGV) unless defined?(RSpec)

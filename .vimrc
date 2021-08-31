@@ -217,6 +217,7 @@ Plug 'pearofducks/ansible-vim'
 Plug 'nginx/nginx',   { 'rtp': '/contrib/vim' }
 Plug 'PProvost/vim-ps1'
 Plug 'ekalinin/dockerfile.vim'
+Plug 'OrangeT/vim-csharp', { 'for': ['cs'] }
 
 " Lua Support
 " Alternatives:

@@ -646,6 +646,10 @@ augroup RubyFiles
   " Prefer CRLF line endings
   autocmd Filetype ruby setlocal fileformat=unix
 
+  " Add bang to iskeyword for ruby files, making `w` and autocomplete think it's part of identifiers/words
+  " TODO: This makes !Dir.thing fail to highlight :(
+  autocmd Filetype ruby setlocal iskeyword+=!
+
   " Extend ruby syntax highlighting
   autocmd Filetype ruby call RubySyntax()
 augroup END

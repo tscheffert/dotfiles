@@ -1,0 +1,91 @@
+#!/usr/bin/env ruby
+# vim: ft=ruby
+
+# require 'pathname'
+# require 'fileutils'
+# require 'bigdecimal'
+
+require 'tty-command'
+require 'optimist'
+require 'active_support/core_ext/object/blank'
+require 'active_support/core_ext/date_time'
+require 'active_support/duration'
+
+module SearchBackgrounds
+
+  DIRS_TO_SEARCH = [
+    'N:/Downloads/_backgrounds',
+    'N:/Downloads/_backgrounds-mega-packs',
+    'N:/Downloads/_backgrounds-models',
+    'N:/Downloads/_backgrounds-viper',
+    'N:/Downloads/ViperRipper Portable/galleries'
+  ].freeze
+
+  def self.perform(args:)
+    # Sync STDOUT so that everything appears in order
+    STDOUT.sync = true
+
+    options = parse_and_validate!(args: args)
+
+    dir = options[:dir]
+
+    cmd = TTY::Command.new # (only_output_on_error: true)
+
+    DIRS_TO_SEARCH.each do |search_dir|
+      result = cmd.run("es.exe -path \"#{search_dir}\" \"#{dir}\"", only_output_on_error: true)
+
+      out = result.stdout
+
+      if out.blank?
+        puts "Found no results in '#{search_dir}'"
+        next
+      end
+
+      require 'benchmark'
+      time = Benchmark.measure do
+        search_results = cleanse_results(output: out)
+
+        puts 'Cleaned Results:'
+        puts search_results
+      end
+
+      puts "Duration: #{format('%02f', time.real)}"
+    end
+  end
+
+  private
+
+  def self.parse_and_validate!(args:)
+    options = Optimist.options(args) do
+      banner <<~BANNERDOC
+        Search backgrounds folders for a given subfolder
+          Usage:
+            #{File.basename(__FILE__)} [options]
+          where [options] are:
+      BANNERDOC
+
+      opt :dir, 'Name of directory to search for',
+        short:    :none,
+        required: true,
+        type:     :string
+    end
+
+    options
+  end
+  private_class_method :parse_and_validate!
+
+  def self.cleanse_results(output:)
+    original_lines = output.lines(chomp: true)
+    lines = original_lines.map { |line|
+      if File.directory?(line)
+        line
+      else
+        File.dirname(line)
+      end
+    }.uniq
+  end
+  private_class_method :cleanse_results
+
+end
+
+SearchBackgrounds.perform(args: ARGV) unless defined?(RSpec)

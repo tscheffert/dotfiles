@@ -1,4 +1,5 @@
-# Chocolatey
+# Windows
+
 ## Execution Policy
 
 In Powershell as admin:

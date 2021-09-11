@@ -322,6 +322,7 @@ end)
 --      - Support a right click menu with "Turn On for Duration"
 --      - Support toggling it off at a certain battery percentage
 --      - 2020-09-30 - It doesn't appear right away when starting hammerspon, gotta click the bar first
+--      - 2021-07-11 - It disappears after waking up from sleep too
 --    Icons from Gloria Kang: https://dribbble.com/shots/2049777-Retina-Caffeine-Menubar-Icons
 --    Features to replace: http://semaja2.net/projects/insomniaxinfo/
 -- ]]

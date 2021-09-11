@@ -36,3 +36,9 @@ Uninstall:
 C:\Windows\Microsoft.NET\Framework\v4.0.30319\installutil.exe -u Wcfhost.exe
 pause
 ```
+
+## Fix CredSSP Issue when RDPing
+
+```
+REG ADD "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System\CredSSP\Parameters" /v AllowEncryptionOracle /t REG_DWORD /d 2
+```

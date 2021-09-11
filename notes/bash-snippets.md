@@ -52,6 +52,12 @@ clever filename with double %: thing
 find . -type f -name "*.sh" -print0 | xargs -0 sed -i "s/foo/bar/g"
 ```
 
+On macOS cause the built-in `sed` is wonky:
+
+```
+find . -type f -print0 | xargs -0 sed -i '' -e "s/infra-kafka/infra_kafka_legacy/g"
+```
+
 ### Find and replace with regular expression capture groups
 
 
@@ -143,7 +149,6 @@ for i in {10..20}; do echo "$i"; find . -type d -name "$i" -delete; done
 References:
 
 - <https://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations>
-- <>
 
 ```bash
 # Use ISO 8601 basic, meaning no dash or colons, in UTC

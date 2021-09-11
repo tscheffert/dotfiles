@@ -11,6 +11,7 @@ backend
 Bazarr
 Bektur
 Bostrom
+Brewmaster
 Buildout
 Bundler
 CDS
@@ -55,6 +56,7 @@ EchoDrive
 EchoShip
 Elasticsearch
 ElasticSearch
+enablement
 ENV
 Etrian
 falseyness
@@ -124,6 +126,8 @@ PRD
 Pre
 project
 PSQL
+python2
+python3
 qa
 QA1
 QA2
@@ -167,6 +171,7 @@ Tampermonkey
 Terraform
 Terraforming
 th
+Thycotic
 timestamp
 TLDR
 tlrg
@@ -178,6 +183,7 @@ TTY
 Typora
 uBlock
 UI
+UltiSnips
 Unbreaking
 Uncheck
 Uniques
@@ -196,6 +202,7 @@ wildcard
 wildcards
 WinRM
 WOX
+WSL
 WTF
 yaml
 YAML

@@ -5,9 +5,6 @@
 
 # -- Prepend --
 
-# Use the vim installed with pacman, but use our own gui
-alias 'gvim'="/c/Program\ Files/Vim/vim80/gvim" # TODO: Figure out how to set this up by PC
-
 # Put the Ruby OneClick Installer install at the front, the ruby shipped with
 # gitsdk has issues with newlines in irb and pry
 prepend_to_path 'C:\tools\ruby\ridk\current\bin'

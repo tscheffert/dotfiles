@@ -409,3 +409,14 @@ alias csr='curl --silent --show-error --request'
 
 # Open Bash man page in Less, searching for the builtin provided as an argument
 function man-bash() { man bash | less -p "^       $1 "; }
+
+# Pretty Print the path
+function pretty_path() {
+  if (($+PATH)); then
+    echo "$#path element(s):"
+    printf '%q\n' "$path[@]"
+  else
+    echo "PATH unset"
+  fi
+}
+

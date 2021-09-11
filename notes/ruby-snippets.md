@@ -105,6 +105,27 @@ else
 end
 ```
 
+### Timing a command
+
+```
+require 'benchmark'
+time = Benchmark.measure {
+  out.lines(chomp: true).each do |line|
+    puts line
+  end
+}
+
+puts "Duration: #{format('%02f', time.real)}"
+```
+
+```
+starting = Process.clock_gettime(Process::CLOCK_MONOTONIC)
+# time consuming operation
+ending = Process.clock_gettime(Process::CLOCK_MONOTONIC)
+elapsed = ending - starting
+elapsed # => 9.183449000120163 seconds
+```
+
 ## Directories
 
 Get the list of all the contents of a directory. Without the `'.'`, `'..'`, and "unix-style hidden files" (aka dot prefixed). In `UTF-8`.

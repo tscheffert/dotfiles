@@ -30,6 +30,28 @@ see `:help feature-list` and `:help has()` for more info
 has('feature')
 ```
 
+```
+:echo has('feature')
+```
+
+### Python Support
+
+- UltiSnips only loads if we have Python3 support, checked with `has('python3')`, cause it errors without it.
+- If python2 is in the path before python3 (`python --version` returns 2.x) then `has('python3')` will fail
+- Vim needs to be compiled with python3 support, check with `:version` for the `python3` or `python3/dyn`
+- Goal: Get
+
+Test it with
+
+```
+:echo has('python3') # should return 1
+:py3 print("hello") # Should print hello
+```
+
+If the `:py3 print("hello")` fails, it will usually have a message explaining "cannot load python39.dll" or something similar.
+
+Install the version of python3 that matches and ensure the DLL is in the PATH.
+
 ### Where was a given function defined?
 
 Source: https://vi.stackexchange.com/a/21296

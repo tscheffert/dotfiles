@@ -42,3 +42,12 @@ pause
 ```
 REG ADD "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System\CredSSP\Parameters" /v AllowEncryptionOracle /t REG_DWORD /d 2
 ```
+
+## Searching with Everything
+
+<https://www.voidtools.com/support/everything/command_line_interface/>
+
+
+```
+es -path .
+```

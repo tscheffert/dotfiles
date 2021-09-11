@@ -12,6 +12,9 @@ require 'active_support/duration'
 module ExampleOptimistScript
 
   def self.perform(args:)
+    # Sync STDOUT so that everything appears in order
+    STDOUT.sync = true
+
     options = parse_and_validate!(args: args)
 
     @test_run = options[:test]

@@ -138,11 +138,22 @@ module ImagesHelper
   end
 
   def self.all_dirs_in(dir:)
-    Dir.entries(dir, encoding: 'UTF-8').select do |entry|
+    dirs = Dir.entries(dir, encoding: 'UTF-8').select do |entry|
       warn "WARNING: Length of directory #{entry} is too long, cannot process it" if File.absolute_path(entry).length >= 255
 
       File.directory?(entry)
     end - Constants::IGNORED_DIRS
+
+    dirs = dirs.map { |entry| File.absolute_path(entry) }
+
+    dirs.select do |entry|
+      exists = Dir.exist?(dir)
+      if !exists
+        puts "For some reason, Directory '#{entry}' in dir '#{dir}' does not exist"
+      end
+
+      exists
+    end
   end
 
   def self.safe_rename(old, new)

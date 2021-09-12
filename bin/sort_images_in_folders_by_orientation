@@ -32,11 +32,10 @@ module SortImagesInFoldersByOrientation
 
     dirs.each do |dir|
       puts "Sorting #{dir}:"
-      if !test_run
-        abs_dir = File.absolute_path(dir)
-        Dir.chdir(abs_dir) do
-          SortImagesByOrientation.perform(args: [abs_dir])
-        end
+      next if test_run
+
+      Dir.chdir(dir) do
+        SortImagesByOrientation.perform(args: [dir])
       end
     end
   end

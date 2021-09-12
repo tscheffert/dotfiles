@@ -65,14 +65,7 @@ module SortFoldersByPrefix
   private_class_method :filter_sorted_dirs
 
   def self.sort_dir(dir:)
-    absolute_dir = File.absolute_path(dir)
-    basename_dir = File.basename(absolute_dir)
-    if Dir.exist?(absolute_dir)
-      puts "Found #{basename_dir}" if @debug
-    else
-      warn "For some reason, directory '#{basename_dir}' is reported as not existing"
-      return
-    end
+    basename_dir = File.basename(dir)
 
     dir_match = dir.match(DIR_MATCHER)
 
@@ -96,7 +89,7 @@ module SortFoldersByPrefix
       FileUtils.mkdir(sorted_dir_name) if !@test_run
     end
 
-    if absolute_dir.length + sorted_dir_name.length > 255
+    if dir.length + sorted_dir_name.length > 255
       warn "Cannot rename '#{basename_dir}', sorted name is too long"
     else
       puts "Moving dir '#{basename_dir}' into '#{sorted_dir_name}'" if @debug

@@ -51,12 +51,6 @@ module RunScriptOnFolders
     dirs = ImagesHelper.all_dirs_in(dir: Dir.pwd)
 
     dirs.each do |dir|
-      dir = File.absolute_path(dir)
-      if Dir.exist?(dir)
-        puts "Running #{command} in '#{dir}'"
-      else
-        puts "For some reason, Directory '#{dir}' does not exist"
-      end
       next if test_run
 
       FileUtils.chdir(dir) do

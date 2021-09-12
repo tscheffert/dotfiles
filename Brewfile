@@ -103,6 +103,12 @@ brew "bfg"
 # VMware vSphere CLI wrapper
 brew "govc"
 
+# Dependency for Rugged gem to build libgit2
+brew "cmake"
+
+# Dependency for Rugged gem to build libgit2
+brew "pkg-config"
+
 
 # Things I haven't installed but could
 # brew "pigz" # Parallelized Implementation of gzip - Homepage: http://www.zlib.net/pigz/

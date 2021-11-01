@@ -42,6 +42,7 @@
 
 [diff]
   algorithm = histogram
+  colorMoved = zebra # Make the code blocks which only moved in the file a different color than the standard red/green.
   # Try to align hunks with blank lines
   compactionHeuristic = true
   # Highlight whitespace errors

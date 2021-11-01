@@ -43,7 +43,7 @@ module FlattenImageFolders
 
     @@debug = args.include?('--debug')
 
-    dirs = Dir.entries('.', encoding: 'UTF-8').select { |entry| File.directory?(entry) } - IGNORED_DIRS
+    dirs = ImagesHelper.all_dirs_in(dir: '.')
 
     hydrated_dirs = dirs.map do |dir|
       hydrate_dir(dir: dir, depth: 0)
@@ -70,9 +70,9 @@ module FlattenImageFolders
         FileUtils.mkdir_p(ALREADY_FLAT_DIRS_DIR) unless test_run
       end
 
-      puts "Moving #{sorted_dirs[:only_images].length} dirs to #{ALREADY_FLAT_DIRS_DIR}:"
+      puts "Moving #{sorted_dirs[:only_images].length} dirs to #{ALREADY_FLAT_DIRS_DIR}:" if @@debug
       sorted_dirs[:only_images].each do |dir|
-        puts "  Moving #{dir[:path]} to #{ALREADY_FLAT_DIRS_DIR}"
+        puts "  Moving #{dir[:path]} to #{ALREADY_FLAT_DIRS_DIR}" if @@debug
         ImagesHelper.safe_rename(dir[:path], ALREADY_FLAT_DIRS_DIR) unless test_run
       end
     end
@@ -94,7 +94,7 @@ module FlattenImageFolders
         subdir = File.basename(nested_image_dir[:path])
         if bad_subdir_name(name: subdir)
           dest_dir = Pathname.new(nested_image_dir[:path]).parent.to_s
-          puts "Flattening dir with bad subdirectory name: '#{subdir}' to '#{dest_dir}'"
+          puts "Flattening dir with bad subdirectory name: '#{subdir}' to '#{dest_dir}'" if @@debug
           ImagesHelper.safe_rename(nested_image_dir[:images], dest_dir) unless test_run
 
           remaining_contents = Dir.glob('*', base: nested_image_dir[:path])
@@ -105,46 +105,47 @@ module FlattenImageFolders
           elsif remaining_contents.length == 1
             if remaining_contents.first == ('info.txt')
               info_file = File.join(nested_image_dir[:path], 'info.txt')
-              puts "Moving file '#{info_file}' to '#{dest_dir}'"
+              puts "Moving file '#{info_file}' to '#{dest_dir}'" if @@debug
               ImagesHelper.safe_rename(info_file, dest_dir) unless test_run
-              puts "Removing now empty badsubdir: '#{nested_image_dir[:path]}'"
+              puts "Removing now empty badsubdir: '#{nested_image_dir[:path]}'" if @@debug
               ImagesHelper.safe_remove_dir(nested_image_dir[:path]) unless test_run
             else
               warn "Something wonky in #{nested_image_dir[:path]}, singular contents is not 'info.txt' as expected: \n#{remaining_contents}"
             end
           else
-            puts "Removing now empty badsubdir: '#{nested_image_dir[:path]}'"
+            puts "Removing now empty badsubdir: '#{nested_image_dir[:path]}'" if @@debug
             ImagesHelper.safe_remove_dir(nested_image_dir[:path]) unless test_run
           end
 
         else
-          puts "Moving to root nested image only dir: #{nested_image_dir[:path]}"
+          puts "Moving to root nested image only dir: #{nested_image_dir[:path]}" if @@debug
           ImagesHelper.safe_rename(nested_image_dir[:path], root_dir) unless test_run
         end
 
       end
 
       sorted_subdir_dirs[:subdirs][:without_both].each do |nested_empty_dir|
-        puts "Removing nested empty dir: #{nested_empty_dir[:path]}"
+        puts "Removing nested empty dir: #{nested_empty_dir[:path]}" if @@debug
         ImagesHelper.safe_remove_dir(nested_empty_dir[:path]) unless test_run
       end
     end
 
     was_empty_dirs = sorted_dirs[:without_both].select { |dir| Dir.empty?(dir[:path]) }
     was_empty_dirs.each do |dir|
-      puts "Was empty, removing: #{dir[:path]}"
+      puts "Was empty, removing: #{dir[:path]}" if @@debug
       ImagesHelper.safe_remove_dir(dir[:path]) unless test_run
     end
 
     now_empty_dirs = sorted_only_subdirs.select { |dir| Dir.empty?(dir[:path]) }
     now_empty_dirs.each do |dir|
-      puts "Now empty, removing: #{dir[:path]}"
+      puts "Now empty, removing: #{dir[:path]}" if @@debug
       ImagesHelper.safe_remove_dir(dir[:path]) unless test_run
     end
   end
 
   def self.sort_hydrated_dirs(dirs:)
     dirs_already_sorted, remaining = dirs.partition do |dir|
+
       sort = ImagesHelper.already_sorted_dir?(dir[:path])
 
       puts "Sorting dir: #{dir[:path]} was already sorted" if sort && @@debug

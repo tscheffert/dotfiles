@@ -73,7 +73,12 @@ module ImagesHelper
   end
 
   def self.already_sorted_dir?(dir)
-    subdirs = Dir.entries(dir, encoding: 'UTF-8')
+    begin
+      subdirs = Dir.entries(dir, encoding: 'UTF-8')
+    rescue Errno::ENOENT
+      warn "-- Directory #{dir} is too long to search for entries"
+      return true
+    end
 
     subdirs.any? { |subdir| subdir.end_with?(Constants::LANDSCAPE_DIR) } \
       || subdirs.any? { |subdir| subdir.end_with?(Constants::PORTRAIT_DIR) }
@@ -139,7 +144,10 @@ module ImagesHelper
 
   def self.all_dirs_in(dir:)
     dirs = Dir.entries(dir, encoding: 'UTF-8').select do |entry|
-      warn "WARNING: Length of directory #{entry} is too long, cannot process it" if File.absolute_path(entry).length >= 255
+      if File.absolute_path(entry).length >= 255
+        warn "WARNING: Length of directory #{entry} is too long, cannot process it"
+        next false
+      end
 
       File.directory?(entry)
     end - Constants::IGNORED_DIRS

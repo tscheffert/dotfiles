@@ -12,12 +12,16 @@ function search_comics {
     exit 1
   fi
 
-  for dir in "${dirs_to_search[@]}"; do
-    echo "Searching '$dir'"
-    pushd "$dir"
-    find . -type d -iname "*$@*"
-    popd
-  done
+  if  ! test_exists es; then
+    echo "Everything not installed or not available on PATH. Cannot find executable 'es'." 1>&2
+  fi
+
+  echo "Searching '$current_dir'"
+  es -path . "$@" | sort
+}
+
+function test_exists {
+  type $1 >/dev/null 2>&1
 }
 
 search_comics "$@"

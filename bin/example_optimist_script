@@ -42,14 +42,19 @@ module ExampleOptimistScript
       opt :no_cleanup, "Don't cleanup intermediary files, the individual screenshots",
         short: :none,
         type:  :flag
-      opt :test, 'Run in test mode, reporting which images will be converted without doing it',
+      opt :test, 'Run in test mode, reporting what the script would do without actually doing it',
         short: :none,
         type:  :flag
+      opt :verbose, 'Run in verbose mode, reporting much more verbosely than normal',
+        short: :none,
+        type: :flag
     end
 
     # if !Dir.exist?(options[:directory])
     #   Optimist.die(:directory, "'#{options[:directory]}' does not exist")
     # end
+
+    options
   end
   private_class_method :parse_and_validate!
 

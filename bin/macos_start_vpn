@@ -5,10 +5,12 @@
 
 set -e
 
-AUTH_GROUP='VPN-Policy-OneLogin'
+# AUTH_GROUP='VPN-Policy-OneLogin'
+# GROUP: [VPN-EchoDriveQA-BYOD|VPN-Policy-OneLogin|VPN-Policy-OneLogin-BYOD-IT|VPN-Policy-OneLogin-BYOD-Non-IT|VPN-Policy-OneLogin-IT]
+AUTH_GROUP='VPN-Policy-OneLogin-IT'
 PID_FILE='/var/run/openconnect.pid'
-SERVER_CERTIFICATE='pin-sha256:v//AK7zXrODNO9JTvbCBSNo82Z20dBmfd5L4zsJegEo='
-SERVER='vpn.echo.com'
+SERVER_CERTIFICATE='pin-sha256:845k6dzZ+MIu9goIyGPoTLgeopHTFYAPJw5zbUpNG2A='
+SERVER='vpn1.echo.com'
 
 function main {
   if [[ "$OSTYPE" != "darwin"* ]]; then

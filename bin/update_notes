@@ -126,7 +126,7 @@ module UpdateNotes
 
     computer_tag =
       case hostname
-      when 'Trents-MacBook-Pro.local', 'Trents-MBP'
+      when 'Trents-MacBook-Pro.local', 'Trents-MBP', 'Trents-MBP.hq.echogl.net'
         'WorkMacbook'
       when 'Lady-Rosalie'
         'PersonalDesktop'

@@ -18,6 +18,11 @@ function search_comics {
 
   echo "Searching '$current_dir'"
   es -path . "$@" | sort
+
+  local other_dir='N:\\Bbs\\'
+  echo "Searching Bbs"
+  es -path "$other_dir" "$@" | sort
+
 }
 
 function test_exists {

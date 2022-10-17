@@ -17,6 +17,17 @@ Features that would be sweet:
 
 ## Tools
 
+### Czkawka
+
+- Constantly marketed on /r/datahoarder
+- Actually seems pretty good
+
+
+- Repository - https://github.com/qarmin/czkawka
+- Files to download - https://github.com/qarmin/czkawka/releases
+- Installation - https://github.com/qarmin/czkawka/blob/master/instructions/Installation.md
+- Instruction - https://github.com/qarmin/czkawka/blob/master/instructions/Instruction.md
+
 ### DupeGuru
 
 - Comes up a lot on Reddit
@@ -153,6 +164,11 @@ Features:
 - For merging folders, files, and even images
 
 <https://winmerge.org/>
+
+### Awesome Duplicate Finder
+
+- Compares similar images
+<http://www.duplicate-finder.com/photo.html>
 
 ## Commercial Tools
 

@@ -1,3 +1,6 @@
+# NOTE: For future .gitignore files, use this: https://www.toptal.com/developers/gitignore/
+# sensible default: https://www.toptal.com/developers/gitignore?templates=vim,ruby,python,go,terraform,macos,windows,linux,microsoftoffice,visualstudio,visualstudiocode
+
 # ----- Custom -----
 # AWS ElasticBeanstalk generated files
 .elasticbeanstalk/

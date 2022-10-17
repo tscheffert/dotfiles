@@ -1,14 +1,14 @@
-# Set the default behavior, in case people don't have core.autocrlf set.
-* text=auto
-
-# Declare files that will always have CRLF line endings on checkout.
-*.sln text eol=crlf
-
-# Everything else is gonna be forced to lf!
-* text eol=lf
-
-# Documents and Graphics template from:
+## Generic Git Attributes for all projects
+# Sources:
 #   https://github.com/alexkaratarakis/gitattributes/blob/master/Common.gitattributes
+#   https://github.com/alexkaratarakis/gitattributes/blob/master/Web.gitattributes
+#   http://davidlaing.com/2012/09/19/customise-your-gitattributes-to-become-a-git-ninja/
+
+## Auto detect
+#    Handle line endings automatically for files detected as
+#    text and leave all files detected as binary untouched.
+#    This will handle all files NOT defined below.
+* text=auto eol=lf
 
 # Documents
 *.doc  diff=astextplain
@@ -21,57 +21,198 @@
 *.PDF  diff=astextplain
 *.rtf  diff=astextplain
 *.RTF  diff=astextplain
-*.md text
-*.adoc text
-*.textile text
-*.mustache text
-*.csv text
-*.tab text
-*.tsv text
-*.sql text
+
+# Source code
+*.bash            text
+*.bat             text
+*.cmd             text
+*.coffee          text
+*.css             text
+*.csv             text
+*.htm             text diff=html
+*.html            text diff=html
+*.inc             text
+*.ini             text
+*.js              text
+*.json            text
+*.jsx             text
+*.less            text
+*.ls              text
+*.map             text -diff
+*.od              text
+*.onlydata        text
+*.php             text diff=php
+*.pl              text
+*.ps1             text
+*.py              text diff=python
+*.rb              text diff=ruby
+*.sass            text
+*.scm             text
+*.scss            text diff=css
+*.sh              text
+*.sql             text
+*.styl            text
+*.tab             text
+*.tag             text
+*.textile         text
+*.ts              text
+*.tsv             text
+*.tsx             text
+*.txt             text
+*.xhtml           text diff=html
+*.xml             text
+.htaccess         text
+
+# Docker
+*.dockerignore    text
+Dockerfile        text
+
+# Documentation
+*.adoc            text
+*.ipynb           text
+*.markdown        text
+*.md              text
+*.mdwn            text
+*.mdown           text
+*.mkd             text
+*.mkdn            text
+*.mdtxt           text
+*.mdtext          text
+*.txt             text
+AUTHORS           text
+CHANGELOG         text
+CHANGES           text
+CONTRIBUTING      text
+COPYING           text
+copyright         text
+*COPYRIGHT*       text
+INSTALL           text
+license           text
+LICENSE           text
+NEWS              text
+readme            text
+*README*          text
+TODO text
+
+# Templates
+*.dot             text
+*.ejs             text
+*.erb             text
+*.haml            text
+*.handlebars      text
+*.hbs             text
+*.hbt             text
+*.jade            text
+*.latte           text
+*.mustache        text
+*.njk             text
+*.phtml           text
+*.tmpl            text
+*.tpl             text
+*.twig            text
+*.vue             text
+
+# Linters
+.csslintrc        text
+.eslintrc         text
+.htmlhintrc       text
+.jscsrc           text
+.jshintrc         text
+.jshintignore     text
+.stylelintrc text
+
+# Configs
+*.bowerrc         text
+*.cnf             text
+*.conf            text
+*.config          text
+.babelrc          text
+.browserslistrc   text
+.editorconfig     text
+.env              text
+.gitattributes    text
+.gitconfig        text
+.htaccess         text
+*.lock            text
+package-lock.json text -diff
+*.npmignore       text
+*.yaml            text
+*.yml             text
+browserslist      text
+Makefile          text
+makefile          text
 
 # Graphics
-*.png binary
-*.jpg binary
-*.jpeg binary
-*.gif binary
-*.tif binary
-*.tiff binary
-*.ico binary
-# SVG treated as an asset (binary) by default. If you want to treat it as text,
-# comment-out the following line and uncomment the line after.
-*.svg binary
-#*.svg text
-*.eps binary
+*.ai              binary
+*.bmp             binary
+*.eps             binary
+*.gif             binary
+*.gifv            binary
+*.ico             binary
+*.jng             binary
+*.jp2             binary
+*.jpeg            binary
+*.jpg             binary
+*.jpx             binary
+*.jxr             binary
+*.pdf             binary
+*.png             binary
+*.psb             binary
+*.psd             binary
+# SVG treated as an asset (binary) by default.
+*.svg             text
+# If you want to treat it as binary,
+# use the following line instead.
+# *.svg           binary
+*.svgz            binary
+*.tif             binary
+*.tiff            binary
+*.wbmp            binary
+*.webp            binary
 
-# Diff registry files as text
-*.reg text
+# Audio
+*.kar             binary
+*.m4a             binary
+*.mid             binary
+*.midi            binary
+*.mp3             binary
+*.ogg             binary
+*.ra              binary
 
+# Video
+*.3gpp            binary
+*.3gp             binary
+*.as              binary
+*.asf             binary
+*.asx             binary
+*.fla             binary
+*.flv             binary
+*.m4v             binary
+*.mng             binary
+*.mov             binary
+*.mp4             binary
+*.mpeg            binary
+*.mpg             binary
+*.ogv             binary
+*.swc             binary
+*.swf             binary
+*.webm            binary
 
-# Diffs
-#   Details on setting up diffs:
-#   https://git-scm.com/docs/gitattributes#_generating_diff_text
-# Built In Diffs:
-*.css diff=css
-*.cs diff=csharp
-*.ex diff=elixir
-*.exs diff=elixir
-*.go diff=golang
-*.html diff=html
-*.md diff=markdown
-*.py diff=python
-*.rb diff=ruby
-*.rs diff=rust
+# Archives
+*.7z              binary
+*.gz              binary
+*.jar             binary
+*.rar             binary
+*.tar             binary
+*.zip             binary
 
-# Specific End of Lines
-# Force batch scripts to always use CRLF line endings so that if a repo is accessed
-# in Windows via a file share from Linux, the scripts will work.
-*.{cmd,[cC][mM][dD]} text eol=crlf
-*.{bat,[bB][aA][tT]} text eol=crlf
+# Fonts
+*.ttf             binary
+*.eot             binary
+*.otf             binary
+*.woff            binary
+*.woff2           binary
 
-# Force bash scripts to always use LF line endings so that if a repo is accessed
-# in Unix via a file share from Windows, the scripts will work.
-*.sh text eol=lf
-
-# Don't diff or line-ending convert zip files
-*.zip binary
+# Executables
+*.exe             binary
+*.pyc             binary

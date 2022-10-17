@@ -14,6 +14,8 @@ require 'active_support/duration'
 
 module GenerateVideoThumbnails
 
+  INTERMEDIATE_DIR = '_intermediate'
+
   def self.perform(args:)
     options = parse_and_validate!(args: args)
 
@@ -81,7 +83,10 @@ module GenerateVideoThumbnails
 
     digits_for_rename = total_number_of_thumbnails.digits.length
     output_ext = '.jpg' # Must format the output_ext avoid weird escaping
-    output_format_string = "capture%<sequence>0#{digits_for_rename}d%<output_ext>s"
+
+    puts "Creating intermediate dir: _intermediate"
+    FileUtils.mkdir(INTERMEDIATE_DIR) if !Dir.exist?(INTERMEDIATE_DIR) && !@test
+    output_format_string = File.join(INTERMEDIATE_DIR, "capture%<sequence>0#{digits_for_rename}d%<output_ext>s")
 
     # Start at 0 to take one at the start
     (0..total_number_of_thumbnails).each do |i|
@@ -107,9 +112,11 @@ module GenerateVideoThumbnails
     name = name.gsub('!', '')
     name = name.gsub('&', '')
 
-    `magick montage -title "#{video}" -geometry +10+10 -tile 4x capture*.jpg #{name}.jpg`
+    capture_glob = File.join(INTERMEDIATE_DIR, 'capture*.jpg')
+    `magick montage -title "#{video}" -geometry +10+10 -tile 4x #{capture_glob} #{name}.jpg`
 
-    `rm capture*.jpg` unless no_cleanup
+    `rm #{capture_glob}` unless no_cleanup
+    FileUtils.rmdir(INTERMEDIATE_DIR) if Dir.exist?(INTERMEDIATE_DIR) && !@test
   end
 
 end

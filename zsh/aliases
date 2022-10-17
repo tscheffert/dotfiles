@@ -420,3 +420,5 @@ function pretty_path() {
   fi
 }
 
+alias generate_video_thumbnails_in_folder="find . -type f -name '*.mp4' -exec generate_video_thumbnails --video '{}' \;"
+

@@ -7,5 +7,5 @@ function findn() {
     echo 1>&2  "Must specify a file name to 'find'"
     return 1
   fi
-  find . -name "$name"
+  find . -name "*$name*"
 }

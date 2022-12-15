@@ -6,7 +6,7 @@ module JSONHelper
   # From Devtools JSONHelper
   def self.validate!(json_file:, argument_name:)
     if json_file.blank?
-      warn Paint["Validating #{argument_name}: Provided JSON file argument was blank!", :Red]
+      warn Paint["Validating #{argument_name}: Provided JSON file argument was blank!", :red]
       exit 1
     end
 

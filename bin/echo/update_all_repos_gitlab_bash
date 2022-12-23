@@ -1,0 +1,60 @@
+#!/usr/bin/env bash
+# vim: ft=sh
+
+# NOTE: Script assumes you have .ssh/config set up for git.echo.com
+
+function clone_or_pull {
+  local group="$1"
+  local project="$2"
+
+  if [[ -d "$project" ]]; then
+    echo "Already cloned $project, running pull"
+    pushd "$project" || exit
+
+    local user_email="trent.scheffert@echo.com"
+    git config --local --add user.email "$user_email"
+
+    git pull
+
+    popd || exit
+  else
+    echo "Cloning $project"
+    git clone "git@git.echo.com:$group/$project.git"
+  fi
+}
+
+function git_update_all_gitlab_repos {
+  local current_dir
+  current_dir="$(basename "$PWD")"
+
+  if "$current_dir" != "gitlab"; then
+    echo "This script is meant to be run from a \"root\" directory named 'gitlab'" 1>&2
+    exit 1
+  fi
+
+  mkdir -p scm
+  pushd scm || exit
+
+  clone_or_pull "slalom-configuration-management" "chef-repo"
+  clone_or_pull "slalom-configuration-management" "infrastructure-deploy"
+
+  popd || exit
+
+  mkdir -p chef-developers
+  pushd chef-developers || exit
+
+  clone_or_pull "chef-developers" "app_installer"
+  clone_or_pull "chef-developers" "generator"
+  clone_or_pull "chef-developers" "chef-repo-finance"
+  clone_or_pull "chef-developers" "chef-repo-ratingconfig"
+  clone_or_pull "chef-developers" "chef-repo-tlrg"
+  clone_or_pull "chef-developers" "chef-repo-atlas"
+  clone_or_pull "chef-developers" "chef-repo-tli"
+  clone_or_pull "chef-developers" "chef-repo-edi"
+  clone_or_pull "chef-developers" "chef-repo-echoship"
+  clone_or_pull "chef-developers" "chef-repo-echodrive"
+
+  popd || exit
+}
+
+git_update_all_gitlab_repos "$@"

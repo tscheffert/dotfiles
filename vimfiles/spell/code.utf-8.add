@@ -131,6 +131,7 @@ Solarwinds
 Sonarr
 Spectrophasic
 Splunk
+Stephane
 Strider
 Styleguide
 Symlink
@@ -165,6 +166,7 @@ WOX
 WSL
 WTF
 WinRM
+Workstream
 YAML
 ZSH
 Zach
@@ -211,9 +213,11 @@ python2
 python3
 qa
 rebasing
+remediations
 remoting
 repo
 runlist
+solutioning
 structs
 subcommand
 subcommands

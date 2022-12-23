@@ -1,0 +1,231 @@
+#!/usr/bin/env ruby
+# vim: ft=ruby
+
+# NOTE: Script assumes you have .ssh/config set up for ssh.dev.azure.com
+
+# TODO: Check the state of repos and only clone if they're in a given state. Be careful of working state basically
+# TODO: Check the .ssh/config
+
+# Docs:
+#   - https://www.rubydoc.info/github/libgit2/rugged/Rugged/Repository
+
+require 'pathname'
+require 'fileutils'
+
+
+# require 'active_support'
+require 'active_support/core_ext/object/blank'
+require 'optimist'
+require 'rugged'
+require 'tty-command'
+
+# require File.join(__dir__, '..', 'ruby', 'lib', 'optimist_helper')
+
+
+
+module UpdateAllReposAzureDevops
+
+  REPOS_ROOT = File.join(Dir.home, 'prj', 'azure-devops')
+
+  DEVOPS_REPOS = [
+    # 'ansible',
+    # 'artifactory-cloud',
+    # 'azure-pipelines-agents',
+    # 'backstage',
+    # 'backstage-catalog-config',
+    # 'diagrams',
+    # 'docker-patches',
+    # 'kubernetes-manifests',
+    # 'packer',
+    # 'repo-file-locker-scripts',
+    # 'secrets',
+    # 'terraform-api-resources',
+    # 'terraform-cdc',
+    'terraform-resources'
+  ].freeze
+
+  DEVCENTER_REPOS = [
+    # 'argocd',
+    # 'bivrost',
+    # 'callahan',
+    # 'ChefMRAutomation',
+    # 'devtools',
+    # 'eks-yaml',
+    # 'holler',
+    # 'k8s-python-cli',
+    # 'k8s-yaml',
+    # 'k8s-yaml-pipelines',
+    # 'onelogin-aws-cli-assume-role',
+    # 'pipeline-templates',
+    # 'policy-as-code',
+    # 'sauron',
+    # 'stevedore',
+    # 'terraform-aws',
+    'yoda'
+  ].freeze
+
+  ALL_REPOS =
+    DEVCENTER_REPOS.map { |repo| ['devcenter', repo] } +
+    DEVOPS_REPOS.map { |repo| ['devops', repo] }
+      .freeze
+
+  def self.perform(args:)
+    STDOUT.sync = true
+
+    options = parse_and_validate!(args: args)
+
+    @test_run = options[:test]
+    @verbose = options[:verbose]
+
+    set_working_directory!
+
+    ALL_REPOS.each do |team, repo|
+      if !repo_exist?(team: team, repo: repo)
+        repo_clone(team: team, repo: repo)
+        puts "#{repo}: does not exist, cloned"
+        next
+      end
+
+      if !repo_valid?(team: team, repo: repo)
+        puts "#{repo}: is not a valid repo directory"
+        next
+      end
+
+      if !repo_clean?(team: team, repo: repo)
+        puts "#{repo}: exists but is dirty, not ready for an update"
+        next
+      end
+
+      repo_update(team: team, repo: repo)
+      puts "#{repo}: exists and updated"
+    end
+  end
+
+  def self.parse_and_validate!(args:)
+    options = Optimist.options(args) do
+      banner <<~BANNERDOC
+        Clones or fetches and rebases all Azure DevOps repos for Echo
+          Usage:
+            #{File.basename(__FILE__)} [options]
+          where [options] are:
+      BANNERDOC
+
+      opt :test, 'Run in test mode, reporting what the script would do without actually doing it',
+        short: :none,
+        type:  :flag
+      opt :verbose, 'Run in debug mode, reporting much more verbosely than normal',
+        short: :none,
+        type:  :flag
+    end
+
+    options
+  end
+  private_class_method :parse_and_validate!
+
+  def self.set_working_directory!
+    current_dir = File.absolute_path(Dir.pwd)
+
+    if current_dir == File.absolute_path(REPOS_ROOT)
+      puts "Current directory matches expected repos root at #{current_dir}"
+    else
+      if @verbose
+        puts "Current directory and expected repos root do not match." \
+          "\n  Current Directory: #{current_dir}" \
+          "\n  Expected Repos Root Directory: #{REPOS_ROOT}"
+        puts "Changing directory to #{REPOS_ROOT}"
+      end
+
+      Dir.chdir(REPOS_ROOT)
+      puts "Working directory changed to #{REPOS_ROOT}" if @verbose
+    end
+  end
+  private_class_method :set_working_directory!
+
+  def self.repo_exist?(team:, repo:)
+    ensure_team_exists!(team: team)
+
+    Dir.exist?(File.join(team, repo))
+  end
+  private_class_method :repo_exist?
+
+  def self.repo_valid?(team:, repo:)
+    # Check if the folder exists but doesn't have a .git dir
+    return false if !Dir.exist?(File.join(team, repo, '.git'))
+
+    rugged_repo = get_rugged_repo(team: team, repo: repo)
+
+    # Check if an empty git repo
+    return false if rugged_repo.empty?
+
+    # Check if a bare repo
+    return false if rugged_repo.bare?
+
+    # Check if HEAD is detached
+    return false if rugged_repo.head_detached?
+
+    # Check if HEAD points to a non-existant branch
+    return false if rugged_repo.head_unborn?
+
+    true
+  end
+
+  def self.repo_clean?(team:, repo:)
+    rugged_repo = get_rugged_repo(team: team, repo: repo)
+
+    # rugged_repo.status returns an enumerator of all items that would appear from a "git status" call
+    status = rugged_repo.enum_for(:status).to_a
+
+    if status.present?
+      puts "For repo #{team}/#{repo}"
+      status.each { |file, status_data| puts "  #{file} has status: #{status_data.inspect}" }
+
+      false
+    else
+      true
+    end
+  end
+  private_class_method :repo_clean?
+
+  def self.repo_update(team:, repo:)
+    puts "Updating repo #{File.join(team, repo)}" if @verbose
+
+    # make sure we're on the default branch specified by `origin/HEAD`
+
+  end
+  private_class_method :repo_update
+
+  def self.repo_clone(team:, repo:)
+    puts "Cloning repo #{File.join(team, repo)}" if @verbose
+
+    # https://www.rubydoc.info/github/libgit2/rugged/Rugged/Repository#clone_at-class_method
+    # How
+    # Repository.clone_at("https://github.com/libgit2/rugged.git", "./some/dir")
+  end
+  private_class_method :repo_clone
+
+  def self.ensure_team_exists!(team:)
+    # Memoize so we're not constantly making filesystem calls
+    @_team_existence ||= {}
+    @_team_existence[team] ||= Dir.exist?(team)
+
+    return if @_team_existence[team]
+
+    puts "Creating missing team directory #{team} under #{REPOS_ROOT}" if @verbose
+    FileUtils.mkdir(team) if !@test
+    @_team_existence[team] = Dir.exist?(team)
+  end
+  private_class_method :ensure_team_exists!
+
+  def self.get_rugged_repo(team:, repo:)
+    @_repos ||= {}
+    @_repos[File.join(team, repo)] ||= Rugged::Repository.new(File.join(team, repo))
+  rescue Rugged::RepositoryError => e
+    warn "Rugged Initialization Error:\n#{e.inspect}"
+
+    raise "Failed to initialize Rugged repository for #{File.join(team,repo)}, something is wrong with that directory"
+  end
+  private_class_method :get_rugged_repo
+
+end
+
+UpdateAllReposAzureDevops.perform(args: ARGV)

@@ -1,3 +1,42 @@
+############################
+# Custom Markdown Snippets #
+############################
+priority 0
+
+# Helpers
+global !p
+import string, os
+
+def titleize(filename):
+    """
+    Convert filenames to markdown titles
+
+    Examples::
+
+        >>> titleize("2021-06-13_example-titleize-name.md")
+        "2021-06-13 - Example Titleize Name"
+        >>> camelize("2021-06-13.md")
+        "2021-06-13 - Daily Status"
+        >>> camelize("example-titleize-name.md")
+        "Example Titleize Name"
+    """
+  title = '2021-06-13_usman-coaching-plan'
+
+  first_part, sep, second_part = title.partition('_')
+
+  print first_part
+  print second_part.replace('-', ' ').title()
+
+endglobal
+
+
+
+snippet title "Set the title header of the document from the filename " bsm
+# `!p snip.rv = thing`
+$0
+endsnippet
+
+
 priority -50
 
 ###########################

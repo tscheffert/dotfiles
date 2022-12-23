@@ -1,0 +1,94 @@
+#!/usr/bin/env bash
+# vim: ft=sh
+
+# NOTE: Script assumes you have .ssh/config set up for ssh.dev.azure.com
+
+# TODO: Check the state of repos and only clone if they're in a given state. Be careful of working state basically
+# TODO: Check the .ssh/config
+function clone_or_pull {
+  local group="$1"
+  local project="$2"
+
+  if [[ -d "$project" ]]; then
+    echo "Already cloned $project, running pull"
+    pushd "$project" || exit
+
+    # Test it with: git config --get user.email
+    local user_email="trent.scheffert@echo.com"
+    git config --local --add user.email "$user_email"
+
+    local branch, head
+    branch="$(git symbolic-ref --quiet --short HEAD 2>/dev/null)"
+    head="$(git symbolic-ref refs/remotes/origin/HEAD | sed 's@^refs/remotes/origin/@@')"
+
+    if [[ "$branch" != "$head" ]]; then
+      echo "branch not head"
+      return
+    fi
+
+    if [[ -n $(git status --porcelain 2> /dev/null) ]]; then
+      echo ""
+    fi
+
+    git pull
+
+    popd || exit
+  else
+    echo "Cloning $project"
+    git clone "git@ssh.dev.azure.com:v3/echo-it/$group/$project"
+  fi
+}
+
+function git_update_all_azuredevops_repos {
+  local current_dir
+  current_dir="$(basename "$PWD")"
+
+  if [[ "$current_dir" != "azure-devops" ]]; then
+    echo "This script is meant to be run from a \"root\" directory named 'azure-devops'" 1>&2
+    exit 1
+  fi
+
+  mkdir -p devops
+  pushd devops || exit
+
+  clone_or_pull "DevOps" "ansible"
+  # clone_or_pull "DevOps" "artifactory-cloud"
+  # clone_or_pull "DevOps" "azure-pipelines-agents"
+  # clone_or_pull "DevOps" "backstage"
+  # clone_or_pull "DevOps" "backstage-catalog-config"
+  # clone_or_pull "DevOps" "diagrams"
+  # clone_or_pull "DevOps" "docker-patches"
+  # clone_or_pull "DevOps" "kubernetes-manifests"
+  # clone_or_pull "DevOps" "packer"
+  # clone_or_pull "DevOps" "repo-file-locker-scripts"
+  # clone_or_pull "DevOps" "secrets"
+  # clone_or_pull "DevOps" "terraform-api-resources"
+  # clone_or_pull "DevOps" "terraform-cdc"
+
+  popd || exit
+
+  mkdir -p devcenter
+  pushd devcenter || exit
+
+  # clone_or_pull "DevCenter" "argocd"
+  # clone_or_pull "DevCenter" "bivrost"
+  # clone_or_pull "DevCenter" "callahan"
+  # clone_or_pull "DevCenter" "ChefMRAutomation"
+  # clone_or_pull "DevCenter" "devtools"
+  # clone_or_pull "DevCenter" "eks-yaml"
+  # clone_or_pull "DevCenter" "holler"
+  # clone_or_pull "DevCenter" "k8s-python-cli"
+  # clone_or_pull "DevCenter" "k8s-yaml"
+  # clone_or_pull "DevCenter" "k8s-yaml-pipelines"
+  # clone_or_pull "DevCenter" "onelogin-aws-cli-assume-role"
+  # clone_or_pull "DevCenter" "pipeline-templates"
+  # clone_or_pull "DevCenter" "policy-as-code"
+  # clone_or_pull "DevCenter" "sauron"
+  # clone_or_pull "DevCenter" "stevedore"
+  # clone_or_pull "DevCenter" "terraform-aws"
+  # clone_or_pull "DevCenter" "yoda"
+
+  popd || exit
+}
+
+git_update_all_azuredevops_repos "$@"

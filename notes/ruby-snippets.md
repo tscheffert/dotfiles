@@ -198,3 +198,33 @@ output_format_string = "capture%<sequence>0#{digits_for_rename}d%<ext_name>s"
   puts output
 end
 ```
+
+## YAML
+
+### Validate YAML file input
+
+```ruby
+def self.parse_and_validate!(args:)
+  yaml_file = args[0]
+
+  raise "Must pass a file to edit" if yaml_file.blank?
+  raise "File to edit '#{yaml_file}' does not exist" if !File.exist?(yaml_file)
+  raise "File to edit '#{yaml_file}' is not a yaml file" if !(yaml_file.end_with?(".yaml") || yaml_file.end_with?(".yml"))
+
+  puts "Valid YAML file: '#{yaml_file}'"
+
+  yaml_file = yaml_file.sub('.yml', '.yaml') # Simplify to only working with .yaml files
+  output_file_basename = File.basename(yaml_file, '.yaml')
+
+  output_file =
+    if OVERWRITE_INPUT
+      yaml_file
+    else
+      output_file_basename + "_out" + ".yaml"
+    end
+
+  return yaml_file, output_file
+end
+```
+
+

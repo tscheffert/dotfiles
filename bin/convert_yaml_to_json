@@ -1,0 +1,36 @@
+#!/usr/bin/env ruby
+# vim: ft=ruby
+
+require 'json'
+require 'YAML'
+require 'active_support'
+require 'active_support/core_ext/object/blank'
+
+module ConvertYAMLToJSON
+  def self.perform(args:)
+    yaml_file = args[0]
+
+    raise "Must pass a file to convert" if yaml_file.blank?
+    raise "File to convert '#{yaml_file}' does not exist" if !File.exist?(yaml_file)
+    raise "File to convert '#{yaml_file}' is not a yaml file" if !(yaml_file.end_with?(".yaml") || yaml_file.end_with?(".yml"))
+
+    puts "Valid YAML file: '#{yaml_file}'"
+
+    yaml_file = yaml_file.sub('.yml', '.yaml') # Simplify to only working with .yaml files
+    output_file_basename = File.basename(yaml_file, '.yaml')
+    output_file = output_file_basename + ".json"
+
+    begin
+      extracted_data = YAML.load_file(yaml_file)
+    rescue => e
+      puts "Loading yaml file failed with error:\n#{e}"
+    end
+    transformed_data = extracted_data # don't need to do anything to yaml do I?
+    json_contents = JSON.pretty_generate(transformed_data)
+    File.write(output_file, json_contents)
+
+    puts "Transformed to json at '#{output_file}'"
+  end
+end
+
+ConvertYAMLToJSON.perform(args: ARGV)

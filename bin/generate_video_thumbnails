@@ -26,9 +26,10 @@ module GenerateVideoThumbnails
 
     ensure_tools_exist!
 
-    generate_thumbnails_naive_but_fast(video: video)
+    cleaned_video_name = clean_and_rename_video(video: video)
+    generate_thumbnails_naive_but_fast(video: cleaned_video_name)
 
-    generate_montage(video: video, no_cleanup: no_cleanup)
+    generate_montage(video: cleaned_video_name, no_cleanup: no_cleanup)
   end
 
   private
@@ -67,6 +68,25 @@ module GenerateVideoThumbnails
   end
   private_class_method :ensure_tools_exist!
 
+  def self.clean_and_rename_video(video:)
+    clean_video_name = File.basename(video)
+    clean_video_name = clean_video_name.gsub(' - ', '_')
+    clean_video_name = clean_video_name.gsub(' & ', '-')
+    clean_video_name = clean_video_name.gsub(' ', '-')
+    clean_video_name = clean_video_name.gsub('\'', '')
+    clean_video_name = clean_video_name.gsub('\!', '')
+    clean_video_name = clean_video_name.gsub('!', '')
+    clean_video_name = clean_video_name.gsub('&', '')
+
+    if File.basename(video) != clean_video_name
+      puts "Renaming '#{video}' to '#{clean_video_name}'"
+      FileUtils.mv(video, clean_video_name) if !@test
+    end
+
+    clean_video_name
+  end
+  private_class_method :clean_and_rename_video
+
   def self.generate_thumbnails_naive_but_fast(video:)
     # TODO: Do this better
     return if @test_run
@@ -104,13 +124,6 @@ module GenerateVideoThumbnails
 
   def self.generate_montage(video:, no_cleanup:)
     name = File.basename(video)
-    name = name.gsub(' - ', '_')
-    name = name.gsub(' & ', '-')
-    name = name.gsub(' ', '-')
-    name = name.gsub('\'', '')
-    name = name.gsub('\!', '')
-    name = name.gsub('!', '')
-    name = name.gsub('&', '')
 
     capture_glob = File.join(INTERMEDIATE_DIR, 'capture*.jpg')
     `magick montage -title "#{video}" -geometry +10+10 -tile 4x #{capture_glob} #{name}.jpg`

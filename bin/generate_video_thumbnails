@@ -77,6 +77,7 @@ module GenerateVideoThumbnails
     clean_video_name = clean_video_name.gsub('\!', '')
     clean_video_name = clean_video_name.gsub('!', '')
     clean_video_name = clean_video_name.gsub('&', '')
+    clean_video_name = clean_video_name.gsub(',', '')
 
     if File.basename(video) != clean_video_name
       puts "Renaming '#{video}' to '#{clean_video_name}'"

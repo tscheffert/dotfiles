@@ -51,3 +51,23 @@ REG ADD "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System\CredSSP\
 ```
 es -path .
 ```
+
+## Pip Install Failure
+
+```
+>>> pip install yamllint
+Collecting yamllint
+  Using cached yamllint-1.28.0-py2.py3-none-any.whl (62 kB)
+Collecting pyyaml
+  Using cached PyYAML-6.0-cp39-cp39-win_amd64.whl (151 kB)
+Collecting pathspec>=0.5.3
+  Using cached pathspec-0.10.2-py3-none-any.whl (28 kB)
+Requirement already satisfied: setuptools in c:\python39\lib\site-packages (from yamllint) (57.4.0)
+Installing collected packages: pyyaml, pathspec, yamllint
+  WARNING: Failed to write executable - trying to use .deleteme logic
+ERROR: Could not install packages due to an OSError: [WinError 2] The system cannot find the file specified: 'C:\\Python39\\Scripts\\yamllint.exe' -> 'C:\\Python39\\Scripts\\yamllint.exe.deleteme'
+
+WARNING: You are using pip version 21.2.3; however, version 22.3.1 is available.
+```
+
+Solution is to grant `<PC>\Users` full control off the `<path>\Scripts` folder so that pip can put the exe there when installing.

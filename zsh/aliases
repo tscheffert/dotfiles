@@ -422,3 +422,5 @@ function pretty_path() {
 
 alias generate_video_thumbnails_in_folder="find . -type f -name '*.mp4' -exec generate_video_thumbnails --video '{}' \;"
 
+function full-title() { echo "$1" > full-title.txt }
+

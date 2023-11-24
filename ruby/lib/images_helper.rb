@@ -24,6 +24,12 @@ module ImagesHelper
 
   module Constants
 
+    MOVIE_EXTENSTIONS = ['.mp4', '.m4v', '.avi', '.mkv', '.wmv', '.mpg', '.mpeg', '.mov'].freeze
+
+    # Used like this:
+    # movie_matcher = /\AMovie (?<new_name>\d{1,3}): (?<old_name>[\(\)\ \.\_A-Za-z0-9：]*)\.(?<ext>#{MOVIE_EXTENSIONS_REGEX_OR_MATCHER})/
+    MOVIE_EXTENSTIONS_REGEX_OR_MATCHER = MOVIE_EXTENSTIONS.map { |s| s.sub(/\A\./, '') }.join('|').freeze
+
     IMAGE_EXTENSIONS = ['.png', '.PNG', '.jpg', '.JPG', '.jpeg', '.JPEG'].freeze
 
     JPEG_IMAGE_EXTENSIONS = ['.jpg', '.JPG', '.jpeg', '.JPEG'].freeze
@@ -162,6 +168,41 @@ module ImagesHelper
 
       exists
     end
+  end
+
+  def self.all_movies_in(dir:)
+    files = Dir.entries(dir, encoding: 'UTF-8')
+
+    # Cannot have pathname too long
+    files = files.select do |entry|
+      if File.absolute_path(entry).length >= 255
+        warn "WARNING: Length of entry #{entry} is too long, cannot process it"
+        next false
+      end
+
+      true
+    end
+
+    # Not a directory
+    files = files.reject do |entry|
+      File.directory?(entry)
+    end
+
+    # Must exist
+    files = files.select do |entry|
+      exists = File.exist?(entry)
+      if !exists
+        puts "For some reason, Directory '#{entry}' in dir '#{dir}' does not exist"
+      end
+
+      exists
+    end
+
+    movies = files.select do |entry|
+      Constants::MOVIE_EXTENSTIONS.include?(File.extname(entry).downcase)
+    end
+
+    movies = movies.map { |entry| File.absolute_path(entry) }
   end
 
   def self.safe_rename(old, new)

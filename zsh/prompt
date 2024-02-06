@@ -17,7 +17,7 @@ spectrum # Load spectrum function to enable $FG[010] stuff
 
 # Git Status from color:
 # - Green is default/good-to-go/unknown
-# - Blue is known behind, like unpushed changed
+# - Blue is known behind, like unpushed changes or unpushed branches
 # - Red is local changes
 # - Magenta is "detached HEAD" state
 
@@ -93,14 +93,8 @@ function git_branch {
             prompt_color="%{$fg[blue]%}"
           fi
         else
-          # We have not pushed, check if we've diverged from trunk
-
-          # TODO: Determine some way to show that we haven't pushed
-
-          if [[ -n $(git log $trunk..$branch 2> /dev/null) ]]; then
-            # We've diverged from trunk
-            prompt_color="%{$fg[blue]%}"
-          fi
+          # New non-trunk branch that hasn't been pushed, always set to blue
+          prompt_color="%{$fg[blue]%}"
         fi
       fi
     fi

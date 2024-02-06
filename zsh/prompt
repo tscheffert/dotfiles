@@ -63,16 +63,19 @@ function git_branch {
 
   # If trimming is needed pipe to: tr -d '[[:space:]]'
   local branch="$(git symbolic-ref --quiet --short HEAD 2>/dev/null)"
+
+  local trunk="$(git_trimmed_origin_head)"
+
   if [[ -n "$branch" ]]; then
-    if [[ "$branch" == 'master' ]]; then
-      # Our branch is master, set branch color this way
+    if [[ "$branch" == "$trunk" ]]; then
+      # Our branch is trunk, set branch color this way
       if [[ -n $(git status --porcelain 2> /dev/null) ]]; then
         # We have uncommited changes
         prompt_color="%{$fg[red]%}"
       elif [[ -n $(git log origin/$branch.. 2> /dev/null) ]]; then
         # We have changes to push
         prompt_color="%{$fg[blue]%}"
-      elif [[ -n $(git log master..origin/master 2> /dev/null) ]]; then
+      elif [[ -n $(git log $trunk..origin/$trunk 2> /dev/null) ]]; then
         # We haven't pushed our changes
         prompt_color="%{$fg[blue]%}"
       fi
@@ -90,12 +93,12 @@ function git_branch {
             prompt_color="%{$fg[blue]%}"
           fi
         else
-          # We have not pushed, check if we've diverged from master
+          # We have not pushed, check if we've diverged from trunk
 
           # TODO: Determine some way to show that we haven't pushed
 
-          if [[ -n $(git log master..$branch 2> /dev/null) ]]; then
-            # We've diverged from master
+          if [[ -n $(git log $trunk..$branch 2> /dev/null) ]]; then
+            # We've diverged from trunk
             prompt_color="%{$fg[blue]%}"
           fi
         fi

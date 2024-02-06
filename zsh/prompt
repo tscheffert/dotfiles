@@ -72,10 +72,11 @@ function git_branch {
       if [[ -n $(git status --porcelain 2> /dev/null) ]]; then
         # We have uncommited changes
         prompt_color="%{$fg[red]%}"
-      elif [[ -n $(git log origin/$branch.. 2> /dev/null) ]]; then
+      # TODO: Do we need to check both directions?
+      elif [[ -n $(git log origin/$branch..HEAD 2> /dev/null) ]]; then
         # We have changes to push
         prompt_color="%{$fg[blue]%}"
-      elif [[ -n $(git log $trunk..origin/$trunk 2> /dev/null) ]]; then
+      elif [[ -n $(git log HEAD..origin/$trunk 2> /dev/null) ]]; then
         # We haven't pushed our changes
         prompt_color="%{$fg[blue]%}"
       fi

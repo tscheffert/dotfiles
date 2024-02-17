@@ -26,6 +26,7 @@ module ExampleOptimistScript
 
   private
 
+  # Docs: https://github.com/ManageIQ/optimist/blob/master/lib/optimist.rb
   def self.parse_and_validate!(args:)
     options = Optimist.options(args) do
       banner <<~BANNERDOC
@@ -60,4 +61,4 @@ module ExampleOptimistScript
 
 end
 
-ExampleOptimistScript.perform(args: ARGV) unless defined?(RSpec)
+ExampleOptimistScript.perform(args: ARGV) if __FILE__ == $PROGRAM_NAME

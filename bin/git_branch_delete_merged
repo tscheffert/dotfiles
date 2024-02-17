@@ -13,12 +13,6 @@
 # TODO: Check out this gem: https://github.com/ruby-git/ruby-git
 
 
-# Problems:
-#   - Repos like the ADR repo have "squash commit" policy from Azure DevOps enabled. This won't automatically delete the squashed branches that were merged.
-#     - You can compare the actual changes of a given branch with HEAD and see if those changes are merged, which will cover changes without using commits (cause commits get messed up by squash/rebase)
-#     - Command: `git log --graph --left-right --cherry-pick --oneline master...<branch to get changes from>`
-#     - More details here: https://stackoverflow.com/a/7549118
-
 module Helpers
   def self.out(cmd:)
     `#{cmd}`
@@ -75,7 +69,9 @@ module GitBranchDeleteMerged
     # Alternative strategies for "determine merged branches" include:
     #   `git cherry #{upstream} #{head}` for (better than git-diff) commitwise-diff
     #   `git diff origin/master...HEAD` for filewise-diff
-    #   `git branch -vv | git branch -vv | grep 'origin/.*: gone]' | awk '{print $1}'`
+    #    - Example, from `main` branch run `git diff suspect-merged-branch..HEAD`
+    #      - if the output is empty then it has been merged
+    #   `git branch -vv | grep 'origin/.*: gone]' | awk '{print $1}'`
     #      source: https://github.com/denysdovhan/dotfiles/blob/master/bin/git-cleanup#L24
 
     branches_stdout =

@@ -1,0 +1,69 @@
+#!/usr/bin/env ruby
+# vim: ft=ruby
+
+require 'pathname'
+require 'fileutils'
+require 'bigdecimal'
+
+require 'tty-command'
+require 'optimist'
+require 'active_support/duration'
+
+module MoveFoundMovies
+
+  def self.perform(args:)
+    # Sync STDOUT so that everything appears in order
+    STDOUT.sync = true
+
+    options = parse_and_validate!(args: args)
+
+    @test_run = options[:test]
+
+    video = options[:output]
+
+    # ensure_tools_exist!
+  end
+
+  private
+
+  def self.parse_and_validate!(args:)
+    options = Optimist.options(args) do
+      banner <<~BANNERDOC
+        Move movies to a new folder
+
+          Process Steps:
+          - Accept a list of movies to move from stdin
+          - Cleanse and sanitize
+            - Validate input was received
+            - Filter down to movies
+            - Validate existance of each file
+          - Move the movies
+          Usage:
+            #{File.basename(__FILE__)} [options]
+          where [options] are:
+          STDIN: Array of movie paths separated by newline
+      BANNERDOC
+
+      opt :output, 'Destination directory to put the movies',
+        short:    :none,
+        required: true,
+        type:     :strings
+      opt :test, 'Run in test mode, reporting what the script would do without actually doing it',
+        short: :none,
+        type:  :flag
+      opt :verbose, 'Run in verbose mode, reporting much more verbosely than normal',
+        short: :none,
+        type: :flag
+    end
+
+    # if !Dir.exist?(options[:directory])
+    #   Optimist.die(:directory, "'#{options[:directory]}' does not exist")
+    # end
+
+    options
+  end
+  private_class_method :parse_and_validate!
+
+end
+
+MoveFoundMovies.perform(args: ARGV) if __FILE__ == $PROGRAM_NAME

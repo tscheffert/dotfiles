@@ -1,0 +1,107 @@
+#!/usr/bin/env ruby
+# vim: ft=ruby
+
+require File.join(__dir__, '..', 'ruby', 'lib', 'images_helper')
+
+require 'date'
+
+module SortImagesByRatio
+
+  include ImagesHelper::Constants
+
+  def self.perform(args:)
+    if args[0] == '--help'
+      command_name = File.basename(__FILE__)
+      puts <<~HELPDOC
+        USAGE:
+            #{command_name}
+                Moves images that aren't perfectly 16:9 square to '#{NOT_SQUARE_DIR}' directory
+            #{command_name} --test
+                Reports which images will move but doesn't move them
+            #{command_name} --help
+                Prints this message
+      HELPDOC
+      exit 0
+    end
+
+    test_run = args[0] == '--test'
+
+    dir = '.'
+
+
+    all_images = ImagesHelper.all_images_in_dir(dir)
+    puts "--- all images length: #{all_images.length}"
+
+    scaled_image_matches = ImagesHelper.all_scaled_image_matches_in_dir(dir)
+    puts "--- scaled image matches length: #{scaled_image_matches.length}"
+
+    pairs = scaled_image_matches.each_with_object([]) do |match, memo|
+      original_matches = all_images.select { |image| image.start_with?(match[:original_name]) }
+      if original_matches.length > 1
+        raise "Unexpectedly found more than one match for '#{match[:original_name]}': #{original_matches}"
+      elsif origina_matches.length == 0
+        puts "cannot find original from: , string: #{match.string} and captures: #{match.named_captures}" if cannot_find_original
+        next
+      else
+        original = original_matches.first
+      end
+
+      memo << {
+        original: original,
+        scaled: match.string
+      }
+    end
+
+    pairs.each(&method(:puts))
+
+    puts "--- ALL IMAGES"
+
+    puts all_images.last
+
+    # # Then test remaining for ratio
+    # off_by_one, remaining_images = images.partition do |img|
+    #   begin
+    #     width, height = Dimensions.dimensions(img)
+
+    #     width
+
+    #     ratio = BigDecimal(width) / BigDecimal(height)
+
+    #     MIN_RATIO < ratio && ratio < MAX_RATIO
+    #   rescue StandardError => e
+    #     puts "File #{img} failed with error #{e}, cannot test ratio"
+
+    #     true
+    #   end
+    # end
+
+    # if test_run
+    #   unless square.empty?
+    #     puts 'Square:'
+    #     square.each do |img|
+    #       puts "  #{img}"
+    #     end
+    #   end
+
+    #   puts "\n---------\n\n" unless square.empty? || not_square.empty?
+
+    #   unless not_square.empty?
+    #     puts 'Not Square:'
+    #     not_square.each do |img|
+    #       puts "  #{img}"
+    #     end
+    #   end
+    # else
+    #   if not_square.present?
+    #     puts 'Moving not_square files:'
+    #     not_square.each(&method(:puts))
+
+    #     FileUtils.mkdir_p(NOT_SQUARE_DIR)
+    #     FileUtils.mv(not_square, NOT_SQUARE_DIR)
+    #   end
+    # end
+  end
+
+end
+
+SortImagesByRatio.perform(args: ARGV)

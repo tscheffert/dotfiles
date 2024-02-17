@@ -1,0 +1,43 @@
+#!/usr/bin/env ruby
+# vim: ft=ruby
+
+require File.join(__dir__, '..', 'ruby', 'lib', 'images_helper')
+
+module SortAllImagesByPrefix
+
+  include ImagesHelper::Constants
+
+  def self.perform(args:)
+    images = ImagesHelper.all_images_in_dir('.')
+    @test_run = args.include?('--test')
+
+    matcher = %r{\A(?<prefix>[0-9]{1,12})_p(?<page>[0-9]{1,5})\.(?<extension>#{IMAGE_EXTENSIONS_REGEX_OR_MATCHER})\z}
+    images_grouped = images.group_by do |image|
+      match = image.match(matcher)
+      raise "not able to match #{image}" if match.blank?
+
+      match[:prefix]
+    end
+
+    images_grouped.keys.each do |prefix|
+      next if @test_run
+      if !Dir.exist?(prefix)
+        puts "Creating prefix dir: #{prefix}"
+        FileUtils.mkdir(prefix)
+      else
+        puts "Prefix dir already exists: #{prefix}"
+      end
+    end
+
+    images_grouped.each do |prefix, grouped_images|
+      puts "Moving images to prefix #{prefix}: #{grouped_images}"
+
+      next if @test_run
+
+      FileUtils.mv(grouped_images, prefix)
+    end
+  end
+
+end
+
+SortAllImagesByPrefix.perform(args: ARGV)

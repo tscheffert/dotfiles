@@ -3,6 +3,8 @@
 
 require 'fileutils'
 
+require File.join(__dir__, '..', 'ruby', 'lib', 'file_helper')
+
 module FlattenDirs
 
   SEP = File::SEPARATOR
@@ -19,15 +21,21 @@ module FlattenDirs
 
     exists.each do |path|
       unless File.exist?(File.join(EXISTS_DIR, File.basename(path)))
-        FileUtils.mv(path, EXISTS_DIR)
+        FileHelper.safe_rename(path, EXISTS_DIR)
       end
     end
 
     to_move.each do |path|
-      FileUtils.mv(path, Dir.pwd)
+      FileHelper.safe_rename(path, Dir.pwd)
     end
 
-    (exists + to_move).each { |f| FileUtils.remove_dir(File.dirname(f), true) }
+    (exists + to_move).each do |f|
+      begin
+        FileUtils.remove_dir(File.dirname(f), true)
+      rescue StandardError => e
+        warn "File rename '#{old}' -> '#{new}' failed with error #{e}"
+      end
+    end
   end
 
 end

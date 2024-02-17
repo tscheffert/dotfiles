@@ -1,3 +1,4 @@
+require 'fileutils'
 require 'active_support/core_ext/object/blank'
 require 'paint'
 
@@ -21,4 +22,27 @@ module FileHelper
       exit 1
     end
   end
+
+  def self.safe_rename(old, new)
+    FileUtils.mv(old, new)
+  rescue StandardError => e
+    warn "File rename '#{old}' -> '#{new}' failed with error #{e}"
+  end
+
+  # def self.safe_remove_dir(dir)
+  #   if Dir.empty?(dir)
+  #     FileUtils.rmdir(dir)
+  #   else
+  #     warn "Dir #{dir} not empty, not removing"
+  #   end
+  # rescue StandardError => e
+  #   warn "Dir #{dir} removal failed with error #{e}"
+  # end
+
+  # def self.safe_remove_dir_with_contents(dir)
+  #   FileUtils.rm_rf(dir)
+  # rescue StandardError => e
+  #   warn "Dir #{dir} removal failed with error #{e}"
+  # end
+
 end

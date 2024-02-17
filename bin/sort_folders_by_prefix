@@ -93,7 +93,15 @@ module SortFoldersByPrefix
       warn "Cannot rename '#{basename_dir}', sorted name is too long"
     else
       puts "Moving dir '#{basename_dir}' into '#{sorted_dir_name}'" if @debug
-      FileUtils.mv(dir, sorted_dir_name) if !@test_run
+      joined_name = Pathname.new(sorted_dir_name).join(basename_dir)
+      puts "Name after move: '#{joined_name}'" if @debug
+      if Dir.exist?(joined_name)
+        puts "WARN: Directory '#{basename_dir}' already exists in '#{sorted_dir_name}'"
+      elsif File.exist?(joined_name)
+        puts "WARN: File with name of current directory '#{basename_dir}' exists in '#{sorted_dir_name}'"
+      else
+        FileUtils.mv(dir, sorted_dir_name) if !@test_run
+      end
     end
   end
   private_class_method :sort_dir

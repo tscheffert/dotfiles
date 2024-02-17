@@ -53,7 +53,13 @@ java -jar c:/tools/bfg/current/bfg.jar --delete-folders <folders-to-remove> --no
 
 Where `<folder-to-remove>` is the folder you want to remove and `<cloned-repo-folder>` is the path to your repo that you cloned.
 
+### Remove Passwords from History
 
+```
+echo 'password==>replacedpassword' > passwords.text
+java -jar c:/tools/bfg/current/bfg.jar --replace-text passwords.txt --no-blob-protection <cloned-repo-folder>
+
+```
 
 ## later
 git reflog expire --expire=now --all && git gc --prune=now --aggressive

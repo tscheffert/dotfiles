@@ -64,3 +64,14 @@ TODO: What is this stuff
 ```
 magick montage -title "Test" -geometry +4+4 capture*.jpg output.jpg
 ```
+
+## Strip Alpha Layer
+
+```
+magick convert input.png -alpha off output.png
+```
+
+Multiple
+```
+find . -name "*.png" -exec magick convert "{}" -alpha off "{}" \;
+```

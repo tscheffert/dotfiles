@@ -61,3 +61,12 @@ origin
 tlrg
 ```
 
+
+## Issue #2
+
+- Repos like the ADR repo have "squash commit" policy from Azure DevOps enabled. This won't automatically delete the squashed branches that were merged.
+  - You can compare the actual changes of a given branch with HEAD and see if those changes are merged, which will cover changes without using commits (cause commits get messed up by squash/rebase)
+  - Command: `git log --graph --left-right --cherry-pick --oneline master...<branch to get changes from>`
+  - More details here: https://stackoverflow.com/a/7549118
+
+

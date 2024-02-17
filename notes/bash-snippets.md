@@ -72,6 +72,14 @@ Full Example:
 find . -type f -name "*.sh" -print0 | xargs -0 sed -i '' -e 's#${\([1-9]\)\?#${\1:?#'
 ```
 
+## Find
+
+### Find files and move results
+
+```
+find . -type f -name '*.jpg' -print0 | xargs -0 -I {} mv {} .
+```
+
 
 ## Stuff
 

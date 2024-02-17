@@ -35,6 +35,7 @@ Configs
 cooldown
 covid
 csv
+dashboarding
 DataDog
 Debloat
 Decrypt
@@ -55,6 +56,7 @@ Divy
 DNS
 docstore
 dotfiles
+dotnet
 DSET
 Dynatrace
 EchoDrive
@@ -86,6 +88,8 @@ Guly
 Halostatue
 Hammerspoon
 Heimdall
+hoc
+Hoc
 Http
 Https
 idempotently

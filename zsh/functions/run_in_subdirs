@@ -1,0 +1,8 @@
+#!/usr/bin/env zsh
+# vi: ft=zsh
+
+function run_in_subdirs() {
+  # Most influence from this StackOverflow Answer: https://stackoverflow.com/a/41575863
+  export THE_COMMAND="$@"
+  find . -maxdepth 1 -type d -name '*' -print0 | xargs -0 -n1 -I{} -- zsh -c '(cd "{}" && $THE_COMMAND)'
+}

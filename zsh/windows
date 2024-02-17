@@ -22,6 +22,8 @@ prepend_to_path 'C:\tools\sops\current'
 
 # Tool used for optimizing PNG images
 prepend_to_path 'C:\tools\optipng\current'
+prepend_to_path 'C:\tools\advancecomp\current' # From: https://www.advancemame.it/download
+
 
 # Tool used for deduping
 prepend_to_path 'C:\tools\jdupes\current'

@@ -1,5 +1,10 @@
 #!/usr/bin/env bash
 
+# Notes
+# - Can use `advpng -z <image>` to re-compress with a better algorithm after optipng
+# - Can use `magick convert <input-image> -alpha off <output-image>` to turn alpha off
+
+
 optimize_pngs_in_folder() {
   optipng -strip all -fix *.png
 }

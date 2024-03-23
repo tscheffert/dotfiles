@@ -10,7 +10,7 @@ module SortMoviesByPrefix
 
   MOVIE_MATCHER = %r{
       \A
-      (?<prefix>\w+)?
+      (?<prefix>[\w\-\_]+)?
       \..+
       \z
     }x

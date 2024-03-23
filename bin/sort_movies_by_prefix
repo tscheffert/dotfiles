@@ -65,17 +65,18 @@ module SortMoviesByPrefix
 
     puts "Found prefix '#{movie_match[:prefix]}' for movie '#{basename_movie}'" if @debug
 
+    # Case doesn't matter on Windows, Dir::exist? is case-insensitive
     if Dir.exist?(movie_match[:prefix])
       puts "Sorted destination directory '#{movie_match[:prefix]}' already exists" if @debug
     else
-      puts "Creating new destination directory '#{movie_match[:prefix]}'" if @debug
+      puts "Creating new destination directory '#{movie_match[:prefix]}'" if @debug || @test_run
       FileUtils.mkdir(movie_match[:prefix]) if !@test_run
     end
 
     if movie.length + movie_match[:prefix].length > 255
       warn "Cannot sort '#{basename_movie}', sorted name is too long"
     else
-      puts "Moving movie '#{basename_movie}' into '#{movie_match[:prefix]}'" if @debug
+      puts "Moving movie '#{basename_movie}' into '#{movie_match[:prefix]}'" if @debug || @test_run
       FileUtils.mv(movie, movie_match[:prefix]) if !@test_run
     end
   end

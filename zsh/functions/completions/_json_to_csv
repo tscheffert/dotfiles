@@ -1,0 +1,10 @@
+#compdef json_to_csv
+# vi: ft=zsh
+
+function _json_to_csv() {
+  # _path_files: Autocomplete only what we admit with the pattern
+    # -g Only files matching the pattern(s) should be completed
+  _path_files -g '*.json'
+}
+
+_json_to_csv "$@"

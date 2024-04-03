@@ -1,0 +1,10 @@
+#compdef convert_yaml_to_json
+# vi: ft=zsh
+
+function _convert_yaml_to_json() {
+  # _path_files: Autocomplete only what we admit with the pattern
+    # -g Only files matching the pattern(s) should be completed
+  _path_files -g '*.yaml' -g '*.yml'
+}
+
+_convert_yaml_to_json "$@"

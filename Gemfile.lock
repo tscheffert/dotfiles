@@ -1,7 +1,7 @@
 GEM
   remote: https://rubygems.org/
   specs:
-    activesupport (6.1.7.3)
+    activesupport (6.1.7.5)
       concurrent-ruby (~> 1.0, >= 1.0.2)
       i18n (>= 1.6, < 2)
       minitest (>= 5.1)
@@ -47,7 +47,7 @@ GEM
       launchy (~> 2.4)
       octokit (~> 4.0)
       thor (~> 1.0)
-    i18n (1.12.0)
+    i18n (1.14.1)
       concurrent-ruby (~> 1.0)
     ice_nine (0.11.2)
     jaro_winkler (1.5.2)
@@ -55,7 +55,7 @@ GEM
       rexml
     launchy (2.5.0)
       addressable (~> 2.7)
-    minitest (5.18.0)
+    minitest (5.19.0)
     mixlib-shellout (3.0.4)
     mixlib-shellout (3.0.4-universal-mingw32)
       win32-process (~> 0.8.2)
@@ -130,7 +130,7 @@ GEM
     win32-process (0.8.3)
       ffi (>= 1.0.0)
     wmi-lite (1.0.2)
-    zeitwerk (2.6.7)
+    zeitwerk (2.6.11)
 
 PLATFORMS
   ruby

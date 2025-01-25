@@ -6,8 +6,8 @@ git_source(:github) { |repo_name| "https://github.com/#{repo_name}" }
 
 gem 'activesupport', '~> 6.1'
 gem 'dimensions'
-gem 'dry-struct'
-gem 'dry-types'
+gem 'dry-struct', '~> 1.1.0' # Stick to 1.1.x as the minor bumps are often breaking
+gem 'dry-types', '~> 1.2.0' # Stick to 1.2.x as the minor bumps are often breaking
 gem 'gemdiff'
 gem 'mixlib-shellout', '~> 3.0.4'
 gem 'optimist', '~> 3.0'
@@ -19,7 +19,7 @@ gem 'rubocop', '= 0.58.0'
 #   brew install cmake pkg-config
 # Docs: https://github.com/libgit2/rugged#install
 # gem 'rugged', git: 'git://github.com/libgit2/rugged.git', submodules: true
-gem 'rugged'
+# gem 'rugged'
 gem 'tty-command'
 gem 'tty-markdown-cli'
 gem 'tty-which'

@@ -68,14 +68,16 @@ function! SetGitForWindowsSDKShell()
   " cygpath --mixed $(which bash)
   " set shell=C:/git-sdk-64/usr/bin/bash.exe
 
-  set shell=bash
-  set shellcmdflag=-c
-  set shellredir=>%s\ 2>&1
-  set shellpipe=2>&1\|\ tee
-  set shellquote=
-  set shellxquote=\"
-  " set shellxquote='"'
-  set shellslash
+  " TODO: On windows with just git for windows bash, this causes issues. Commenting it out fixed everything though.
+
+  " set shell=bash
+  " set shellcmdflag=-c
+  " set shellredir=>%s\ 2>&1
+  " set shellpipe=2>&1\|\ tee
+  " set shellquote=
+  " set shellxquote=\"
+  " " set shellxquote='"'
+  " set shellslash
 endfunction
 
 function! SetCmdShell()
@@ -148,7 +150,7 @@ endfunction
 Plug 'mhartington/oceanic-next' " , { 'on': 'LoadColors' }
 Plug 'ciaranm/inkpot', { 'on': 'LoadColors' }
 
-Plug 'trevordmiller/nova-vim'
+Plug 'iammerrick/nova-vim'
 if has('gui_running')
   " TODO: Install this wether its gui or not
   Plug 'NLKNguyen/papercolor-theme'

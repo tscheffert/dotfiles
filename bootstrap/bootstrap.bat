@@ -34,12 +34,12 @@ mklink %userprofile%\.yamllint %userprofile%\.dotfiles\.yamllint
 mklink %userprofile%\.zshrc %userprofile%\.dotfiles\.zshrc
 mklink %userprofile%\.zshrc.private %userprofile%\.dotfiles\.zshrc.private
 mklink %userprofile%\console_config.rb %userprofile%\.dotfiles\console_config.rb
-mkdir %APPDATA%\alacritty
-mklink %userprofile%\AppData\Roaming\alacritty\alacritty.yml %userprofile%\.dotfiles\alacritty.yml
+@REM mkdir %APPDATA%\alacritty
+@REM mklink %userprofile%\AppData\Roaming\alacritty\alacritty.yml %userprofile%\.dotfiles\alacritty.yml
 
-mkdir %userprofile%\Documents\WindowsPowerShell
-mklink %userprofile%\Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1 %userprofile%\.dotfiles\powershell\Microsoft.PowerShell_profile.ps1
+@REM mkdir %userprofile%\Documents\WindowsPowerShell
+@REM mklink %userprofile%\Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1 %userprofile%\.dotfiles\powershell\Microsoft.PowerShell_profile.ps1
 
-mklink "C:\\Program Files\\ConEmu\\ConEmu.xml" %userprofile%\.dotfiles\ConEmu.xml
+REM mklink "C:\\Program Files\\ConEmu\\ConEmu.xml" %userprofile%\.dotfiles\ConEmu.xml
 
 pause

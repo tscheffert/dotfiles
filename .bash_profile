@@ -61,7 +61,7 @@ if [[ $platform == 'windows' ]]; then
   # - Windows -
 
   # Clearly we want vim...
-  prepend_to_PATH 'C:\Program Files\Vim\vim80'
+  prepend_to_PATH 'C:\Program Files\Vim\vim91'
 
 fi
 
@@ -94,28 +94,28 @@ append_to_PATH () {
   done
 }
 
-if [[ $platform == 'windows' ]]; then
+#if [[ $platform == 'windows' ]]; then
   # - Windows -
 
   # We want IIS Express!
-  append_to_PATH 'C:\Program Files (x86)\IIS Express\'
+  #append_to_PATH 'C:\Program Files (x86)\IIS Express\'
 
   # Adb for android debugging
   # append_to_PATH 'C:\Users\tscheffert\AppData\Local\Android\android-sdk\platform-tools'
 
   # Python Scripts including pip
-  append_to_PATH 'C:\tools\python\Scripts'
+  #append_to_PATH 'C:\tools\python\Scripts'
 
   # Xmllint from libxml2
-  append_to_PATH 'C:\tools\xmllint'
+  #append_to_PATH 'C:\tools\xmllint'
 
   # pdfimages from XPDF
-  append_to_PATH 'C:\tools\xpdf'
+  #append_to_PATH 'C:\tools\xpdf'
 
-  append_to_PATH 'C:\Program Files (x86)\PWGen'
+  #append_to_PATH 'C:\Program Files (x86)\PWGen'
 
-  append_to_PATH 'C:\dev\github\elasticdog\transcrypt'
-fi
+  #append_to_PATH 'C:\dev\github\elasticdog\transcrypt'
+# fi
 
 
 # --- Options ---

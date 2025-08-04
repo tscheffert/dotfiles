@@ -3,6 +3,8 @@
 # Source: http://www.imagemagick.org/Usage/scripts/anim2gif
 # Bashified by Trent 'tscheffe' Scheffert,
 #
+# NOTE: Check out this cool thing https://gif.ski/
+#
 # anim2gif [-b BASENAME] file.anim...
 #
 # This is a simple script to convert my own animation sequence file

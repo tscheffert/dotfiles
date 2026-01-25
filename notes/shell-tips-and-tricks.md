@@ -258,6 +258,14 @@ Load an array of yaml objects, filter them, then output only a subset of keys:
 yq eval '.[] | select(.server_role == "TLRG*") | {"server_role": .server_role, "depdendent_applications": .dependent_applications} | splitDoc' qa1-server-roles_overlay.yml
 ```
 
+## JQ
+
+Grab a single value from an array of json objects
+
+```
+cat mismatch_20250703_110058.json | jq '.[] | .loadId' | clip.exe
+```
+
 ## Other?
 
 ### Create a new sudo user

@@ -101,6 +101,8 @@ if has('win64') || has('win32') " Using InWindowsSession() here breaks syntastic
   " " Use cmd as the shell
   " set shell=cmd
   " set shellcmdflag=/c
+
+  " Every time a save a .sh file on windows it opens a cmd window and takes a moment to muck with files here
   let temp_dir=$HOME."/.vim-tmp"
   " Create the temp_dir if it doesn't exist
   if !isdirectory(expand(temp_dir))
@@ -206,7 +208,7 @@ Plug 'sjl/gundo.vim'
 
 " Snippets
 if !InConEmuSession() " TODO: Get this working with ConEmu vim
-  Plug 'SirVer/ultisnips', Cond(has('python3'))
+  " TODO: Get this working on windows at all! Plug 'SirVer/ultisnips', Cond(has('python3'))
 end
 
 Plug 'ervandew/supertab'
@@ -1584,6 +1586,11 @@ let g:syntastic_check_on_wq = 0
 
 " Don't use any checkers for python, too slow
 let g:syntastic_python_checkers = []
+
+" Don't use any checkers for bash, too slow
+let g:syntastic_bash_checkers = []
+let g:syntastic_shell_checkers = []
+let g:syntastic_sh_checkers = []
 
 " Use 'yamllint' for yaml files
 "   Further Info: http://yamllint.readthedocs.io/en/latest/

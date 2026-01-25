@@ -65,3 +65,21 @@ gifsicle --transparent
 
 gifsicle --crop x1,y1+widthxheight input.gif > output.gif
 ```
+
+
+## ImageMagick
+
+### Strip White Background
+
+```
+magick party_dumpster.gif -layers Coalesce -set dispose Background -fuzz 8%% -transparent White -layers optimize party_dumpster_transparent.gif
+```
+
+### Expand image canvas
+
+```
+magick party_dumpster_transparent_anim.gif -background none -gravity east -splice 2x0 resized.gif
+magick resized.gif -background none -gravity west -splice 3x0 resizeder.gif
+magick resizeder.gif -background none -gravity north -splice 0x3 resizederer.gif
+magick resizederer.gif -background none -gravity south -splice 0x2 resizedest.gif
+```

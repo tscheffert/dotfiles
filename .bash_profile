@@ -94,7 +94,7 @@ append_to_PATH () {
   done
 }
 
-#if [[ $platform == 'windows' ]]; then
+if [[ $platform == 'windows' ]]; then
   # - Windows -
 
   # We want IIS Express!
@@ -115,7 +115,15 @@ append_to_PATH () {
   #append_to_PATH 'C:\Program Files (x86)\PWGen'
 
   #append_to_PATH 'C:\dev\github\elasticdog\transcrypt'
-# fi
+
+  append_to_PATH 'C:\tools\oxipng\current'
+
+  append_to_PATH 'C:\tools\jpegtran'
+  append_to_PATH 'C:\tools\everything-search-cli'
+
+  append_to_PATH 'C:\tools\HellYesGui\binaries'
+
+fi
 
 
 # --- Options ---
@@ -493,6 +501,10 @@ find . -type f | grep -v .svn | grep -v .git | grep -i $1
 # what the hell?
 function gr {
   find . -type f | grep -v .svn | grep -v .git | xargs grep -i $1 | grep -v Binary
+}
+
+function full-title {
+  echo "$1" > full-title.txt
 }
 
 if [[ $platform == 'osx' ]]; then

@@ -5,11 +5,11 @@
 
 require 'fileutils'
 
-GARBAGE_FILES = ['RARBG.COM_XXX_BANNER.jpg', 'RARBG.txt', 'RARBG.com.txt', 'file_id.diz', '.BridgeSort']
+GARBAGE_FILES = ['RARBG.COM_XXX_BANNER.jpg', 'RARBG.txt', 'RARBG.com.txt', 'file_id.diz', '.BridgeSort', '.DS_Store']
 
-GARBAGE_EXTENSIONS = ['.nfo', '.BridgeSort']
+GARBAGE_EXTENSIONS = ['.nfo', '.BridgeSort', '.htm']
 
-garbage_files = Dir.glob('**/*').select { |f| File.file?(f) }.select do |file|
+garbage_files = Dir.glob('**/*', File::FNM_DOTMATCH).select { |f| File.file?(f) }.select do |file|
   GARBAGE_FILES.include?(File.basename(file)) || GARBAGE_EXTENSIONS.include?(File.extname(file))
 end
 

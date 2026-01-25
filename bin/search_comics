@@ -5,7 +5,8 @@ function search_comics {
   local dirs_to_search=('_comics-deluged' '_Finished Deluge' '_comics-exh' '_comics-best')
 
   local current_dir="$(basename $PWD)"
-  local expected_dir='Downloads'
+  local expected_dir='bbs'
+  local original_search="$@"
 
   if [[ "$current_dir" != "$expected_dir" ]]; then
     echo "Only supports running from the expected directory: $expected_dir" 1>&2
@@ -16,13 +17,22 @@ function search_comics {
     echo "Everything not installed or not available on PATH. Cannot find executable 'es'." 1>&2
   fi
 
+  if [[ -z "$original_search" ]]; then
+    echo "No search text provided. Expected format:"
+    echo "  search_comics \"text to search\""
+    exit 1
+  fi
+
   echo "Searching '$current_dir'"
-  es -path . "$@" | sort
+  LC_ALL='C'
+  es -path . "$original_search" | sort
 
-  local other_dir='N:\\Bbs\\'
-  echo "Searching Bbs"
-  es -path "$other_dir" "$@" | sort
+  local stripped_search="${original_search//.}"
 
+  if [[ "$original_search" != "$stripped_search" ]]; then
+    echo "Stripping '.' and searching for '$stripped_search'"
+    es -path . "$stripped_search"
+  fi
 }
 
 function test_exists {
